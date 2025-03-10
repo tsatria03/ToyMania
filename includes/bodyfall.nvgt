@@ -1,0 +1,45 @@
+bodyfall@[]bodyfalls(0);
+class bodyfall
+{
+int fallsound;
+int fallx;
+int fally;
+int falltime;
+string falltype;
+timer falltimer;
+bodyfall(int bx,int by,int bt,string ft)
+{
+fallx=bx;
+fally=by;
+falltime=bt;
+falltype=ft;
+}
+}
+void bfloop()
+{
+for(uint i=0; i<bodyfalls.length(); i++)
+{
+if(bodyfalls[i].falltimer.elapsed>=bodyfalls[i].falltime)
+{
+bodyfalls[i].falltimer.restart();
+if(bodyfalls[i].falltype=="boss") bodyfalls[i].fallsound=p.play_2d(bodyfalls[i].falltype+"fall.wav",me.x,me.y,bodyfalls[i].fallx,bodyfalls[i].fally,false);
+if(bodyfalls[i].falltype=="gard1") bodyfalls[i].fallsound=p.play_2d(bodyfalls[i].falltype+"fall"+random(1,5)+".wav",me.x,me.y,bodyfalls[i].fallx,bodyfalls[i].fally,false);
+if(bodyfalls[i].falltype=="gard2") bodyfalls[i].fallsound=p.play_2d(bodyfalls[i].falltype+"fall"+random(1,2)+".wav",me.x,me.y,bodyfalls[i].fallx,bodyfalls[i].fally,false);
+bodyfalls.remove_at(i);
+return;
+}
+}
+}
+void spawn_bodyfall(int x,int y,int falltime,string falltype)
+{
+bodyfall bf1(x,y,falltime,falltype);
+bodyfalls.insert_last(bf1);
+}
+void destroy_all_bodyfalls()
+{
+for(uint i=0; i<bodyfalls.length(); i++)
+{
+p.destroy_sound(bodyfalls[i].fallsound);
+}
+bodyfalls.resize(0);
+}

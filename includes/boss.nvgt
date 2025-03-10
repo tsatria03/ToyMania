@@ -1,0 +1,131 @@
+boss@[]bosses(0);
+class boss
+{
+int bossesound, defsound, healsound, hurtsound, launchsound, spawnsound, stepsound, telsound, wepsound;
+int bosshealth;
+int bossx;
+int bossy;
+int damage;
+int bosstime;
+int firetime;
+int healtime;
+int launchtime;
+int teltime;
+string bosstype;
+timer bosstimer, firetimer, healtimer, launchtimer, teltimer;
+boss(int bx,int by,int hp,int dm,int ft,int lt,int sp,int tlt,int hlt,string bt)
+{
+bossx=bx;
+bossy=by;
+bosshealth=hp;
+damage=dm;
+firetime=ft;
+launchtime=lt;
+bosstime=sp;
+teltime=tlt;
+healtime=hlt;
+bosstype=bt;
+bossesound=bosspool.play_2d(bosstype+"taunt.ogg", me.x, me.y, bossx, bossy, true);
+}
+void regenerate_bosshp(int hp)
+{
+healsound=bosspool.play_2d(bosstype+"heal"+random(1,3)+".ogg", me.x, me.y, bossx, bossy, false);
+bosshealth+=hp;
+}
+void teleport_boss(int bx,int by)
+{
+telsound=bosspool.play_2d(bosstype+"tel"+random(1,3)+".ogg", me.x, me.y, bossx, bossy, false);
+bossx=bx;
+bossy=by;
+}
+}
+void bossloop()
+{
+for(uint i=0; i<bosses.length(); i++)
+{
+if(bosses[i].healtimer.elapsed>=bosses[i].healtime)
+{
+bosses[i].regenerate_bosshp(random(bosses[i].bosshealth/10,bosses[i].bosshealth/5));
+bosses[i].healtimer.restart();
+}
+if(bosses[i].launchtimer.elapsed>=bosses[i].launchtime)
+{
+bosses[i].launchsound=bosspool.play_2d(bosses[i].bosstype+"launch.ogg", me.x, me.y, bosses[i].bossx, bosses[i].bossy, false);
+string[] bosstyp={"gard1", "gard2"};
+spawn_gard(bosses[i].bossx-random(1,5), bosses[i].bossy-random(1,5), random(30,60), random(30,60), random(75,750), random(75,750), random_string(bosstyp));
+bosses[i].launchtimer.restart();
+}
+if(bosses[i].teltimer.elapsed>=bosses[i].teltime)
+{
+bosses[i].telsound=bosspool.play_2d(bosses[i].bosstype+"tel"+random(1,3)+".ogg", me.x, me.y, bosses[i].bossx, bosses[i].bossy, false);
+bosses[i].teleport_boss(random(0, me.x-random(1,5)), random(0, me.y-random(1,5)));
+bosspool.update_sound_2d(bosses[i].bossesound,bosses[i].bossx,bosses[i].bossy);
+bosspool.update_sound_2d(bosses[i].telsound,bosses[i].bossx,bosses[i].bossy);
+bosses[i].teltimer.restart();
+}
+if(bosses[i].bosstimer.elapsed>=bosses[i].bosstime)
+{
+bosses[i].stepsound=bosspool.play_2d(bosses[i].bosstype+"walk"+random(1,4)+".ogg",me.x,me.y,bosses[i].bossx,bosses[i].bossy,false);
+bosspool.update_sound_2d(bosses[i].bossesound,bosses[i].bossx,bosses[i].bossy);
+bosses[i].bosstimer.restart();
+if(bosses[i].bossx<me.x)
+{
+bosses[i].bossx++;
+}
+if(bosses[i].bossx>me.x)
+{
+bosses[i].bossx--;
+}
+if(bosses[i].bossy<me.y)
+{
+bosses[i].bossy++;
+}
+if(bosses[i].bossy>me.y)
+{
+bosses[i].bossy--;
+}
+}
+if(me.x==bosses[i].bossx and me.y==bosses[i].bossy and bosses[i].firetimer.elapsed>=bosses[i].firetime)
+{
+bosses[i].wepsound=bosspool.play_2d(bosses[i].bosstype+"hit"+random(1,3)+".ogg", me.x, me.y, bosses[i].bossx, bosses[i].bossy, false);
+painslot=p.play_stationary("playerpain.ogg", false);
+health-=bosses[i].damage;
+bosses[i].firetimer.restart();
+}
+for(uint i1=0; i1<toys.length(); i1++)
+{
+if(toys[i1].tx==bosses[i].bossx and toys[i1].ty==bosses[i].bossy and bosses[i].firetimer.elapsed>=bosses[i].firetime)
+{
+toypool.destroy_sound(toys[i1].toysound);
+bosses[i].wepsound=bosspool.play_2d(bosses[i].bosstype+"hit.ogg", me.x, me.y, bosses[i].bossx, bosses[i].bossy, false);
+toys[i1].hurtsound=toypool.play_2d("toybreak"+random(1,6)+".ogg", me.x, me.y, toys[i1].tx, toys[i1].ty, false);
+bosses[i].firetimer.restart();
+toys.remove_at(i1);
+return;
+}
+}
+if(bosses[i].bosshealth<=0)
+{
+bosspool.destroy_sound(bosses[i].hurtsound);
+bosspool.destroy_sound(bosses[i].bossesound);
+bosses[i].defsound=bosspool.play_2d(bosses[i].bosstype+"death.ogg", me.x, me.y, bosses[i].bossx, bosses[i].bossy, false);
+spawn_bodyfall(bosses[i].bossx, bosses[i].bossy, random(500,1000), "boss");
+bosses.remove_at(i);
+return;
+}
+}
+}
+void spawn_boss(int x,int y,int hp,int dm,int firetime,int launchtime,int bosstime,int teltime,int healtime,string bosstype)
+{
+boss bs1(x,y,hp,dm,firetime,launchtime,bosstime,teltime,healtime,bosstype);
+bosses.insert_last(bs1);
+}
+void destroy_all_bosses()
+{
+for(uint i=0; i<bosses.length(); i++)
+{
+bosspool.destroy_sound(bosses[i].bossesound);
+}
+bosses.resize(0);
+}
+

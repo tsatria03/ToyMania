@@ -1,0 +1,87 @@
+gard@[]gards(0);
+class gard
+{
+int defsound, firesound, hurtsound, gardsound, spawnsound, stepsound, wepsound;
+int gardhealth;
+int gardx;
+int gardy;
+int damage;
+int firetime;
+int gardtime;
+string gardtype;
+timer firetimer, gardtimer;
+gard(int gx,int gy,int hp,int dm,int ft,int sp,string gt)
+{
+gardx=gx;
+gardy=gy;
+gardhealth=hp;
+damage=dm;
+firetime=ft;
+gardtime=sp;
+gardtype=gt;
+if(gardtype=="gard1") gardsound=gardpool.play_2d(gardtype+"taunt"+random(1,2)+".ogg", me.x, me.y, gardx, gardy, true);
+if(gardtype=="gard2") gardsound=gardpool.play_2d(gardtype+"taunt.ogg", me.x, me.y, gardx, gardy, true);
+}
+}
+void gardloop()
+{
+for(uint i=0; i<gards.length(); i++)
+{
+if(gards[i].gardtimer.elapsed>=gards[i].gardtime)
+{
+if(gards[i].gardtype=="gard1") gards[i].stepsound=gardpool.play_2d("gard1walk"+random(1,5)+".ogg",me.x,me.y,gards[i].gardx,gards[i].gardy,false);
+if(gards[i].gardtype=="gard2") gards[i].stepsound=gardpool.play_2d("gard2walk"+random(1,8)+".ogg",me.x,me.y,gards[i].gardx,gards[i].gardy,false);
+gardpool.update_sound_2d(gards[i].gardsound,gards[i].gardx,gards[i].gardy);
+gards[i].gardtimer.restart();
+if(gards[i].gardx<me.x)
+{
+gards[i].gardx++;
+}
+if(gards[i].gardx>me.x)
+{
+gards[i].gardx--;
+}
+if(gards[i].gardy<me.y)
+{
+gards[i].gardy++;
+}
+if(gards[i].gardy>me.y)
+{
+gards[i].gardy--;
+}
+}
+if(me.x==gards[i].gardx and me.y==gards[i].gardy and gards[i].firetimer.elapsed>=gards[i].firetime)
+{
+if(gards[i].gardtype=="gard1") gards[i].wepsound=gardpool.play_2d(gards[i].gardtype+"hit"+random(1,4)+".ogg", me.x, me.y, gards[i].gardx, gards[i].gardy, false);
+if(gards[i].gardtype=="gard2") gards[i].wepsound=gardpool.play_2d(gards[i].gardtype+"hit.ogg", me.x, me.y, gards[i].gardx, gards[i].gardy, false);
+painslot=p.play_stationary("playerpain.ogg", false);
+health-=gards[i].damage;
+gards[i].firetimer.restart();
+}
+if(gards[i].gardhealth<=0)
+{
+gardpool.destroy_sound(gards[i].hurtsound);
+gardpool.destroy_sound(gards[i].gardsound);
+gards[i].defsound=gardpool.play_2d(gards[i].gardtype+"death.ogg", me.x, me.y, gards[i].gardx, gards[i].gardy, false);
+killed_gards+=1;
+if(gards[i].gardtype=="gard1") spawn_bodyfall(gards[i].gardx, gards[i].gardy, random(500,1000), "gard1");
+if(gards[i].gardtype=="gard2") spawn_bodyfall(gards[i].gardx, gards[i].gardy, random(500,1000), "gard2");
+gards.remove_at(i);
+return;
+}
+}
+}
+void spawn_gard(int x,int y,int hp,int dm,int firetime,int gardtime,string gardtype)
+{
+gard g1(x,y,hp,dm,firetime,gardtime,gardtype);
+gards.insert_last(g1);
+}
+void destroy_all_gards()
+{
+for(uint i=0; i<gards.length(); i++)
+{
+gardpool.destroy_sound(gards[i].gardsound);
+}
+gards.resize(0);
+}
+

@@ -1,0 +1,99 @@
+car@[]cars(0);
+class car
+{
+int carsound, defsound, hurtsound;
+int carx;
+int cary;
+int cardir;
+int cardir2;
+int carhealth;
+int cartime;
+int firetime=cartime;
+string cartype;
+timer cartimer, firetimer;
+car(int cx,int cy,int cd,int cd2,int hp,int sp,string ct)
+{
+carx=cx;
+cary=cy;
+cardir=cd;
+cardir2=cd2;
+carhealth=hp;
+cartime=sp;
+cartype=ct;
+carsound=carpool.play_2d(cartype+"loop.ogg",me.x,me.y,carx,cary,true);
+}
+}
+void carloop()
+{
+for(uint i=0; i<cars.length(); i++)
+{
+if(cars[i].cartimer.elapsed>=cars[i].cartime)
+{
+cars[i].carx+=cars[i].cardir==1?1:-1;
+cars[i].cary+=cars[i].cardir2==1?1:-1;
+carpool.update_sound_2d(cars[i].carsound,cars[i].carx,cars[i].cary);
+cars[i].cartimer.restart();
+if (cars[i].cardir==1 and cars[i].carx>maxx)
+{
+cars[i].cardir=0;
+}
+else if (cars[i].cardir==0 and cars[i].carx<=0)
+{
+cars[i].cardir=1;
+}
+if (cars[i].cardir2==1 and cars[i].cary>maxy)
+{
+cars[i].cardir2=0;
+}
+else if (cars[i].cardir2==0 and cars[i].cary<=0)
+{
+cars[i].cardir2=1;
+}
+for(uint i1=0; i1<gards.length(); i1++)
+{
+if(gards[i1].gardx==cars[i].carx and gards[i1].gardy==cars[i].cary and cars[i].firetimer.elapsed>=cars[i].firetime)
+{
+gardpool.destroy_sound(gards[i1].gardsound);
+gards[i1].defsound=gardpool.play_2d(gards[i1].gardtype+"death.ogg", me.x, me.y, gards[i1].gardx, gards[i1].gardy, false);
+if(gards[i1].gardtype=="gard1") spawn_bodyfall(gards[i1].gardx, gards[i1].gardy, random(500,1000), "gard1");
+if(gards[i1].gardtype=="gard2") spawn_bodyfall(gards[i1].gardx, gards[i1].gardy, random(500,1000), "gard2");
+cars[i].firetimer.restart();
+gards.remove_at(i1);
+return;
+}
+}
+for(uint i2=0; i2<toys.length(); i2++)
+{
+if(toys[i2].tx==cars[i].carx and toys[i2].ty==cars[i].cary and cars[i].firetimer.elapsed>=cars[i].firetime)
+{
+toypool.destroy_sound(toys[i2].toysound);
+toys[i2].hurtsound=toypool.play_2d("toybreak"+random(1,6)+".ogg", me.x, me.y, toys[i2].tx, toys[i2].ty, false);
+cars[i].firetimer.restart();
+toys.remove_at(i2);
+return;
+}
+}
+if(cars[i].carhealth<=0)
+{
+carpool.destroy_sound(cars[i].carsound);
+cars[i].defsound=carpool.play_2d(cars[i].cartype+"death.ogg",me.x,me.y,cars[i].carx,cars[i].cary,false);
+destroyed_cars+=1;
+cars.remove_at(i);
+return;
+}
+}
+}
+}
+void spawn_car(int x,int y,int dir,int dir2,int hp,int sp,string cartype)
+{
+car c1(x,y,dir,dir2,hp,sp,cartype);
+cars.insert_last(c1);
+}
+void destroy_all_cars()
+{
+for(uint i=0; i<cars.length(); i++)
+{
+carpool.destroy_sound(cars[i].carsound);
+}
+cars.resize(0);
+}

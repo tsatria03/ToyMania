@@ -1,0 +1,55 @@
+void fade_volume_pool(sound_pool@ handle, double time=0.25, double minvol=-50)
+{
+for(double current=0; current>minvol; current-=time)
+{
+for(uint x=0; x<handle.items.length(); x++)
+{
+if(@handle.items[x].handle==null)
+continue;
+if(handle.items[x].handle.playing==false)
+continue;
+handle.items[x].handle.volume=handle.items[x].handle.volume-time;
+wait(5);
+}
+}
+handle.destroy_all();
+}
+
+void fade_pitch_pool(sound_pool@ handle, double time=20, double target_pitch=20, double amount=2, int mode=0) 
+{
+    if (@handle == null) return;
+    bool all_faded = false;    
+    while (!all_faded)
+    {
+        all_faded = true;
+        for (uint i = 0; i < handle.items.length(); i++)
+        {
+            if (@handle.items[i].handle != null && handle.items[i].handle.playing)
+            {
+                double current_pitch = handle.items[i].handle.pitch;
+                if (mode == 0)
+                {
+                    if (current_pitch > target_pitch)
+                    {
+                        double new_pitch = current_pitch - amount;
+                        if (new_pitch < target_pitch) new_pitch = target_pitch;
+                        handle.items[i].handle.pitch = new_pitch;
+                        all_faded = false;
+                    }
+                }
+                else if (mode == 1)
+                {
+                    if (current_pitch < target_pitch)
+                    {
+                        double new_pitch = current_pitch + amount;
+                        if (new_pitch > target_pitch) new_pitch = target_pitch;
+                        handle.items[i].handle.pitch = new_pitch;
+                        all_faded = false;
+                    }
+                }
+            }
+        }
+        wait(time);
+    }    
+}
+

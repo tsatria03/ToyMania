@@ -1,0 +1,55 @@
+key@[]keys(0);
+class key
+{
+bool autobreak;
+int getsound, hurtsound, keysound, spawnsound;
+int kx;
+int ky;
+int timeout;
+timer timeout_timer;
+key(int x, int y,int tt,bool br)
+{
+kx=x;
+ky=y;
+timeout=tt;
+autobreak=br;
+spawnsound=keypool.play_2d("keyspawn"+random(1,8)+".ogg", me.x, me.y, kx, ky, false);
+keysound=keypool.play_2d("keyloop"+random(1,4)+".ogg", me.x, me.y, kx, ky, true);
+keypool.update_sound_2d(spawnsound,kx,ky);
+keypool.update_sound_2d(keysound,kx,ky);
+}
+}
+void keyloop()
+{
+for(uint i=0; i<keys.length(); i++)
+{
+if(keys[i].timeout_timer.elapsed>=keys[i].timeout and keys[i].autobreak==true)
+{
+keypool.destroy_sound(keys[i].keysound);
+keys[i].hurtsound=keypool.play_2d("keybreak"+random(1,6)+".ogg", me.x, me.y, keys[i].kx, keys[i].ky, false);
+keys.remove_at(i);
+return;
+}
+if(me.x==keys[i].kx and me.y==keys[i].ky)
+{
+keypool.destroy_sound(keys[i].keysound);
+keys[i].getsound=keypool.play_stationary("keyget"+random(1,6)+".ogg",false);
+collected_keys+=1;
+keys.remove_at(i);
+return;
+}
+}
+}
+void spawn_key(int x,int y,int timeout,bool autobreak)
+{
+key k1(x,y,timeout,autobreak);
+keys.insert_last(k1);
+}
+void destroy_all_keys()
+{
+for(uint i=0; i<keys.length(); i++)
+{
+keypool.destroy_sound(keys[i].keysound);
+}
+keys.resize(0);
+}
