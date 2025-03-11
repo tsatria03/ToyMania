@@ -13,7 +13,7 @@ int runtime=100;
 int walktime=200;
 int bossespawntime=5000, carspawntime=1000, gardspawntime=500, keyspawntime=250, toyspawntime=125;
 string weapontype="bat";
-string version="1.1";
+string version="1.0";
 timer bossespawntimer, carspawntimer, firetimer, firetimer2, gametimer, gardspawntimer, keyspawntimer, movetimer, runtimer, toyspawntimer, walktimer;
 sound dummy;
 sound_pool p, pool, bosspool, carpool, doorpool, gardpool, keypool, toypool;
