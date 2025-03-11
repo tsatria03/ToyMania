@@ -55,7 +55,6 @@ toypool.max_distance = 0;
 toypool.pan_step = 2.5;
 toypool.volume_step = 2.5;
 show_game_window("ToyMania, version "+version);
-wait(1000);
 dlgplay("toylaunch.ogg");
 health=1000;
 me.x=25;

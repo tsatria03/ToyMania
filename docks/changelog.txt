@@ -1,9 +1,7 @@
-new in 1.1
-Made some weapon enhancements.
+new in 1.0
 Replaced the boss hitting sounds with new ones.
 Decreased the amount of keys you need to collect to unlock the door. This value will also be spoken when trying to unlock the door.
 Made it so the ammo of the machine gun resets upon redrawing it.
-new in 1.0
 Fixed a bug where keys and toys were being broken at the start of a new game despite the clock not allowing them to do it.
 Added a door that will randomly spawn on the map while you're on the boss area. You can't open this door unless you've collected all of the keys that are required to unlock it.
 Fixed a bug where you were still able to hit bosses, cars, and guards while your machinegun was empty.
@@ -13,14 +11,11 @@ Made it so keys get destroied if you don't collect them on time.
 You can now collect keys. They will start appearing in the boss area of the map.
 Made it so the boss class launches random guards with different atributes.
 Adjusted some tweaks. The guards will no longer show up untill you reach the boss area. They will also no longer destroy the toys that get dropped on the ground.
-Added various keyboard shortcuts. These will be explained more in detail in the readme.
 Made it so the damage of weapons are randomized when hitting bosses, cars, and guards.
 Added health mechanics. When a guard or a boss attacks you, you'll here pain sounds. The same thing will apply if they kill you.
-added behind pitch decrease.
 Made it so toys get broken if you don't collect them on time.
 Added damage and range stats to all of the weapons.
 Added a boss that will attack, heal, and teleport around the area. This boss can be killed using your weapons.
-Made it so the longer the game lasts, the more cars, guards, and toys spawn.
 Added guards that will attack and patrol the area. These guards can be killed using your weapons.
 Added toy cars that will patrol the area. These cars can be destroyed using your weapons.
 Added the ability to draw and equip weapons.
