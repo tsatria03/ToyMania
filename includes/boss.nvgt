@@ -111,6 +111,7 @@ bosspool.destroy_sound(bosses[i].bossesound);
 bosses[i].defsound=bosspool.play_2d(bosses[i].bosstype+"death.ogg", me.x, me.y, bosses[i].bossx, bosses[i].bossy, false);
 spawn_bodyfall(bosses[i].bossx, bosses[i].bossy, random(500,1000), "boss");
 bosses.remove_at(i);
+bossdefeated = true;
 return;
 }
 }

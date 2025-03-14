@@ -25,7 +25,7 @@ for(uint i=0; i<doors.length(); i++)
 {
 if(doors[i].startx==me.x and doors[i].starty==me.y and doors[i].automatic==true)
 {
-int required_keys=30;
+int required_keys=15;
 if(collected_keys<required_keys)
 {
 speak("This door is locked. You need "+required_keys+" or more keys in order to unlock it.");
@@ -44,7 +44,7 @@ doors[i].movesound=doorpool.play_stationary("doormove.ogg",true);
 }
 if(doors[i].startx==me.x and doors[i].starty==me.y and doors[i].automatic==false and key_pressed(KEY_RETURN))
 {
-int required_keys=30;
+int required_keys=15;
 if(collected_keys<required_keys)
 {
 speak("This door is locked. You need "+required_keys+" or more keys in order to unlock it.");

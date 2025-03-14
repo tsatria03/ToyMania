@@ -1,1 +1,3 @@
+Fix bosses from reappearing
+Reduce the number of keys need to be collected to win the game
 *Done. Add doors

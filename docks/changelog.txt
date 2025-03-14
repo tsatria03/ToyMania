@@ -1,3 +1,6 @@
+new in 1.1
+Fixed an issue where the boss would continuously resurrect itself upon succesfull defeat.
+Reduced the amount of keys you need to collect to unlock the door to 15, instead of 30.
 new in 1.0
 Replaced the boss hitting sounds with new ones.
 Decreased the amount of keys you need to collect to unlock the door. This value will also be spoken when trying to unlock the door.

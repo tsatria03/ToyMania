@@ -1,5 +1,6 @@
 #include"includes/includes.nvgt"
 bool y_is_elevation=true;
+bool bossdefeated = false;
 bool bossespawn=false, carspawn=false, coinsfx=true, gardspawn=false, keydest=false, keyspawn=false, toydest=false, toyspawn=false;
 double toyambvolume=-10, toyambpitch=100, toymusvolume=-10, toymuspitch=100;
 double ammo=100, collected_keys=0, collected_toys=0, destroyed_cars=0, health=1000, killed_gards=0, level=1;
@@ -59,6 +60,7 @@ dlgplay("toylaunch.ogg");
 health=1000;
 me.x=25;
 me.y=25;
+bossdefeated = false;
 keydest=false;
 toydest=false;
 toyspawn=true;
@@ -500,7 +502,7 @@ weaponslot=p.play_stationary(weapontype+"draw.ogg", false);
 p.play_stationary("playerland.ogg", false);
 toyambslot=pool.play_stationary_extended("toyamb.ogg",true,0,0,toyambvolume,toyambpitch,false);
 toytrackslot=pool.play_stationary_extended("toymusic.ogg",true,0,0,toymusvolume,toymuspitch,false);
-//gametimer.force(1000*300);
+gametimer.force(1000*300);
 while(true)
 {
 wait(5);
@@ -520,7 +522,7 @@ doorpool.update_listener_2d(me.x,me.y);
 gardpool.update_listener_2d(me.x,me.y);
 keypool.update_listener_2d(me.x,me.y);
 toypool.update_listener_2d(me.x,me.y);
-if(bossespawntimer.elapsed>=bossespawntime and bosses.length()<bossnum and bossespawn==true)
+if(bossespawntimer.elapsed>=bossespawntime and bosses.length()<bossnum and bossespawn==true and !bossdefeated)
 {
 dlgplay("alert_big.ogg");
 destroy_all_cars();
@@ -602,6 +604,7 @@ ammo=0;
 if(health<=0)
 {
 level=1;
+bossdefeated = false;
 bossespawn=false;
 carspawn=false;
 gardspawn=false;
