@@ -30,7 +30,7 @@ keys[i].hurtsound=keypool.play_2d("keybreak"+random(1,6)+".ogg", me.x, me.y, key
 keys.remove_at(i);
 return;
 }
-if(me.x==keys[i].kx and me.y==keys[i].ky)
+if(absolute(me.x - keys[i].kx) <= 2 and absolute(me.y - keys[i].ky) <= 2)
 {
 keypool.destroy_sound(keys[i].keysound);
 keys[i].getsound=keypool.play_stationary("keyget"+random(1,6)+".ogg",false);

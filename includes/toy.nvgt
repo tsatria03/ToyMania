@@ -28,7 +28,7 @@ toys[i].hurtsound=toypool.play_2d("toybreak"+random(1,6)+".ogg", me.x, me.y, toy
 toys.remove_at(i);
 return;
 }
-if(me.x==toys[i].tx and me.y==toys[i].ty)
+if(absolute(me.x - toys[i].tx) <= 2 and absolute(me.y - toys[i].ty) <= 2)
 {
 toypool.destroy_sound(toys[i].toysound);
 toys[i].getsound=toypool.play_stationary("toyget"+random(1,2)+".ogg",false);

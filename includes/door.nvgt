@@ -35,7 +35,13 @@ else if(collected_keys>=required_keys)
 doors[i].unlocksound=doorpool.play_stationary("keyuse"+random(1,6)+".ogg",false);
 pool.destroy_sound(toyambslot);
 pool.destroy_sound(toytrackslot);
+destroy_all_keys();
+keyspawn=false;
 wait(500);
+pool.destroy_sound(toyambslot);
+pool.destroy_sound(toytrackslot);
+destroy_all_keys();
+keyspawn=false;
 doormove=true;
 doors[i].is_moving=true;
 doors[i].opensound=doorpool.play_stationary("dooropen.ogg",false);
@@ -54,6 +60,8 @@ else if(collected_keys>=required_keys)
 doors[i].unlocksound=doorpool.play_stationary("keyuse"+random(1,6)+".ogg",false);
 pool.destroy_sound(toyambslot);
 pool.destroy_sound(toytrackslot);
+destroy_all_keys();
+keyspawn=false;
 wait(500);
 doormove=true;
 doors[i].is_moving=true;
@@ -93,9 +101,6 @@ me.y--;
 }
 if(me.x==doors[i].endx and me.y==doors[i].endy)
 {
-keypool.destroy_all();
-keyspawn=false;
-destroy_all_keys();
 doorpool.destroy_sound(doors[i].movesound);
 doors[i].closesound=doorpool.play_stationary("doorclose.ogg",false);
 doormove=false;

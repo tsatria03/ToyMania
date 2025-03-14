@@ -1,4 +1,5 @@
 new in 1.1
+Made it so You no longer have to be perfectly on top of a key or toy to pick it up. You can now collect keys and toys while being slightly to the left, right, forward, or backward.
 Fixed an issue where the boss would continuously resurrect itself upon succesfull defeat.
 Reduced the amount of keys you need to collect to unlock the door to 15, instead of 30.
 new in 1.0
