@@ -14,7 +14,7 @@ int runtime=100;
 int walktime=200;
 int bossespawntime=5000, carspawntime=1000, gardspawntime=500, keyspawntime=250, toyspawntime=125;
 string weapontype="bat";
-string version="1.0";
+string version="1.1";
 timer bossespawntimer, carspawntimer, firetimer, firetimer2, gametimer, gardspawntimer, keyspawntimer, movetimer, runtimer, toyspawntimer, walktimer;
 sound dummy;
 sound_pool p, pool, bosspool, carpool, doorpool, gardpool, keypool, toypool;
@@ -22,8 +22,8 @@ time_elapsed timeelapsed;
 vector me;
 void main()
 {
-set_sound_storage("data/sounds.dat");
-set_sound_decryption_key("BRn2x3BJd3O0KrB7kb2L6cY4qJYEjVt5OhuVzJmmsoj9wampZL3IAx7IdIQBMyqW7ssXZhsXwD2nrQR4qRL8038swNq0Zc2ObN6mNlWrjIGcYLqEh2t0OHeM",true);
+set_sound_storage("data/assets.tmg");
+set_sound_decryption_key("LGY24P2p56riZXtvhxtONfyBQgVZZS8wJnVSJEZ0zOOeQr3THFTtlyIXYI04Dgbk2SD1DoCMFk8QuRPv7DhlAXJDb3XzEt8vd9RcU8LW0LzcXkHvJUmkWbAtJ8ITyuCF0CkpPcW6eiPsjGDU9rlVufn8GSO2vy4KAjcLe",true);
 dummy.load("dummy");
 sound_global_hrtf=true;
 timeelapsed.set_timer(gametimer);
@@ -502,8 +502,6 @@ weaponslot=p.play_stationary(weapontype+"draw.ogg", false);
 p.play_stationary("playerland.ogg", false);
 toyambslot=pool.play_stationary_extended("toyamb.ogg",true,0,0,toyambvolume,toyambpitch,false);
 toytrackslot=pool.play_stationary_extended("toymusic.ogg",true,0,0,toymusvolume,toymuspitch,false);
-gametimer.force(1000*300);
-collected_keys=30;
 while(true)
 {
 wait(5);
@@ -626,7 +624,7 @@ pool.destroy_sound(toyambslot);
 pool.destroy_sound(toytrackslot);
 dlgplay("playerdeath.ogg");
 dlgplay("playerfall.ogg");
-dlg("You died! Better luck next time!");
+dlg("You died with a total score of "+collected_keys+" keys and "+collected_toys+" toys. Better luck next time!");
 exit();
 }
 }
