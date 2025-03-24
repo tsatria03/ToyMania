@@ -1,4 +1,5 @@
 new in 1.1
+Made it so bosses, cars, and guards can no longer destroy toys.
 The winning screen now tells you how many keys and toys you've collected upon unlocking the final exit.
 The death screen now tells you how many keys and toys you've collected upon being killed.
 Made it so You no longer have to be perfectly on top of a key or toy to pick it up. You can now collect keys and toys while being slightly to the left, right, forward, or backward.

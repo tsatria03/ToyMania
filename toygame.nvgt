@@ -56,7 +56,7 @@ toypool.max_distance = 0;
 toypool.pan_step = 2.5;
 toypool.volume_step = 2.5;
 show_game_window("ToyMania, version "+version);
-dlgplay("toylaunch.ogg");
+dlgplay("launch.ogg");
 health=1000;
 me.x=25;
 me.y=25;
@@ -296,7 +296,7 @@ if(weapontype=="machinegun" and ammo>=1)
 {
 if(ammo>=1 and weapontype=="machinegun") wepdamage=random(27,30);
 if(ammo>=1 and weapontype=="machinegun") weaponslot=p.play_2d(weapontype+"hit.ogg",me.x,me.y,bosses[i].bossx,bosses[i].bossy, false);
-if(ammo>=1 and weapontype=="machinegun") weaponslot=p.play_2d(weapontype+"shell"+random(1,8)+".ogg",me.x,me.y,bosses[i].bossx,bosses[i].bossy, false);
+if(ammo>=1 and weapontype=="machinegun") weaponslot=p.play_2d(weapontype+"shell"+random(1,4)+".ogg",me.x,me.y,bosses[i].bossx,bosses[i].bossy, false);
 }
 if(ammo>=1 and weapontype=="machinegun") bosses[i].hurtsound=bosspool.play_2d(bosses[i].bosstype+"pain.ogg",me.x,me.y,bosses[i].bossx,bosses[i].bossy,false);
 if(ammo>=1 and weapontype=="machinegun") bosses[i].bosshealth-=wepdamage;
@@ -310,7 +310,7 @@ if(weapontype=="machinegun" and ammo>=1)
 {
 if(ammo>=1 and weapontype=="machinegun") wepdamage=random(27,30);
 if(ammo>=1 and weapontype=="machinegun") weaponslot=p.play_2d(weapontype+"hit.ogg",me.x,me.y,cars[i].carx,cars[i].cary, false);
-if(ammo>=1 and weapontype=="machinegun") weaponslot=p.play_2d(weapontype+"shell"+random(1,8)+".ogg",me.x,me.y,cars[i].carx,cars[i].cary, false);
+if(ammo>=1 and weapontype=="machinegun") weaponslot=p.play_2d(weapontype+"shell"+random(1,4)+".ogg",me.x,me.y,cars[i].carx,cars[i].cary, false);
 }
 if(ammo>=1 and weapontype=="machinegun") cars[i].hurtsound=carpool.play_2d(cars[i].cartype+"pain.ogg",me.x,me.y,cars[i].carx,cars[i].cary,false);
 if(ammo>=1 and weapontype=="machinegun") cars[i].carhealth-=wepdamage;
@@ -324,7 +324,7 @@ if(weapontype=="machinegun" and ammo>=1)
 {
 if(ammo>=1 and weapontype=="machinegun") wepdamage=random(27,30);
 if(ammo>=1 and weapontype=="machinegun") weaponslot=p.play_2d(weapontype+"hit.ogg",me.x,me.y,gards[i].gardx,gards[i].gardy, false);
-if(ammo>=1 and weapontype=="machinegun") weaponslot=p.play_2d(weapontype+"shell"+random(1,8)+".ogg",me.x,me.y,gards[i].gardx,gards[i].gardy, false);
+if(ammo>=1 and weapontype=="machinegun") weaponslot=p.play_2d(weapontype+"shell"+random(1,4)+".ogg",me.x,me.y,gards[i].gardx,gards[i].gardy, false);
 }
 if(ammo>=1 and weapontype=="machinegun" and gards[i].gardtype=="gard1") gards[i].hurtsound=gardpool.play_2d(gards[i].gardtype+"pain"+random(1,5)+".ogg", me.x, me.y, gards[i].gardx, gards[i].gardy, false);
 if(ammo>=1 and weapontype=="machinegun" and gards[i].gardtype=="gard2") gards[i].hurtsound=gardpool.play_2d(gards[i].gardtype+"pain.ogg", me.x, me.y, gards[i].gardx, gards[i].gardy, false);
@@ -500,8 +500,8 @@ weprange2=2;
 speak(weapontype+" equipped");
 weaponslot=p.play_stationary(weapontype+"draw.ogg", false);
 p.play_stationary("playerland.ogg", false);
-toyambslot=pool.play_stationary_extended("toyamb.ogg",true,0,0,toyambvolume,toyambpitch,false);
-toytrackslot=pool.play_stationary_extended("toymusic.ogg",true,0,0,toymusvolume,toymuspitch,false);
+toyambslot=pool.play_stationary_extended("ambience.ogg",true,0,0,toyambvolume,toyambpitch,false);
+toytrackslot=pool.play_stationary_extended("music.ogg",true,0,0,toymusvolume,toymuspitch,false);
 while(true)
 {
 wait(5);
@@ -523,7 +523,7 @@ keypool.update_listener_2d(me.x,me.y);
 toypool.update_listener_2d(me.x,me.y);
 if(bossespawntimer.elapsed>=bossespawntime and bosses.length()<bossnum and bossespawn==true and !bossdefeated)
 {
-dlgplay("alert_big.ogg");
+dlgplay("alert.ogg");
 destroy_all_cars();
 destroy_all_doors();
 destroy_all_gards();

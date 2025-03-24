@@ -92,18 +92,6 @@ painslot=p.play_stationary("playerpain.ogg", false);
 health-=bosses[i].damage;
 bosses[i].firetimer.restart();
 }
-for(uint i1=0; i1<toys.length(); i1++)
-{
-if(toys[i1].tx==bosses[i].bossx and toys[i1].ty==bosses[i].bossy and bosses[i].firetimer.elapsed>=bosses[i].firetime)
-{
-toypool.destroy_sound(toys[i1].toysound);
-bosses[i].wepsound=bosspool.play_2d(bosses[i].bosstype+"hit.ogg", me.x, me.y, bosses[i].bossx, bosses[i].bossy, false);
-toys[i1].hurtsound=toypool.play_2d("toybreak"+random(1,6)+".ogg", me.x, me.y, toys[i1].tx, toys[i1].ty, false);
-bosses[i].firetimer.restart();
-toys.remove_at(i1);
-return;
-}
-}
 if(bosses[i].bosshealth<=0)
 {
 bosspool.destroy_sound(bosses[i].hurtsound);
