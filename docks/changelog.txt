@@ -1,4 +1,4 @@
-new in 1.1
+new in 1.1beta
 Made it so bosses, cars, and guards can no longer destroy toys.
 The winning screen now tells you how many keys and toys you've collected upon unlocking the final exit.
 The death screen now tells you how many keys and toys you've collected upon being killed.
