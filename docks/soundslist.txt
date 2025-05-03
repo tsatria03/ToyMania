@@ -64,6 +64,7 @@ fistfire2.ogg
 fisthit1.ogg
 fisthit2.ogg
 fisthit3.ogg
+gamelaunch.ogg
 gard1death.ogg
 gard1fall1.wav
 gard1fall2.wav
@@ -147,7 +148,6 @@ knifehit3.ogg
 laserdraw.ogg
 laserfire.ogg
 laserhit.ogg
-launch.ogg
 machinegundraw.ogg
 machinegunempty.ogg
 machinegunfire.ogg

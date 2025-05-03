@@ -1,4 +1,6 @@
 new in 1.2
+Added a steps tracker into the stats menu. It will now tell you how many steps you've taken in total.
+Added a Stats Menu to the game. This menu displays a summary of your total collected keys and toys, killed guards, and destroyed cars. You can access this from the main menu to review your progress all in one place.
 Addressed an issue where collected keys and toys weren't being tracked propperly upon player death.
 Added some menu sounds to the game.
 Added the ability to save your settings in the settings menu.
