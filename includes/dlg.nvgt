@@ -25,34 +25,6 @@ break;
 }
 }
 }
-void dlg_snd(string message, string dlgsound="error.ogg", bool dlgcoppy=true, int timeout=-1)
-{
-timer timeouter;
-temp.play_stationary(dlgsound, false);
-speak(message);
-while(true)
-{
-wait(5);
-if (timeout>-1 and timeouter.elapsed>=timeout)
-return;
-if (key_repeating(KEY_C) and dlgcoppy==true)
-{
-temp.destroy_all();
-temp.play_stationary("dlgcoppy.ogg", false);
-speak("Copied");
-clipboard_copy_text(message);
-}
-if (key_repeating(KEY_LEFT) or key_repeating(KEY_RIGHT) or key_repeating(KEY_UP) or key_repeating(KEY_DOWN))
-{
-speak(message);
-}
-if(key_repeating(KEY_RETURN) or key_down(KEY_A))
-{
-temp.destroy_all();
-break;
-}
-}
-}
 void dlgmessage(string messages)
 {
 temp.play_stationary("dlgopen.ogg", false);

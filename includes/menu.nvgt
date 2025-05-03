@@ -86,6 +86,7 @@ void settingsmenu()
 setupmenu(false);
 m.add_item(behind_pitch ? "Disable global behind pitch decrease" : "Enable global behind pitch decrease", "glb");
 m.add_item(hrtf ? "Disable global HRTF support" : "Enable global HRTF support", "glh");
+m.add_item("Clear game statistics.", "gs");
 m.add_item("save settings", "sv");
 m.add_item("back", "back");
 m.intro_text = "Settings menu.";
@@ -98,21 +99,84 @@ mainmenu();
 if (preffsm == "glb")
 {
 behind_pitch = !behind_pitch;
-dlg(behind_pitch ? "Global behind pitch decrease enabled. Press enter to continue." : "Global behind pitch decrease disabled. Press enter to continue.");
+dlgmessage(behind_pitch ? "Global behind pitch decrease enabled. Press enter to continue." : "Global behind pitch decrease disabled. Press enter to continue.");
 settingsmenu();
 }
 if (preffsm == "glh")
 {
 hrtf = !hrtf;
 sound_global_hrtf = hrtf;
-dlg(hrtf ? "Global hrtf support enabled. Press enter to continue." : "Global hrtf support disabled. Press enter to continue.");
+dlgmessage(hrtf ? "Global hrtf support enabled. Press enter to continue." : "Global hrtf support disabled. Press enter to continue.");
 settingsmenu();
 }
 if (preffsm == "sv")
 {
 writepreffs();
-dlg("Settings saved. Press enter to continue.");
+dlgmessage("Settings saved. Press enter to continue.");
 mainmenu();
+}
+if (preffsm == "gs")
+{
+    setupmenu(false);
+    m.add_item("Clear session stats only", "session");
+    m.add_item("Clear lifetime stats only", "lifetime");
+    m.add_item("Clear both session and lifetime stats", "both");
+    m.add_item("Back", "back");
+    m.intro_text = "Choose which game stats to reset.";
+    int mres = m.run();
+    string gsm = m.get_selected_item_id();
+    if (mres == -1 or gsm == "back")
+    {
+        settingsmenu();
+    }
+    setupmenu(false);
+    m.add_item("Yes", "yes");
+    m.add_item("No", "no");
+    m.intro_text = "Are you sure you want to clear " + (gsm == "session" ? "your session stats" : gsm == "lifetime" ? "your lifetime stats" : "all of your stats") + "? This can't be undone.";
+    mres = m.run();
+    string confirm = m.get_selected_item_id();
+    if (mres == -1 or confirm == "no")
+    {
+settingsmenu();
+    }
+    if (gsm == "session")
+    {
+        collected_toys = 0;
+        collected_keys = 0;
+        killed_gards = 0;
+        destroyed_cars = 0;
+        taken_steps = 0;
+writedata();
+        dlgmessage("Session stats cleared. Press enter to continue.");
+    }
+    if (gsm == "lifetime")
+    {
+        total_collected_toys = 0;
+        total_collected_keys = 0;
+        total_killed_gards = 0;
+        total_destroyed_cars = 0;
+        total_taken_steps = 0;
+        total_playtime = 0;
+        writedata();
+        dlgmessage("Lifetime stats cleared. Press enter to continue.");
+    }
+    if (gsm == "both")
+    {
+        collected_toys = 0;
+        collected_keys = 0;
+        killed_gards = 0;
+        destroyed_cars = 0;
+        taken_steps = 0;
+        total_collected_toys = 0;
+        total_collected_keys = 0;
+        total_killed_gards = 0;
+        total_destroyed_cars = 0;
+        total_taken_steps = 0;
+        total_playtime = 0;
+        writedata();
+        dlgmessage("All stats cleared. Press enter to continue.");
+    }
+    settingsmenu();
 }
 if (preffsm == "back")
 {

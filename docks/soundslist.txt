@@ -47,6 +47,10 @@ clubfire3.ogg
 clubhit1.ogg
 clubhit2.ogg
 clubhit3.ogg
+dlgclose.ogg
+dlgcoppy.ogg
+dlgopen.ogg
+dlgscroll.ogg
 doorclose.ogg
 doorloop.ogg
 doormove.ogg
@@ -222,4 +226,4 @@ toyloop7.ogg
 toyloop8.ogg
 toyloop9.ogg
 toymus.ogg
-total files: 224
+total files: 228
