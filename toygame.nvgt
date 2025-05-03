@@ -19,7 +19,7 @@ string weapontype="bat";
 string version="1.2";
 timer bossespawntimer, carspawntimer, firetimer, firetimer2, gametimer, gardspawntimer, keyspawntimer, movetimer, runtimer, toyspawntimer, walktimer;
 sound dummy;
-savedata st("data/settings.tmg", "JPl3mWxEI9k3USkJ9FOcAyX3rM2bC7TEMal2yhACrMXiymP9blH8RUhAnXJgY9s8wN18ZQDYnMAyqespGd7oqHOYEuhY10Py2KWa0GU7PmLuQTs86u9GSrNALSI2cQr91Nx7JdchD0YR3VT9Wt8HOeh7iEZmHKnAspZSZStdGL8WJdxuZSetCSEsSdyvpKtYa2kC4dE7PKM9YsdgQrOSxAOmnRtitYRdXr3NHdUhf8qefxjMMsELF3lzVycamyLAbTxpM1Kkj4h5YnELQxNf81ULUGyKVA2j3gx2wlJvbABIufN52A08Ia8ufou63Z4ZvUuzhj81jvzwS4D8XJ7e4k3hgdjI9oChGt991DqWjc2i3O7DQGgPQDSsrkXXKxz79ZlLyjF9nqlj0RuTIV0qNxZLgPEMqIKeGhxphLsJP3scIvtSzkKELNMvbwrDDFeT8pXVP");
+savedata st("data/saves/settings.tmg", "JPl3mWxEI9k3USkJ9FOcAyX3rM2bC7TEMal2yhACrMXiymP9blH8RUhAnXJgY9s8wN18ZQDYnMAyqespGd7oqHOYEuhY10Py2KWa0GU7PmLuQTs86u9GSrNALSI2cQr91Nx7JdchD0YR3VT9Wt8HOeh7iEZmHKnAspZSZStdGL8WJdxuZSetCSEsSdyvpKtYa2kC4dE7PKM9YsdgQrOSxAOmnRtitYRdXr3NHdUhf8qefxjMMsELF3lzVycamyLAbTxpM1Kkj4h5YnELQxNf81ULUGyKVA2j3gx2wlJvbABIufN52A08Ia8ufou63Z4ZvUuzhj81jvzwS4D8XJ7e4k3hgdjI9oChGt991DqWjc2i3O7DQGgPQDSsrkXXKxz79ZlLyjF9nqlj0RuTIV0qNxZLgPEMqIKeGhxphLsJP3scIvtSzkKELNMvbwrDDFeT8pXVP");
 menu m;
 sound_pool p, pool, bosspool, carpool, doorpool, gardpool, keypool, toypool;
 time_elapsed timeelapsed;
@@ -50,7 +50,7 @@ st.save();
 }
 void main()
 {
-set_sound_storage("data/assets.tmg");
+set_sound_storage("data/saves/assets.tmg");
 set_sound_decryption_key("LGY24P2p56riZXtvhxtONfyBQgVZZS8wJnVSJEZ0zOOeQr3THFTtlyIXYI04Dgbk2SD1DoCMFk8QuRPv7DhlAXJDb3XzEt8vd9RcU8LW0LzcXkHvJUmkWbAtJ8ITyuCF0CkpPcW6eiPsjGDU9rlVufn8GSO2vy4KAjcLe",true);
 dummy.load("dummy");
 readpreffs();
@@ -602,8 +602,8 @@ weprange2=2;
 speak(weapontype+" equipped");
 weaponslot=p.play_stationary(weapontype+"draw.ogg", false);
 p.play_stationary("playerland.ogg", false);
-toyambslot=pool.play_stationary_extended("ambience.ogg",true,0,0,toyambvolume,toyambpitch,false);
-toytrackslot=pool.play_stationary_extended("music.ogg",true,0,0,toymusvolume,toymuspitch,false);
+toyambslot=pool.play_stationary_extended("toyamb.ogg",true,0,0,toyambvolume,toyambpitch,false);
+toytrackslot=pool.play_stationary_extended("toymus.ogg",true,0,0,toymusvolume,toymuspitch,false);
 while(true)
 {
 wait(5);

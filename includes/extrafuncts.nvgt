@@ -112,7 +112,7 @@ m.add_music("");
 m.reset();
 m.automatic_intro = true;
 m.focus_first_item = false;
-m.wrap = true;
+m.wrap = false;
 m.click_sound = "menuclick.ogg";
 m.close_sound = "menuclose.ogg";
 m.edge_sound = "menuedge.ogg";
