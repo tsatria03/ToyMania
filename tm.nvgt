@@ -33,12 +33,12 @@ void main()
 set_sound_storage("data/saves/assets.tmg");
 set_sound_decryption_key("LGY24P2p56riZXtvhxtONfyBQgVZZS8wJnVSJEZ0zOOeQr3THFTtlyIXYI04Dgbk2SD1DoCMFk8QuRPv7DhlAXJDb3XzEt8vd9RcU8LW0LzcXkHvJUmkWbAtJ8ITyuCF0CkpPcW6eiPsjGDU9rlVufn8GSO2vy4KAjcLe",true);
 dummy.load("dummy");
-achievements.insert_last(AchievementTracker("Toys", "Toy Collector", generate_achievement_thresholds(5, 10, 2)));
-achievements.insert_last(AchievementTracker("Keys", "Key Hunter", generate_achievement_thresholds(10, 10, 2)));
-achievements.insert_last(AchievementTracker("Guards", "Guard Slayer", generate_achievement_thresholds(20, 10, 2)));
-achievements.insert_last(AchievementTracker("Cars", "Car Crusher", generate_achievement_thresholds(40, 10, 2)));
-achievements.insert_last(AchievementTracker("Steps", "Walker", generate_achievement_thresholds(80, 10, 2)));
-achievements.insert_last(AchievementTracker("Playtime", "Time Traveler", generate_achievement_thresholds(2, 10, 2)));
+achievements.insert_last(AchievementTracker("Toys", "Toy Collector", generate_achievement_thresholds(5, 20, 2)));
+achievements.insert_last(AchievementTracker("Keys", "Key Hunter", generate_achievement_thresholds(10, 20, 2)));
+achievements.insert_last(AchievementTracker("Guards", "Guard Slayer", generate_achievement_thresholds(20, 20, 2)));
+achievements.insert_last(AchievementTracker("Cars", "Car Crusher", generate_achievement_thresholds(40, 20, 2)));
+achievements.insert_last(AchievementTracker("Steps", "Pacer", generate_achievement_thresholds(80, 20, 2)));
+achievements.insert_last(AchievementTracker("Playtime", "Time Traveler", generate_achievement_thresholds(2, 20, 2)));
 readdata();
 readpreffs();
 sound_global_hrtf=hrtf;

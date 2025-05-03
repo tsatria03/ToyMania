@@ -202,19 +202,35 @@ mainmenu();
 if (preffsm == "chm")
 {
     setupmenu(false);
-    m.add_item("Yes", "yes");
-    m.add_item("No", "no");
-    m.intro_text = "Are you sure you want to clear all of your achievements? This action cannot be undone.";
+    m.add_item("Yes, reset only achievement tiers.", "tiers");
+    m.add_item("Yes, reset achievement tiers and related game stats.", "full");
+    m.add_item("No, cancel.", "cancel");
+    m.intro_text = "Are you sure you want to clear all of your achievements? This action can't be undone.";
     int res = m.run();
     string result = m.get_selected_item_id();
-    if (result == "yes")
+    if (result == "tiers")
     {
         for (uint i = 0; i < achievements.length(); i++)
         {
             achievements[i].currentTier = 0;
         }
-        dlgmessage("All achievement progress has been cleared.");
         writedata();
+        dlgmessage("All achievement tiers have been reset. Your stats still remain intact. Press enter to continue.");
+    }
+    else if (result == "full")
+    {
+        for (uint i = 0; i < achievements.length(); i++)
+        {
+            achievements[i].currentTier = 0;
+        }
+        total_collected_toys = 0;
+        total_collected_keys = 0;
+        total_killed_gards = 0;
+        total_destroyed_cars = 0;
+        total_taken_steps = 0;
+        total_playtime = 0;
+        writedata();
+        dlgmessage("All achievements and related stats have been fully reset. Press enter to continue.");
     }
     settingsmenu();
 }
@@ -235,7 +251,7 @@ if (preffsm == "gs")
     setupmenu(false);
     m.add_item("Yes", "yes");
     m.add_item("No", "no");
-    m.intro_text = "Are you sure you want to clear " + (gsm == "session" ? "your session stats" : gsm == "lifetime" ? "your lifetime stats" : "all of your session and lifetime stats") + "? This can't be undone.";
+    m.intro_text = "Are you sure you want to clear " + (gsm == "session" ? "your session stats" : gsm == "lifetime" ? "your lifetime stats" : "all of your session and lifetime stats") + "? This action can't be undone.";
     mres = m.run();
     string confirm = m.get_selected_item_id();
     if (mres == -1 or confirm == "no")
