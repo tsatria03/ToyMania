@@ -53,7 +53,8 @@ void main()
 set_sound_storage("data/assets.tmg");
 set_sound_decryption_key("LGY24P2p56riZXtvhxtONfyBQgVZZS8wJnVSJEZ0zOOeQr3THFTtlyIXYI04Dgbk2SD1DoCMFk8QuRPv7DhlAXJDb3XzEt8vd9RcU8LW0LzcXkHvJUmkWbAtJ8ITyuCF0CkpPcW6eiPsjGDU9rlVufn8GSO2vy4KAjcLe",true);
 dummy.load("dummy");
-sound_global_hrtf=true;
+readpreffs();
+sound_global_hrtf=hrtf;
 timeelapsed.set_timer(gametimer);
 if(behind_pitch==true) p.behind_pitch_decrease=5;
 p.max_distance = 0;
@@ -84,7 +85,6 @@ toypool.max_distance = 0;
 toypool.pan_step = 2.5;
 toypool.volume_step = 2.5;
 show_game_window("ToyMania, version "+version);
-readpreffs();
 mainmenu();
 }
 void mainmenu()
@@ -126,6 +126,7 @@ void settingsmenu()
 setupmenu(false);
 m.add_item(behind_pitch ? "Disable global behind pitch decrease" : "Enable global behind pitch decrease", "glb");
 m.add_item(hrtf ? "Disable global HRTF support" : "Enable global HRTF support", "glh");
+m.add_item("save settings", "sv");
 m.add_item("back", "back");
 m.intro_text = "Settings menu.";
 int mres=m.run();
@@ -138,7 +139,6 @@ if (preffsm == "glb")
 {
 behind_pitch = !behind_pitch;
 dlg(behind_pitch ? "Global behind pitch decrease enabled. Press enter to continue." : "Global behind pitch decrease disabled. Press enter to continue.");
-writepreffs();
 settingsmenu();
 }
 if (preffsm == "glh")
@@ -146,8 +146,13 @@ if (preffsm == "glh")
 hrtf = !hrtf;
 sound_global_hrtf = hrtf;
 dlg(hrtf ? "Global hrtf support enabled. Press enter to continue." : "Global hrtf support disabled. Press enter to continue.");
-writepreffs();
 settingsmenu();
+}
+if (preffsm == "sv")
+{
+writepreffs();
+dlg("Settings saved. Press enter to continue.");
+mainmenu();
 }
 if (preffsm == "back")
 {

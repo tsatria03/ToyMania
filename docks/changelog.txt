@@ -1,4 +1,5 @@
 new in 1.2
+Added the ability to save your settings in the settings menu.
 You can now enable/disable global behind pitch decrease for the game in the settings menu.
 new in 1.1
 You can now enable/disable global hrtf support for the game in the settings menu.
