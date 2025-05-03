@@ -1,4 +1,5 @@
 new in 1.3
+Added the ability to copy all of your game stats to the clipboard in the stats menu.
 Added a confirmation menu when clearing game stats. Players are now asked to confirm their choice before clearing session, lifetime, or all stats, preventing accidental data loss.
 Added a new option in the Settings Menu to clear your game stats. You can now reset your session stats, lifetime stats, or both, with clear feedback after each action.
 new in 1.2

@@ -64,6 +64,7 @@ setupmenu(false);
 int total_minutes = int(total_playtime / 60000);
 int total_seconds = int((total_playtime % 60000) / 1000);
 m.add_item("You've been playing for a total of "+total_minutes+" minutes, "+total_seconds+" seconds.", "");
+m.add_item("Copy all game statistics to clipboard.", "cys");
     m.add_item("back", "back");
 m.intro_text = "Game statistics.";
 int mres=m.run();
@@ -71,6 +72,29 @@ string statsm = m.get_selected_item_id();
 if(mres==-1)
 {
 mainmenu();
+}
+if (statsm == "cys")
+{
+int total_minutes = int(total_playtime / 60000);
+int total_seconds = int((total_playtime % 60000) / 1000);
+string statsummary = "";
+statsummary += "Session Stats:\r\n";
+statsummary += "- Toys collected: " + collected_toys + "\r\n";
+statsummary += "- Keys collected: " + collected_keys + "\r\n";
+statsummary += "- Guards killed: " + killed_gards + "\r\n";
+statsummary += "- Cars destroyed: " + destroyed_cars + "\r\n";
+statsummary += "- Steps taken: " + taken_steps + "\r\n";
+statsummary += "- Time played: " + timeelapsed.m() + " minutes, " + timeelapsed.s() + " seconds.\r\n\r\n";
+statsummary += "Lifetime Stats:\r\n";
+statsummary += "- Toys collected: " + total_collected_toys + "\r\n";
+statsummary += "- Keys collected: " + total_collected_keys + "\r\n";
+statsummary += "- Guards killed: " + total_killed_gards + "\r\n";
+statsummary += "- Cars destroyed: " + total_destroyed_cars + "\r\n";
+statsummary += "- Steps taken: " + total_taken_steps + "\r\n";
+statsummary += "- Total playtime: " + total_minutes + " minutes, " + total_seconds + " seconds.";
+    clipboard_copy_text(statsummary);
+    dlg("All game stats have been copied to your clipboard.");
+    statsmenu(); // go back to stats menu after copying
 }
 if (statsm == "back")
 {
