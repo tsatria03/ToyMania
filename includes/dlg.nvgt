@@ -1,4 +1,4 @@
-void dlg(string message, int timeout=-1)
+void dlg(string message, bool dlgcoppy=true, int timeout=-1)
 {
 timer timeouter;
 speak(message);
@@ -7,20 +7,66 @@ while(true)
 wait(5);
 if (timeout>-1 and timeouter.elapsed>=timeout)
 return;
-if (key_pressed(KEY_C))
+if (key_repeating(KEY_C) and dlgcoppy==true)
 {
+temp.destroy_all();
+temp.play_stationary("dlgcoppy.ogg", false);
 speak("Copied");
 clipboard_copy_text(message);
 }
-if (key_pressed(KEY_LEFT) or key_pressed(KEY_RIGHT) or key_pressed(KEY_UP) or key_pressed(KEY_DOWN))
+if (key_repeating(KEY_LEFT) or key_repeating(KEY_RIGHT) or key_repeating(KEY_UP) or key_repeating(KEY_DOWN))
 {
 speak(message);
 }
-if(key_pressed(KEY_SPACE) or key_pressed(KEY_RETURN))
+if(key_repeating(KEY_RETURN) or key_down(KEY_A))
 {
+temp.destroy_all();
 break;
 }
 }
+}
+void dlg_snd(string message, string dlgsound="error.ogg", bool dlgcoppy=true, int timeout=-1)
+{
+timer timeouter;
+temp.play_stationary(dlgsound, false);
+speak(message);
+while(true)
+{
+wait(5);
+if (timeout>-1 and timeouter.elapsed>=timeout)
+return;
+if (key_repeating(KEY_C) and dlgcoppy==true)
+{
+temp.destroy_all();
+temp.play_stationary("dlgcoppy.ogg", false);
+speak("Copied");
+clipboard_copy_text(message);
+}
+if (key_repeating(KEY_LEFT) or key_repeating(KEY_RIGHT) or key_repeating(KEY_UP) or key_repeating(KEY_DOWN))
+{
+speak(message);
+}
+if(key_repeating(KEY_RETURN) or key_down(KEY_A))
+{
+temp.destroy_all();
+break;
+}
+}
+}
+void dlgmessage(string messages)
+{
+temp.play_stationary("dlgopen.ogg", false);
+string[] d=string_split(messages,"--",true);
+dlg(d[0]);
+if (d.length()>1)
+{
+for (uint i=1; i<d.length(); i++)
+{
+temp.play_stationary("dlgscroll.ogg", false);
+dlg(d[i]);
+}
+}
+temp.play_stationary("dlgclose.ogg", false);
 }
 void dlgplay(string dlgsound, bool skippable=true, bool fadeable=true, int fadetime=30)
 {
@@ -30,7 +76,7 @@ dlgaudio.play();
 while(dlgaudio.playing)
 {
 wait(5);
-if(key_pressed(KEY_RETURN) and skippable==true)
+if(key_repeating(KEY_RETURN) and skippable==true or key_down(KEY_A) and skippable==true)
 {
 if (fadeable==true)
 {
@@ -45,4 +91,3 @@ break;
 }
 }
 }
-

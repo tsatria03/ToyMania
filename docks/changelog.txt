@@ -1,4 +1,5 @@
 new in 1.2
+Improved the readability of the win and death screens by breaking long stat messages into separate, easier to read lines.
 Added the ability to view total playtime in the stats menu. This shows how many minutes and seconds you've played across all sessions, even after restarting the game.
 Added separation of session stats and lifetime stats. In-game stat keys, such as T, I, F, and Q now report only the current session's progress, while the Stats Menu displays lifetime totals of all of the things you've collected, destroyed, and or killed.
 Added the ability to save statistics found in the stats menu to a file. These will persist between sessions.
