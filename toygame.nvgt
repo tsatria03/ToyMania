@@ -26,6 +26,11 @@ vector me;
 void readpreffs()
 {
 st.load();
+if (st.d.exists("hrtf"))
+{
+hrtf = st.read_bool("hrtf");
+sound_global_hrtf = hrtf;
+}
 if (st.d.exists("menumusvolume"))
 {
 menumusvolume = st.read_int("menumusvolume");
@@ -33,6 +38,7 @@ menumusvolume = st.read_int("menumusvolume");
 }
 void writepreffs()
 {
+st.add("hrtf", hrtf);
 st.add("menumusvolume", menumusvolume);
 st.save();
 }
@@ -112,14 +118,7 @@ exit();
 void settingsmenu()
 {
 setupmenu(false);
-if(hrtf==true)
-{
-m.add_item("Disable global HRTF support", "glh");
-}
-else
-{
-m.add_item("Enable global HRTF support", "glh");
-}
+m.add_item(hrtf ? "Disable global HRTF support" : "Enable global HRTF support", "glh");
 m.add_item("back", "back");
 m.intro_text = "Settings menu.";
 int mres=m.run();
@@ -130,7 +129,11 @@ mainmenu();
 }
 if (preffsm == "glh")
 {
-//do something
+hrtf = !hrtf;
+sound_global_hrtf = hrtf;
+dlg(hrtf ? "Enabled global HRTF support. Press enter to continue." : "Disabled global HRTF support. Press enter to continue.");
+writepreffs();
+settingsmenu();
 }
 if (preffsm == "back")
 {
