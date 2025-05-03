@@ -1,15 +1,15 @@
 Session Stats:
-- Toys collected: 135
-- Keys collected: 41
-- Guards killed: 174
-- Cars destroyed: 17
-- Steps taken: 2662
-- Time played: 0 minutes, 9 seconds.
+- Toys collected: 70
+- Keys collected: 0
+- Guards killed: 42
+- Cars destroyed: 13
+- Steps taken: 1106
+- Time played: 4 minutes, 45 seconds.
 
 Lifetime Stats:
-- Toys collected: 234
+- Toys collected: 395
 - Keys collected: 41
-- Guards killed: 256
-- Cars destroyed: 43
-- Steps taken: 4140
-- Total playtime: 12 minutes, 28 seconds.
+- Guards killed: 327
+- Cars destroyed: 94
+- Steps taken: 6430
+- Total playtime: 20 minutes, 40 seconds.

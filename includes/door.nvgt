@@ -106,6 +106,7 @@ doors[i].closesound=doorpool.play_stationary("doorclose.ogg",false);
 doormove=false;
 doors[i].is_moving=false;
 dlgmessage("You won! Here's how you did:"+ "--Keys collected: " + collected_keys +"--Toys collected: " + collected_toys +"--Cars destroyed: " + destroyed_cars +"--Guards defeated: " + killed_gards +"--Steps taken: " + taken_steps +"--Time survived: " + timeelapsed.m() + " minutes, " + timeelapsed.s() + " seconds" +"--Grate work!");
+session_playtime += timeelapsed.ms();
 total_playtime += timeelapsed.ms();
 writedata();
 mainmenu();

@@ -1,4 +1,7 @@
 new in 1.3
+Fixed an issue where session playtime would reset on game relaunch. The timer now tracks total session time across game launches.
+The Clipboard export function now includes accurate session times, reflecting both current and past play.
+Made it so Session Stats and Lifetime Stats are split into 2 separate menus for easier navigation. Each menu now clearly shows relevant stat categories in a more focused view. The copy stats function is also Retained as well for sharing or tracking progress.
 Added the ability to copy all of your game stats to the clipboard in the stats menu.
 Added a confirmation menu when clearing game stats. Players are now asked to confirm their choice before clearing session, lifetime, or all stats, preventing accidental data loss.
 Added a new option in the Settings Menu to clear your game stats. You can now reset your session stats, lifetime stats, or both, with clear feedback after each action.

@@ -56,14 +56,8 @@ exit();
 void statsmenu()
 {
 setupmenu(false);
-    m.add_item("You have collected a total of " + total_collected_toys + " toys.", "");
-    m.add_item("You have collected a total of " + total_collected_keys + " keys.", "");
-    m.add_item("You have killed a total of " + total_killed_gards + " guards.", "");
-    m.add_item("You have destroyed a total of " + total_destroyed_cars + " cars.", "");
-    m.add_item("You have taken a total of " + total_taken_steps + " steps.", "");
-int total_minutes = int(total_playtime / 60000);
-int total_seconds = int((total_playtime % 60000) / 1000);
-m.add_item("You've been playing for a total of "+total_minutes+" minutes, "+total_seconds+" seconds.", "");
+    m.add_item("View Session Stats", "session");
+    m.add_item("View Lifetime Stats", "lifetime");
 m.add_item("Copy all game statistics to clipboard.", "cys");
     m.add_item("back", "back");
 m.intro_text = "Game statistics.";
@@ -73,8 +67,18 @@ if(mres==-1)
 {
 mainmenu();
 }
+       if (statsm == "session")
+{
+        view_session_stats();
+    }
+if (statsm == "lifetime")
+{
+        view_lifetime_stats();
+}
 if (statsm == "cys")
 {
+int session_minutes = int(session_playtime / 60000);
+int session_seconds = int((session_playtime % 60000) / 1000);
 int total_minutes = int(total_playtime / 60000);
 int total_seconds = int((total_playtime % 60000) / 1000);
 string statsummary = "";
@@ -84,7 +88,7 @@ statsummary += "- Keys collected: " + collected_keys + "\r\n";
 statsummary += "- Guards killed: " + killed_gards + "\r\n";
 statsummary += "- Cars destroyed: " + destroyed_cars + "\r\n";
 statsummary += "- Steps taken: " + taken_steps + "\r\n";
-statsummary += "- Time played: " + timeelapsed.m() + " minutes, " + timeelapsed.s() + " seconds.\r\n\r\n";
+statsummary += "- Time played: " + session_minutes + " minutes, " + session_seconds + " seconds.\r\n\r\n";
 statsummary += "Lifetime Stats:\r\n";
 statsummary += "- Toys collected: " + total_collected_toys + "\r\n";
 statsummary += "- Keys collected: " + total_collected_keys + "\r\n";
@@ -94,7 +98,7 @@ statsummary += "- Steps taken: " + total_taken_steps + "\r\n";
 statsummary += "- Total playtime: " + total_minutes + " minutes, " + total_seconds + " seconds.";
     clipboard_copy_text(statsummary);
     dlg("All game stats have been copied to your clipboard.");
-    statsmenu(); // go back to stats menu after copying
+    statsmenu();
 }
 if (statsm == "back")
 {
@@ -104,6 +108,54 @@ else
 {
 statsmenu();
 }
+}
+void view_session_stats()
+{
+    setupmenu(false);
+    m.add_item("You have collected " + collected_toys + " toys.", "");
+    m.add_item("You have collected " + collected_keys + " keys.", "");
+    m.add_item("You have killed " + killed_gards + " guards.", "");
+    m.add_item("You have destroyed " + destroyed_cars + " cars.", "");
+    m.add_item("You have taken " + taken_steps + " steps.", "");
+int session_minutes = session_playtime / 60000;
+int session_seconds = (session_playtime % 60000) / 1000;
+m.add_item("You've been playing for " + session_minutes + " minutes, " + session_seconds + " seconds.", "");
+    m.add_item("Back", "back");
+    m.intro_text = "Session Statistics.";
+    int mres = m.run();
+    string statsm = m.get_selected_item_id();
+    if (mres == -1 || statsm == "back")
+{
+        statsmenu();
+    }
+else
+{
+        view_session_stats();
+    }
+}
+void view_lifetime_stats()
+{
+    setupmenu(false);
+    m.add_item("You have collected a total of " + total_collected_toys + " toys.", "");
+    m.add_item("You have collected a total of " + total_collected_keys + " keys.", "");
+    m.add_item("You have killed a total of " + total_killed_gards + " guards.", "");
+    m.add_item("You have destroyed a total of " + total_destroyed_cars + " cars.", "");
+    m.add_item("You have taken a total of " + total_taken_steps + " steps.", "");
+    int total_minutes = int(total_playtime / 60000);
+    int total_seconds = int((total_playtime % 60000) / 1000);
+    m.add_item("You've been playing for a total of " + total_minutes + " minutes, " + total_seconds + " seconds.", "");
+    m.add_item("Back", "back");
+    m.intro_text = "Lifetime Statistics.";
+    int mres = m.run();
+    string statsm = m.get_selected_item_id();
+    if (mres == -1 || statsm == "back")
+{
+        statsmenu();
+    }
+else
+{
+        view_lifetime_stats();
+    }
 }
 void settingsmenu()
 {

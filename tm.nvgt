@@ -15,6 +15,7 @@ int firetime=50, firetime2=100;
 int runtime=100;
 int walktime=200;
 int bossespawntime=5000, carspawntime=1000, gardspawntime=500, keyspawntime=250, toyspawntime=125;
+int64 session_playtime = 0;
 int64 total_playtime = 0;
 string weapontype="bat";
 string version="1.3";
@@ -34,7 +35,6 @@ dummy.load("dummy");
 readdata();
 readpreffs();
 sound_global_hrtf=hrtf;
-timeelapsed.set_timer(gametimer);
 if(behind_pitch==true) p.behind_pitch_decrease=5;
 p.max_distance = 0;
 p.pan_step = 2.5;
@@ -63,6 +63,10 @@ if(behind_pitch==true) toypool.behind_pitch_decrease=5;
 toypool.max_distance = 0;
 toypool.pan_step = 2.5;
 toypool.volume_step = 2.5;
+if (@timeelapsed.handle == null)
+{
+    timeelapsed.set_timer(gametimer);
+}
 show_game_window("ToyMania, version "+version);
 mainmenu();
 }
@@ -634,6 +638,7 @@ pool.destroy_sound(toytrackslot);
 dlgplay("playerdeath.ogg");
 dlgplay("playerfall.ogg");
 dlgmessage("You died! Here's how you did:"+ "--Keys collected: " + collected_keys +"--Toys collected: " + collected_toys +"--Cars destroyed: " + destroyed_cars +"--Guards defeated: " + killed_gards +"--Steps taken: " + taken_steps +"--Time survived: " + timeelapsed.m() + " minutes, " + timeelapsed.s() + " seconds" +"--Better luck next time!");
+session_playtime += timeelapsed.ms();
 total_playtime += timeelapsed.ms();
 writedata();
 mainmenu();
