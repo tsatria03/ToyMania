@@ -1,5 +1,7 @@
+new in 1.2
+You can now enable/disable global behind pitch decrease for the game in the settings menu.
 new in 1.1
-You can now enable/disable hrtf support for the game in the settings menu.
+You can now enable/disable global hrtf support for the game in the settings menu.
 Added a basic settings menu to the game.
 Added menu music. The volume of the music will be saved the next time you launch the game.
 Added a basic menu system to the game.

@@ -1,4 +1,5 @@
 #include"includes/includes.nvgt"
+bool behind_pitch=true;
 bool hrtf=true;
 bool y_is_elevation=true;
 bool bossdefeated = false;
@@ -15,7 +16,7 @@ int runtime=100;
 int walktime=200;
 int bossespawntime=5000, carspawntime=1000, gardspawntime=500, keyspawntime=250, toyspawntime=125;
 string weapontype="bat";
-string version="1.1";
+string version="1.2";
 timer bossespawntimer, carspawntimer, firetimer, firetimer2, gametimer, gardspawntimer, keyspawntimer, movetimer, runtimer, toyspawntimer, walktimer;
 sound dummy;
 savedata st("data/settings.tmg", "JPl3mWxEI9k3USkJ9FOcAyX3rM2bC7TEMal2yhACrMXiymP9blH8RUhAnXJgY9s8wN18ZQDYnMAyqespGd7oqHOYEuhY10Py2KWa0GU7PmLuQTs86u9GSrNALSI2cQr91Nx7JdchD0YR3VT9Wt8HOeh7iEZmHKnAspZSZStdGL8WJdxuZSetCSEsSdyvpKtYa2kC4dE7PKM9YsdgQrOSxAOmnRtitYRdXr3NHdUhf8qefxjMMsELF3lzVycamyLAbTxpM1Kkj4h5YnELQxNf81ULUGyKVA2j3gx2wlJvbABIufN52A08Ia8ufou63Z4ZvUuzhj81jvzwS4D8XJ7e4k3hgdjI9oChGt991DqWjc2i3O7DQGgPQDSsrkXXKxz79ZlLyjF9nqlj0RuTIV0qNxZLgPEMqIKeGhxphLsJP3scIvtSzkKELNMvbwrDDFeT8pXVP");
@@ -26,6 +27,10 @@ vector me;
 void readpreffs()
 {
 st.load();
+if (st.d.exists("behind_pitch"))
+{
+behind_pitch = st.read_bool("behind_pitch");
+}
 if (st.d.exists("hrtf"))
 {
 hrtf = st.read_bool("hrtf");
@@ -38,6 +43,7 @@ menumusvolume = st.read_int("menumusvolume");
 }
 void writepreffs()
 {
+st.add("behind_pitch", behind_pitch);
 st.add("hrtf", hrtf);
 st.add("menumusvolume", menumusvolume);
 st.save();
@@ -49,31 +55,31 @@ set_sound_decryption_key("LGY24P2p56riZXtvhxtONfyBQgVZZS8wJnVSJEZ0zOOeQr3THFTtly
 dummy.load("dummy");
 sound_global_hrtf=true;
 timeelapsed.set_timer(gametimer);
-p.behind_pitch_decrease=5;
+if(behind_pitch==true) p.behind_pitch_decrease=5;
 p.max_distance = 0;
 p.pan_step = 2.5;
 p.volume_step = 2.5;
-bosspool.behind_pitch_decrease=5;
+if(behind_pitch==true) bosspool.behind_pitch_decrease=5;
 bosspool.max_distance = 0;
 bosspool.pan_step = 2.5;
 bosspool.volume_step = 2.5;
-doorpool.behind_pitch_decrease=5;
+if(behind_pitch==true) doorpool.behind_pitch_decrease=5;
 doorpool.max_distance = 0;
 doorpool.pan_step = 2.5;
 doorpool.volume_step = 2.5;
-carpool.behind_pitch_decrease=5;
+if(behind_pitch==true) carpool.behind_pitch_decrease=5;
 carpool.max_distance = 0;
 carpool.pan_step = 2.5;
 carpool.volume_step = 2.5;
-gardpool.behind_pitch_decrease=5;
+if(behind_pitch==true) gardpool.behind_pitch_decrease=5;
 gardpool.max_distance = 0;
 gardpool.pan_step = 2.5;
 gardpool.volume_step = 2.5;
-keypool.behind_pitch_decrease=5;
+if(behind_pitch==true) keypool.behind_pitch_decrease=5;
 keypool.max_distance = 0;
 keypool.pan_step = 2.5;
 keypool.volume_step = 2.5;
-toypool.behind_pitch_decrease=5;
+if(behind_pitch==true) toypool.behind_pitch_decrease=5;
 toypool.max_distance = 0;
 toypool.pan_step = 2.5;
 toypool.volume_step = 2.5;
@@ -118,6 +124,7 @@ exit();
 void settingsmenu()
 {
 setupmenu(false);
+m.add_item(behind_pitch ? "Disable global behind pitch decrease" : "Enable global behind pitch decrease", "glb");
 m.add_item(hrtf ? "Disable global HRTF support" : "Enable global HRTF support", "glh");
 m.add_item("back", "back");
 m.intro_text = "Settings menu.";
@@ -127,11 +134,18 @@ if(mres==-1)
 {
 mainmenu();
 }
+if (preffsm == "glb")
+{
+behind_pitch = !behind_pitch;
+dlg(behind_pitch ? "Global behind pitch decrease enabled. Press enter to continue." : "Global behind pitch decrease disabled. Press enter to continue.");
+writepreffs();
+settingsmenu();
+}
 if (preffsm == "glh")
 {
 hrtf = !hrtf;
 sound_global_hrtf = hrtf;
-dlg(hrtf ? "Enabled global HRTF support. Press enter to continue." : "Disabled global HRTF support. Press enter to continue.");
+dlg(hrtf ? "Global hrtf support enabled. Press enter to continue." : "Global hrtf support disabled. Press enter to continue.");
 writepreffs();
 settingsmenu();
 }
