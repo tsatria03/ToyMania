@@ -711,8 +711,6 @@ carspawn=false;
 gardspawn=false;
 keyspawn=false;
 toyspawn=false;
-collected_keys=0;
-collected_toys=0;
 destroyed_cars=0;
 killed_gards=0;
 destroy_all_bosses();
