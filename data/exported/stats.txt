@@ -8,7 +8,7 @@ Session Stats:
 
 Lifetime Stats:
 - Toys collected: 395
-- Keys collected: 41
+- Keys collected: 52
 - Guards killed: 327
 - Cars destroyed: 94
 - Steps taken: 6430

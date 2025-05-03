@@ -88,6 +88,7 @@ collected_keys = 0;
 killed_gards = 0;
 destroyed_cars = 0;
 taken_steps = 0;
+session_playtime=0;
 bossespawn=false;
 carspawn=false;
 gardspawn=false;

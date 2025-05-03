@@ -25,6 +25,7 @@ collected_keys = 0;
 killed_gards = 0;
 destroyed_cars = 0;
 taken_steps = 0;
+session_playtime = 0;
 health=1000;
 me.x=25;
 me.y=25;
