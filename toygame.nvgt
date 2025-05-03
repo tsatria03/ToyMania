@@ -106,6 +106,15 @@ if (main == "ty")
 {
 speak("loading");
 m.fade_music();
+dlgplay("launch.ogg");
+health=1000;
+me.x=25;
+me.y=25;
+bossdefeated = false;
+keydest=false;
+toydest=false;
+toyspawn=true;
+gametimer.restart();
 toygame();
 }
 if (main == "sets")
@@ -297,7 +306,7 @@ if(weapontype=="machinegun") weaponslot=p.play_stationary(weapontype+"reload.ogg
 }
 if(key_pressed(KEY_L) and doormove==false)
 {
-speak("You're currently at level "+level);
+speak("You're currently on level "+level);
 }
 if(key_pressed(KEY_C) and doormove==false)
 {
@@ -586,15 +595,6 @@ gards[i].gardhealth-=wepdamage;
 
 void toygame()
 {
-dlgplay("launch.ogg");
-health=1000;
-me.x=25;
-me.y=25;
-bossdefeated = false;
-keydest=false;
-toydest=false;
-toyspawn=true;
-gametimer.restart();
 weapontype="bat";
 wepdamage=3;
 weprange=1;
