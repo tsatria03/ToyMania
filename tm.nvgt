@@ -5,7 +5,7 @@ bool y_is_elevation=true;
 bool bossdefeated = false;
 bool bossespawn=false, carspawn=false, coinsfx=true, gardspawn=false, keydest=false, keyspawn=false, toydest=false, toyspawn=false;
 double toyambvolume=-10, toyambpitch=100, toymusvolume=-10, toymuspitch=100;
-double ammo=100, collected_keys=0, collected_toys=0, destroyed_cars=0, health=1000, killed_gards=0, level=1, taken_steps=0;
+double ammo=100, collected_keys=0, collected_toys=0, destroyed_cars=0, health=1000, killed_gards=0, level=1, taken_steps=0, total_collected_toys=0, total_collected_keys=0, total_killed_gards=0, total_destroyed_cars=0, total_taken_steps=0;
 double maxx=50, maxy=50;
 int painslot, toyambslot, toytrackslot, weaponslot;
 int bossnum=1, carnum=5, gardnum=10, keynum=15, toynum=20;
@@ -71,15 +71,16 @@ if(key_pressed(KEY_ESCAPE) and doormove==false)
 {
 fade_multi_pool();
 level=1;
+collected_toys = 0;
+collected_keys = 0;
+killed_gards = 0;
+destroyed_cars = 0;
+taken_steps = 0;
 bossespawn=false;
 carspawn=false;
 gardspawn=false;
 keyspawn=false;
 toyspawn=false;
-collected_keys=0;
-collected_toys=0;
-destroyed_cars=0;
-killed_gards=0;
 destroy_all_bosses();
 destroy_all_cars();
 destroy_all_gards();
@@ -261,6 +262,7 @@ if (key_down(KEY_LEFT) and movetimer.elapsed>=movetime and me.x!=0 and doormove=
 {
 me.x-=1;
 taken_steps+=1;
+total_taken_steps+=1;
 writedata();
 p.play_stationary("playerstep"+random(1,5)+".ogg", false);
 movetimer.restart();
@@ -269,6 +271,7 @@ if (key_down(KEY_RIGHT) and movetimer.elapsed>=movetime and me.x!=maxx and doorm
 {
 me.x+=1;
 taken_steps+=1;
+total_taken_steps+=1;
 writedata();
 p.play_stationary("playerstep"+random(1,5)+".ogg", false);
 movetimer.restart();
@@ -277,6 +280,7 @@ if (key_down(KEY_DOWN) and movetimer.elapsed>=movetime and me.y!=0 and doormove=
 {
 me.y-=1;
 taken_steps+=1;
+total_taken_steps+=1;
 writedata();
 p.play_stationary("playerstep"+random(1,5)+".ogg", false);
 movetimer.restart();
@@ -285,6 +289,7 @@ if (key_down(KEY_UP) and movetimer.elapsed>=movetime and me.y!=maxy and doormove
 {
 me.y+=1;
 taken_steps+=1;
+total_taken_steps+=1;
 writedata();
 p.play_stationary("playerstep"+random(1,5)+".ogg", false);
 movetimer.restart();
@@ -627,7 +632,7 @@ pool.destroy_sound(toyambslot);
 pool.destroy_sound(toytrackslot);
 dlgplay("playerdeath.ogg");
 dlgplay("playerfall.ogg");
-dlg("You died with a total score of "+collected_keys+" keys, "+collected_toys+" toys, "+destroyed_cars+" cars, and "+killed_gards+" guards. Better luck next time!");
+dlg("You died with a total score of " + collected_keys + " keys, " + collected_toys + " toys, " + destroyed_cars + " cars, " + killed_gards + " guards, and " + taken_steps + " steps taken. Better luck next time!");
 mainmenu();
 }
 }

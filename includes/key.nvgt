@@ -35,6 +35,7 @@ if(absolute(me.x - keys[i].kx) <= 2 and absolute(me.y - keys[i].ky) <= 2)
 keypool.destroy_sound(keys[i].keysound);
 keys[i].getsound=keypool.play_stationary("keyget"+random(1,6)+".ogg",false);
 collected_keys+=1;
+total_collected_keys+=1;
 writedata();
 keys.remove_at(i);
 return;

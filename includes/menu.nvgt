@@ -19,6 +19,11 @@ if (main == "ty")
 speak("loading");
 m.fade_music();
 dlgplay("gamelaunch.ogg");
+collected_toys = 0;
+collected_keys = 0;
+killed_gards = 0;
+destroyed_cars = 0;
+taken_steps = 0;
 health=1000;
 me.x=25;
 me.y=25;
@@ -51,11 +56,11 @@ exit();
 void statsmenu()
 {
 setupmenu(false);
-    m.add_item("You have collected a total of "+collected_toys+" toys.", "");
-    m.add_item("You have collected a total of "+collected_keys+" keys.", "");
-    m.add_item("You have killed a total of "+killed_gards+" guards.", "");
-    m.add_item("You have destroyed a total of "+destroyed_cars+" cars.", "");
-m.add_item("You have taken a total of "+taken_steps+" steps.", "");
+    m.add_item("You have collected a total of " + total_collected_toys + " toys.", "");
+    m.add_item("You have collected a total of " + total_collected_keys + " keys.", "");
+    m.add_item("You have killed a total of " + total_killed_gards + " guards.", "");
+    m.add_item("You have destroyed a total of " + total_destroyed_cars + " cars.", "");
+    m.add_item("You have taken a total of " + total_taken_steps + " steps.", "");
     m.add_item("back", "back");
 m.intro_text = "Game statistics.";
 int mres=m.run();

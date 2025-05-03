@@ -105,7 +105,7 @@ doorpool.destroy_sound(doors[i].movesound);
 doors[i].closesound=doorpool.play_stationary("doorclose.ogg",false);
 doormove=false;
 doors[i].is_moving=false;
-dlg("You won with a total score of "+collected_keys+" keys, "+collected_toys+" toys, "+destroyed_cars+" cars, and "+killed_gards+" guards. Grate work!");
+dlg("You won with a total score of " + collected_keys + " keys, " + collected_toys + " toys, " + destroyed_cars + " cars, " + killed_gards + " guards, and " + taken_steps + " steps taken. Grate work!");
 mainmenu();
 }
 }

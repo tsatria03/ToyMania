@@ -21,7 +21,27 @@ void readdata()
 {
         taken_steps = sd.read_double("taken_steps");
     }
-}
+if (sd.d.exists("total_collected_toys"))
+{
+        total_collected_toys = sd.read_double("total_collected_toys");
+    }
+    if (sd.d.exists("total_collected_keys"))
+{
+        total_collected_keys = sd.read_double("total_collected_keys");
+    }
+    if (sd.d.exists("total_killed_gards"))
+{
+        total_killed_gards = sd.read_double("total_killed_gards");
+    }
+    if (sd.d.exists("total_destroyed_cars"))
+{
+        total_destroyed_cars = sd.read_double("total_destroyed_cars");
+    }
+    if (sd.d.exists("total_taken_steps"))
+{
+        total_taken_steps = sd.read_double("total_taken_steps");
+    }
+    }
 void writedata()
 {
     sd.add("collected_toys", collected_toys);
@@ -29,6 +49,11 @@ void writedata()
     sd.add("killed_gards", killed_gards);
     sd.add("destroyed_cars", destroyed_cars);
     sd.add("taken_steps", taken_steps);
+    sd.add("total_collected_toys", total_collected_toys);
+    sd.add("total_collected_keys", total_collected_keys);
+    sd.add("total_killed_gards", total_killed_gards);
+    sd.add("total_destroyed_cars", total_destroyed_cars);
+    sd.add("total_taken_steps", total_taken_steps);
     sd.save();
 }
 void readpreffs()
