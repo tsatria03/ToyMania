@@ -24,7 +24,7 @@ class AchievementTracker
 		if (name == "Guards") return total_killed_gards;
 		if (name == "Cars") return total_destroyed_cars;
 		if (name == "Steps") return total_taken_steps;
-		if (name == "Playtime") return int(total_playtime / 60000); // minutes
+		if (name == "Playtime") return int(total_playtime / 60000);
 		return 0;
 	}
 	string get_next_milestone_label()
@@ -44,12 +44,12 @@ class AchievementTracker
 		}
 		return false;
 	}
-	string get_progress_status()
+string get_progress_status() 
 {
-		if (currentTier >= thresholds.length())
+	if (currentTier >= thresholds.length())
 {
-			return baseName + " Achievement: Completed all tiers!";
-		}
-		return baseName + ": Tier " + currentTier + "/" + thresholds.length() + " (" + get_value() + "/" + thresholds[currentTier] + ")";
+		return baseName + " Achievement: Completed all tiers!";
 	}
+	return baseName + ": Tier " + currentTier + " of " + thresholds.length() + " (" + get_value() + " of " + thresholds[currentTier] + ", " + thresholds[currentTier] + " " + name.lower() + " required to unlock the next tier)";
+}
 }
