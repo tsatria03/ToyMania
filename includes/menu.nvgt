@@ -5,6 +5,7 @@ m.add_item("play game", "ty");
 m.add_item("view achievements", "ach");
 m.add_item("view statistics", "stats");
 m.add_item("change settings", "sets");
+m.add_item("read documentation", "rdm");
 m.add_item("exit game", "ex");
 m.intro_text = "Main menu. Please choose an option with your arrow keys, then press enter to activate one.";
 int mres=m.run();
@@ -13,6 +14,7 @@ if(mres==-1)
 {
 speak("exiting");
 m.fade_music();
+writepreffs();
 exit();
 }
 if (main == "ty")
@@ -42,6 +44,10 @@ speak("loading");
 m.fade_music();
 show_achievements();
 }
+if (main == "rdm")
+{
+docksmenu();
+}
 if (main == "stats")
 {
 speak("loading");
@@ -58,7 +64,52 @@ if (main == "ex")
 {
 speak("exiting");
 m.fade_music();
+writepreffs();
 exit();
+}
+}
+void docksmenu()
+{
+setupmenu();
+m.add_item("changelog", "changelog");
+m.add_item("credits", "credits");
+m.add_item("readme", "readme");
+if(!SCRIPT_COMPILED) m.add_item("todo_list", "todo_list");
+m.add_item("back", "back");
+m.intro_text="Documentation menu.";
+int mres=m.run();
+string dnm=m.get_selected_item_id();
+if(mres==-1)
+{
+mainmenu();
+}
+if(dnm=="changelog")
+{
+speak("loading");
+m.fade_music();
+dockread("docks/changelog.txt");
+}
+if(dnm=="credits")
+{
+speak("loading");
+m.fade_music();
+dockread("docks/credits.txt");
+}
+if(dnm=="readme")
+{
+speak("loading");
+m.fade_music();
+dockread("docks/readme.txt");
+}
+if(dnm=="todo_list")
+{
+speak("loading");
+m.fade_music();
+dockread("docks/todo_list.txt");
+}
+if(dnm=="back")
+{
+mainmenu();
 }
 }
 void statsmenu()

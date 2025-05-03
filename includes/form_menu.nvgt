@@ -142,7 +142,6 @@ music.play_looped();
 if (key_down(volkeydown) and voltimer.elapsed >= voltime and menumusvolume > -50) {
 menumusvolume -= 2;
 music.set_volume(menumusvolume);
-writepreffs();
 voltimer.restart();
 }
 if (key_down(volkeyup) and voltimer.elapsed >= voltime and menumusvolume < 0) {

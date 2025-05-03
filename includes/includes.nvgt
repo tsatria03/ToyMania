@@ -1,4 +1,5 @@
 #include"bgt_compat.nvgt"
+#include"instance.nvgt"
 #include"sound_pool.nvgt"
 #include"speech.nvgt"
 #include"achievments.nvgt"

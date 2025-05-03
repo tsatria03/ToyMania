@@ -20,6 +20,9 @@ int64 total_playtime = 0;
 string weapontype="bat";
 string version="1.3";
 timer bossespawntimer, carspawntimer, firetimer, firetimer2, gametimer, gardspawntimer, keyspawntimer, movetimer, runtimer, toyspawntimer, walktimer;
+file dockfile;
+instance gamstence("tm");
+audio_form form;
 sound dummy;
 menu m;
 savedata sd("data/saves/game.tmg", "PYtaj2OBK9oT0MVpgeyo32zlfd3MuggW4g7Ago5t0PHI3pafU6QbwYo5wy3G1KWYWGiS8A9dNpI8M85j1D95Gjo4By96owIC3SfJMa5xCtl0yrrlDCWQjlZJgYnLWFGWRFeFzvHMZZL9exA7DBUPrdtF72wyZGQWNele7UOTCXeTtfsciim2bw3F31VsOhF3tCTp5Tt3hE5SpQmMTSmh8tOWZ7zDVXRIWAqjxnOBtD5qKI1l5b80ZxlcUL8aITZuz0YTcmWGrP5IItxzJj2YX3M9Y4v34Sx1C9PaBcmgdpn6ts56mbRjc69gmdry56hlaKrPKmnp2U");
@@ -75,7 +78,15 @@ if (@timeelapsed.handle == null)
     timeelapsed.set_timer(gametimer);
 }
 show_game_window("ToyMania, version "+version);
+if(gamstence.is_already_running)
+{
+alert("error", "You can only have one instence of this game running!");
+exit();
+}
+else
+{
 mainmenu();
+}
 }
 void toy_game_input()
 {
