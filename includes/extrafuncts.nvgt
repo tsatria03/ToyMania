@@ -131,51 +131,6 @@ m.enter_sound = "menuenter.ogg";
 m.open_sound = "menuopen.ogg";
 m.wrap_sound = "menuwrap.ogg";
 }
-void update_achievements()
-{
-    for (uint i = 0; i < achievements.length(); i++)
-    {
-        if (achievements[i].check_progress())
-        {
-            string actionVerb = "";
-            string unit = "";
-            if (achievements[i].name == "Toys")
-{
-                actionVerb = "collected";
-                unit = "toys";
-            }
-            else if (achievements[i].name == "Keys")
-{
-                actionVerb = "collected";
-                unit = "keys";
-            }
-            else if (achievements[i].name == "Guards")
-{
-                actionVerb = "killed";
-                unit = "guards";
-            }
-            else if (achievements[i].name == "Cars")
-{
-                actionVerb = "destroyed";
-                unit = "cars";
-            }
-            else if (achievements[i].name == "Steps")
-{
-                actionVerb = "taken";
-                unit = "steps";
-            }
-            else if (achievements[i].name == "Playtime")
-{
-                actionVerb = "played for";
-                unit = "minutes";
-            }
-            string baseName = achievements[i].baseName;
-            int value = achievements[i].get_value();
-achslot=pool.play_stationary("achievement" + random(1, 2) + ".ogg", false);
-            speak("Congratulations! You just unlocked the " + baseName + " achievement. You’ve " + actionVerb + " " + value + " " + unit + ". Nice work!");
-        }
-    }
-}
 void show_achievements()
 {
     setupmenu(false);
@@ -193,5 +148,57 @@ void show_achievements()
 else
 {
         show_achievements();
+    }
+}
+void update_achievements()
+{
+    for (uint i = 0; i < achievements.length(); i++)
+    {
+        if (achievements[i].check_progress())
+        {
+            string actionVerb = "";
+            string unit = "";
+            if (achievements[i].name == "Toys")
+            {
+                actionVerb = "collected";
+                unit = "toys";
+            }
+            else if (achievements[i].name == "Keys")
+            {
+                actionVerb = "collected";
+                unit = "keys";
+            }
+            else if (achievements[i].name == "Guards")
+            {
+                actionVerb = "killed";
+                unit = "guards";
+            }
+            else if (achievements[i].name == "Cars")
+            {
+                actionVerb = "destroyed";
+                unit = "cars";
+            }
+            else if (achievements[i].name == "Steps")
+            {
+                actionVerb = "taken";
+                unit = "steps";
+            }
+            else if (achievements[i].name == "Playtime")
+            {
+                actionVerb = "played for";
+                unit = "minutes";
+            }
+            string baseName = achievements[i].baseName;
+            int value = achievements[i].get_value();
+            achslot = pool.play_stationary("achievement" + random(1, 2) + ".ogg", false);
+            if (achievements[i].currentTier >= achievements[i].thresholds.length())
+            {
+                dlgmessage("Amazing! You've completed all of the tiers of the " + baseName + " achievement! Press enter to continue.");
+            }
+            else
+            {
+speak("Congratulations! You just unlocked Tier " + achievements[i].currentTier + " of the " + baseName + " achievement. You’ve " + actionVerb + " " + value + " " + unit + ". Nice work!");
+            }
+        }
     }
 }
