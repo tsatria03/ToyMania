@@ -106,7 +106,7 @@ doors[i].closesound=doorpool.play_stationary("doorclose.ogg",false);
 doormove=false;
 doors[i].is_moving=false;
 dlg("You won with a total score of "+collected_keys+" keys and "+collected_toys+" toys. Grate work!");
-exit();
+mainmenu();
 }
 }
 }

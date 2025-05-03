@@ -14,9 +14,10 @@ int runtime=100;
 int walktime=200;
 int bossespawntime=5000, carspawntime=1000, gardspawntime=500, keyspawntime=250, toyspawntime=125;
 string weapontype="bat";
-string version="1.1beta";
+string version="1.1";
 timer bossespawntimer, carspawntimer, firetimer, firetimer2, gametimer, gardspawntimer, keyspawntimer, movetimer, runtimer, toyspawntimer, walktimer;
 sound dummy;
+menu m;
 sound_pool p, pool, bosspool, carpool, doorpool, gardpool, keypool, toypool;
 time_elapsed timeelapsed;
 vector me;
@@ -56,21 +57,41 @@ toypool.max_distance = 0;
 toypool.pan_step = 2.5;
 toypool.volume_step = 2.5;
 show_game_window("ToyMania, version "+version);
-dlgplay("launch.ogg");
-health=1000;
-me.x=25;
-me.y=25;
-bossdefeated = false;
-keydest=false;
-toydest=false;
-toyspawn=true;
-gametimer.restart();
+mainmenu();
+}
+void mainmenu()
+{
+setupmenu();
+m.add_item("play game", "pl");
+m.add_item("exit game", "ex");
+m.intro_text = "Main menu. Please choose an option with your arrow keys, then press enter to activate one.";
+int mres=m.run();
+string main = m.get_selected_item_id();
+if(mres==-1)
+{
+speak("exiting");
+m.fade_music();
+exit();
+}
+if (main == "pl")
+{
+speak("loading");
+m.fade_music();
 toygame();
+}
+if (main == "ex")
+{
+speak("exiting");
+m.fade_music();
+exit();
+}
 }
 void toy_game_input()
 {
 if(key_pressed(KEY_ESCAPE) and doormove==false)
 {
+pool.destroy_sound(toyambslot);
+pool.destroy_sound(toytrackslot);
 level=1;
 bossespawn=false;
 carspawn=false;
@@ -87,7 +108,7 @@ destroy_all_gards();
 destroy_all_doors();
 destroy_all_keys();
 destroy_all_toys();
-exit();
+mainmenu();
 }
 if(key_pressed(KEY_1) and doormove==false)
 {
@@ -493,6 +514,15 @@ gards[i].gardhealth-=wepdamage;
 
 void toygame()
 {
+dlgplay("launch.ogg");
+health=1000;
+me.x=25;
+me.y=25;
+bossdefeated = false;
+keydest=false;
+toydest=false;
+toyspawn=true;
+gametimer.restart();
 weapontype="bat";
 wepdamage=3;
 weprange=1;
@@ -625,7 +655,7 @@ pool.destroy_sound(toytrackslot);
 dlgplay("playerdeath.ogg");
 dlgplay("playerfall.ogg");
 dlg("You died with a total score of "+collected_keys+" keys and "+collected_toys+" toys. Better luck next time!");
-exit();
+mainmenu();
 }
 }
 }

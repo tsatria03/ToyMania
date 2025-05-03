@@ -22,9 +22,28 @@ return true;
 }
 return false;
 }
-
 string random_string(string[] array)
 {
 string retval=array[random(0,array.length()-1)];
 return retval;
+}
+void setupmenu(bool music_added = false)
+{
+if (music_added)
+{
+m.add_music("menumus.ogg");
+} else
+{
+m.add_music("");
+}
+m.reset();
+m.automatic_intro = true;
+m.focus_first_item = false;
+m.wrap = true;
+m.click_sound = "menuclick.ogg";
+m.close_sound = "menuclose.ogg";
+m.edge_sound = "menuedge.ogg";
+m.enter_sound = "menuenter.ogg";
+m.open_sound = "menuopen.ogg";
+m.wrap_sound = "menuwrap.ogg";
 }
