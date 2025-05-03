@@ -171,7 +171,8 @@ void update_achievements()
             }
             string baseName = achievements[i].baseName;
             int value = achievements[i].get_value();
-            dlgmessage("Congratulations! You just unlocked the " + baseName + " achievement. You’ve " + actionVerb + " " + value + " " + unit + ". Nice work!");
+achslot=pool.play_stationary("achievement" + random(1, 2) + ".ogg", false);
+            speak("Congratulations! You just unlocked the " + baseName + " achievement. You’ve " + actionVerb + " " + value + " " + unit + ". Nice work!");
         }
     }
 }

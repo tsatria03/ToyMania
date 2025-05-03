@@ -7,7 +7,7 @@ bool bossespawn=false, carspawn=false, coinsfx=true, gardspawn=false, keydest=fa
 double toyambvolume=-10, toyambpitch=100, toymusvolume=-10, toymuspitch=100;
 double ammo=100, collected_keys=0, collected_toys=0, destroyed_cars=0, health=1000, killed_gards=0, level=1, taken_steps=0, total_collected_toys=0, total_collected_keys=0, total_killed_gards=0, total_destroyed_cars=0, total_taken_steps=0;
 double maxx=50, maxy=50;
-int painslot, toyambslot, toytrackslot, weaponslot;
+int achslot, painslot, toyambslot, toytrackslot, weaponslot;
 int bossnum=1, carnum=5, gardnum=10, keynum=15, toynum=20;
 int weprange=5, weprange2=10, wepdamage=20;
 int gametime, movetime;
