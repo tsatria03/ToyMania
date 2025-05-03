@@ -15,6 +15,7 @@ int firetime=50, firetime2=100;
 int runtime=100;
 int walktime=200;
 int bossespawntime=5000, carspawntime=1000, gardspawntime=500, keyspawntime=250, toyspawntime=125;
+int64 total_playtime = 0;
 string weapontype="bat";
 string version="1.2";
 timer bossespawntimer, carspawntimer, firetimer, firetimer2, gametimer, gardspawntimer, keyspawntimer, movetimer, runtimer, toyspawntimer, walktimer;
@@ -633,6 +634,8 @@ pool.destroy_sound(toytrackslot);
 dlgplay("playerdeath.ogg");
 dlgplay("playerfall.ogg");
 dlg("You died with a total score of " + collected_keys + " keys, " + collected_toys + " toys, " + destroyed_cars + " cars, " + killed_gards + " guards, and " + taken_steps + " steps taken. Better luck next time!");
+total_playtime += timeelapsed.ms();
+writedata();
 mainmenu();
 }
 }

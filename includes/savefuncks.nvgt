@@ -41,6 +41,10 @@ if (sd.d.exists("total_collected_toys"))
 {
         total_taken_steps = sd.read_double("total_taken_steps");
     }
+if (sd.d.exists("total_playtime"))
+{
+total_playtime = sd.read_int64("total_playtime");
+}
     }
 void writedata()
 {
@@ -54,6 +58,7 @@ void writedata()
     sd.add("total_killed_gards", total_killed_gards);
     sd.add("total_destroyed_cars", total_destroyed_cars);
     sd.add("total_taken_steps", total_taken_steps);
+sd.add("total_playtime", total_playtime);
     sd.save();
 }
 void readpreffs()

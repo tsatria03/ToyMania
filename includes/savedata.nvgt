@@ -96,6 +96,18 @@ int tmp;
 d.get(name,tmp);
 return tmp;
 }
+//function to add a value.
+void add(string name, int64 value)
+{
+d.set(name,value);
+}
+//function to read a number.
+int read_int64(string name)
+{
+int tmp;
+d.get(name,tmp);
+return tmp;
+}
 //overloaded function of add to add a string.
 void add(string name, string value)
 {
