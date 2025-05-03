@@ -13,5 +13,6 @@
 #include"gametime.nvgt"
 #include"gard.nvgt"
 #include"key.nvgt"
+#include"savedata.nvgt"
 #include"toy.nvgt"
 typedef uint8 usmall; typedef int8 small;

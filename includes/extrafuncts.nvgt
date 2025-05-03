@@ -22,12 +22,85 @@ return true;
 }
 return false;
 }
+bool int_to_bool(int i)
+{
+return i==1? true:false;
+}
+int bool_to_int(bool b)
+{
+return b? 1:0;
+}
 string random_string(string[] array)
 {
 string retval=array[random(0,array.length()-1)];
 return retval;
 }
-void setupmenu(bool music_added = false)
+void fade_multi_pool(int fade_mode=1)
+{
+sound_pool@[] pools = {p, pool, bosspool, carpool, doorpool, gardpool, keypool, toypool};
+if(fade_mode==0)
+{
+fade_pitch_pool(pools);
+}
+if(fade_mode==1)
+{
+fade_volume_pool(pools);
+}
+}
+void fade_pitch_pool(sound_pool@[] handles, double time=20, double minpitch=20, double amount=2)
+{
+bool all_faded = false;    
+while(!all_faded)
+{
+all_faded = true;
+for(uint h=0; h<handles.length(); h++)
+{
+for(uint i=0; i<handles[h].items.length(); i++)
+{
+if(@handles[h].items[i].handle!=null && handles[h].items[i].handle.playing)
+{
+double current_pitch = handles[h].items[i].handle.pitch;
+if(current_pitch > minpitch)
+{
+double new_pitch = current_pitch - amount;
+if(new_pitch < minpitch)
+new_pitch = minpitch;
+handles[h].items[i].handle.pitch = new_pitch;
+all_faded = false;
+}
+}
+}
+}
+wait(time);
+}    
+for(uint h=0; h<handles.length(); h++)
+{
+handles[h].destroy_all();
+}
+}
+void fade_volume_pool(sound_pool@[] handles, double time=0.25, double minvol=-50)
+{
+for(double current=0; current>minvol; current-=time)
+{
+for(uint h=0; h<handles.length(); h++)
+{
+for(uint x=0; x<handles[h].items.length(); x++)
+{
+if(@handles[h].items[x].handle==null)
+continue;
+if(handles[h].items[x].handle.playing==false)
+continue;
+handles[h].items[x].handle.volume = handles[h].items[x].handle.volume-time;
+}
+}
+wait(5);
+}
+for(uint h=0; h<handles.length(); h++)
+{
+handles[h].destroy_all();
+}
+}
+void setupmenu(bool music_added = true)
 {
 if (music_added)
 {

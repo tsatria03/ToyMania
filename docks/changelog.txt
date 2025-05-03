@@ -1,4 +1,6 @@
 new in 1.1
+Added a basic settings menu to the game.
+Added menu music. The volume of the music will be saved the next time you launch the game.
 Added a basic menu system to the game.
 Made it so bosses, cars, and guards no longer destroy toys.
 The winning screen now tells you how many keys and toys you've collected upon unlocking the final exit.

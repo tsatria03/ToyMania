@@ -1,4 +1,5 @@
 #include"includes/includes.nvgt"
+bool hrtf=true;
 bool y_is_elevation=true;
 bool bossdefeated = false;
 bool bossespawn=false, carspawn=false, coinsfx=true, gardspawn=false, keydest=false, keyspawn=false, toydest=false, toyspawn=false;
@@ -17,10 +18,24 @@ string weapontype="bat";
 string version="1.1";
 timer bossespawntimer, carspawntimer, firetimer, firetimer2, gametimer, gardspawntimer, keyspawntimer, movetimer, runtimer, toyspawntimer, walktimer;
 sound dummy;
+savedata st("data/settings.tmg", "JPl3mWxEI9k3USkJ9FOcAyX3rM2bC7TEMal2yhACrMXiymP9blH8RUhAnXJgY9s8wN18ZQDYnMAyqespGd7oqHOYEuhY10Py2KWa0GU7PmLuQTs86u9GSrNALSI2cQr91Nx7JdchD0YR3VT9Wt8HOeh7iEZmHKnAspZSZStdGL8WJdxuZSetCSEsSdyvpKtYa2kC4dE7PKM9YsdgQrOSxAOmnRtitYRdXr3NHdUhf8qefxjMMsELF3lzVycamyLAbTxpM1Kkj4h5YnELQxNf81ULUGyKVA2j3gx2wlJvbABIufN52A08Ia8ufou63Z4ZvUuzhj81jvzwS4D8XJ7e4k3hgdjI9oChGt991DqWjc2i3O7DQGgPQDSsrkXXKxz79ZlLyjF9nqlj0RuTIV0qNxZLgPEMqIKeGhxphLsJP3scIvtSzkKELNMvbwrDDFeT8pXVP");
 menu m;
 sound_pool p, pool, bosspool, carpool, doorpool, gardpool, keypool, toypool;
 time_elapsed timeelapsed;
 vector me;
+void readpreffs()
+{
+st.load();
+if (st.d.exists("menumusvolume"))
+{
+menumusvolume = st.read_int("menumusvolume");
+}
+}
+void writepreffs()
+{
+st.add("menumusvolume", menumusvolume);
+st.save();
+}
 void main()
 {
 set_sound_storage("data/assets.tmg");
@@ -57,13 +72,15 @@ toypool.max_distance = 0;
 toypool.pan_step = 2.5;
 toypool.volume_step = 2.5;
 show_game_window("ToyMania, version "+version);
+readpreffs();
 mainmenu();
 }
 void mainmenu()
 {
 setupmenu();
-m.add_item("play game", "pl");
-m.add_item("exit game", "ex");
+m.add_item("play", "ty");
+m.add_item("settings", "sets");
+m.add_item("exit", "ex");
 m.intro_text = "Main menu. Please choose an option with your arrow keys, then press enter to activate one.";
 int mres=m.run();
 string main = m.get_selected_item_id();
@@ -73,11 +90,17 @@ speak("exiting");
 m.fade_music();
 exit();
 }
-if (main == "pl")
+if (main == "ty")
 {
 speak("loading");
 m.fade_music();
 toygame();
+}
+if (main == "sets")
+{
+speak("loading");
+m.fade_music();
+settingsmenu();
 }
 if (main == "ex")
 {
@@ -86,12 +109,39 @@ m.fade_music();
 exit();
 }
 }
+void settingsmenu()
+{
+setupmenu(false);
+if(hrtf==true)
+{
+m.add_item("Disable global HRTF support", "glh");
+}
+else
+{
+m.add_item("Enable global HRTF support", "glh");
+}
+m.add_item("back", "back");
+m.intro_text = "Settings menu.";
+int mres=m.run();
+string preffsm = m.get_selected_item_id();
+if(mres==-1)
+{
+mainmenu();
+}
+if (preffsm == "glh")
+{
+//do something
+}
+if (preffsm == "back")
+{
+mainmenu();
+}
+}
 void toy_game_input()
 {
 if(key_pressed(KEY_ESCAPE) and doormove==false)
 {
-pool.destroy_sound(toyambslot);
-pool.destroy_sound(toytrackslot);
+fade_multi_pool();
 level=1;
 bossespawn=false;
 carspawn=false;
@@ -659,4 +709,3 @@ mainmenu();
 }
 }
 }
-
