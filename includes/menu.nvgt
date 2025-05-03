@@ -2,10 +2,10 @@ void mainmenu()
 {
 setupmenu();
 m.add_item("play game", "ty");
+m.add_item("read documentation", "rdm");
 m.add_item("view achievements", "ach");
 m.add_item("view statistics", "stats");
 m.add_item("change settings", "sets");
-m.add_item("read documentation", "rdm");
 m.add_item("exit game", "ex");
 m.intro_text = "Main menu. Please choose an option with your arrow keys, then press enter to activate one.";
 int mres=m.run();
