@@ -19,40 +19,18 @@ string weapontype="bat";
 string version="1.2";
 timer bossespawntimer, carspawntimer, firetimer, firetimer2, gametimer, gardspawntimer, keyspawntimer, movetimer, runtimer, toyspawntimer, walktimer;
 sound dummy;
-savedata st("data/saves/settings.tmg", "JPl3mWxEI9k3USkJ9FOcAyX3rM2bC7TEMal2yhACrMXiymP9blH8RUhAnXJgY9s8wN18ZQDYnMAyqespGd7oqHOYEuhY10Py2KWa0GU7PmLuQTs86u9GSrNALSI2cQr91Nx7JdchD0YR3VT9Wt8HOeh7iEZmHKnAspZSZStdGL8WJdxuZSetCSEsSdyvpKtYa2kC4dE7PKM9YsdgQrOSxAOmnRtitYRdXr3NHdUhf8qefxjMMsELF3lzVycamyLAbTxpM1Kkj4h5YnELQxNf81ULUGyKVA2j3gx2wlJvbABIufN52A08Ia8ufou63Z4ZvUuzhj81jvzwS4D8XJ7e4k3hgdjI9oChGt991DqWjc2i3O7DQGgPQDSsrkXXKxz79ZlLyjF9nqlj0RuTIV0qNxZLgPEMqIKeGhxphLsJP3scIvtSzkKELNMvbwrDDFeT8pXVP");
 menu m;
+savedata sd("data/saves/game.tmg", "PYtaj2OBK9oT0MVpgeyo32zlfd3MuggW4g7Ago5t0PHI3pafU6QbwYo5wy3G1KWYWGiS8A9dNpI8M85j1D95Gjo4By96owIC3SfJMa5xCtl0yrrlDCWQjlZJgYnLWFGWRFeFzvHMZZL9exA7DBUPrdtF72wyZGQWNele7UOTCXeTtfsciim2bw3F31VsOhF3tCTp5Tt3hE5SpQmMTSmh8tOWZ7zDVXRIWAqjxnOBtD5qKI1l5b80ZxlcUL8aITZuz0YTcmWGrP5IItxzJj2YX3M9Y4v34Sx1C9PaBcmgdpn6ts56mbRjc69gmdry56hlaKrPKmnp2U");
+savedata st("data/saves/settings.tmg", "JPl3mWxEI9k3USkJ9FOcAyX3rM2bC7TEMal2yhACrMXiymP9blH8RUhAnXJgY9s8wN18ZQDYnMAyqespGd7oqHOYEuhY10Py2KWa0GU7PmLuQTs86u9GSrNALSI2cQr91Nx7JdchD0YR3VT9Wt8HOeh7iEZmHKnAspZSZStdGL8WJdxuZSetCSEsSdyvpKtYa2kC4dE7PKM9YsdgQrOSxAOmnRtitYRdXr3NHdUhf8qefxjMMsELF3lzVycamyLAbTxpM1Kkj4h5YnELQxNf81ULUGyKVA2j3gx2wlJvbABIufN52A08Ia8ufou63Z4ZvUuzhj81jvzwS4D8XJ7e4k3hgdjI9oChGt991DqWjc2i3O7DQGgPQDSsrkXXKxz79ZlLyjF9nqlj0RuTIV0qNxZLgPEMqIKeGhxphLsJP3scIvtSzkKELNMvbwrDDFeT8pXVP");
 sound_pool p, pool, bosspool, carpool, doorpool, gardpool, keypool, toypool;
 time_elapsed timeelapsed;
 vector me;
-void readpreffs()
-{
-st.load();
-if (st.d.exists("behind_pitch"))
-{
-behind_pitch = st.read_bool("behind_pitch");
-}
-if (st.d.exists("hrtf"))
-{
-hrtf = st.read_bool("hrtf");
-sound_global_hrtf = hrtf;
-}
-if (st.d.exists("menumusvolume"))
-{
-menumusvolume = st.read_int("menumusvolume");
-}
-}
-void writepreffs()
-{
-st.add("behind_pitch", behind_pitch);
-st.add("hrtf", hrtf);
-st.add("menumusvolume", menumusvolume);
-st.save();
-}
 void main()
 {
 set_sound_storage("data/saves/assets.tmg");
 set_sound_decryption_key("LGY24P2p56riZXtvhxtONfyBQgVZZS8wJnVSJEZ0zOOeQr3THFTtlyIXYI04Dgbk2SD1DoCMFk8QuRPv7DhlAXJDb3XzEt8vd9RcU8LW0LzcXkHvJUmkWbAtJ8ITyuCF0CkpPcW6eiPsjGDU9rlVufn8GSO2vy4KAjcLe",true);
 dummy.load("dummy");
+readdata();
 readpreffs();
 sound_global_hrtf=hrtf;
 timeelapsed.set_timer(gametimer);
@@ -86,119 +64,6 @@ toypool.pan_step = 2.5;
 toypool.volume_step = 2.5;
 show_game_window("ToyMania, version "+version);
 mainmenu();
-}
-void mainmenu()
-{
-setupmenu();
-m.add_item("play game", "ty");
-m.add_item("view statistics", "stats");
-m.add_item("change settings", "sets");
-m.add_item("exit game", "ex");
-m.intro_text = "Main menu. Please choose an option with your arrow keys, then press enter to activate one.";
-int mres=m.run();
-string main = m.get_selected_item_id();
-if(mres==-1)
-{
-speak("exiting");
-m.fade_music();
-exit();
-}
-if (main == "ty")
-{
-speak("loading");
-m.fade_music();
-dlgplay("gamelaunch.ogg");
-health=1000;
-me.x=25;
-me.y=25;
-bossdefeated = false;
-keydest=false;
-toydest=false;
-toyspawn=true;
-gametimer.restart();
-toygame();
-}
-if (main == "stats")
-{
-speak("loading");
-m.fade_music();
-statsmenu();
-}
-if (main == "sets")
-{
-speak("loading");
-m.fade_music();
-settingsmenu();
-}
-if (main == "ex")
-{
-speak("exiting");
-m.fade_music();
-exit();
-}
-}
-void statsmenu()
-{
-setupmenu(false);
-    m.add_item("You have collected a total of "+collected_toys+" toys.", "");
-    m.add_item("You have collected a total of "+collected_keys+" keys.", "");
-    m.add_item("You have killed a total of "+killed_gards+" guards.", "");
-    m.add_item("You have destroyed a total of "+destroyed_cars+" cars.", "");
-m.add_item("You have taken a total of "+taken_steps+" steps.", "");
-    m.add_item("back", "back");
-m.intro_text = "Game statistics.";
-int mres=m.run();
-string statsm = m.get_selected_item_id();
-if(mres==-1)
-{
-mainmenu();
-}
-if (statsm == "back")
-{
-mainmenu();
-}
-else
-{
-statsmenu();
-}
-}
-void settingsmenu()
-{
-setupmenu(false);
-m.add_item(behind_pitch ? "Disable global behind pitch decrease" : "Enable global behind pitch decrease", "glb");
-m.add_item(hrtf ? "Disable global HRTF support" : "Enable global HRTF support", "glh");
-m.add_item("save settings", "sv");
-m.add_item("back", "back");
-m.intro_text = "Settings menu.";
-int mres=m.run();
-string preffsm = m.get_selected_item_id();
-if(mres==-1)
-{
-mainmenu();
-}
-if (preffsm == "glb")
-{
-behind_pitch = !behind_pitch;
-dlg(behind_pitch ? "Global behind pitch decrease enabled. Press enter to continue." : "Global behind pitch decrease disabled. Press enter to continue.");
-settingsmenu();
-}
-if (preffsm == "glh")
-{
-hrtf = !hrtf;
-sound_global_hrtf = hrtf;
-dlg(hrtf ? "Global hrtf support enabled. Press enter to continue." : "Global hrtf support disabled. Press enter to continue.");
-settingsmenu();
-}
-if (preffsm == "sv")
-{
-writepreffs();
-dlg("Settings saved. Press enter to continue.");
-mainmenu();
-}
-if (preffsm == "back")
-{
-mainmenu();
-}
 }
 void toy_game_input()
 {
@@ -396,6 +261,7 @@ if (key_down(KEY_LEFT) and movetimer.elapsed>=movetime and me.x!=0 and doormove=
 {
 me.x-=1;
 taken_steps+=1;
+writedata();
 p.play_stationary("playerstep"+random(1,5)+".ogg", false);
 movetimer.restart();
 }
@@ -403,6 +269,7 @@ if (key_down(KEY_RIGHT) and movetimer.elapsed>=movetime and me.x!=maxx and doorm
 {
 me.x+=1;
 taken_steps+=1;
+writedata();
 p.play_stationary("playerstep"+random(1,5)+".ogg", false);
 movetimer.restart();
 }
@@ -410,6 +277,7 @@ if (key_down(KEY_DOWN) and movetimer.elapsed>=movetime and me.y!=0 and doormove=
 {
 me.y-=1;
 taken_steps+=1;
+writedata();
 p.play_stationary("playerstep"+random(1,5)+".ogg", false);
 movetimer.restart();
 }
@@ -417,6 +285,7 @@ if (key_down(KEY_UP) and movetimer.elapsed>=movetime and me.y!=maxy and doormove
 {
 me.y+=1;
 taken_steps+=1;
+writedata();
 p.play_stationary("playerstep"+random(1,5)+".ogg", false);
 movetimer.restart();
 }
@@ -747,8 +616,6 @@ carspawn=false;
 gardspawn=false;
 keyspawn=false;
 toyspawn=false;
-destroyed_cars=0;
-killed_gards=0;
 destroy_all_bosses();
 destroy_all_cars();
 destroy_all_doors();
@@ -760,7 +627,7 @@ pool.destroy_sound(toyambslot);
 pool.destroy_sound(toytrackslot);
 dlgplay("playerdeath.ogg");
 dlgplay("playerfall.ogg");
-dlg("You died with a total score of "+collected_keys+" keys and "+collected_toys+" toys. Better luck next time!");
+dlg("You died with a total score of "+collected_keys+" keys, "+collected_toys+" toys, "+destroyed_cars+" cars, and "+killed_gards+" guards. Better luck next time!");
 mainmenu();
 }
 }

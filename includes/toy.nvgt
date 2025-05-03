@@ -33,6 +33,7 @@ if(absolute(me.x - toys[i].tx) <= 2 and absolute(me.y - toys[i].ty) <= 2)
 toypool.destroy_sound(toys[i].toysound);
 toys[i].getsound=toypool.play_stationary("toyget"+random(1,2)+".ogg",false);
 collected_toys+=1;
+writedata();
 toys.remove_at(i);
 return;
 }
