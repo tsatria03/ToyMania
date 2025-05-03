@@ -1,6 +1,10 @@
 void readdata()
 {
     sd.load();
+    if (sd.d.exists("level"))
+{
+        level = sd.read_double("level");
+    }
     if (sd.d.exists("collected_toys"))
 {
         collected_toys = sd.read_double("collected_toys");
@@ -21,11 +25,11 @@ void readdata()
 {
         taken_steps = sd.read_double("taken_steps");
     }
-if (sd.d.exists("session_playtime"))
+    if (sd.d.exists("session_playtime"))
 {
-session_playtime = sd.read_int64("session_playtime");
-}
-if (sd.d.exists("total_collected_toys"))
+        session_playtime = sd.read_int64("session_playtime");
+    }
+    if (sd.d.exists("total_collected_toys"))
 {
         total_collected_toys = sd.read_double("total_collected_toys");
     }
@@ -45,25 +49,38 @@ if (sd.d.exists("total_collected_toys"))
 {
         total_taken_steps = sd.read_double("total_taken_steps");
     }
-if (sd.d.exists("total_playtime"))
+    if (sd.d.exists("total_playtime"))
 {
-total_playtime = sd.read_int64("total_playtime");
-}
+        total_playtime = sd.read_int64("total_playtime");
     }
+    for (uint i = 0; i < achievements.length(); i++)
+{
+        string id = "ach_tier_" + achievements[i].name;
+        if (sd.d.exists(id))
+{
+            achievements[i].currentTier = sd.read_double(id);
+        }
+    }
+}
 void writedata()
 {
+    sd.add("level", level);
     sd.add("collected_toys", collected_toys);
     sd.add("collected_keys", collected_keys);
     sd.add("killed_gards", killed_gards);
     sd.add("destroyed_cars", destroyed_cars);
     sd.add("taken_steps", taken_steps);
-sd.add("session_playtime", session_playtime);
+    sd.add("session_playtime", session_playtime);
     sd.add("total_collected_toys", total_collected_toys);
     sd.add("total_collected_keys", total_collected_keys);
     sd.add("total_killed_gards", total_killed_gards);
     sd.add("total_destroyed_cars", total_destroyed_cars);
     sd.add("total_taken_steps", total_taken_steps);
-sd.add("total_playtime", total_playtime);
+    sd.add("total_playtime", total_playtime);
+    for (uint i = 0; i < achievements.length(); i++)
+{
+        sd.add("ach_tier_" + achievements[i].name, achievements[i].currentTier);
+    }
     sd.save();
 }
 void readpreffs()

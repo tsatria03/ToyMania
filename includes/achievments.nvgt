@@ -1,0 +1,55 @@
+class AchievementTracker
+{
+	string name;
+	string baseName;
+	int[] thresholds;
+	int currentTier;
+	AchievementTracker()
+{
+		name = "";
+		baseName = "";
+		currentTier = 0;
+	}
+	AchievementTracker(string achName, string base, int[] achThresholds)
+{
+		name = achName;
+		baseName = base;
+		thresholds = achThresholds;
+		currentTier = 0;
+	}
+	int get_value()
+{
+		if (name == "Toys") return total_collected_toys;
+		if (name == "Keys") return total_collected_keys;
+		if (name == "Guards") return total_killed_gards;
+		if (name == "Cars") return total_destroyed_cars;
+		if (name == "Steps") return total_taken_steps;
+		if (name == "Playtime") return int(total_playtime / 60000); // minutes
+		return 0;
+	}
+	string get_next_milestone_label()
+{
+		if (currentTier < thresholds.length())
+{
+			return baseName + " " + thresholds[currentTier];
+		}
+		return "All " + baseName + " achievements unlocked!";
+	}
+	bool check_progress()
+{
+		if (currentTier < thresholds.length() and get_value() >= thresholds[currentTier])
+{
+			currentTier++;
+			return true;
+		}
+		return false;
+	}
+	string get_progress_status()
+{
+		if (currentTier >= thresholds.length())
+{
+			return baseName + " Achievement: Completed all tiers!";
+		}
+		return baseName + ": Tier " + currentTier + "/" + thresholds.length() + " (" + get_value() + "/" + thresholds[currentTier] + ")";
+	}
+}

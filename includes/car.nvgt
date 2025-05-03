@@ -55,6 +55,7 @@ carpool.destroy_sound(cars[i].carsound);
 cars[i].defsound=carpool.play_2d(cars[i].cartype+"death.ogg",me.x,me.y,cars[i].carx,cars[i].cary,false);
 destroyed_cars+=1;
 total_destroyed_cars+=1;
+update_achievements();
 writedata();
 cars.remove_at(i);
 return;

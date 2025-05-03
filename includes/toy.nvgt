@@ -34,6 +34,7 @@ toypool.destroy_sound(toys[i].toysound);
 toys[i].getsound=toypool.play_stationary("toyget"+random(1,2)+".ogg",false);
 collected_toys+=1;
 total_collected_toys+=1;
+update_achievements();
 writedata();
 toys.remove_at(i);
 return;

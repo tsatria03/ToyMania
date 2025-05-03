@@ -36,6 +36,7 @@ keypool.destroy_sound(keys[i].keysound);
 keys[i].getsound=keypool.play_stationary("keyget"+random(1,6)+".ogg",false);
 collected_keys+=1;
 total_collected_keys+=1;
+update_achievements();
 writedata();
 keys.remove_at(i);
 return;

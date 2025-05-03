@@ -30,6 +30,17 @@ int bool_to_int(bool b)
 {
 return b? 1:0;
 }
+int[] generate_achievement_thresholds(int start, int count, double multiplier)
+{
+	int[] result;
+	int value = start;
+	for (int i = 0; i < count; i++)
+{
+		result.insert_last(value);
+		value = int(value * multiplier);
+	}
+	return result;
+}
 string random_string(string[] array)
 {
 string retval=array[random(0,array.length()-1)];
@@ -119,4 +130,67 @@ m.edge_sound = "menuedge.ogg";
 m.enter_sound = "menuenter.ogg";
 m.open_sound = "menuopen.ogg";
 m.wrap_sound = "menuwrap.ogg";
+}
+void update_achievements()
+{
+    for (uint i = 0; i < achievements.length(); i++)
+    {
+        if (achievements[i].check_progress())
+        {
+            string actionVerb = "";
+            string unit = "";
+            if (achievements[i].name == "Toys")
+{
+                actionVerb = "collected";
+                unit = "toys";
+            }
+            else if (achievements[i].name == "Keys")
+{
+                actionVerb = "collected";
+                unit = "keys";
+            }
+            else if (achievements[i].name == "Guards")
+{
+                actionVerb = "killed";
+                unit = "guards";
+            }
+            else if (achievements[i].name == "Cars")
+{
+                actionVerb = "destroyed";
+                unit = "cars";
+            }
+            else if (achievements[i].name == "Steps")
+{
+                actionVerb = "taken";
+                unit = "steps";
+            }
+            else if (achievements[i].name == "Playtime")
+{
+                actionVerb = "played for";
+                unit = "minutes";
+            }
+            string baseName = achievements[i].baseName;
+            int value = achievements[i].get_value();
+            dlgmessage("Congratulations! You just unlocked the " + baseName + " achievement. You’ve " + actionVerb + " " + value + " " + unit + ". Nice work!");
+        }
+    }
+}
+void show_achievements()
+{
+    setupmenu(false);
+    for (uint i = 0; i < achievements.length(); i++)
+{
+        m.add_item(achievements[i].get_progress_status(), "");
+    }
+    m.add_item("Back", "back");
+    m.intro_text = "Achievements menu.";
+    int r = m.run();
+    if (r == -1 or m.get_selected_item_id() == "back")
+{
+        mainmenu();
+    }
+else
+{
+        show_achievements();
+    }
 }

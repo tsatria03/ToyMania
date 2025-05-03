@@ -65,6 +65,7 @@ gardpool.destroy_sound(gards[i].gardsound);
 gards[i].defsound=gardpool.play_2d(gards[i].gardtype+"death.ogg", me.x, me.y, gards[i].gardx, gards[i].gardy, false);
 killed_gards+=1;
 total_killed_gards+=1;
+update_achievements();
 writedata();
 if(gards[i].gardtype=="gard1") spawn_bodyfall(gards[i].gardx, gards[i].gardy, random(500,1000), "gard1");
 if(gards[i].gardtype=="gard2") spawn_bodyfall(gards[i].gardx, gards[i].gardy, random(500,1000), "gard2");

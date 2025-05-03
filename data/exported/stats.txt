@@ -4,7 +4,7 @@ Session Stats:
 - Guards killed: 42
 - Cars destroyed: 13
 - Steps taken: 1106
-- Time played: 4 minutes, 45 seconds.
+- Time played: 4 minutes, 14 seconds.
 
 Lifetime Stats:
 - Toys collected: 395

@@ -2,6 +2,7 @@ void mainmenu()
 {
 setupmenu();
 m.add_item("play game", "ty");
+m.add_item("view achievements", "ach");
 m.add_item("view statistics", "stats");
 m.add_item("change settings", "sets");
 m.add_item("exit game", "ex");
@@ -34,6 +35,12 @@ toyspawn=true;
 gametimer.restart();
 toygame();
 }
+if (main == "ach")
+{
+speak("loading");
+m.fade_music();
+show_achievements();
+}
 if (main == "stats")
 {
 speak("loading");
@@ -60,7 +67,7 @@ setupmenu(false);
     m.add_item("View Lifetime Stats", "lifetime");
 m.add_item("Copy all game statistics to clipboard.", "cys");
     m.add_item("back", "back");
-m.intro_text = "Game statistics.";
+m.intro_text = "Statistics menu.";
 int mres=m.run();
 string statsm = m.get_selected_item_id();
 if(mres==-1)
@@ -97,7 +104,7 @@ statsummary += "- Cars destroyed: " + total_destroyed_cars + "\r\n";
 statsummary += "- Steps taken: " + total_taken_steps + "\r\n";
 statsummary += "- Total playtime: " + total_minutes + " minutes, " + total_seconds + " seconds.";
     clipboard_copy_text(statsummary);
-    dlg("All game stats have been copied to your clipboard.");
+    dlgmessage("All game stats have been copied to your clipboard. Press enter to continue.");
     statsmenu();
 }
 if (statsm == "back")
@@ -162,6 +169,7 @@ void settingsmenu()
 setupmenu(false);
 m.add_item(behind_pitch ? "Disable global behind pitch decrease" : "Enable global behind pitch decrease", "glb");
 m.add_item(hrtf ? "Disable global HRTF support" : "Enable global HRTF support", "glh");
+m.add_item("Clear game achievements.", "chm");
 m.add_item("Clear game statistics.", "gs");
 m.add_item("save settings", "sv");
 m.add_item("back", "back");
@@ -191,12 +199,31 @@ writepreffs();
 dlgmessage("Settings saved. Press enter to continue.");
 mainmenu();
 }
+if (preffsm == "chm")
+{
+    setupmenu(false);
+    m.add_item("Yes", "yes");
+    m.add_item("No", "no");
+    m.intro_text = "Are you sure you want to clear all of your achievements? This action cannot be undone.";
+    int res = m.run();
+    string result = m.get_selected_item_id();
+    if (result == "yes")
+    {
+        for (uint i = 0; i < achievements.length(); i++)
+        {
+            achievements[i].currentTier = 0;
+        }
+        dlgmessage("All achievement progress has been cleared.");
+        writedata();
+    }
+    settingsmenu();
+}
 if (preffsm == "gs")
 {
     setupmenu(false);
-    m.add_item("Clear session stats only", "session");
-    m.add_item("Clear lifetime stats only", "lifetime");
-    m.add_item("Clear both session and lifetime stats", "both");
+    m.add_item("Clear session stats.", "session");
+    m.add_item("Clear lifetime stats.", "lifetime");
+    m.add_item("Clear session and lifetime stats.", "both");
     m.add_item("Back", "back");
     m.intro_text = "Choose which game stats to reset.";
     int mres = m.run();
@@ -208,7 +235,7 @@ if (preffsm == "gs")
     setupmenu(false);
     m.add_item("Yes", "yes");
     m.add_item("No", "no");
-    m.intro_text = "Are you sure you want to clear " + (gsm == "session" ? "your session stats" : gsm == "lifetime" ? "your lifetime stats" : "all of your stats") + "? This can't be undone.";
+    m.intro_text = "Are you sure you want to clear " + (gsm == "session" ? "your session stats" : gsm == "lifetime" ? "your lifetime stats" : "all of your session and lifetime stats") + "? This can't be undone.";
     mres = m.run();
     string confirm = m.get_selected_item_id();
     if (mres == -1 or confirm == "no")
@@ -222,6 +249,7 @@ settingsmenu();
         killed_gards = 0;
         destroyed_cars = 0;
         taken_steps = 0;
+session_playtime = 0;
 writedata();
         dlgmessage("Session stats cleared. Press enter to continue.");
     }
