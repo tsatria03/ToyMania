@@ -32,6 +32,7 @@ settingsmenu();
 }
 if(main=="st")
 {
+speak("loading");
 m.fade_music();
 dlgplay("speakertest"+random(1,2)+".ogg");
 mainmenu();
@@ -52,7 +53,7 @@ m.add_item("credits", "credits");
 m.add_item("readme", "readme");
 m.add_item("todo_list", "todo_list");
 m.add_item("back", "back");
-m.intro_text="Documentation menu.";
+m.intro_text="Documentation menu. What would you like to read?";
 int mres=m.run();
 string dnm=m.get_selected_item_id();
 if(mres==-1)
@@ -95,7 +96,7 @@ m.add_item("play", "ty");
 m.add_item("achievements", "ach");
 m.add_item("statistics", "stats");
 m.add_item("back", "back");
-m.intro_text="Game menu.";
+m.intro_text = "Game menu. You can start a new game session, view achievements, or check your stats here.";
 int mres=m.run();
 string gamem = m.get_selected_item_id();
 if(mres==-1)
@@ -150,7 +151,7 @@ setupmenu();
     m.add_item("Lifetime Achievements", "lifetime");
 m.add_item("Copy all game Achievements to clipboard.", "cys");
     m.add_item("back", "back");
-m.intro_text = "Achievements menu.";
+m.intro_text = "Achievements menu. You can view your unlocked session and lifetime achievements here.";
 int mres=m.run();
 string achm = m.get_selected_item_id();
 if(mres==-1)
@@ -207,7 +208,7 @@ void show_session_achievements()
             m.add_item(achievements[i].get_progress_status(), "");
     }
     m.add_item("Back", "back");
-    m.intro_text = "Session Achievements menu.";
+m.intro_text = "Session Achievements menu. These achievements reset every run and track short-term progress.";
     int r = m.run();
     if (r == -1 or m.get_selected_item_id() == "back")
         achesmenu();
@@ -223,7 +224,7 @@ void show_lifetime_achievements()
             m.add_item(achievements[i].get_progress_status(), "");
     }
     m.add_item("Back", "back");
-    m.intro_text = "Lifetime Achievements menu.";
+m.intro_text = "Lifetime Achievements menu. These achievements track your long-term overall game progress.";
     int r = m.run();
     if (r == -1 or m.get_selected_item_id() == "back")
         achesmenu();
@@ -238,7 +239,7 @@ setupmenu();
 m.add_item("Player Titles", "titles");
 m.add_item("Copy all game statistics to clipboard.", "cys");
     m.add_item("back", "back");
-m.intro_text = "Statistics menu.";
+m.intro_text = "Statistics menu. You can check your gameplay stats and unlockable player titles here.";
 int mres=m.run();
 string statsm = m.get_selected_item_id();
 if(mres==-1)
@@ -316,7 +317,7 @@ int session_minutes = session_playtime / 60000;
 int session_seconds = (session_playtime % 60000) / 1000;
 m.add_item("You've been playing for " + session_minutes + " minutes, " + session_seconds + " seconds.", "");
     m.add_item("Back", "back");
-    m.intro_text = "Session Statistics menu.";
+m.intro_text = "Session Statistics menu. You can view your stats for the current game session here.";
     int mres = m.run();
     string statsm = m.get_selected_item_id();
     if (mres == -1 || statsm == "back")
@@ -342,7 +343,7 @@ void view_lifetime_stats()
     int total_seconds = int((total_playtime % 60000) / 1000);
     m.add_item("You've been playing for a total of " + total_minutes + " minutes, " + total_seconds + " seconds.", "");
     m.add_item("Back", "back");
-    m.intro_text = "Lifetime Statistics menu.";
+m.intro_text = "Lifetime Statistics menu. You can see your total stats across all of your game sessions here.";
     int mres = m.run();
     string statsm = m.get_selected_item_id();
     if (mres == -1 || statsm == "back")
@@ -364,7 +365,7 @@ void view_player_titles()
     m.add_item("Steps Rank: " + get_steps_rank() + ". " + get_steps_rank_desc(), "");
     m.add_item("Playtime Rank: " + get_playtime_rank() + ". " + get_playtime_rank_desc(), "");
     m.add_item("Back", "back");
-    m.intro_text = "Player titles menu.";
+m.intro_text = "Player titles menu. You can view your earned titles based on lifetime stats here.";
     int res = m.run();
     if (res == -1 or m.get_selected_item_id() == "back")
     {
@@ -384,7 +385,7 @@ m.add_item("Clear game achievements.", "chm");
 m.add_item("Clear game statistics.", "gs");
 m.add_item("save settings", "sv");
 m.add_item("back", "back");
-m.intro_text = "Settings menu.";
+m.intro_text = "Settings menu. You can adjust game options, reset stats, or clear achievements here.";
 int mres=m.run();
 string preffsm = m.get_selected_item_id();
 if(mres==-1)
