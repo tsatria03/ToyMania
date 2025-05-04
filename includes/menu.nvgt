@@ -50,7 +50,7 @@ setupmenu();
 m.add_item("changelog", "changelog");
 m.add_item("credits", "credits");
 m.add_item("readme", "readme");
-if(!SCRIPT_COMPILED) m.add_item("todo_list", "todo_list");
+m.add_item("todo_list", "todo_list");
 m.add_item("back", "back");
 m.intro_text="Documentation menu.";
 int mres=m.run();
@@ -369,9 +369,9 @@ if (preffsm == "chm")
 if (preffsm == "gs")
 {
     setupmenu(false);
-    m.add_item("Clear session stats.", "session");
-    m.add_item("Clear lifetime stats.", "lifetime");
-    m.add_item("Clear session and lifetime stats.", "both");
+    m.add_item("session stats", "session");
+    m.add_item("lifetime stats", "lifetime");
+    m.add_item("session and lifetime stats", "both");
     m.add_item("Back", "back");
     m.intro_text = "Choose which game stats to reset.";
     int mres = m.run();
