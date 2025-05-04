@@ -250,12 +250,12 @@ else
 void view_player_titles()
 {
     setupmenu(false);
-    m.add_item("Toy Rank: " + get_toy_rank(), "");
-    m.add_item("Key Rank: " + get_key_rank(), "");
-    m.add_item("Guard Rank: " + get_guard_rank(), "");
-    m.add_item("Car Rank: " + get_car_rank(), "");
-    m.add_item("Steps Rank: " + get_steps_rank(), "");
-    m.add_item("Playtime Rank: " + get_playtime_rank(), "");
+    m.add_item("Toy Rank: " + get_toy_rank() + ". " + get_toy_rank_desc(), "");
+    m.add_item("Key Rank: " + get_key_rank() + ". " + get_key_rank_desc(), "");
+    m.add_item("Guard Rank: " + get_guard_rank() + ". " + get_guard_rank_desc(), "");
+    m.add_item("Car Rank: " + get_car_rank() + ". " + get_car_rank_desc(), "");
+    m.add_item("Steps Rank: " + get_steps_rank() + ". " + get_steps_rank_desc(), "");
+    m.add_item("Playtime Rank: " + get_playtime_rank() + ". " + get_playtime_rank_desc(), "");
     m.add_item("Back", "back");
     m.intro_text = "Player titles menu.";
     int res = m.run();
