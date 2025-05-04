@@ -1,5 +1,6 @@
 new in 1.4
-Added a Player Titles menu to the Stats Menu. Players can now view special rank titles from collecting toys, collecting keys, killing guards, destroying cars, taking steps, and playing the game for a sertain amount of time.
+Added the ability to copy your player titles along with your session and lifetime stats of the game in the stats menu.
+Added a Player Titles menu to the Stats Menu. Players can now view special ranks for collecting toys, collecting keys, killing guards, destroying cars, taking steps, and playing the game for a sertain amount of time.
 Improved the Achievement Progress Display found in the achievements menu. The achievement progress summary now includes a rounded percentage value for clearer milestone tracking, helping players better understand how close they are to reaching the next tier.
 Improved the achievement progress text to be clearer and more informative in the achievements menu. It now shows how far you are into the current tier, and how much more is needed to reach the next tier.
 Made the achievement summeries more clearer to read in the achievements menu. This change also applies to the in game summeries as well.

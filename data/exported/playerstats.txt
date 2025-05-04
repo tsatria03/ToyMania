@@ -1,15 +1,23 @@
 Session Stats:
-- Toys collected: 107
-- Keys collected: 39
-- Guards killed: 173
-- Cars destroyed: 3
-- Steps taken: 2172
-- Time played: 7 minutes, 53 seconds.
+- Toys collected: 0
+- Keys collected: 0
+- Guards killed: 0
+- Cars destroyed: 0
+- Steps taken: 0
+- Time played: 0 minutes, 0 seconds.
 
 Lifetime Stats:
-- Toys collected: 363
-- Keys collected: 67
-- Guards killed: 426
-- Cars destroyed: 82
-- Steps taken: 6189
-- Total playtime: 19 minutes, 4 seconds.
+- Toys collected: 0
+- Keys collected: 0
+- Guards killed: 0
+- Cars destroyed: 0
+- Steps taken: 0
+- Total playtime: 0 minutes, 0 seconds.
+
+Player Titles:
+- Toy Title: Toyless
+- Key Title: Keyless
+- Guard Title: Pacifist
+- Car Title: Civilian
+- Steps Title: Sedentary
+- Playtime Title: Beginner
