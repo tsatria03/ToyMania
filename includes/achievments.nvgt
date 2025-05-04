@@ -51,7 +51,7 @@ class AchievementTracker
 	{
 		if (currentTier >= thresholds.length())
 		{
-			return baseName + " Achievement: Completed all tiers!";
+			return baseName + ": Completed all tiers!";
 		}
 		int currentValue = get_value();
 		int tierStart = (currentTier > 0) ? thresholds[currentTier - 1] : 0;
