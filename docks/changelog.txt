@@ -1,9 +1,13 @@
+new in 1.4
+Made the achievement summeries more clearer to read in the achievements menu. This change also applies to the in game summeries as well.
+Added some sounds to indicate unlocked achievements.
+Added a new achievement reset menu with multiple options for clearing progress. Players can now choose to reset only their achievement tiers or both tiers and related game stats for full flexibility.
 new in 1.3
 Added the ability to save your Achievement progress. This is loaded along with your other game stats.
 Added an option to the settings menu that let's you clear all of your achievements you've unlocked in the game.
 Made it so when an achievement has been unlocked, a dialog now congratulates the player and describes what was accomplished.
 Added an Achievements Menu to the main screen, allowing players to view their progress across all categories.
-Added a full Achievement system that tracks your progress across collected toys, found keys, defeated guards, destroyed cars, taken steps, and total playtime. Each achievement has 10 scalable tiers, unlocking as you reach higher milestones.
+Added a full Achievement system that tracks your progress across collected toys, found keys, defeated guards, destroyed cars, taken steps, and total playtime. Each achievement has 50 scalable tiers, unlocking as you reach higher milestones.
 Fixed an issue where session playtime would reset on game relaunch. The timer now tracks total session time across game launches.
 Made it so Session Stats and Lifetime Stats are split into 2 separate menus for easier navigation. Each menu now clearly shows relevant stat categories in a more focused view. The copy stats function is also Retained as well for sharing or tracking progress.
 Added the ability to copy all of your game stats to the clipboard in the stats menu.

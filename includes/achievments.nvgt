@@ -50,6 +50,6 @@ string get_progress_status()
 {
 		return baseName + " Achievement: Completed all tiers!";
 	}
-	return baseName + ": Tier " + currentTier + " of " + thresholds.length() + " (" + get_value() + " of " + thresholds[currentTier] + ", " + thresholds[currentTier] + " " + name.lower() + " required to unlock the next tier)";
+	return baseName + ": Tier " + currentTier + " of " + thresholds.length() + " (" + get_value() + " of " + thresholds[currentTier] + ", " + thresholds[currentTier] + " " + name.lower() + " needed to unlock the next tier)";
 }
 }

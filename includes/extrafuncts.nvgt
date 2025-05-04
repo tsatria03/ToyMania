@@ -185,32 +185,32 @@ void update_achievements()
             string unit = "";
             if (achievements[i].name == "Toys")
             {
-                actionVerb = "collected";
+                actionVerb = "collected a total of ";
                 unit = "toys";
             }
             else if (achievements[i].name == "Keys")
             {
-                actionVerb = "collected";
+                actionVerb = "collected a total of ";
                 unit = "keys";
             }
             else if (achievements[i].name == "Guards")
             {
-                actionVerb = "killed";
+                actionVerb = "killed a total of ";
                 unit = "guards";
             }
             else if (achievements[i].name == "Cars")
             {
-                actionVerb = "destroyed";
+                actionVerb = "destroyed a total of ";
                 unit = "cars";
             }
             else if (achievements[i].name == "Steps")
             {
-                actionVerb = "taken";
+                actionVerb = "taken a total of ";
                 unit = "steps";
             }
             else if (achievements[i].name == "Playtime")
             {
-                actionVerb = "played for";
+                actionVerb = "played for a total of ";
                 unit = "minutes";
             }
             string baseName = achievements[i].baseName;
