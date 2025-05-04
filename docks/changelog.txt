@@ -1,11 +1,13 @@
+new in 1.6
+Added distinct achievement sounds based on the type of achievement the player recieves. Session based achievements now play session_achievement.ogg, and lifetime achievements now play life_achievement.ogg. This provides clearer audio feedback for each type of achievement the player gets.
 new in 1.5
 Made it so session based achievements have a more Balanced Progression. Session-based achievements now have different starting thresholds and growth rates compared to lifetime achievements. This ensures that they have a shorter focused goal during a single gameplay session while keeping lifetime achievements as long-term milestones.
 Fixed an issue where session achievements retained their previous progress while session stats were reset. This in turn caused negative percentages to appear. It now properly resetts the currentTier when restarting or exiting a game session.
 Improved the format for exported achievements to match the existing stats export style. Each entry includes the tier number, percentage progress, and how much is needed to reach the next tier.
 Improved the speaking of Achievement tiers. The game now includes the type of achievement, such as Session or Lifetime in the notification message. This provides clearer feedback to players about what kind of achievement they just unlocked.
 Made it so Session Achievements and Lifetime Achievements are split into 2 separate menus for easier navigation. Each menu now clearly shows relevant achievement categories in a more focused view. The copy achievements function is also Retained as well for sharing or tracking progress.
-You can now copy all of your achievements to the clipboard in the achievements menu. Session and Lifetime achievements are grouped and clearly labeled for easy readability.
-Improved the clear achievements menu. Added a new clear achievements interface that allows players to clear only session, lifetime, or both sets of achievements. Confirmation dialogs are also added to prevent accidental deletion.
+You can now copy all of your achievements to the clipboard in the achievements menu. Session and Lifetime achievements are also grouped and clearly labeled for easy readability.
+Improved the clear achievements menu. Added a new clear achievements menu that allows players to clear only session, lifetime, or both sets of achievements. Confirmation dialogs are also added to prevent accidental deletion.
 Added a full Session Achievement system that tracks your progress within a single game session across toys collected, keys found, guards defeated, cars destroyed, steps taken, and total time played. Each session achievement includes 50 scalable tiers that reset each run, encouraging fast-paced and high-performance gameplay.
 Added a test speakers option in the main menu.
 Recoded the entire menu system.
