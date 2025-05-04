@@ -1,4 +1,5 @@
 new in 1.4
+Improved the achievement progress text to be clearer and more informative in the achievements menu. It now shows how far you are into the current tier, and how much more is needed to reach the next tier.
 Made the achievement summeries more clearer to read in the achievements menu. This change also applies to the in game summeries as well.
 Added some sounds to indicate unlocked achievements.
 Added a new achievement reset menu with multiple options for clearing progress. Players can now choose to reset only their achievement tiers or both tiers and related game stats for full flexibility.

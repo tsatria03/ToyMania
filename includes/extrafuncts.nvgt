@@ -215,13 +215,14 @@ void update_achievements()
             }
             string baseName = achievements[i].baseName;
             int value = achievements[i].get_value();
-            achslot = pool.play_stationary("achievement" + random(1, 2) + ".ogg", false);
             if (achievements[i].currentTier >= achievements[i].thresholds.length())
             {
+            achslot = pool.play_stationary("achievement" + random(1, 2) + ".ogg", false);
                 dlgmessage("Amazing! You've completed all of the tiers of the " + baseName + " achievement! Press enter to continue.");
             }
             else
             {
+            achslot = pool.play_stationary("achievement" + random(1, 2) + ".ogg", false);
 speak("Congratulations! You just unlocked Tier " + achievements[i].currentTier + " of the " + baseName + " achievement. You’ve " + actionVerb + " " + value + " " + unit + ". Nice work!");
             }
         }
