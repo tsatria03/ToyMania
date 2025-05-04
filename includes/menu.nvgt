@@ -115,8 +115,9 @@ mainmenu();
 void statsmenu()
 {
 setupmenu(false);
-    m.add_item("View Session Stats", "session");
-    m.add_item("View Lifetime Stats", "lifetime");
+    m.add_item("Session Stats", "session");
+    m.add_item("Lifetime Stats", "lifetime");
+m.add_item("Player Titles", "titles");
 m.add_item("Copy all game statistics to clipboard.", "cys");
     m.add_item("back", "back");
 m.intro_text = "Statistics menu.";
@@ -133,6 +134,10 @@ mainmenu();
 if (statsm == "lifetime")
 {
         view_lifetime_stats();
+}
+if (statsm == "titles")
+{
+    view_player_titles();
 }
 if (statsm == "cys")
 {
@@ -168,6 +173,25 @@ else
 statsmenu();
 }
 }
+void show_achievements()
+{
+    setupmenu(false);
+    for (uint i = 0; i < achievements.length(); i++)
+{
+        m.add_item(achievements[i].get_progress_status(), "");
+    }
+    m.add_item("Back", "back");
+    m.intro_text = "Achievements menu.";
+    int r = m.run();
+    if (r == -1 or m.get_selected_item_id() == "back")
+{
+        mainmenu();
+    }
+else
+{
+        show_achievements();
+    }
+}
 void view_session_stats()
 {
     setupmenu(false);
@@ -180,7 +204,7 @@ int session_minutes = session_playtime / 60000;
 int session_seconds = (session_playtime % 60000) / 1000;
 m.add_item("You've been playing for " + session_minutes + " minutes, " + session_seconds + " seconds.", "");
     m.add_item("Back", "back");
-    m.intro_text = "Session Statistics.";
+    m.intro_text = "Session Statistics menu.";
     int mres = m.run();
     string statsm = m.get_selected_item_id();
     if (mres == -1 || statsm == "back")
@@ -204,7 +228,7 @@ void view_lifetime_stats()
     int total_seconds = int((total_playtime % 60000) / 1000);
     m.add_item("You've been playing for a total of " + total_minutes + " minutes, " + total_seconds + " seconds.", "");
     m.add_item("Back", "back");
-    m.intro_text = "Lifetime Statistics.";
+    m.intro_text = "Lifetime Statistics menu.";
     int mres = m.run();
     string statsm = m.get_selected_item_id();
     if (mres == -1 || statsm == "back")
@@ -215,6 +239,27 @@ else
 {
         view_lifetime_stats();
     }
+}
+void view_player_titles()
+{
+    setupmenu(false);
+    m.add_item("Toy Rank: " + get_toy_rank(), "");
+    m.add_item("Key Rank: " + get_key_rank(), "");
+    m.add_item("Guard Rank: " + get_guard_rank(), "");
+    m.add_item("Car Rank: " + get_car_rank(), "");
+    m.add_item("Steps Rank: " + get_steps_rank(), "");
+    m.add_item("Playtime Rank: " + get_playtime_rank(), "");
+    m.add_item("Back", "back");
+    m.intro_text = "Player titles menu.";
+    int res = m.run();
+    if (res == -1 or m.get_selected_item_id() == "back")
+    {
+        statsmenu();
+}
+    else
+{
+view_player_titles();
+}
 }
 void settingsmenu()
 {

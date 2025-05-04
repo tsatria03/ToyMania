@@ -41,6 +41,57 @@ int[] generate_achievement_thresholds(int start, int count, double multiplier)
 	}
 	return result;
 }
+string get_playtime_rank()
+{
+	int minutes = int(total_playtime / 60000);
+	if (minutes < 10) return "Beginner";
+	else if (minutes < 30) return "Rookie";
+	else if (minutes < 60) return "Explorer";
+	else if (minutes < 120) return "Adventurer";
+	else if (minutes < 240) return "Veteran";
+	else return "Toymaster";
+}
+string get_toy_rank()
+{
+	if (total_collected_toys < 10) return "Toyless";
+	else if (total_collected_toys < 50) return "Toy Finder";
+	else if (total_collected_toys < 150) return "Toy Collector";
+	else if (total_collected_toys < 300) return "Toy Hoarder";
+	else if (total_collected_toys < 600) return "Toy Fanatic";
+	else return "Toy Overlord";
+}
+string get_key_rank()
+{
+	if (total_collected_keys < 5) return "Keyless";
+	else if (total_collected_keys < 20) return "Key Novice";
+	else if (total_collected_keys < 50) return "Key Grabber";
+	else if (total_collected_keys < 100) return "Key Master";
+	else return "Key Emperor";
+}
+string get_guard_rank()
+{
+	if (total_killed_gards < 10) return "Pacifist";
+	else if (total_killed_gards < 50) return "Guard Slayer";
+	else if (total_killed_gards < 150) return "Battle Hardened";
+	else if (total_killed_gards < 300) return "Enforcer";
+	else return "Warrior Supreme";
+}
+string get_car_rank()
+{
+	if (total_destroyed_cars < 10) return "Civilian";
+	else if (total_destroyed_cars < 30) return "Road Wrecker";
+	else if (total_destroyed_cars < 60) return "Bumper Smasher";
+	else if (total_destroyed_cars < 120) return "Junkyard King";
+	else return "Vehicular Menace";
+}
+string get_steps_rank()
+{
+	if (total_taken_steps < 500) return "Sedentary";
+	else if (total_taken_steps < 2000) return "Wanderer";
+	else if (total_taken_steps < 5000) return "Roamer";
+	else if (total_taken_steps < 10000) return "Trekker";
+	else return "Step Legend";
+}
 string random_string(string[] array)
 {
 string retval=array[random(0,array.length()-1)];
@@ -155,25 +206,6 @@ m.edge_sound = "menuedge.ogg";
 m.enter_sound = "menuenter.ogg";
 m.open_sound = "menuopen.ogg";
 m.wrap_sound = "menuwrap.ogg";
-}
-void show_achievements()
-{
-    setupmenu(false);
-    for (uint i = 0; i < achievements.length(); i++)
-{
-        m.add_item(achievements[i].get_progress_status(), "");
-    }
-    m.add_item("Back", "back");
-    m.intro_text = "Achievements menu.";
-    int r = m.run();
-    if (r == -1 or m.get_selected_item_id() == "back")
-{
-        mainmenu();
-    }
-else
-{
-        show_achievements();
-    }
 }
 void update_achievements()
 {
