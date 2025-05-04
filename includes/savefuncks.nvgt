@@ -72,6 +72,8 @@ last_played_time = sd.read_string("last_played_time");
 }
 void writedata()
 {
+    last_played_date = get_date(true, false);
+    last_played_time = get_time(true, false);
     sd.add("level", level);
     sd.add("collected_toys", collected_toys);
     sd.add("collected_keys", collected_keys);
