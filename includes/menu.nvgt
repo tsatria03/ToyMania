@@ -4,6 +4,7 @@ setupmenu();
 m.add_item("documentation menu", "dm");
 m.add_item("game menu", "gm");
 m.add_item("settings menu", "sm");
+m.add_item("test speakers", "st");
 m.add_item("exit game", "ex");
 m.intro_text = "Main menu. Please choose an option with your arrow keys, then press enter to activate one.";
 int mres=m.run();
@@ -28,6 +29,12 @@ if (main == "sm")
 speak("loading");
 m.fade_music();
 settingsmenu();
+}
+if(main=="st")
+{
+m.fade_music();
+dlgplay("speakertest.ogg");
+mainmenu();
 }
 if (main == "ex")
 {
@@ -292,8 +299,8 @@ view_player_titles();
 void settingsmenu()
 {
 setupmenu(false);
-m.add_item(behind_pitch ? "Disable global behind pitch decrease" : "Enable global behind pitch decrease", "glb");
-m.add_item(hrtf ? "Disable global HRTF support" : "Enable global HRTF support", "glh");
+m.add_item(behind_pitch ? "Disable behind pitch decrease" : "Enable behind pitch decrease", "glb");
+m.add_item(hrtf ? "Disable HRTF" : "Enable HRTF", "glh");
 m.add_item("Clear game achievements.", "chm");
 m.add_item("Clear game statistics.", "gs");
 m.add_item("save settings", "sv");
@@ -308,14 +315,14 @@ mainmenu();
 if (preffsm == "glb")
 {
 behind_pitch = !behind_pitch;
-dlgmessage(behind_pitch ? "Global behind pitch decrease enabled. Press enter to continue." : "Global behind pitch decrease disabled. Press enter to continue.");
+dlgmessage(behind_pitch ? "Behind pitch decrease enabled. Press enter to continue." : "Behind pitch decrease disabled. Press enter to continue.");
 settingsmenu();
 }
 if (preffsm == "glh")
 {
 hrtf = !hrtf;
 sound_global_hrtf = hrtf;
-dlgmessage(hrtf ? "Global hrtf support enabled. Press enter to continue." : "Global hrtf support disabled. Press enter to continue.");
+dlgmessage(hrtf ? "HRTF enabled. Press enter to continue." : "HRTF disabled. Press enter to continue.");
 settingsmenu();
 }
 if (preffsm == "sv")

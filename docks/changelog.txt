@@ -1,4 +1,5 @@
 new in 1.5
+Added a test speakers option in the main menu.
 Recoded the entire menu system.
 new in 1.4
 Added Last Played Timestamp to the Stats Menu. You can now see the exact date and time of your last session in the Lifetime Stats menu. This information is also included when copying your full game stats to the clipboard.
