@@ -132,14 +132,10 @@ toygame();
 }
 if (gamem == "ach")
 {
-speak("loading");
-m.fade_music();
 achesmenu();
 }
 if (gamem == "stats")
 {
-speak("loading");
-m.fade_music();
 statsmenu();
 }
 if (gamem == "back")
@@ -149,7 +145,7 @@ mainmenu();
 }
 void achesmenu()
 {
-setupmenu(false);
+setupmenu();
     m.add_item("Session Achievements", "session");
     m.add_item("Lifetime Achievements", "lifetime");
 m.add_item("Copy all game Achievements to clipboard.", "cys");
@@ -163,14 +159,20 @@ gamemenu();
 }
        if (achm == "session")
 {
+speak("loading");
+m.fade_music();
         show_session_achievements();
     }
 if (achm == "lifetime")
 {
+speak("loading");
+m.fade_music();
         show_lifetime_achievements();
 }
 if (achm == "cys")
 {
+speak("loading");
+m.fade_music();
     string achievementSummary = "Session Achievements:\r\n";
     for (uint i = 0; i < achievements.length(); i++)
     {
@@ -230,7 +232,7 @@ void show_lifetime_achievements()
 }
 void statsmenu()
 {
-setupmenu(false);
+setupmenu();
     m.add_item("Session Stats", "session");
     m.add_item("Lifetime Stats", "lifetime");
 m.add_item("Player Titles", "titles");
@@ -245,18 +247,26 @@ gamemenu();
 }
        if (statsm == "session")
 {
+speak("loading");
+m.fade_music();
         view_session_stats();
     }
 if (statsm == "lifetime")
 {
+speak("loading");
+m.fade_music();
         view_lifetime_stats();
 }
 if (statsm == "titles")
 {
+speak("loading");
+m.fade_music();
     view_player_titles();
 }
 if (statsm == "cys")
 {
+speak("loading");
+m.fade_music();
 int session_minutes = int(session_playtime / 60000);
 int session_seconds = int((session_playtime % 60000) / 1000);
 int total_minutes = int(total_playtime / 60000);
