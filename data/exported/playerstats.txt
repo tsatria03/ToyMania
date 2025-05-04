@@ -15,9 +15,9 @@ Lifetime Stats:
 - Total playtime: 0 minutes, 0 seconds.
 
 Player Titles:
-- Toy Title: Toyless
-- Key Title: Keyless
-- Guard Title: Pacifist
-- Car Title: Civilian
-- Steps Title: Sedentary
-- Playtime Title: Beginner
+- Toy Title: Toyless. You’ve barely started your toy journey.
+- Key Title: Keyless. Locked doors fear you not... eventually.
+- Guard Title: Pacifist. You prefer to avoid conflict.
+- Car Title: Civilian. The roads remain mostly safe.
+- Steps Title: Sedentary. You prefer standing still.
+- Playtime Title: Beginner. You’re just getting started.

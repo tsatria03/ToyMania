@@ -1,4 +1,5 @@
 new in 1.4
+Added the ability to copy your player title descriptions along with your player titles in the stats menu.
 Added descriptive titles to the Player Titles menu. Each rank now includes a short description, giving players more insight into their progress and what their rank represents.
 Added the ability to copy your player titles along with your session and lifetime stats of the game in the stats menu.
 Added a Player Titles menu to the Stats Menu. Players can now view special ranks for collecting toys, collecting keys, killing guards, destroying cars, taking steps, and playing the game for a sertain amount of time.
