@@ -17,6 +17,8 @@ int walktime=200;
 int bossespawntime=5000, carspawntime=1000, gardspawntime=500, keyspawntime=250, toyspawntime=125;
 int64 session_playtime = 0;
 int64 total_playtime = 0;
+string last_played_date;
+string last_played_time;
 string weapontype="bat";
 string version="1.4";
 timer bossespawntimer, carspawntimer, firetimer, firetimer2, gametimer, gardspawntimer, keyspawntimer, movetimer, runtimer, toyspawntimer, walktimer;
@@ -33,6 +35,8 @@ time_elapsed timeelapsed;
 vector me;
 void main()
 {
+    last_played_date = get_date(true, false);
+    last_played_time = get_time(true, false);
 set_sound_storage("data/saves/assets.tmg");
 set_sound_decryption_key("LGY24P2p56riZXtvhxtONfyBQgVZZS8wJnVSJEZ0zOOeQr3THFTtlyIXYI04Dgbk2SD1DoCMFk8QuRPv7DhlAXJDb3XzEt8vd9RcU8LW0LzcXkHvJUmkWbAtJ8ITyuCF0CkpPcW6eiPsjGDU9rlVufn8GSO2vy4KAjcLe",true);
 dummy.load("dummy");

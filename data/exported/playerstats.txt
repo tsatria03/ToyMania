@@ -7,6 +7,8 @@ Session Stats:
 - Time played: 0 minutes, 0 seconds.
 
 Lifetime Stats:
+- Last Played Date: Saturday, May 3, 2025
+- Last Played Time: 8:58 PM
 - Toys collected: 0
 - Keys collected: 0
 - Guards killed: 0

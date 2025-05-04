@@ -154,19 +154,21 @@ statsummary += "- Cars destroyed: " + destroyed_cars + "\r\n";
 statsummary += "- Steps taken: " + taken_steps + "\r\n";
 statsummary += "- Time played: " + session_minutes + " minutes, " + session_seconds + " seconds.\r\n\r\n";
 statsummary += "Lifetime Stats:\r\n";
+statsummary += "- Last Played Date: " + last_played_date + "\r\n";
+statsummary += "- Last Played Time: " + last_played_time + "\r\n";
 statsummary += "- Toys collected: " + total_collected_toys + "\r\n";
 statsummary += "- Keys collected: " + total_collected_keys + "\r\n";
 statsummary += "- Guards killed: " + total_killed_gards + "\r\n";
 statsummary += "- Cars destroyed: " + total_destroyed_cars + "\r\n";
 statsummary += "- Steps taken: " + total_taken_steps + "\r\n";
-	statsummary += "- Total playtime: " + total_minutes + " minutes, " + total_seconds + " seconds.\r\n\r\n";
-	statsummary += "Player Titles:\r\n";
-	statsummary += "- Toy Title: " + get_toy_rank() + ". " + get_toy_rank_desc() + "\r\n";
-	statsummary += "- Key Title: " + get_key_rank() + ". " + get_key_rank_desc() + "\r\n";
-	statsummary += "- Guard Title: " + get_guard_rank() + ". " + get_guard_rank_desc() + "\r\n";
-	statsummary += "- Car Title: " + get_car_rank() + ". " + get_car_rank_desc() + "\r\n";
-	statsummary += "- Steps Title: " + get_steps_rank() + ". " + get_steps_rank_desc() + "\r\n";
-	statsummary += "- Playtime Title: " + get_playtime_rank() + ". " + get_playtime_rank_desc() + "\r\n";
+statsummary += "- Total playtime: " + total_minutes + " minutes, " + total_seconds + " seconds.\r\n\r\n";
+statsummary += "Player Titles:\r\n";
+statsummary += "- Toy Title: " + get_toy_rank() + ". " + get_toy_rank_desc() + "\r\n";
+statsummary += "- Key Title: " + get_key_rank() + ". " + get_key_rank_desc() + "\r\n";
+statsummary += "- Guard Title: " + get_guard_rank() + ". " + get_guard_rank_desc() + "\r\n";
+statsummary += "- Car Title: " + get_car_rank() + ". " + get_car_rank_desc() + "\r\n";
+statsummary += "- Steps Title: " + get_steps_rank() + ". " + get_steps_rank_desc() + "\r\n";
+statsummary += "- Playtime Title: " + get_playtime_rank() + ". " + get_playtime_rank_desc() + "\r\n";
     clipboard_copy_text(statsummary);
     dlgmessage("All game stats have been copied to your clipboard. Press enter to continue.");
     statsmenu();
@@ -226,6 +228,8 @@ else
 void view_lifetime_stats()
 {
     setupmenu(false);
+    m.add_item("Last Played Date: " + last_played_date, "");
+    m.add_item("Last Played Time: " + last_played_time, "");
     m.add_item("You have collected a total of " + total_collected_toys + " toys.", "");
     m.add_item("You have collected a total of " + total_collected_keys + " keys.", "");
     m.add_item("You have killed a total of " + total_killed_gards + " guards.", "");

@@ -53,6 +53,14 @@ void readdata()
 {
         total_playtime = sd.read_int64("total_playtime");
     }
+if (sd.d.exists("last_played_date"))
+{
+last_played_date = sd.read_string("last_played_date");
+}
+if (sd.d.exists("last_played_time"))
+{
+last_played_time = sd.read_string("last_played_time");
+}
     for (uint i = 0; i < achievements.length(); i++)
 {
         string id = "ach_tier_" + achievements[i].name;
@@ -77,6 +85,8 @@ void writedata()
     sd.add("total_destroyed_cars", total_destroyed_cars);
     sd.add("total_taken_steps", total_taken_steps);
     sd.add("total_playtime", total_playtime);
+sd.add("last_played_date", last_played_date);
+sd.add("last_played_time", last_played_time);
     for (uint i = 0; i < achievements.length(); i++)
 {
         sd.add("ach_tier_" + achievements[i].name, achievements[i].currentTier);
