@@ -1,4 +1,12 @@
 new in 1.5
+Made it so session based achievements have a more Balanced Progression. Session-based achievements now have different starting thresholds and growth rates compared to lifetime achievements. This ensures that they have a shorter focused goal during a single gameplay session while keeping lifetime achievements as long-term milestones.
+Fixed an issue where session achievements retained their previous progress while session stats were reset. This in turn caused negative percentages to appear. It now properly resetts the currentTier when restarting or exiting a game session.
+Improved the format for exported achievements to match the existing stats export style. Each entry includes the tier number, percentage progress, and how much is needed to reach the next tier.
+Improved the speaking of Achievement tiers. The game now includes the type of achievement, such as Session or Lifetime in the notification message. This provides clearer feedback to players about what kind of achievement they just unlocked.
+Made it so Session Achievements and Lifetime Achievements are split into 2 separate menus for easier navigation. Each menu now clearly shows relevant achievement categories in a more focused view. The copy achievements function is also Retained as well for sharing or tracking progress.
+You can now copy all of your achievements to the clipboard in the achievements menu. Session and Lifetime achievements are grouped and clearly labeled for easy readability.
+Improved the clear achievements menu. Added a new clear achievements interface that allows players to clear only session, lifetime, or both sets of achievements. Confirmation dialogs are also added to prevent accidental deletion.
+Added a full Session Achievement system that tracks your progress within a single game session across toys collected, keys found, guards defeated, cars destroyed, steps taken, and total time played. Each session achievement includes 50 scalable tiers that reset each run, encouraging fast-paced and high-performance gameplay.
 Added a test speakers option in the main menu.
 Recoded the entire menu system.
 new in 1.4
@@ -17,7 +25,7 @@ Added the ability to save your Achievement progress. This is loaded along with y
 Added an option to the settings menu that let's you clear all of your achievements you've unlocked in the game.
 Made it so when an achievement has been unlocked, a dialog now congratulates the player and describes what was accomplished.
 Added an Achievements Menu to the main screen, allowing players to view their progress across all categories.
-Added a full Achievement system that tracks your progress across collected toys, found keys, defeated guards, destroyed cars, taken steps, and total playtime. Each achievement has 50 scalable tiers, unlocking as you reach higher milestones.
+Added a full Lifetime Achievement system that tracks your overall progress across collected toys, found keys, defeated guards, destroyed cars, taken steps, and total time played. Each lifetime achievement features 50 scalable tiers that reward long-term dedication and consistent gameplay.
 Fixed an issue where session playtime would reset on game relaunch. The timer now tracks total session time across game launches.
 Made it so Session Stats and Lifetime Stats are split into 2 separate menus for easier navigation. Each menu now clearly shows relevant stat categories in a more focused view. The copy stats function is also Retained as well for sharing or tracking progress.
 Added the ability to copy all of your game stats to the clipboard in the stats menu.

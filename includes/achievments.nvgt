@@ -4,63 +4,66 @@ class AchievementTracker
 	string baseName;
 	int[] thresholds;
 	int currentTier;
+	bool isSessionBased;
 	AchievementTracker()
-{
+	{
 		name = "";
 		baseName = "";
 		currentTier = 0;
+		isSessionBased = false;
 	}
-	AchievementTracker(string achName, string base, int[] achThresholds)
-{
+	AchievementTracker(string achName, string base, int[] achThresholds, bool session = false)
+	{
 		name = achName;
 		baseName = base;
 		thresholds = achThresholds;
 		currentTier = 0;
+		isSessionBased = session;
 	}
 	int get_value()
-{
-		if (name == "Toys") return total_collected_toys;
-		if (name == "Keys") return total_collected_keys;
-		if (name == "Guards") return total_killed_gards;
-		if (name == "Cars") return total_destroyed_cars;
-		if (name == "Steps") return total_taken_steps;
-		if (name == "Playtime") return int(total_playtime / 60000);
+	{
+		if (name == "Toys") return isSessionBased ? collected_toys : total_collected_toys;
+		if (name == "Keys") return isSessionBased ? collected_keys : total_collected_keys;
+		if (name == "Guards") return isSessionBased ? killed_gards : total_killed_gards;
+		if (name == "Cars") return isSessionBased ? destroyed_cars : total_destroyed_cars;
+		if (name == "Steps") return isSessionBased ? taken_steps : total_taken_steps;
+		if (name == "Playtime") return isSessionBased ? int(session_playtime / 60000) : int(total_playtime / 60000);
 		return 0;
 	}
 	string get_next_milestone_label()
-{
+	{
 		if (currentTier < thresholds.length())
-{
+		{
 			return baseName + " " + thresholds[currentTier];
 		}
 		return "All " + baseName + " achievements unlocked!";
 	}
 	bool check_progress()
-{
+	{
 		if (currentTier < thresholds.length() and get_value() >= thresholds[currentTier])
-{
+		{
 			currentTier++;
 			return true;
 		}
 		return false;
 	}
-string get_progress_status() 
-{
-	if (currentTier >= thresholds.length())
+	string get_progress_status()
 	{
-		return baseName + " Achievement: Completed all tiers!";
+		if (currentTier >= thresholds.length())
+		{
+			return baseName + " Achievement: Completed all tiers!";
+		}
+		int currentValue = get_value();
+		int tierStart = (currentTier > 0) ? thresholds[currentTier - 1] : 0;
+		int tierGoal = thresholds[currentTier];
+		int progressInTier = currentValue - tierStart;
+		int neededToNext = tierGoal - currentValue;
+		int tierRange = tierGoal - tierStart;
+		double percent = 0.0;
+		if (tierRange > 0)
+		{
+			percent = round((double(progressInTier) * 100.0) / double(tierRange), 2);
+		}
+		return baseName + ": Tier " + currentTier + " of " + thresholds.length() + ". Current progress: " + progressInTier + " (" + percent + "%). " + neededToNext + " total " + name.lower() + " needed to reach the next tier.";
 	}
-	int currentValue = get_value();
-	int tierStart = (currentTier > 0) ? thresholds[currentTier - 1] : 0;
-	int tierGoal = thresholds[currentTier];
-	int progressInTier = currentValue - tierStart;
-	int neededToNext = tierGoal - currentValue;
-	int tierRange = tierGoal - tierStart;
-	double percent = 0.0;
-	if (tierRange > 0)
-	{
-		percent = round((double(progressInTier) * 100.0) / double(tierRange), 2);
-	}
-	return baseName + ": Tier " + currentTier + " of " + thresholds.length() + ". Current progress: " + progressInTier + " (" + percent + "%). " + neededToNext + " total " + name.lower() + " needed to reach the next tier.";
-}
 }

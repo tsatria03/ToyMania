@@ -113,6 +113,13 @@ killed_gards = 0;
 destroyed_cars = 0;
 taken_steps = 0;
 session_playtime = 0;
+for (uint i = 0; i < achievements.length(); i++)
+{
+    if (achievements[i].isSessionBased)
+{
+        achievements[i].currentTier = 0;
+    }
+}
 health=1000;
 me.x=25;
 me.y=25;
@@ -127,7 +134,7 @@ if (gamem == "ach")
 {
 speak("loading");
 m.fade_music();
-show_achievements();
+achesmenu();
 }
 if (gamem == "stats")
 {
@@ -139,6 +146,87 @@ if (gamem == "back")
 {
 mainmenu();
 }
+}
+void achesmenu()
+{
+setupmenu(false);
+    m.add_item("Session Achievements", "session");
+    m.add_item("Lifetime Achievements", "lifetime");
+m.add_item("Copy all game Achievements to clipboard.", "cys");
+    m.add_item("back", "back");
+m.intro_text = "Achievements menu.";
+int mres=m.run();
+string achm = m.get_selected_item_id();
+if(mres==-1)
+{
+gamemenu();
+}
+       if (achm == "session")
+{
+        show_session_achievements();
+    }
+if (achm == "lifetime")
+{
+        show_lifetime_achievements();
+}
+if (achm == "cys")
+{
+    string achievementSummary = "Session Achievements:\r\n";
+    for (uint i = 0; i < achievements.length(); i++)
+    {
+        if (achievements[i].isSessionBased)
+        {
+            achievementSummary += "- " + achievements[i].get_progress_status() + "\r\n";
+        }
+    }
+    achievementSummary += "\r\nLifetime Achievements:\r\n";
+    for (uint i = 0; i < achievements.length(); i++)
+    {
+        if (!achievements[i].isSessionBased)
+        {
+            achievementSummary += "- " + achievements[i].get_progress_status() + "\r\n";
+        }
+    }
+    clipboard_copy_text(achievementSummary);
+    dlgmessage("All game achievements have been copied to your clipboard. Press enter to continue.");
+    achesmenu();
+}
+if (achm == "back")
+{
+gamemenu();
+}
+}
+void show_session_achievements()
+{
+    setupmenu(false);
+    for (uint i = 0; i < achievements.length(); i++)
+    {
+        if (achievements[i].isSessionBased)
+            m.add_item(achievements[i].get_progress_status(), "");
+    }
+    m.add_item("Back", "back");
+    m.intro_text = "Session Achievements menu.";
+    int r = m.run();
+    if (r == -1 or m.get_selected_item_id() == "back")
+        achesmenu();
+    else
+        show_session_achievements();
+}
+void show_lifetime_achievements()
+{
+    setupmenu(false);
+    for (uint i = 0; i < achievements.length(); i++)
+    {
+        if (!achievements[i].isSessionBased)
+            m.add_item(achievements[i].get_progress_status(), "");
+    }
+    m.add_item("Back", "back");
+    m.intro_text = "Lifetime Achievements menu.";
+    int r = m.run();
+    if (r == -1 or m.get_selected_item_id() == "back")
+        achesmenu();
+    else
+        show_lifetime_achievements();
 }
 void statsmenu()
 {
@@ -205,25 +293,6 @@ if (statsm == "back")
 {
 gamemenu();
 }
-}
-void show_achievements()
-{
-    setupmenu(false);
-    for (uint i = 0; i < achievements.length(); i++)
-{
-        m.add_item(achievements[i].get_progress_status(), "");
-    }
-    m.add_item("Back", "back");
-    m.intro_text = "Achievements menu.";
-    int r = m.run();
-    if (r == -1 or m.get_selected_item_id() == "back")
-{
-gamemenu();
-    }
-else
-{
-        show_achievements();
-    }
 }
 void view_session_stats()
 {
@@ -331,39 +400,39 @@ writepreffs();
 dlgmessage("Settings saved. Press enter to continue.");
 mainmenu();
 }
-if (preffsm == "chm")
+if (preffsm == "chm") 
 {
     setupmenu(false);
-    m.add_item("Yes, reset only achievement tiers.", "tiers");
-    m.add_item("Yes, reset achievement tiers and related game stats.", "full");
-    m.add_item("No, cancel.", "cancel");
-    m.intro_text = "Are you sure you want to clear all of your achievements? This action can't be undone.";
-    int res = m.run();
-    string result = m.get_selected_item_id();
-    if (result == "tiers")
+    m.add_item("Session achievements", "session");
+    m.add_item("Lifetime achievements", "lifetime");
+    m.add_item("Session and lifetime achievements", "both");
+    m.add_item("Back", "back");
+    m.intro_text = "Choose which game achievements to reset.";
+    int mres = m.run();
+    string achmode = m.get_selected_item_id();
+    if (mres == -1 or achmode == "back")
     {
-        for (uint i = 0; i < achievements.length(); i++)
+        settingsmenu();
+    }
+    setupmenu(false);
+    m.add_item("Yes", "yes");
+    m.add_item("No", "no");
+    m.intro_text = "Are you sure you want to reset your " + (achmode == "session" ? "session" : achmode == "lifetime" ? "lifetime" : "session and lifetime") + " achievements? This action can't be undone.";
+    mres = m.run();
+    string confirm = m.get_selected_item_id();
+    if (mres == -1 or confirm == "no")
+    {
+        settingsmenu();
+    }
+    for (uint i = 0; i < achievements.length(); i++)
+    {
+        if ((achmode == "session" and achievements[i].isSessionBased) or (achmode == "lifetime" and !achievements[i].isSessionBased) or (achmode == "both"))
         {
             achievements[i].currentTier = 0;
         }
-        writedata();
-        dlgmessage("All achievement tiers have been reset. Your stats still remain intact. Press enter to continue.");
     }
-    else if (result == "full")
-    {
-        for (uint i = 0; i < achievements.length(); i++)
-        {
-            achievements[i].currentTier = 0;
-        }
-        total_collected_toys = 0;
-        total_collected_keys = 0;
-        total_killed_gards = 0;
-        total_destroyed_cars = 0;
-        total_taken_steps = 0;
-        total_playtime = 0;
-        writedata();
-        dlgmessage("All achievements and related stats have been fully reset. Press enter to continue.");
-    }
+    writedata();
+    dlgmessage("Your " + (achmode == "session" ? "session" : achmode == "lifetime" ? "lifetime" : "session and lifetime") + " achievements have been cleared. Press enter to continue.");
     settingsmenu();
 }
 if (preffsm == "gs")
@@ -383,7 +452,7 @@ if (preffsm == "gs")
     setupmenu(false);
     m.add_item("Yes", "yes");
     m.add_item("No", "no");
-    m.intro_text = "Are you sure you want to clear " + (gsm == "session" ? "your session stats" : gsm == "lifetime" ? "your lifetime stats" : "all of your session and lifetime stats") + "? This action can't be undone.";
+    m.intro_text = "Are you sure you want to clear " + (gsm == "session" ? "your session stats" : gsm == "lifetime" ? "your lifetime stats" : "your session and lifetime stats") + "? This action can't be undone.";
     mres = m.run();
     string confirm = m.get_selected_item_id();
     if (mres == -1 or confirm == "no")
@@ -399,7 +468,7 @@ settingsmenu();
         taken_steps = 0;
 session_playtime = 0;
 writedata();
-        dlgmessage("Session stats cleared. Press enter to continue.");
+        dlgmessage("Your session stats have been cleared. Press enter to continue.");
     }
     if (gsm == "lifetime")
     {
@@ -410,7 +479,7 @@ writedata();
         total_taken_steps = 0;
         total_playtime = 0;
         writedata();
-        dlgmessage("Lifetime stats cleared. Press enter to continue.");
+        dlgmessage("Your lifetime stats have been cleared. Press enter to continue.");
     }
     if (gsm == "both")
     {
@@ -426,7 +495,7 @@ writedata();
         total_taken_steps = 0;
         total_playtime = 0;
         writedata();
-        dlgmessage("All stats cleared. Press enter to continue.");
+        dlgmessage("Your session and lifetime stats have been cleared. Press enter to continue.");
     }
     settingsmenu();
 }

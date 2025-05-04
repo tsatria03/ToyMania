@@ -40,12 +40,7 @@ void main()
 set_sound_storage("data/saves/assets.tmg");
 set_sound_decryption_key("LGY24P2p56riZXtvhxtONfyBQgVZZS8wJnVSJEZ0zOOeQr3THFTtlyIXYI04Dgbk2SD1DoCMFk8QuRPv7DhlAXJDb3XzEt8vd9RcU8LW0LzcXkHvJUmkWbAtJ8ITyuCF0CkpPcW6eiPsjGDU9rlVufn8GSO2vy4KAjcLe",true);
 dummy.load("dummy");
-achievements.insert_last(AchievementTracker("Toys", "Toy Collector", generate_achievement_thresholds(5, 50, 1.5)));
-achievements.insert_last(AchievementTracker("Keys", "Key Hunter", generate_achievement_thresholds(10, 50, 1.5)));
-achievements.insert_last(AchievementTracker("Guards", "Guard Slayer", generate_achievement_thresholds(15, 50, 1.5)));
-achievements.insert_last(AchievementTracker("Cars", "Car Crusher", generate_achievement_thresholds(20, 50, 1.5)));
-achievements.insert_last(AchievementTracker("Steps", "Pacer", generate_achievement_thresholds(25, 50, 1.5)));
-achievements.insert_last(AchievementTracker("Playtime", "Time Traveler", generate_achievement_thresholds(5, 50, 1.5)));
+load_achievements();
 readdata();
 readpreffs();
 sound_global_hrtf=hrtf;
@@ -104,6 +99,13 @@ killed_gards = 0;
 destroyed_cars = 0;
 taken_steps = 0;
 session_playtime=0;
+for (uint i = 0; i < achievements.length(); i++)
+{
+    if (achievements[i].isSessionBased)
+{
+        achievements[i].currentTier = 0;
+    }
+}
 bossespawn=false;
 carspawn=false;
 gardspawn=false;
