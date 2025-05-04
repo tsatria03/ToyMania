@@ -1,11 +1,9 @@
 void mainmenu()
 {
 setupmenu();
-m.add_item("play game", "ty");
-m.add_item("read documentation", "rdm");
-m.add_item("view achievements", "ach");
-m.add_item("view statistics", "stats");
-m.add_item("change settings", "sets");
+m.add_item("documentation menu", "dm");
+m.add_item("game menu", "gm");
+m.add_item("settings menu", "sm");
 m.add_item("exit game", "ex");
 m.intro_text = "Main menu. Please choose an option with your arrow keys, then press enter to activate one.";
 int mres=m.run();
@@ -17,44 +15,15 @@ m.fade_music();
 writepreffs();
 exit();
 }
-if (main == "ty")
-{
-speak("loading");
-m.fade_music();
-dlgplay("gamelaunch.ogg");
-collected_toys = 0;
-collected_keys = 0;
-killed_gards = 0;
-destroyed_cars = 0;
-taken_steps = 0;
-session_playtime = 0;
-health=1000;
-me.x=25;
-me.y=25;
-bossdefeated = false;
-keydest=false;
-toydest=false;
-toyspawn=true;
-gametimer.restart();
-toygame();
-}
-if (main == "ach")
-{
-speak("loading");
-m.fade_music();
-show_achievements();
-}
-if (main == "rdm")
+if (main == "dm")
 {
 docksmenu();
 }
-if (main == "stats")
+if (main == "gm")
 {
-speak("loading");
-m.fade_music();
-statsmenu();
+gamemenu();
 }
-if (main == "sets")
+if (main == "sm")
 {
 speak("loading");
 m.fade_music();
@@ -112,6 +81,58 @@ if(dnm=="back")
 mainmenu();
 }
 }
+void gamemenu()
+{
+setupmenu();
+m.add_item("play", "ty");
+m.add_item("achievements", "ach");
+m.add_item("statistics", "stats");
+m.add_item("back", "back");
+m.intro_text="Game menu.";
+int mres=m.run();
+string gamem = m.get_selected_item_id();
+if(mres==-1)
+{
+mainmenu();
+}
+if (gamem == "ty")
+{
+speak("loading");
+m.fade_music();
+dlgplay("gamelaunch.ogg");
+collected_toys = 0;
+collected_keys = 0;
+killed_gards = 0;
+destroyed_cars = 0;
+taken_steps = 0;
+session_playtime = 0;
+health=1000;
+me.x=25;
+me.y=25;
+bossdefeated = false;
+keydest=false;
+toydest=false;
+toyspawn=true;
+gametimer.restart();
+toygame();
+}
+if (gamem == "ach")
+{
+speak("loading");
+m.fade_music();
+show_achievements();
+}
+if (gamem == "stats")
+{
+speak("loading");
+m.fade_music();
+statsmenu();
+}
+if (gamem == "back")
+{
+mainmenu();
+}
+}
 void statsmenu()
 {
 setupmenu(false);
@@ -125,7 +146,7 @@ int mres=m.run();
 string statsm = m.get_selected_item_id();
 if(mres==-1)
 {
-mainmenu();
+gamemenu();
 }
        if (statsm == "session")
 {
@@ -175,11 +196,7 @@ statsummary += "- Playtime Title: " + get_playtime_rank() + ". " + get_playtime_
 }
 if (statsm == "back")
 {
-mainmenu();
-}
-else
-{
-statsmenu();
+gamemenu();
 }
 }
 void show_achievements()
@@ -194,7 +211,7 @@ void show_achievements()
     int r = m.run();
     if (r == -1 or m.get_selected_item_id() == "back")
 {
-        mainmenu();
+gamemenu();
     }
 else
 {
