@@ -55,6 +55,12 @@ string get_progress_status()
 	int tierGoal = thresholds[currentTier];
 	int progressInTier = currentValue - tierStart;
 	int neededToNext = tierGoal - currentValue;
-	return baseName + ": Tier " + currentTier + " of " + thresholds.length() + ". Current progress: " + progressInTier + ". " + neededToNext + " total " + name.lower() + " needed to reach the next tier.";
+	int tierRange = tierGoal - tierStart;
+	double percent = 0.0;
+	if (tierRange > 0)
+	{
+		percent = round((double(progressInTier) * 100.0) / double(tierRange), 2);
+	}
+	return baseName + ": Tier " + currentTier + " of " + thresholds.length() + ". Current progress: " + progressInTier + " (" + percent + "%). " + neededToNext + " total " + name.lower() + " needed to reach the next tier.";
 }
 }
