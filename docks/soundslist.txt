@@ -1,5 +1,3 @@
-achievement1.ogg
-achievement2.ogg
 alert.ogg
 batdraw.ogg
 batfire1.ogg
@@ -154,6 +152,7 @@ knifehit3.ogg
 laserdraw.ogg
 laserfire.ogg
 laserhit.ogg
+life_achievement.ogg
 machinegundraw.ogg
 machinegunempty.ogg
 machinegunfire.ogg
@@ -178,6 +177,9 @@ playerstep2.ogg
 playerstep3.ogg
 playerstep4.ogg
 playerstep5.ogg
+session_achievement.ogg
+speakertest1.ogg
+speakertest2.ogg
 toyamb.ogg
 toybreak1.ogg
 toybreak2.ogg
@@ -228,4 +230,4 @@ toyloop7.ogg
 toyloop8.ogg
 toyloop9.ogg
 toymus.ogg
-total files: 230
+total files: 232

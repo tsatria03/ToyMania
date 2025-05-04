@@ -33,7 +33,7 @@ settingsmenu();
 if(main=="st")
 {
 m.fade_music();
-dlgplay("speakertest.ogg");
+dlgplay("speakertest"+random(1,2)+".ogg");
 mainmenu();
 }
 if (main == "ex")

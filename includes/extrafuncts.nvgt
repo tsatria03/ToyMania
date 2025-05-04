@@ -314,14 +314,15 @@ void update_achievements()
             string typeLabel = achievements[i].isSessionBased ? "Session " : "Lifetime ";
             string baseName = achievements[i].baseName;
             int value = achievements[i].get_value();
+string soundName = achievements[i].isSessionBased ? "session_achievement.ogg" : "life_achievement.ogg";
             if (achievements[i].currentTier >= achievements[i].thresholds.length())
             {
-            achslot = pool.play_stationary("achievement" + random(1, 2) + ".ogg", false);
+    achslot = pool.play_stationary(soundName, false);
                 dlgmessage("Amazing! You've completed all tiers of the " + typeLabel + baseName + " achievement! Press enter to continue.");
             }
             else
             {
-            achslot = pool.play_stationary("achievement" + random(1, 2) + ".ogg", false);
+    achslot = pool.play_stationary(soundName, false);
                 speak("Congratulations! You just unlocked Tier " + achievements[i].currentTier + " of the " + typeLabel + baseName + " achievement. You've " + actionVerb + value + " " + unit + ". Nice work!");
             }
         }
