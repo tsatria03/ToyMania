@@ -1,4 +1,5 @@
 new in 1.7
+Added a speaker test menu to the main menu. Players can now choose between the Sword Clank and Stone Throw sound to varify their speaker setup. The speaker test menu also includes a description to guide users in selecting an appropriate sound to test their audio setup.
 Added options to the settings menu for toggling achievement sounds and spoken notifications when unlocking various achievements during gameplay.
 Added the ability to turn on and off the achievement sounds and speech played when recieving various achievments while playing the game.
 Changed the growth multiplier for all session-based achievements to a higher value for a more consistent and challenging progression curve. This ensures each tier scales appropriately with player effort, preventing accidental full completions from minimal activity.

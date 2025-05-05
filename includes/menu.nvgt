@@ -4,7 +4,7 @@ setupmenu();
 m.add_item("documentation menu", "dm");
 m.add_item("game menu", "gm");
 m.add_item("settings menu", "sm");
-m.add_item("test speakers", "st");
+m.add_item("speaker test menu", "st");
 m.add_item("exit game", "ex");
 m.intro_text = "Main menu. Please choose an option with your arrow keys, then press enter to activate one.";
 int mres=m.run();
@@ -29,12 +29,28 @@ speak("loading");
 m.fade_music();
 settingsmenu();
 }
-if(main=="st")
+if(main == "st")
 {
-speak("loading");
-m.fade_music();
-dlgplay("speakertest"+random(1,2)+".ogg");
-mainmenu();
+    setupmenu(false);
+    m.add_item("Sword Clank", "clank");
+    m.add_item("Stone Throw", "stone");
+    m.add_item("Back", "back");
+    m.intro_text = "Choose a sound to play to test your speakers. Make sure you are wearing your headphones correctly when playing these sounds.";
+    int mres = m.run();
+    string soundsel = m.get_selected_item_id();
+    if (mres == -1 or soundsel == "back")
+{
+        mainmenu();
+    }
+    if (soundsel == "clank")
+{
+        dlgplay("speaker_sword_clank.ogg");
+    }
+    if (soundsel == "stone")
+{
+        dlgplay("speaker_stone_throw.ogg");
+    }
+    mainmenu();
 }
 if (main == "ex")
 {
