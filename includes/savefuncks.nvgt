@@ -99,6 +99,18 @@ sd.add("last_played_time", last_played_time);
 void readpreffs()
 {
 st.load();
+if (st.d.exists("menumusvolume"))
+{
+menumusvolume = st.read_int("menumusvolume");
+}
+if (st.d.exists("play_ach_scores"))
+{
+play_ach_scores = st.read_bool("play_ach_scores");
+}
+if (st.d.exists("speak_ach_scores"))
+{
+speak_ach_scores = st.read_bool("speak_ach_scores");
+}
 if (st.d.exists("behind_pitch"))
 {
 behind_pitch = st.read_bool("behind_pitch");
@@ -108,15 +120,13 @@ if (st.d.exists("hrtf"))
 hrtf = st.read_bool("hrtf");
 sound_global_hrtf = hrtf;
 }
-if (st.d.exists("menumusvolume"))
-{
-menumusvolume = st.read_int("menumusvolume");
-}
 }
 void writepreffs()
 {
+st.add("menumusvolume", menumusvolume);
 st.add("behind_pitch", behind_pitch);
 st.add("hrtf", hrtf);
-st.add("menumusvolume", menumusvolume);
+st.add("play_ach_scores", play_ach_scores);
+st.add("speak_ach_scores", speak_ach_scores);
 st.save();
 }

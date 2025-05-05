@@ -255,12 +255,12 @@ handles[h].destroy_all();
 }
 void load_achievements()
 {
-    achievements.insert_last(AchievementTracker("Toys", "Speed Collector", generate_achievement_thresholds(3, 25, 1.25), true));
-    achievements.insert_last(AchievementTracker("Keys", "Key Snatcher", generate_achievement_thresholds(5, 25, 1.25), true));
-    achievements.insert_last(AchievementTracker("Guards", "Strike Force", generate_achievement_thresholds(8, 25, 1.25), true));
-    achievements.insert_last(AchievementTracker("Cars", "Crash Rush", generate_achievement_thresholds(10, 25, 1.25), true));
-    achievements.insert_last(AchievementTracker("Steps", "Pace Breaker", generate_achievement_thresholds(15, 25, 1.25), true));
-    achievements.insert_last(AchievementTracker("Playtime", "Sprint Runner", generate_achievement_thresholds(1, 25, 1.25), true));
+    achievements.insert_last(AchievementTracker("Toys", "Speed Collector", generate_achievement_thresholds(3, 25, 1.5), true));
+    achievements.insert_last(AchievementTracker("Keys", "Key Snatcher", generate_achievement_thresholds(5, 25, 1.5), true));
+    achievements.insert_last(AchievementTracker("Guards", "Strike Force", generate_achievement_thresholds(8, 25, 1.5), true));
+    achievements.insert_last(AchievementTracker("Cars", "Crash Rush", generate_achievement_thresholds(10, 25, 1.5), true));
+    achievements.insert_last(AchievementTracker("Steps", "Pace Breaker", generate_achievement_thresholds(15, 25, 1.5), true));
+    achievements.insert_last(AchievementTracker("Playtime", "Sprint Runner", generate_achievement_thresholds(1, 25, 1.5), true));
 achievements.insert_last(AchievementTracker("Toys", "Toy Collector", generate_achievement_thresholds(5, 50, 1.5), false));
 achievements.insert_last(AchievementTracker("Keys", "Key Hunter", generate_achievement_thresholds(10, 50, 1.5), false));
 achievements.insert_last(AchievementTracker("Guards", "Guard Slayer", generate_achievement_thresholds(15, 50, 1.5), false));
@@ -337,13 +337,13 @@ void update_achievements()
             string soundName = achievements[i].isSessionBased ? "session_achievement.ogg" : "life_achievement.ogg";
             if (achievements[i].currentTier >= achievements[i].thresholds.length())
             {
-                achslot = pool.play_stationary(soundName, false);
-                dlgmessage("Amazing! You've completed all tiers of the " + typeLabel + baseName + " achievement! Press enter to continue.");
+                if(play_ach_scores==true) achslot = pool.play_stationary(soundName, false);
+                if(speak_ach_scores==true) speak("Amazing! You've completed all tiers of the " + typeLabel + baseName + " achievement! Press enter to continue.");
             }
             else
             {
-                achslot = pool.play_stationary(soundName, false);
-                speak("Congratulations! You just unlocked Tier " + achievements[i].currentTier + " of the " + typeLabel + baseName + " achievement. You've " + actionVerb + value + " " + unit + ". Nice work!");
+                if(play_ach_scores==true) achslot = pool.play_stationary(soundName, false);
+                if(speak_ach_scores==true) speak("Congratulations! You just unlocked Tier " + achievements[i].currentTier + " of the " + typeLabel + baseName + " achievement. You've " + actionVerb + value + " " + unit + ". Nice work!");
             }
         }
     }

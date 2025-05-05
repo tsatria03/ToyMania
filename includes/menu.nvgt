@@ -13,7 +13,6 @@ if(mres==-1)
 {
 speak("exiting");
 m.fade_music();
-writepreffs();
 exit();
 }
 if (main == "dm")
@@ -41,7 +40,6 @@ if (main == "ex")
 {
 speak("exiting");
 m.fade_music();
-writepreffs();
 exit();
 }
 }

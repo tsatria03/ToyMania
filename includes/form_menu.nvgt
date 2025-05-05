@@ -142,12 +142,13 @@ music.play_looped();
 if (key_down(volkeydown) and voltimer.elapsed >= voltime and menumusvolume > -50) {
 menumusvolume -= 2;
 music.set_volume(menumusvolume);
+writepreffs();
 voltimer.restart();
 }
 if (key_down(volkeyup) and voltimer.elapsed >= voltime and menumusvolume < 0) {
 menumusvolume += 2;
 music.set_volume(menumusvolume);
-//writepreffs();
+writepreffs();
 voltimer.restart();
 }
 if(key_repeating(KEY_TAB) and intro_text.length()>0)
