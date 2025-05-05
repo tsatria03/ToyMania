@@ -466,7 +466,7 @@ m.add_item(speak_ach_scores ? "Disable achievement speech feedback. This setting
 m.add_item(speak_dlg_enter ? "Disable dialog end speech feedback. This setting controls whether the phrase 'Press enter to continue' is spoken after dialog messages." : "Enable dialog end speech feedback. This setting controls whether the phrase 'Press enter to continue' is spoken after dialog messages.", "dlgspeech");
 m.add_item(speak_menu_loading ? "Disable menu loading speech feedback. This setting controls whether the 'Loading' phrase is spoken when opening various menus." : "Enable menu loading speech feedback. This setting controls whether the 'Loading' phrase is spoken when opening various menus.", "loadspeech");
 m.add_item(gamcopy ? "Disable post-game copy prompt. This allows the game to ask if you'd like to copy your session stats after death or victory." : "Enable post-game copy prompt. This allows the game to ask if you'd like to copy your session stats after death or victory.", "gcp");
-m.add_item(statscopy ? "Disable manual copy options. This shows or hides all copy-to-clipboard entries from various stat based menus." : "Enable manual copy options. This shows or hides all copy-to-clipboard entries from various stat based menus.", "scp");
+m.add_item(statscopy ? "Disable manual stat copy options. This shows or hides all copy-to-clipboard entries from various stat based menus." : "Enable manual stat copy options. This shows or hides all copy-to-clipboard entries from various stat based menus.", "scp");
 m.add_item("Clear game achievements.", "chm");
 m.add_item("Clear game statistics.", "gs");
 m.add_item("save settings", "sv");
