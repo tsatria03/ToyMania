@@ -95,7 +95,7 @@ setupmenu();
 m.add_item("play", "ty");
 m.add_item("achievements", "ach");
 m.add_item("statistics", "stats");
-m.add_item("Copy all game progress to clipboard", "copyall");
+m.add_item("Copy all game progresses to clipboard", "copyall");
 m.add_item("back", "back");
 m.intro_text = "Game menu. You can start a new game session, view achievements, or check your stats here.";
 int mres=m.run();
@@ -190,7 +190,7 @@ m.fade_music();
     result += "- Steps Title: " + get_steps_rank() + ". " + get_steps_rank_desc() + "\r\n";
     result += "- Playtime Title: " + get_playtime_rank() + ". " + get_playtime_rank_desc() + "\r\n";
     clipboard_copy_text(result);
-    dlgmessage("Your complete game progress has been copied to the clipboard. Press enter to continue.");
+    dlgmessage("All game progresses have been copied to the clipboard. Press enter to continue.");
     gamemenu();
 }
 if (gamem == "back")
@@ -351,7 +351,7 @@ statsummary += "- Car Title: " + get_car_rank() + ". " + get_car_rank_desc() + "
 statsummary += "- Steps Title: " + get_steps_rank() + ". " + get_steps_rank_desc() + "\r\n";
 statsummary += "- Playtime Title: " + get_playtime_rank() + ". " + get_playtime_rank_desc() + "\r\n";
     clipboard_copy_text(statsummary);
-    dlgmessage("All game stats have been copied to your clipboard. Press enter to continue.");
+    dlgmessage("All game statistics have been copied to your clipboard. Press enter to continue.");
     statsmenu();
 }
 if (statsm == "back")
@@ -433,8 +433,8 @@ view_player_titles();
 void settingsmenu()
 {
 setupmenu(false);
-m.add_item(behind_pitch ? "Disable behind pitch decrease" : "Enable behind pitch decrease", "glb");
-m.add_item(hrtf ? "Disable HRTF" : "Enable HRTF", "glh");
+m.add_item(behind_pitch ? "Disable behind pitch decrease. This setting controls whether the pitch of sounds decrease when you are behind it." : "Enable behind pitch decrease. This setting controls whether the pitch of sounds decrease when you are behind it.", "glb");
+m.add_item(hrtf ? "Disable HRTF. This setting enhances the 3D sound positioning effect for headphone users." : "Enable HRTF. This setting enhances the 3D sound positioning effect for headphone users.", "glh");
 m.add_item("Clear game achievements.", "chm");
 m.add_item("Clear game statistics.", "gs");
 m.add_item("save settings", "sv");
@@ -472,7 +472,7 @@ if (preffsm == "chm")
     m.add_item("Lifetime achievements", "lifetime");
     m.add_item("Session and lifetime achievements", "both");
     m.add_item("Back", "back");
-    m.intro_text = "Choose which game achievements to reset.";
+m.intro_text = "Choose which game achievements to clear. This will clear related game statistics as well.";
     int mres = m.run();
     string achmode = m.get_selected_item_id();
     if (mres == -1 or achmode == "back")
@@ -525,7 +525,7 @@ if (preffsm == "gs")
     m.add_item("lifetime stats", "lifetime");
     m.add_item("session and lifetime stats", "both");
     m.add_item("Back", "back");
-    m.intro_text = "Choose which game stats to reset.";
+m.intro_text = "Choose which game statistics to clear. This will not clear your game achievements.";
     int mres = m.run();
     string gsm = m.get_selected_item_id();
     if (mres == -1 or gsm == "back")

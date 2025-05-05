@@ -1,15 +1,15 @@
 Session Achievements:
-- Speed Collector: Completed all tiers!
-- Quick Key Snatcher: Tier 12 of 25. Current progress: 4 (40%). 6 total keys needed to reach the next tier.
-- Session Enforcer: Tier 15 of 25. Current progress: 33 (89.19%). 4 total guards needed to reach the next tier.
-- Wreck on Sight: Tier 6 of 25. Current progress: 3 (50%). 3 total cars needed to reach the next tier.
-- Pace Breaker: Tier 24 of 25. Current progress: 134 (24.68%). 409 total steps needed to reach the next tier.
-- Sprint Runner: Tier 0 of 25. Current progress: 7 (700%). -6 total playtime needed to reach the next tier.
+- Speed Collector: Tier 0 of 25. Current progress: 0 (0%). 3 total toys needed to reach the next tier.
+- Quick Key Snatcher: Tier 0 of 25. Current progress: 0 (0%). 5 total keys needed to reach the next tier.
+- Session Enforcer: Tier 0 of 25. Current progress: 0 (0%). 8 total guards needed to reach the next tier.
+- Wreck on Sight: Tier 0 of 25. Current progress: 0 (0%). 10 total cars needed to reach the next tier.
+- Pace Breaker: Tier 0 of 25. Current progress: 0 (0%). 15 total steps needed to reach the next tier.
+- Sprint Runner: Tier 0 of 25. Current progress: 0 (0%). 1 total playtime needed to reach the next tier.
 
 Lifetime Achievements:
-- Toy Collector: Tier 9 of 50. Current progress: 4 (7.41%). 50 total toys needed to reach the next tier.
-- Key Hunter: Tier 4 of 50. Current progress: 12 (75%). 4 total keys needed to reach the next tier.
-- Guard Slayer: Tier 7 of 50. Current progress: 21 (25.93%). 60 total guards needed to reach the next tier.
-- Car Crusher: Tier 2 of 50. Current progress: 0 (0%). 15 total cars needed to reach the next tier.
-- Pacer: Tier 12 of 50. Current progress: 212 (20.25%). 835 total steps needed to reach the next tier.
-- Time Traveler: Tier 0 of 50. Current progress: 7 (140%). -2 total playtime needed to reach the next tier.
+- Toy Collector: Tier 0 of 50. Current progress: 0 (0%). 5 total toys needed to reach the next tier.
+- Key Hunter: Tier 0 of 50. Current progress: 0 (0%). 10 total keys needed to reach the next tier.
+- Guard Slayer: Tier 0 of 50. Current progress: 0 (0%). 15 total guards needed to reach the next tier.
+- Car Crusher: Tier 0 of 50. Current progress: 0 (0%). 20 total cars needed to reach the next tier.
+- Pacer: Tier 0 of 50. Current progress: 0 (0%). 25 total steps needed to reach the next tier.
+- Time Traveler: Tier 0 of 50. Current progress: 0 (0%). 5 total playtime needed to reach the next tier.

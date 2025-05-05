@@ -1,4 +1,6 @@
 new in 1.6
+Added descriptive labels to audio setting toggles like HRTF and behind pitch decrease, making their purpose clearer to players who don't know what those toggles do.
+Updated the achievement and statistics reset menus with improved descriptions to clarify what each reset option does when the player clicks on them.
 Made it so the achievement reset system also clears lifetime stats, along with session stats. This ensures that resetting achievements now fully wipes out all of the associated progress, including playtime, toys, keys, guards, cars, and steps.
 Fixed an issue where session-based achievements such as Sprint Runner did not reset properly when clearing achievements. The session playtime value is now explicitly reset when session achievements are cleared, ensuring accurate progress tracking.
 Fixed a bug where only one achievement tier was granted at a time, even if the player had far surpassed the required milestone. Achievements now unlock multiple tiers at once if progress exceeds several thresholds, ensuring accurate reward tracking.
