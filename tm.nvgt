@@ -694,14 +694,7 @@ dlgmessage("You just died on level "+level+"! Here are your current results for 
         clipsummery += "- Guards killed: " + killed_gards + "\r\n";
         clipsummery += "- Cars destroyed: " + destroyed_cars + "\r\n";
         clipsummery += "- Steps taken: " + taken_steps + "\r\n";
-        clipsummery += "- Time played: " + min + " minutes, " + sec + " seconds\r\n\r\n";
-        clipsummery += "Player Titles:\r\n";
-        clipsummery += "- Toy Title: " + get_toy_rank() + ". " + get_toy_rank_desc() + "\r\n";
-        clipsummery += "- Key Title: " + get_key_rank() + ". " + get_key_rank_desc() + "\r\n";
-        clipsummery += "- Guard Title: " + get_guard_rank() + ". " + get_guard_rank_desc() + "\r\n";
-        clipsummery += "- Car Title: " + get_car_rank() + ". " + get_car_rank_desc() + "\r\n";
-        clipsummery += "- Steps Title: " + get_steps_rank() + ". " + get_steps_rank_desc() + "\r\n";
-        clipsummery += "- Playtime Title: " + get_playtime_rank() + ". " + get_playtime_rank_desc() + "\r\n";
+        clipsummery += "- Time played: " + min + " minutes, " + sec + " seconds\r\n";
         clipboard_copy_text(clipsummery);
         dlgmessage("All game session results copied to clipboard. Press enter to continue.");
     }

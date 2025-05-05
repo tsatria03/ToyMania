@@ -1,4 +1,5 @@
 new in 1.7
+Made it so player titles don't get coppied along with other game statistics on the death and win screens. These are only a part of lifetime stats, not session based ones.
 Added the ability to copy all of your game session results to the clipboard upon reaching the death or win screens.
 Added the ability to restart the game in the main menu.
 Modified the description found in the speaker test menu to include a helpful but humorous prompt about propperly varifying your audio setup.
