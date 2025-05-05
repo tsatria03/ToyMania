@@ -1,9 +1,9 @@
 Add difficulty options for the normal and endless game modes.
 Ad an endless game mode.
 Add a learn game sounds menu.
-Add a toggle in the settings menu to control speaking the press enter to continue statement after presenting various dialog prompts.
-Add a toggle in the settings menu to control speaking the loading statement after clicking on some of the options found in various menus.
 Add a toggle in the settings menu to control copying game session results to the clipboard.
+Add a toggle in the settings menu to control speaking the loading statement after clicking on some of the options found in various menus.
+Add a toggle in the settings menu to control speaking the press enter to continue statement after presenting various dialog prompts.
 
 *Done. Add a way to copy game stats to the clipboard after completing a game session.
 *Done. Add an option to test two of the sounds found in the sounds folder for the speaker test item in the main menu.

@@ -702,7 +702,7 @@ if(gamcopy==true)
         clipsummery += "- Steps taken: " + taken_steps + "\r\n";
         clipsummery += "- Time played: " + min + " minutes, " + sec + " seconds\r\n";
         clipboard_copy_text(clipsummery);
-dlgmessage("All game session results copied to clipboard." + (speak_dlg_enter ? " Press enter to continue." : ""));
+dlgmessage_return("All game session results copied to clipboard.");
     }
 }
     writedata();

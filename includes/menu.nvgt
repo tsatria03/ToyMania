@@ -55,7 +55,7 @@ if(speak_menu_loading==true) speak("loading");
 m.fade_music();
         dlgplay("speaker_stone_throw.ogg");
     }
-dlgmessage("Speaker test complete." + (speak_dlg_enter ? " Press enter to continue." : ""));
+dlgmessage_return("Speaker test complete.");
     mainmenu();
 }
 if (main == "rt")
@@ -216,7 +216,7 @@ m.fade_music();
     result += "- Steps Title: " + get_steps_rank() + ". " + get_steps_rank_desc() + "\r\n";
     result += "- Playtime Title: " + get_playtime_rank() + ". " + get_playtime_rank_desc() + "\r\n";
     clipboard_copy_text(result);
-    dlgmessage("All game progresses have been copied to your clipboard." + (speak_dlg_enter ? " Press enter to continue." : ""));
+    dlgmessage_return("All game progresses have been copied to your clipboard.");
     gamemenu();
 }
 if (gamem == "back")
@@ -271,7 +271,7 @@ m.fade_music();
         }
     }
     clipboard_copy_text(achievementSummary);
-    dlgmessage("All game achievements have been copied to your clipboard." + (speak_dlg_enter ? " Press enter to continue." : ""));
+    dlgmessage_return("All game achievements have been copied to your clipboard.");
     achesmenu();
 }
 if (achm == "back")
@@ -377,7 +377,7 @@ statsummary += "- Car Title: " + get_car_rank() + ". " + get_car_rank_desc() + "
 statsummary += "- Steps Title: " + get_steps_rank() + ". " + get_steps_rank_desc() + "\r\n";
 statsummary += "- Playtime Title: " + get_playtime_rank() + ". " + get_playtime_rank_desc() + "\r\n";
     clipboard_copy_text(statsummary);
-    dlgmessage("All game statistics have been copied to your clipboard." + (speak_dlg_enter ? " Press enter to continue." : ""));
+    dlgmessage_return("All game statistics have been copied to your clipboard.");
     statsmenu();
 }
 if (statsm == "back")
@@ -477,32 +477,32 @@ mainmenu();
 if (preffsm == "glb")
 {
 behind_pitch = !behind_pitch;
-dlgmessage((behind_pitch ? "Behind pitch decrease enabled." : "Behind pitch decrease disabled.") + (speak_dlg_enter ? " Press enter to continue." : ""));
+dlgmessage_return((behind_pitch ? "Behind pitch decrease enabled." : "Behind pitch decrease disabled."));
 settingsmenu();
 }
 if (preffsm == "glh")
 {
 hrtf = !hrtf;
 sound_global_hrtf = hrtf;
-dlgmessage((hrtf ? "HRTF support enabled." : "HRTF support disabled.") + (speak_dlg_enter ? " Press enter to continue." : ""));
+dlgmessage_return((hrtf ? "HRTF support enabled." : "HRTF support disabled."));
 settingsmenu();
 }
 if (preffsm == "achsound")
 {
     play_ach_scores = !play_ach_scores;
-dlgmessage((play_ach_scores ? "Achievement sound effects enabled." : "Achievement sound effects disabled.") + (speak_dlg_enter ? " Press enter to continue." : ""));
+dlgmessage_return((play_ach_scores ? "Achievement sound effects enabled." : "Achievement sound effects disabled."));
     settingsmenu();
 }
 if (preffsm == "achvoice")
 {
     speak_ach_scores = !speak_ach_scores;
-dlgmessage((speak_ach_scores ? "Achievement speech feedback enabled." : "Achievement speech feedback disabled.") + (speak_dlg_enter ? " Press enter to continue." : ""));
+dlgmessage_return((speak_ach_scores ? "Achievement speech feedback enabled." : "Achievement speech feedback disabled."));
     settingsmenu();
 }
 if (preffsm == "sv")
 {
 writepreffs();
-dlgmessage("Settings saved." + (speak_dlg_enter ? " Press enter to continue." : ""));
+dlgmessage_return("Settings saved.");
 mainmenu();
 }
 if (preffsm == "chm") 
@@ -556,7 +556,7 @@ m.intro_text = "Choose which game achievements to clear. This will clear your ga
     }
     writedata();
 string modeLabel = (achmode == "session") ? "session" : (achmode == "lifetime") ? "lifetime" : "session and lifetime";
-dlgmessage("Your " + modeLabel + " achievements have been cleared." + (speak_dlg_enter ? " Press enter to continue." : ""));
+dlgmessage_return("Your " + modeLabel + " achievements have been cleared.");
     settingsmenu();
 }
 if (preffsm == "gs")
@@ -592,7 +592,7 @@ settingsmenu();
         taken_steps = 0;
 session_playtime = 0;
 writedata();
-        dlgmessage("Your session stats have been cleared." + (speak_dlg_enter ? " Press enter to continue." : ""));
+        dlgmessage_return("Your session stats have been cleared.");
     }
     if (gsm == "lifetime")
     {
@@ -603,7 +603,7 @@ writedata();
         total_taken_steps = 0;
         total_playtime = 0;
         writedata();
-        dlgmessage("Your lifetime stats have been cleared." + (speak_dlg_enter ? " Press enter to continue." : ""));
+        dlgmessage_return("Your lifetime stats have been cleared.");
     }
     if (gsm == "both")
     {
@@ -619,7 +619,7 @@ writedata();
         total_taken_steps = 0;
         total_playtime = 0;
         writedata();
-        dlgmessage("Your session and lifetime stats have been cleared." + (speak_dlg_enter ? " Press enter to continue." : ""));
+        dlgmessage_return("Your session and lifetime stats have been cleared.");
     }
     settingsmenu();
 }

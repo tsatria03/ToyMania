@@ -40,7 +40,7 @@ dlg(d[i]);
 }
 temp.play_stationary("dlgclose.ogg", false);
 }
-void dlgmessage_enter(string msg)
+void dlgmessage_return(string msg)
 {
     dlgmessage(msg + (speak_dlg_enter ? " Press enter to continue." : ""));
 }
