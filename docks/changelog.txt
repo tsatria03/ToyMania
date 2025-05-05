@@ -1,4 +1,6 @@
 new in 1.7
+Added the ability to restart the game in the main menu.
+Modified the description found in the speaker test menu to include a helpful but humorous prompt about propperly varifying your audio setup.
 Added a speaker test menu to the main menu. Players can now choose between the Sword Clank and Stone Throw sound to varify their speaker setup. The speaker test menu also includes a description to guide users in selecting an appropriate sound to test their audio setup.
 Added options to the settings menu for toggling achievement sounds and spoken notifications when unlocking various achievements during gameplay.
 Added the ability to turn on and off the achievement sound effects and spoken announcements when recieving various achievments while playing the game.

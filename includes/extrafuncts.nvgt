@@ -253,6 +253,25 @@ for(uint h=0; h<handles.length(); h++)
 handles[h].destroy_all();
 }
 }
+void restart()
+{
+if(SCRIPT_COMPILED)
+{
+bool success=run("tm.exe","",false,false);
+if(!success)
+{
+alert("errorr", "Unable to restart tm.exe!");
+}
+}
+else
+{
+bool success=run("c:\\nvgt\\nvgtw.exe","tm.nvgt",false,false);
+if(!success)
+{
+alert("errorr", "Unable to restart tm.nvgt!");
+}
+}
+}
 void load_achievements()
 {
     achievements.insert_last(AchievementTracker("Toys", "Speed Collector", generate_achievement_thresholds(3, 25, 1.5), true));
