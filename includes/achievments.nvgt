@@ -51,7 +51,7 @@ string get_progress_status()
 {
 	if (currentTier >= thresholds.length())
 	{
-		return baseName + ": Completed all tiers!";
+		return baseName + ": fully completed.";
 	}
 	int currentValue = get_value();
 	int tierStart = (currentTier > 0) ? thresholds[currentTier - 1] : 0;
