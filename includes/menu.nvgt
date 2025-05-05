@@ -496,6 +496,24 @@ if (preffsm == "chm")
             achievements[i].currentTier = 0;
         }
     }
+    if (achmode == "session" or achmode == "both")
+    {
+        collected_toys = 0;
+        collected_keys = 0;
+        killed_gards = 0;
+        destroyed_cars = 0;
+        taken_steps = 0;
+        session_playtime = 0;
+    }
+    if (achmode == "lifetime" or achmode == "both")
+    {
+        total_collected_toys = 0;
+        total_collected_keys = 0;
+        total_killed_gards = 0;
+        total_destroyed_cars = 0;
+        total_taken_steps = 0;
+        total_playtime = 0;
+    }
     writedata();
     dlgmessage("Your " + (achmode == "session" ? "session" : achmode == "lifetime" ? "lifetime" : "session and lifetime") + " achievements have been cleared. Press enter to continue.");
     settingsmenu();

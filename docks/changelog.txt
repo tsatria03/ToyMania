@@ -1,4 +1,6 @@
 new in 1.6
+Made it so the achievement reset system also clears lifetime stats, along with session stats. This ensures that resetting achievements now fully wipes out all of the associated progress, including playtime, toys, keys, guards, cars, and steps.
+Fixed an issue where session-based achievements such as Sprint Runner did not reset properly when clearing achievements. The session playtime value is now explicitly reset when session achievements are cleared, ensuring accurate progress tracking.
 Fixed a bug where only one achievement tier was granted at a time, even if the player had far surpassed the required milestone. Achievements now unlock multiple tiers at once if progress exceeds several thresholds, ensuring accurate reward tracking.
 Addressed an issue where playtime-based achievements, such as Sprint Runner and Time Traveler, showed inflated progress or negative values. The progress of those achievements are now clamped correctly, and all time thresholds are checked in sequence, preventing logical errors from occuring.
 Added the ability to copy your entire game progress to the clipboard in the game menu. This includes all of your achievements, statistics, and player titles. This provides an easy way to track, share, or back up your full progress in one step.
