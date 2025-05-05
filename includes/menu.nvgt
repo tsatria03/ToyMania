@@ -463,6 +463,8 @@ m.add_item(behind_pitch ? "Disable behind pitch decrease. This setting controls 
 m.add_item(hrtf ? "Disable HRTF support. This setting enhances the 3D sound positioning effect for headphone users." : "Enable HRTF support. This setting enhances the 3D sound positioning effect for headphone users.", "glh");
 m.add_item(play_ach_scores ? "Disable achievement sound effects. This setting controls the sounds played when unlocking achievements." : "Enable achievement sound effects. This setting controls the sounds played when unlocking achievements.", "achsound");
 m.add_item(speak_ach_scores ? "Disable achievement speech feedback. This setting controls the spoken announcements of game achievement progresses." : "Enable achievement speech feedback. This setting controls the spoken announcements of achievement progresses.", "achvoice");
+m.add_item(speak_dlg_enter ? "Disable dialog end speech feedback. This setting controls whether the phrase 'Press enter to continue' is spoken after dialog messages." : "Enable dialog end speech feedback. This setting controls whether the phrase 'Press enter to continue' is spoken after dialog messages.", "dlgspeech");
+m.add_item(speak_menu_loading ? "Disable menu loading speech feedback. This setting controls whether the 'Loading' phrase is spoken when opening various menus." : "Enable menu loading speech feedback. This setting controls whether the 'Loading' phrase is spoken when opening various menus.", "loadspeech");
 m.add_item("Clear game achievements.", "chm");
 m.add_item("Clear game statistics.", "gs");
 m.add_item("save settings", "sv");
@@ -497,6 +499,18 @@ if (preffsm == "achvoice")
 {
     speak_ach_scores = !speak_ach_scores;
 dlgmessage_return((speak_ach_scores ? "Achievement speech feedback enabled." : "Achievement speech feedback disabled."));
+    settingsmenu();
+}
+if (preffsm == "dlgspeech")
+{
+    speak_dlg_enter = !speak_dlg_enter;
+    dlgmessage_return(speak_dlg_enter ? "Dialog end speech feedback enabled." : "Dialog end speech feedback disabled.");
+    settingsmenu();
+}
+if (preffsm == "loadspeech")
+{
+    speak_menu_loading = !speak_menu_loading;
+    dlgmessage_return(speak_menu_loading ? "Menu loading speech feedback enabled." : "Menu loading speech feedback disabled.");
     settingsmenu();
 }
 if (preffsm == "sv")
