@@ -109,6 +109,8 @@ fade_multi_pool();
 dlgmessage("You just won! Here are your current results for this game session:"+ "--Keys collected: " + collected_keys +"--Toys collected: " + collected_toys +"--Cars destroyed: " + destroyed_cars +"--Guards defeated: " + killed_gards +"--Steps taken: " + taken_steps +"--Time survived: " + timeelapsed.m() + " minutes, " + timeelapsed.s() + " seconds" +"--Grate job! Press enter to continue.");
 session_playtime += timeelapsed.ms();
 total_playtime += timeelapsed.ms();
+if(gamcopy==true)
+{
     setupmenu(false);
     m.add_item("Yes", "yes");
     m.add_item("No", "no");
@@ -134,8 +136,9 @@ total_playtime += timeelapsed.ms();
         clipsummery += "- Steps taken: " + taken_steps + "\r\n";
         clipsummery += "- Time played: " + min + " minutes, " + sec + " seconds\r\n";
         clipboard_copy_text(clipsummery);
-        dlgmessage("All game session results copied to clipboard. Press enter to continue.");
+dlgmessage("All game session results copied to clipboard." + (speak_dlg_enter ? " Press enter to continue." : ""));
     }
+}
     writedata();
     mainmenu();
 }

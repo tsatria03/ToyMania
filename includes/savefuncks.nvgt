@@ -128,6 +128,10 @@ if (st.d.exists("speak_menu_loading"))
 {
 speak_menu_loading = st.read_bool("speak_menu_loading");
 }
+if (st.d.exists("gamcopy"))
+{
+gamcopy = st.read_bool("gamcopy");
+}
 if (st.d.exists("statscopy"))
 {
 statscopy = st.read_bool("statscopy");
@@ -142,6 +146,7 @@ st.add("play_ach_scores", play_ach_scores);
 st.add("speak_ach_scores", speak_ach_scores);
 st.add("speak_dlg_enter", speak_dlg_enter);
 st.add("speak_menu_loading", speak_menu_loading);
+st.add("gamcopy", gamcopy);
 st.add("statscopy", statscopy);
 st.save();
 }

@@ -40,6 +40,10 @@ dlg(d[i]);
 }
 temp.play_stationary("dlgclose.ogg", false);
 }
+void dlgmessage_enter(string msg)
+{
+    dlgmessage(msg + (speak_dlg_enter ? " Press enter to continue." : ""));
+}
 void dlgplay(string dlgsound, bool skippable=true, bool fadeable=true, int fadetime=30)
 {
 sound dlgaudio;

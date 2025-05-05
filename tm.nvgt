@@ -8,6 +8,7 @@ bool play_ach_scores=true;
 bool speak_ach_scores=true;
 bool speak_dlg_enter=true;
 bool speak_menu_loading=true;
+bool gamcopy=true;
 bool statscopy=true;
 double toyambvolume=-10, toyambpitch=100, toymusvolume=-10, toymuspitch=100;
 double ammo=100, collected_keys=0, collected_toys=0, destroyed_cars=0, health=1000, killed_gards=0, level=1, taken_steps=0, total_collected_toys=0, total_collected_keys=0, total_killed_gards=0, total_destroyed_cars=0, total_taken_steps=0;
@@ -674,6 +675,8 @@ if (health <= 0)
 dlgmessage("You just died on level "+level+"! Here are your current results for this game session:"+ "--Keys collected: " + collected_keys +"--Toys collected: " + collected_toys +"--Cars destroyed: " + destroyed_cars +"--Guards defeated: " + killed_gards +"--Steps taken: " + taken_steps +"--Time survived: " + timeelapsed.m() + " minutes, " + timeelapsed.s() + " seconds" +"--Better luck next time! Press enter to continue.");
     session_playtime += timeelapsed.ms();
     total_playtime += timeelapsed.ms();
+if(gamcopy==true)
+{
     setupmenu(false);
     m.add_item("Yes", "yes");
     m.add_item("No", "no");
@@ -699,8 +702,9 @@ dlgmessage("You just died on level "+level+"! Here are your current results for 
         clipsummery += "- Steps taken: " + taken_steps + "\r\n";
         clipsummery += "- Time played: " + min + " minutes, " + sec + " seconds\r\n";
         clipboard_copy_text(clipsummery);
-        dlgmessage("All game session results copied to clipboard. Press enter to continue.");
+dlgmessage("All game session results copied to clipboard." + (speak_dlg_enter ? " Press enter to continue." : ""));
     }
+}
     writedata();
     mainmenu();
 }

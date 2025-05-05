@@ -26,7 +26,7 @@ gamemenu();
 }
 if (main == "sm")
 {
-speak("loading");
+if(speak_menu_loading==true) speak("loading");
 m.fade_music();
 settingsmenu();
 }
@@ -45,17 +45,17 @@ m.intro_text = "Choose a sound to test your audio setup. For the most accurate r
     }
     if (soundsel == "clank")
 {
-speak("loading");
+if(speak_menu_loading==true) speak("loading");
 m.fade_music();
         dlgplay("speaker_sword_clank.ogg");
     }
     if (soundsel == "stone")
 {
-speak("loading");
+if(speak_menu_loading==true) speak("loading");
 m.fade_music();
         dlgplay("speaker_stone_throw.ogg");
     }
-dlgmessage("Speaker test complete. Press enter to continue.");
+dlgmessage("Speaker test complete." + (speak_dlg_enter ? " Press enter to continue." : ""));
     mainmenu();
 }
 if (main == "rt")
@@ -88,25 +88,25 @@ mainmenu();
 }
 if(dnm=="changelog")
 {
-speak("loading");
+if(speak_menu_loading==true) speak("loading");
 m.fade_music();
 dockread("docks/changelog.txt");
 }
 if(dnm=="credits")
 {
-speak("loading");
+if(speak_menu_loading==true) speak("loading");
 m.fade_music();
 dockread("docks/credits.txt");
 }
 if(dnm=="readme")
 {
-speak("loading");
+if(speak_menu_loading==true) speak("loading");
 m.fade_music();
 dockread("docks/readme.txt");
 }
 if(dnm=="todo_list")
 {
-speak("loading");
+if(speak_menu_loading==true) speak("loading");
 m.fade_music();
 dockread("docks/todo_list.txt");
 }
@@ -121,7 +121,7 @@ setupmenu();
 m.add_item("start game", "ty");
 m.add_item("view achievements", "ach");
 m.add_item("view statistics", "stats");
-m.add_item("Copy all game progresses to clipboard", "copyall");
+if(statscopy==true) m.add_item("Copy all game progresses to clipboard", "copyall");
 m.add_item("back", "back");
 m.intro_text = "Game menu. You can start a new game session, view achievements, or check your stats here.";
 int mres=m.run();
@@ -132,7 +132,7 @@ mainmenu();
 }
 if (gamem == "ty")
 {
-speak("loading");
+if(speak_menu_loading==true) speak("loading");
 m.fade_music();
 dlgplay("gamelaunch.ogg");
 collected_toys = 0;
@@ -168,7 +168,7 @@ statsmenu();
 }
 if (gamem == "copyall")
 {
-speak("loading");
+if(speak_menu_loading==true) speak("loading");
 m.fade_music();
     string result = "";
     result += "Session Achievements:\r\n";
@@ -216,7 +216,7 @@ m.fade_music();
     result += "- Steps Title: " + get_steps_rank() + ". " + get_steps_rank_desc() + "\r\n";
     result += "- Playtime Title: " + get_playtime_rank() + ". " + get_playtime_rank_desc() + "\r\n";
     clipboard_copy_text(result);
-    dlgmessage("All game progresses have been copied to the clipboard. Press enter to continue.");
+    dlgmessage("All game progresses have been copied to your clipboard." + (speak_dlg_enter ? " Press enter to continue." : ""));
     gamemenu();
 }
 if (gamem == "back")
@@ -229,7 +229,7 @@ void achesmenu()
 setupmenu();
     m.add_item("Session Achievements", "session");
     m.add_item("Lifetime Achievements", "lifetime");
-m.add_item("Copy all game Achievements to clipboard.", "cys");
+if(statscopy==true) m.add_item("Copy all game Achievements to clipboard.", "cys");
     m.add_item("back", "back");
 m.intro_text = "Achievements menu. You can view your unlocked session and lifetime achievements here.";
 int mres=m.run();
@@ -240,19 +240,19 @@ gamemenu();
 }
        if (achm == "session")
 {
-speak("loading");
+if(speak_menu_loading==true) speak("loading");
 m.fade_music();
         show_session_achievements();
     }
 if (achm == "lifetime")
 {
-speak("loading");
+if(speak_menu_loading==true) speak("loading");
 m.fade_music();
         show_lifetime_achievements();
 }
 if (achm == "cys")
 {
-speak("loading");
+if(speak_menu_loading==true) speak("loading");
 m.fade_music();
     string achievementSummary = "Session Achievements:\r\n";
     for (uint i = 0; i < achievements.length(); i++)
@@ -271,7 +271,7 @@ m.fade_music();
         }
     }
     clipboard_copy_text(achievementSummary);
-    dlgmessage("All game achievements have been copied to your clipboard. Press enter to continue.");
+    dlgmessage("All game achievements have been copied to your clipboard." + (speak_dlg_enter ? " Press enter to continue." : ""));
     achesmenu();
 }
 if (achm == "back")
@@ -317,7 +317,7 @@ setupmenu();
     m.add_item("Session Stats", "session");
     m.add_item("Lifetime Stats", "lifetime");
 m.add_item("Player Titles", "titles");
-m.add_item("Copy all game statistics to clipboard.", "cys");
+if(statscopy==true) m.add_item("Copy all game statistics to clipboard.", "cys");
     m.add_item("back", "back");
 m.intro_text = "Statistics menu. You can check your gameplay stats and unlockable player titles here.";
 int mres=m.run();
@@ -328,25 +328,25 @@ gamemenu();
 }
        if (statsm == "session")
 {
-speak("loading");
+if(speak_menu_loading==true) speak("loading");
 m.fade_music();
         view_session_stats();
     }
 if (statsm == "lifetime")
 {
-speak("loading");
+if(speak_menu_loading==true) speak("loading");
 m.fade_music();
         view_lifetime_stats();
 }
 if (statsm == "titles")
 {
-speak("loading");
+if(speak_menu_loading==true) speak("loading");
 m.fade_music();
     view_player_titles();
 }
 if (statsm == "cys")
 {
-speak("loading");
+if(speak_menu_loading==true) speak("loading");
 m.fade_music();
 int session_minutes = int(session_playtime / 60000);
 int session_seconds = int((session_playtime % 60000) / 1000);
@@ -377,7 +377,7 @@ statsummary += "- Car Title: " + get_car_rank() + ". " + get_car_rank_desc() + "
 statsummary += "- Steps Title: " + get_steps_rank() + ". " + get_steps_rank_desc() + "\r\n";
 statsummary += "- Playtime Title: " + get_playtime_rank() + ". " + get_playtime_rank_desc() + "\r\n";
     clipboard_copy_text(statsummary);
-    dlgmessage("All game statistics have been copied to your clipboard. Press enter to continue.");
+    dlgmessage("All game statistics have been copied to your clipboard." + (speak_dlg_enter ? " Press enter to continue." : ""));
     statsmenu();
 }
 if (statsm == "back")
@@ -477,32 +477,32 @@ mainmenu();
 if (preffsm == "glb")
 {
 behind_pitch = !behind_pitch;
-dlgmessage(behind_pitch ? "Behind pitch decrease enabled. Press enter to continue." : "Behind pitch decrease disabled. Press enter to continue.");
+dlgmessage((behind_pitch ? "Behind pitch decrease enabled." : "Behind pitch decrease disabled.") + (speak_dlg_enter ? " Press enter to continue." : ""));
 settingsmenu();
 }
 if (preffsm == "glh")
 {
 hrtf = !hrtf;
 sound_global_hrtf = hrtf;
-dlgmessage(hrtf ? "HRTF support enabled. Press enter to continue." : "HRTF support disabled. Press enter to continue.");
+dlgmessage((hrtf ? "HRTF support enabled." : "HRTF support disabled.") + (speak_dlg_enter ? " Press enter to continue." : ""));
 settingsmenu();
 }
 if (preffsm == "achsound")
 {
     play_ach_scores = !play_ach_scores;
-    dlgmessage(play_ach_scores ? "Achievement sound effects enabled. Press enter to continue." : "Achievement sound effects disabled. Press enter to continue.");
+dlgmessage((play_ach_scores ? "Achievement sound effects enabled." : "Achievement sound effects disabled.") + (speak_dlg_enter ? " Press enter to continue." : ""));
     settingsmenu();
 }
 if (preffsm == "achvoice")
 {
     speak_ach_scores = !speak_ach_scores;
-    dlgmessage(speak_ach_scores ? "Achievement speech feedback enabled. Press enter to continue." : "Achievement speech feedback disabled. Press enter to continue.");
+dlgmessage((speak_ach_scores ? "Achievement speech feedback enabled." : "Achievement speech feedback disabled.") + (speak_dlg_enter ? " Press enter to continue." : ""));
     settingsmenu();
 }
 if (preffsm == "sv")
 {
 writepreffs();
-dlgmessage("Settings saved. Press enter to continue.");
+dlgmessage("Settings saved." + (speak_dlg_enter ? " Press enter to continue." : ""));
 mainmenu();
 }
 if (preffsm == "chm") 
@@ -555,7 +555,8 @@ m.intro_text = "Choose which game achievements to clear. This will clear your ga
         total_playtime = 0;
     }
     writedata();
-    dlgmessage("Your " + (achmode == "session" ? "session" : achmode == "lifetime" ? "lifetime" : "session and lifetime") + " achievements have been cleared. Press enter to continue.");
+string modeLabel = (achmode == "session") ? "session" : (achmode == "lifetime") ? "lifetime" : "session and lifetime";
+dlgmessage("Your " + modeLabel + " achievements have been cleared." + (speak_dlg_enter ? " Press enter to continue." : ""));
     settingsmenu();
 }
 if (preffsm == "gs")
@@ -591,7 +592,7 @@ settingsmenu();
         taken_steps = 0;
 session_playtime = 0;
 writedata();
-        dlgmessage("Your session stats have been cleared. Press enter to continue.");
+        dlgmessage("Your session stats have been cleared." + (speak_dlg_enter ? " Press enter to continue." : ""));
     }
     if (gsm == "lifetime")
     {
@@ -602,7 +603,7 @@ writedata();
         total_taken_steps = 0;
         total_playtime = 0;
         writedata();
-        dlgmessage("Your lifetime stats have been cleared. Press enter to continue.");
+        dlgmessage("Your lifetime stats have been cleared." + (speak_dlg_enter ? " Press enter to continue." : ""));
     }
     if (gsm == "both")
     {
@@ -618,7 +619,7 @@ writedata();
         total_taken_steps = 0;
         total_playtime = 0;
         writedata();
-        dlgmessage("Your session and lifetime stats have been cleared. Press enter to continue.");
+        dlgmessage("Your session and lifetime stats have been cleared." + (speak_dlg_enter ? " Press enter to continue." : ""));
     }
     settingsmenu();
 }

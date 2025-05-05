@@ -151,6 +151,10 @@ music.set_volume(menumusvolume);
 writepreffs();
 voltimer.restart();
 }
+if(alt_is_down() and key_down(KEY_LEFT) and key_repeating(KEY_RIGHT) or alt_is_down() and key_down(KEY_RIGHT) and key_repeating(KEY_LEFT))
+{
+speak("music volume, "+menumusvolume);
+}
 if(key_repeating(KEY_TAB) and intro_text.length()>0)
 {
 speak(intro_text);
