@@ -256,9 +256,9 @@ handles[h].destroy_all();
 void load_achievements()
 {
     achievements.insert_last(AchievementTracker("Toys", "Speed Collector", generate_achievement_thresholds(3, 25, 1.25), true));
-    achievements.insert_last(AchievementTracker("Keys", "Quick Key Snatcher", generate_achievement_thresholds(5, 25, 1.25), true));
-    achievements.insert_last(AchievementTracker("Guards", "Session Enforcer", generate_achievement_thresholds(8, 25, 1.25), true));
-    achievements.insert_last(AchievementTracker("Cars", "Wreck on Sight", generate_achievement_thresholds(10, 25, 1.25), true));
+    achievements.insert_last(AchievementTracker("Keys", "Key Snatcher", generate_achievement_thresholds(5, 25, 1.25), true));
+    achievements.insert_last(AchievementTracker("Guards", "Strike Force", generate_achievement_thresholds(8, 25, 1.25), true));
+    achievements.insert_last(AchievementTracker("Cars", "Crash Rush", generate_achievement_thresholds(10, 25, 1.25), true));
     achievements.insert_last(AchievementTracker("Steps", "Pace Breaker", generate_achievement_thresholds(15, 25, 1.25), true));
     achievements.insert_last(AchievementTracker("Playtime", "Sprint Runner", generate_achievement_thresholds(1, 25, 1.25), true));
 achievements.insert_last(AchievementTracker("Toys", "Toy Collector", generate_achievement_thresholds(5, 50, 1.5), false));
