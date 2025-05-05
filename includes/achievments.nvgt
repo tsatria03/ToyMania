@@ -47,23 +47,23 @@ class AchievementTracker
 		}
 		return false;
 	}
-	string get_progress_status()
+string get_progress_status()
+{
+	if (currentTier >= thresholds.length())
 	{
-		if (currentTier >= thresholds.length())
-		{
-			return baseName + ": Completed all tiers!";
-		}
-		int currentValue = get_value();
-		int tierStart = (currentTier > 0) ? thresholds[currentTier - 1] : 0;
-		int tierGoal = thresholds[currentTier];
-		int progressInTier = currentValue - tierStart;
-		int neededToNext = tierGoal - currentValue;
-		int tierRange = tierGoal - tierStart;
-		double percent = 0.0;
-		if (tierRange > 0)
-		{
-			percent = round((double(progressInTier) * 100.0) / double(tierRange), 2);
-		}
-		return baseName + ": Tier " + currentTier + " of " + thresholds.length() + ". Current progress: " + progressInTier + " (" + percent + "%). " + neededToNext + " total " + name.lower() + " needed to reach the next tier.";
+		return baseName + ": Completed all tiers!";
 	}
+	int currentValue = get_value();
+	int tierStart = (currentTier > 0) ? thresholds[currentTier - 1] : 0;
+	int tierGoal = thresholds[currentTier];
+	int progressInTier = max(0, currentValue - tierStart);
+	int neededToNext = max(0, tierGoal - currentValue);
+	int tierRange = tierGoal - tierStart;
+	double percent = 0.0;
+	if (tierRange > 0)
+	{
+		percent = round((double(progressInTier) * 100.0) / double(tierRange), 2);
+	}
+	return baseName + ": Tier " + currentTier + " of " + thresholds.length() + ". Current progress: " + progressInTier + " (" + percent + "%). " + neededToNext + " total " + name.lower() + " needed to reach the next tier.";
+}
 }
