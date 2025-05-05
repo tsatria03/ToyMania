@@ -1,5 +1,6 @@
 new in 1.6
-Added descriptive intro messages to all major game menus. These include, but are not limmited to, the main Game menu, the Achievements menu, the Statistics menu, and the Settings menu. These short descriptions provides context and guidance, making navigation easier for new and returning players alike.
+Added the ability to copy your entire game progress to the clipboard in the game menu. This includes all of your achievements, statistics, and player titles. This provides an easy way to track, share, or back up your full progress in one step.
+Added descriptive intro messages to all major game menus. These include, but are not limmited to, the main Game menu, the Achievements menu, the Statistics menu, and the Settings menu. These short descriptions provide context and guidance, making navigation easier for new and returning players alike.
 Made it so the sounds found in the speaker test option is randomized in the main menu.
 Added distinct achievement sounds based on the type of achievement the player recieves. Session based achievements now play session_achievement.ogg, and lifetime achievements now play life_achievement.ogg. This provides clearer audio feedback for each type of achievement the player gets.
 new in 1.5
