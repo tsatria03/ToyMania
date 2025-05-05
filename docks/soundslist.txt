@@ -178,8 +178,8 @@ playerstep3.ogg
 playerstep4.ogg
 playerstep5.ogg
 session_achievement.ogg
-speakertest1.ogg
-speakertest2.ogg
+speaker_stone_throw.ogg
+speaker_sword_clank.ogg
 toyamb.ogg
 toybreak1.ogg
 toybreak2.ogg
