@@ -16,3 +16,6 @@ Letter, T: Announces how many toys you've collected, if pressed.
 Letter, O: Announces how many collectible toys their are on the field, if pressed.
 Letter, I: Announces how many keys you've collected, if pressed.
 Letter, U: Announces how many collectible keys their are on the field, if pressed.
+Number row: Draws weapons 1 through 8 for use, if pressed.
+Space: Fires the currently drawn weapon, if pressed/held down.
+Escape: Exits the current game session, and returns back to the main menu, if pressed.
