@@ -1,3 +1,6 @@
+new in 1.8
+Added an option to show the post-game stat copy prompt in the settings menu. Players can now enable or disable the clipboard prompt that appears after a game session ends. This gives more control over whether session results are automatically offered for copying.
+Added an option to show or hide the manual stat copy menu items in the settings menu. This allows players to show or hide the clipboard copy options for achievements and statistics found in various stat based menus.
 new in 1.7
 Updated the readme file with some missing keyboard shortcuts that weren't their before.
 Added a hidden keyboard shortcut to announce the current music volume in the main menu. Holding Alt and pressing Left + Right or Right + Left arrows now speaks the current menu music volume.
