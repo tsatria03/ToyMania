@@ -666,7 +666,7 @@ pool.destroy_sound(toyambslot);
 pool.destroy_sound(toytrackslot);
 dlgplay("playerdeath.ogg");
 dlgplay("playerfall.ogg");
-dlgmessage("You just died on level "+level+"! Here's how you did:"+ "--Keys collected: " + collected_keys +"--Toys collected: " + collected_toys +"--Cars destroyed: " + destroyed_cars +"--Guards defeated: " + killed_gards +"--Steps taken: " + taken_steps +"--Time survived: " + timeelapsed.m() + " minutes, " + timeelapsed.s() + " seconds" +"--Better luck next time! Press enter to continue.");
+dlgmessage("You just died on level "+level+"! Here are your current results for this game session:"+ "--Keys collected: " + collected_keys +"--Toys collected: " + collected_toys +"--Cars destroyed: " + destroyed_cars +"--Guards defeated: " + killed_gards +"--Steps taken: " + taken_steps +"--Time survived: " + timeelapsed.m() + " minutes, " + timeelapsed.s() + " seconds" +"--Better luck next time! Press enter to continue.");
 session_playtime += timeelapsed.ms();
 total_playtime += timeelapsed.ms();
 writedata();
