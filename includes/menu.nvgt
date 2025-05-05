@@ -55,6 +55,7 @@ speak("loading");
 m.fade_music();
         dlgplay("speaker_stone_throw.ogg");
     }
+dlgmessage("Speaker test complete. Press enter to continue.");
     mainmenu();
 }
 if (main == "rt")
@@ -117,9 +118,9 @@ mainmenu();
 void gamemenu()
 {
 setupmenu();
-m.add_item("play", "ty");
-m.add_item("achievements", "ach");
-m.add_item("statistics", "stats");
+m.add_item("start game", "ty");
+m.add_item("view achievements", "ach");
+m.add_item("view statistics", "stats");
 m.add_item("Copy all game progresses to clipboard", "copyall");
 m.add_item("back", "back");
 m.intro_text = "Game menu. You can start a new game session, view achievements, or check your stats here.";

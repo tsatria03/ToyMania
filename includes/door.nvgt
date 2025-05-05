@@ -109,8 +109,42 @@ fade_multi_pool();
 dlgmessage("You just won! Here are your current results for this game session:"+ "--Keys collected: " + collected_keys +"--Toys collected: " + collected_toys +"--Cars destroyed: " + destroyed_cars +"--Guards defeated: " + killed_gards +"--Steps taken: " + taken_steps +"--Time survived: " + timeelapsed.m() + " minutes, " + timeelapsed.s() + " seconds" +"--Grate job! Press enter to continue.");
 session_playtime += timeelapsed.ms();
 total_playtime += timeelapsed.ms();
-writedata();
-mainmenu();
+    setupmenu(false);
+    m.add_item("Yes", "yes");
+    m.add_item("No", "no");
+    m.intro_text = "Would you like to copy your current results for this game session to the clipboard?";
+    int res = m.run();
+    if (res != -1 and m.get_selected_item_id() == "yes")
+    {
+        string clipsummery = "Session Achievements:\r\n";
+        for (uint i = 0; i < achievements.length(); i++)
+        {
+            if (achievements[i].isSessionBased)
+            {
+                clipsummery += "- " + achievements[i].get_progress_status() + "\r\n";
+            }
+        }
+        int min = int(session_playtime / 60000);
+        int sec = int((session_playtime % 60000) / 1000);
+        clipsummery += "\r\nSession Stats:\r\n";
+        clipsummery += "- Toys collected: " + collected_toys + "\r\n";
+        clipsummery += "- Keys collected: " + collected_keys + "\r\n";
+        clipsummery += "- Guards killed: " + killed_gards + "\r\n";
+        clipsummery += "- Cars destroyed: " + destroyed_cars + "\r\n";
+        clipsummery += "- Steps taken: " + taken_steps + "\r\n";
+        clipsummery += "- Time played: " + min + " minutes, " + sec + " seconds\r\n\r\n";
+        clipsummery += "Player Titles:\r\n";
+        clipsummery += "- Toy Title: " + get_toy_rank() + ". " + get_toy_rank_desc() + "\r\n";
+        clipsummery += "- Key Title: " + get_key_rank() + ". " + get_key_rank_desc() + "\r\n";
+        clipsummery += "- Guard Title: " + get_guard_rank() + ". " + get_guard_rank_desc() + "\r\n";
+        clipsummery += "- Car Title: " + get_car_rank() + ". " + get_car_rank_desc() + "\r\n";
+        clipsummery += "- Steps Title: " + get_steps_rank() + ". " + get_steps_rank_desc() + "\r\n";
+        clipsummery += "- Playtime Title: " + get_playtime_rank() + ". " + get_playtime_rank_desc() + "\r\n";
+        clipboard_copy_text(clipsummery);
+        dlgmessage("All game session results copied to clipboard. Press enter to continue.");
+    }
+    writedata();
+    mainmenu();
 }
 }
 }
