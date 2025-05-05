@@ -433,6 +433,8 @@ void settingsmenu()
 setupmenu(false);
 m.add_item(behind_pitch ? "Disable behind pitch decrease. This setting controls whether the pitch of sounds decrease when you are behind it." : "Enable behind pitch decrease. This setting controls whether the pitch of sounds decrease when you are behind it.", "glb");
 m.add_item(hrtf ? "Disable HRTF. This setting enhances the 3D sound positioning effect for headphone users." : "Enable HRTF. This setting enhances the 3D sound positioning effect for headphone users.", "glh");
+m.add_item(play_ach_scores ? "Disable achievement sounds. This setting controls the sound effects played when unlocking achievements." : "Enable achievement sounds. This setting controls the sound effects played when unlocking achievements.", "achsound");
+m.add_item(speak_ach_scores ? "Disable achievement speech. This setting controls the announcement of game achievement progresses." : "Enable achievement speech. This setting controls the announcement of achievement progresses.", "achvoice");
 m.add_item("Clear game achievements.", "chm");
 m.add_item("Clear game statistics.", "gs");
 m.add_item("save settings", "sv");
@@ -456,6 +458,18 @@ hrtf = !hrtf;
 sound_global_hrtf = hrtf;
 dlgmessage(hrtf ? "HRTF enabled. Press enter to continue." : "HRTF disabled. Press enter to continue.");
 settingsmenu();
+}
+if (preffsm == "achsound")
+{
+    play_ach_scores = !play_ach_scores;
+    dlgmessage(play_ach_scores ? "Achievement sounds enabled. Press enter to continue." : "Achievement sounds disabled. Press enter to continue.");
+    settingsmenu();
+}
+if (preffsm == "achvoice")
+{
+    speak_ach_scores = !speak_ach_scores;
+    dlgmessage(speak_ach_scores ? "Achievement speech enabled. Press enter to continue." : "Achievement speech disabled. Press enter to continue.");
+    settingsmenu();
 }
 if (preffsm == "sv")
 {
