@@ -1,8 +1,11 @@
-Add an option to copy game stats to the clipboard after completing a game session.
-Fix the bug with playtime variables not updating propperly.
+Add a toggle in the settings menu to control speaking the press enter to continue statement after presenting various dialog prompts.
+Add a toggle in the settings menu to control speaking the loading statement after clicking on some of the options found in various menus.
+Add a toggle in the settings menu to control copying game session results to the clipboard.
 
+*Done. Add a way to copy game stats to the clipboard after completing a game session.
 *Done. Add an option to test two of the sounds found in the sounds folder for the speaker test item in the main menu.
 *Done. Add settings for playing the achievement sounds and speaking out the results of them.
+*Done. Fix the bug with playtime variables not updating propperly.
 *Done. Fix the bug with session based achievements where you get up to very high tiers with the same number of collected toys.
 *Done. Fix bosses from reappearing
 *Done. Reduce the number of keys need to be collected to win the game
