@@ -472,7 +472,7 @@ if (preffsm == "chm")
     m.add_item("Lifetime achievements", "lifetime");
     m.add_item("Session and lifetime achievements", "both");
     m.add_item("Back", "back");
-m.intro_text = "Choose which game achievements to clear. This will clear related game statistics as well.";
+m.intro_text = "Choose which game achievements to clear. This will clear your game statistics.";
     int mres = m.run();
     string achmode = m.get_selected_item_id();
     if (mres == -1 or achmode == "back")
