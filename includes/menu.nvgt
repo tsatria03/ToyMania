@@ -563,8 +563,9 @@ m.add_item(play_ach_scores ? "Disable achievement sound effects. This setting co
 m.add_item(speak_ach_scores ? "Disable achievement speech feedback. This setting controls the spoken announcements of game achievement progresses." : "Enable achievement speech feedback. This setting controls the spoken announcements of achievement progresses.", "achvoice");
 m.add_item(speak_dlg_enter ? "Disable dialog end speech feedback. This setting controls whether the phrase 'Press enter to continue' is spoken after dialog messages." : "Enable dialog end speech feedback. This setting controls whether the phrase 'Press enter to continue' is spoken after dialog messages.", "dlgspeech");
 m.add_item(speak_menu_loading ? "Disable menu loading speech feedback. This setting controls whether the 'Loading' phrase is spoken when opening various menus." : "Enable menu loading speech feedback. This setting controls whether the 'Loading' phrase is spoken when opening various menus.", "loadspeech");
-m.add_item(gamcopy ? "Disable post-game copy prompt. This allows the game to ask if you'd like to copy your session stats after death or victory." : "Enable post-game copy prompt. This allows the game to ask if you'd like to copy your session stats after death or victory.", "gcp");
-m.add_item(statscopy ? "Disable manual stat copy options. This shows or hides all copy-to-clipboard entries from various stat based menus." : "Enable manual stat copy options. This shows or hides all copy-to-clipboard entries from various stat based menus.", "scp");
+m.add_item(gamcopy ? "Disable post-game copy prompt. This Setting controls weather the game asks if you'd like to copy your session stats after death or victory." : "Enable post-game copy prompt. This Setting controls weather the game asks if you'd like to copy your session stats after death or victory.", "gcp");
+m.add_item(statscopy ? "Disable manual stat copy options. This setting controls the showing of all copy-to-clipboard entries from various stat based menus." : "Enable manual stat copy options. This setting controls the showing of all copy-to-clipboard entries from various stat based menus.", "scp");
+m.add_item(variant_descriptions ? "Disable variant-based sound descriptions. This setting controls weather sounds that have multiple variants will include a description along side them." : "Enable variant-based sound descriptions. This setting controls weather sounds that have multiple variants will include a description along side them.", "vsc");
 m.add_item("Clear game achievements.", "chm");
 m.add_item("Clear game statistics.", "gs");
 m.add_item("save settings", "sv");
@@ -623,6 +624,12 @@ if (preffsm == "scp")
 {
 statscopy = !statscopy;
 dlgmessage_return(statscopy ? "Manual stat copy options enabled." : "Manual stat copy options disabled.");
+settingsmenu();
+}
+if(preffsm == "vsc")
+{
+	variant_descriptions = !variant_descriptions;
+	dlgmessage_return(variant_descriptions ? "Variant based descriptions enabled." : "Variant based descriptions disabled.");
 settingsmenu();
 }
 if (preffsm == "sv")
