@@ -1,0 +1,15 @@
+Session Achievements:
+- Speed Collector: Tier 10 of 25. Current progress: 22 (46.81%). 25 total toys needed to reach the next tier.
+- Key Snatcher: Tier 7 of 25. Current progress: 7 (29.17%). 17 total keys needed to reach the next tier.
+- Strike Force: Tier 8 of 25. Current progress: 32 (47.76%). 35 total guards needed to reach the next tier.
+- Crash Rush: Tier 4 of 25. Current progress: 15 (93.75%). 1 total cars needed to reach the next tier.
+- Pace Breaker: Tier 13 of 25. Current progress: 828 (89.51%). 97 total steps needed to reach the next tier.
+- Sprint Runner: Tier 0 of 25. Current progress: 7 (700%). 0 total playtime needed to reach the next tier.
+
+Session Stats:
+- Toys collected: 116
+- Keys collected: 56
+- Guards killed: 167
+- Cars destroyed: 48
+- Steps taken: 2679
+- Time played: 7 minutes, 53 seconds

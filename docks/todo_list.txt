@@ -1,4 +1,4 @@
-Add difficulty options for the normal and endless game modes.
+Add difficulty options for the normal game mode.
 Ad an endless game mode.
 Add a learn game sounds menu.
 

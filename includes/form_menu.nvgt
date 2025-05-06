@@ -241,6 +241,7 @@ speak(intro_text);
 }
 
 // helper menus:
+
 // learn_game_sounds: takes a dictionary of sound descriptions mapped to sound filenames or lists of sound filenames and displays a menu which allows users to press enter on sound descriptions to hear associated sounds.
 void learn_game_sounds_menu(dictionary@ sfx, const string&in audio_prefix = "", menu@ m = null) {
 	sound audio;
@@ -250,31 +251,25 @@ void learn_game_sounds_menu(dictionary@ sfx, const string&in audio_prefix = "", 
 	m.enter_sound = "";
 	string[]@ sfx_names = sfx.get_keys();
 	sfx_names.sort_ascending();
-	m.reset();
-	m.focus_first_item = false;
-	m.wrap = true;
-	m.click_sound="menuclick.ogg";
-	m.close_sound="menuenter.ogg";
-	m.edge_sound="menuedge.ogg";
-	m.open_sound="menuopen.ogg";
-	m.wrap_sound="menuclick.ogg";
+setupmenu(false);
 	m.add_items(sfx_names);
-	m.add_item("Go back");
-	m.intro();
+m.add_item("back", "back");
 	while (true) {
 		wait(5);
 		int old_pos = m.focused_item;
 		bool r = m.monitor();
+if (!r && m.selected_item < 0) {
+	mainmenu();
+}
 		if (m.focused_item != old_pos) {
 			audio.close();
 			old_pos = m.focused_item;
 		}
 		if (r) continue;
-		if (m.selected_item < 0) return;
-		if (m.selected_item >= sfx.size()) {
-			m.play(enter_sound);
-			return;
-		}
+	if (m.selected_item_id == "back") {
+		mainmenu();
+	}
+	if (m.selected_item < 0 || m.selected_item >= sfx_names.length()) continue;
 		string filename = "";
 		if (!sfx.get(sfx_names[m.selected_item], filename)) {
 			string[]@ filenames = cast<string[]@>(sfx[sfx_names[m.selected_item]]);
@@ -293,12 +288,6 @@ bool yes_no(const string&in prompt, menu@ m = null) {
 	m.reset();
 	m.focus_first_item = true;
 	m.wrap = true;
-	m.click_sound="sounds/menuclick.ogg";
-	m.close_sound="sounds/menuclose.ogg";
-	m.edge_sound="sounds/menuedge.ogg";
-	m.enter_sound="sounds/menuenter.ogg";
-	m.open_sound="sounds/menuopen.ogg";
-	m.wrap_sound="sounds/menuwrap.ogg";
 	m.add_item(prompt);
 	m.add_item("yes");
 	m.add_item("no");

@@ -1,4 +1,3 @@
-alert.ogg
 batdraw.ogg
 batfire1.ogg
 batfire2.ogg
@@ -13,6 +12,7 @@ bootfire3.ogg
 boothit1.ogg
 boothit2.ogg
 boothit3.ogg
+bossalert.ogg
 bossdeath.ogg
 bossfall.wav
 bossheal1.ogg
