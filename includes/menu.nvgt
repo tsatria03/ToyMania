@@ -791,6 +791,7 @@ string confirm = m.get_selected_item_id();
 if(confirm=="yes")
 {
 if(file_exists("data/saves/settings.tmg")) file_delete("data/saves/settings.tmg");
+resetpreffs();
 dlgmessage_return("Settings reset.");
 speak("restarting");
 wait(500);
