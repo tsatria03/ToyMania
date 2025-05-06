@@ -253,6 +253,10 @@ for(uint h=0; h<handles.length(); h++)
 handles[h].destroy_all();
 }
 }
+void play_toggle(bool setting)
+{
+	dlgplay(setting ? "setenabled.ogg" : "setdisabled.ogg", false);
+}
 void restart()
 {
 if(SCRIPT_COMPILED)

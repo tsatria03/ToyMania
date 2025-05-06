@@ -584,6 +584,7 @@ mainmenu();
 if (preffsm == "glb")
 {
 behind_pitch = !behind_pitch;
+play_toggle(behind_pitch);
 dlgmessage_return((behind_pitch ? "Behind pitch decrease enabled." : "Behind pitch decrease disabled."));
 settingsmenu();
 }
@@ -591,54 +592,63 @@ if (preffsm == "glh")
 {
 hrtf = !hrtf;
 sound_global_hrtf = hrtf;
+play_toggle(hrtf);
 dlgmessage_return((hrtf ? "HRTF support enabled." : "HRTF support disabled."));
 settingsmenu();
 }
 if (preffsm == "achsound")
 {
     play_ach_scores = !play_ach_scores;
+play_toggle(play_ach_scores);
 dlgmessage_return((play_ach_scores ? "Achievement sound effects enabled." : "Achievement sound effects disabled."));
     settingsmenu();
 }
 if (preffsm == "achvoice")
 {
     speak_ach_scores = !speak_ach_scores;
+play_toggle(speak_ach_scores);
 dlgmessage_return((speak_ach_scores ? "Achievement speech feedback enabled." : "Achievement speech feedback disabled."));
     settingsmenu();
 }
 if (preffsm == "dlgspeech")
 {
     speak_dlg_enter = !speak_dlg_enter;
+play_toggle(speak_dlg_enter);
     dlgmessage_return(speak_dlg_enter ? "Dialog end speech feedback enabled." : "Dialog end speech feedback disabled.");
     settingsmenu();
 }
 if (preffsm == "loadspeech")
 {
     speak_menu_loading = !speak_menu_loading;
+play_toggle(speak_menu_loading);
     dlgmessage_return(speak_menu_loading ? "Menu loading speech feedback enabled." : "Menu loading speech feedback disabled.");
     settingsmenu();
 }
 if (preffsm == "gcp")
 {
 gamcopy = !gamcopy;
+play_toggle(gamcopy);
 dlgmessage_return(gamcopy ? "Post-game copy prompt enabled." : "Post-game copy prompt disabled.");
 settingsmenu();
 }
 if (preffsm == "scp")
 {
 statscopy = !statscopy;
+play_toggle(statscopy);
 dlgmessage_return(statscopy ? "Manual stat copy options enabled." : "Manual stat copy options disabled.");
 settingsmenu();
 }
 if(preffsm == "lps")
 {
 	loop_previews = !loop_previews;
+play_toggle(loop_previews);
 	dlgmessage_return(loop_previews ? "Looping of previewed sounds enabled." : "Looping of previewed sounds disabled.");
 	settingsmenu();
 }
 if(preffsm == "vsc")
 {
 	variant_descriptions = !variant_descriptions;
+play_toggle(variant_descriptions);
 	dlgmessage_return(variant_descriptions ? "Variant based sound descriptions enabled." : "Variant based sound descriptions disabled.");
 settingsmenu();
 }
