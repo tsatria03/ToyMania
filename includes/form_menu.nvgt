@@ -280,7 +280,7 @@ if (!r && m.selected_item < 0) {
 		}
 		if (!filename.empty()) {
 			audio.load(audio_prefix + filename);
-			audio.play();
+	loop_previews ? audio.play_looped() : audio.play();
 		}
 		else speak("Unable to play "+sfx_names[m.selected_item]);
 	}
