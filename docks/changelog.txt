@@ -1,4 +1,5 @@
 new in 1.8
+Added a confermation sound for copying various achievements and other game statistics to the clipboard.
 Added an option in the settings menu to enable or disable looping of previewed sounds. This allows players to choose whether the sounds in the Learn Sounds menu continue playing until another sound is selected, or the Escape key is pressed. This is useful for continuous ambiences or short burst effects.
 Added an option in the settings menu to enable or disable variant-based sound descriptions. This allows players to choose whether sounds with multiple randomized variants include a description in their name, indicating the presence of found variants.
 Fixed a bug where pressing escape or the back option in the learn sounds menu didn't stop sounds from being played propperly.

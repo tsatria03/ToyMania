@@ -68,6 +68,7 @@ fistfire2.ogg
 fisthit1.ogg
 fisthit2.ogg
 fisthit3.ogg
+gamcopy.ogg
 gamelaunch.ogg
 gard1death.ogg
 gard1fall1.wav
@@ -230,4 +231,4 @@ toyloop7.ogg
 toyloop8.ogg
 toyloop9.ogg
 toymus.ogg
-total files: 232
+total files: 233

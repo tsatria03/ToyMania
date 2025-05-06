@@ -136,6 +136,7 @@ if(gamcopy==true)
         clipsummery += "- Steps taken: " + taken_steps + "\r\n";
         clipsummery += "- Time played: " + min + " minutes, " + sec + " seconds\r\n";
         clipboard_copy_text(clipsummery);
+dlgplay("gamcopy.ogg" ,false);
 dlgmessage_return("All game session results copied to your clipboard.");
     }
 }
