@@ -1,4 +1,5 @@
 new in 1.8
+Enhanced the Learn Sounds menu with descriptive labels for randomized sounds. Sound entries that contain multiple variants now include a description to help players understand that there are several possible versions of that sound when being previewed in the menu.
 Added support for randomized variants of sounds found in the learn sounds menu.
 Added a Learn Sounds menu to the main menu. This allows players to preview important sound effects used throughout the game, helping them build familiarity with audio cues while starting out.
 Added an option to show the post-game stat copy prompt in the settings menu. Players can now enable or disable the clipboard prompt that appears after a game session ends. This gives more control over whether session results are automatically offered for copying.

@@ -252,6 +252,7 @@ void learn_game_sounds_menu(dictionary@ sfx, const string&in audio_prefix = "", 
 	string[]@ sfx_names = sfx.get_keys();
 	sfx_names.sort_ascending();
 setupmenu(false);
+m.enter_sound="";
 	m.add_items(sfx_names);
 m.add_item("back", "back");
 	while (true) {
