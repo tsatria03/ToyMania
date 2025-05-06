@@ -79,7 +79,7 @@ m.add_item("credits", "credits");
 m.add_item("readme", "readme");
 m.add_item("todo_list", "todo_list");
 m.add_item("back", "back");
-m.intro_text="Documentation menu. What would you like to read?";
+m.intro_text = "Documentation menu. You can access help guides and other resources explaining how the game works here.";
 int mres=m.run();
 string dnm=m.get_selected_item_id();
 if(mres==-1)

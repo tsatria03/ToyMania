@@ -11,7 +11,7 @@ if (key_repeating(KEY_C) and dlgcoppy==true)
 {
 temp.destroy_all();
 temp.play_stationary("dlgcoppy.ogg", false);
-speak("Copied");
+speak("Text copied");
 clipboard_copy_text(message);
 }
 if (key_repeating(KEY_LEFT) or key_repeating(KEY_RIGHT) or key_repeating(KEY_UP) or key_repeating(KEY_DOWN))
