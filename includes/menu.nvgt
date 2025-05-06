@@ -123,6 +123,7 @@ m.add_item("start game", "ty");
 m.add_item("learn game sounds", "gsm");
 m.add_item("view achievements", "ach");
 m.add_item("view statistics", "stats");
+m.add_item("Clear game progresses.", "cgr");
 if(statscopy==true) m.add_item("Copy all game progresses to clipboard", "copyall");
 m.add_item("back", "back");
 m.intro_text = "Game menu. You can start a new game session, learn about important sounds, view achievements, or check your stats here.";
@@ -173,6 +174,28 @@ achesmenu();
 if (gamem == "stats")
 {
 statsmenu();
+}
+if (gamem == "cgr")
+{
+if(speak_menu_loading==true) speak("loading");
+m.fade_music();
+setupmenu(false);
+    m.add_item("Yes", "yes");
+    m.add_item("No", "no");
+m.intro_text="Are you sure you want to reset all of your game progresses?";
+int mres=m.run();
+string confirm = m.get_selected_item_id();
+    if (mres == -1 or confirm == "no")
+    {
+        gamemenu();
+    }
+if(confirm=="yes")
+{
+if(file_exists("data/saves/game.tmg")) file_delete("data/saves/game.tmg");
+resetgame();
+dlgmessage_return("Game progresses cleared.");
+gamemenu();
+}
 }
 if (gamem == "copyall")
 {
@@ -793,10 +816,7 @@ if(confirm=="yes")
 if(file_exists("data/saves/settings.tmg")) file_delete("data/saves/settings.tmg");
 resetpreffs();
 dlgmessage_return("Settings reset.");
-speak("restarting");
-wait(500);
-restart();
-exit();
+mainmenu();
 }
 }
 if (preffsm == "sv")
