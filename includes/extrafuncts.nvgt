@@ -91,10 +91,10 @@ string get_car_rank()
 }
 string get_steps_rank()
 {
-	if (total_taken_steps < 500) return "Sedentary";
-	else if (total_taken_steps < 2000) return "Wanderer";
-	else if (total_taken_steps < 5000) return "Roamer";
-	else if (total_taken_steps < 10000) return "Trekker";
+	if (total_moved_steps < 500) return "Sedentary";
+	else if (total_moved_steps < 2000) return "Wanderer";
+	else if (total_moved_steps < 5000) return "Roamer";
+	else if (total_moved_steps < 10000) return "Trekker";
 	else return "Step Legend";
 }
 string get_playtime_rank()
@@ -142,10 +142,10 @@ string get_car_rank_desc()
 }
 string get_steps_rank_desc()
 {
-	if (total_taken_steps < 500) return "You prefer standing still.";
-	else if (total_taken_steps < 2000) return "You’ve started wandering.";
-	else if (total_taken_steps < 5000) return "You roam with purpose.";
-	else if (total_taken_steps < 10000) return "You’re always on the move.";
+	if (total_moved_steps < 500) return "You prefer standing still.";
+	else if (total_moved_steps < 2000) return "You’ve started wandering.";
+	else if (total_moved_steps < 5000) return "You roam with purpose.";
+	else if (total_moved_steps < 10000) return "You’re always on the move.";
 	else return "Your footsteps echo across the world!";
 }
 string get_playtime_rank_desc()

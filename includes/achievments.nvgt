@@ -26,7 +26,7 @@ class AchievementTracker
 		if (name == "Keys") return isSessionBased ? collected_keys : total_collected_keys;
 		if (name == "Guards") return isSessionBased ? killed_gards : total_killed_gards;
 		if (name == "Cars") return isSessionBased ? destroyed_cars : total_destroyed_cars;
-		if (name == "Steps") return isSessionBased ? taken_steps : total_taken_steps;
+		if (name == "Steps") return isSessionBased ? moved_steps : total_moved_steps;
 		if (name == "Playtime") return isSessionBased ? int(session_playtime / 60000) : int(total_playtime / 60000);
 		return 0;
 	}

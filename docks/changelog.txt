@@ -1,3 +1,9 @@
+new in 1.9
+Updated the readme file with added and modified keyboard shortcuts.
+Fixed a bug where the death screen didn't announce the actual level you were on prior to getting killed.
+Added a keyboard shorcut to check how many steps you've taken durring the game session.
+Moved the clear achievements and game statistics menus over to the main achievement and statistic menus. The descriptions of those menus are also updated as well.
+Moved the learn sounds menu over to the game menu.
 new in 1.8
 Added sounds for toggeling various options found in the settings menu.
 Added a sound for copying various achievements and other game statistics to the clipboard.

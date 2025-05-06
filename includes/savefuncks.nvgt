@@ -21,9 +21,9 @@ void readdata()
 {
         destroyed_cars = sd.read_double("destroyed_cars");
     }
-    if (sd.d.exists("taken_steps"))
+    if (sd.d.exists("moved_steps"))
 {
-        taken_steps = sd.read_double("taken_steps");
+        moved_steps = sd.read_double("moved_steps");
     }
     if (sd.d.exists("session_playtime"))
 {
@@ -53,9 +53,9 @@ last_played_time = sd.read_string("last_played_time");
 {
         total_destroyed_cars = sd.read_double("total_destroyed_cars");
     }
-    if (sd.d.exists("total_taken_steps"))
+    if (sd.d.exists("total_moved_steps"))
 {
-        total_taken_steps = sd.read_double("total_taken_steps");
+        total_moved_steps = sd.read_double("total_moved_steps");
     }
     if (sd.d.exists("total_playtime"))
 {
@@ -79,7 +79,7 @@ void writedata()
     sd.add("collected_keys", collected_keys);
     sd.add("killed_gards", killed_gards);
     sd.add("destroyed_cars", destroyed_cars);
-    sd.add("taken_steps", taken_steps);
+    sd.add("moved_steps", moved_steps);
     sd.add("session_playtime", session_playtime);
 sd.add("last_played_date", last_played_date);
 sd.add("last_played_time", last_played_time);
@@ -87,7 +87,7 @@ sd.add("last_played_time", last_played_time);
     sd.add("total_collected_keys", total_collected_keys);
     sd.add("total_killed_gards", total_killed_gards);
     sd.add("total_destroyed_cars", total_destroyed_cars);
-    sd.add("total_taken_steps", total_taken_steps);
+    sd.add("total_moved_steps", total_moved_steps);
     sd.add("total_playtime", total_playtime);
     for (uint i = 0; i < achievements.length(); i++)
     {

@@ -106,7 +106,7 @@ doors[i].closesound=doorpool.play_stationary("doorclose.ogg",false);
 doormove=false;
 doors[i].is_moving=false;
 fade_multi_pool();
-dlgmessage("You just won! Here are your current results for this game session:"+ "--Keys collected: " + collected_keys +"--Toys collected: " + collected_toys +"--Cars destroyed: " + destroyed_cars +"--Guards defeated: " + killed_gards +"--Steps taken: " + taken_steps +"--Time survived: " + timeelapsed.m() + " minutes, " + timeelapsed.s() + " seconds" +"--Grate job! Press enter to continue.");
+dlgmessage("You just won! Here are your current results for this game session:"+ "--Keys collected: " + collected_keys +"--Toys collected: " + collected_toys +"--Cars destroyed: " + destroyed_cars +"--Guards defeated: " + killed_gards +"--Steps taken: " + moved_steps +"--Time survived: " + timeelapsed.m() + " minutes, " + timeelapsed.s() + " seconds" +"--Grate job! Press enter to continue.");
 session_playtime += timeelapsed.ms();
 total_playtime += timeelapsed.ms();
 if(gamcopy==true)
@@ -114,7 +114,7 @@ if(gamcopy==true)
     setupmenu(false);
     m.add_item("Yes", "yes");
     m.add_item("No", "no");
-    m.intro_text = "Would you like to copy current results for this game session to the clipboard?";
+    m.intro_text = "Would you like to copy the current results for this game session to the clipboard?";
     int res = m.run();
     if (res != -1 and m.get_selected_item_id() == "yes")
     {
@@ -133,7 +133,7 @@ if(gamcopy==true)
         clipsummery += "- Keys collected: " + collected_keys + "\r\n";
         clipsummery += "- Guards killed: " + killed_gards + "\r\n";
         clipsummery += "- Cars destroyed: " + destroyed_cars + "\r\n";
-        clipsummery += "- Steps taken: " + taken_steps + "\r\n";
+        clipsummery += "- Steps taken: " + moved_steps + "\r\n";
         clipsummery += "- Time played: " + min + " minutes, " + sec + " seconds\r\n";
         clipboard_copy_text(clipsummery);
 dlgplay("gamcopy.ogg" ,false);

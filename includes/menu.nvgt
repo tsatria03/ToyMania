@@ -140,7 +140,7 @@ collected_toys = 0;
 collected_keys = 0;
 killed_gards = 0;
 destroyed_cars = 0;
-taken_steps = 0;
+moved_steps = 0;
 session_playtime = 0;
 for (uint i = 0; i < achievements.length(); i++)
 {
@@ -202,7 +202,7 @@ m.fade_music();
     result += "- Keys collected: " + collected_keys + "\r\n";
     result += "- Guards killed: " + killed_gards + "\r\n";
     result += "- Cars destroyed: " + destroyed_cars + "\r\n";
-    result += "- Steps taken: " + taken_steps + "\r\n";
+    result += "- Steps taken: " + moved_steps + "\r\n";
     result += "- Time played: " + session_minutes + " minutes, " + session_seconds + " seconds.\r\n\r\n";
     int total_minutes = int(total_playtime / 60000);
     int total_seconds = int((total_playtime % 60000) / 1000);
@@ -213,7 +213,7 @@ m.fade_music();
     result += "- Keys collected: " + total_collected_keys + "\r\n";
     result += "- Guards killed: " + total_killed_gards + "\r\n";
     result += "- Cars destroyed: " + total_destroyed_cars + "\r\n";
-    result += "- Steps taken: " + total_taken_steps + "\r\n";
+    result += "- Steps taken: " + total_moved_steps + "\r\n";
     result += "- Total playtime: " + total_minutes + " minutes, " + total_seconds + " seconds.\r\n\r\n";
     result += "Player Titles:\r\n";
     result += "- Toy Title: " + get_toy_rank() + ". " + get_toy_rank_desc() + "\r\n";
@@ -328,9 +328,10 @@ void achesmenu()
 setupmenu();
     m.add_item("Session Achievements", "session");
     m.add_item("Lifetime Achievements", "lifetime");
+m.add_item("Clear game achievements.", "chm");
 if(statscopy==true) m.add_item("Copy all game Achievements to clipboard.", "cys");
     m.add_item("back", "back");
-m.intro_text = "Achievements menu. You can view your unlocked session and lifetime achievements here.";
+m.intro_text = "Achievements menu. You can view your unlocked session and lifetime achievements, or clear or copy all of your achievements here.";
 int mres=m.run();
 string achm = m.get_selected_item_id();
 if(mres==-1)
@@ -348,6 +349,62 @@ if (achm == "lifetime")
 if(speak_menu_loading==true) speak("loading");
 m.fade_music();
         show_lifetime_achievements();
+}
+if (achm == "chm") 
+{
+if(speak_menu_loading==true) speak("loading");
+m.fade_music();
+    setupmenu(false);
+    m.add_item("Session achievements", "session");
+    m.add_item("Lifetime achievements", "lifetime");
+    m.add_item("Session and lifetime achievements", "both");
+    m.add_item("Back", "back");
+m.intro_text = "Choose which game achievements to clear. This will clear your game statistics.";
+    int mres = m.run();
+    string achmode = m.get_selected_item_id();
+    if (mres == -1 or achmode == "back")
+    {
+        achesmenu();
+    }
+    setupmenu(false);
+    m.add_item("Yes", "yes");
+    m.add_item("No", "no");
+    m.intro_text = "Are you sure you want to reset your " + (achmode == "session" ? "session" : achmode == "lifetime" ? "lifetime" : "session and lifetime") + " achievements? This action can't be undone.";
+    mres = m.run();
+    string confirm = m.get_selected_item_id();
+    if (mres == -1 or confirm == "no")
+    {
+        achesmenu();
+    }
+    for (uint i = 0; i < achievements.length(); i++)
+    {
+        if ((achmode == "session" and achievements[i].isSessionBased) or (achmode == "lifetime" and !achievements[i].isSessionBased) or (achmode == "both"))
+        {
+            achievements[i].currentTier = 0;
+        }
+    }
+    if (achmode == "session" or achmode == "both")
+    {
+        collected_toys = 0;
+        collected_keys = 0;
+        killed_gards = 0;
+        destroyed_cars = 0;
+        moved_steps = 0;
+        session_playtime = 0;
+    }
+    if (achmode == "lifetime" or achmode == "both")
+    {
+        total_collected_toys = 0;
+        total_collected_keys = 0;
+        total_killed_gards = 0;
+        total_destroyed_cars = 0;
+        total_moved_steps = 0;
+        total_playtime = 0;
+    }
+    writedata();
+string modeLabel = (achmode == "session") ? "session" : (achmode == "lifetime") ? "lifetime" : "session and lifetime";
+dlgmessage_return("Your " + modeLabel + " achievements have been cleared.");
+    achesmenu();
 }
 if (achm == "cys")
 {
@@ -417,9 +474,10 @@ setupmenu();
     m.add_item("Session Stats", "session");
     m.add_item("Lifetime Stats", "lifetime");
 m.add_item("Player Titles", "titles");
+m.add_item("Clear game statistics.", "gs");
 if(statscopy==true) m.add_item("Copy all game statistics to clipboard.", "cys");
     m.add_item("back", "back");
-m.intro_text = "Statistics menu. You can check your gameplay stats and unlockable player titles here.";
+m.intro_text = "Statistics menu. You can check your gameplay stats and unlockable player titles, or clear or copy all of your stats here.";
 int mres=m.run();
 string statsm = m.get_selected_item_id();
 if(mres==-1)
@@ -444,6 +502,72 @@ if(speak_menu_loading==true) speak("loading");
 m.fade_music();
     view_player_titles();
 }
+if (statsm == "gs")
+{
+if(speak_menu_loading==true) speak("loading");
+m.fade_music();
+    setupmenu(false);
+    m.add_item("session stats", "session");
+    m.add_item("lifetime stats", "lifetime");
+    m.add_item("session and lifetime stats", "both");
+    m.add_item("Back", "back");
+m.intro_text = "Choose which game statistics to clear. This will not clear your game achievements.";
+    int mres = m.run();
+    string gsm = m.get_selected_item_id();
+    if (mres == -1 or gsm == "back")
+    {
+        statsmenu();
+    }
+    setupmenu(false);
+    m.add_item("Yes", "yes");
+    m.add_item("No", "no");
+    m.intro_text = "Are you sure you want to clear " + (gsm == "session" ? "your session stats" : gsm == "lifetime" ? "your lifetime stats" : "your session and lifetime stats") + "? This action can't be undone.";
+    mres = m.run();
+    string confirm = m.get_selected_item_id();
+    if (mres == -1 or confirm == "no")
+    {
+statsmenu();
+    }
+    if (gsm == "session")
+    {
+        collected_toys = 0;
+        collected_keys = 0;
+        killed_gards = 0;
+        destroyed_cars = 0;
+        moved_steps = 0;
+session_playtime = 0;
+writedata();
+        dlgmessage_return("Your session stats have been cleared.");
+    }
+    if (gsm == "lifetime")
+    {
+        total_collected_toys = 0;
+        total_collected_keys = 0;
+        total_killed_gards = 0;
+        total_destroyed_cars = 0;
+        total_moved_steps = 0;
+        total_playtime = 0;
+        writedata();
+        dlgmessage_return("Your lifetime stats have been cleared.");
+    }
+    if (gsm == "both")
+    {
+        collected_toys = 0;
+        collected_keys = 0;
+        killed_gards = 0;
+        destroyed_cars = 0;
+        moved_steps = 0;
+        total_collected_toys = 0;
+        total_collected_keys = 0;
+        total_killed_gards = 0;
+        total_destroyed_cars = 0;
+        total_moved_steps = 0;
+        total_playtime = 0;
+        writedata();
+        dlgmessage_return("Your session and lifetime stats have been cleared.");
+    }
+    statsmenu();
+}
 if (statsm == "cys")
 {
 if(speak_menu_loading==true) speak("loading");
@@ -458,7 +582,7 @@ statsummary += "- Toys collected: " + collected_toys + "\r\n";
 statsummary += "- Keys collected: " + collected_keys + "\r\n";
 statsummary += "- Guards killed: " + killed_gards + "\r\n";
 statsummary += "- Cars destroyed: " + destroyed_cars + "\r\n";
-statsummary += "- Steps taken: " + taken_steps + "\r\n";
+statsummary += "- Steps taken: " + moved_steps + "\r\n";
 statsummary += "- Time played: " + session_minutes + " minutes, " + session_seconds + " seconds.\r\n\r\n";
 statsummary += "Lifetime Stats:\r\n";
 statsummary += "- Last Played Date: " + last_played_date + "\r\n";
@@ -467,7 +591,7 @@ statsummary += "- Toys collected: " + total_collected_toys + "\r\n";
 statsummary += "- Keys collected: " + total_collected_keys + "\r\n";
 statsummary += "- Guards killed: " + total_killed_gards + "\r\n";
 statsummary += "- Cars destroyed: " + total_destroyed_cars + "\r\n";
-statsummary += "- Steps taken: " + total_taken_steps + "\r\n";
+statsummary += "- Steps taken: " + total_moved_steps + "\r\n";
 statsummary += "- Total playtime: " + total_minutes + " minutes, " + total_seconds + " seconds.\r\n\r\n";
 statsummary += "Player Titles:\r\n";
 statsummary += "- Toy Title: " + get_toy_rank() + ". " + get_toy_rank_desc() + "\r\n";
@@ -493,7 +617,7 @@ void view_session_stats()
     m.add_item("You have collected " + collected_keys + " keys.", "");
     m.add_item("You have killed " + killed_gards + " guards.", "");
     m.add_item("You have destroyed " + destroyed_cars + " cars.", "");
-    m.add_item("You have taken " + taken_steps + " steps.", "");
+    m.add_item("You have taken " + moved_steps + " steps.", "");
 int session_minutes = session_playtime / 60000;
 int session_seconds = (session_playtime % 60000) / 1000;
 m.add_item("You've been playing for " + session_minutes + " minutes, " + session_seconds + " seconds.", "");
@@ -519,7 +643,7 @@ void view_lifetime_stats()
     m.add_item("You have collected a total of " + total_collected_keys + " keys.", "");
     m.add_item("You have killed a total of " + total_killed_gards + " guards.", "");
     m.add_item("You have destroyed a total of " + total_destroyed_cars + " cars.", "");
-    m.add_item("You have taken a total of " + total_taken_steps + " steps.", "");
+    m.add_item("You have taken a total of " + total_moved_steps + " steps.", "");
     int total_minutes = int(total_playtime / 60000);
     int total_seconds = int((total_playtime % 60000) / 1000);
     m.add_item("You've been playing for a total of " + total_minutes + " minutes, " + total_seconds + " seconds.", "");
@@ -570,11 +694,9 @@ m.add_item(gamcopy ? "Disable post-game copy prompt. This Setting controls weath
 m.add_item(statscopy ? "Disable manual stat copy options. This setting controls the showing of all copy-to-clipboard entries from various stat based menus." : "Enable manual stat copy options. This setting controls the showing of all copy-to-clipboard entries from various stat based menus.", "scp");
 m.add_item(loop_previews ? "Disable looping of previewed sounds. This setting controls whether the sounds found in the Learn Sounds menu loop until another sound is selected or the Escape key is pressed." : "Enable looping of previewed sounds. This setting controls whether the sounds found in the Learn Sounds menu loop until another sound is selected or the Escape key is pressed.", "lps");
 m.add_item(variant_descriptions ? "Disable variant-based sound descriptions. This setting controls weather sounds that have multiple variants will include a description along side them." : "Enable variant-based sound descriptions. This setting controls weather sounds that have multiple variants will include a description along side them.", "vsc");
-m.add_item("Clear game achievements.", "chm");
-m.add_item("Clear game statistics.", "gs");
 m.add_item("save settings", "sv");
 m.add_item("back", "back");
-m.intro_text = "Settings menu. You can adjust game options, reset stats, or clear achievements here.";
+m.intro_text = "Settings menu. You can adjust various game options here.";
 int mres=m.run();
 string preffsm = m.get_selected_item_id();
 if(mres==-1)
@@ -657,124 +779,6 @@ if (preffsm == "sv")
 writepreffs();
 dlgmessage_return("Settings saved.");
 mainmenu();
-}
-if (preffsm == "chm") 
-{
-    setupmenu(false);
-    m.add_item("Session achievements", "session");
-    m.add_item("Lifetime achievements", "lifetime");
-    m.add_item("Session and lifetime achievements", "both");
-    m.add_item("Back", "back");
-m.intro_text = "Choose which game achievements to clear. This will clear your game statistics.";
-    int mres = m.run();
-    string achmode = m.get_selected_item_id();
-    if (mres == -1 or achmode == "back")
-    {
-        settingsmenu();
-    }
-    setupmenu(false);
-    m.add_item("Yes", "yes");
-    m.add_item("No", "no");
-    m.intro_text = "Are you sure you want to reset your " + (achmode == "session" ? "session" : achmode == "lifetime" ? "lifetime" : "session and lifetime") + " achievements? This action can't be undone.";
-    mres = m.run();
-    string confirm = m.get_selected_item_id();
-    if (mres == -1 or confirm == "no")
-    {
-        settingsmenu();
-    }
-    for (uint i = 0; i < achievements.length(); i++)
-    {
-        if ((achmode == "session" and achievements[i].isSessionBased) or (achmode == "lifetime" and !achievements[i].isSessionBased) or (achmode == "both"))
-        {
-            achievements[i].currentTier = 0;
-        }
-    }
-    if (achmode == "session" or achmode == "both")
-    {
-        collected_toys = 0;
-        collected_keys = 0;
-        killed_gards = 0;
-        destroyed_cars = 0;
-        taken_steps = 0;
-        session_playtime = 0;
-    }
-    if (achmode == "lifetime" or achmode == "both")
-    {
-        total_collected_toys = 0;
-        total_collected_keys = 0;
-        total_killed_gards = 0;
-        total_destroyed_cars = 0;
-        total_taken_steps = 0;
-        total_playtime = 0;
-    }
-    writedata();
-string modeLabel = (achmode == "session") ? "session" : (achmode == "lifetime") ? "lifetime" : "session and lifetime";
-dlgmessage_return("Your " + modeLabel + " achievements have been cleared.");
-    settingsmenu();
-}
-if (preffsm == "gs")
-{
-    setupmenu(false);
-    m.add_item("session stats", "session");
-    m.add_item("lifetime stats", "lifetime");
-    m.add_item("session and lifetime stats", "both");
-    m.add_item("Back", "back");
-m.intro_text = "Choose which game statistics to clear. This will not clear your game achievements.";
-    int mres = m.run();
-    string gsm = m.get_selected_item_id();
-    if (mres == -1 or gsm == "back")
-    {
-        settingsmenu();
-    }
-    setupmenu(false);
-    m.add_item("Yes", "yes");
-    m.add_item("No", "no");
-    m.intro_text = "Are you sure you want to clear " + (gsm == "session" ? "your session stats" : gsm == "lifetime" ? "your lifetime stats" : "your session and lifetime stats") + "? This action can't be undone.";
-    mres = m.run();
-    string confirm = m.get_selected_item_id();
-    if (mres == -1 or confirm == "no")
-    {
-settingsmenu();
-    }
-    if (gsm == "session")
-    {
-        collected_toys = 0;
-        collected_keys = 0;
-        killed_gards = 0;
-        destroyed_cars = 0;
-        taken_steps = 0;
-session_playtime = 0;
-writedata();
-        dlgmessage_return("Your session stats have been cleared.");
-    }
-    if (gsm == "lifetime")
-    {
-        total_collected_toys = 0;
-        total_collected_keys = 0;
-        total_killed_gards = 0;
-        total_destroyed_cars = 0;
-        total_taken_steps = 0;
-        total_playtime = 0;
-        writedata();
-        dlgmessage_return("Your lifetime stats have been cleared.");
-    }
-    if (gsm == "both")
-    {
-        collected_toys = 0;
-        collected_keys = 0;
-        killed_gards = 0;
-        destroyed_cars = 0;
-        taken_steps = 0;
-        total_collected_toys = 0;
-        total_collected_keys = 0;
-        total_killed_gards = 0;
-        total_destroyed_cars = 0;
-        total_taken_steps = 0;
-        total_playtime = 0;
-        writedata();
-        dlgmessage_return("Your session and lifetime stats have been cleared.");
-    }
-    settingsmenu();
 }
 if (preffsm == "back")
 {
