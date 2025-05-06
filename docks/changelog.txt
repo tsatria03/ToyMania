@@ -1,4 +1,5 @@
 new in 1.9
+Added a sound for finishing speaker tests.
 Updated the readme file with added and modified keyboard shortcuts.
 Fixed a bug where the death screen didn't announce the actual level you were on prior to getting killed.
 Added a keyboard shorcut to check how many steps you've taken durring the game session.

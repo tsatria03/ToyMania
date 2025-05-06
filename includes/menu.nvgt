@@ -55,6 +55,7 @@ if(speak_menu_loading==true) speak("loading");
 m.fade_music();
         dlgplay("speaker_stone_throw.ogg");
     }
+dlgplay("complete.ogg",false);
 dlgmessage_return("Speaker test complete.");
     mainmenu();
 }
@@ -694,6 +695,7 @@ m.add_item(gamcopy ? "Disable post-game copy prompt. This Setting controls weath
 m.add_item(statscopy ? "Disable manual stat copy options. This setting controls the showing of all copy-to-clipboard entries from various stat based menus." : "Enable manual stat copy options. This setting controls the showing of all copy-to-clipboard entries from various stat based menus.", "scp");
 m.add_item(loop_previews ? "Disable looping of previewed sounds. This setting controls whether the sounds found in the Learn Sounds menu loop until another sound is selected or the Escape key is pressed." : "Enable looping of previewed sounds. This setting controls whether the sounds found in the Learn Sounds menu loop until another sound is selected or the Escape key is pressed.", "lps");
 m.add_item(variant_descriptions ? "Disable variant-based sound descriptions. This setting controls weather sounds that have multiple variants will include a description along side them." : "Enable variant-based sound descriptions. This setting controls weather sounds that have multiple variants will include a description along side them.", "vsc");
+m.add_item("reset settings", "rest");
 m.add_item("save settings", "sv");
 m.add_item("back", "back");
 m.intro_text = "Settings menu. You can adjust various game options here.";
@@ -773,6 +775,28 @@ if(preffsm == "vsc")
 play_toggle(variant_descriptions);
 	dlgmessage_return(variant_descriptions ? "Variant based sound descriptions enabled." : "Variant based sound descriptions disabled.");
 settingsmenu();
+}
+if (preffsm == "rest")
+{
+setupmenu(false);
+    m.add_item("Yes", "yes");
+    m.add_item("No", "no");
+m.intro_text="Are you sure you want to reset all of your settings?";
+int mres=m.run();
+string confirm = m.get_selected_item_id();
+    if (mres == -1 or confirm == "no")
+    {
+        settingsmenu();
+    }
+if(confirm=="yes")
+{
+if(file_exists("data/saves/settings.tmg")) file_delete("data/saves/settings.tmg");
+dlgmessage_return("Settings reset.");
+speak("restarting");
+wait(500);
+restart();
+exit();
+}
 }
 if (preffsm == "sv")
 {
