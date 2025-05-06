@@ -260,6 +260,7 @@ m.add_item("back", "back");
 		int old_pos = m.focused_item;
 		bool r = m.monitor();
 if (!r && m.selected_item < 0) {
+			audio.close();
 	gamemenu();
 }
 		if (m.focused_item != old_pos) {
@@ -268,6 +269,7 @@ if (!r && m.selected_item < 0) {
 		}
 		if (r) continue;
 	if (m.selected_item_id == "back") {
+			audio.close();
 		gamemenu();
 	}
 	if (m.selected_item < 0 || m.selected_item >= sfx_names.length()) continue;

@@ -1,4 +1,5 @@
 new in 1.8
+Fixed a bug where pressing escape or the back option in the learn sounds menu didn't stop sounds from being played propperly.
 Enhanced the Learn Sounds menu with descriptive labels for randomized sounds. Sound entries that contain multiple variants now include a description to help players understand that there are several possible versions of that sound when being previewed in the menu.
 Added support for randomized variants of sounds found in the learn sounds menu.
 Added a Learn Sounds menu to the main menu. This allows players to preview important sound effects used throughout the game, helping them build familiarity with audio cues while starting out.
