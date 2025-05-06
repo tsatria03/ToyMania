@@ -3,7 +3,6 @@ void mainmenu()
 setupmenu();
 m.add_item("documentation menu", "dm");
 m.add_item("game menu", "gm");
-m.add_item("learn sounds menu", "gsm");
 m.add_item("speaker test menu", "st");
 m.add_item("settings menu", "sm");
 m.add_item("restart game", "rt");
@@ -24,12 +23,6 @@ docksmenu();
 if (main == "gm")
 {
 gamemenu();
-}
-if (main == "gsm")
-{
-if(speak_menu_loading==true) speak("loading");
-m.fade_music();
-learnsoundsmenu();
 }
 if (main == "sm")
 {
@@ -126,6 +119,7 @@ void gamemenu()
 {
 setupmenu();
 m.add_item("start game", "ty");
+m.add_item("learn game sounds", "gsm");
 m.add_item("view achievements", "ach");
 m.add_item("view statistics", "stats");
 if(statscopy==true) m.add_item("Copy all game progresses to clipboard", "copyall");
@@ -164,6 +158,12 @@ toydest=false;
 toyspawn=true;
 gametimer.restart();
 toygame();
+}
+if (gamem == "gsm")
+{
+if(speak_menu_loading==true) speak("loading");
+m.fade_music();
+learnsoundsmenu();
 }
 if (gamem == "ach")
 {
