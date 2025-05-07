@@ -260,7 +260,7 @@ if (gamem == "cys2")
 {
 if (speak_menu_loading) speak("loading");
 m.fade_music();
-gamfile.open("data/exported/player_progresses.txt", "w");
+gamfile.open("data/stats/player_progresses.txt", "w");
 string result = "";
 result += "Session Achievements:\r\n";
 for (uint i = 0; i < achievements.length(); i++)
@@ -305,7 +305,7 @@ result += "- Playtime Title: " + get_playtime_rank() + ". " + get_playtime_rank_
 gamfile.write(result);
 gamfile.close();
 dlgplay("complete.ogg",false);
-dlgmessage_return("All game progresses have been exported to data/exported/player_progresses.txt.");
+dlgmessage_return("All game progresses have been exported to data/stats/player_progresses.txt.");
 gamemenu();
 }
 if (gamem == "back")
@@ -517,7 +517,7 @@ if (achm == "cys2")
 {
 if (speak_menu_loading) speak("loading");
 m.fade_music();
-achfile.open("data/exported/player_achievements.txt", "w");
+achfile.open("data/stats/player_achievements.txt", "w");
 string achievementSummary = "Session Achievements:\r\n";
 for (uint i = 0; i < achievements.length(); i++)
 {
@@ -533,7 +533,7 @@ achievementSummary += "- " + achievements[i].get_progress_status() + "\r\n";
 achfile.write(achievementSummary);
 achfile.close();
 dlgplay("complete.ogg",false);
-dlgmessage_return("All game achievements have been exported to data/exported/player_achievements.txt.");
+dlgmessage_return("All game achievements have been exported to data/stats/player_achievements.txt.");
 achesmenu();
 }
 if (achm == "back")
@@ -715,7 +715,7 @@ if (statsm == "cys2")
 {
 if (speak_menu_loading) speak("loading");
 m.fade_music();
-statfile.open("data/exported/player_stats.txt", "w");
+statfile.open("data/stats/player_statistics.txt", "w");
 int session_minutes = int(session_playtime / 60000);
 int session_seconds = int((session_playtime % 60000) / 1000);
 int total_minutes = int(total_playtime / 60000);
@@ -747,7 +747,7 @@ statsummary += "- Playtime Title: " + get_playtime_rank() + ". " + get_playtime_
 statfile.write(statsummary);
 statfile.close();
 dlgplay("complete.ogg",false);
-dlgmessage_return("All game statistics have been exported to data/exported/player_stats.txt.");
+dlgmessage_return("All game statistics have been exported to data/stats/player_statistics.txt.");
 statsmenu();
 }
 if (statsm == "back")
