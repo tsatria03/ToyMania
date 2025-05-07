@@ -576,8 +576,8 @@ m.intro_text = "Lifetime Achievements menu. These achievements track your long-t
 void statsmenu()
 {
 setupmenu();
-    m.add_item("Session Stats", "session");
-    m.add_item("Lifetime Stats", "lifetime");
+    m.add_item("Session Statistics", "session");
+    m.add_item("Lifetime Statistics", "lifetime");
 m.add_item("Player Titles", "titles");
 m.add_item("Clear game statistics.", "gs");
 if(statscopy==true) m.add_item("Copy all game statistics to clipboard.", "cys");
