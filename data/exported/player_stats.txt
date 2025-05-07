@@ -1,25 +1,25 @@
 Session Stats:
-- Toys collected: 116
-- Keys collected: 56
-- Guards killed: 167
-- Cars destroyed: 48
-- Steps taken: 2679
-- Time played: 7 minutes, 53 seconds.
+- Toys collected: 0
+- Keys collected: 0
+- Guards killed: 0
+- Cars destroyed: 0
+- Steps taken: 0
+- Time played: 0 minutes, 0 seconds.
 
 Lifetime Stats:
-- Last Played Date: Monday, May 5, 2025
-- Last Played Time: 2:29 PM
-- Toys collected: 116
-- Keys collected: 56
-- Guards killed: 167
-- Cars destroyed: 48
-- Steps taken: 2679
-- Total playtime: 7 minutes, 53 seconds.
+- Last Played Date: Tuesday, May 6, 2025
+- Last Played Time: 9:55 PM
+- Toys collected: 0
+- Keys collected: 0
+- Guards killed: 0
+- Cars destroyed: 0
+- Steps taken: 0
+- Total playtime: 0 minutes, 0 seconds.
 
 Player Titles:
-- Toy Title: Toy Collector. You’ve become a dedicated collector.
-- Key Title: Key Master. You're a master of unlocking.
-- Guard Title: Enforcer. You’re a relentless enforcer.
-- Car Title: Bumper Smasher. You’ve left a trail of bumper destruction.
-- Steps Title: Roamer. You roam with purpose.
+- Toy Title: Toyless. You’ve barely started your toy journey.
+- Key Title: Keyless. Locked doors fear you not... eventually.
+- Guard Title: Pacifist. You prefer to avoid conflict.
+- Car Title: Civilian. The roads remain mostly safe.
+- Steps Title: Sedentary. You prefer standing still.
 - Playtime Title: Beginner. You’re just getting started.

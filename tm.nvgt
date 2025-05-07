@@ -30,7 +30,7 @@ string last_played_time;
 string weapontype="bat";
 string version="1.9";
 timer bossespawntimer, carspawntimer, firetimer, firetimer2, gametimer, gardspawntimer, keyspawntimer, movetimer, runtimer, toyspawntimer, walktimer;
-file dockfile;
+file achfile, dockfile, gamfile, statfile;
 instance gamstence("tm");
 audio_form form;
 sound dummy;

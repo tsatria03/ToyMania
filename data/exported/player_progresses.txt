@@ -1,0 +1,41 @@
+Session Achievements:
+- Speed Collector: Tier 0 of 25. Current progress: 0 (0%). 3 total toys needed to reach the next tier.
+- Key Snatcher: Tier 0 of 25. Current progress: 0 (0%). 5 total keys needed to reach the next tier.
+- Strike Force: Tier 0 of 25. Current progress: 0 (0%). 8 total guards needed to reach the next tier.
+- Crash Rush: Tier 0 of 25. Current progress: 0 (0%). 10 total cars needed to reach the next tier.
+- Pace Breaker: Tier 0 of 25. Current progress: 0 (0%). 15 total steps needed to reach the next tier.
+- Sprint Runner: Tier 0 of 25. Current progress: 0 (0%). 1 total playtime needed to reach the next tier.
+
+Lifetime Achievements:
+- Toy Collector: Tier 0 of 50. Current progress: 0 (0%). 5 total toys needed to reach the next tier.
+- Key Hunter: Tier 0 of 50. Current progress: 0 (0%). 10 total keys needed to reach the next tier.
+- Guard Slayer: Tier 0 of 50. Current progress: 0 (0%). 15 total guards needed to reach the next tier.
+- Car Crusher: Tier 0 of 50. Current progress: 0 (0%). 20 total cars needed to reach the next tier.
+- Pacer: Tier 0 of 50. Current progress: 0 (0%). 25 total steps needed to reach the next tier.
+- Time Traveler: Tier 0 of 50. Current progress: 0 (0%). 5 total playtime needed to reach the next tier.
+
+Session Stats:
+- Toys collected: 0
+- Keys collected: 0
+- Guards killed: 0
+- Cars destroyed: 0
+- Steps taken: 0
+- Time played: 0 minutes, 0 seconds.
+
+Lifetime Stats:
+- Last Played Date: Tuesday, May 6, 2025
+- Last Played Time: 10:32 PM
+- Toys collected: 0
+- Keys collected: 0
+- Guards killed: 0
+- Cars destroyed: 0
+- Steps taken: 0
+- Total playtime: 0 minutes, 0 seconds.
+
+Player Titles:
+- Toy Title: Toyless. You’ve barely started your toy journey.
+- Key Title: Keyless. Locked doors fear you not... eventually.
+- Guard Title: Pacifist. You prefer to avoid conflict.
+- Car Title: Civilian. The roads remain mostly safe.
+- Steps Title: Sedentary. You prefer standing still.
+- Playtime Title: Beginner. You’re just getting started.
