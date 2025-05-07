@@ -138,6 +138,7 @@ if (gamem == "ty")
 if(speak_menu_loading==true) speak("loading");
 m.fade_music();
 dlgplay("gamelaunch.ogg");
+level=1;
 collected_toys = 0;
 collected_keys = 0;
 killed_gards = 0;
@@ -151,14 +152,18 @@ for (uint i = 0; i < achievements.length(); i++)
         achievements[i].currentTier = 0;
     }
 }
+gametimer.restart();
 health=1000;
 me.x=25;
 me.y=25;
 bossdefeated = false;
+bossespawn=false;
+carspawn=false;
+gardspawn=false;
 keydest=false;
+keyspawn=false;
 toydest=false;
 toyspawn=true;
-gametimer.restart();
 toygame();
 }
 if (gamem == "gsm")
@@ -512,7 +517,7 @@ if (achm == "cys2")
 {
 if (speak_menu_loading) speak("loading");
 m.fade_music();
-achfile.open("data/exported/achievements.txt", "w");
+achfile.open("data/exported/player_achievements.txt", "w");
 string achievementSummary = "Session Achievements:\r\n";
 for (uint i = 0; i < achievements.length(); i++)
 {
@@ -528,7 +533,7 @@ achievementSummary += "- " + achievements[i].get_progress_status() + "\r\n";
 achfile.write(achievementSummary);
 achfile.close();
 dlgplay("complete.ogg",false);
-dlgmessage_return("All game achievements have been exported to data/exported/achievements.txt.");
+dlgmessage_return("All game achievements have been exported to data/exported/player_achievements.txt.");
 achesmenu();
 }
 if (achm == "back")

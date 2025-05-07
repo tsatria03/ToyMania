@@ -114,17 +114,24 @@ for (uint i = 0; i < achievements.length(); i++)
         achievements[i].currentTier = 0;
     }
 }
-bossespawn=false;
-carspawn=false;
-gardspawn=false;
-keyspawn=false;
-toyspawn=false;
 destroy_all_bosses();
 destroy_all_cars();
 destroy_all_gards();
 destroy_all_doors();
 destroy_all_keys();
 destroy_all_toys();
+gametimer.restart();
+health=1000;
+me.x=25;
+me.y=25;
+bossdefeated = false;
+bossespawn=false;
+carspawn=false;
+gardspawn=false;
+keydest=false;
+keyspawn=false;
+toydest=false;
+toyspawn=false;
 mainmenu();
 }
 if(key_pressed(KEY_1) and doormove==false)
@@ -248,11 +255,10 @@ if(key_pressed(KEY_C) and doormove==false)
 {
 speak("current location, "+me.x+", "+me.y);
 }
-if(key_pressed(KEY_T) and doormove==false)
+if(key_pressed(KEY_X) and doormove==false)
 {
 speak("You have taken "+moved_steps+" steps.");
 }
-
 if(key_pressed(KEY_T) and doormove==false)
 {
 speak("You have collected "+collected_toys+" toys.");
