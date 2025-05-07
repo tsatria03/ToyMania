@@ -1,3 +1,5 @@
+new in 2.0
+Addressed an issue where the behind pitch decrease option wasn't working propperly in the game when it was completely disabled in the settings menu.
 new in 1.9
 Made it so the former manual stat copy option found in the settings menu also controls the export items section located in several in-game menus. Players can now choose to show or hide both clipboard and file export items for achievements, statistics, and overall progress from various stat-based menus.
 Added the ability to directly export all of your achievements and game statistics to a file from several in-game menus.
