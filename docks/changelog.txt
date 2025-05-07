@@ -6,29 +6,29 @@ Added the ability to reset your settings in the settings menu.
 Added a sound for finishing speaker tests.
 Updated the readme file with added and modified keyboard shortcuts.
 Fixed a bug where the death screen didn't announce the actual level you were on prior to getting killed.
-Added a keyboard shorcut to check how many steps you've taken durring the game session.
+Added a keyboard shortcut to check how many steps you've taken during the game session.
 Moved the clear achievements and game statistics menus over to the main achievement and statistic menus. The descriptions of those menus are also updated as well.
 Moved the learn sounds menu over to the game menu.
 new in 1.8
-Added sounds for toggeling various options found in the settings menu.
+Added sounds for toggling various options found in the settings menu.
 Added a sound for copying various achievements and other game statistics to the clipboard.
 Added an option in the settings menu to enable or disable looping of previewed sounds. This allows players to choose whether the sounds in the Learn Sounds menu continue playing until another sound is selected, or the Escape key is pressed. This is useful for continuous ambiences or short burst effects.
 Added an option in the settings menu to enable or disable variant-based sound descriptions. This allows players to choose whether sounds with multiple randomized variants include a description in their name, indicating the presence of found variants.
-Fixed a bug where pressing escape or the back option in the learn sounds menu didn't stop sounds from being played propperly.
+Fixed a bug where pressing escape or the back option in the learn sounds menu didn't stop sounds from being played properly.
 Enhanced the Learn Sounds menu with descriptive labels for randomized sounds. Sound entries that contain multiple variants now include a description to help players understand that there are several possible versions of that sound when being previewed in the menu.
 Added support for randomized variants of sounds found in the learn sounds menu.
 Added a Learn Sounds menu to the main menu. This allows players to preview important sound effects used throughout the game, helping them build familiarity with audio cues while starting out.
 Added an option to show the post-game stat copy prompt in the settings menu. Players can now enable or disable the clipboard prompt that appears after a game session ends. This gives more control over whether session results are automatically offered for copying.
 Added an option to show or hide the manual stat copy menu items in the settings menu. This allows players to show or hide the clipboard copy options for achievements and statistics found in various stat based menus.
 new in 1.7
-Updated the readme file with some missing keyboard shortcuts that weren't their before.
+Updated the readme file with some missing keyboard shortcuts that weren't there before.
 Added a hidden keyboard shortcut to announce the current music volume in the main menu. Holding Alt and pressing Left + Right or Right + Left arrows now speaks the current menu music volume.
 Added options to the settings menu for toggling spoken menu loading prompts and dialog end statements. These options allow players to disable the automatic "Loading" and "Press enter to continue" speech, offering a cleaner experience for advanced users.
-Made it so player titles don't get coppied along with other game statistics on the death and win screens. These are only a part of lifetime stats, not session based ones.
+Made it so player titles don't get copied along with other game statistics on the death and win screens. These are only a part of lifetime stats, not session-based ones.
 Added the ability to copy all of your game session results to the clipboard upon reaching the death or win screens.
 Added the ability to restart the game in the main menu.
-Modified the description found in the speaker test menu to include a helpful prompt about propperly varifying your audio setup.
-Added a speaker test menu to the main menu. Players can now choose between the Sword Clank and Stone Throw sound to varify their speaker setup. The speaker test menu also includes a description to guide users in selecting an appropriate sound to test their audio setup.
+Modified the description found in the speaker test menu to include a helpful prompt about properly verifying your audio setup.
+Added a speaker test menu to the main menu. Players can now choose between the Sword Clank and Stone Throw sound to verify their speaker setup. The speaker test menu also includes a description to guide users in selecting an appropriate sound to test their audio setup.
 Added options to the settings menu for toggling achievement sounds and spoken notifications when unlocking various achievements during gameplay.
 Changed the growth multiplier for all session-based achievements to a higher value for a more consistent and challenging progression curve. This ensures each tier scales appropriately with player effort, preventing accidental full completions from minimal activity.
 new in 1.6
@@ -37,36 +37,36 @@ Updated the achievement and statistics reset menus with improved descriptions to
 Made it so the achievement reset system also clears lifetime stats, along with session stats. This ensures that resetting achievements now fully wipes out all of the associated progress, including playtime, toys, keys, guards, cars, and steps.
 Fixed an issue where session-based achievements such as Sprint Runner did not reset properly when clearing achievements. The session playtime value is now explicitly reset when session achievements are cleared, ensuring accurate progress tracking.
 Fixed a bug where only one achievement tier was granted at a time, even if the player had far surpassed the required milestone. Achievements now unlock multiple tiers at once if progress exceeds several thresholds, ensuring accurate reward tracking.
-Addressed an issue where playtime-based achievements, such as Sprint Runner and Time Traveler, showed inflated progress or negative values. The progress of those achievements are now clamped correctly, and all time thresholds are checked in sequence, preventing logical errors from occuring.
+Addressed an issue where playtime-based achievements, such as Sprint Runner and Time Traveler, showed inflated progress or negative values. The progress of those achievements is now clamped correctly, and all-time thresholds are checked in sequence, preventing logical errors from occurring.
 Added the ability to copy your entire game progress to the clipboard in the game menu. This includes all of your achievements, statistics, and player titles. This provides an easy way to track, share, or back up your full progress in one step.
 Added descriptive messages to all major game menus. These include, but are not limited to, the main Game menu, the Achievements menu, the Statistics menu, and the Settings menu. These short descriptions provide context and guidance, making navigation easier for new and returning players alike.
 Made it so the sounds found in the speaker test option is randomized in the main menu.
-Added distinct achievement sounds based on the type of achievement the player recieves. Session based achievements now play session_achievement.ogg, and lifetime achievements now play life_achievement.ogg. This provides clearer audio feedback for each type of achievement the player gets.
+Added distinct achievement sounds based on the type of achievement the player receives. Session based achievements now play session_achievement.ogg, and lifetime achievements now play life_achievement.ogg. This provides clearer audio feedback for each type of achievement the player gets.
 new in 1.5
-Made it so session based achievements have a more Balanced Progression. Session-based achievements now have different starting thresholds and growth rates compared to lifetime achievements. This ensures that they have a shorter focused goal during a single gameplay session while keeping lifetime achievements as long-term milestones.
-Fixed an issue where session achievements retained their previous progress while session stats were reset. This in turn caused negative percentages to appear. It now properly resetts the currentTier when restarting or exiting a game session.
+Made it so session-based achievements have a more Balanced Progression. Session-based achievements now have different starting thresholds and growth rates compared to lifetime achievements. This ensures that they have a shorter focused goal during a single gameplay session while keeping lifetime achievements as long-term milestones.
+Fixed an issue where session achievements retained their previous progress while session stats were reset. This in turn caused negative percentages to appear. It now properly resets the current Tier when restarting or exiting a game session.
 Improved the format for exported achievements to match the existing stats export style. Each entry includes the tier number, percentage progress, and how much is needed to reach the next tier.
 Improved the speaking of Achievement tiers. The game now includes the type of achievement, such as Session or Lifetime in the notification message. This provides clearer feedback to players about what kind of achievement they just unlocked.
-Made it so Session Achievements and Lifetime Achievements are split into 2 separate menus for easier navigation. Each menu now clearly shows relevant achievement categories in a more focused view. The copy achievements function is also Retained as well for sharing or tracking progress.
-You can now copy all of your achievements to the clipboard in the achievements menu. Session and Lifetime achievements are also grouped and clearly labeled for easy readability.
+Made it so Session Achievements and Lifetime Achievements are split into 2 separate menus for easier navigation. Each menu now clearly shows relevant achievement categories in a more focused view. The copy achievement’s function is also Retained as well for sharing or tracking progress.
+You can now copy all of your achievements to the clipboard in the achievement’s menu. Session and Lifetime achievements are also grouped and clearly labeled for easy readability.
 Improved the clear achievements menu. Added a new clear achievements menu that allows players to clear only session, lifetime, or both sets of achievements. Confirmation dialogs are also added to prevent accidental deletion.
 Added a full Session Achievement system that tracks your progress within a single game session across toys collected, keys found, guards defeated, cars destroyed, steps taken, and total time played. Each session achievement includes 50 scalable tiers that reset each run, encouraging fast-paced and high-performance gameplay.
-Added a test speakers option in the main menu.
+Added a test speakers’ option in the main menu.
 Recoded the entire menu system.
 new in 1.4
 Added Last Played Timestamp to the Stats Menu. You can now see the exact date and time of your last session in the Lifetime Stats menu. This information is also included when copying your full game stats to the clipboard.
 Added the ability to copy your player title descriptions along with your player titles in the stats menu.
 Added descriptive titles to the Player Titles menu. Each rank now includes a short description, giving players more insight into their progress and what their rank represents.
 Added the ability to copy your player titles along with your session and lifetime stats of the game in the stats menu.
-Added a Player Titles menu to the Stats Menu. Players can now view special ranks for collecting toys, collecting keys, killing guards, destroying cars, taking steps, and playing the game for a sertain amount of time.
-Improved the Achievement Progress Display found in the achievements menu. The achievement progress summary now includes a rounded percentage value for clearer milestone tracking, helping players better understand how close they are to reaching the next tier.
-Improved the achievement progress text to be clearer and more informative in the achievements menu. It now shows how far you are into the current tier, and how much more is needed to reach the next tier.
-Made the achievement summeries more clearer to read in the achievements menu. This change also applies to the in game summeries as well.
+Added a Player Titles menu to the Stats Menu. Players can now view special ranks for collecting toys, collecting keys, killing guards, destroying cars, taking steps, and playing the game for a certain amount of time.
+Improved the Achievement Progress Display found in the achievement’s menu. The achievement progress summary now includes a rounded percentage value for clearer milestone tracking, helping players better understand how close they are to reaching the next tier.
+Improved the achievement progress text to be clearer and more informative in the achievement’s menu. It now shows how far you are into the current tier, and how much more is needed to reach the next tier.
+Made the achievement summaries clearer to read in the achievement’s menu. This change also applies to the in-game summaries as well.
 Added some sounds to indicate unlocked achievements.
 Added a new achievement reset menu with multiple options for clearing progress. Players can now choose to reset only their achievement tiers or both tiers and related game stats for full flexibility.
 new in 1.3
 Added the ability to save your Achievement progress. This is loaded along with your other game stats.
-Added an option to the settings menu that let's you clear all of your achievements you've unlocked in the game.
+Added an option to the settings menu that lets you clear all of your achievements you've unlocked in the game.
 Made it so when an achievement has been unlocked, a dialog now congratulates the player and describes what was accomplished.
 Added an Achievements Menu to the main screen, allowing players to view their progress across all categories.
 Added a full Lifetime Achievement system that tracks your overall progress across collected toys, found keys, defeated guards, destroyed cars, taken steps, and total time played. Each lifetime achievement features 50 scalable tiers that reward long-term dedication and consistent gameplay.
@@ -82,7 +82,7 @@ Added separation of session stats and lifetime stats. In-game stat keys, such as
 Added the ability to save statistics found in the stats menu to a file. These will persist between sessions.
 Added a steps tracker into the stats menu. It will now tell you how many steps you've taken in total.
 Added a Stats Menu to the game. This menu displays a summary of your total collected keys, collected toys, killed guards, and destroyed cars. You can access this from the main menu to review your progress all in one place.
-Addressed an issue where collected keys and toys weren't being tracked propperly upon player death.
+Addressed an issue where collected keys and toys weren't being tracked properly upon player death.
 Added some menu sounds to the game.
 Added the ability to save your settings in the settings menu.
 You can now enable/disable global behind pitch decrease for the game in the settings menu.
@@ -95,7 +95,7 @@ Made it so bosses, cars, and guards no longer destroy toys.
 The winning screen now tells you how many keys and toys you've collected upon unlocking the final exit.
 The death screen now tells you how many keys and toys you've collected upon being killed.
 Made it so You no longer have to be perfectly on top of a key or toy to pick it up. You can now collect keys and toys while being slightly to the left, right, forward, or backward.
-Fixed an issue where the boss would continuously resurrect itself upon succesfull defeat.
+Fixed an issue where the boss would continuously resurrect itself upon successful defeat.
 Reduced the amount of keys you need to collect to unlock the door to 15, instead of 30.
 new in 1.0
 Replaced the boss hitting sounds with new ones.
@@ -106,12 +106,12 @@ Added a door that will randomly spawn on the map while you're on the boss area. 
 Fixed a bug where you were still able to hit bosses, cars, and guards while your machinegun was empty.
 Added 2 new weapons. The laser, and the machine gun.
 Changed the key to run from control to alt.
-Made it so keys get destroied if you don't collect them on time.
+Made it so keys get destroyed if you don't collect them on time.
 You can now collect keys. They will start appearing in the boss area of the map.
-Made it so the boss class launches random guards with different atributes.
-Adjusted some tweaks. The guards will no longer show up untill you reach the boss area. They will also no longer destroy the toys that get dropped on the ground.
-Made it so the damage of weapons are randomized when hitting bosses, cars, and guards.
-Added health mechanics. When a guard or a boss attacks you, you'll here pain sounds. The same thing will apply if they kill you.
+Made it so the boss class launches random guards with different attributes.
+Adjusted some tweaks. The guards will no longer show up until you reach the boss area. They will also no longer destroy the toys that get dropped on the ground.
+Made it so the damage of weapons is randomized when hitting bosses, cars, and guards.
+Added health mechanics. When a guard or a boss attacks you, you'll hear pain sounds. The same thing will apply if they kill you.
 Made it so toys get broken if you don't collect them on time.
 Added damage and range stats to all of the weapons.
 Added a boss that will attack, heal, and teleport around the area. This boss can be killed using your weapons.

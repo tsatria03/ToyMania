@@ -5,20 +5,20 @@ You can equip various weapons, each with different strengths and ranges, to help
 Can you escape before the boss inevitably catches you? Let's find out!
 
 Keyboard commands
-Letter, Q: Announces how many gards you've killed, if pressed.
-Letter, E: Announces how many killable gards their are on the field, if pressed.
+Letter, Q: Announces how many guards you've killed, if pressed.
+Letter, E: Announces how many killable guards there are on the field, if pressed.
 Letter, F: Announces how many cars you've destroyed if pressed.
-Letter, J: Announces how many destroyable cars their are on the field, if pressed.
+Letter, J: Announces how many destroyable cars there are on the field, if pressed.
 Letter, H: Announces how much health you have, if pressed.
 Letter, L: Announces what level you're on, if pressed.
 Letter, Y: Announces how much time you've been playing the game for, if pressed.
 Letter, T: Announces how many toys you've collected, if pressed.
-Letter, O: Announces how many collectible toys their are on the field, if pressed.
+Letter, O: Announces how many collectible toys there are on the field, if pressed.
 Letter, I: Announces how many keys you've collected, if pressed.
-Letter, U: Announces how many collectible keys their are on the field, if pressed.
+Letter, U: Announces how many collectible keys there are on the field, if pressed.
 Letter, C: Announces your current location, if pressed.
 Letter, X: Announces how many steps you've taken, if pressed.
-Letter, Z: Anounces the ammo of weapons that take them, if pressed.
+Letter, Z: Announces the ammo of weapons that take them, if pressed.
 Letter, R: Reloads ammo into weapons that take them, if pressed.
 Number row: Draws weapons 1 through 8 for use, if pressed.
 Space: Fires the currently drawn weapon, if pressed/held down.
