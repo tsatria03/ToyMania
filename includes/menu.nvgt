@@ -418,6 +418,7 @@ learn_game_sounds_menu(sfx, "", m);
 void pausemenu()
 {
 setupmenu(false);
+m.add_item("copy level and game mode to clipboard", "clg");
 m.add_item("quit game", "qmg");
 m.add_item("resume game", "rmg");
 m.add_item("view session statistics", "vs");
@@ -429,6 +430,15 @@ if(mres==-1)
 p.play_stationary("resume.ogg",false);
 resume_game();
 return;
+}
+if(psmem == "clg")
+{
+    string mode = endless ? "Endless" : "Normal";
+    string info = "Current Level: " + level + "\r\nGame Mode: " + mode;
+    clipboard_copy_text(info);
+    dlgplay("gamcopy.ogg", false);
+    dlgmessage_return("Your current level and game mode has been copied to the clipboard.");
+    pausemenu();
 }
 if(psmem=="qmg")
 {
