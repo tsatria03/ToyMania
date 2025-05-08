@@ -341,6 +341,7 @@ if(!success)
 alert("errorr", "Unable to restart tm.nvgt!");
 }
 }
+exit();
 }
 void setupmenu(bool music_added = true)
 {

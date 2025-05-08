@@ -782,11 +782,11 @@ if (endless and gametimer.elapsed >= 1000 * (level + 1) * 60)
     }
     bossespawn = false;
 }
-double heartbeat_threshold = endless ? 5000 : 500;
+double heartbeat_threshold = endless ? 1000 : 500;
 if (health <= heartbeat_threshold and !heartbeat_playing)
 {
     heartbeat_playing = true;
-    heartbeat_slot = p.play_stationary("heart.ogg", true); // looped warning sound
+    heartbeat_slot = p.play_stationary("heartstart.ogg", true);
 }
 if (health > heartbeat_threshold and heartbeat_playing)
 {
@@ -798,6 +798,7 @@ if (health <= 0)
 if (heartbeat_playing)
 {
     p.destroy_sound(heartbeat_slot);
+pool.play_stationary("heartstop.ogg", false);
     heartbeat_playing = false;
 }
     if(!endless) bossdefeated = false;
@@ -817,7 +818,7 @@ if (heartbeat_playing)
     muspool.destroy_sound(toytrackslot);
     dlgplay("playerdeath.ogg");
     dlgplay("playerfall.ogg");
-dlgmessage_return("You just died on level "+level+ " of the " + (endless ? "Endless" : "Normal") + " game mode."+"! Here are your current results for this game session:"+ "\r\nToys collected: " + collected_toys +"\r\nKeys collected: " + collected_keys +"\r\nGuards defeated: " + killed_gards +"\r\nCars destroyed: " + destroyed_cars +"\r\nSteps taken: " + moved_steps +"\r\nTime survived: " + timeelapsed.m() + " minutes, " + timeelapsed.s() + " seconds" +"\r\nBetter luck next time!");
+dlgmessage_return("You just died on level "+level+ " of the " + (endless ? "Endless" : "Normal") + " game mode!"+" Here are your current results for this game session:"+ "\r\nToys collected: " + collected_toys +"\r\nKeys collected: " + collected_keys +"\r\nGuards defeated: " + killed_gards +"\r\nCars destroyed: " + destroyed_cars +"\r\nSteps taken: " + moved_steps +"\r\nTime survived: " + timeelapsed.m() + " minutes, " + timeelapsed.s() + " seconds" +"\r\nBetter luck next time!");
     session_playtime += timeelapsed.ms();
     total_playtime += timeelapsed.ms();
 if(gamcopy==true)

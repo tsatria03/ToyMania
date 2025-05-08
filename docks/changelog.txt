@@ -1,4 +1,5 @@
 new in 2.0
+Fixed a bug where the game failed to restart propperly upon activating it in the main menu.
 Implemented a health warning system in all of the game modes. If your health gets below a certain threshold, a heartbeat sound will play to signify that you're in real danger of dying.
 You can now directly quit the game session right from within the pause menu.
 Added the ability to adjust the ambience and music volumes of the game. You can press the page up or down keys to adjust the music, and home or end to adjust the ambience. These settings are automaticly saved the next time you start a new game session.
