@@ -116,7 +116,7 @@ destroy_all_doors();
 destroy_all_keys();
 destroy_all_toys();
 gametimer.restart();
-health=1000;
+health = endless ? 10000 : 1000;
 me.x=25;
 me.y=25;
 if(!endless) bossdefeated = false;
@@ -624,33 +624,33 @@ if(toyspawntimer.elapsed>=toyspawntime and toys.length()<toynum and toyspawn==tr
 spawn_toy(random(0,maxx), random(0,maxy), random(5000,10000), toydest);
 toyspawntimer.restart();
 }
-if(gametimer.elapsed>=1000*60)
+if(!endless and gametimer.elapsed>=1000*60)
 {
 level=2;
 carspawn=true;
 toynum=25;
 }
-if(gametimer.elapsed>=1000*120)
+if(!endless and gametimer.elapsed>=1000*120)
 {
 level=3;
 carnum=10;
 toydest=true;
 toynum=30;
 }
-if(gametimer.elapsed>=1000*180)
+if(!endless and gametimer.elapsed>=1000*180)
 {
 level=4;
 carspawn=false;
 gardspawn=true;
 toynum=35;
 }
-if(gametimer.elapsed>=1000*240)
+if(!endless and gametimer.elapsed>=1000*240)
 {
 level=5;
 gardnum=20;
 toynum=50;
 }
-if(gametimer.elapsed>=1000*300 and !endless)
+if(!endless and gametimer.elapsed>=1000*300)
 {
 level=6;
 carspawn=false;

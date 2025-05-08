@@ -164,7 +164,7 @@ m.add_item("Play on Endless Mode. This mode lets you keep playing as long as you
             achievements[i].currentTier = 0;
     }
     gametimer.restart();
-    health = 1000;
+health = endless ? 10000 : 1000;
     me.x = 25;
     me.y = 25;
     bossdefeated = false;
