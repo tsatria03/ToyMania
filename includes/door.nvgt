@@ -130,7 +130,7 @@ if(gamcopy==true)
         statsummary += "- Steps taken: " + moved_steps + "\r\n";
         statsummary += "- Time played: " + min + " minutes, " + sec + " seconds\r\n";
         clipboard_copy_text(statsummary);
-dlgplay("gamcopy.ogg" ,false);
+if(copconfsounds==true) dlgplay("gamcopy.ogg" ,false);
 dlgmessage_return("All game session results copied to your clipboard.");
     }
 }

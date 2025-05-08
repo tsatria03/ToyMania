@@ -1,4 +1,4 @@
-#pragma embed "data/packs/assets.tmg"
+#pragma embed "data/shares/assets.tmg"
 #include"includes/includes.nvgt"
 bool behind_pitch=true;
 bool hrtf=true;
@@ -16,6 +16,7 @@ bool gamcopy=true;
 bool statscopy=true;
 bool loop_previews=true;
 bool variant_descriptions=true;
+bool copconfsounds=true;
 bool quit_menu=true;
 double toyambvolume=0, toyambpitch=100, toymusvolume=0, toymuspitch=100;
 double ammo=100, collected_keys=0, collected_toys=0, destroyed_cars=0, health=1000, killed_gards=0, level=1, moved_steps=0, total_collected_toys=0, total_collected_keys=0, total_killed_gards=0, total_destroyed_cars=0, total_moved_steps=0;
@@ -848,7 +849,7 @@ if(gamcopy==true)
         statsummary+= "- Steps taken: " + moved_steps + "\r\n";
         statsummary+= "- Time played: " + min + " minutes, " + sec + " seconds\r\n";
         clipboard_copy_text(statsummary);
-dlgplay("gamcopy.ogg" ,false);
+if(copconfsounds==true) dlgplay("gamcopy.ogg" ,false);
 dlgmessage_return("All game session results copied to your clipboard.");
     }
 }
