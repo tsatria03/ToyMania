@@ -1,4 +1,5 @@
 new in 2.1
+Renamed the documentation menu, and moved it over to the game menu.
 Fixed an issue where the pause menu could behave unexpectedly, such as returning to the main menu without resetting progress or resuming gameplay properly.
 new in 2.0
 Added an option in the pause menu to copy your current level and game mode to the clipboard for easy sharing or progress tracking.
