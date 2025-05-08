@@ -19,9 +19,9 @@ Letter, U: Announces how many collectible keys there are on the field, if presse
 Letter, D: Announces the position of the winning door in the endless game mode, if pressed.
 Letter, C: Announces your current location, if pressed.
 Letter, X: Announces how many steps you've taken, if pressed.
-Letter, Z: Announces the ammo of weapons that take them, if pressed.
-Letter, R: Reloads ammo into weapons that take them, if pressed.
-Number row: Draws weapons 1 through 8 for use, if pressed.
+Letter, Z: Announces the ammo of weapons that take them in the endless game mode, if pressed.
+Letter, R: Reloads ammo into weapons that take them in the endless game mode, if pressed.
+Number row: Draws weapons 1 through 8 in the normal game mode, and 9 in the endless game mode for use, if pressed.
 Space: Fires the currently drawn weapon, if pressed/held down.
 Enter: Interacts with various game elements, such as doors, dialogs, and lots of other menu items found in general, if pressed.
 Escape: Exits the current game session, and returns back to the main menu, if pressed.

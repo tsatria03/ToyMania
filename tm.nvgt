@@ -207,7 +207,7 @@ speak(weapontype+" equipped");
 p.destroy_sound(weaponslot);
 weaponslot=p.play_stationary(weapontype+"draw.ogg", false);
 }
-if(key_pressed(KEY_9) and doormove==false)
+if(key_pressed(KEY_9) and doormove==false and endless)
 {
 ammo=100;
 weapontype="machinegun";
@@ -218,12 +218,12 @@ speak(weapontype+" equipped");
 p.destroy_sound(weaponslot);
 weaponslot=p.play_stationary(weapontype+"draw.ogg", false);
 }
-if(key_pressed(KEY_Z) and doormove==false)
+if(key_pressed(KEY_Z) and doormove==false and endless)
 {
 if(weapontype=="machinegun") speak("You have "+ammo+"rounds of ammo available in this weapon.");
 if(weapontype!="machinegun") speak("This weapon does not take any ammo.");
 }
-if(key_pressed(KEY_R) and doormove==false)
+if(key_pressed(KEY_R) and doormove==false and endless)
 {
 if(weapontype!="machinegun")
 {
@@ -248,7 +248,7 @@ speak("You're currently on level "+level);
 }
 if (key_pressed(KEY_D) and !doormove and endless and doors.length() > 0)
 {
-    speak("The door is at " + doors[0].startx + ", " + doors[0].starty + ".");
+    speak("The door is at " + doors[0].startx + ", " + doors[0].starty + ". You need 15 or more keys to unlock it.");
 }
 if(key_pressed(KEY_C) and doormove==false)
 {
