@@ -1,3 +1,4 @@
+#pragma embed "data/packs/assets.tmg"
 #include"includes/includes.nvgt"
 bool behind_pitch=true;
 bool hrtf=true;
@@ -14,7 +15,7 @@ bool gamcopy=true;
 bool statscopy=true;
 bool loop_previews=true;
 bool variant_descriptions=true;
-double toyambvolume=-10, toyambpitch=100, toymusvolume=-10, toymuspitch=100;
+double toyambvolume=0, toyambpitch=100, toymusvolume=0, toymuspitch=100;
 double ammo=100, collected_keys=0, collected_toys=0, destroyed_cars=0, health=1000, killed_gards=0, level=1, moved_steps=0, total_collected_toys=0, total_collected_keys=0, total_killed_gards=0, total_destroyed_cars=0, total_moved_steps=0;
 double maxx=50, maxy=50;
 int achslot, painslot, toyambslot, toytrackslot, weaponslot;
@@ -47,7 +48,7 @@ void main()
 {
     last_played_date = get_date(true, false);
     last_played_time = get_time(true, false);
-set_sound_storage("data/shared/assets.tmg");
+set_sound_storage("*");
 set_sound_decryption_key("LGY24P2p56riZXtvhxtONfyBQgVZZS8wJnVSJEZ0zOOeQr3THFTtlyIXYI04Dgbk2SD1DoCMFk8QuRPv7DhlAXJDb3XzEt8vd9RcU8LW0LzcXkHvJUmkWbAtJ8ITyuCF0CkpPcW6eiPsjGDU9rlVufn8GSO2vy4KAjcLe",true);
 dummy.load("dummy");
 load_achievements();
@@ -246,6 +247,34 @@ weprange2=10;
 speak(weapontype+" equipped");
 p.destroy_sound(weaponslot);
 weaponslot=p.play_stationary(weapontype+"draw.ogg", false);
+}
+if(key_repeating(KEY_PRIOR) and toymusvolume!=0)
+{
+toymusvolume+=2;
+muspool.update_sound_start_values(toytrackslot,0,toymusvolume,toymuspitch);
+speak(toymusvolume);
+writepreffs();
+}
+if(key_repeating(KEY_NEXT) and toymusvolume!=-50)
+{
+toymusvolume-=2;
+muspool.update_sound_start_values(toytrackslot,0,toymusvolume,toymuspitch);
+speak(toymusvolume);
+writepreffs();
+}
+if(key_repeating(KEY_HOME) and toyambvolume!=0)
+{
+toyambvolume+=2;
+ambpool.update_sound_start_values(toyambslot,0,toyambvolume,toyambpitch);
+speak(toyambvolume);
+writepreffs();
+}
+if(key_repeating(KEY_END) and toyambvolume!=-50)
+{
+toyambvolume-=2;
+ambpool.update_sound_start_values(toyambslot,0,toyambvolume,toyambpitch);
+speak(toyambvolume);
+writepreffs();
 }
 if(key_pressed(KEY_P) and doormove==false)
 {

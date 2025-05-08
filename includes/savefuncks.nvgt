@@ -161,6 +161,14 @@ if (st.d.exists("menumusvolume"))
 {
 menumusvolume = st.read_int("menumusvolume");
 }
+if (st.d.exists("toyambvolume"))
+{
+toyambvolume = st.read_double("toyambvolume");
+}
+if (st.d.exists("toymusvolume"))
+{
+toymusvolume = st.read_double("toymusvolume");
+}
 if (st.d.exists("behind_pitch"))
 {
 behind_pitch = st.read_bool("behind_pitch");
@@ -206,6 +214,8 @@ variant_descriptions = st.read_bool("variant_descriptions");
 void writepreffs()
 {
 st.add("menumusvolume", menumusvolume);
+st.add("toyambvolume", toyambvolume);
+st.add("toymusvolume", toymusvolume);
 st.add("behind_pitch", behind_pitch);
 st.add("hrtf", hrtf);
 st.add("play_ach_scores", play_ach_scores);
