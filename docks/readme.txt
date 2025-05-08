@@ -21,6 +21,18 @@ Letter, C: Announces your current location, if pressed.
 Letter, X: Announces how many steps you've taken, if pressed.
 Letter, Z: Announces the ammo of weapons that take them in the endless game mode, if pressed.
 Letter, R: Reloads ammo into weapons that take them in the endless game mode, if pressed.
+Page up: Razes the in-game music volume by 1 decibel, if pressed/held down.
+Page down: Lowers the in-game music volume by 1 decibel, if pressed/held down.
+Home: Razes the in-game ambience volume by 1 decibel, if pressed/held down.
+End: Lowers the in-game ambience volume by 1 decibel, if pressed/ held down.
+Left arrow: Moves left on the X axis, if pressed/held down.
+Right arrow: Moves right on the X axis, if pressed/held down.
+Up arrow: Moves up on the y axis, if pressed/held down.
+Down arrow: Moves down on the Y axis, if pressed/ held down.
+Alt or Control plus left arrow: Moves left at double speed on the X axis, if pressed/held down.
+Alt or Control plus right arrow: Moves right at double speed on the X axis, if pressed/held down.
+Alt or Control plus up arrow: Moves up at double speed on the Y axis, if pressed/held down.
+Alt or Control plus down arrow: Moves down at double speed on the Y axis, if pressed/held down.
 Number row: Draws weapons 1 through 8 in the normal game mode, and 9 in the endless game mode for use, if pressed.
 Space: Fires the currently drawn weapon, if pressed/held down.
 Enter: Interacts with various game elements, such as doors, dialogs, and lots of other menu items found in general, if pressed.
