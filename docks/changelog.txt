@@ -1,4 +1,5 @@
 new in 2.0
+Made it so pressing the letter L tells you wich game mode you are on after announcing your current level.
 Made it so the machine gun is only available in the endless game mode. This also includes the restriction of keys to check and reload the ammo for it. The readme file's keyboard command section is also updated to reflect this change as well.
 The endless game Mode has now been completely rebalanced to match the Normal game Mode for the first 6 levels. This offers a gradual and familiar introduction before the difficulty of the game increases. After level 6, the mode will start ramping up with more enemies and collectibles.
 Adjusted the Endless Mode progression for better difficulty scaling. Previously, the Endless Mode would overwhelm players early on by spawning guards, cars, and keys all at once.

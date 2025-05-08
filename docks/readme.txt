@@ -10,7 +10,7 @@ Letter, E: Announces how many killable guards there are on the field, if pressed
 Letter, F: Announces how many cars you've destroyed if pressed.
 Letter, J: Announces how many destroyable cars there are on the field, if pressed.
 Letter, H: Announces how much health you have, if pressed.
-Letter, L: Announces what level you're on, if pressed.
+Letter, L: Announces what level you're on and the game mode at witch you are playing, if pressed.
 Letter, Y: Announces how much time you've been playing the game for, if pressed.
 Letter, T: Announces how many toys you've collected, if pressed.
 Letter, O: Announces how many collectible toys there are on the field, if pressed.

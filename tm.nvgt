@@ -244,7 +244,7 @@ if(weapontype=="machinegun") weaponslot=p.play_stationary(weapontype+"reload.ogg
 }
 if(key_pressed(KEY_L) and doormove==false)
 {
-speak("You're currently on level "+level);
+speak("You're currently on level " + level + " of the " + (endless ? "Endless" : "Normal") + " game mode.");
 }
 if (key_pressed(KEY_D) and !doormove and endless and doors.length() > 0)
 {
