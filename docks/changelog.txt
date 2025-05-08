@@ -1,6 +1,8 @@
 new in 2.1
+Fixed a bug where cars would mysteriously disappear during guard spawns. This was caused by guards destroying all cars on the field when spawning, even in Endless Mode.
 Renamed the documentation menu, and moved it over to the game menu.
 Fixed an issue where the pause menu could behave unexpectedly, such as returning to the main menu without resetting progress or resuming gameplay properly.
+Made it so you can run with the alt or control key.
 new in 2.0
 Added an option in the pause menu to copy your current level and game mode to the clipboard for easy sharing or progress tracking.
 Fixed a bug where the game failed to restart propperly upon activating it in the main menu.
