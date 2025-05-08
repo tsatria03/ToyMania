@@ -664,18 +664,18 @@ bossespawn=true;
 keydest=true;
 keyspawn=true;
 }
-if (endless and gametimer.elapsed >= 1000 * (level + 1) * 60) 
+if (endless and gametimer.elapsed >= 1000 * (level + 1) * 60)
 {
     level++;
     if (level == 2)
     {
+        carspawn = true;
         toyspawn = true;
         toynum = 25;
     }
     else if (level == 3)
     {
-        carspawn = true;
-        carnum = 5;
+        carnum = 10;
         toydest = true;
         toynum = 30;
     }
@@ -687,15 +687,15 @@ if (endless and gametimer.elapsed >= 1000 * (level + 1) * 60)
     }
     else if (level == 5)
     {
-        gardnum = 15;
-        toynum = 40;
+        gardnum = 20;
+        toynum = 50;
     }
     else if (level == 6)
     {
         keyspawn = true;
         keydest = true;
         keynum = 5;
-        toynum = 45;
+        toynum = 10;
     }
     else
     {
@@ -703,16 +703,16 @@ if (endless and gametimer.elapsed >= 1000 * (level + 1) * 60)
         if (toynum > 50) toynum = 50;
         carnum += 2;
         if (carnum > 30) carnum = 30;
+        carspawn = true;
         gardnum += 2;
         if (gardnum > 20) gardnum = 20;
+        gardspawn = true;
         keynum += 1;
         if (keynum > 15) keynum = 15;
-        toyspawn = true;
-        toydest = true;
-        carspawn = true;
-        gardspawn = true;
         keyspawn = true;
         keydest = true;
+        toyspawn = true;
+        toydest = true;
     }
     bossespawn = false;
 }
