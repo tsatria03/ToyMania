@@ -16,6 +16,7 @@ Letter, T: Announces how many toys you've collected, if pressed.
 Letter, O: Announces how many collectible toys there are on the field, if pressed.
 Letter, I: Announces how many keys you've collected, if pressed.
 Letter, U: Announces how many collectible keys there are on the field, if pressed.
+Letter, D: Announces the position of the winning door in the endless game mode, if pressed.
 Letter, C: Announces your current location, if pressed.
 Letter, X: Announces how many steps you've taken, if pressed.
 Letter, Z: Announces the ammo of weapons that take them, if pressed.

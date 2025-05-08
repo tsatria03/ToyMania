@@ -246,6 +246,10 @@ if(key_pressed(KEY_L) and doormove==false)
 {
 speak("You're currently on level "+level);
 }
+if (key_pressed(KEY_D) and !doormove and endless and doors.length() > 0)
+{
+    speak("The door is at " + doors[0].startx + ", " + doors[0].starty + ".");
+}
 if(key_pressed(KEY_C) and doormove==false)
 {
 speak("current location, "+me.x+", "+me.y);
