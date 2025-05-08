@@ -137,8 +137,8 @@ mainmenu();
 if (gamem == "ty")
 {
     setupmenu(false);
-    m.add_item("Play on Normal Mode", "normal");
-    m.add_item("Play on Endless Mode", "endless");
+m.add_item("Play on Normal Mode. This mode lets you complete objectives and defeat the boss, and find the unlockable door to win. Great for structured gameplay.", "normal");
+m.add_item("Play on Endless Mode. This mode lets you keep playing as long as you can. The game gets harder over time with no final boss, and one unlockable door to win.", "endless");
     m.add_item("Back", "back");
     m.intro_text = "Choose how you want to play the game.";
     int gres = m.run();
