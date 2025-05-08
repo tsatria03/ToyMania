@@ -16,6 +16,7 @@ bool gamcopy=true;
 bool statscopy=true;
 bool loop_previews=true;
 bool variant_descriptions=true;
+bool quit_menu=true;
 double toyambvolume=0, toyambpitch=100, toymusvolume=0, toymuspitch=100;
 double ammo=100, collected_keys=0, collected_toys=0, destroyed_cars=0, health=1000, killed_gards=0, level=1, moved_steps=0, total_collected_toys=0, total_collected_keys=0, total_killed_gards=0, total_destroyed_cars=0, total_moved_steps=0;
 double maxx=50, maxy=50;
@@ -108,24 +109,27 @@ gametimer.resume();
 }
 void toy_game_input()
 {
-if(key_repeating(KEY_ESCAPE) and doormove == false)
+if (key_repeating(KEY_ESCAPE) and doormove == false)
 {
-pool.play_stationary("pause.ogg",false);
-pause_pools();
-    setupmenu(false);
-    m.add_item("Yes", "yes");
-    m.add_item("No", "no");
-    m.intro_text = "Are you sure you want to quit the game? You will lose all progress for this current game session.";
-    int res = m.run();
-    string confirm = m.get_selected_item_id();
-    if (res == -1 or confirm == "no")
+    if(quit_menu==true) pool.play_stationary("pause.ogg", false);
+    pause_pools();
+    if (quit_menu==true)
     {
-pool.play_stationary("resume.ogg",false);
-resume_pools();
-        return;
+        setupmenu(false);
+        m.add_item("Yes", "yes");
+        m.add_item("No", "no");
+        m.intro_text = "Are you sure you want to quit the game? You will lose all progress for this current game session.";
+        int res = m.run();
+        string confirm = m.get_selected_item_id();
+        if (res == -1 or confirm == "no")
+        {
+            if(quit_menu==true) pool.play_stationary("resume.ogg", false);
+            resume_pools();
+            return;
+        }
     }
-pool.play_stationary("resume.ogg",false);
-resume_pools();
+    if(quit_menu==true) pool.play_stationary("resume.ogg", false);
+    resume_pools();
     fade_multi_pool();
     level = 1;
     collected_toys = 0;

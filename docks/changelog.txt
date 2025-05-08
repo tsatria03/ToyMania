@@ -1,4 +1,5 @@
 new in 2.1
+Added an option in the settings menu to enable or disable quit confirmation prompts. This setting controls whether the game asks for confirmation before quitting via the Escape key or the pause menu. Disabling this option allows for instant exiting without prompts, useful for advanced players.
 Updated the readme file with added and modified keyboard shortcuts.
 Fixed a bug where cars would mysteriously disappear during guard spawns. This was caused by guards destroying all cars on the field when spawning, even in Endless Mode.
 Renamed the documentation menu, and moved it over to the game menu.
@@ -10,7 +11,7 @@ Fixed a bug where the game failed to restart propperly upon activating it in the
 Implemented a health warning system in all of the game modes. If your health gets below a certain threshold, a heartbeat sound will play to signify that you're in real danger of dying.
 You can now directly quit the game session right from within the pause menu.
 Added the ability to adjust the ambience and music volumes of the game. You can press the page up or down keys to adjust the music, and home or end to adjust the ambience. These settings are automaticly saved the next time you start a new game session.
-Added a confirmation prompt when pressing Escape during gameplay. Players are now warned for quitting the current game session. This allows them to abort the action if pressed accidentally.
+Added a confirmation prompt when pressing Escape during gameplay. Players are now warned for quitting the current game session. This allows them to abort the action if pressed accidentally. This also effects the pause menu as well.
 Made it so the post game copy prompt option found in the settings menu also controls the copy prompt found in the pause menu.
 Made it so session based achievements don't get coppied along with your actual in-game statistics when using the pause menu or the post game copy prompt after death or victory.
 Added sounds for pausing and resuming the game.

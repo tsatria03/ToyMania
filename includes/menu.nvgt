@@ -441,21 +441,24 @@ if(psmem == "clg")
     pausemenu();
     return;
 }
-if(psmem=="qmg")
+if (psmem == "qmg")
 {
-    setupmenu(false);
-    m.add_item("Yes", "yes");
-    m.add_item("No", "no");
-    m.intro_text = "Are you sure you want to quit the game? You will lose all progress for this current game session.";
-    int res = m.run();
-    string confirm = m.get_selected_item_id();
-    if (res == -1 or confirm == "no")
+    if (quit_menu==true)
     {
-pausemenu();
-    return;
+        setupmenu(false);
+        m.add_item("Yes", "yes");
+        m.add_item("No", "no");
+        m.intro_text = "Are you sure you want to quit the game? You will lose all progress for this current game session.";
+        int res = m.run();
+        string confirm = m.get_selected_item_id();
+        if (res == -1 or confirm == "no")
+        {
+            pausemenu();
+            return;
+        }
     }
-pool.play_stationary("resume.ogg",false);
-resume_pools();
+    if(quit_menu==true) pool.play_stationary("resume.ogg", false);
+    resume_pools();
     fade_multi_pool();
     level = 1;
     collected_toys = 0;
@@ -967,6 +970,7 @@ m.add_item(gamcopy ? "Disable pause and post-game copy prompt. This Setting cont
 m.add_item(statscopy ? "Disable manual stat copy and export options. This setting controls the showing of all copy and export entries from various stat based menus." : "Enable manual stat copy and export options. This setting controls the showing of all copy and export entries from various stat based menus.", "scp");
 m.add_item(loop_previews ? "Disable looping of previewed sounds. This setting controls whether the sounds found in the Learn Sounds menu loop until another sound is selected or the Escape key is pressed." : "Enable looping of previewed sounds. This setting controls whether the sounds found in the Learn Sounds menu loop until another sound is selected or the Escape key is pressed.", "lps");
 m.add_item(variant_descriptions ? "Disable variant-based sound descriptions. This setting controls weather sounds that have multiple variants will include a description along side them." : "Enable variant-based sound descriptions. This setting controls weather sounds that have multiple variants will include a description along side them.", "vsc");
+m.add_item(quit_menu ? "Disable quit confirmation prompts. This setting controls whether the game will show up a prompt to quit the current game session before quitting from the Escape or pause menu." : "Enable quit confirmation prompts. This setting controls whether the game will show up a prompt to quit the current game session before quitting from the Escape or pause menu.", "qcm");
 m.add_item("reset settings", "rest");
 m.add_item("save settings", "sv");
 m.add_item("back", "back");
@@ -1048,6 +1052,13 @@ if(preffsm == "vsc")
 play_toggle(variant_descriptions);
 	dlgmessage_return(variant_descriptions ? "Variant based sound descriptions enabled." : "Variant based sound descriptions disabled.");
 settingsmenu();
+}
+if (preffsm == "qcm")
+{
+    quit_menu = !quit_menu;
+    play_toggle(quit_menu);
+    dlgmessage_return(quit_menu ? "Quit confirmation promptss enabled." : "Quit confirmation prompts disabled.");
+    settingsmenu();
 }
 if (preffsm == "rest")
 {

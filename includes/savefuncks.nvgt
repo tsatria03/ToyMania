@@ -210,6 +210,10 @@ if (st.d.exists("variant_descriptions"))
 {
 variant_descriptions = st.read_bool("variant_descriptions");
 }
+if (st.d.exists("quit_menu"))
+{
+quit_menu = st.read_bool("quit_menu");
+}
 }
 void writepreffs()
 {
@@ -226,5 +230,6 @@ st.add("gamcopy", gamcopy);
 st.add("statscopy", statscopy);
 st.add("loop_previews", loop_previews);
 st.add("variant_descriptions", variant_descriptions);
+st.add("quit_menu", quit_menu);
 st.save();
 }
