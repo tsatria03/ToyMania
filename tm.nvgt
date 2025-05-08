@@ -4,6 +4,7 @@ bool hrtf=true;
 bool y_is_elevation=true;
 bool bossdefeated = false;
 bool bossespawn=false, carspawn=false, gardspawn=false, keydest=false, keyspawn=false, toydest=false, toyspawn=false;
+bool endless = false;
 bool play_ach_scores=true;
 bool speak_ach_scores=true;
 bool speak_dlg_enter=true;
@@ -108,7 +109,7 @@ for (uint i = 0; i < achievements.length(); i++)
         achievements[i].currentTier = 0;
     }
 }
-destroy_all_bosses();
+if(!endless) destroy_all_bosses();
 destroy_all_cars();
 destroy_all_gards();
 destroy_all_doors();
@@ -118,8 +119,8 @@ gametimer.restart();
 health=1000;
 me.x=25;
 me.y=25;
-bossdefeated = false;
-bossespawn=false;
+if(!endless) bossdefeated = false;
+if(!endless) bossespawn=false;
 carspawn=false;
 gardspawn=false;
 keydest=false;
@@ -560,11 +561,12 @@ weaponslot=p.play_stationary(weapontype+"draw.ogg", false);
 p.play_stationary("playerland.ogg", false);
 toyambslot=pool.play_stationary_extended("toyamb.ogg",true,0,0,toyambvolume,toyambpitch,false);
 toytrackslot=pool.play_stationary_extended("toymus.ogg",true,0,0,toymusvolume,toymuspitch,false);
+if(endless) spawn_door(random(25,50), random(25,50), 0, 0, random(100,200), false);
 while(true)
 {
 wait(5);
 bfloop();
-bossloop();
+if(!endless) bossloop();
 carloop();
 doorcheck();
 doorloop();
@@ -573,13 +575,17 @@ keyloop();
 toyloop();
 toy_game_input();
 p.update_listener_2d(me.x,me.y);
-bosspool.update_listener_2d(me.x,me.y);
+if(!endless) bosspool.update_listener_2d(me.x,me.y);
 carpool.update_listener_2d(me.x,me.y);
 doorpool.update_listener_2d(me.x,me.y);
 gardpool.update_listener_2d(me.x,me.y);
 keypool.update_listener_2d(me.x,me.y);
 toypool.update_listener_2d(me.x,me.y);
-if(bossespawntimer.elapsed>=bossespawntime and bosses.length()<bossnum and bossespawn==true and !bossdefeated)
+if(ammo<=0)
+{
+ammo=0;
+}
+if(bossespawntimer.elapsed>=bossespawntime and bosses.length()<bossnum and bossespawn==true and !bossdefeated and !endless)
 {
 dlgplay("bossalert.ogg");
 destroy_all_cars();
@@ -644,7 +650,7 @@ level=5;
 gardnum=20;
 toynum=50;
 }
-if(gametimer.elapsed>=1000*300)
+if(gametimer.elapsed>=1000*300 and !endless)
 {
 level=6;
 carspawn=false;
@@ -654,19 +660,34 @@ bossespawn=true;
 keydest=true;
 keyspawn=true;
 }
-if(ammo<=0)
+if (endless and gametimer.elapsed >= 1000 * (level + 1) * 60) 
 {
-ammo=0;
+    level++;
+    toynum += 5;
+    if (toynum > 50) toynum = 50;
+    toyspawn = true;
+    toydest = true;
+    carnum += 2;
+    if (carnum > 30) carnum = 30;
+    carspawn = true;
+    gardnum += 3;
+    if (gardnum > 20) gardnum = 20;
+    gardspawn = true;
+    keynum += 2;
+    if (keynum > 15) keynum = 15;
+    keyspawn = true;
+    keydest = true;
+    bossespawn = false;
 }
 if (health <= 0)
 {
-    bossdefeated = false;
-    bossespawn = false;
+    if(!endless) bossdefeated = false;
+    if(!endless) bossespawn = false;
     carspawn = false;
     gardspawn = false;
     keyspawn = false;
     toyspawn = false;
-    destroy_all_bosses();
+    if(!endless) destroy_all_bosses();
     destroy_all_cars();
     destroy_all_doors();
     destroy_all_gards();

@@ -54,6 +54,10 @@ variant_descriptions=true;
 void readdata()
 {
     sd.load();
+if (st.d.exists("endless"))
+{
+endless = st.read_bool("endless");
+}
     if (sd.d.exists("level"))
 {
         level = sd.read_double("level");
@@ -127,6 +131,7 @@ void writedata()
 {
     last_played_date = get_date(true, false);
     last_played_time = get_time(true, false);
+st.add("endless", endless);
     sd.add("level", level);
     sd.add("collected_toys", collected_toys);
     sd.add("collected_keys", collected_keys);

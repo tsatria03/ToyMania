@@ -1,4 +1,5 @@
 new in 2.0
+Added an Endless Mode to the game. Players can now choose between Normal Mode and Endless Mode before starting a game. In Endless Mode, gameplay difficulty gradually increases over time without a final level, encouraging long play sessions and making session-based achievements more meaningful.
 Addressed an issue where the behind pitch decrease option wasn't working propperly in the game when it was disabled in the settings menu.
 new in 1.9
 Made it so the former manual stat copy option found in the settings menu also controls the export items section located in several in-game menus. Players can now choose to show or hide both clipboard and file export items for achievements, statistics, and overall progress from various stat-based menus.
