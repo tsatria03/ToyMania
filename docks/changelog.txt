@@ -1,4 +1,5 @@
 new in 2.1
+Updated the letter Y key behavior to reflect the accurate playtime of the pause menu. The time announcement message now matches the session playtime shown in various stat based menus, ensuring consistency between in-game stats and spoken feedback given.
 Added an option in the settings menu to enable or disable quit confirmation prompts. This setting controls whether the game asks for confirmation before quitting via the Escape key or the pause menu. Disabling this option allows for instant exiting without prompts, useful for advanced players.
 Updated the readme file with added and modified keyboard shortcuts.
 Fixed a bug where cars would mysteriously disappear during guard spawns. This was caused by guards destroying all cars on the field when spawning, even in Endless Mode.

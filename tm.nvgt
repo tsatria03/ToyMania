@@ -354,7 +354,9 @@ speak("There are "+cars.length()+" destroyable cars on the field.");
 }
 if(key_pressed(KEY_Y) and doormove==false)
 {
-speak("You've been playing for a total of;"+timeelapsed.m()+"minutes,"+timeelapsed.s()+"seconds");
+int min = int(session_playtime / 60000);
+int sec = int((session_playtime % 60000) / 1000);
+speak("You've been playing for a total of " + min + " minutes, " + sec + " seconds.");
 }
 if(key_pressed(KEY_H) and doormove==false)
 {
@@ -655,6 +657,8 @@ doorpool.update_listener_2d(me.x,me.y);
 gardpool.update_listener_2d(me.x,me.y);
 keypool.update_listener_2d(me.x,me.y);
 toypool.update_listener_2d(me.x,me.y);
+    session_playtime += timeelapsed.ms();
+    timeelapsed.set_timer(gametimer);
 if(ammo<=0)
 {
 ammo=0;
