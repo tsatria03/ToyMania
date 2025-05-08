@@ -354,9 +354,9 @@ speak("There are "+cars.length()+" destroyable cars on the field.");
 }
 if(key_pressed(KEY_Y) and doormove==false)
 {
-int min = int(session_playtime / 60000);
-int sec = int((session_playtime % 60000) / 1000);
-speak("You've been playing for a total of " + min + " minutes, " + sec + " seconds.");
+    int session_minutes = int(timeelapsed.ms() / 60000);
+    int session_seconds = int((timeelapsed.ms() % 60000) / 1000);
+speak("You've been playing for a total of " + session_minutes + " minutes, " + session_seconds + " seconds.");
 }
 if(key_pressed(KEY_H) and doormove==false)
 {
@@ -657,8 +657,6 @@ doorpool.update_listener_2d(me.x,me.y);
 gardpool.update_listener_2d(me.x,me.y);
 keypool.update_listener_2d(me.x,me.y);
 toypool.update_listener_2d(me.x,me.y);
-    session_playtime += timeelapsed.ms();
-    timeelapsed.set_timer(gametimer);
 if(ammo<=0)
 {
 ammo=0;
@@ -829,6 +827,7 @@ pool.play_stationary("heartstop.ogg", false);
 dlgmessage_return("You just died on level "+level+ " of the " + (endless ? "Endless" : "Normal") + " game mode!"+" Here are your current results for this game session:"+ "\r\nToys collected: " + collected_toys +"\r\nKeys collected: " + collected_keys +"\r\nGuards defeated: " + killed_gards +"\r\nCars destroyed: " + destroyed_cars +"\r\nSteps taken: " + moved_steps +"\r\nTime survived: " + timeelapsed.m() + " minutes, " + timeelapsed.s() + " seconds" +"\r\nBetter luck next time!");
     session_playtime += timeelapsed.ms();
     total_playtime += timeelapsed.ms();
+timeelapsed.set_timer(gametimer);
 if(gamcopy==true)
 {
     setupmenu(false);

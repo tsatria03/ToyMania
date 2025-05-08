@@ -502,11 +502,8 @@ return;
 }
 if(psmem == "vs")
 {
-session_playtime += timeelapsed.ms();
-total_playtime += timeelapsed.ms();
-timeelapsed.set_timer(gametimer);
-    int session_minutes = int(session_playtime / 60000);
-    int session_seconds = int((session_playtime % 60000) / 1000);
+    int session_minutes = int(timeelapsed.ms() / 60000);
+    int session_seconds = int((timeelapsed.ms() % 60000) / 1000);
     string statsummary = "";
     statsummary += "Session Stats:\r\n";
     statsummary += "- Toys collected: " + collected_toys + "\r\n";

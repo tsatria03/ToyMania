@@ -109,6 +109,7 @@ fade_multi_pool();
 dlgmessage_return("You just won on level "+level+ " of the " + (endless ? "Endless" : "Normal") + " game mode!"+" Here are your current results for this game session:"+ "\r\nToys collected: " + collected_toys +"\r\nKeys collected: " + collected_keys +"\r\nGuards defeated: " + killed_gards +"\r\nCars destroyed: " + destroyed_cars +"\r\nSteps taken: " + moved_steps +"\r\nTime survived: " + timeelapsed.m() + " minutes, " + timeelapsed.s() + " seconds" +"\r\nGrate work!");
 session_playtime += timeelapsed.ms();
 total_playtime += timeelapsed.ms();
+timeelapsed.set_timer(gametimer);
 if(gamcopy==true)
 {
     setupmenu(false);
