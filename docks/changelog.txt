@@ -1,3 +1,5 @@
+new in 2.1
+Fixed an issue where the pause menu could behave unexpectedly, such as returning to the main menu without resetting progress or resuming gameplay properly.
 new in 2.0
 Added an option in the pause menu to copy your current level and game mode to the clipboard for easy sharing or progress tracking.
 Fixed a bug where the game failed to restart propperly upon activating it in the main menu.

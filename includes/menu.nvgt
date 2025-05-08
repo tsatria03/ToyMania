@@ -439,6 +439,7 @@ if(psmem == "clg")
     dlgplay("gamcopy.ogg", false);
     dlgmessage_return("Your current level and game mode has been copied to the clipboard.");
     pausemenu();
+    return;
 }
 if(psmem=="qmg")
 {
@@ -451,6 +452,7 @@ if(psmem=="qmg")
     if (res == -1 or confirm == "no")
     {
 pausemenu();
+    return;
     }
 pool.play_stationary("resume.ogg",false);
 resume_pools();

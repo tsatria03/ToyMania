@@ -33,7 +33,7 @@ int64 total_playtime = 0;
 string last_played_date;
 string last_played_time;
 string weapontype="bat";
-string version="2.0";
+string version="2.1";
 timer bossespawntimer, carspawntimer, firetimer, firetimer2, gametimer, gardspawntimer, keyspawntimer, movetimer, runtimer, toyspawntimer, walktimer;
 file achfile, dockfile, gamfile, statfile;
 instance gamstence("tm");
