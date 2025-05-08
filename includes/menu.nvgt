@@ -963,7 +963,7 @@ m.add_item(speak_ach_scores ? "Disable achievement speech feedback. This setting
 m.add_item(speak_dlg_enter ? "Disable dialog end speech feedback. This setting controls whether the phrase 'Press enter to continue' is spoken after dialog messages." : "Enable dialog end speech feedback. This setting controls whether the phrase 'Press enter to continue' is spoken after dialog messages.", "dlgspeech");
 m.add_item(speak_menu_loading ? "Disable menu loading speech feedback. This setting controls whether the 'Loading' phrase is spoken when opening various menus." : "Enable menu loading speech feedback. This setting controls whether the 'Loading' phrase is spoken when opening various menus.", "loadspeech");
 m.add_item(gamcopy ? "Disable pause and post-game copy prompts. This Setting controls weather the game asks if you'd like to copy your session stats after pause, death or victory." : "Enable pause and post-game copy prompts. This Setting controls weather the game asks if you'd like to copy your session stats after pause, death or victory.", "gcp");
-m.add_item(statscopy ? "Disable manual stat copy and export options. This setting controls the showing of all copy and export entries from various stat based menus." : "Enable manual stat copy and export options. This setting controls the showing of all copy and export entries from various stat based menus.", "scp");
+m.add_item(statscopy ? "Disable stat copy and export options. This setting controls the showing of all copy and export entries from various stat based menus." : "Enable stat copy and export options. This setting controls the showing of all copy and export entries from various stat based menus.", "scp");
 m.add_item(loop_previews ? "Disable looping of previewed sounds. This setting controls whether the sounds found in the Learn Sounds menu loop until another sound is selected or the Escape key is pressed." : "Enable looping of previewed sounds. This setting controls whether the sounds found in the Learn Sounds menu loop until another sound is selected or the Escape key is pressed.", "lps");
 m.add_item(variant_descriptions ? "Disable variant-based sound descriptions. This setting controls weather sounds that have multiple variants will include a description along side them." : "Enable variant-based sound descriptions. This setting controls weather sounds that have multiple variants will include a description along side them.", "vsc");
 m.add_item(copconfsounds ? "Disable copy and export confirmation sounds. This setting controls the playing of short chimes after copying or exporting files to and from the clipboard." : "Enable copy and export confirmation sounds. This setting controls the playing of short chimes after copying or exporting files to and from the clipboard.", "cfs");
@@ -1033,7 +1033,7 @@ if (preffsm == "scp")
 {
 statscopy = !statscopy;
 play_toggle(statscopy);
-dlgmessage_return(statscopy ? "Manual stat copy and export options enabled." : "Manual stat copy and export options disabled.");
+dlgmessage_return(statscopy ? "Stat copy and export options enabled." : "Stat copy and export options disabled.");
 settingsmenu();
 }
 if(preffsm == "lps")

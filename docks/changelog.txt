@@ -1,11 +1,11 @@
 new in 2.1
-Added an option in the settings menu to enable or disable copy and export confirmation sounds. This setting controls whether a short chime plays after copying stats or exporting files to and from the clipboard. This is ideal for advanced players who prefer to have less auditory confirmation.
+Added an option in the settings menu to enable or disable copy and export confirmation sounds. This is ideal for advanced players who prefer to have less auditory confirmation.
 Removed the speaker test complete sound. This sound has been renamed, and is now being used elsewhere.
 Fixed an issue where session playtime would incorrectly increase while the game was paused. The session timer is now properly synchronized with the actual gameplay time.
 Updated the letter Y key behavior to reflect the accurate playtime of the pause menu. The time announcement message now matches the session playtime shown in various stat based menus, ensuring consistency between in-game stats and spoken feedback given.
-Added an option in the settings menu to enable or disable quit confirmation prompts. This setting controls whether the game asks for confirmation before quitting via the Escape key or the pause menu. Disabling this option allows for instant exiting without prompts, useful for advanced players.
+Added an option in the settings menu to enable or disable quit confirmation prompts. This allows for instant exiting without prompts, useful for advanced players.
 Updated the readme file with added and modified keyboard shortcuts.
-Fixed a bug where cars would mysteriously disappear during guard spawns. This was caused by guards destroying all cars on the field when spawning, even in Endless Mode.
+Fixed a bug where cars would mysteriously disappear during the spawning of guards. This was caused by guards destroying all cars on the field when spawning them, even when playing Endless Mode.
 Renamed the documentation menu, and moved it over to the game menu.
 Fixed an issue where the pause menu could behave unexpectedly, such as returning to the main menu without resetting progress or resuming gameplay properly.
 Made it so you can run with either the alt or control key.
