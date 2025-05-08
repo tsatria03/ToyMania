@@ -4,7 +4,7 @@ setupmenu();
 m.add_item("documentation menu", "dm");
 m.add_item("game menu", "gm");
 m.add_item("settings menu", "sm");
-m.add_item("speaker test menu", "st");
+m.add_item("test speaker menu", "st");
 m.add_item("restart game", "rt");
 m.add_item("exit game", "ex");
 m.intro_text = "Main menu. Please choose an option with your arrow keys, then press enter to activate one.";
@@ -36,7 +36,7 @@ if(main == "st")
     m.add_item("Sword Clank", "clank");
     m.add_item("Stone Throw", "stone");
     m.add_item("Back", "back");
-m.intro_text = "Choose a sound to test your audio setup. For the most accurate results, please use headphones. Please also make sure to check if they are worn correctly.";
+m.intro_text = "Test speaker menu. Choose a sound to test your audio setup. For the most accurate results, please use headphones. Please also make sure to check if they are worn correctly.";
     int mres = m.run();
     string soundsel = m.get_selected_item_id();
     if (mres == -1 or soundsel == "back")
@@ -854,6 +854,7 @@ if (preffsm == "glb")
 {
 behind_pitch = !behind_pitch;
 play_toggle(behind_pitch);
+apply_pitch_settings();
 dlgmessage_return((behind_pitch ? "Behind pitch decrease enabled." : "Behind pitch decrease disabled."));
 settingsmenu();
 }

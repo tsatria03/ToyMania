@@ -163,6 +163,17 @@ string random_string(string[] array)
 string retval=array[random(0,array.length()-1)];
 return retval;
 }
+void apply_pitch_settings()
+{
+	int pitchValue = behind_pitch ? 5 : 0;
+	p.behind_pitch_decrease = pitchValue;
+	bosspool.behind_pitch_decrease = pitchValue;
+	doorpool.behind_pitch_decrease = pitchValue;
+	carpool.behind_pitch_decrease = pitchValue;
+	gardpool.behind_pitch_decrease = pitchValue;
+	keypool.behind_pitch_decrease = pitchValue;
+	toypool.behind_pitch_decrease = pitchValue;
+}
 void dockread(const string&in filename)
 {
 if(!file_exists(filename))
