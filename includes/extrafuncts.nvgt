@@ -32,7 +32,6 @@ value=value<min? min:value;
 value=value>max? max:value;
 return value;
 }
-
 double min(double a, double b)
 {
 return (a < b) ? a : b;
@@ -55,6 +54,36 @@ int[] generate_achievement_thresholds(int start, int count, double multiplier)
 		value = int(value * multiplier);
 	}
 	return result;
+}
+string find_sound(string soundname)
+{
+string[] snd=find_files(soundname);
+if (snd.length()>0)
+{
+string[] a_path=string_split(soundname,"/",true);
+string path=string_replace(soundname,a_path[a_path.length()-1],"",true);
+return path+snd[random(0,snd.length()-1)];
+}
+else
+return "";
+}
+string strip_extension(string filename)
+{
+    int dotIndex = filename.rfind(".");
+    if (dotIndex != -1)
+    {
+        return filename.substr(0, dotIndex);
+    }
+    return filename;
+}
+string strip_directory(string path)
+{
+    int lastSlash = path.rfind("/");
+    if (lastSlash == -1)
+        lastSlash = path.rfind("\\");
+    if (lastSlash != -1)
+        return path.substr(lastSlash + 1);
+    return path;
 }
 string get_toy_rank()
 {
