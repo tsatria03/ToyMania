@@ -252,30 +252,30 @@ weaponslot=p.play_stationary(weapontype+"draw.ogg", false);
 }
 if(key_repeating(KEY_PRIOR) and toymusvolume!=0)
 {
-toymusvolume+=2;
+toymusvolume+=1;
 muspool.update_sound_start_values(toytrackslot,0,toymusvolume,toymuspitch);
-speak(toymusvolume);
+speak("track "+toymusvolume);
 writepreffs();
 }
 if(key_repeating(KEY_NEXT) and toymusvolume!=-50)
 {
-toymusvolume-=2;
+toymusvolume-=1;
 muspool.update_sound_start_values(toytrackslot,0,toymusvolume,toymuspitch);
-speak(toymusvolume);
+speak("track "+toymusvolume);
 writepreffs();
 }
 if(key_repeating(KEY_HOME) and toyambvolume!=0)
 {
-toyambvolume+=2;
+toyambvolume+=1;
 ambpool.update_sound_start_values(toyambslot,0,toyambvolume,toyambpitch);
-speak(toyambvolume);
+speak("source "+toyambvolume);
 writepreffs();
 }
 if(key_repeating(KEY_END) and toyambvolume!=-50)
 {
-toyambvolume-=2;
+toyambvolume-=1;
 ambpool.update_sound_start_values(toyambslot,0,toyambvolume,toyambpitch);
-speak(toyambvolume);
+speak("source "+toyambvolume);
 writepreffs();
 }
 if(key_pressed(KEY_P) and doormove==false)
