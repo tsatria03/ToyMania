@@ -415,6 +415,61 @@ sfx["Toy Loop" + vdesc] = toyloop;
 m.intro_text = "Learn game sounds menu. You can preview the most important sounds used by the game here. Press the up or down arrow keys to navigate the list, and enter to play one.";
 learn_game_sounds_menu(sfx, "", m);
 }
+void pausemenu()
+{
+setupmenu(false);
+m.add_item("resume game", "rmg");
+m.add_item("view session statistics", "vs");
+m.intro_text="Pause menu.";
+int mres=m.run();
+string psmem=m.get_selected_item_id();
+if(mres==-1)
+{
+p.play_stationary("resume.ogg",false);
+resume_game();
+return;
+}
+if(psmem=="rmg")
+{
+p.play_stationary("resume.ogg",false);
+resume_game();
+return;
+}
+if(psmem == "vs")
+{
+session_playtime += timeelapsed.ms();
+total_playtime += timeelapsed.ms();
+timeelapsed.set_timer(gametimer);
+    int session_minutes = int(session_playtime / 60000);
+    int session_seconds = int((session_playtime % 60000) / 1000);
+    string statsummary = "";
+    statsummary += "Session Stats:\r\n";
+    statsummary += "- Toys collected: " + collected_toys + "\r\n";
+    statsummary += "- Keys collected: " + collected_keys + "\r\n";
+    statsummary += "- Guards killed: " + killed_gards + "\r\n";
+    statsummary += "- Cars destroyed: " + destroyed_cars + "\r\n";
+    statsummary += "- Steps taken: " + moved_steps + "\r\n";
+    statsummary += "- Time played: " + session_minutes + " minutes, " + session_seconds + " seconds\r\n";
+    dlgmessage_return(statsummary);
+if(gamcopy==true)
+{
+    setupmenu(false);
+    m.add_item("Yes", "yes");
+    m.add_item("No", "no");
+    m.intro_text = "Would you like to copy the current results for this game session to the clipboard?";
+    int res = m.run();
+    string resp = m.get_selected_item_id();
+    if (res != -1 and resp == "yes")
+    {
+clipboard_copy_text(statsummary);
+        dlgplay("gamcopy.ogg", false);
+        dlgmessage_return("All game session results copied to your clipboard.");
+    }
+}
+    pausemenu();
+    return;
+}
+}
 void achesmenu()
 {
 setupmenu();
@@ -846,7 +901,7 @@ m.add_item(play_ach_scores ? "Disable achievement sound effects. This setting co
 m.add_item(speak_ach_scores ? "Disable achievement speech feedback. This setting controls the spoken announcements of game achievement progresses." : "Enable achievement speech feedback. This setting controls the spoken announcements of achievement progresses.", "achvoice");
 m.add_item(speak_dlg_enter ? "Disable dialog end speech feedback. This setting controls whether the phrase 'Press enter to continue' is spoken after dialog messages." : "Enable dialog end speech feedback. This setting controls whether the phrase 'Press enter to continue' is spoken after dialog messages.", "dlgspeech");
 m.add_item(speak_menu_loading ? "Disable menu loading speech feedback. This setting controls whether the 'Loading' phrase is spoken when opening various menus." : "Enable menu loading speech feedback. This setting controls whether the 'Loading' phrase is spoken when opening various menus.", "loadspeech");
-m.add_item(gamcopy ? "Disable post-game copy prompt. This Setting controls weather the game asks if you'd like to copy your session stats after death or victory." : "Enable post-game copy prompt. This Setting controls weather the game asks if you'd like to copy your session stats after death or victory.", "gcp");
+m.add_item(gamcopy ? "Disable pause and post-game copy prompt. This Setting controls weather the game asks if you'd like to copy your session stats after pause, death or victory." : "Enable pause and post-game copy prompt. This Setting controls weather the game asks if you'd like to copy your session stats after pause, death or victory.", "gcp");
 m.add_item(statscopy ? "Disable manual stat copy and export options. This setting controls the showing of all copy and export entries from various stat based menus." : "Enable manual stat copy and export options. This setting controls the showing of all copy and export entries from various stat based menus.", "scp");
 m.add_item(loop_previews ? "Disable looping of previewed sounds. This setting controls whether the sounds found in the Learn Sounds menu loop until another sound is selected or the Escape key is pressed." : "Enable looping of previewed sounds. This setting controls whether the sounds found in the Learn Sounds menu loop until another sound is selected or the Escape key is pressed.", "lps");
 m.add_item(variant_descriptions ? "Disable variant-based sound descriptions. This setting controls weather sounds that have multiple variants will include a description along side them." : "Enable variant-based sound descriptions. This setting controls weather sounds that have multiple variants will include a description along side them.", "vsc");
@@ -908,7 +963,7 @@ if (preffsm == "gcp")
 {
 gamcopy = !gamcopy;
 play_toggle(gamcopy);
-dlgmessage_return(gamcopy ? "Post-game copy prompt enabled." : "Post-game copy prompt disabled.");
+dlgmessage_return(gamcopy ? "Pause and post-game copy prompt enabled." : "Pause and post-game copy prompt disabled.");
 settingsmenu();
 }
 if (preffsm == "scp")

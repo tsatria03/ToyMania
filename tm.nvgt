@@ -5,6 +5,7 @@ bool y_is_elevation=true;
 bool bossdefeated = false;
 bool bossespawn=false, carspawn=false, gardspawn=false, keydest=false, keyspawn=false, toydest=false, toyspawn=false;
 bool endless = false;
+bool paused=false;
 bool play_ach_scores=true;
 bool speak_ach_scores=true;
 bool speak_dlg_enter=true;
@@ -39,7 +40,7 @@ menu m;
 savedata sd("data/saves/game.tmg", "PYtaj2OBK9oT0MVpgeyo32zlfd3MuggW4g7Ago5t0PHI3pafU6QbwYo5wy3G1KWYWGiS8A9dNpI8M85j1D95Gjo4By96owIC3SfJMa5xCtl0yrrlDCWQjlZJgYnLWFGWRFeFzvHMZZL9exA7DBUPrdtF72wyZGQWNele7UOTCXeTtfsciim2bw3F31VsOhF3tCTp5Tt3hE5SpQmMTSmh8tOWZ7zDVXRIWAqjxnOBtD5qKI1l5b80ZxlcUL8aITZuz0YTcmWGrP5IItxzJj2YX3M9Y4v34Sx1C9PaBcmgdpn6ts56mbRjc69gmdry56hlaKrPKmnp2U");
 savedata st("data/saves/settings.tmg", "JPl3mWxEI9k3USkJ9FOcAyX3rM2bC7TEMal2yhACrMXiymP9blH8RUhAnXJgY9s8wN18ZQDYnMAyqespGd7oqHOYEuhY10Py2KWa0GU7PmLuQTs86u9GSrNALSI2cQr91Nx7JdchD0YR3VT9Wt8HOeh7iEZmHKnAspZSZStdGL8WJdxuZSetCSEsSdyvpKtYa2kC4dE7PKM9YsdgQrOSxAOmnRtitYRdXr3NHdUhf8qefxjMMsELF3lzVycamyLAbTxpM1Kkj4h5YnELQxNf81ULUGyKVA2j3gx2wlJvbABIufN52A08Ia8ufou63Z4ZvUuzhj81jvzwS4D8XJ7e4k3hgdjI9oChGt991DqWjc2i3O7DQGgPQDSsrkXXKxz79ZlLyjF9nqlj0RuTIV0qNxZLgPEMqIKeGhxphLsJP3scIvtSzkKELNMvbwrDDFeT8pXVP");
 AchievementTracker[] achievements;
-sound_pool temp, p, pool, bosspool, carpool, doorpool, gardpool, keypool, toypool;
+sound_pool temp, p, ambpool, muspool, pool, bosspool, carpool, doorpool, gardpool, keypool, toypool;
 time_elapsed timeelapsed;
 vector me;
 void main()
@@ -90,44 +91,93 @@ else
 mainmenu();
 }
 }
-void toy_game_input()
+void pause_pools()
 {
-if(key_pressed(KEY_ESCAPE) and doormove==false)
-{
-fade_multi_pool();
-level=1;
-collected_toys = 0;
-collected_keys = 0;
-killed_gards = 0;
-destroyed_cars = 0;
-moved_steps = 0;
-session_playtime=0;
-for (uint i = 0; i < achievements.length(); i++)
-{
-    if (achievements[i].isSessionBased)
-{
-        achievements[i].currentTier = 0;
+sound_pool@[] pools = {p, ambpool, muspool, bosspool, doorpool, carpool, gardpool, keypool, toypool};
+    for(uint h = 0; h < pools.length(); h++)
+    {
+        for(uint i = 0; i < pools[h].items.length(); i++)
+        {
+            if(@pools[h].items[i].handle == null)
+                continue;
+            if(pools[h].items[i].handle.playing == false)
+                continue;
+            pools[h].pause_sound(i);
+        }
     }
 }
-if(!endless) destroy_all_bosses();
-destroy_all_cars();
-destroy_all_gards();
-destroy_all_doors();
-destroy_all_keys();
-destroy_all_toys();
-gametimer.restart();
-health = endless ? 10000 : 1000;
-me.x=25;
-me.y=25;
-if(!endless) bossdefeated = false;
-if(!endless) bossespawn=false;
-carspawn=false;
-gardspawn=false;
-keydest=false;
-keyspawn=false;
-toydest=false;
-toyspawn=false;
-mainmenu();
+void resume_pools()
+{
+sound_pool@[] pools = {p, ambpool, muspool, bosspool, doorpool, carpool, gardpool, keypool, toypool};
+    for(uint h = 0; h < pools.length(); h++)
+    {
+        for(uint i = 0; i < pools[h].items.length(); i++)
+        {
+            pools[h].resume_sound(i);
+        }
+    }
+}
+
+void pause_game()
+{
+paused=true;
+pause_pools();
+gametimer.pause();
+}
+void resume_game()
+{
+paused=false;
+resume_pools();
+gametimer.resume();
+}
+void toy_game_input()
+{
+if(key_pressed(KEY_ESCAPE) and doormove == false)
+{
+    setupmenu(false);
+    m.add_item("Yes", "yes");
+    m.add_item("No", "no");
+    m.intro_text = "Are you sure you want to quit the game? You will lose all progress for this current game session.";
+    int res = m.run();
+    string confirm = m.get_selected_item_id();
+    if (res == -1 or confirm == "no")
+    {
+        return;
+    }
+    fade_multi_pool();
+    level = 1;
+    collected_toys = 0;
+    collected_keys = 0;
+    killed_gards = 0;
+    destroyed_cars = 0;
+    moved_steps = 0;
+    session_playtime = 0;
+    for (uint i = 0; i < achievements.length(); i++)
+    {
+        if (achievements[i].isSessionBased)
+        {
+            achievements[i].currentTier = 0;
+        }
+    }
+    if (!endless) destroy_all_bosses();
+    destroy_all_cars();
+    destroy_all_gards();
+    destroy_all_doors();
+    destroy_all_keys();
+    destroy_all_toys();
+    gametimer.restart();
+    health = endless ? 10000 : 1000;
+    me.x = 25;
+    me.y = 25;
+    if (!endless) bossdefeated = false;
+    if (!endless) bossespawn = false;
+    carspawn = false;
+    gardspawn = false;
+    keydest = false;
+    keyspawn = false;
+    toydest = false;
+    toyspawn = false;
+    mainmenu();
 }
 if(key_pressed(KEY_1) and doormove==false)
 {
@@ -217,6 +267,12 @@ weprange2=10;
 speak(weapontype+" equipped");
 p.destroy_sound(weaponslot);
 weaponslot=p.play_stationary(weapontype+"draw.ogg", false);
+}
+if(key_pressed(KEY_P) and doormove==false)
+{
+pool.play_stationary("pause.ogg",false);
+pause_game();
+pausemenu();
 }
 if(key_pressed(KEY_Z) and doormove==false and endless)
 {
@@ -563,8 +619,8 @@ weprange2=2;
 speak(weapontype+" equipped");
 weaponslot=p.play_stationary(weapontype+"draw.ogg", false);
 p.play_stationary("playerland.ogg", false);
-toyambslot=pool.play_stationary_extended("toyamb.ogg",true,0,0,toyambvolume,toyambpitch,false);
-toytrackslot=pool.play_stationary_extended("toymus.ogg",true,0,0,toymusvolume,toymuspitch,false);
+toyambslot=ambpool.play_stationary_extended("toyamb.ogg",true,0,0,toyambvolume,toyambpitch,false);
+toytrackslot=muspool.play_stationary_extended("toymus.ogg",true,0,0,toymusvolume,toymuspitch,false);
 if(endless) spawn_door(random(25,50), random(25,50), 0, 0, random(100,200), false);
 while(true)
 {
@@ -731,11 +787,11 @@ if (health <= 0)
     destroy_all_keys();
     destroy_all_toys();
     p.destroy_sound(painslot);
-    pool.destroy_sound(toyambslot);
-    pool.destroy_sound(toytrackslot);
+    ambpool.destroy_sound(toyambslot);
+    muspool.destroy_sound(toytrackslot);
     dlgplay("playerdeath.ogg");
     dlgplay("playerfall.ogg");
-dlgmessage("You just died on level "+level+"! Here are your current results for this game session:"+ "--Keys collected: " + collected_keys +"--Toys collected: " + collected_toys +"--Cars destroyed: " + destroyed_cars +"--Guards defeated: " + killed_gards +"--Steps taken: " + moved_steps +"--Time survived: " + timeelapsed.m() + " minutes, " + timeelapsed.s() + " seconds" +"--Better luck next time! Press enter to continue.");
+dlgmessage_return("You just died on level "+level+"! Here are your current results for this game session:"+ "\r\nKeys collected: " + collected_keys +"\r\nToys collected: " + collected_toys +"\r\nCars destroyed: " + destroyed_cars +"\r\nGuards defeated: " + killed_gards +"\r\nSteps taken: " + moved_steps +"\r\nTime survived: " + timeelapsed.m() + " minutes, " + timeelapsed.s() + " seconds" +"\r\nBetter luck next time!");
     session_playtime += timeelapsed.ms();
     total_playtime += timeelapsed.ms();
 if(gamcopy==true)
@@ -747,24 +803,17 @@ if(gamcopy==true)
     int res = m.run();
     if (res != -1 and m.get_selected_item_id() == "yes")
     {
-        string clipsummery = "Session Achievements:\r\n";
-        for (uint i = 0; i < achievements.length(); i++)
-        {
-            if (achievements[i].isSessionBased)
-            {
-                clipsummery += "- " + achievements[i].get_progress_status() + "\r\n";
-            }
-        }
+        string statsummary = "";
         int min = int(session_playtime / 60000);
         int sec = int((session_playtime % 60000) / 1000);
-        clipsummery += "\r\nSession Stats:\r\n";
-        clipsummery += "- Toys collected: " + collected_toys + "\r\n";
-        clipsummery += "- Keys collected: " + collected_keys + "\r\n";
-        clipsummery += "- Guards killed: " + killed_gards + "\r\n";
-        clipsummery += "- Cars destroyed: " + destroyed_cars + "\r\n";
-        clipsummery += "- Steps taken: " + moved_steps + "\r\n";
-        clipsummery += "- Time played: " + min + " minutes, " + sec + " seconds\r\n";
-        clipboard_copy_text(clipsummery);
+        statsummary+= "\r\nSession Stats:\r\n";
+        statsummary+= "- Toys collected: " + collected_toys + "\r\n";
+        statsummary+= "- Keys collected: " + collected_keys + "\r\n";
+        statsummary+= "- Guards killed: " + killed_gards + "\r\n";
+        statsummary+= "- Cars destroyed: " + destroyed_cars + "\r\n";
+        statsummary+= "- Steps taken: " + moved_steps + "\r\n";
+        statsummary+= "- Time played: " + min + " minutes, " + sec + " seconds\r\n";
+        clipboard_copy_text(statsummary);
 dlgplay("gamcopy.ogg" ,false);
 dlgmessage_return("All game session results copied to your clipboard.");
     }

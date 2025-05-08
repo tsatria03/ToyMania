@@ -106,7 +106,7 @@ doors[i].closesound=doorpool.play_stationary("doorclose.ogg",false);
 doormove=false;
 doors[i].is_moving=false;
 fade_multi_pool();
-dlgmessage("You just won! Here are your current results for this game session:"+ "--Keys collected: " + collected_keys +"--Toys collected: " + collected_toys +"--Cars destroyed: " + destroyed_cars +"--Guards defeated: " + killed_gards +"--Steps taken: " + moved_steps +"--Time survived: " + timeelapsed.m() + " minutes, " + timeelapsed.s() + " seconds" +"--Grate job! Press enter to continue.");
+dlgmessage_return("You just won! Here are your current results for this game session:"+ "\r\nKeys collected: " + collected_keys +"\r\nToys collected: " + collected_toys +"\r\nCars destroyed: " + destroyed_cars +"\r\nGuards defeated: " + killed_gards +"\r\nSteps taken: " + moved_steps +"\r\nTime survived: " + timeelapsed.m() + " minutes, " + timeelapsed.s() + " seconds" +"\r\nBetter luck next time!");
 session_playtime += timeelapsed.ms();
 total_playtime += timeelapsed.ms();
 if(gamcopy==true)
@@ -118,24 +118,17 @@ if(gamcopy==true)
     int res = m.run();
     if (res != -1 and m.get_selected_item_id() == "yes")
     {
-        string clipsummery = "Session Achievements:\r\n";
-        for (uint i = 0; i < achievements.length(); i++)
-        {
-            if (achievements[i].isSessionBased)
-            {
-                clipsummery += "- " + achievements[i].get_progress_status() + "\r\n";
-            }
-        }
+        string statsummary = "";
         int min = int(session_playtime / 60000);
         int sec = int((session_playtime % 60000) / 1000);
-        clipsummery += "\r\nSession Stats:\r\n";
-        clipsummery += "- Toys collected: " + collected_toys + "\r\n";
-        clipsummery += "- Keys collected: " + collected_keys + "\r\n";
-        clipsummery += "- Guards killed: " + killed_gards + "\r\n";
-        clipsummery += "- Cars destroyed: " + destroyed_cars + "\r\n";
-        clipsummery += "- Steps taken: " + moved_steps + "\r\n";
-        clipsummery += "- Time played: " + min + " minutes, " + sec + " seconds\r\n";
-        clipboard_copy_text(clipsummery);
+        statsummary += "\r\nSession Stats:\r\n";
+        statsummary += "- Toys collected: " + collected_toys + "\r\n";
+        statsummary += "- Keys collected: " + collected_keys + "\r\n";
+        statsummary += "- Guards killed: " + killed_gards + "\r\n";
+        statsummary += "- Cars destroyed: " + destroyed_cars + "\r\n";
+        statsummary += "- Steps taken: " + moved_steps + "\r\n";
+        statsummary += "- Time played: " + min + " minutes, " + sec + " seconds\r\n";
+        clipboard_copy_text(statsummary);
 dlgplay("gamcopy.ogg" ,false);
 dlgmessage_return("All game session results copied to your clipboard.");
     }

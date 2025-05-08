@@ -1,6 +1,6 @@
 Add difficulty options for the normal game mode.
-Ad an endless game mode.
 
+*Done. Ad an endless game mode.
 *Done. Add a learn game sounds menu.
 *Done. Add a toggle in the settings menu to control the showing of copyable stat related menu items.
 *Done. Add a toggle in the settings menu to control copying of game session results to the clipboard.

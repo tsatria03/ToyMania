@@ -28,7 +28,7 @@ break;
 void dlgmessage(string messages)
 {
 temp.play_stationary("dlgopen.ogg", false);
-string[] d=string_split(messages,"--",true);
+string[] d=string_split(messages,"\r\n",true);
 dlg(d[0]);
 if (d.length()>1)
 {
