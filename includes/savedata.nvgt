@@ -41,7 +41,7 @@ void save()
 {
 file f;
 //again, use the FN string
-	f.open(fn,"wb");
+f.open(fn,"wb");
 //check for a key.
 if (key=="")
 f.write(serialize(d));

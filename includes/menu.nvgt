@@ -1043,16 +1043,16 @@ settingsmenu();
 }
 if(preffsm == "lps")
 {
-	loop_previews = !loop_previews;
+loop_previews = !loop_previews;
 play_toggle(loop_previews);
-	dlgmessage_return(loop_previews ? "Looping of previewed sounds enabled." : "Looping of previewed sounds disabled.");
-	settingsmenu();
+dlgmessage_return(loop_previews ? "Looping of previewed sounds enabled." : "Looping of previewed sounds disabled.");
+settingsmenu();
 }
 if(preffsm == "vsc")
 {
-	variant_descriptions = !variant_descriptions;
+variant_descriptions = !variant_descriptions;
 play_toggle(variant_descriptions);
-	dlgmessage_return(variant_descriptions ? "Variant based sound descriptions enabled." : "Variant based sound descriptions disabled.");
+dlgmessage_return(variant_descriptions ? "Variant based sound descriptions enabled." : "Variant based sound descriptions disabled.");
 settingsmenu();
 }
 if (preffsm == "cfs")

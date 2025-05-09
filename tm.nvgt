@@ -210,94 +210,41 @@ toynum=20;
     toyspawn = false;
     mainmenu();
 }
-if(key_pressed(KEY_1) and doormove==false)
+if (key_pressed(KEY_1) and doormove == false)
 {
-weapontype="bat";
-wepdamage=3;
-weprange=1;
-weprange2=2;
-speak(weapontype+" equipped");
-p.destroy_sound(weaponslot);
-weaponslot=p.play_stationary(weapontype+"draw.ogg", false);
+draw_weapon("bat");
 }
-if(key_pressed(KEY_2) and doormove==false)
+if (key_pressed(KEY_2) and doormove == false)
 {
-weapontype="boot";
-wepdamage=6;
-weprange=2;
-weprange2=3;
-speak(weapontype+" equipped");
-p.destroy_sound(weaponslot);
-weaponslot=p.play_stationary(weapontype+"draw.ogg", false);
+draw_weapon("boot");
 }
-if(key_pressed(KEY_3) and doormove==false)
+if (key_pressed(KEY_3) and doormove == false)
 {
-weapontype="club";
-wepdamage=9;
-weprange=3;
-weprange2=4;
-speak(weapontype+" equipped");
-p.destroy_sound(weaponslot);
-weaponslot=p.play_stationary(weapontype+"draw.ogg", false);
+draw_weapon("club");
 }
-if(key_pressed(KEY_4) and doormove==false)
+if (key_pressed(KEY_4) and doormove == false)
 {
-weapontype="feat";
-wepdamage=12;
-weprange=4;
-weprange2=5;
-speak(weapontype+" equipped");
-weaponslot=p.play_stationary(weapontype+"draw.ogg", false);
+draw_weapon("feat");
 }
-if(key_pressed(KEY_5) and doormove==false)
+if (key_pressed(KEY_5) and doormove == false)
 {
-weapontype="fist";
-wepdamage=15;
-weprange=5;
-weprange2=6;
-speak(weapontype+" equipped");
-p.destroy_sound(weaponslot);
-weaponslot=p.play_stationary(weapontype+"draw.ogg", false);
+draw_weapon("fist");
 }
-if(key_pressed(KEY_6) and doormove==false)
+if (key_pressed(KEY_6) and doormove == false)
 {
-weapontype="hammer";
-wepdamage=18;
-weprange=6;
-weprange2=7;
-speak(weapontype+" equipped");
-weaponslot=p.play_stationary(weapontype+"draw.ogg", false);
+draw_weapon("hammer");
 }
-if(key_pressed(KEY_7) and doormove==false)
+if (key_pressed(KEY_7) and doormove == false)
 {
-weapontype="knife";
-wepdamage=21;
-weprange=7;
-weprange2=8;
-speak(weapontype+" equipped");
-p.destroy_sound(weaponslot);
-weaponslot=p.play_stationary(weapontype+"draw.ogg", false);
+draw_weapon("knife");
 }
-if(key_pressed(KEY_8) and doormove==false)
+if (key_pressed(KEY_8) and doormove == false)
 {
-weapontype="laser";
-wepdamage=24;
-weprange=8;
-weprange2=9;
-speak(weapontype+" equipped");
-p.destroy_sound(weaponslot);
-weaponslot=p.play_stationary(weapontype+"draw.ogg", false);
+draw_weapon("laser");
 }
-if(key_pressed(KEY_9) and doormove==false and endless)
+if (key_pressed(KEY_9) and doormove == false and endless)
 {
-ammo=100;
-weapontype="machinegun";
-wepdamage=27;
-weprange=9;
-weprange2=10;
-speak(weapontype+" equipped");
-p.destroy_sound(weaponslot);
-weaponslot=p.play_stationary(weapontype+"draw.ogg", false);
+draw_weapon("machinegun");
 }
 if(key_repeating(KEY_PRIOR) and toymusvolume!=0)
 {
@@ -673,12 +620,7 @@ gards[i].gardhealth-=wepdamage;
 }
 void toygame()
 {
-weapontype="bat";
-wepdamage=3;
-weprange=1;
-weprange2=2;
-speak(weapontype+" equipped");
-weaponslot=p.play_stationary(weapontype+"draw.ogg", false);
+draw_random_weapon();
 p.play_stationary("playerland.ogg", false);
 toyambslot=ambpool.play_stationary_extended("toyamb.ogg",true,0,0,toyambvolume,toyambpitch,false);
 toytrackslot=muspool.play_stationary_extended("toymus.ogg",true,0,0,toymusvolume,toymuspitch,false);
