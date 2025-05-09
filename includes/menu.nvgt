@@ -28,8 +28,8 @@ settingsmenu();
 if(main == "st")
 {
     setupmenu(false);
-    m.add_item("Sword Clank", "clank");
-    m.add_item("Stone Throw", "stone");
+    m.add_item("Sword Clank. This sound has been played a total of "+swordplays+" times.", "clank");
+    m.add_item("Stone Throw. This sound has been played a total of "+stoneplays+" times.", "stone");
     m.add_item("Back", "back");
 m.intro_text = "Test speakers menu. Choose a sound to test your audio setup. For the most accurate results, please use headphones. Please also make sure to check if they are worn correctly.";
     int mres = m.run();
@@ -42,12 +42,16 @@ m.intro_text = "Test speakers menu. Choose a sound to test your audio setup. For
 {
 if(speak_menu_loading==true) speak("loading");
 m.fade_music();
+swordplays+=1;
+writepreffs();
         dlgplay("speaker_sword_clank.ogg");
     }
     if (soundsel == "stone")
 {
 if(speak_menu_loading==true) speak("loading");
 m.fade_music();
+stoneplays+=1;
+writepreffs();
         dlgplay("speaker_stone_throw.ogg");
     }
 dlgmessage_return("Speaker test complete.");
@@ -263,7 +267,7 @@ m.fade_music();
     result += "- Steps Title: " + get_steps_rank() + ". " + get_steps_rank_desc() + "\r\n";
     result += "- Playtime Title: " + get_playtime_rank() + ". " + get_playtime_rank_desc() + "\r\n";
     clipboard_copy_text(result);
-if(copconfsounds==true) dlgplay("gamcopy.ogg" ,false);
+if(copexpsounds==true) dlgplay("gamcopy.ogg" ,false);
     dlgmessage_return("All game progresses have been copied to your clipboard.");
     gamemenu();
 }
@@ -315,7 +319,7 @@ result += "- Steps Title: " + get_steps_rank() + ". " + get_steps_rank_desc() + 
 result += "- Playtime Title: " + get_playtime_rank() + ". " + get_playtime_rank_desc() + "\r\n";
 gamfile.write(result);
 gamfile.close();
-if(copconfsounds==true) dlgplay("gamexport.ogg",false);
+if(copexpsounds==true) dlgplay("gamexport.ogg",false);
 dlgmessage_return("All game progresses have been exported to data/stats/player_progresses.txt.");
 gamemenu();
 }
@@ -436,7 +440,7 @@ if(psmem == "clg")
     string mode = endless ? "Endless" : "Normal";
     string info = "Current Level: " + level + "\r\nGame Mode: " + mode;
     clipboard_copy_text(info);
-if(copconfsounds==true)     dlgplay("gamcopy.ogg", false);
+if(copexpsounds==true)     dlgplay("gamcopy.ogg", false);
     dlgmessage_return("Your current level and game mode has been copied to the clipboard.");
     pausemenu();
     return;
@@ -524,7 +528,7 @@ if(gamcopy==true)
     if (res != -1 and resp == "yes")
     {
 clipboard_copy_text(statsummary);
-        if(copconfsounds==true) dlgplay("gamcopy.ogg", false);
+        if(copexpsounds==true) dlgplay("gamcopy.ogg", false);
         dlgmessage_return("All game session results copied to your clipboard.");
     }
 }
@@ -637,7 +641,7 @@ m.fade_music();
         }
     }
     clipboard_copy_text(achievementSummary);
-if(copconfsounds==true) dlgplay("gamcopy.ogg" ,false);
+if(copexpsounds==true) dlgplay("gamcopy.ogg" ,false);
     dlgmessage_return("All game achievements have been copied to your clipboard.");
     achesmenu();
 }
@@ -660,7 +664,7 @@ achievementSummary += "- " + achievements[i].get_progress_status() + "\r\n";
 }
 achfile.write(achievementSummary);
 achfile.close();
-if(copconfsounds==true) dlgplay("gamexport.ogg",false);
+if(copexpsounds==true) dlgplay("gamexport.ogg",false);
 dlgmessage_return("All game achievements have been exported to data/stats/player_achievements.txt.");
 achesmenu();
 }
@@ -835,7 +839,7 @@ statsummary += "- Car Title: " + get_car_rank() + ". " + get_car_rank_desc() + "
 statsummary += "- Steps Title: " + get_steps_rank() + ". " + get_steps_rank_desc() + "\r\n";
 statsummary += "- Playtime Title: " + get_playtime_rank() + ". " + get_playtime_rank_desc() + "\r\n";
     clipboard_copy_text(statsummary);
-if(copconfsounds==true) dlgplay("gamcopy.ogg" ,false);
+if(copexpsounds==true) dlgplay("gamcopy.ogg" ,false);
     dlgmessage_return("All game statistics have been copied to your clipboard.");
     statsmenu();
 }
@@ -874,7 +878,7 @@ statsummary += "- Steps Title: " + get_steps_rank() + ". " + get_steps_rank_desc
 statsummary += "- Playtime Title: " + get_playtime_rank() + ". " + get_playtime_rank_desc() + "\r\n";
 statfile.write(statsummary);
 statfile.close();
-if(copconfsounds==true) dlgplay("gamexport.ogg",false);
+if(copexpsounds==true) dlgplay("gamexport.ogg",false);
 dlgmessage_return("All game statistics have been exported to data/stats/player_statistics.txt.");
 statsmenu();
 }
@@ -967,7 +971,7 @@ m.add_item(gamcopy ? "Disable pause and post-game copy prompts. This Setting con
 m.add_item(statscopy ? "Disable stat copy and export options. This setting controls the showing of all copy and export entries from various stat based menus." : "Enable stat copy and export options. This setting controls the showing of all copy and export entries from various stat based menus.", "scp");
 m.add_item(loop_previews ? "Disable looping of previewed sounds. This setting controls whether the sounds found in the Learn Sounds menu loop until another sound is selected or the Escape key is pressed." : "Enable looping of previewed sounds. This setting controls whether the sounds found in the Learn Sounds menu loop until another sound is selected or the Escape key is pressed.", "lps");
 m.add_item(variant_descriptions ? "Disable variant-based sound descriptions. This setting controls weather sounds that have multiple variants will include a description along side them." : "Enable variant-based sound descriptions. This setting controls weather sounds that have multiple variants will include a description along side them.", "vsc");
-m.add_item(copconfsounds ? "Disable copy and export confirmation sounds. This setting controls the playing of short chimes after copying or exporting files to and from the clipboard." : "Enable copy and export confirmation sounds. This setting controls the playing of short chimes after copying or exporting files to and from the clipboard.", "cfs");
+m.add_item(copexpsounds ? "Disable copy and export confirmation sounds. This setting controls the playing of short chimes after copying or exporting files to and from the clipboard." : "Enable copy and export confirmation sounds. This setting controls the playing of short chimes after copying or exporting files to and from the clipboard.", "cfs");
 m.add_item(quit_menu ? "Disable quit confirmation prompts. This setting controls whether the game will show a prompt to quit the current game session before quitting from the Escape or pause menu." : "Enable quit confirmation prompts. This setting controls whether the game will show a prompt to quit the current game session before quitting from the Escape or pause menu.", "qcm");
 m.add_item("reset settings", "rest");
 m.add_item("save settings", "sv");
@@ -1053,9 +1057,9 @@ settingsmenu();
 }
 if (preffsm == "cfs")
 {
-    copconfsounds = !copconfsounds;
-    play_toggle(copconfsounds);
-    dlgmessage_return(copconfsounds ? "Copy and export confermation sounds enabled." : "Copy and export confermation sounds disabled.");
+    copexpsounds = !copexpsounds;
+    play_toggle(copexpsounds);
+    dlgmessage_return(copexpsounds ? "Copy and export confermation sounds enabled." : "Copy and export confermation sounds disabled.");
     settingsmenu();
 }
 if (preffsm == "qcm")

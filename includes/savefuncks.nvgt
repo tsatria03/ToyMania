@@ -13,44 +13,6 @@ achievements.insert_last(AchievementTracker("Cars", "Car Crusher", generate_achi
 achievements.insert_last(AchievementTracker("Steps", "Pacer", generate_achievement_thresholds(25, 50, 1.5), false));
 achievements.insert_last(AchievementTracker("Playtime", "Time Traveler", generate_achievement_thresholds(5, 50, 1.5), false));
 }
-void resetgame()
-{
-    last_played_date = get_date(true, false);
-    last_played_time = get_time(true, false);
-level=1;
-collected_keys=0;
-collected_toys=0;
-destroyed_cars=0;
-killed_gards=0;
-moved_steps=0;
-session_playtime=0;
-total_collected_toys=0;
-total_collected_keys=0;
-total_killed_gards=0;
-total_destroyed_cars=0;
-total_moved_steps=0;
-total_playtime=0;
-    for (uint i = 0; i < achievements.length(); i++)
-    {
-        if (achievements[i].isSessionBased or !achievements[i].isSessionBased)
-        {
-            achievements[i].currentTier = 0;
-        }
-}
-}
-void resetpreffs()
-{
-behind_pitch=true;
-hrtf=true;
-play_ach_scores=true;
-speak_ach_scores=true;
-speak_dlg_enter=true;
-speak_menu_loading=true;
-gamcopy=true;
-statscopy=true;
-loop_previews=true;
-variant_descriptions=true;
-}
 void readdata()
 {
     sd.load();
@@ -161,6 +123,14 @@ if (st.d.exists("menumusvolume"))
 {
 menumusvolume = st.read_int("menumusvolume");
 }
+if (st.d.exists("stoneplays"))
+{
+stoneplays = st.read_double("stoneplays");
+}
+if (st.d.exists("swordplays"))
+{
+swordplays = st.read_double("swordplays");
+}
 if (st.d.exists("toyambvolume"))
 {
 toyambvolume = st.read_double("toyambvolume");
@@ -222,6 +192,8 @@ quit_menu = st.read_bool("quit_menu");
 void writepreffs()
 {
 st.add("menumusvolume", menumusvolume);
+st.add("stoneplays", stoneplays);
+st.add("swordplays", swordplays);
 st.add("toyambvolume", toyambvolume);
 st.add("toymusvolume", toymusvolume);
 st.add("behind_pitch", behind_pitch);
