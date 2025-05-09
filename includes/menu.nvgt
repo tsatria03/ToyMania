@@ -457,7 +457,6 @@ if (psmem == "qmg")
             return;
         }
     }
-    if(quit_menu==true) pool.play_stationary("resume.ogg", false);
     resume_game();
     fade_multi_pool();
     level = 1;

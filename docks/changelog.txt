@@ -1,4 +1,5 @@
 new in 2.2
+Made it so the pause and resume sounds don't play when the user presses the escape key to open the quit menu.
 Fixed a bug where pressing the escape key didn't pause the game propperly when opening up the quit menu.
 Made it so the number of toys that can be spawned is set to 20 by default upon starting a new game session.
 new in 2.1
