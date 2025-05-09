@@ -1,7 +1,7 @@
 new in 2.2
 Made it so the pause and resume sounds don't play when the user presses the escape key to open the quit menu.
 Fixed a bug where pressing the escape key didn't pause the game propperly when opening up the quit menu.
-Made it so the number of toys that can be spawned is set to 20 by default upon starting a new game session.
+Made it so the number of toys that are spawned is set to 20 by default upon starting a new game session.
 new in 2.1
 Added an option in the settings menu to enable or disable copy and export confirmation sounds. This is ideal for advanced players who prefer to have less auditory confirmation.
 Removed the speaker test complete sound. This sound has been renamed, and is now being used elsewhere.

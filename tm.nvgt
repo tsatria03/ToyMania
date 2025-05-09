@@ -1,4 +1,4 @@
-#pragma embed "data/shares/assets.tmg"
+#pragma embed "packs/assets.tmg"
 #include"includes/includes.nvgt"
 bool behind_pitch=true;
 bool hrtf=true;
