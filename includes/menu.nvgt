@@ -458,7 +458,7 @@ if (psmem == "qmg")
         }
     }
     if(quit_menu==true) pool.play_stationary("resume.ogg", false);
-    resume_pools();
+    resume_game();
     fade_multi_pool();
     level = 1;
     collected_toys = 0;

@@ -1,4 +1,5 @@
 new in 2.2
+Fixed a bug where pressing the escape key didn't pause the game propperly when opening up the quit menu.
 Made it so the number of toys that can be spawned is set to 20 by default upon starting a new game session.
 new in 2.1
 Added an option in the settings menu to enable or disable copy and export confirmation sounds. This is ideal for advanced players who prefer to have less auditory confirmation.

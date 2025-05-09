@@ -113,7 +113,7 @@ void toy_game_input()
 if (key_repeating(KEY_ESCAPE) and doormove == false)
 {
     if(quit_menu==true) pool.play_stationary("pause.ogg", false);
-    pause_pools();
+    pause_game();
     if (quit_menu==true)
     {
         setupmenu(false);
@@ -125,12 +125,12 @@ if (key_repeating(KEY_ESCAPE) and doormove == false)
         if (res == -1 or confirm == "no")
         {
             if(quit_menu==true) pool.play_stationary("resume.ogg", false);
-            resume_pools();
+            resume_game();
             return;
         }
     }
     if(quit_menu==true) pool.play_stationary("resume.ogg", false);
-    resume_pools();
+    resume_game();
     fade_multi_pool();
     level = 1;
     collected_toys = 0;
@@ -842,7 +842,7 @@ if(gamcopy==true)
         string statsummary = "";
         int min = int(session_playtime / 60000);
         int sec = int((session_playtime % 60000) / 1000);
-        statsummary+= "\r\nSession Stats:\r\n";
+        statsummary+= "Session Stats:\r\n";
         statsummary+= "- Toys collected: " + collected_toys + "\r\n";
         statsummary+= "- Keys collected: " + collected_keys + "\r\n";
         statsummary+= "- Guards killed: " + killed_gards + "\r\n";

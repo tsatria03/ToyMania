@@ -1,0 +1,7 @@
+Session Stats:
+- Toys collected: 119
+- Keys collected: 22
+- Guards killed: 176
+- Cars destroyed: 40
+- Steps taken: 2555
+- Time played: 7 minutes, 10 seconds

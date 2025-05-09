@@ -122,7 +122,7 @@ if(gamcopy==true)
         string statsummary = "";
         int min = int(session_playtime / 60000);
         int sec = int((session_playtime % 60000) / 1000);
-        statsummary += "\r\nSession Stats:\r\n";
+        statsummary += "Session Stats:\r\n";
         statsummary += "- Toys collected: " + collected_toys + "\r\n";
         statsummary += "- Keys collected: " + collected_keys + "\r\n";
         statsummary += "- Guards killed: " + killed_gards + "\r\n";
