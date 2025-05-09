@@ -35,7 +35,7 @@ int64 total_playtime = 0;
 string last_played_date;
 string last_played_time;
 string weapontype="bat";
-string version="2.1";
+string version="2.2";
 timer bossespawntimer, carspawntimer, firetimer, firetimer2, gametimer, gardspawntimer, keyspawntimer, movetimer, runtimer, toyspawntimer, walktimer;
 file achfile, dockfile, gamfile, statfile;
 instance gamstence("tm");
@@ -156,6 +156,7 @@ if (key_repeating(KEY_ESCAPE) and doormove == false)
     health = endless ? 10000 : 1000;
     me.x = 25;
     me.y = 25;
+toynum=20;
     if (!endless) bossdefeated = false;
     if (!endless) bossespawn = false;
     carspawn = false;

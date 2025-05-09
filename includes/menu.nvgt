@@ -162,6 +162,7 @@ m.add_item("Play on Endless Mode. This mode lets you keep playing as long as you
 health = endless ? 10000 : 1000;
     me.x = 25;
     me.y = 25;
+toynum=20;
     bossdefeated = false;
     bossespawn = false;
     carspawn = false;
@@ -483,6 +484,7 @@ if (psmem == "qmg")
     health = endless ? 10000 : 1000;
     me.x = 25;
     me.y = 25;
+toynum=20;
     if (!endless) bossdefeated = false;
     if (!endless) bossespawn = false;
     carspawn = false;
