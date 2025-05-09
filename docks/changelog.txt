@@ -1,3 +1,5 @@
+new in 2.3
+Added an inventory system to the game. This will only be used in endless mode.
 new in 2.2
 Made it so returning from a sound category in the learn sounds menu now brings players back to the category selection menu instead of going back to the game menu. This allows users to jump between categories without having to restart the entire process from the beginning.
 Made it so categories in the Learn Sounds menu are now displayed in alphabetical order. This helps users find what they're looking for more quickly.

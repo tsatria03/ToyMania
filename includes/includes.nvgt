@@ -13,6 +13,7 @@
 #include"form_menu.nvgt"
 #include"gametime.nvgt"
 #include"gard.nvgt"
+#include"inventory.nvgt"
 #include"key.nvgt"
 #include"menu.nvgt"
 #include"savefuncks.nvgt"

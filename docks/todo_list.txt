@@ -1,3 +1,6 @@
+Add a way to determine how many sounds there are per category in the learn game sounds menu.
+Add more UI sounds into the learn game sounds menu.
+Randomize door keys.
 Add difficulty options for the normal and endless game modes.
 
 *Done. Ad an endless game mode.

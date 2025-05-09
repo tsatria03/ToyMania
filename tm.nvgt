@@ -1,4 +1,4 @@
-#pragma embed "packs/assets.tmg"
+#pragma embed "data/packs/assets.tmg"
 #include"includes/includes.nvgt"
 bool behind_pitch=true;
 bool hrtf=true;
@@ -19,15 +19,16 @@ bool variant_descriptions=true;
 bool copexpsounds=true;
 bool quit_menu=true;
 double toyambvolume=0, toyambpitch=100, toymusvolume=0, toymuspitch=100;
-double ammo=100, collected_keys=0, collected_toys=0, destroyed_cars=0, health=1000, killed_gards=0, level=1, moved_steps=0, swordplays=0, stoneplays=0, total_collected_toys=0, total_collected_keys=0, total_killed_gards=0, total_destroyed_cars=0, total_moved_steps=0;
+double ammo=100, collected_keys=0, collected_toys=0, destroyed_cars=0, health=1000, maxhealth=1000, killed_gards=0, level=1, moved_steps=0, swordplays=0, stoneplays=0, total_collected_toys=0, total_collected_keys=0, total_killed_gards=0, total_destroyed_cars=0, total_moved_steps=0;
 double maxx=50, maxy=50;
-int achslot, painslot, toyambslot, toytrackslot, weaponslot;
+int achslot, invslot, painslot, toyambslot, toytrackslot, weaponslot;
 int heartbeat_slot;
 int bossnum=1, carnum=5, gardnum=10, keynum=15, toynum=20;
 int weprange=5, weprange2=10, wepdamage=20;
 int gametime, movetime;
 int firetime=50, firetime2=100;
 int runtime=100;
+int usetime=100;
 int walktime=200;
 int bossespawntime=5000, carspawntime=1000, gardspawntime=500, keyspawntime=250, toyspawntime=125;
 int64 session_playtime = 0;
@@ -35,8 +36,8 @@ int64 total_playtime = 0;
 string last_played_date;
 string last_played_time;
 string weapontype="bat";
-string version="2.2";
-timer bossespawntimer, carspawntimer, firetimer, firetimer2, gametimer, gardspawntimer, keyspawntimer, movetimer, runtimer, toyspawntimer, walktimer;
+string version="2.3";
+timer bossespawntimer, carspawntimer, firetimer, firetimer2, gametimer, gardspawntimer, keyspawntimer, movetimer, runtimer, toyspawntimer, usetimer, walktimer;
 file achfile, dockfile, gamfile, statfile;
 instance gamstence("tm");
 audio_form form;
@@ -157,7 +158,7 @@ void toy_game_input()
 {
 if (key_repeating(KEY_ESCAPE) and doormove == false)
 {
-    pause_game();
+gametimer.pause();
     if (quit_menu==true)
     {
         setupmenu(false);
@@ -169,11 +170,11 @@ if (key_repeating(KEY_ESCAPE) and doormove == false)
         if (res == -1 or confirm == "no")
         {
             speak("canceled");
-resume_game();
+gametimer.resume();
             return;
         }
     }
-    resume_game();
+gametimer.resume();
     fade_multi_pool();
     level = 1;
     collected_toys = 0;
@@ -197,6 +198,7 @@ resume_game();
     destroy_all_toys();
     gametimer.restart();
     health = endless ? 10000 : 1000;
+maxhealth = endless ? 10000 : 1000;
     me.x = 25;
     me.y = 25;
 toynum=20;
@@ -245,6 +247,21 @@ draw_weapon("laser");
 if (key_pressed(KEY_9) and doormove == false and endless)
 {
 draw_weapon("machinegun");
+}
+if(key_repeating(KEY_TAB) and key_up(KEY_LMENU) and key_up(KEY_RMENU) and endless)
+{
+if (shift_is_down())
+cycle_inv(0);
+else
+cycle_inv(1);
+}
+if(key_repeating(KEY_RETURN) and shift_is_down() and endless and usetimer.elapsed>=usetime)
+{
+usetimer.restart();
+if (inv.get_keys().length()>0 and invpos<inv.get_size())
+useitem(inv.get_keys()[invpos]);
+else
+speak("No item in focus.");
 }
 if(key_repeating(KEY_PRIOR) and toymusvolume!=0)
 {

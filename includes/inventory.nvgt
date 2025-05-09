@@ -1,0 +1,112 @@
+int invpos;
+dictionary inv;
+void give(string item, int amount)
+{
+int a;
+if (!inv.exists(item))
+{
+inv.set(item,amount);
+}
+else
+{
+inv.get(item,a);
+if (a+amount<=0)
+inv.delete(item);
+else
+inv.set(item,a+amount);
+}
+}
+void clear_inv()
+{
+inv.delete_all();
+}
+void cycle_inv(int dir)
+{
+if (dir==1)
+invpos+=1;
+//sound goes here.
+else
+invpos-=1;
+if (invpos>=inv.get_size())
+{
+invpos=0;
+}
+else if (invpos<0)
+{
+invpos=inv.get_size()-1;
+}
+if (inv.get_size()==0)
+{
+p.destroy_sound(invslot);
+speak("empty");
+}
+else
+{
+int a;
+inv.get(inv.get_keys()[invpos],a);
+if(a==1)
+speak(string_replace(inv.get_keys()[invpos],"_"," ",true)+". Item "+(invpos+1)+" of "+inv.get_keys().length());
+else
+speak(string_replace(inv.get_keys()[invpos], "_", " ", true)+"s, "+a+". Item "+(invpos+1)+" of "+inv.get_keys().length());
+}
+}
+void useitem(string current)
+{
+if (inv.get_size()<=0)
+{
+speak("No items");
+}
+else
+{
+current=inv.get_keys()[invpos];
+if(current=="potion" and health!=maxhealth)
+{
+//sound goes here.
+give("potion",-1);
+health+=maxhealth/4;
+speak("healed to"+round(health/maxhealth*100,2)+"percent health");
+return;
+}
+if(current=="potion" and health>=maxhealth)
+{
+speak("You don't need to use this!");
+return;
+}
+}
+}
+int count_total_items()
+{
+int amount=0;
+for (uint i=0; i<inv.get_keys().length(); i++)
+{
+int a;
+inv.get(inv.get_keys()[i],a);
+amount+=a;
+}
+return amount;
+}
+string getitem()
+{
+if (inv.get_size()<=0)
+{
+return "";
+}
+else
+{
+string current=inv.get_keys()[invpos];
+return current;
+}
+}
+int item_exists(string item)
+{
+string[] current=inv.get_keys();
+int index=current.find(item);
+if (index>-1)
+{
+int ab;
+inv.get(current[index],ab);
+return ab;
+}
+else
+return -1;
+}

@@ -163,7 +163,8 @@ m.add_item("Play Endless Mode. This mode lets you keep playing as long as you ca
             achievements[i].currentTier = 0;
     }
     gametimer.restart();
-health = endless ? 10000 : 1000;
+    health = endless ? 10000 : 1000;
+maxhealth = endless ? 10000 : 1000;
     me.x = 25;
     me.y = 25;
 toynum=20;
@@ -335,12 +336,12 @@ string vdesc = variant_descriptions ? ". This sound has multiple variants." : ""
 dictionary boss;
 boss["Boss Alert"] = "bossalert.ogg";
 boss["Boss Death"] = "bossdeath.ogg";
-boss["Boss Fall"] = "bossfall.wav";
+boss["Boss Fall" + vdesc] = array<string> = {"bossfall1.wav", "bossfall2.wav"};
 boss["Boss Heal" + vdesc] = array<string> = {"bossheal1.ogg", "bossheal2.ogg", "bossheal3.ogg"};
 boss["Boss Hit" + vdesc] = array<string> = {"bosshit1.ogg", "bosshit2.ogg", "bosshit3.ogg"};
 boss["Boss Pain"] = "bosspain.ogg";
 boss["Boss Taunt"] = "bosstaunt.ogg";
-boss["Boss Teleport" + vdesc] = array<string> = {"bosstel1.ogg", "bosstel2.ogg", "bosstel3.ogg"};
+boss["Boss Teleport" + vdesc] = array<string> = {"bosstel1.ogg", "bosstel2.ogg"};
 boss["Boss Walk" + vdesc] = array<string> = {"bosswalk1.ogg", "bosswalk2.ogg", "bosswalk3.ogg", "bosswalk4.ogg"};
 boss["Boss Launch"] = "bosslaunch.ogg";
 learnCategories["Boss"] = boss;
@@ -521,6 +522,7 @@ if (psmem == "qmg")
     destroy_all_toys();
     gametimer.restart();
     health = endless ? 10000 : 1000;
+maxhealth = endless ? 10000 : 1000;
     me.x = 25;
     me.y = 25;
 toynum=20;
