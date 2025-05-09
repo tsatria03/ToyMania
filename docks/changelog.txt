@@ -66,7 +66,7 @@ Added an option to show or hide the manual stat copy menu items in the settings 
 new in 1.7
 Updated the readme file with some missing keyboard shortcuts that weren't there before.
 Added a hidden keyboard shortcut to announce the current music volume in the main menu. Holding Alt and pressing Left + Right or Right + Left arrows now speaks the current menu music volume.
-Added options to the settings menu for toggling spoken menu loading prompts and dialog end statements. These options allow players to disable the automatic "Loading" and "Press enter to continue" speech, offering a cleaner experience for advanced users.
+Added options to the settings menu for toggling spoken menu loading prompts and dialog end statements. These options allow players to disable the automatic Loading and Press enter to continue speech, offering a cleaner experience for advanced users.
 Made it so player titles don't get copied along with other game statistics on the death and win screens. These are only a part of lifetime stats, not session-based ones.
 Added the ability to copy all of your game session results to the clipboard upon reaching the death or win screens.
 Added the ability to restart the game in the main menu.
