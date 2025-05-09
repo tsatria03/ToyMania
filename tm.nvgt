@@ -620,7 +620,10 @@ gards[i].gardhealth-=wepdamage;
 }
 void toygame()
 {
-draw_random_weapon();
+if (endless)
+    draw_random_weapon();
+else
+    draw_weapon("bat");
 p.play_stationary("playerland.ogg", false);
 toyambslot=ambpool.play_stationary_extended("toyamb.ogg",true,0,0,toyambvolume,toyambpitch,false);
 toytrackslot=muspool.play_stationary_extended("toymus.ogg",true,0,0,toymusvolume,toymuspitch,false);

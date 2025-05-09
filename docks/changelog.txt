@@ -1,4 +1,5 @@
 new in 2.2
+Made it so your starting weapon is only randomized when playing the Endless mode. In Normal mode, players will always begin with the bat as their default weapon, ensuring a consistent and balanced starting experience.
 Added the ability to draw a random weapon at the start of a new game session. Instead of always starting with the bat, players are now equipped with a randomly selected weapon, adding variety and unpredictability to each run.
 Added a playtime counter to the test speakers menu. These counters are for the sword clank and stone throw sounds. They will also be saved along with your game related settings as well.
 Made it so the pause and resume sounds don't play when the user presses the escape key to open the quit menu.
