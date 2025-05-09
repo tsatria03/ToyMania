@@ -1,4 +1,8 @@
 new in 2.2
+Made it so returning from a sound category in the learn sounds menu now brings players back to the category selection menu instead of going back to the game menu. This allows users to jump between categories without having to restart the entire process from the beginning.
+Made it so categories in the Learn Sounds menu are now displayed in alphabetical order. This helps users find what they're looking for more quickly.
+Made it so each sound category in the Learn Sounds menu has it's own descriptive title. When entering a category, the menu intro text updates to reflect the selected group, giving users clear context while browsing the sounds they want to view.
+Improved the Learn game Sounds menu by reorganizing it into categories for easier navigation of commonly used sounds in the game. Players can now browse specific groups of sounds, such as Bosses, Guards, Weapons, and more, making it faster to find and preview the sounds they care about most.
 Made it so your starting weapon is only randomized when playing the Endless mode. In Normal mode, players will always begin with the bat as their default weapon, ensuring a consistent and balanced starting experience.
 Added the ability to draw a random weapon at the start of a new game session. Instead of always starting with the bat, players are now equipped with a randomly selected weapon, adding variety and unpredictability to each run.
 Added a playtime counter to the test speakers menu. These counters are for the sword clank and stone throw sounds. They will also be saved along with your game related settings as well.

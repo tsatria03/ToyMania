@@ -261,7 +261,7 @@ int old_pos = m.focused_item;
 bool r = m.monitor();
 if (!r && m.selected_item < 0) {
 audio.close();
-gamemenu();
+learnsoundsmenu();
 }
 if (m.focused_item != old_pos) {
 audio.close();
@@ -270,7 +270,7 @@ old_pos = m.focused_item;
 if (r) continue;
 if (m.selected_item_id == "back") {
 audio.close();
-gamemenu();
+learnsoundsmenu();
 }
 if (m.selected_item < 0 || m.selected_item >= sfx_names.length()) continue;
 string filename = "";
