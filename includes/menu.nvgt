@@ -436,7 +436,7 @@ learnCategories["Weapons"] = weapons;
 string[] sortedKeys = learnCategories.get_keys();
 sortedKeys.sort_ascending();
 setupmenu(false);
-m.intro_text = "Learn game sounds menu. You can preview the most important sounds used by the game here. Please first select a sound category to play.";
+m.intro_text = "Learn game sounds menu. You can preview the most important sounds used by the game here. This menu is organized by sound category for easier viewing.";
 for (uint i = 0; i < sortedKeys.length(); i++)
 {
 string key = sortedKeys[i];
