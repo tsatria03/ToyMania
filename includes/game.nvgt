@@ -171,9 +171,16 @@ if(key_pressed(KEY_L) and doormove==false)
 {
 speak("You're currently on level " + level + " of the " + (endless ? "Endless" : "Normal") + " game mode.");
 }
-if (key_pressed(KEY_D) and !doormove and endless and doors.length() > 0)
+if (key_pressed(KEY_D) and doormove==false and endless)
 {
-    speak("The door is at " + doors[0].startx + ", " + doors[0].starty + ". You need a sertain amount of keys to unlock it.");
+if (doors.length() > 0)
+{
+    speak("The door is at " + doors[0].startx + ", " + doors[0].starty + ". You need " + doors[0].required_keys + " or more keys to unlock it.");
+}
+else
+{
+    speak("There are no doors currently present.");
+}
 }
 if(key_pressed(KEY_C) and doormove==false)
 {
@@ -516,6 +523,10 @@ if(ammo<=0)
 {
 ammo=0;
 }
+if(health>=maxhealth)
+{
+health=maxhealth;
+}
 if(bossespawntimer.elapsed>=bossespawntime and bosses.length()<bossnum and bossespawn==true and !bossdefeated and !endless)
 {
 dlgplay("bossalert.ogg");
@@ -524,7 +535,7 @@ destroy_all_doors();
 destroy_all_gards();
 destroy_all_toys();
 spawn_boss(random(0,maxx), random(0,maxy), random(200,400), random(40,80), random(100,500), random(5000,10000), random(100,500), random(5000,10000), random(10000,20000), "boss");
-spawn_door(random(25,50), random(25,50), 0, 0, random(100,200), random(15,30);
+spawn_door(random(25,50), random(25,50), 0, 0, random(100,200), random(15,30));
 bossespawntimer.restart();
 }
 if(carspawntimer.elapsed>=carspawntime and cars.length()<carnum and carspawn==true)
@@ -615,17 +626,19 @@ if (endless and gametimer.elapsed >= 1000 * (level + 1) * 60)
     {
         gardspawn = true;
         gardnum = 10;
+    objdest = true;
+    objspawn = true;
         toynum = 35;
     }
     else if (level == 5)
     {
         gardnum = 20;
-    objdest = true;
-    objspawn = true;
         toynum = 50;
     }
     else if (level == 6)
     {
+carnum=3;
+gardnum=5;
         keyspawn = true;
         keydest = true;
         toynum = 10;

@@ -2,7 +2,7 @@ obj@[]objs(0);
 class obj
 {
 bool autobreak;
-int getsound, hurtsound, objsound;
+int getsound, hurtsound, objsound, spawnsound;
 int itx;
 int ity;
 int timeout;
@@ -15,6 +15,7 @@ ity=y;
 timeout=tt;
 objtype=ot;
 autobreak=br;
+spawnsound=objpool.play_2d("objspawn.ogg", me.x, me.y, itx, ity, false);
 objsound=objpool.play_2d("objloop.ogg", me.x, me.y, itx, ity, true);
 objpool.update_sound_2d(objsound,itx,ity);
 }
@@ -26,7 +27,7 @@ for(uint i=0; i<objs.length(); i++)
 if(objs[i].timeout_timer.elapsed>=objs[i].timeout and objs[i].autobreak==true)
 {
 objpool.destroy_sound(objs[i].objsound);
-objs[i].hurtsound=objpool.play_2d("objbreak.ogg", me.x, me.y, objs[i].itx, objs[i].ity, false);
+objs[i].hurtsound=objpool.play_2d("objbreak"+random(1,2)+".ogg", me.x, me.y, objs[i].itx, objs[i].ity, false);
 objs.remove_at(i);
 return;
 }

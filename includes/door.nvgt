@@ -28,7 +28,7 @@ if(doors[i].startx==me.x and doors[i].starty==me.y and key_pressed(KEY_RETURN))
 {
 if(collected_keys<doors[i].required_keys)
 {
-speak("This door is locked. You need "+doors[i].required_keys+" or more keys in order to unlock it.");
+speak("This door is locked. You need "+doors[i].required_keys+" or more keys to unlock it.");
 }
 else if(collected_keys>=doors[i].required_keys)
 {

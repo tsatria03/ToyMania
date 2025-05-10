@@ -483,7 +483,28 @@ m.intro_text = "Learn game sounds menu. You can preview the most important sound
 for (uint i = 0; i < sortedKeys.length(); i++)
 {
 string key = sortedKeys[i];
-m.add_item(key, key);
+dictionary@ cat = cast<dictionary@>(learnCategories[key]);
+if (cat is null) continue;
+uint count = 0;
+array<string> subkeys = cat.get_keys();
+for (uint j = 0; j < subkeys.length(); j++)
+{
+if (cat.exists(subkeys[j]))
+{
+    string[]@ arr = cast<string[]@>(cat[subkeys[j]]);
+    if (arr !is null)
+    {
+        count += arr.length();
+    }
+    else
+    {
+        string dummy;
+        if (cat.get(subkeys[j], dummy))
+            count += 1;
+    }
+}
+}
+m.add_item(key + ": This category has a total of " + count + " sound" + (count == 1 ? "" : "s"), key);
 }
 m.add_item("Back", "back");
 int res = m.run();
@@ -1113,7 +1134,7 @@ if (preffsm == "gcp")
 {
 gamcopy = !gamcopy;
 play_toggle(gamcopy);
-dlgmessage_return(gamcopy ? "Pause and post-game copy prompt enabled." : "Pause and post-game copy prompt disabled.");
+dlgmessage_return(gamcopy ? "Pause and post-game copy prompts enabled." : "Pause and post-game copy prompts disabled.");
 settingsmenu();
 }
 if (preffsm == "scp")
