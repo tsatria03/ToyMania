@@ -513,7 +513,7 @@ void pausemenu()
 {
     setupmenu(false);
         m.add_item("Copy level and game mode to clipboard", "clg");
-        m.add_item("Read session statistics", "rs");
+        m.add_item("Read current game session statistics", "rs");
         m.add_item("Quit game", "qmg");
         m.add_item("Resume game", "rmg");
 m.add_item("view detailed stats", "vds");
