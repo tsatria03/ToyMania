@@ -87,7 +87,7 @@ bosses[i].bossy--;
 }
 if(me.x==bosses[i].bossx and me.y==bosses[i].bossy and bosses[i].firetimer.elapsed>=bosses[i].firetime)
 {
-bosses[i].wepsound=bosspool.play_2d(bosses[i].bosstype+"hit"+random(1,3)+".ogg", me.x, me.y, bosses[i].bossx, bosses[i].bossy, false);
+bosses[i].wepsound=bosspool.play_2d(bosses[i].bosstype+"hit"+random(1,2)+".ogg", me.x, me.y, bosses[i].bossx, bosses[i].bossy, false);
 painslot=p.play_stationary("playerpain.ogg", false);
 health-=bosses[i].damage;
 bosses[i].firetimer.restart();

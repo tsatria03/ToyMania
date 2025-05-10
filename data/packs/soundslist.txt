@@ -21,7 +21,6 @@ bossheal2.ogg
 bossheal3.ogg
 bosshit1.ogg
 bosshit2.ogg
-bosshit3.ogg
 bosslaunch.ogg
 bosspain.ogg
 bosstaunt.ogg
@@ -80,7 +79,6 @@ gard1fall5.wav
 gard1hit1.ogg
 gard1hit2.ogg
 gard1hit3.ogg
-gard1hit4.ogg
 gard1pain1.ogg
 gard1pain2.ogg
 gard1pain3.ogg
@@ -96,7 +94,9 @@ gard1walk5.ogg
 gard2death.ogg
 gard2fall1.wav
 gard2fall2.wav
-gard2hit.ogg
+gard2hit1.ogg
+gard2hit2.ogg
+gard2hit3.ogg
 gard2pain.ogg
 gard2taunt.ogg
 gard2walk1.ogg

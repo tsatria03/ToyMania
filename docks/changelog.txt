@@ -1,4 +1,5 @@
 new in 2.4
+Adjusted some hitting sounds for bosses and guards.
 Made it so your inventory gets reset upon starting a new game in endless mode.
 Fixed a bug where the sounds of health related items would still play even after a game has ended in endless mode.
 new in 2.3

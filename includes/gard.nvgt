@@ -52,8 +52,8 @@ gards[i].gardy--;
 }
 if(me.x==gards[i].gardx and me.y==gards[i].gardy and gards[i].firetimer.elapsed>=gards[i].firetime)
 {
-if(gards[i].gardtype=="gard1") gards[i].wepsound=gardpool.play_2d(gards[i].gardtype+"hit"+random(1,4)+".ogg", me.x, me.y, gards[i].gardx, gards[i].gardy, false);
-if(gards[i].gardtype=="gard2") gards[i].wepsound=gardpool.play_2d(gards[i].gardtype+"hit.ogg", me.x, me.y, gards[i].gardx, gards[i].gardy, false);
+if(gards[i].gardtype=="gard1") gards[i].wepsound=gardpool.play_2d(gards[i].gardtype+"hit"+random(1,3)+".ogg", me.x, me.y, gards[i].gardx, gards[i].gardy, false);
+if(gards[i].gardtype=="gard2") gards[i].wepsound=gardpool.play_2d(gards[i].gardtype+"hit"+random(1,3)+".ogg", me.x, me.y, gards[i].gardx, gards[i].gardy, false);
 painslot=p.play_stationary("playerpain.ogg", false);
 health-=gards[i].damage;
 gards[i].firetimer.restart();
