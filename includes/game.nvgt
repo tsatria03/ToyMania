@@ -52,6 +52,8 @@ toynum=20;
     gardspawn = false;
     keydest = false;
     keyspawn = false;
+    objdest = false;
+    objspawn = false;
     toydest = false;
     toyspawn = false;
     mainmenu();
@@ -618,8 +620,8 @@ if (endless and gametimer.elapsed >= 1000 * (level + 1) * 60)
     else if (level == 5)
     {
         gardnum = 20;
-objspawn=true;
-objdest=true;
+    objdest = true;
+    objspawn = true;
         toynum = 50;
     }
     else if (level == 6)
@@ -640,14 +642,14 @@ objdest=true;
         gardspawn = true;
         keynum += 1;
         if (keynum > 15) keynum = 15;
-        keyspawn = true;
         keydest = true;
+        keyspawn = true;
         objnum += 1;
         if (objnum > 15) objnum = 15;
-        objspawn = true;
-        objdest = true;
-        toyspawn = true;
+    objdest = true;
+    objspawn = true;
         toydest = true;
+        toyspawn = true;
     }
     bossespawn = false;
 }

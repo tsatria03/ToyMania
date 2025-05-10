@@ -1,5 +1,5 @@
 new in 2.3
-Made it so the door requirements are randomized between 15 and 30 keys to unlock it.
+Made it so door requirements are randomized between 15 and 30 keys to unlock it.
 Adjusted some of the sound names found in the learn game sounds menu.
 Added an items category into the learn game sounds menu.
 Added some more player and UI related sounds into the learn game sounds menu.
