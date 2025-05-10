@@ -171,7 +171,7 @@ speak("You're currently on level " + level + " of the " + (endless ? "Endless" :
 }
 if (key_pressed(KEY_D) and !doormove and endless and doors.length() > 0)
 {
-    speak("The door is at " + doors[0].startx + ", " + doors[0].starty + ". You need 15 or more keys to unlock it.");
+    speak("The door is at " + doors[0].startx + ", " + doors[0].starty + ". You need sertain amount of keys to unlock it.");
 }
 if(key_pressed(KEY_C) and doormove==false)
 {

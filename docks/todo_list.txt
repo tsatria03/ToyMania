@@ -1,8 +1,8 @@
 Add a way to determine how many sounds there are per category in the learn game sounds menu.
-Add more UI sounds into the learn game sounds menu.
-Randomize door keys.
 Add difficulty options for the normal and endless game modes.
 
+*Done. Randomize key requirements to unlock doors in the game.
+*Done. Add more player and UI sounds into the learn game sounds menu.
 *Done. Ad an endless game mode.
 *Done. Add a learn game sounds menu.
 *Done. Add a toggle in the settings menu to control the showing of copyable stat related menu items.
