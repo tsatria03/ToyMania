@@ -1,3 +1,6 @@
+new in 2.4
+Made it so your inventory gets reset upon starting a new game in endless mode.
+Fixed a bug where the sounds of health related items would still play even after a game has ended in endless mode.
 new in 2.3
 Improved level progression in Endless Mode. The game now tracks the times between level-ups to ensure that the level only increases once every 60 seconds, preventing the level sound from playing continuously. This adds stability and makes level advancements more predictable during long Endless Mode runs.
 Added a sound count indicator to each category in the Learn game Sounds menu. Players can now see how many sounds are available in each category before entering the menu. This helps estimate the size of each group of sounds and improves overall navigation and clarity.
