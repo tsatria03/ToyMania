@@ -242,6 +242,27 @@ return 0;
 
 // helper menus:
 
+void setupmenu(bool music_added = true)
+{
+if (music_added)
+{
+m.add_music("menumus.ogg");
+} else
+{
+m.add_music("");
+}
+m.reset();
+m.automatic_intro = true;
+m.focus_first_item = false;
+m.wrap = true;
+m.click_sound = "menuclick.ogg";
+m.close_sound = "menuclose.ogg";
+m.edge_sound = "menuedge.ogg";
+m.enter_sound = "menuenter.ogg";
+m.open_sound = "menuopen.ogg";
+m.wrap_sound = "menuwrap.ogg";
+}
+
 // learn_game_sounds: takes a dictionary of sound descriptions mapped to sound filenames or lists of sound filenames and displays a menu which allows users to press enter on sound descriptions to hear associated sounds.
 void learn_game_sounds_menu(dictionary@ sfx, const string&in audio_prefix = "", menu@ m = null) {
 sound audio;

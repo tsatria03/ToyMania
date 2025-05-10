@@ -168,10 +168,6 @@ if(weapontype=="machinegun") weaponslot=p.play_stationary(weapontype+"reload.ogg
 }
 }
 }
-if(key_pressed(KEY_L) and doormove==false)
-{
-speak("You're currently on level " + level + " of the " + (endless ? "Endless" : "Normal") + " game mode.");
-}
 if (key_pressed(KEY_D) and doormove==false and endless)
 {
 if (doors.length() > 0)
@@ -183,9 +179,29 @@ else
     speak("There are no doors currently present.");
 }
 }
+if(key_pressed(KEY_L) and doormove==false)
+{
+speak("You're currently on level " + level + " of the " + (endless ? "Endless" : "Normal") + " game mode.");
+}
 if(key_pressed(KEY_C) and doormove==false)
 {
 speak("current location, "+me.x+", "+me.y);
+}
+if(key_pressed(KEY_O) and doormove==false)
+{
+speak("There are "+toys.length()+" collectible toys on the field.");
+}
+if(key_pressed(KEY_U) and doormove==false)
+{
+speak("There are "+keys.length()+" collectible keys on the field.");
+}
+if(key_pressed(KEY_J) and doormove==false)
+{
+speak("There are "+cars.length()+" destroyable cars on the field.");
+}
+if(key_pressed(KEY_E) and doormove==false)
+{
+speak("There are "+gards.length()+" killible gards on the field.");
 }
 if(key_pressed(KEY_X) and doormove==false)
 {
@@ -195,25 +211,17 @@ if(key_pressed(KEY_T) and doormove==false)
 {
 speak("You have collected "+collected_toys+" toys.");
 }
-if(key_pressed(KEY_O) and doormove==false)
-{
-speak("There are "+toys.length()+" collectible toys on the field.");
-}
 if(key_pressed(KEY_I) and doormove==false)
 {
 speak("You have collected "+collected_keys+" keys.");
-}
-if(key_pressed(KEY_U) and doormove==false)
-{
-speak("There are "+keys.length()+" collectible keys on the field.");
 }
 if(key_pressed(KEY_F) and doormove==false)
 {
 speak("You have destroyed "+destroyed_cars+" cars.");
 }
-if(key_pressed(KEY_J) and doormove==false)
+if(key_pressed(KEY_Q) and doormove==false)
 {
-speak("There are "+cars.length()+" destroyable cars on the field.");
+speak("You have killed"+killed_gards+" gards.");
 }
 if(key_pressed(KEY_Y) and doormove==false)
 {
@@ -224,14 +232,6 @@ speak("You've been playing for a total of " + session_minutes + " minutes, " + s
 if(key_pressed(KEY_H) and doormove==false)
 {
 speak("You have"+health+" hp remaining.");
-}
-if(key_pressed(KEY_Q) and doormove==false)
-{
-speak("You have killed"+killed_gards+" gards.");
-}
-if(key_pressed(KEY_E) and doormove==false)
-{
-speak("There are "+gards.length()+" killible gards on the field.");
 }
 if(alt_is_down() or control_is_down())
 {
