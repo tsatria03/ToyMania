@@ -1,4 +1,5 @@
 new in 2.4
+Made it so pressing the number row keys doesn't draw the same weapon multiple times. From now on, switching to an already equipped weapon won't retrigger drawing the weapon again.
 Adjusted some breaking sounds for items and toys.
 Made it so menu related sounds don't play while a user is in one of the categories found in the learn game sounds menu.
 Added a detailed stats viewer to the pause menu. This menu displays non-interactive stats about things such as HP, level, coordinates, and much more. This offers a full overview at a glance without having to directly rely on using hotkeys to obtain this information.
