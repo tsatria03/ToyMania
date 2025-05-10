@@ -179,9 +179,11 @@ menuenter.ogg
 menumus.ogg
 menuopen.ogg
 menuwrap.ogg
-objbreak.ogg
+objbreak1.ogg
+objbreak2.ogg
 objget.ogg
 objloop.ogg
+objspawn.ogg
 pause.ogg
 playerbuy1.ogg
 playerbuy2.ogg
@@ -258,4 +260,4 @@ toyloop7.ogg
 toyloop8.ogg
 toyloop9.ogg
 toymus.ogg
-total files: 260
+total files: 262

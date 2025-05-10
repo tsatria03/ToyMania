@@ -25,6 +25,7 @@ int achslot, invslot, itemslot, painslot, toyambslot, toytrackslot, weaponslot;
 int heartbeat_slot;
 int bossnum=1, carnum=5, gardnum=10, keynum=15, objnum=15, toynum=20;
 int bossespawntime=5000, objspawntime=2500, carspawntime=1000, gardspawntime=500, keyspawntime=250, toyspawntime=125;
+int last_level_time = 0;
 int weprange=5, weprange2=10, wepdamage=20;
 int gametime, movetime;
 int firetime=50, firetime2=100;

@@ -1,11 +1,11 @@
 new in 2.3
+Improved level progression in Endless Mode. The game now tracks the times between level-ups to ensure that the level only increases once every 60 seconds, preventing the level sound from playing continuously. This adds stability and makes level advancements more predictable during long Endless Mode runs.
 Added a sound count indicator to each category in the Learn game Sounds menu. Players can now see how many sounds are available in each category before entering the menu. This helps estimate the size of each group of sounds and improves overall navigation and clarity.
 Fixed a bug where the key requirement for unlocking doors would randomly change every time the player interacted with them. The required number of keys is now determined when the door is spawned and remains consistent throughout the session.
 Made it so door requirements are randomized between 15-30 keys for the normal game mode, and 30-60 keys for the endless game mode to unlock it.
-Adjusted some of the sound names found in the learn game sounds menu.
 Added an items category into the learn game sounds menu.
 Added some more player and UI related sounds into the learn game sounds menu.
-Made it so all menus wrap from top to botum.
+Added menu wrapping to the game. If you've reached the botum of a menu, it will wrap itself back up to the top item of the menu.
 Updated the readme file with added and modified keyboard shortcuts.
 Added useable items to the game. This will only be used in endless mode.
 Added an inventory system to the game. This will only be used in endless mode.

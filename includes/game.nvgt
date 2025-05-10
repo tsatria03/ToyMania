@@ -571,34 +571,39 @@ if(toyspawntimer.elapsed>=toyspawntime and toys.length()<toynum and toyspawn==tr
 spawn_toy(random(0,maxx), random(0,maxy), random(5000,10000), toydest);
 toyspawntimer.restart();
 }
-if(!endless and gametimer.elapsed>=1000*60)
+if(!endless and level==1 and gametimer.elapsed>=1000*60)
 {
+p.play_stationary("playerlevel.ogg",false);
 level=2;
 carspawn=true;
 toynum=25;
 }
-if(!endless and gametimer.elapsed>=1000*120)
+if(!endless and level==2 and gametimer.elapsed>=1000*120)
 {
+p.play_stationary("playerlevel.ogg",false);
 level=3;
 carnum=10;
 toydest=true;
 toynum=30;
 }
-if(!endless and gametimer.elapsed>=1000*180)
+if(!endless and level==3 and gametimer.elapsed>=1000*180)
 {
+p.play_stationary("playerlevel.ogg",false);
 level=4;
 carspawn=false;
 gardspawn=true;
 toynum=35;
 }
-if(!endless and gametimer.elapsed>=1000*240)
+if(!endless and level==4 and gametimer.elapsed>=1000*240)
 {
+p.play_stationary("playerlevel.ogg",false);
 level=5;
 gardnum=20;
 toynum=50;
 }
-if(!endless and gametimer.elapsed>=1000*300)
+if(!endless and level==5 and gametimer.elapsed>=1000*300)
 {
+p.play_stationary("playerlevel.ogg",false);
 level=6;
 carspawn=false;
 gardspawn=false;
@@ -607,9 +612,11 @@ bossespawn=true;
 keydest=true;
 keyspawn=true;
 }
-if (endless and gametimer.elapsed >= 1000 * (level + 1) * 60)
+if (endless and gametimer.elapsed >= last_level_time + (1000 * 60))
 {
     level++;
+    last_level_time = gametimer.elapsed;
+    p.play_stationary("playerlevel.ogg", false);
     if (level == 2)
     {
         carspawn = true;
