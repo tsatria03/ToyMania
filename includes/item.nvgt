@@ -15,8 +15,8 @@ ity=y;
 timeout=tt;
 objtype=ot;
 autobreak=br;
-spawnsound=objpool.play_2d("objspawn.ogg", me.x, me.y, itx, ity, false);
-objsound=objpool.play_2d("objloop.ogg", me.x, me.y, itx, ity, true);
+spawnsound=objpool.play_2d("itemspawn.ogg", me.x, me.y, itx, ity, false);
+objsound=objpool.play_2d("itemloop.ogg", me.x, me.y, itx, ity, true);
 objpool.update_sound_2d(objsound,itx,ity);
 }
 }
@@ -27,14 +27,14 @@ for(uint i=0; i<objs.length(); i++)
 if(objs[i].timeout_timer.elapsed>=objs[i].timeout and objs[i].autobreak==true)
 {
 objpool.destroy_sound(objs[i].objsound);
-objs[i].hurtsound=objpool.play_2d("objbreak"+random(1,2)+".ogg", me.x, me.y, objs[i].itx, objs[i].ity, false);
+objs[i].hurtsound=objpool.play_2d("itembreak"+random(1,6)+".ogg", me.x, me.y, objs[i].itx, objs[i].ity, false);
 objs.remove_at(i);
 return;
 }
 if(absolute(me.x - objs[i].itx) <= 2 and absolute(me.y - objs[i].ity) <= 2)
 {
 objpool.destroy_sound(objs[i].objsound);
-objs[i].getsound=objpool.play_stationary("objget.ogg",false);
+objs[i].getsound=objpool.play_stationary("itemget.ogg",false);
 give(objs[i].objtype,1);
 speak(objs[i].objtype);
 objs.remove_at(i);

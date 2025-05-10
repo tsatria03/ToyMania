@@ -1,9 +1,10 @@
 new in 2.4
+Adjusted some breaking sounds for items and toys.
 Made it so menu related sounds don't play while a user is in one of the categories found in the learn game sounds menu.
 Added a detailed stats viewer to the pause menu. This menu displays non-interactive stats about things such as HP, level, coordinates, and much more. This offers a full overview at a glance without having to directly rely on using hotkeys to obtain this information.
 Added some more UI related sounds into the learn game sounds menu.
-Adjusted some hitting sounds for bosses and guards.
 Made it so your inventory gets reset upon starting a new game in endless mode.
+Adjusted some hitting sounds for bosses and guards.
 Fixed a bug where the sounds of health related items would still play even after a game has ended in endless mode.
 new in 2.3
 Improved level progression in Endless Mode. The game now tracks the times between level-ups to ensure that the level only increases once every 60 seconds, preventing the level sound from playing continuously. This adds stability and makes level advancements more predictable during long Endless Mode runs.
