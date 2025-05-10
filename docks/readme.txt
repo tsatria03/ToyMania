@@ -34,6 +34,9 @@ Alt or Control plus right arrow: Moves right at double speed on the X axis, if p
 Alt or Control plus up arrow: Moves up at double speed on the Y axis, if pressed/held down.
 Alt or Control plus down arrow: Moves down at double speed on the Y axis, if pressed/held down.
 Number row: Draws weapons 1 through 8 in the normal game mode, and 9 in the endless game mode for use, if pressed.
-Space: Fires the currently drawn weapon, if pressed/held down.
+Tab: Cycles forward through the available inventory items, if pressed.
+Shift plus tab: Cycles backward through the available inventory items, if pressed.
+Spacebar: Fires the currently drawn weapon, if pressed/held down.
 Enter: Interacts with various game elements, such as doors, dialogs, and lots of other menu items found in general, if pressed.
+Shift plus enter: Uses an inventory item when it's currently focused, if pressed/held down.
 Escape: Exits the current game session, and returns back to the main menu, if pressed.

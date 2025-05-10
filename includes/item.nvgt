@@ -1,0 +1,56 @@
+obj@[]objs(0);
+class obj
+{
+bool autobreak;
+int getsound, hurtsound, objsound;
+int itx;
+int ity;
+int timeout;
+string objtype;
+timer timeout_timer;
+obj(int x,int y,int tt,string ot,bool br)
+{
+itx=x;
+ity=y;
+timeout=tt;
+objtype=ot;
+autobreak=br;
+objsound=objpool.play_2d("objloop.ogg", me.x, me.y, itx, ity, true);
+objpool.update_sound_2d(objsound,itx,ity);
+}
+}
+void objloop()
+{
+for(uint i=0; i<objs.length(); i++)
+{
+if(objs[i].timeout_timer.elapsed>=objs[i].timeout and objs[i].autobreak==true)
+{
+objpool.destroy_sound(objs[i].objsound);
+objs[i].hurtsound=objpool.play_2d("objbreak.ogg", me.x, me.y, objs[i].itx, objs[i].ity, false);
+objs.remove_at(i);
+return;
+}
+if(absolute(me.x - objs[i].itx) <= 2 and absolute(me.y - objs[i].ity) <= 2)
+{
+objpool.destroy_sound(objs[i].objsound);
+objs[i].getsound=objpool.play_stationary("objget.ogg",false);
+give(objs[i].objtype,1);
+speak(objs[i].objtype);
+objs.remove_at(i);
+return;
+}
+}
+}
+void spawn_obj(int x,int y,int timeout,string objtype,bool autobreak)
+{
+obj o1(x,y,timeout,objtype,autobreak);
+objs.insert_last(o1);
+}
+void destroy_all_objs()
+{
+for(uint i=0; i<objs.length(); i++)
+{
+objpool.destroy_sound(objs[i].objsound);
+}
+objs.resize(0);
+}

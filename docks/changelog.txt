@@ -1,4 +1,10 @@
 new in 2.3
+Adjusted some of the sound names found in the learn game sounds menu.
+Added an items category into the learn game sounds menu.
+Added some more player and UI related sounds into the learn game sounds menu.
+Made it so all menus wrap from top to botum.
+Added useable items to the game. This will only be used in endless mode.
+Updated the readme file with added and modified keyboard shortcuts.
 Added an inventory system to the game. This will only be used in endless mode.
 new in 2.2
 Made it so returning from a sound category in the learn sounds menu now brings players back to the category selection menu instead of going back to the game menu. This allows users to jump between categories without having to restart the entire process from the beginning.

@@ -14,7 +14,8 @@ boothit2.ogg
 boothit3.ogg
 bossalert.ogg
 bossdeath.ogg
-bossfall.wav
+bossfall1.wav
+bossfall2.wav
 bossheal1.ogg
 bossheal2.ogg
 bossheal3.ogg
@@ -26,7 +27,6 @@ bosspain.ogg
 bosstaunt.ogg
 bosstel1.ogg
 bosstel2.ogg
-bosstel3.ogg
 bosswalk1.ogg
 bosswalk2.ogg
 bosswalk3.ogg
@@ -116,6 +116,12 @@ hammerhit2.ogg
 hammerhit3.ogg
 heartstart.ogg
 heartstop.ogg
+invcycle1.ogg
+invcycle2.ogg
+invcycle3.ogg
+invcycle4.ogg
+invcycle5.ogg
+invcycle6.ogg
 keybreak1.ogg
 keybreak2.ogg
 keybreak3.ogg
@@ -172,16 +178,30 @@ menuedge.ogg
 menuenter.ogg
 menumus.ogg
 menuopen.ogg
+menuwrap.ogg
+objbreak.ogg
+objget.ogg
+objloop.ogg
 pause.ogg
+playerbuy1.ogg
+playerbuy2.ogg
+playerbuy3.ogg
+playerbuy4.ogg
 playerdeath.ogg
 playerfall.ogg
+playerheal1.ogg
+playerheal2.ogg
+playerheal3.ogg
 playerland.ogg
+playerlevel.ogg
 playerpain.ogg
 playerstep1.ogg
 playerstep2.ogg
 playerstep3.ogg
 playerstep4.ogg
 playerstep5.ogg
+playertel.ogg
+potionuse.ogg
 resume.ogg
 session_achievement.ogg
 setdisabled.ogg
@@ -238,4 +258,4 @@ toyloop7.ogg
 toyloop8.ogg
 toyloop9.ogg
 toymus.ogg
-total files: 240
+total files: 260
