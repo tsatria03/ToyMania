@@ -291,7 +291,7 @@ weapons = {"bat", "boot", "club", "feat", "fist", "hammer", "knife", "laser"};
 }
 string weapon = random_string(weapons);
 draw_weapon(weapon);
-speak(weapontype + " equipped");
+speak(weapontype + " randomly equipped");
 p.destroy_sound(weaponslot);
 weaponslot = p.play_stationary(weapontype + "draw.ogg", false);
 }

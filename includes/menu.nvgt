@@ -156,8 +156,8 @@ mainmenu();
 if (gamem == "ty")
 {
     setupmenu(false);
-m.add_item("Play Normal Mode. This mode lets you complete objectives and defeat the boss, and find the unlockable door to win. Great for structured gameplay.", "normal");
-m.add_item("Play Endless Mode. This mode lets you keep playing as long as you can. The game gets harder over time with no final boss, and one unlockable door to win.", "endless");
+m.add_item("Easy. This mode lets you complete objectives and defeat the boss, and find the unlockable door to win. Great for structured gameplay.", "normal");
+m.add_item("Endless. This mode lets you play for as long as you can survive. The game will get harder over time with no final boss, and just one unlockable door to win. This mode will also include health potions that drop from time to time for use durring intense guard fights.", "endless");
     m.add_item("Back", "back");
     m.intro_text = "Choose how you want to play the game.";
     int gres = m.run();
@@ -166,9 +166,9 @@ m.add_item("Play Endless Mode. This mode lets you keep playing as long as you ca
     {
         gamemenu();
     }
-    if (speak_menu_loading) speak("loading");
-    m.fade_music();
     endless = (mode == "endless");
+    if (speak_menu_loading) speak(endless ? "loading endless mode" : "loading easy mode");
+    m.fade_music();
     dlgplay("gamelaunch.ogg");
     level = 1;
     collected_toys = 0;
@@ -399,10 +399,11 @@ guards["Guard 2 Taunt"] = "gard2taunt.ogg";
 guards["Guard 2 Walk" + vdesc] = array<string> = {"gard2walk1.ogg", "gard2walk2.ogg", "gard2walk3.ogg", "gard2walk4.ogg", "gard2walk5.ogg", "gard2walk6.ogg", "gard2walk7.ogg", "gard2walk8.ogg"};
 learnCategories["Guards"] = guards;
 dictionary items;
-items["Break"] = "objbreak.ogg";
+items["Break" + vdesc] = array<string> = {"objbreak1.ogg", "objbreak2.ogg"};
 items["Cycle inventory" + vdesc] = array<string> = {"invcycle1.ogg", "invcycle2.ogg", "invcycle3.ogg", "invcycle4.ogg", "invcycle5.ogg", "invcycle6.ogg"};
 items["Get"] = "objget.ogg";
 items["Loop"] = "objloop.ogg";
+items["Spawn"] = "objspawn.ogg";
 items["Use potion"] = "potionuse.ogg";
 learnCategories["Items"] = items;
 dictionary keys;
