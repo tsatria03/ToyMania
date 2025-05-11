@@ -194,7 +194,9 @@ else return "You are the ultimate ToyMaster.";
 }
 void draw_weapon(string weapon)
 {
-weapontype = weapon;
+    if (current_weapon == weapon) return;
+    current_weapon = weapon;
+    weapontype = weapon;
 if (weapon == "bat")
 {
 wepdamage = 3;

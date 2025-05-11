@@ -663,6 +663,43 @@ pausemenu();
         }
 }
     }
+void weaponsmenu()
+{
+    setupmenu(false);
+    string[] weaponNames = {"Bat", "Boot", "Club", "Feat", "Fist", "Hammer", "Knife", "Laser"};
+    string[] weaponIds = {"bat", "boot", "club", "feat", "fist", "hammer", "knife", "laser"};
+    if (endless)
+{
+        weaponNames.insert_last("Machine Gun");
+        weaponIds.insert_last("machinegun");
+    }
+    for (uint i = 0; i < weaponNames.length(); i++)
+{
+        if (weaponIds[i] == current_weapon)
+            m.add_item(weaponNames[i] + ": Equipped", weaponIds[i]);
+        else
+            m.add_item(weaponNames[i], weaponIds[i]);
+    }
+    m.intro_text = "Weapons menu.";
+    int res = m.run();
+    string selected = m.get_selected_item_id();
+    if (res == -1)
+{
+gametimer.resume();
+        return;
+    }
+    if (selected != current_weapon)
+{
+gametimer.resume();
+        draw_weapon(selected);
+    }
+else
+{
+        speak("This weapon is already equipped.");
+    }
+gametimer.resume();
+return;
+}
 void achesmenu()
 {
 setupmenu();

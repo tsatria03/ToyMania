@@ -147,6 +147,11 @@ ambpool.update_sound_start_values(toyambslot,0,toyambvolume,toyambpitch);
 speak("source "+toyambvolume);
 writepreffs();
 }
+if (key_pressed(KEY_W) and doormove == false and endless)
+{
+gametimer.pause();
+    weaponsmenu();
+}
 if(key_pressed(KEY_P) and doormove==false)
 {
 pool.play_stationary("pause.ogg",false);
