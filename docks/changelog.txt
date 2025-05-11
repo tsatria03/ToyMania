@@ -1,5 +1,5 @@
 new in 2.4
-Added the ability to view the stats of weapons found in the Weapons menu. Players can now see the damage, horizontal range, and vertical range of each weapon directly from the menu. This makes it easier to compare and choose weapons based on their effectiveness without needing to equip them first.
+Added the ability to view the stats of various weapons found in the Weapons menu. Players can now see the damage, horizontal range, and vertical range of each weapon directly from the menu. This makes it easier to compare and choose weapons based on their effectiveness without needing to equip them first.
 Added the ability to draw and equip weapons with the new weapons menu. You can access this menu by pressing the letter W. This shortcut is also mentioned in the readme file as well.
 Made it so pressing the number row keys doesn't draw the same weapon multiple times. From now on, switching to an already equipped weapon won't retrigger drawing the weapon again.
 Adjusted some breaking sounds for items and toys.
