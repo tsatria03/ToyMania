@@ -1,3 +1,5 @@
+#pragma asset data
+#pragma document docks
 #pragma embed "data/packs/assets.tmg"
 #include"includes/includes.nvgt"
 bool behind_pitch=true;

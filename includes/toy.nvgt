@@ -24,7 +24,7 @@ for(uint i=0; i<toys.length(); i++)
 if(toys[i].timeout_timer.elapsed>=toys[i].timeout and toys[i].autobreak==true)
 {
 toypool.destroy_sound(toys[i].toysound);
-toys[i].hurtsound=toypool.play_2d("toybreak"+random(1,2)+".ogg", me.x, me.y, toys[i].tx, toys[i].ty, false);
+toys[i].hurtsound=toypool.play_2d("toybreak"+random(1,3)+".ogg", me.x, me.y, toys[i].tx, toys[i].ty, false);
 toys.remove_at(i);
 return;
 }

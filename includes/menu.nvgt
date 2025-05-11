@@ -411,7 +411,7 @@ player["Teleport"] = "playertel.ogg";
 player["Walk" + vdesc] = array<string> = {"playerstep1.ogg", "playerstep2.ogg", "playerstep3.ogg", "playerstep4.ogg", "playerstep5.ogg"};
 learnCategories["Player"] = player;
 dictionary toys;
-toys["Break" + vdesc] = array<string> = {"toybreak1.ogg", "toybreak2.ogg"};
+toys["Break" + vdesc] = array<string> = {"toybreak1.ogg", "toybreak2.ogg", "toybreak3.ogg"};
 toys["Get" + vdesc] = array<string> = {"toyget1.ogg", "toyget2.ogg"};
 string[] toyloop;
 for (int i = 1; i <= 40; i++) toyloop.insert_last("toyloop" + i + ".ogg");

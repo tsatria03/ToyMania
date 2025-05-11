@@ -217,6 +217,7 @@ speaker_sword_clank.ogg
 toyamb.ogg
 toybreak1.ogg
 toybreak2.ogg
+toybreak3.ogg
 toyget1.ogg
 toyget2.ogg
 toyloop1.ogg
@@ -260,4 +261,4 @@ toyloop7.ogg
 toyloop8.ogg
 toyloop9.ogg
 toymus.ogg
-total files: 262
+total files: 263
