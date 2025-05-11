@@ -1,5 +1,6 @@
 new in 2.4
-Added the ability to draw and equip weapons with the new weapons menu. You can access this menu by pressing the letter W. This menu will only work in endless mode.
+Added the ability to view the stats of weapons found in the Weapons menu. Players can now see the damage, horizontal range, and vertical range of each weapon directly from the menu. This makes it easier to compare and choose weapons based on their effectiveness without needing to equip them first.
+Added the ability to draw and equip weapons with the new weapons menu. You can access this menu by pressing the letter W. This shortcut is also mentioned in the readme file as well.
 Made it so pressing the number row keys doesn't draw the same weapon multiple times. From now on, switching to an already equipped weapon won't retrigger drawing the weapon again.
 Adjusted some breaking sounds for items and toys.
 Made it so menu related sounds don't play while a user is in one of the categories found in the learn game sounds menu.
@@ -56,7 +57,7 @@ Made it so pressing the letter L tells you wich game mode you are on after annou
 Made it so the machine gun is only available in endless mode. This also includes the restriction of keys to check and reload the ammo for it. The readme file's keyboard command section is also updated to reflect this change as well.
 The endless game Mode has now been completely rebalanced to match the Normal game Mode for the first 6 levels. This offers a gradual and familiar introduction before the difficulty of the game increases. After level 6, the mode will start ramping up with more enemies and collectibles.
 Adjusted the Endless Mode progression for better difficulty scaling. Previously, the Endless Mode would overwhelm players early on by spawning guards, cars, and keys all at once.
-Added a keyboard shortcut to check the position of the winning door in endless mode. This shortcut is also in the readme file as well.
+Added a keyboard shortcut to check the position of the winning door in endless mode. This shortcut is also mentioned in the readme file as well.
 Made it so endless mode starts the player with 10,000 health instead of 1,000. This provides a better chance of survival against harder difficulties with spawned guards.
 Fixed an issue where cars would disappear between levels 4 and 6 in endless mode.
 Added descriptions to the game mode options found in the start game menu.

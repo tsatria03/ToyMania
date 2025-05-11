@@ -18,7 +18,7 @@ Letter, I: Announces how many keys you've collected, if pressed.
 Letter, U: Announces how many collectible keys there are on the field, if pressed.
 Letter, D: Announces the position of the winning door in the endless game mode, if pressed.
 Letter, C: Announces your current location, if pressed.
-Letter, W: Opens the weapons menu in the endless game mode, if pressed.
+Letter, W: Opens the weapons menu, if pressed.
 Letter, X: Announces how many steps you've taken, if pressed.
 Letter, Z: Announces the ammo of weapons that take them in the endless game mode, if pressed.
 Letter, P: Opens the pause menu, if pressed.
