@@ -636,6 +636,8 @@ if (endless and gametimer.elapsed >= last_level_time + (1000 * 60))
     {
         carspawn = true;
         toyspawn = true;
+    objdest = true;
+    objspawn = true;
         toynum = 25;
     }
     else if (level == 3)
@@ -648,8 +650,6 @@ if (endless and gametimer.elapsed >= last_level_time + (1000 * 60))
     {
         gardspawn = true;
         gardnum = 10;
-    objdest = true;
-    objspawn = true;
         toynum = 35;
     }
     else if (level == 5)

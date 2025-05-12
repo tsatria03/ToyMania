@@ -8,7 +8,7 @@ int cardir, cardir2;
 int carhealth;
 int cartime;
 int shotsFired = 0;
-int shotsPerBurst = 50;
+int shotsPerBurst = 10;
 int burstCooldown = 1000;
 int fire_interval = 100;
 string cartype;
@@ -71,17 +71,17 @@ if (cars[i].firing && cars[i].firetimer.elapsed >= cars[i].fire_interval)
     if (cars[i].cartype == "car1")
     {
         cars[i].firesound = p.play_2d("car1shoot.ogg", me.x, me.y, cars[i].carx, cars[i].cary, false);
-        spawn_bullet(cars[i].carx, cars[i].cary, 1, 2, random(10, 20), 30, direction);
+        spawn_bullet(cars[i].carx, cars[i].cary, 2, 2, random(10, 20), 30, direction);
     }
     else if (cars[i].cartype == "car2")
     {
         cars[i].firesound = p.play_2d("car2shoot.ogg", me.x, me.y, cars[i].carx, cars[i].cary, false);
-        spawn_bullet(cars[i].carx, cars[i].cary, 2, 3, random(20, 40), 30, direction);
+        spawn_bullet(cars[i].carx, cars[i].cary, 2, 2, random(20, 40), 30, direction);
     }
     else if (cars[i].cartype == "car3")
     {
         cars[i].firesound = p.play_2d("car3shoot.ogg", me.x, me.y, cars[i].carx, cars[i].cary, false);
-        spawn_bullet(cars[i].carx, cars[i].cary, 3, 4, random(30, 60), 30, direction);
+        spawn_bullet(cars[i].carx, cars[i].cary, 2, 2, random(30, 60), 30, direction);
     }
     cars[i].shotsFired++;
     cars[i].firetimer.restart();
