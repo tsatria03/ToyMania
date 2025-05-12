@@ -1,9 +1,9 @@
 Make the normal game time based.
-Add an export option to the post game copy section
 Add an alarm system to the game.
-Make toy cars harder to kill.
-Add dificulty settings for the normal game mode.
+Add difficulty settings for the normal game mode.
 
+*Done. Add an export option to the post game copy section.
+*Done. Make toy cars use  different tacticts.
 *Done. Add a way to determine how many sounds there are per category in the learn game sounds menu.
 *Done. Randomize key requirements to unlock doors in the game.
 *Done. Add more player and UI sounds into the learn game sounds menu.
