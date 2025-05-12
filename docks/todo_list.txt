@@ -1,3 +1,5 @@
+Make the normal game time based.
+Add an export option to the post game copy section
 Add an alarm system to the game.
 Make toy cars harder to kill.
 Add dificulty settings for the normal game mode.

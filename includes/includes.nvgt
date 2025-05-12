@@ -5,6 +5,7 @@
 #include"achievments.nvgt"
 #include"bodyfall.nvgt"
 #include"boss.nvgt"
+#include"bullet.nvgt"
 #include"car.nvgt"
 #include"dlg.nvgt"
 #include"door.nvgt"
