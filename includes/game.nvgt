@@ -614,22 +614,68 @@ level=5;
 gardnum=20;
 toynum=50;
 }
-if(!endless and level==5 and gametimer.elapsed>=1000*300)
+if (!endless && level == 5 && gametimer.elapsed >= 1000 * 300)
 {
-dlgplay("bossalert.ogg");
-p.play_stationary("playerlevel.ogg",false);
-level=6;
+    dlgplay("bossalert.ogg");
+    p.play_stationary("playerlevel.ogg", false);
+    level = 6;
+    destroy_all_bullets();
+    destroy_all_cars();
+    destroy_all_gards();
+    destroy_all_toys();
+    spawn_door(random(25, 50), random(25, 50), 0, 0, random(100, 200), random(15, 30));
+    carspawn = false;
+    gardspawn = false;
+    toyspawn = false;
+    bossespawn = true;
+    keydest = true;
+    keyspawn = true;
+    boss_timer.restart();
+    alarm_started = false;
+}
+if (!endless && level == 6)
+{
+    if (!alarm_started && boss_timer.elapsed >= 0)
+    {
+        alarmslot=pool.play_stationary("gamealarm.ogg", true);
+        alarm_started = true;
+    }
+    if (boss_timer.elapsed >= boss_time_limit)
+    {
+if (heartbeat_playing)
+{
+    pool.destroy_sound(heartbeat_slot);
+pool.play_stationary("heartstop.ogg", false);
+    heartbeat_playing = false;
+}
+    if(!endless) bossdefeated = false;
+    if(!endless) bossespawn = false;
+    carspawn = false;
+    gardspawn = false;
+    keyspawn = false;
+    toyspawn = false;
+if(endless) clear_inv();
+    if(!endless) destroy_all_bosses();
 destroy_all_bullets();
-destroy_all_cars();
-destroy_all_gards();
-destroy_all_toys();
-spawn_door(random(25,50), random(25,50), 0, 0, random(100,200), random(15,30));
-carspawn=false;
-gardspawn=false;
-toyspawn=false;
-bossespawn=true;
-keydest=true;
-keyspawn=true;
+    destroy_all_cars();
+    destroy_all_doors();
+    destroy_all_gards();
+    destroy_all_keys();
+destroy_all_objs();
+    destroy_all_toys();
+alarm_started = false;
+pool.destroy_sound(alarmslot);
+    p.destroy_sound(painslot);
+    ambpool.destroy_sound(toyambslot);
+    muspool.destroy_sound(toytrackslot);
+pool.play_stationary("gamedeath.ogg",false);
+    dlgplay("playerdeath.ogg");
+    dlgplay("playerfall.ogg");
+        dlgmessage_return("Time ran out! You failed to escape in time. Nice try!");
+        writedata();
+        mainmenu();
+        return;
+    }
 }
 if (endless and gametimer.elapsed >= last_level_time + (1000 * 60))
 {
@@ -696,18 +742,18 @@ double heartbeat_threshold = endless ? 5000 : 500;
 if (health <= heartbeat_threshold and !heartbeat_playing)
 {
     heartbeat_playing = true;
-    heartbeat_slot = p.play_stationary("heartstart.ogg", true);
+    heartbeat_slot = pool.play_stationary("heartstart.ogg", true);
 }
 if (health > heartbeat_threshold and heartbeat_playing)
 {
     heartbeat_playing = false;
-    p.destroy_sound(heartbeat_slot);
+    pool.destroy_sound(heartbeat_slot);
 }
 if (health <= 0)
 {
 if (heartbeat_playing)
 {
-    p.destroy_sound(heartbeat_slot);
+    pool.destroy_sound(heartbeat_slot);
 pool.play_stationary("heartstop.ogg", false);
     heartbeat_playing = false;
 }
@@ -726,6 +772,8 @@ destroy_all_bullets();
     destroy_all_keys();
 destroy_all_objs();
     destroy_all_toys();
+alarm_started = false;
+pool.destroy_sound(alarmslot);
     p.destroy_sound(painslot);
     ambpool.destroy_sound(toyambslot);
     muspool.destroy_sound(toytrackslot);
