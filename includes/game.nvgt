@@ -525,7 +525,6 @@ p.play_stationary("playerland.ogg", false);
 toyambslot=ambpool.play_stationary_extended("gameamb.ogg",true,0,0,toyambvolume,toyambpitch,false);
 toytrackslot=muspool.play_stationary_extended("gamemus.ogg",true,0,0,toymusvolume,toymuspitch,false);
 if(endless) spawn_door(random(25,50), random(25,50), 0, 0, random(100,200), random(30,60));
-collected_keys=55;
 gametimer.force(1000*300);
 while(true)
 {
@@ -820,7 +819,7 @@ if (gamcopy == true)
         if (choice == "copy")
         {
             clipboard_copy_text(statsummary);
-            if (copexpsounds == true) dlgplay("gamcopy.ogg", false);
+            if (copexpsounds == true) dlgplay("gamecopy.ogg", false);
             dlgmessage_return("All game session results copied to your clipboard.");
         }
         else if (choice == "export")

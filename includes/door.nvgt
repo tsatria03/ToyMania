@@ -111,7 +111,7 @@ if (gamcopy == true)
         if (choice == "copy")
         {
             clipboard_copy_text(statsummary);
-            if (copexpsounds == true) dlgplay("gamcopy.ogg", false);
+            if (copexpsounds == true) dlgplay("gamecopy.ogg", false);
             dlgmessage_return("All game session results copied to your clipboard.");
         }
         else if (choice == "export")

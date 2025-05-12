@@ -271,7 +271,7 @@ m.fade_music();
     result += "- Steps Title: " + get_steps_rank() + ". " + get_steps_rank_desc() + "\r\n";
     result += "- Playtime Title: " + get_playtime_rank() + ". " + get_playtime_rank_desc() + "\r\n";
     clipboard_copy_text(result);
-if(copexpsounds==true) dlgplay("gamcopy.ogg" ,false);
+if(copexpsounds==true) dlgplay("gamecopy.ogg" ,false);
     dlgmessage_return("All game progresses have been copied to your clipboard.");
     gamemenu();
 }
@@ -400,6 +400,7 @@ learnCategories["Keys"] = keys;
 dictionary player;
 player["Alarm"] = "gamealarm.ogg";
 player["Death"] = "playerdeath.ogg";
+player["Explode"] = "gamedeath.ogg";
 player["Fall"] = "playerfall.ogg";
 player["Heart start"] = "heartstart.ogg";
 player["Heart stop"] = "heartstop.ogg";
@@ -409,7 +410,7 @@ player["Launch"] = "gamelaunch.ogg";
 player["Level up"] = "playerlevel.ogg";
 player["Life achievement"] = "life_achievement.ogg";
 player["Pain"] = "playerpain.ogg";
-player["Store purchase" + vdesc] = array<string> = {"playerbuy1.ogg", "playerbuy2.ogg", "playerbuy3.ogg", "playerbuy4.ogg"};
+player["Purchase: unused" + vdesc] = array<string> = {"playerbuy1.ogg", "playerbuy2.ogg", "playerbuy3.ogg", "playerbuy4.ogg"};
 player["Session achievement"] = "session_achievement.ogg";
 player["Teleport"] = "playertel.ogg";
 player["Walk" + vdesc] = array<string> = {"playerstep1.ogg", "playerstep2.ogg", "playerstep3.ogg", "playerstep4.ogg", "playerstep5.ogg"};
@@ -436,7 +437,7 @@ ui["Menu open"] = "menuopen.ogg";
 ui["Menu wrap"] = "menuwrap.ogg";
 ui["Pause Game"] = "pause.ogg";
 ui["Resume Game"] = "resume.ogg";
-ui["Stats copy"] = "gamcopy.ogg";
+ui["Stats copy"] = "gamecopy.ogg";
 ui["Stats export"] = "gamexport.ogg";
 learnCategories["UI"] = ui;
 dictionary weapons;
@@ -536,7 +537,7 @@ if (mres == -1)
             string mode = endless ? "Endless" : "Normal";
             string info = "Current Level: " + level + "\r\nGame Mode: " + mode;
             clipboard_copy_text(info);
-            if (copexpsounds==true) dlgplay("gamcopy.ogg", false);
+            if (copexpsounds==true) dlgplay("gamecopy.ogg", false);
             dlgmessage_return("Your current level and game mode has been copied to the clipboard.");
             pausemenu();
 return;
@@ -568,7 +569,7 @@ if (gamcopy == true)
         if (resp == "copy")
         {
             clipboard_copy_text(statsummary);
-            if (copexpsounds == true) dlgplay("gamcopy.ogg", false);
+            if (copexpsounds == true) dlgplay("gamecopy.ogg", false);
             dlgmessage_return("All game session results copied to your clipboard.");
         }
         else if (resp == "export")
@@ -833,7 +834,7 @@ m.fade_music();
         }
     }
     clipboard_copy_text(achievementSummary);
-if(copexpsounds==true) dlgplay("gamcopy.ogg" ,false);
+if(copexpsounds==true) dlgplay("gamecopy.ogg" ,false);
     dlgmessage_return("All game achievements have been copied to your clipboard.");
     achesmenu();
 }
@@ -1031,7 +1032,7 @@ statsummary += "- Car Title: " + get_car_rank() + ". " + get_car_rank_desc() + "
 statsummary += "- Steps Title: " + get_steps_rank() + ". " + get_steps_rank_desc() + "\r\n";
 statsummary += "- Playtime Title: " + get_playtime_rank() + ". " + get_playtime_rank_desc() + "\r\n";
     clipboard_copy_text(statsummary);
-if(copexpsounds==true) dlgplay("gamcopy.ogg" ,false);
+if(copexpsounds==true) dlgplay("gamecopy.ogg" ,false);
     dlgmessage_return("All game statistics have been copied to your clipboard.");
     statsmenu();
 }
