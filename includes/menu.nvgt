@@ -631,6 +631,7 @@ maxhealth = endless ? 10000 : 1000;
             toynum = 20;
             if (!endless) bossdefeated = false;
             if (!endless) bossespawn = false;
+alarm_started = false;
             carspawn = false;
             gardspawn = false;
             keydest = false;

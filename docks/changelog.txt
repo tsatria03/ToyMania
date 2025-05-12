@@ -1,4 +1,5 @@
 new in 2.5
+Fixed an issue where the alarm sound in level 6 would continue to play even after the user has either died or won.
 The normal game mode is now time based. Players now have a limited amount of time to defeat the boss and escape the store once they reach level 6. A looping alarm sound plays during this final phase, increasing urgency. Failing to exit in time will result in the game being over.
 Recoded the post-game menus to support exporting session stats to a file. Players can now choose whether to copy their results to the clipboard, or export them to data/stats/player_posts.txt durring or after a game session.
 Made it so car bullets can sometimes break items and toys while they are traveling.
