@@ -529,6 +529,7 @@ toyloop();
 toy_game_input();
 p.update_listener_2d(me.x,me.y);
 if(!endless) bosspool.update_listener_2d(me.x,me.y);
+bulletpool.update_listener_2d(me.x,me.y);
 carpool.update_listener_2d(me.x,me.y);
 doorpool.update_listener_2d(me.x,me.y);
 gardpool.update_listener_2d(me.x,me.y);

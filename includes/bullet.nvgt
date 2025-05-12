@@ -43,26 +43,37 @@ if(bullets[i].direction=="down")
 {
 bullets[i].bully--;
 }
-if (absolute(me.x - bullets[i].bullx) <= 1 && absolute(me.y - bullets[i].bully) <= 1)
+if (absolute(me.x - bullets[i].bullx) <= 2 && absolute(me.y - bullets[i].bully) <= 2)
 {
 painslot=p.play_stationary("playerpain.ogg", false);
 health-=bullets[i].damage;
 bullets.remove_at(i);
 return;
 }
-if(absolute(bullets[i].bullx-me.x)>bullets[i].range or absolute(bullets[i].bully-me.y)>bullets[i].range2)
+if(absolute(bullets[i].bullx-me.x)>bullets[i].range && absolute(bullets[i].bully-me.y)>bullets[i].range2)
 {
 bullets.remove_at(i);
 return;
 }
 }
-for(uint i1=0; i1<toys.length(); i1++)
+for(uint i1=0; i1<objs.length(); i1++)
 {
-if (absolute(toys[i1].tx - bullets[i].bullx) <= 1 && absolute(toys[i1].ty - bullets[i].bully) <= 1)
+if (absolute(objs[i1].itx - bullets[i].bullx) <= 2 && absolute(objs[i1].ity - bullets[i].bully) <= 2)
 {
-toypool.destroy_sound(toys[i1].toysound);
-toys[i1].hurtsound=toypool.play_2d("toybreak"+random(1,3)+".ogg", me.x, me.y, toys[i1].tx, toys[i1].ty, false);
-toys.remove_at(i1);
+objpool.destroy_sound(objs[i1].objsound);
+objs[i1].hurtsound=objpool.play_2d("itembreak"+random(1,6)+".ogg", me.x, me.y, objs[i1].itx, objs[i1].ity, false);
+objs.remove_at(i1);
+bullets.remove_at(i);
+return;
+}
+}
+for(uint i2=0; i2<toys.length(); i2++)
+{
+if (absolute(toys[i2].tx - bullets[i].bullx) <= 2 && absolute(toys[i2].ty - bullets[i].bully) <= 2)
+{
+toypool.destroy_sound(toys[i2].toysound);
+toys[i2].hurtsound=toypool.play_2d("toybreak"+random(1,3)+".ogg", me.x, me.y, toys[i2].tx, toys[i2].ty, false);
+toys.remove_at(i2);
 bullets.remove_at(i);
 return;
 }
