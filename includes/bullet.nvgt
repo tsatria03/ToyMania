@@ -50,7 +50,7 @@ health-=bullets[i].damage;
 bullets.remove_at(i);
 return;
 }
-if(absolute(bullets[i].bullx-me.x)>bullets[i].range && absolute(bullets[i].bully-me.y)>bullets[i].range2)
+if (abs(bullets[i].bullx - me.x) > bullets[i].range || abs(bullets[i].bully - me.y) > bullets[i].range2)
 {
 bullets.remove_at(i);
 return;

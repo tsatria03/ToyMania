@@ -36,6 +36,7 @@ gametimer.resume();
     }
 if(endless) clear_inv();
     if (!endless) destroy_all_bosses();
+destroy_all_bullets();
     destroy_all_cars();
     destroy_all_gards();
     destroy_all_doors();
@@ -560,6 +561,7 @@ carspawntimer.restart();
 }
 if(gardspawntimer.elapsed>=gardspawntime and gards.length()<gardnum and gardspawn==true)
 {
+destroy_all_bullets();
 if(!endless) destroy_all_cars();
 int gardchoice;
 if(gardchoice==1) spawn_gard(random(0,maxx), random(0,maxy), random(20,40), random(20,40), random(100,1000), random(100,1000), "gard1");
@@ -617,6 +619,7 @@ if(!endless and level==5 and gametimer.elapsed>=1000*300)
 dlgplay("bossalert.ogg");
 p.play_stationary("playerlevel.ogg",false);
 level=6;
+destroy_all_bullets();
 destroy_all_cars();
 destroy_all_gards();
 destroy_all_toys();
@@ -716,6 +719,7 @@ pool.play_stationary("heartstop.ogg", false);
     toyspawn = false;
 if(endless) clear_inv();
     if(!endless) destroy_all_bosses();
+destroy_all_bullets();
     destroy_all_cars();
     destroy_all_doors();
     destroy_all_gards();

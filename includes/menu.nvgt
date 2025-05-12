@@ -603,6 +603,7 @@ return;
             }
             if (endless) clear_inv();
             if (!endless) destroy_all_bosses();
+destroy_all_bullets();
             destroy_all_cars();
             destroy_all_gards();
             destroy_all_doors();
