@@ -1,7 +1,6 @@
 bullet@[]bullets(0);
 class bullet
 {
-int bullsound, wepsound;
 int bullx;
 int bully;
 int range;
@@ -27,7 +26,6 @@ for(uint i=0; i<bullets.length(); i++)
 {
 if(bullets[i].speedtimer.elapsed>=bullets[i].speed)
 {
-p.update_sound_2d(bullets[i].bullsound,bullets[i].bullx,bullets[i].bully);
 bullets[i].speedtimer.restart();
 if(bullets[i].direction=="right")
 {
@@ -45,15 +43,8 @@ if(bullets[i].direction=="down")
 {
 bullets[i].bully--;
 }
-if(me.x==bullets[i].bullx and me.y==bullets[i].bully)
+if (absolute(me.x - bullets[i].bullx) <= 1 && absolute(me.y - bullets[i].bully) <= 1)
 {
-p.destroy_sound(bullets[i].bullsound);
-for(uint i=0; i<cars.length(); i++)
-{
-if(cars[i].cartype=="car1") bullets[i].wepsound=p.play_2d("car1shoot.ogg",me.x,me.y,bullets[i].bullx,bullets[i].bully,false);
-if(cars[i].cartype=="car2") bullets[i].wepsound=p.play_2d("car2shoot.ogg",me.x,me.y,bullets[i].bullx,bullets[i].bully,false);
-if(cars[i].cartype=="car3") bullets[i].wepsound=p.play_2d("car3shoot.ogg",me.x,me.y,bullets[i].bullx,bullets[i].bully,false);
-}
 painslot=p.play_stationary("playerpain.ogg", false);
 health-=bullets[i].damage;
 bullets.remove_at(i);
@@ -61,7 +52,6 @@ return;
 }
 if(absolute(bullets[i].bullx-me.x)>bullets[i].range or absolute(bullets[i].bully-me.y)>bullets[i].range2)
 {
-p.destroy_sound(bullets[i].bullsound);
 bullets.remove_at(i);
 return;
 }
@@ -75,9 +65,5 @@ bullets.insert_last(bl1);
 }
 void destroy_all_bullets()
 {
-for(uint i=0; i<bullets.length(); i++)
-{
-p.destroy_sound(bullets[i].bullsound);
-}
 bullets.resize(0);
 }

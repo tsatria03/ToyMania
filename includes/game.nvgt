@@ -517,6 +517,7 @@ while(true)
 {
 wait(5);
 bfloop();
+bulletloop();
 if(!endless) bossloop();
 carloop();
 doorcheck();

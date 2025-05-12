@@ -1,4 +1,8 @@
 new in 2.5
+Made it so cars will only shoot at you if you’re nearby. This prevents bullets from cluttering up the field at long distances, and makes car attacks more impactful when they’re up close.
+Made it so the damage of bullets fired by cars is randomized per car type. Different cars now fire bullets with varying damage specs.
+Added machine gun-style burst firing to car bullets. Each car now fires in bursts of multiple bullets at a rapid speed, followed by a cooldown between bursts.
+Upgraded the cars used in this game. They can now shoot bullets at the player. This brings the same level of threat and chaos previously reserved for bosses and guards. Each car now has a ranged attack that makes them more than just anoying distractions.
 Added some more car and player related sounds into the learn game sounds menu.
 new in 2.4
 Added the ability to view the stats of various weapons found in the Weapons menu. Players can now see the damage, horizontal range, and vertical range of each weapon directly from the menu. This makes it easier to compare and choose weapons based on their effectiveness without needing to equip them first.
