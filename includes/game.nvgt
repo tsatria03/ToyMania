@@ -2,6 +2,7 @@ void toy_game_input()
 {
 if (key_repeating(KEY_ESCAPE) and doormove == false)
 {
+boss_timer.pause();
 gametimer.pause();
     if (quit_menu==true)
     {
@@ -14,10 +15,12 @@ gametimer.pause();
         if (res == -1 or confirm == "no")
         {
             speak("canceled");
+boss_timer.resume();
 gametimer.resume();
             return;
         }
     }
+boss_timer.resume();
 gametimer.resume();
     fade_multi_pool();
     level = 1;

@@ -113,12 +113,14 @@ void pause_game()
 {
 paused=true;
 pause_pools();
+boss_timer.pause();
 gametimer.pause();
 }
 void resume_game()
 {
 paused=false;
 resume_pools();
+boss_timer.resume();
 gametimer.resume();
 }
 void resetgame()
