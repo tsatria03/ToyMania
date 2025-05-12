@@ -527,7 +527,7 @@ m.add_item("view detailed stats", "vds");
     string psmem = m.get_selected_item_id();
 if (mres == -1)
 {
-    p.play_stationary("resume.ogg", false);
+    temp.play_stationary("resume.ogg", false);
     resume_game();
     return;
 }
@@ -645,7 +645,7 @@ alarm_started = false;
         }
         if (psmem == "rmg")
 {
-            p.play_stationary("resume.ogg", false);
+            temp.play_stationary("resume.ogg", false);
             resume_game();
             return;
         }

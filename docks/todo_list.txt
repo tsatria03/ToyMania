@@ -1,7 +1,8 @@
-Make the normal game time based.
-Add an alarm system to the game.
 Add difficulty settings for the normal game mode.
 
+*Done. Make the letter D key anounce how many keys are required to unlock the door in normal mode.
+*Done. Add an alarm system to the game.
+*Done. Make the normal game time based.
 *Done. Add an export option to the post game copy section.
 *Done. Make toy cars use  different tacticts.
 *Done. Add a way to determine how many sounds there are per category in the learn game sounds menu.

@@ -42,7 +42,7 @@ string last_played_date;
 string last_played_time;
 string current_weapon;
 string weapontype="bat";
-string version="2.5";
+string version="2.6";
 timer boss_timer, bossespawntimer, carspawntimer, firetimer, firetimer2, gametimer, gardspawntimer, objspawntimer, keyspawntimer, movetimer, runtimer, toyspawntimer, usetimer, walktimer;
 file achfile, dockfile, gamfile, statfile;
 instance gamstence("tm");

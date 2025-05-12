@@ -159,7 +159,7 @@ gametimer.pause();
 }
 if(key_pressed(KEY_P) and doormove==false)
 {
-pool.play_stationary("pause.ogg",false);
+temp.play_stationary("pause.ogg",false);
 pause_game();
 pausemenu();
 }
@@ -187,16 +187,23 @@ if(weapontype=="machinegun") weaponslot=p.play_stationary(weapontype+"reload.ogg
 }
 }
 }
-if (key_pressed(KEY_D) and doormove==false and endless)
+if (key_pressed(KEY_D) and doormove == false)
 {
-if (doors.length() > 0)
-{
-    speak("The door is at " + doors[0].startx + ", " + doors[0].starty + ". You need " + doors[0].required_keys + " or more keys to unlock it.");
-}
-else
-{
-    speak("There are no doors currently present.");
-}
+    if (doors.length() > 0)
+    {
+        if (endless)
+        {
+            speak("The door is at " + doors[0].startx + ", " + doors[0].starty + ". You need " + doors[0].required_keys + " or more keys to unlock it.");
+        }
+        else
+        {
+            speak("You need " + doors[0].required_keys + " or more keys to unlock the door.");
+        }
+    }
+    else
+    {
+        speak("There are no doors currently present.");
+    }
 }
 if(key_pressed(KEY_L) and doormove==false)
 {
@@ -518,6 +525,8 @@ p.play_stationary("playerland.ogg", false);
 toyambslot=ambpool.play_stationary_extended("gameamb.ogg",true,0,0,toyambvolume,toyambpitch,false);
 toytrackslot=muspool.play_stationary_extended("gamemus.ogg",true,0,0,toymusvolume,toymuspitch,false);
 if(endless) spawn_door(random(25,50), random(25,50), 0, 0, random(100,200), random(30,60));
+collected_keys=55;
+gametimer.force(1000*300);
 while(true)
 {
 wait(5);
@@ -672,10 +681,10 @@ pool.destroy_sound(alarmslot);
     p.destroy_sound(painslot);
     ambpool.destroy_sound(toyambslot);
     muspool.destroy_sound(toytrackslot);
-pool.play_stationary("gamedeath.ogg",false);
-    dlgplay("playerdeath.ogg");
+p.play_stationary("playerdeath.ogg", false);
+dlgplay("gamedeath.ogg");
     dlgplay("playerfall.ogg");
-        dlgmessage_return("Time ran out! You failed to escape in time. Nice try!");
+        dlgmessage_return("Time ran out! You failed to escape the store in time. Nice try!");
         writedata();
         mainmenu();
         return;
