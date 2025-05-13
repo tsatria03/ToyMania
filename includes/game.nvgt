@@ -523,9 +523,12 @@ if (endless)
 else
     draw_weapon("bat");
 p.play_stationary("playerland.ogg", false);
-toyambslot=ambpool.play_stationary_extended("gameamb.ogg",true,0,0,toyambvolume,toyambpitch,false);
-toytrackslot=muspool.play_stationary_extended("gamemus.ogg",true,0,0,toymusvolume,toymuspitch,false);
+ambtype="gameamb";
+toyambslot=ambpool.play_stationary_extended(ambtype+".ogg",true,0,0,toyambvolume,toyambpitch,false);
+mustype="gamemus";
+toytrackslot=muspool.play_stationary_extended(mustype+".ogg",true,0,0,toymusvolume,toymuspitch,false);
 if(endless) spawn_door(random(25,50), random(25,50), 0, 0, random(100,200), random(30,60));
+gametimer.force(1000*280);
 while(true)
 {
 wait(5);
@@ -628,6 +631,9 @@ toynum=50;
 }
 if (!endless && level == 5 && gametimer.elapsed >= 1000 * 300)
 {
+mustype="bossmus";
+muspool.destroy_sound(toytrackslot);
+toytrackslot=muspool.play_stationary_extended(mustype+".ogg",true,0,0,toymusvolume,toymuspitch,false);
     p.play_stationary("playerlevel.ogg", false);
     level = 6;
     destroy_all_bullets();
@@ -662,7 +668,7 @@ if (!countdown_started and boss_timer.elapsed >boss_time_limit-10000)
 if (heartbeat_playing)
 {
     pool.destroy_sound(heartbeat_slot);
-pool.play_stationary("heartstop.ogg", false);
+temp.play_stationary("heartstop.ogg", false);
     heartbeat_playing = false;
 }
     if(!endless) bossdefeated = false;
@@ -773,7 +779,7 @@ if (health <= 0)
 if (heartbeat_playing)
 {
     pool.destroy_sound(heartbeat_slot);
-pool.play_stationary("heartstop.ogg", false);
+temp.play_stationary("heartstop.ogg", false);
     heartbeat_playing = false;
 }
     if(!endless) bossdefeated = false;
