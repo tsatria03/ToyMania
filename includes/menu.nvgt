@@ -3,7 +3,7 @@ void mainmenu()
 setupmenu();
 m.add_item("game menu", "gm");
 m.add_item("settings menu", "sm");
-m.add_item("test speakers menu", "st");
+m.add_item("speaker test menu", "st");
 m.add_item("restart game", "rt");
 m.add_item("exit game", "ex");
 m.intro_text = "Main menu. Please choose an option with your arrow keys, then press enter to activate one.";
@@ -31,7 +31,7 @@ if(main == "st")
     m.add_item("Sword Clank. This sound has been played a total of "+swordplays+" times.", "clank");
     m.add_item("Stone Throw. This sound has been played a total of "+stoneplays+" times.", "stone");
     m.add_item("Back", "back");
-m.intro_text = "Test speakers menu. Choose a sound to test your audio setup. For the most accurate results, please use headphones. Please also make sure to check if they are worn correctly.";
+m.intro_text = "Speaker test menu. Choose a sound to test your audio setup. For the most accurate results, please use headphones. Please also make sure to check if they are worn correctly.";
     int mres = m.run();
     string soundsel = m.get_selected_item_id();
     if (mres == -1 or soundsel == "back")
@@ -354,15 +354,15 @@ dictionary cars;
 cars["Car 1 Death"] = "car1death.ogg";
 cars["Car 1 Loop"] = "car1loop.ogg";
 cars["Car 1 Pain"] = "car1pain.ogg";
-cars["Car 1 Shoot: used in normal mode"] = "car1shoot.ogg";
+cars["Car 1 Shoot"] = "car1shoot.ogg";
 cars["Car 2 Death"] = "car2death.ogg";
 cars["Car 2 Loop"] = "car2loop.ogg";
 cars["Car 2 Pain"] = "car2pain.ogg";
-cars["Car 2 Shoot: used in normal mode"] = "car2shoot.ogg";
+cars["Car 2 Shoot"] = "car2shoot.ogg";
 cars["Car 3 Death"] = "car3death.ogg";
 cars["Car 3 Loop"] = "car3loop.ogg";
 cars["Car 3 Pain"] = "car3pain.ogg";
-cars["Car 3 Shoot: used in normal mode"] = "car3shoot.ogg";
+cars["Car 3 Shoot"] = "car3shoot.ogg";
 learnCategories["Cars"] = cars;
 dictionary doors;
 doors["Close"] = "doorclose.ogg";
