@@ -1,4 +1,5 @@
 new in 2.6
+Made it so You no longer have to be perfectly on top of a door to open it. You can now open doors while being slightly to the left, right, forward, or backward.
 Added a retry menu after failing Level 6 due to time running out. Players now have the option to instantly restart the Normal game mode after failing to escape the store in time. Instead of being taken back to the main menu, a quick “Try Again” prompt offers a more seamless and convenient way to attempt another run.
 Added randomized failure messages for when the time runs out in level 6. If the player fails to escape the store in time, a random humorous message will pop up instead of a static alert.
 Fixed an issue where the final countdown voice in level 6 would trigger too early. The countdown now starts almost exactly when there's 10 seconds left on the clock.
@@ -6,7 +7,6 @@ Added a voice-based countdown system for the final 10 seconds of the game in lev
 Removed the alert sound associated with the boss showing up in level 6. The alarm sound will now serv as the warning indicater for it instead.
 Replaced the main game ambience and music with new ones. Credit goes to the producer of Andre Louis.
 Added music to the time limited level. This music will play through out the entire level, even after a successfull boss defeat.
-Updated the readme file with added and modified keyboard shortcuts.
 Updated the Y key behavior in Normal Mode to announce how much time is remaining when playing the sixth level, instead of the total playtime. This helps players stay aware of the countdown, and therefore better manage their time before the store goes boom.
 Updated the D key behavior in Normal Mode to only announce how many keys are needed to unlock the door, without revealing the door’s location. This helps maintain focus and urgency during the time-limited phase of level 6.
 new in 2.5

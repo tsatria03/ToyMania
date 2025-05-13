@@ -1,41 +1,41 @@
 Session Achievements:
-- Speed Collector: Tier 12 of 25. Current progress: 59 (56.19%). 46 total toys needed to reach the next tier.
-- Key Snatcher: Tier 7 of 25. Current progress: 12 (50%). 12 total keys needed to reach the next tier.
-- Strike Force: Tier 11 of 25. Current progress: 120 (52.86%). 107 total guards needed to reach the next tier.
-- Crash Rush: Tier 9 of 25. Current progress: 1 (0.82%). 121 total cars needed to reach the next tier.
-- Pace Breaker: Tier 15 of 25. Current progress: 248 (11.91%). 1834 total steps needed to reach the next tier.
-- Sprint Runner: Tier 0 of 25. Current progress: 14 (1400%). 0 total playtime needed to reach the next tier.
+- Speed Collector: Tier 0 of 25. Current progress: 0 (0%). 3 total toys needed to reach the next tier.
+- Key Snatcher: Tier 0 of 25. Current progress: 0 (0%). 5 total keys needed to reach the next tier.
+- Strike Force: Tier 0 of 25. Current progress: 0 (0%). 8 total guards needed to reach the next tier.
+- Crash Rush: Tier 0 of 25. Current progress: 0 (0%). 10 total cars needed to reach the next tier.
+- Pace Breaker: Tier 0 of 25. Current progress: 0 (0%). 15 total steps needed to reach the next tier.
+- Sprint Runner: Tier 0 of 25. Current progress: 0 (0%). 1 total playtime needed to reach the next tier.
 
 Lifetime Achievements:
-- Toy Collector: Tier 14 of 50. Current progress: 46 (11.19%). 365 total toys needed to reach the next tier.
-- Key Hunter: Tier 6 of 50. Current progress: 10 (27.78%). 26 total keys needed to reach the next tier.
-- Guard Slayer: Tier 11 of 50. Current progress: 338 (82.24%). 73 total guards needed to reach the next tier.
-- Car Crusher: Tier 8 of 50. Current progress: 94 (55.95%). 74 total cars needed to reach the next tier.
-- Pacer: Tier 16 of 50. Current progress: 4696 (88.62%). 603 total steps needed to reach the next tier.
-- Time Traveler: Tier 5 of 50. Current progress: 17 (154.55%). 0 total playtime needed to reach the next tier.
+- Toy Collector: Tier 0 of 50. Current progress: 0 (0%). 5 total toys needed to reach the next tier.
+- Key Hunter: Tier 0 of 50. Current progress: 0 (0%). 10 total keys needed to reach the next tier.
+- Guard Slayer: Tier 0 of 50. Current progress: 0 (0%). 15 total guards needed to reach the next tier.
+- Car Crusher: Tier 0 of 50. Current progress: 0 (0%). 20 total cars needed to reach the next tier.
+- Pacer: Tier 0 of 50. Current progress: 0 (0%). 25 total steps needed to reach the next tier.
+- Time Traveler: Tier 0 of 50. Current progress: 0 (0%). 5 total playtime needed to reach the next tier.
 
 Session Stats:
-- Toys collected: 270
-- Keys collected: 61
-- Guards killed: 574
-- Cars destroyed: 245
-- Steps taken: 4412
-- Time played: 14 minutes, 1 seconds.
+- Toys collected: 0
+- Keys collected: 0
+- Guards killed: 0
+- Cars destroyed: 0
+- Steps taken: 0
+- Time played: 0 minutes, 0 seconds.
 
 Lifetime Stats:
-- Last Played Date: Friday, May 9, 2025
-- Last Played Time: 8:06 PM
-- Toys collected: 869
-- Keys collected: 83
-- Guards killed: 1161
-- Cars destroyed: 431
-- Steps taken: 15295
-- Total playtime: 39 minutes, 28 seconds.
+- Last Played Date: Tuesday, May 13, 2025
+- Last Played Time: 7:52 AM
+- Toys collected: 0
+- Keys collected: 0
+- Guards killed: 0
+- Cars destroyed: 0
+- Steps taken: 0
+- Total playtime: 0 minutes, 0 seconds.
 
 Player Titles:
-- Toy Title: Toy Overlord. You’ve mastered the art of toy collecting!
-- Key Title: Key Master. You're a master of unlocking.
-- Guard Title: Warrior Supreme. You’ve dominated the battlefield!
-- Car Title: Vehicular Menace. Every car trembles in your presence.
-- Steps Title: Step Legend. Your footsteps echo across the world!
-- Playtime Title: Explorer. You’ve explored quite a bit.
+- Toy Title: Toyless. You’ve barely started your toy journey.
+- Key Title: Keyless. Locked doors fear you not... eventually.
+- Guard Title: Pacifist. You prefer to avoid conflict.
+- Car Title: Civilian. The roads remain mostly safe.
+- Steps Title: Sedentary. You prefer standing still.
+- Playtime Title: Beginner. You’re just getting started.

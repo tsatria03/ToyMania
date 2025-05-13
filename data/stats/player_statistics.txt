@@ -1,25 +1,25 @@
 Session Stats:
-- Toys collected: 270
-- Keys collected: 61
-- Guards killed: 574
-- Cars destroyed: 245
-- Steps taken: 4412
-- Time played: 14 minutes, 1 seconds.
+- Toys collected: 0
+- Keys collected: 0
+- Guards killed: 0
+- Cars destroyed: 0
+- Steps taken: 0
+- Time played: 0 minutes, 0 seconds.
 
 Lifetime Stats:
-- Last Played Date: Friday, May 9, 2025
-- Last Played Time: 8:06 PM
-- Toys collected: 869
-- Keys collected: 83
-- Guards killed: 1161
-- Cars destroyed: 431
-- Steps taken: 15295
-- Total playtime: 39 minutes, 28 seconds.
+- Last Played Date: Tuesday, May 13, 2025
+- Last Played Time: 7:52 AM
+- Toys collected: 0
+- Keys collected: 0
+- Guards killed: 0
+- Cars destroyed: 0
+- Steps taken: 0
+- Total playtime: 0 minutes, 0 seconds.
 
 Player Titles:
-- Toy Title: Toy Overlord. You’ve mastered the art of toy collecting!
-- Key Title: Key Master. You're a master of unlocking.
-- Guard Title: Warrior Supreme. You’ve dominated the battlefield!
-- Car Title: Vehicular Menace. Every car trembles in your presence.
-- Steps Title: Step Legend. Your footsteps echo across the world!
-- Playtime Title: Explorer. You’ve explored quite a bit.
+- Toy Title: Toyless. You’ve barely started your toy journey.
+- Key Title: Keyless. Locked doors fear you not... eventually.
+- Guard Title: Pacifist. You prefer to avoid conflict.
+- Car Title: Civilian. The roads remain mostly safe.
+- Steps Title: Sedentary. You prefer standing still.
+- Playtime Title: Beginner. You’re just getting started.
