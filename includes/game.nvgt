@@ -250,11 +250,22 @@ if(key_pressed(KEY_Q) and doormove==false)
 {
 speak("You have killed"+killed_gards+" gards.");
 }
-if(key_pressed(KEY_Y) and doormove==false)
+if (key_pressed(KEY_Y) and doormove == false)
 {
-    int session_minutes = int(timeelapsed.ms() / 60000);
-    int session_seconds = int((timeelapsed.ms() % 60000) / 1000);
-speak("You've been playing for a total of " + session_minutes + " minutes, " + session_seconds + " seconds.");
+    if (!endless and level == 6)
+    {
+        int remaining = boss_time_limit - boss_timer.elapsed;
+        if (remaining < 0) remaining = 0;
+        int minutes = int(remaining / 60000);
+        int seconds = int((remaining % 60000) / 1000);
+        speak("You have " + minutes + " minutes, " + seconds + " seconds to escape the store.");
+    }
+    else
+    {
+        int session_minutes = int(timeelapsed.ms() / 60000);
+        int session_seconds = int((timeelapsed.ms() % 60000) / 1000);
+        speak("You've been playing for a total of " + session_minutes + " minutes, " + session_seconds + " seconds.");
+    }
 }
 if(key_pressed(KEY_H) and doormove==false)
 {

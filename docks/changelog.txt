@@ -4,6 +4,7 @@ Added music to the time limited level. This music will play through out the enti
 Added a voice-based countdown system for the final 10 seconds of the game in level 6. This creates a heightened sense of urgency as players race to reach the exit before time runs out.
 Removed the alert sound associated with the boss showing up in level 6. The alarm sound will now serv as the warning indicater for it instead.
 Updated the readme file with added and modified keyboard shortcuts.
+Updated the Y key behavior in Normal Mode to announce how much time is remaining when playing the sixth level, instead of the total playtime. This helps players stay aware of the countdown, and therefore better manage their time before the store goes boom.
 Updated the D key behavior in Normal Mode to only announce how many keys are needed to unlock the door, without revealing the door’s location. This helps maintain focus and urgency during the time-limited phase of level 6.
 new in 2.5
 Fixed an issue where the alarm sound in level 6 would continue to play even after the user has either died or won the game.
