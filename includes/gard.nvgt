@@ -62,7 +62,8 @@ if(gards[i].gardhealth<=0)
 {
 gardpool.destroy_sound(gards[i].hurtsound);
 gardpool.destroy_sound(gards[i].gardsound);
-gards[i].defsound=gardpool.play_2d(gards[i].gardtype+"death"+random(1,2)+".ogg", me.x, me.y, gards[i].gardx, gards[i].gardy, false);
+if(gards[i].gardtype=="gard1") gards[i].defsound=gardpool.play_2d(gards[i].gardtype+"death"+random(1,2)+".ogg", me.x, me.y, gards[i].gardx, gards[i].gardy, false);
+if(gards[i].gardtype=="gard2") gards[i].defsound=gardpool.play_2d(gards[i].gardtype+"death.ogg", me.x, me.y, gards[i].gardx, gards[i].gardy, false);
 killed_gards+=1;
 total_killed_gards+=1;
 update_achievements();

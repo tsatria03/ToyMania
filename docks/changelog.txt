@@ -1,4 +1,5 @@
 new in 2.7
+Added the ability to adjust the alarm volume in the timed portion of the game. You can press shift plus page up or down to adjust this. This setting is automaticly saved the next time you start a new game session.
 Replaced some of the guard sounds with better ones.
 Fixed a bug where the move sound for doors weren't looping propperly.
 Replaced all of the door sounds with new ones.

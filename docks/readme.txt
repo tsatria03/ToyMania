@@ -25,6 +25,8 @@ Letter, P: Opens the pause menu, if pressed.
 Letter, R: Reloads ammo into weapons that take them in the endless game mode, if pressed.
 Page up: Razes the in-game music volume by 1 decibel, if pressed/held down.
 Page down: Lowers the in-game music volume by 1 decibel, if pressed/held down.
+Shift plus Page up: Razes the in-game alarm volume by 1 decibel, if pressed/held down.
+Shift plus Page down: Lowers the in-game alarm volume by 1 decibel, if pressed/held down.
 Home: Razes the in-game ambience volume by 1 decibel, if pressed/held down.
 End: Lowers the in-game ambience volume by 1 decibel, if pressed/ held down.
 Left arrow: Moves left on the X axis, if pressed/held down.

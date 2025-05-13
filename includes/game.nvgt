@@ -125,6 +125,20 @@ useitem(inv.get_keys()[invpos]);
 else
 speak("No item in focus.");
 }
+if(shift_is_down() and key_repeating(KEY_PRIOR) and alarmvolume!=0)
+{
+alarmvolume+=1;
+alarmpool.update_sound_start_values(alarmslot,0,alarmvolume,alarmpitch);
+speak("alarm "+alarmvolume);
+writepreffs();
+}
+if(shift_is_down() and key_repeating(KEY_NEXT) and alarmvolume!=-50)
+{
+alarmvolume-=1;
+alarmpool.update_sound_start_values(alarmslot,0,alarmvolume,alarmpitch);
+speak("alarm "+alarmvolume);
+writepreffs();
+}
 if(key_repeating(KEY_PRIOR) and toymusvolume!=0)
 {
 toymusvolume+=1;
@@ -540,7 +554,7 @@ mustype="gamemus";
 toytrackslot=muspool.play_stationary_extended(mustype+".ogg",true,0,0,toymusvolume,toymuspitch,false);
 if(endless) spawn_door(random(25,50), random(25,50), 0, 0, random(100,200), random(30,60));
 collected_keys=80;
-gametimer.force(1000*300);
+gametimer.force(1000*280);
 while(true)
 {
 wait(5);
@@ -667,7 +681,7 @@ if (!endless && level == 6)
 {
     if (!alarm_started && boss_timer.elapsed >= 0)
     {
-        alarmslot=pool.play_stationary("gamealarm.ogg", true);
+        alarmslot=alarmpool.play_stationary_extended("gamealarm.ogg", true,0,0,alarmvolume,alarmpitch);
         alarm_started = true;
     }
 if (!countdown_started and boss_timer.elapsed >boss_time_limit-10000)
@@ -700,7 +714,7 @@ destroy_all_objs();
     destroy_all_toys();
 alarm_started = false;
 countdown_started = false;
-pool.destroy_sound(alarmslot);
+alarmpool.destroy_sound(alarmslot);
     pool.destroy_sound(countslot);
 p.destroy_sound(painslot);
     ambpool.destroy_sound(toyambslot);
@@ -852,7 +866,7 @@ destroy_all_objs();
     destroy_all_toys();
 alarm_started = false;
 countdown_started = false;
-pool.destroy_sound(alarmslot);
+alarmpool.destroy_sound(alarmslot);
 pool.destroy_sound(countslot);
     p.destroy_sound(painslot);
     ambpool.destroy_sound(toyambslot);
