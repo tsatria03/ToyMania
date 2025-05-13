@@ -1,3 +1,8 @@
+Make it so When you press D, it tells you how far you are away from the exit door in feat.
+Make it so if you have collected enough keys in normal mode, they stop spawning on the map.
+Add an option to enable or disable the countdown sounds.
+Add an option to enable or disable the levelup sounds.
+
 *Done. Make the letter D key anounce how many keys are required to unlock the door in normal mode.
 *Done. Add an alarm system to the game.
 *Done. Make the normal game time based.
