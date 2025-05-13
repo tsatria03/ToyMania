@@ -540,6 +540,7 @@ mustype="gamemus";
 toytrackslot=muspool.play_stationary_extended(mustype+".ogg",true,0,0,toymusvolume,toymuspitch,false);
 if(endless) spawn_door(random(25,50), random(25,50), 0, 0, random(100,200), random(30,60));
 gametimer.force(1000*280);
+gametimer.force(1000*280);
 while(true)
 {
 wait(5);
