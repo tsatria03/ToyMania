@@ -169,6 +169,8 @@ if(endless) clear_inv();
     me.x = 25;
     me.y = 25;
 toynum=20;
+alarm_started = false;
+countdown_started = false;
     bossdefeated = false;
     bossespawn = false;
     carspawn = false;

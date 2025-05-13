@@ -1,4 +1,5 @@
 new in 2.6
+Added a retry menu after failing Level 6 due to time running out. Players now have the option to instantly restart the Normal game mode after failing to escape the store in time. Instead of being taken back to the main menu, a quick “Try Again” prompt offers a more seamless and convenient way to attempt another run.
 Added randomized failure messages for when the time runs out in level 6. If the player fails to escape the store in time, a random humorous message will pop up instead of a static alert.
 Added music to the time limited level. This music will play through out the entire level, even after a successfull boss defeat.
 Added a voice-based countdown system for the final 10 seconds of the game in level 6. This creates a heightened sense of urgency as players race to reach the exit before time runs out.
