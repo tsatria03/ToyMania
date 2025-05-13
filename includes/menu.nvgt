@@ -337,7 +337,6 @@ void learnsoundsmenu()
 dictionary learnCategories;
 string vdesc = variant_descriptions ? ". This sound has multiple variants." : "";
 dictionary boss;
-boss["Alert"] = "bossalert.ogg";
 boss["Death"] = "bossdeath.ogg";
 boss["Fall" + vdesc] = array<string> = {"bossfall1.wav", "bossfall2.wav"};
 boss["Heal" + vdesc] = array<string> = {"bossheal1.ogg", "bossheal2.ogg", "bossheal3.ogg"};
@@ -399,6 +398,7 @@ keys["Use" + vdesc] = array<string> = {"keyuse1.ogg", "keyuse2.ogg", "keyuse3.og
 learnCategories["Keys"] = keys;
 dictionary player;
 player["Alarm"] = "gamealarm.ogg";
+player["Countdown"] = "gamecount.ogg";
 player["Death"] = "playerdeath.ogg";
 player["Explode"] = "gamedeath.ogg";
 player["Fall"] = "playerfall.ogg";
@@ -633,6 +633,7 @@ maxhealth = endless ? 10000 : 1000;
             if (!endless) bossdefeated = false;
             if (!endless) bossespawn = false;
 alarm_started = false;
+countdown_started = false;
             carspawn = false;
             gardspawn = false;
             keydest = false;

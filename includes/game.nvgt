@@ -54,6 +54,7 @@ toynum=20;
     if (!endless) bossdefeated = false;
     if (!endless) bossespawn = false;
 alarm_started = false;
+countdown_started = false;
     carspawn = false;
     gardspawn = false;
     keydest = false;
@@ -525,7 +526,6 @@ p.play_stationary("playerland.ogg", false);
 toyambslot=ambpool.play_stationary_extended("gameamb.ogg",true,0,0,toyambvolume,toyambpitch,false);
 toytrackslot=muspool.play_stationary_extended("gamemus.ogg",true,0,0,toymusvolume,toymuspitch,false);
 if(endless) spawn_door(random(25,50), random(25,50), 0, 0, random(100,200), random(30,60));
-gametimer.force(1000*300);
 while(true)
 {
 wait(5);
@@ -628,7 +628,6 @@ toynum=50;
 }
 if (!endless && level == 5 && gametimer.elapsed >= 1000 * 300)
 {
-    dlgplay("bossalert.ogg");
     p.play_stationary("playerlevel.ogg", false);
     level = 6;
     destroy_all_bullets();
@@ -644,6 +643,7 @@ if (!endless && level == 5 && gametimer.elapsed >= 1000 * 300)
     keyspawn = true;
     boss_timer.restart();
     alarm_started = false;
+countdown_started = false;
 }
 if (!endless && level == 6)
 {
@@ -652,7 +652,12 @@ if (!endless && level == 6)
         alarmslot=pool.play_stationary("gamealarm.ogg", true);
         alarm_started = true;
     }
-    if (boss_timer.elapsed >= boss_time_limit)
+if (!countdown_started and boss_timer.elapsed >boss_time_limit-10000)
+{
+    countdown_started = true;
+    countslot=pool.play_stationary("gamecount.ogg", false);
+}
+    if (boss_timer.elapsed > boss_time_limit-1000)
     {
 if (heartbeat_playing)
 {
@@ -676,8 +681,10 @@ destroy_all_bullets();
 destroy_all_objs();
     destroy_all_toys();
 alarm_started = false;
+countdown_started = false;
 pool.destroy_sound(alarmslot);
-    p.destroy_sound(painslot);
+    pool.destroy_sound(countslot);
+p.destroy_sound(painslot);
     ambpool.destroy_sound(toyambslot);
     muspool.destroy_sound(toytrackslot);
 p.play_stationary("playerdeath.ogg", false);
@@ -785,7 +792,9 @@ destroy_all_bullets();
 destroy_all_objs();
     destroy_all_toys();
 alarm_started = false;
+countdown_started = false;
 pool.destroy_sound(alarmslot);
+pool.destroy_sound(countslot);
     p.destroy_sound(painslot);
     ambpool.destroy_sound(toyambslot);
     muspool.destroy_sound(toytrackslot);
