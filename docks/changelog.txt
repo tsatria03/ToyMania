@@ -1,4 +1,5 @@
 new in 2.7
+Replaced some of the guard sounds with better ones.
 Fixed a bug where the move sound for doors weren't looping propperly.
 Replaced all of the door sounds with new ones.
 Updated some of the descriptions found in the learn game sounds menu.

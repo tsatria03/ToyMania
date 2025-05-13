@@ -867,7 +867,7 @@ if (gamcopy == true)
     setupmenu(false);
     m.add_item("Copy results to clipboard", "copy");
     m.add_item("Export results to file", "export");
-    m.add_item("Cancel", "cancel");
+    m.add_item("Return to main menu.", "cancel");
     m.intro_text = "What would you like to do with the current results for this game session?";
     int res = m.run();
     string choice = m.get_selected_item_id();
