@@ -1,3 +1,8 @@
+new in 2.7
+Fixed a bug where the move sound for doors weren't looping propperly.
+Replaced all of the door sounds with new ones.
+Updated some of the descriptions found in the learn game sounds menu.
+Updated the credits.txt file to include music attributions used in this game.
 new in 2.6
 Made it so You no longer have to be perfectly on top of a door to open it. You can now open doors while being slightly to the left, right, forward, or backward.
 Added a retry menu after failing Level 6 due to time running out. Players now have the option to instantly restart the Normal game mode after failing to escape the store in time. Instead of being taken back to the main menu, a quick “Try Again” prompt offers a more seamless and convenient way to attempt another run.

@@ -42,7 +42,7 @@ wait(500);
 doormove=true;
 doors[i].is_moving=true;
 doors[i].opensound=doorpool.play_stationary("dooropen.ogg",false);
-doors[i].movesound=doorpool.play_stationary("doormove.ogg",false);
+doors[i].movesound=doorpool.play_stationary("doormove.ogg",true);
 }
 }
 }
