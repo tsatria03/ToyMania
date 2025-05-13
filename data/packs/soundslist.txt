@@ -12,7 +12,6 @@ bootfire3.ogg
 boothit1.ogg
 boothit2.ogg
 boothit3.ogg
-bossalert.ogg
 bossdeath.ogg
 bossfall1.wav
 bossfall2.wav
@@ -22,6 +21,7 @@ bossheal3.ogg
 bosshit1.ogg
 bosshit2.ogg
 bosslaunch.ogg
+bossmus.ogg
 bosspain.ogg
 bosstaunt.ogg
 bosstel1.ogg
@@ -33,12 +33,15 @@ bosswalk4.ogg
 car1death.ogg
 car1loop.ogg
 car1pain.ogg
+car1shoot.ogg
 car2death.ogg
 car2loop.ogg
 car2pain.ogg
+car2shoot.ogg
 car3death.ogg
 car3loop.ogg
 car3pain.ogg
+car3shoot.ogg
 clubdraw.ogg
 clubfire1.ogg
 clubfire2.ogg
@@ -46,6 +49,7 @@ clubfire3.ogg
 clubhit1.ogg
 clubhit2.ogg
 clubhit3.ogg
+complete.ogg
 dlgclose.ogg
 dlgcoppy.ogg
 dlgopen.ogg
@@ -67,8 +71,13 @@ fistfire2.ogg
 fisthit1.ogg
 fisthit2.ogg
 fisthit3.ogg
-gamcopy.ogg
+gamealarm.ogg
+gameamb.ogg
+gamecopy.ogg
+gamecount.ogg
+gamedeath.ogg
 gamelaunch.ogg
+gamemus.ogg
 gamexport.ogg
 gard1death.ogg
 gard1fall1.wav
@@ -214,7 +223,6 @@ setdisabled.ogg
 setenabled.ogg
 speaker_stone_throw.ogg
 speaker_sword_clank.ogg
-toyamb.ogg
 toybreak1.ogg
 toybreak2.ogg
 toybreak3.ogg
@@ -260,5 +268,4 @@ toyloop6.ogg
 toyloop7.ogg
 toyloop8.ogg
 toyloop9.ogg
-toymus.ogg
-total files: 263
+total files: 270

@@ -1,5 +1,3 @@
-Add difficulty settings for the normal game mode.
-
 *Done. Make the letter D key anounce how many keys are required to unlock the door in normal mode.
 *Done. Add an alarm system to the game.
 *Done. Make the normal game time based.
@@ -19,6 +17,6 @@ Add difficulty settings for the normal game mode.
 *Done. Add settings for playing the achievement sounds and speaking out the results of them.
 *Done. Fix the bug with playtime variables not updating properly.
 *Done. Fix the bug with session-based achievements where you get up to very high tiers with the same number of collected toys.
-*Done. Fix bosses from reappearing
-*Done. Reduce the number of keys need to be collected to win the game
-*Done. Add doors
+*Done. Fix bosses from reappearing.
+*Done. Reduce the number of keys need to be collected to win the game.
+*Done. Add doors.
