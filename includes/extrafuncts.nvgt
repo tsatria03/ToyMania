@@ -26,6 +26,25 @@ bool int_to_bool(int i)
 {
 return i==1? true:false;
 }
+bool entity_near_door(int x, int y)
+{
+    for (uint i = 0; i < bosses.length(); i++)
+{
+        if (absolute(bosses[i].bossx - x) <= 2 && absolute(bosses[i].bossy - y) <= 2)
+            return true;
+    }
+    for (uint i = 0; i < gards.length(); i++)
+{
+        if (absolute(gards[i].gardx - x) <= 2 && absolute(gards[i].gardy - y) <= 2)
+            return true;
+    }
+    for (uint i = 0; i < cars.length(); i++)
+{
+        if (absolute(cars[i].carx - x) <= 2 && absolute(cars[i].cary - y) <= 2)
+            return true;
+    }
+    return false;
+}
 double clamp(double value, double min, double max)
 {
 value=value<min? min:value;

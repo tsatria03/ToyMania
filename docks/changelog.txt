@@ -1,4 +1,5 @@
 new in 2.8
+Made it so doors can't be opened if enemies are nearby. If a boss, guard, or car is within 2 tiles of a door, the player is now blocked from opening it. This adds more realism by forcing players to clear out the area before leaving the store.
 Fixed an issue where preview volume would reset itself back to 0 upon selecting another playable sound in the learn game sounds menu.
 Added the ability to adjust the preview volumes of sounds found in the learn game sounds menu. You can press shift plus page up or down to adjust this.
 Updated the readme file with added and modified keyboard shortcuts.

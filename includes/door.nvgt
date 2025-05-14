@@ -3,7 +3,7 @@ door@[]doors(0);
 class door
 {
 bool is_moving=false;
-int closesound, doorsound, unlocksound, movesound, opensound;
+int closesound, doorsound, jamsound, unlocksound, movesound, opensound;
 int startx, starty;
 int endx, endy;
 int speed;
@@ -22,31 +22,37 @@ doorsound=doorpool.play_2d("doorloop.ogg",me.x,me.y,startx,starty,true);
 }
 void doorcheck()
 {
-for(uint i=0; i<doors.length(); i++)
-{
-if (absolute(me.x - doors[i].startx) <= 2 and absolute(me.y - doors[i].starty) <= 2 and key_pressed(KEY_RETURN))
-{
-if(collected_keys<doors[i].required_keys)
-{
-speak("This door is locked. You need "+doors[i].required_keys+" or more keys to unlock it.");
-}
-else if(collected_keys>=doors[i].required_keys)
-{
-doors[i].unlocksound=doorpool.play_stationary("keyuse"+random(1,6)+".ogg",false);
-alarmpool.destroy_sound(alarmslot);
-ambpool.destroy_sound(toyambslot);
-muspool.destroy_sound(toytrackslot);
-destroy_all_keys();
-keyspawn=false;
-keydest=false;
-wait(500);
-doormove=true;
-doors[i].is_moving=true;
-doors[i].opensound=doorpool.play_stationary("dooropen.ogg",false);
-doors[i].movesound=doorpool.play_stationary("doormove.ogg",true);
-}
-}
-}
+    for (uint i = 0; i < doors.length(); i++)
+    {
+        if (absolute(me.x - doors[i].startx) <= 2 && absolute(me.y - doors[i].starty) <= 2 && key_pressed(KEY_RETURN))
+        {
+            if (entity_near_door(doors[i].startx, doors[i].starty))
+            {
+doors[i].jamsound = doorpool.play_stationary("doorjam.ogg", false);
+                speak("The door is jammed! Something dangerous is nearby!");
+                return;
+            }
+            if (collected_keys < doors[i].required_keys)
+            {
+                speak("This door is locked. You need " + doors[i].required_keys + " or more keys to unlock it.");
+            }
+            else
+            {
+                doors[i].unlocksound = doorpool.play_stationary("keyuse" + random(1, 6) + ".ogg", false);
+                alarmpool.destroy_sound(alarmslot);
+                ambpool.destroy_sound(toyambslot);
+                muspool.destroy_sound(toytrackslot);
+                destroy_all_keys();
+                keyspawn = false;
+                keydest = false;
+                wait(500);
+                doormove = true;
+                doors[i].is_moving = true;
+                doors[i].opensound = doorpool.play_stationary("dooropen.ogg", false);
+                doors[i].movesound = doorpool.play_stationary("doormove.ogg", true);
+            }
+        }
+    }
 }
 void doorloop()
 {

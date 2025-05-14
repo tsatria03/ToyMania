@@ -55,6 +55,7 @@ dlgcoppy.ogg
 dlgopen.ogg
 dlgscroll.ogg
 doorclose.ogg
+doorjam.ogg
 doorloop.ogg
 doormove.ogg
 dooropen.ogg
@@ -270,4 +271,4 @@ toyloop6.ogg
 toyloop7.ogg
 toyloop8.ogg
 toyloop9.ogg
-total files: 272
+total files: 273
