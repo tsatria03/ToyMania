@@ -12,6 +12,7 @@
 */
 
 int menumusvolume=0;
+double preview_volume = 0;
 void fade(sound@ handle, double final_volume = -50, double delay = 25)
 {
 if (handle.volume == final_volume or !handle.active)
@@ -281,6 +282,18 @@ m.add_items(sfx_names);
 m.add_item("back", "back");
 while (true) {
 wait(5);
+if (shift_is_down() and key_repeating(KEY_PRIOR)  and preview_volume!=0)
+{
+preview_volume += 1;
+audio.set_volume(preview_volume);
+speak("preview "+preview_volume);
+}
+if (shift_is_down() and key_repeating(KEY_NEXT) and preview_volume!=-50)
+{
+preview_volume -= 1;
+audio.set_volume(preview_volume);
+speak("preview "+preview_volume);
+}
 int old_pos = m.focused_item;
 bool r = m.monitor();
 if (!r && m.selected_item < 0) {
