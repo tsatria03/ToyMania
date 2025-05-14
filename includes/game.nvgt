@@ -907,11 +907,11 @@ if (gamcopy == true)
         else if (choice == "export")
         {
             file postfile;
-            postfile.open("C:/ProgramData/tsatria03/ToyMania/data/stats/player_posts.txt", "w");
+            postfile.open(DIRECTORY_APPDATA+"tsatria03/ToyMania/data/stats/player_posts.txt", "w");
             postfile.write(statsummary);
             postfile.close();
             if (copexpsounds == true) dlgplay("gamexport.ogg", false);
-            dlgmessage_return("All game session results exported to C:/ProgramData/tsatria03/ToyMania/data/stats/player_posts.txt.");
+            dlgmessage_return("All game session results exported to data/stats/player_posts.txt.");
         }
     }
 }
