@@ -43,10 +43,12 @@ return;
 }
 }
 }
-void spawn_key(int x,int y,int timeout,bool autobreak)
+void spawn_key(int x, int y, int timeout, bool autobreak)
 {
-key k1(x,y,timeout,autobreak);
-keys.insert_last(k1);
+    if (!endless && doors.length() > 0 && collected_keys >= doors[0].required_keys)
+        return;
+    key k1(x, y, timeout, autobreak);
+    keys.insert_last(k1);
 }
 void destroy_all_keys()
 {

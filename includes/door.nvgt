@@ -33,8 +33,9 @@ speak("This door is locked. You need "+doors[i].required_keys+" or more keys to 
 else if(collected_keys>=doors[i].required_keys)
 {
 doors[i].unlocksound=doorpool.play_stationary("keyuse"+random(1,6)+".ogg",false);
-pool.destroy_sound(toyambslot);
-pool.destroy_sound(toytrackslot);
+alarmpool.destroy_sound(alarmslot);
+ambpool.destroy_sound(toyambslot);
+muspool.destroy_sound(toytrackslot);
 destroy_all_keys();
 keyspawn=false;
 keydest=false;
