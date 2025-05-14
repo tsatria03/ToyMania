@@ -1,7 +1,7 @@
-Remove player titles.
-Prevent players from collecting items, keys, toys, or being hit by enemies while inside a door.
 Add difficulty options to the normal game mode.
 
+*Done. Prevent players from collecting items, keys, toys, or being hit by bullets and enemies while inside a door.
+*Done. Remove the management of player titles.
 *Done. Make it so When you press the letter D in normal mode, it tells you how far you are away from the exit door in feat.
 *Done. Make it so if you have collected enough keys in normal mode, they stop spawning on the map.
 *Done. Add an option to enable or disable the countdown sounds.

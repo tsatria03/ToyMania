@@ -50,7 +50,7 @@ if(gards[i].gardy>me.y)
 gards[i].gardy--;
 }
 }
-if(me.x==gards[i].gardx and me.y==gards[i].gardy and gards[i].firetimer.elapsed>=gards[i].firetime)
+if(me.x==gards[i].gardx and me.y==gards[i].gardy and gards[i].firetimer.elapsed>=gards[i].firetime and doormove == false)
 {
 if(gards[i].gardtype=="gard1") gards[i].wepsound=gardpool.play_2d(gards[i].gardtype+"hit"+random(1,3)+".ogg", me.x, me.y, gards[i].gardx, gards[i].gardy, false);
 if(gards[i].gardtype=="gard2") gards[i].wepsound=gardpool.play_2d(gards[i].gardtype+"hit"+random(1,3)+".ogg", me.x, me.y, gards[i].gardx, gards[i].gardy, false);

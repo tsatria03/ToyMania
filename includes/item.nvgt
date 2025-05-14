@@ -31,7 +31,7 @@ objs[i].hurtsound=objpool.play_2d("itembreak"+random(1,6)+".ogg", me.x, me.y, ob
 objs.remove_at(i);
 return;
 }
-if(absolute(me.x - objs[i].itx) <= 2 and absolute(me.y - objs[i].ity) <= 2)
+if(absolute(me.x - objs[i].itx) <= 2 and absolute(me.y - objs[i].ity) <= 2 and doormove == false)
 {
 objpool.destroy_sound(objs[i].objsound);
 objs[i].getsound=objpool.play_stationary("itemget.ogg",false);

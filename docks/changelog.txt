@@ -1,4 +1,5 @@
 new in 2.8
+Made it so players can no longer collect items, keys, or toys while inside a door. They also can't be hit by bullets or enemies either. This prevents unintended interactions and ensures smoother transitions when exiting a level.
 Made it so game data and settings are now saved to the user's AppData folder under tsatria03/ToyMania/saves, and tsatria03/ToyMania/stats. This ensures proper user configuration and seamless OS integration.
 Completely removed the coppying, exporting, and viewing of player titles for all lifetime stats.
 Fixed an issue where coppied and exported stats weren't being split into lines properly for reading.
@@ -28,7 +29,7 @@ new in 2.5
 Fixed an issue where the alarm sound in level 6 would continue to play even after the user has either died or won the game.
 The normal game mode is now time based. Players now have a limited amount of time to defeat the boss and escape the store once they reach level 6. A looping alarm sound will play during this final phase. Failing to exit in time will result in the entire store exploding.
 Recoded the post-game menus to support exporting session stats to a file. Players can now choose whether to copy their results to the clipboard, or export them to data/stats/player_posts.txt. This can be durring or after a game session has ended.
-Made it so car bullets can sometimes break items and toys while they are traveling.
+Made it so car bullets can sometimes break keys, items, and toys while they are traveling.
 Made it so health related items start showing up in level 2 or higher in endless mode.
 Made it so cars will only shoot at you if you’re nearby. This prevents bullets from cluttering up the field at long distances, and makes car attacks more impactful when they’re up close.
 Made it so the damage of bullets fired by cars is randomized per car type. Different cars now fire bullets with varying damage specs.
