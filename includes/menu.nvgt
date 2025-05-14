@@ -4,7 +4,7 @@ setupmenu();
 m.add_item("game menu", "gm");
 m.add_item("settings menu", "sm");
 m.add_item("speaker test menu", "st");
-m.add_item("restart game", "rt");
+if(system_is_windows) m.add_item("restart game", "rt");
 m.add_item("exit game", "ex");
 m.intro_text = "Main menu. Please choose an option with your arrow keys, then press enter to activate one.";
 int mres=m.run();
