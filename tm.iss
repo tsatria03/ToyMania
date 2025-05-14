@@ -19,7 +19,6 @@ UninstallDisplayIcon={app}\{#MyAppExeName}
 ArchitecturesAllowed=x64compatible
 ArchitecturesInstallIn64BitMode=x64compatible
 PrivilegesRequired=admin
-PrivilegesRequiredOverridesAllowed=dialog
 OutputDir=releases
 OutputBaseFilename=ToyMania_Installer_Password_is_GrateCollector
 Password=GrateCollector
@@ -38,12 +37,11 @@ Name: "startmenuicon"; Description: "Create a Start Menu shortcut"; GroupDescrip
 Source: "C:\Users\tsatr\OneDrive\Documents\GitHub\ToyMania\releases\windows\ToyMania_windows_password_is_GrateCollector\tm\*"; \
   DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs
 Source: "C:\Users\tsatr\OneDrive\Documents\GitHub\ToyMania\releases\windows\ToyMania_windows_password_is_GrateCollector\tm\docks\readme.txt"; \
-  DestDir: "{app}"; Flags: isreadme
+DestDir: "{app}"; Flags: ignoreversion
 
 [Icons]
 Name: "{autodesktop}\{#MyAppName}"; Filename: "{app}\{#MyAppExeName}"; Tasks: desktopicon
 Name: "{group}\{#MyAppName}"; Filename: "{app}\{#MyAppExeName}"; Tasks: startmenuicon
-Name: "{group}\Uninstall {#MyAppName}"; Filename: "{uninstallexe}"
 
 [Run]
 Filename: "{app}\{#MyAppExeName}"; Description: "Launch {#MyAppName}"; \
