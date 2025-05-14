@@ -1,8 +1,10 @@
 new in 2.8
+Updated the readme file with added and modified keyboard shortcuts.
+Added the ability to adjust the heartbeat volume in all game modes. You can press shift plus home or end to adjust this. This setting is automaticly saved the next time you start a new game session.
 Made it so players can no longer collect items, keys, or toys while inside a door. They also can't be hit by bullets or enemies either. This prevents unintended interactions and ensures smoother transitions when exiting a level.
 Made it so game data and settings are now saved to the user's AppData folder under tsatria03/ToyMania/saves, and tsatria03/ToyMania/stats. This ensures proper user configuration and seamless OS integration.
 Completely removed the coppying, exporting, and viewing of player titles for all lifetime stats.
-Fixed an issue where coppied and exported stats weren't being split into lines properly for reading.
+Addressed an issue where coppied and exported stats weren't being split into lines properly for reading.
 new in 2.7
 Made it so extra keys don't get spawned after reaching the required key count in all game Modes. Once you've collected enough keys to unlock the door, no more of them will spawn on the map. This keeps the overall playfield cleaner to work with.
 Added door distance feedback to the letter D keyboard shortcut in Normal Mode. Pressing it now tells you how far the exit door is from your current location in feet, followed by how many keys are required to open it. This improves situational awareness during the final time-limited phase.

@@ -139,6 +139,20 @@ alarmpool.update_sound_start_values(alarmslot,0,alarmvolume,alarmpitch);
 speak("alarm "+alarmvolume);
 writepreffs();
 }
+if(shift_is_down() and key_repeating(KEY_HOME) and heartvolume!=0)
+{
+heartvolume+=1;
+heartpool.update_sound_start_values(heartslot,0,heartvolume,heartpitch);
+speak("heart "+heartvolume);
+writepreffs();
+}
+if(shift_is_down() and key_repeating(KEY_END) and heartvolume!=-50)
+{
+heartvolume-=1;
+heartpool.update_sound_start_values(heartslot,0,heartvolume,heartpitch);
+speak("heart "+heartvolume);
+writepreffs();
+}
 if(key_repeating(KEY_PRIOR) and toymusvolume!=0)
 {
 toymusvolume+=1;
@@ -694,7 +708,7 @@ if (!countdown_started and boss_timer.elapsed >boss_time_limit-10000)
     {
 if (heartbeat_playing)
 {
-    pool.destroy_sound(heartbeat_slot);
+    heartpool.destroy_sound(heartslot);
 temp.play_stationary("heartstop.ogg", false);
     heartbeat_playing = false;
 }
@@ -835,18 +849,18 @@ double heartbeat_threshold = endless ? 5000 : 500;
 if (health <= heartbeat_threshold and !heartbeat_playing)
 {
     heartbeat_playing = true;
-    heartbeat_slot = pool.play_stationary("heartstart.ogg", true);
+    heartslot = heartpool.play_stationary_extended("heartstart.ogg", true,0,0,heartvolume,heartpitch);
 }
 if (health > heartbeat_threshold and heartbeat_playing)
 {
     heartbeat_playing = false;
-    pool.destroy_sound(heartbeat_slot);
+    heartpool.destroy_sound(heartslot);
 }
 if (health <= 0)
 {
 if (heartbeat_playing)
 {
-    pool.destroy_sound(heartbeat_slot);
+    heartpool.destroy_sound(heartslot);
 temp.play_stationary("heartstop.ogg", false);
     heartbeat_playing = false;
 }
