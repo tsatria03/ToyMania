@@ -75,11 +75,14 @@ gamealarm.ogg
 gameamb.ogg
 gamecopy.ogg
 gamecount.ogg
-gamedeath.ogg
+gamedeath1.ogg
+gamedeath2.ogg
+gamedeath3.ogg
 gamelaunch.ogg
 gamemus.ogg
 gamexport.ogg
-gard1death.ogg
+gard1death1.ogg
+gard1death2.ogg
 gard1fall1.wav
 gard1fall2.wav
 gard1fall3.wav
@@ -93,8 +96,7 @@ gard1pain2.ogg
 gard1pain3.ogg
 gard1pain4.ogg
 gard1pain5.ogg
-gard1taunt1.ogg
-gard1taunt2.ogg
+gard1taunt.ogg
 gard1walk1.ogg
 gard1walk2.ogg
 gard1walk3.ogg
@@ -268,4 +270,4 @@ toyloop6.ogg
 toyloop7.ogg
 toyloop8.ogg
 toyloop9.ogg
-total files: 270
+total files: 272
