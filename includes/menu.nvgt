@@ -218,7 +218,7 @@ string confirm = m.get_selected_item_id();
     }
 if(confirm=="yes")
 {
-if(file_exists("data/saves/game.tmg")) file_delete("data/saves/game.tmg");
+if(file_exists(DIRECTORY_APPDATA+"tsatria03/ToyMania/data/saves/game.tmg")) file_delete(DIRECTORY_APPDATA+"tsatria03/ToyMania/data/saves/game.tmg");
 resetgame();
 dlgmessage_return("Game progresses cleared.");
 gamemenu();
@@ -229,50 +229,43 @@ if (gamem == "cys")
 if(speak_menu_loading==true) speak("loading");
 m.fade_music();
     string result = "";
-    result += "Session Achievements:/r/n";
+    result += "Session Achievements:\r\n";
     for (uint i = 0; i < achievements.length(); i++)
     {
         if (achievements[i].isSessionBased)
         {
-            result += "- " + achievements[i].get_progress_status() + "/r/n";
+            result += "- " + achievements[i].get_progress_status() + "\r\n";
         }
     }
-    result += "/r/nLifetime Achievements:/r/n";
+    result += "\r\nLifetime Achievements:\r\n";
     for (uint i = 0; i < achievements.length(); i++)
     {
         if (!achievements[i].isSessionBased)
         {
-            result += "- " + achievements[i].get_progress_status() + "/r/n";
+            result += "- " + achievements[i].get_progress_status() + "\r\n";
         }
     }
-    result += "/r/n";
+    result += "\r\n";
     int session_minutes = int(session_playtime / 60000);
     int session_seconds = int((session_playtime % 60000) / 1000);
-    result += "Session Stats:/r/n";
-    result += "- Toys collected: " + collected_toys + "/r/n";
-    result += "- Keys collected: " + collected_keys + "/r/n";
-    result += "- Guards killed: " + killed_gards + "/r/n";
-    result += "- Cars destroyed: " + destroyed_cars + "/r/n";
-    result += "- Steps taken: " + moved_steps + "/r/n";
-    result += "- Time played: " + session_minutes + " minutes, " + session_seconds + " seconds./r/n/r/n";
+    result += "Session Stats:\r\n";
+    result += "- Toys collected: " + collected_toys + "\r\n";
+    result += "- Keys collected: " + collected_keys + "\r\n";
+    result += "- Guards killed: " + killed_gards + "\r\n";
+    result += "- Cars destroyed: " + destroyed_cars + "\r\n";
+    result += "- Steps taken: " + moved_steps + "\r\n";
+    result += "- Time played: " + session_minutes + " minutes, " + session_seconds + " seconds.\r\n\r\n";
     int total_minutes = int(total_playtime / 60000);
     int total_seconds = int((total_playtime % 60000) / 1000);
-    result += "Lifetime Stats:/r/n";
-    result += "- Last Played Date: " + last_played_date + "/r/n";
-    result += "- Last Played Time: " + last_played_time + "/r/n";
-    result += "- Toys collected: " + total_collected_toys + "/r/n";
-    result += "- Keys collected: " + total_collected_keys + "/r/n";
-    result += "- Guards killed: " + total_killed_gards + "/r/n";
-    result += "- Cars destroyed: " + total_destroyed_cars + "/r/n";
-    result += "- Steps taken: " + total_moved_steps + "/r/n";
-    result += "- Total playtime: " + total_minutes + " minutes, " + total_seconds + " seconds./r/n/r/n";
-    result += "Player Titles:/r/n";
-    result += "- Toy Title: " + get_toy_rank() + ". " + get_toy_rank_desc() + "/r/n";
-    result += "- Key Title: " + get_key_rank() + ". " + get_key_rank_desc() + "/r/n";
-    result += "- Guard Title: " + get_guard_rank() + ". " + get_guard_rank_desc() + "/r/n";
-    result += "- Car Title: " + get_car_rank() + ". " + get_car_rank_desc() + "/r/n";
-    result += "- Steps Title: " + get_steps_rank() + ". " + get_steps_rank_desc() + "/r/n";
-    result += "- Playtime Title: " + get_playtime_rank() + ". " + get_playtime_rank_desc() + "/r/n";
+    result += "Lifetime Stats:\r\n";
+    result += "- Last Played Date: " + last_played_date + "\r\n";
+    result += "- Last Played Time: " + last_played_time + "\r\n";
+    result += "- Toys collected: " + total_collected_toys + "\r\n";
+    result += "- Keys collected: " + total_collected_keys + "\r\n";
+    result += "- Guards killed: " + total_killed_gards + "\r\n";
+    result += "- Cars destroyed: " + total_destroyed_cars + "\r\n";
+    result += "- Steps taken: " + total_moved_steps + "\r\n";
+    result += "- Total playtime: " + total_minutes + " minutes, " + total_seconds + " seconds.\r\n";
     clipboard_copy_text(result);
 if(copexpsounds==true) dlgplay("gamecopy.ogg" ,false);
     dlgmessage_return("All game progresses have been copied to your clipboard.");
@@ -284,46 +277,39 @@ if (speak_menu_loading) speak("loading");
 m.fade_music();
 gamfile.open(DIRECTORY_APPDATA+"tsatria03/ToyMania/data/stats/player_progresses.txt", "w");
 string result = "";
-result += "Session Achievements:/r/n";
+result += "Session Achievements:\r\n";
 for (uint i = 0; i < achievements.length(); i++)
 {
 if (achievements[i].isSessionBased)
-result += "- " + achievements[i].get_progress_status() + "/r/n";
+result += "- " + achievements[i].get_progress_status() + "\r\n";
 }
-result += "/r/nLifetime Achievements:/r/n";
+result += "\r\nLifetime Achievements:\r\n";
 for (uint i = 0; i < achievements.length(); i++)
 {
 if (!achievements[i].isSessionBased)
-result += "- " + achievements[i].get_progress_status() + "/r/n";
+result += "- " + achievements[i].get_progress_status() + "\r\n";
 }
-result += "/r/n";
+result += "\r\n";
 int session_minutes = int(session_playtime / 60000);
 int session_seconds = int((session_playtime % 60000) / 1000);
-result += "Session Stats:/r/n";
-result += "- Toys collected: " + collected_toys + "/r/n";
-result += "- Keys collected: " + collected_keys + "/r/n";
-result += "- Guards killed: " + killed_gards + "/r/n";
-result += "- Cars destroyed: " + destroyed_cars + "/r/n";
-result += "- Steps taken: " + moved_steps + "/r/n";
-result += "- Time played: " + session_minutes + " minutes, " + session_seconds + " seconds./r/n/r/n";
+result += "Session Stats:\r\n";
+result += "- Toys collected: " + collected_toys + "\r\n";
+result += "- Keys collected: " + collected_keys + "\r\n";
+result += "- Guards killed: " + killed_gards + "\r\n";
+result += "- Cars destroyed: " + destroyed_cars + "\r\n";
+result += "- Steps taken: " + moved_steps + "\r\n";
+result += "- Time played: " + session_minutes + " minutes, " + session_seconds + " seconds.\r\n\r\n";
 int total_minutes = int(total_playtime / 60000);
 int total_seconds = int((total_playtime % 60000) / 1000);
-result += "Lifetime Stats:/r/n";
-result += "- Last Played Date: " + last_played_date + "/r/n";
-result += "- Last Played Time: " + last_played_time + "/r/n";
-result += "- Toys collected: " + total_collected_toys + "/r/n";
-result += "- Keys collected: " + total_collected_keys + "/r/n";
-result += "- Guards killed: " + total_killed_gards + "/r/n";
-result += "- Cars destroyed: " + total_destroyed_cars + "/r/n";
-result += "- Steps taken: " + total_moved_steps + "/r/n";
-result += "- Total playtime: " + total_minutes + " minutes, " + total_seconds + " seconds./r/n/r/n";
-result += "Player Titles:/r/n";
-result += "- Toy Title: " + get_toy_rank() + ". " + get_toy_rank_desc() + "/r/n";
-result += "- Key Title: " + get_key_rank() + ". " + get_key_rank_desc() + "/r/n";
-result += "- Guard Title: " + get_guard_rank() + ". " + get_guard_rank_desc() + "/r/n";
-result += "- Car Title: " + get_car_rank() + ". " + get_car_rank_desc() + "/r/n";
-result += "- Steps Title: " + get_steps_rank() + ". " + get_steps_rank_desc() + "/r/n";
-result += "- Playtime Title: " + get_playtime_rank() + ". " + get_playtime_rank_desc() + "/r/n";
+result += "Lifetime Stats:\r\n";
+result += "- Last Played Date: " + last_played_date + "\r\n";
+result += "- Last Played Time: " + last_played_time + "\r\n";
+result += "- Toys collected: " + total_collected_toys + "\r\n";
+result += "- Keys collected: " + total_collected_keys + "\r\n";
+result += "- Guards killed: " + total_killed_gards + "\r\n";
+result += "- Cars destroyed: " + total_destroyed_cars + "\r\n";
+result += "- Steps taken: " + total_moved_steps + "\r\n";
+result += "- Total playtime: " + total_minutes + " minutes, " + total_seconds + " seconds.\r\n";
 gamfile.write(result);
 gamfile.close();
 if(copexpsounds==true) dlgplay("gamexport.ogg",false);
@@ -539,7 +525,7 @@ if (mres == -1)
         if (psmem == "clg")
 {
             string mode = endless ? "Endless" : "Normal";
-            string info = "Current Level: " + level + "/r/nGame Mode: " + mode;
+            string info = "Current Level: " + level + "\r\nGame Mode: " + mode;
             clipboard_copy_text(info);
             if (copexpsounds==true) dlgplay("gamecopy.ogg", false);
             dlgmessage_return("Your current level and game mode has been copied to the clipboard.");
@@ -549,15 +535,15 @@ return;
         if (psmem == "rs")
 {
             string statsummary = "";
-            statsummary += "Session Stats:/r/n";
-            statsummary += "- Toys collected: " + collected_toys + "/r/n";
-            statsummary += "- Keys collected: " + collected_keys + "/r/n";
-            statsummary += "- Guards killed: " + killed_gards + "/r/n";
-            statsummary += "- Cars destroyed: " + destroyed_cars + "/r/n";
-            statsummary += "- Steps taken: " + moved_steps + "/r/n";
+            statsummary += "Session Stats:\r\n";
+            statsummary += "- Toys collected: " + collected_toys + "\r\n";
+            statsummary += "- Keys collected: " + collected_keys + "\r\n";
+            statsummary += "- Guards killed: " + killed_gards + "\r\n";
+            statsummary += "- Cars destroyed: " + destroyed_cars + "\r\n";
+            statsummary += "- Steps taken: " + moved_steps + "\r\n";
 int session_minutes = int(timeelapsed.ms() / 60000);
 int session_seconds = int((timeelapsed.ms() % 60000) / 1000);
-            statsummary += "- Time played: " + session_minutes + " minutes, " + session_seconds + " seconds/r/n";
+            statsummary += "- Time played: " + session_minutes + " minutes, " + session_seconds + " seconds\r\n";
             dlgmessage_return(statsummary);
 if (gamcopy == true)
 {
@@ -822,20 +808,20 @@ if (achm == "cys")
 {
 if(speak_menu_loading==true) speak("loading");
 m.fade_music();
-    string achievementSummary = "Session Achievements:/r/n";
+    string achievementSummary = "Session Achievements:\r\n";
     for (uint i = 0; i < achievements.length(); i++)
     {
         if (achievements[i].isSessionBased)
         {
-            achievementSummary += "- " + achievements[i].get_progress_status() + "/r/n";
+            achievementSummary += "- " + achievements[i].get_progress_status() + "\r\n";
         }
     }
-    achievementSummary += "/r/nLifetime Achievements:/r/n";
+    achievementSummary += "\r\nLifetime Achievements:\r\n";
     for (uint i = 0; i < achievements.length(); i++)
     {
         if (!achievements[i].isSessionBased)
         {
-            achievementSummary += "- " + achievements[i].get_progress_status() + "/r/n";
+            achievementSummary += "- " + achievements[i].get_progress_status() + "\r\n";
         }
     }
     clipboard_copy_text(achievementSummary);
@@ -848,17 +834,17 @@ if (achm == "cys2")
 if (speak_menu_loading) speak("loading");
 m.fade_music();
 achfile.open(DIRECTORY_APPDATA+"tsatria03/ToyMania/data/stats/player_achievements.txt", "w");
-string achievementSummary = "Session Achievements:/r/n";
+string achievementSummary = "Session Achievements:\r\n";
 for (uint i = 0; i < achievements.length(); i++)
 {
 if (achievements[i].isSessionBased)
-achievementSummary += "- " + achievements[i].get_progress_status() + "/r/n";
+achievementSummary += "- " + achievements[i].get_progress_status() + "\r\n";
 }
-achievementSummary += "/r/nLifetime Achievements:/r/n";
+achievementSummary += "\r\nLifetime Achievements:\r\n";
 for (uint i = 0; i < achievements.length(); i++)
 {
 if (!achievements[i].isSessionBased)
-achievementSummary += "- " + achievements[i].get_progress_status() + "/r/n";
+achievementSummary += "- " + achievements[i].get_progress_status() + "\r\n";
 }
 achfile.write(achievementSummary);
 achfile.close();
@@ -908,7 +894,6 @@ void statsmenu()
 setupmenu();
     m.add_item("Session Statistics", "session");
     m.add_item("Lifetime Statistics", "lifetime");
-m.add_item("Player Titles", "titles");
 m.add_item("Clear game statistics.", "gs");
 if(statscopy==true) m.add_item("Copy all game statistics to clipboard.", "cys");
 if(statscopy==true) m.add_item("Export all game statistics to file", "cys2");
@@ -931,12 +916,6 @@ if (statsm == "lifetime")
 if(speak_menu_loading==true) speak("loading");
 m.fade_music();
         view_lifetime_stats();
-}
-if (statsm == "titles")
-{
-if(speak_menu_loading==true) speak("loading");
-m.fade_music();
-    view_player_titles();
 }
 if (statsm == "gs")
 {
@@ -1013,29 +992,22 @@ int session_seconds = int((session_playtime % 60000) / 1000);
 int total_minutes = int(total_playtime / 60000);
 int total_seconds = int((total_playtime % 60000) / 1000);
 string statsummary = "";
-statsummary += "Session Stats:/r/n";
-statsummary += "- Toys collected: " + collected_toys + "/r/n";
-statsummary += "- Keys collected: " + collected_keys + "/r/n";
-statsummary += "- Guards killed: " + killed_gards + "/r/n";
-statsummary += "- Cars destroyed: " + destroyed_cars + "/r/n";
-statsummary += "- Steps taken: " + moved_steps + "/r/n";
-statsummary += "- Time played: " + session_minutes + " minutes, " + session_seconds + " seconds./r/n/r/n";
-statsummary += "Lifetime Stats:/r/n";
-statsummary += "- Last Played Date: " + last_played_date + "/r/n";
-statsummary += "- Last Played Time: " + last_played_time + "/r/n";
-statsummary += "- Toys collected: " + total_collected_toys + "/r/n";
-statsummary += "- Keys collected: " + total_collected_keys + "/r/n";
-statsummary += "- Guards killed: " + total_killed_gards + "/r/n";
-statsummary += "- Cars destroyed: " + total_destroyed_cars + "/r/n";
-statsummary += "- Steps taken: " + total_moved_steps + "/r/n";
-statsummary += "- Total playtime: " + total_minutes + " minutes, " + total_seconds + " seconds./r/n/r/n";
-statsummary += "Player Titles:/r/n";
-statsummary += "- Toy Title: " + get_toy_rank() + ". " + get_toy_rank_desc() + "/r/n";
-statsummary += "- Key Title: " + get_key_rank() + ". " + get_key_rank_desc() + "/r/n";
-statsummary += "- Guard Title: " + get_guard_rank() + ". " + get_guard_rank_desc() + "/r/n";
-statsummary += "- Car Title: " + get_car_rank() + ". " + get_car_rank_desc() + "/r/n";
-statsummary += "- Steps Title: " + get_steps_rank() + ". " + get_steps_rank_desc() + "/r/n";
-statsummary += "- Playtime Title: " + get_playtime_rank() + ". " + get_playtime_rank_desc() + "/r/n";
+statsummary += "Session Stats:\r\n";
+statsummary += "- Toys collected: " + collected_toys + "\r\n";
+statsummary += "- Keys collected: " + collected_keys + "\r\n";
+statsummary += "- Guards killed: " + killed_gards + "\r\n";
+statsummary += "- Cars destroyed: " + destroyed_cars + "\r\n";
+statsummary += "- Steps taken: " + moved_steps + "\r\n";
+statsummary += "- Time played: " + session_minutes + " minutes, " + session_seconds + " seconds.\r\n\r\n";
+statsummary += "Lifetime Stats:\r\n";
+statsummary += "- Last Played Date: " + last_played_date + "\r\n";
+statsummary += "- Last Played Time: " + last_played_time + "\r\n";
+statsummary += "- Toys collected: " + total_collected_toys + "\r\n";
+statsummary += "- Keys collected: " + total_collected_keys + "\r\n";
+statsummary += "- Guards killed: " + total_killed_gards + "\r\n";
+statsummary += "- Cars destroyed: " + total_destroyed_cars + "\r\n";
+statsummary += "- Steps taken: " + total_moved_steps + "\r\n";
+statsummary += "- Total playtime: " + total_minutes + " minutes, " + total_seconds + " seconds.\r\n";
     clipboard_copy_text(statsummary);
 if(copexpsounds==true) dlgplay("gamecopy.ogg" ,false);
     dlgmessage_return("All game statistics have been copied to your clipboard.");
@@ -1051,29 +1023,22 @@ int session_seconds = int((session_playtime % 60000) / 1000);
 int total_minutes = int(total_playtime / 60000);
 int total_seconds = int((total_playtime % 60000) / 1000);
 string statsummary = "";
-statsummary += "Session Stats:/r/n";
-statsummary += "- Toys collected: " + collected_toys + "/r/n";
-statsummary += "- Keys collected: " + collected_keys + "/r/n";
-statsummary += "- Guards killed: " + killed_gards + "/r/n";
-statsummary += "- Cars destroyed: " + destroyed_cars + "/r/n";
-statsummary += "- Steps taken: " + moved_steps + "/r/n";
-statsummary += "- Time played: " + session_minutes + " minutes, " + session_seconds + " seconds./r/n/r/n";
-statsummary += "Lifetime Stats:/r/n";
-statsummary += "- Last Played Date: " + last_played_date + "/r/n";
-statsummary += "- Last Played Time: " + last_played_time + "/r/n";
-statsummary += "- Toys collected: " + total_collected_toys + "/r/n";
-statsummary += "- Keys collected: " + total_collected_keys + "/r/n";
-statsummary += "- Guards killed: " + total_killed_gards + "/r/n";
-statsummary += "- Cars destroyed: " + total_destroyed_cars + "/r/n";
-statsummary += "- Steps taken: " + total_moved_steps + "/r/n";
-statsummary += "- Total playtime: " + total_minutes + " minutes, " + total_seconds + " seconds./r/n/r/n";
-statsummary += "Player Titles:/r/n";
-statsummary += "- Toy Title: " + get_toy_rank() + ". " + get_toy_rank_desc() + "/r/n";
-statsummary += "- Key Title: " + get_key_rank() + ". " + get_key_rank_desc() + "/r/n";
-statsummary += "- Guard Title: " + get_guard_rank() + ". " + get_guard_rank_desc() + "/r/n";
-statsummary += "- Car Title: " + get_car_rank() + ". " + get_car_rank_desc() + "/r/n";
-statsummary += "- Steps Title: " + get_steps_rank() + ". " + get_steps_rank_desc() + "/r/n";
-statsummary += "- Playtime Title: " + get_playtime_rank() + ". " + get_playtime_rank_desc() + "/r/n";
+statsummary += "Session Stats:\r\n";
+statsummary += "- Toys collected: " + collected_toys + "\r\n";
+statsummary += "- Keys collected: " + collected_keys + "\r\n";
+statsummary += "- Guards killed: " + killed_gards + "\r\n";
+statsummary += "- Cars destroyed: " + destroyed_cars + "\r\n";
+statsummary += "- Steps taken: " + moved_steps + "\r\n";
+statsummary += "- Time played: " + session_minutes + " minutes, " + session_seconds + " seconds.\r\n\r\n";
+statsummary += "Lifetime Stats:\r\n";
+statsummary += "- Last Played Date: " + last_played_date + "\r\n";
+statsummary += "- Last Played Time: " + last_played_time + "\r\n";
+statsummary += "- Toys collected: " + total_collected_toys + "\r\n";
+statsummary += "- Keys collected: " + total_collected_keys + "\r\n";
+statsummary += "- Guards killed: " + total_killed_gards + "\r\n";
+statsummary += "- Cars destroyed: " + total_destroyed_cars + "\r\n";
+statsummary += "- Steps taken: " + total_moved_steps + "\r\n";
+statsummary += "- Total playtime: " + total_minutes + " minutes, " + total_seconds + " seconds.\r\n";
 statfile.write(statsummary);
 statfile.close();
 if(copexpsounds==true) dlgplay("gamexport.ogg",false);
@@ -1134,27 +1099,6 @@ else
 {
         view_lifetime_stats();
     }
-}
-void view_player_titles()
-{
-    setupmenu(false);
-    m.add_item("Toy Rank: " + get_toy_rank() + ". " + get_toy_rank_desc(), "");
-    m.add_item("Key Rank: " + get_key_rank() + ". " + get_key_rank_desc(), "");
-    m.add_item("Guard Rank: " + get_guard_rank() + ". " + get_guard_rank_desc(), "");
-    m.add_item("Car Rank: " + get_car_rank() + ". " + get_car_rank_desc(), "");
-    m.add_item("Steps Rank: " + get_steps_rank() + ". " + get_steps_rank_desc(), "");
-    m.add_item("Playtime Rank: " + get_playtime_rank() + ". " + get_playtime_rank_desc(), "");
-    m.add_item("Back", "back");
-m.intro_text = "Player titles menu. You can view your earned titles based on lifetime stats here.";
-    int res = m.run();
-    if (res == -1 or m.get_selected_item_id() == "back")
-    {
-        statsmenu();
-}
-    else
-{
-view_player_titles();
-}
 }
 void settingsmenu()
 {
@@ -1297,7 +1241,7 @@ string confirm = m.get_selected_item_id();
     }
 if(confirm=="yes")
 {
-if(file_exists("data/saves/settings.tmg")) file_delete("data/saves/settings.tmg");
+if(file_exists(DIRECTORY_APPDATA+"tsatria03/ToyMania/data/saves/settings.tmg")) file_delete(DIRECTORY_APPDATA+"tsatria03/ToyMania/data/saves/settings.tmg");
 resetpreffs();
 dlgmessage_return("Settings reset.");
 mainmenu();

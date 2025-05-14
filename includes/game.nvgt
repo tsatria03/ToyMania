@@ -874,7 +874,7 @@ pool.destroy_sound(countslot);
     muspool.destroy_sound(toytrackslot);
     dlgplay("playerdeath.ogg");
     dlgplay("playerfall.ogg");
-dlgmessage_return("You just died on level "+level+ " of the " + (endless ? "Endless" : "Normal") + " game mode!"+" Here are your current results for this game session:"+ "/r/nToys collected: " + collected_toys +"/r/nKeys collected: " + collected_keys +"/r/nGuards defeated: " + killed_gards +"/r/nCars destroyed: " + destroyed_cars +"/r/nSteps taken: " + moved_steps +"/r/nTime survived: " + timeelapsed.m() + " minutes, " + timeelapsed.s() + " seconds" +"/r/nBetter luck next time!");
+dlgmessage_return("You just died on level "+level+ " of the " + (endless ? "Endless" : "Normal") + " game mode!"+" Here are your current results for this game session:"+ "\r\nToys collected: " + collected_toys +"\r\nKeys collected: " + collected_keys +"\r\nGuards defeated: " + killed_gards +"\r\nCars destroyed: " + destroyed_cars +"\r\nSteps taken: " + moved_steps +"\r\nTime survived: " + timeelapsed.m() + " minutes, " + timeelapsed.s() + " seconds" +"\r\nBetter luck next time!");
     session_playtime += timeelapsed.ms();
     total_playtime += timeelapsed.ms();
 if (gamcopy == true)
@@ -891,13 +891,13 @@ if (gamcopy == true)
         string statsummary = "";
         int min = int(session_playtime / 60000);
         int sec = int((session_playtime % 60000) / 1000);
-        statsummary += "Session Stats:/r/n";
-        statsummary += "- Toys collected: " + collected_toys + "/r/n";
-        statsummary += "- Keys collected: " + collected_keys + "/r/n";
-        statsummary += "- Guards killed: " + killed_gards + "/r/n";
-        statsummary += "- Cars destroyed: " + destroyed_cars + "/r/n";
-        statsummary += "- Steps taken: " + moved_steps + "/r/n";
-        statsummary += "- Time played: " + min + " minutes, " + sec + " seconds/r/n";
+        statsummary += "Session Stats:\r\n";
+        statsummary += "- Toys collected: " + collected_toys + "\r\n";
+        statsummary += "- Keys collected: " + collected_keys + "\r\n";
+        statsummary += "- Guards killed: " + killed_gards + "\r\n";
+        statsummary += "- Cars destroyed: " + destroyed_cars + "\r\n";
+        statsummary += "- Steps taken: " + moved_steps + "\r\n";
+        statsummary += "- Time played: " + min + " minutes, " + sec + " seconds\r\n";
         if (choice == "copy")
         {
             clipboard_copy_text(statsummary);

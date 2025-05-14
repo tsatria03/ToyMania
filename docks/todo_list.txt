@@ -1,3 +1,4 @@
+Remove player titles.
 Prevent players from collecting items, keys, toys, or being hit by enemies while inside a door.
 Add difficulty options to the normal game mode.
 
