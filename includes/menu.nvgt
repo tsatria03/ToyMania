@@ -218,7 +218,7 @@ string confirm = m.get_selected_item_id();
     }
 if(confirm=="yes")
 {
-if(file_exists(DIRECTORY_APPDATA+"tsatria03/ToyMania/data/saves/game.tmg")) file_delete(DIRECTORY_APPDATA+"tsatria03/ToyMania/data/saves/game.tmg");
+if(file_exists(DIRECTORY_APPDATA+"tsatria03/ToyMania/saves/game.tmg")) file_delete(DIRECTORY_APPDATA+"tsatria03/ToyMania/saves/game.tmg");
 resetgame();
 dlgmessage_return("Game progresses cleared.");
 gamemenu();
@@ -275,7 +275,7 @@ if (gamem == "cys2")
 {
 if (speak_menu_loading) speak("loading");
 m.fade_music();
-gamfile.open(DIRECTORY_APPDATA+"tsatria03/ToyMania/data/stats/player_progresses.txt", "w");
+gamfile.open(DIRECTORY_APPDATA+"tsatria03/ToyMania/stats/player_progresses.txt", "w");
 string result = "";
 result += "Session Achievements:\r\n";
 for (uint i = 0; i < achievements.length(); i++)
@@ -313,7 +313,7 @@ result += "- Total playtime: " + total_minutes + " minutes, " + total_seconds + 
 gamfile.write(result);
 gamfile.close();
 if(copexpsounds==true) dlgplay("gamexport.ogg",false);
-dlgmessage_return("All game progresses have been exported to data/stats/player_progresses.txt.");
+dlgmessage_return("All game progresses have been exported to stats/player_progresses.txt.");
 gamemenu();
 }
 if (gamem == "back")
@@ -565,11 +565,11 @@ if (gamcopy == true)
         else if (resp == "export")
         {
             file postfile;
-            postfile.open(DIRECTORY_APPDATA+"tsatria03/ToyMania/data/stats/player_posts.txt", "w");
+            postfile.open(DIRECTORY_APPDATA+"tsatria03/ToyMania/stats/player_posts.txt", "w");
             postfile.write(statsummary);
             postfile.close();
             if (copexpsounds == true) dlgplay("gamexport.ogg", false);
-            dlgmessage_return("All game session results exported to data/stats/player_posts.txt.");
+            dlgmessage_return("All game session results exported to stats/player_posts.txt.");
         }
     }
 }
@@ -833,7 +833,7 @@ if (achm == "cys2")
 {
 if (speak_menu_loading) speak("loading");
 m.fade_music();
-achfile.open(DIRECTORY_APPDATA+"tsatria03/ToyMania/data/stats/player_achievements.txt", "w");
+achfile.open(DIRECTORY_APPDATA+"tsatria03/ToyMania/stats/player_achievements.txt", "w");
 string achievementSummary = "Session Achievements:\r\n";
 for (uint i = 0; i < achievements.length(); i++)
 {
@@ -849,7 +849,7 @@ achievementSummary += "- " + achievements[i].get_progress_status() + "\r\n";
 achfile.write(achievementSummary);
 achfile.close();
 if(copexpsounds==true) dlgplay("gamexport.ogg",false);
-dlgmessage_return("All game achievements have been exported to data/stats/player_achievements.txt.");
+dlgmessage_return("All game achievements have been exported to stats/player_achievements.txt.");
 achesmenu();
 }
 if (achm == "back")
@@ -1017,7 +1017,7 @@ if (statsm == "cys2")
 {
 if (speak_menu_loading) speak("loading");
 m.fade_music();
-statfile.open(DIRECTORY_APPDATA+"tsatria03/ToyMania/data/stats/player_statistics.txt", "w");
+statfile.open(DIRECTORY_APPDATA+"tsatria03/ToyMania/stats/player_statistics.txt", "w");
 int session_minutes = int(session_playtime / 60000);
 int session_seconds = int((session_playtime % 60000) / 1000);
 int total_minutes = int(total_playtime / 60000);
@@ -1042,7 +1042,7 @@ statsummary += "- Total playtime: " + total_minutes + " minutes, " + total_secon
 statfile.write(statsummary);
 statfile.close();
 if(copexpsounds==true) dlgplay("gamexport.ogg",false);
-dlgmessage_return("All game statistics have been exported to data/stats/player_statistics.txt.");
+dlgmessage_return("All game statistics have been exported to stats/player_statistics.txt.");
 statsmenu();
 }
 if (statsm == "back")
@@ -1241,7 +1241,7 @@ string confirm = m.get_selected_item_id();
     }
 if(confirm=="yes")
 {
-if(file_exists(DIRECTORY_APPDATA+"tsatria03/ToyMania/data/saves/settings.tmg")) file_delete(DIRECTORY_APPDATA+"tsatria03/ToyMania/data/saves/settings.tmg");
+if(file_exists(DIRECTORY_APPDATA+"tsatria03/ToyMania/saves/settings.tmg")) file_delete(DIRECTORY_APPDATA+"tsatria03/ToyMania/saves/settings.tmg");
 resetpreffs();
 dlgmessage_return("Settings reset.");
 mainmenu();

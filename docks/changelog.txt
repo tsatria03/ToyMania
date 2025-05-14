@@ -1,4 +1,5 @@
 new in 2.8
+Made it so game data and settings are now saved to the user's AppData folder under tsatria03/ToyMania/saves, and tsatria03/ToyMania/stats. This ensures proper user configuration and seamless OS integration.
 Completely removed the coppying, exporting, and viewing of player titles for all lifetime stats.
 Fixed an issue where coppied and exported stats weren't being split into lines properly for reading.
 new in 2.7
