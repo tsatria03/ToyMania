@@ -207,7 +207,7 @@ Changed the key to run from control to alt.
 Made it so keys get destroyed if you don't collect them on time.
 You can now collect keys. They will start appearing in the boss area of the map.
 Made it so the boss class launches random guards with different attributes.
-Adjusted some tweaks. The guards will no longer show up until you reach the boss area. They will also no longer destroy the toys that get dropped on the ground.
+Adjusted some tweaks with guards. The guards will no longer show up until you reach the boss area. They will also no longer destroy the toys that get dropped on the ground.
 Made it so the damage of weapons is randomized when hitting bosses, cars, and guards.
 Added health mechanics. When a guard or a boss attacks you, you'll hear pain sounds. The same thing will apply if they kill you.
 Made it so toys get broken if you don't collect them on time.
