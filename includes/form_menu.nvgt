@@ -298,6 +298,8 @@ int old_pos = m.focused_item;
 bool r = m.monitor();
 if (!r && m.selected_item < 0) {
 audio.close();
+preview_volume=0;
+audio.set_volume(preview_volume);
 learnsoundsmenu();
 }
 if (m.focused_item != old_pos) {
@@ -307,6 +309,8 @@ old_pos = m.focused_item;
 if (r) continue;
 if (m.selected_item_id == "back") {
 audio.close();
+preview_volume=0;
+audio.set_volume(preview_volume);
 learnsoundsmenu();
 }
 if (m.selected_item < 0 || m.selected_item >= sfx_names.length()) continue;
@@ -317,6 +321,7 @@ if (filenames.length() > 0) filename = filenames[random(0, filenames.length() -1
 }
 if (!filename.empty()) {
 audio.load(audio_prefix + filename);
+audio.set_volume(preview_volume);
 loop_previews ? audio.play_looped() : audio.play();
 }
 else speak("Unable to play "+sfx_names[m.selected_item]);
