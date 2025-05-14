@@ -20,6 +20,8 @@ bool loop_previews=true;
 bool variant_descriptions=true;
 bool copexpsounds=true;
 bool quit_menu=true;
+bool playcounts=true;
+bool playlevels=true;
 bool alarm_started = false;
 bool countdown_started = false;
 double alarmvolume=0, alarmpitch=100, toyambvolume=0, toyambpitch=100, toymusvolume=0, toymuspitch=100;

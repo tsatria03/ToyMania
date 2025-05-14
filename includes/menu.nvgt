@@ -435,7 +435,7 @@ ui["Disable Setting"] = "setdisabled.ogg";
 ui["Enable Setting"] = "setenabled.ogg";
 ui["Menu click"] = "menuclick.ogg";
 ui["Menu close"] = "menuclose.ogg";
-ui["Menu edge"] = "menuedge.ogg";
+ui["Menu edge: unused"] = "menuedge.ogg";
 ui["Menu enter"] = "menuenter.ogg";
 ui["Menu open"] = "menuopen.ogg";
 ui["Menu wrap"] = "menuwrap.ogg";
@@ -1171,6 +1171,8 @@ m.add_item(loop_previews ? "Disable looping of previewed sounds. This setting co
 m.add_item(variant_descriptions ? "Disable variant-based sound descriptions. This setting controls weather sounds that have multiple variants will include a description along side them." : "Enable variant-based sound descriptions. This setting controls weather sounds that have multiple variants will include a description along side them.", "vsc");
 m.add_item(copexpsounds ? "Disable copy and export confirmation sounds. This setting controls the playing of short chimes after copying or exporting files to and from the clipboard." : "Enable copy and export confirmation sounds. This setting controls the playing of short chimes after copying or exporting files to and from the clipboard.", "cfs");
 m.add_item(quit_menu ? "Disable quit confirmation prompts. This setting controls whether the game will show a prompt to quit the current game session before quitting from the Escape or pause menu." : "Enable quit confirmation prompts. This setting controls whether the game will show a prompt to quit the current game session before quitting from the Escape or pause menu.", "qcm");
+m.add_item(playcounts ? "Disable countdown sound effects for the normal game mode. This setting controls the sounds played when you only have 10 seconts left in the sixth level of the normal game mode." : "Enable countdown sound effects for the normal game mode. This setting controls the sounds played when you only have 10 seconts left in the sixth level of the normal game mode.", "countsound");
+m.add_item(playlevels ? "Disable levelup sound effects for all game modes. This setting controls the sounds played when you reach the next level in a game." : "Enable levelup sound effects for all game modes. This setting controls the sounds played when you reach the next level in a game.", "levsound");
 m.add_item("reset settings", "rest");
 m.add_item("save settings", "sv");
 m.add_item("back", "back");
@@ -1265,6 +1267,20 @@ if (preffsm == "qcm")
     quit_menu = !quit_menu;
     play_toggle(quit_menu);
     dlgmessage_return(quit_menu ? "Quit confirmation promptss enabled." : "Quit confirmation prompts disabled.");
+    settingsmenu();
+}
+if (preffsm == "countsound")
+{
+    playcounts = !playcounts;
+play_toggle(playcounts);
+dlgmessage_return((playcounts ? "Countdown sound effects enabled." : "Countdown sound effects disabled."));
+    settingsmenu();
+}
+if (preffsm == "levsound")
+{
+    playlevels = !playlevels;
+play_toggle(playlevels);
+dlgmessage_return((playlevels ? "Levelup sound effects enabled." : "Levelup sound effects disabled."));
     settingsmenu();
 }
 if (preffsm == "rest")

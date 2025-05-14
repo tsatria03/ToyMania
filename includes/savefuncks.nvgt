@@ -192,6 +192,14 @@ if (st.d.exists("quit_menu"))
 {
 quit_menu = st.read_bool("quit_menu");
 }
+if (st.d.exists("playcounts"))
+{
+playcounts = st.read_bool("playcounts");
+}
+if (st.d.exists("playlevels"))
+{
+playlevels = st.read_bool("playlevels");
+}
 }
 void writepreffs()
 {
@@ -213,5 +221,7 @@ st.add("loop_previews", loop_previews);
 st.add("variant_descriptions", variant_descriptions);
 st.add("copexpsounds", copexpsounds);
 st.add("quit_menu", quit_menu);
+st.add("playcounts", playcounts);
+st.add("playlevels", playlevels);
 st.save();
 }

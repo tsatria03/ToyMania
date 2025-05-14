@@ -1,7 +1,0 @@
-Session Stats:
-- Toys collected: 0
-- Keys collected: 0
-- Guards killed: 0
-- Cars destroyed: 0
-- Steps taken: 0
-- Time played: 0 minutes, 0 seconds

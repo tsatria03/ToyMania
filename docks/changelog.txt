@@ -1,4 +1,6 @@
 new in 2.7
+Added an option in the settings menu to enable or disable level-up sounds for all game modes. This lets players choose whether they want to hear an audio cue each time they advance a level, offering a quieter experience for those who don't prefer it.
+Added an option in the settings menu to enable or disable countdown sounds for the Normal Mode. This gives players the control over whether the dramatic 10-second countdown voice is played during the final phase of level 6. This allows for either tension or silence depending on the user's playstyle.
 Added the ability to adjust the alarm volume in the timed portion of the game. You can press shift plus page up or down to adjust this. This setting is automaticly saved the next time you start a new game session.
 Replaced some of the guard sounds with better ones.
 Fixed a bug where the move sound for doors weren't looping propperly.
