@@ -1,4 +1,5 @@
 new in 2.9
+Made it so you feel half the effects of a store explosion. This makes it seam more realistic as if you were in an actual store with a bomb going off.
 Added warning sounds for when the store gets damaged in normal mode.
 Added some more player related sounds into the learn game sounds menu.
 Improved the sixth level of the normal game mode. The store will now start to come a part the longer you're in it. This is indicated by the store's health, and it's accompanying sounds to go along with it.

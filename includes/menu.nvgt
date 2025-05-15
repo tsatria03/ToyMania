@@ -392,7 +392,7 @@ keys["Use" + vdesc] = array<string> = {"keyuse1.ogg", "keyuse2.ogg", "keyuse3.og
 learnCategories["Keys"] = keys;
 dictionary player;
 player["Alarm: used in normal mode"] = "gamealarm.ogg";
-player["Alert medium: used in normal mode"] = "storealart_medium.ogg";
+player["Alert medium: used in normal mode"] = "storealert_medium.ogg";
 player["Alert small: used in normal mode"] = "storealert_small.ogg";
 player["Countdown: used in normal mode"] = "gamecount.ogg";
 player["Death"] = "playerdeath.ogg";
@@ -625,6 +625,7 @@ destroy_all_bullets();
             destroy_all_gards();
             destroy_all_doors();
             destroy_all_keys();
+destroy_all_platforms();
             destroy_all_toys();
             gametimer.restart();
     health = endless ? 10000 : 1000;

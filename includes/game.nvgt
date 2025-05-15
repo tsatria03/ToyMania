@@ -44,6 +44,7 @@ destroy_all_bullets();
     destroy_all_gards();
     destroy_all_doors();
     destroy_all_keys();
+destroy_all_platforms();
     destroy_all_toys();
     gametimer.restart();
     health = endless ? 10000 : 1000;
@@ -723,14 +724,18 @@ if (!countdown_started and boss_timer.elapsed >boss_time_limit-10000)
 if (!small_storedest and boss_timer.elapsed >boss_time_limit-60000)
 {
 storehealth-=random(200, 400);
+health=storehealth/2;
 small_storedest = true;
+painslot=p.play_stationary("playerpain.ogg", false);
 pool.play_stationary("storealert_small.ogg", false);
 pool.play_stationary("storedest_small.ogg", false);
 }
 if (!medium_storedest and boss_timer.elapsed >boss_time_limit-30000)
 {
 storehealth-=random(300, 600);
+health=storehealth/2;
 medium_storedest = true;
+painslot=p.play_stationary("playerpain.ogg", false);
 pool.play_stationary("storealert_medium.ogg", false);
 pool.play_stationary("storedest_medium.ogg", false);
 }
@@ -756,6 +761,7 @@ destroy_all_bullets();
     destroy_all_gards();
     destroy_all_keys();
 destroy_all_objs();
+destroy_all_platforms();
     destroy_all_toys();
 alarm_started = false;
 countdown_started = false;
@@ -914,6 +920,7 @@ destroy_all_bullets();
     destroy_all_gards();
     destroy_all_keys();
 destroy_all_objs();
+destroy_all_platforms();
     destroy_all_toys();
 alarm_started = false;
 countdown_started = false;
