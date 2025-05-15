@@ -1135,7 +1135,7 @@ m.add_item(copexpsounds ? "Disable copy and export confirmation sounds. This set
 m.add_item(quit_menu ? "Disable quit confirmation prompts. This setting controls whether the game will show a prompt to quit the current game session before quitting from the Escape or pause menu." : "Enable quit confirmation prompts. This setting controls whether the game will show a prompt to quit the current game session before quitting from the Escape or pause menu.", "qcm");
 m.add_item(playcounts ? "Disable countdown sound effects for the normal game mode. This setting controls the sounds played when you only have 10 seconts left in the sixth level of the normal game mode." : "Enable countdown sound effects for the normal game mode. This setting controls the sounds played when you only have 10 seconts left in the sixth level of the normal game mode.", "countsound");
 m.add_item(playlevels ? "Disable levelup sound effects for all game modes. This setting controls the sounds played when you reach the next level in a game." : "Enable levelup sound effects for all game modes. This setting controls the sounds played when you reach the next level in a game.", "levsound");
-m.add_item("open save data location", "sdloc");
+if(system_is_windows) m.add_item("open save data location", "sdloc");
 m.add_item("reset settings", "rest");
 m.add_item("save settings", "sv");
 m.add_item("back", "back");

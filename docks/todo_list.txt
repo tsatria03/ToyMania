@@ -1,3 +1,5 @@
+Convert the settings menu to use the native audio form's checkboxes.
+Add separate volume controls for ambience, music, alarm, and heartbeat in the settings menu.
 Add difficulty options to the normal game mode.
 
 *Done. Make it so parts of the store gets damaged the longer you stay in at level6.
