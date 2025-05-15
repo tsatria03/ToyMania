@@ -1,4 +1,6 @@
 new in 2.9
+Made it so pressing the lettor S tells you the maximim HP out of it's current HP remaining for the store.
+Made it so pressing the lettor H tells you the maximim HP out of it's current HP remaining for the player.
 Added the ability to check the store's HP. You can press the letter S to do this in normal mode.
 Updated some of the player related sounds found in the learn game sounds menu.
 Added support for spawning dynamic platforms, used later on.

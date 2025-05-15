@@ -302,11 +302,11 @@ if (key_pressed(KEY_Y) and doormove == false)
 }
 if(key_pressed(KEY_S) and doormove==false and !endless)
 {
-speak("This store has"+storehealth+" hp remaining.");
+speak("This store has "+storehealth+" out of "+storemaxhealth+" HP remaining.");
 }
 if(key_pressed(KEY_H) and doormove==false)
 {
-speak("You have"+health+" hp remaining.");
+speak("You have "+health+" out of "+maxhealth+" HP remaining.");
 }
 if(alt_is_down() or control_is_down())
 {

@@ -652,7 +652,8 @@ countdown_started = false;
 if(psmem == "vds")
 {
     setupmenu(false);
-    m.add_item("Current HP: " + health);
+    m.add_item("Current player HP: " + health);
+m.add_item("Current store HP: " + storehealth);
     m.add_item("Current level: " + level + " (" + (endless ? "Endless Mode" : "Normal Mode") + ")");
     m.add_item("Current location: " + me.x + ", " + me.y);
     m.add_item("Cars on field: " + cars.length());
