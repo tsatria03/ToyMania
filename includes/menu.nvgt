@@ -166,6 +166,8 @@ m.add_item("Endless. This mode lets you play for as long as you can survive. The
     gametimer.restart();
     health = endless ? 10000 : 1000;
 maxhealth = endless ? 10000 : 1000;
+    storehealth = endless ? 10000 : 1000;
+storemaxhealth = endless ? 10000 : 1000;
 if(endless) clear_inv();
     me.x = 25;
     me.y = 25;
@@ -621,6 +623,8 @@ destroy_all_bullets();
             gametimer.restart();
     health = endless ? 10000 : 1000;
 maxhealth = endless ? 10000 : 1000;
+    storehealth = endless ? 10000 : 1000;
+storemaxhealth = endless ? 10000 : 1000;
     me.x = 25;
     me.y = 25;
             toynum = 20;

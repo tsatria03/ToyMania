@@ -48,6 +48,8 @@ destroy_all_bullets();
     gametimer.restart();
     health = endless ? 10000 : 1000;
 maxhealth = endless ? 10000 : 1000;
+    storehealth = endless ? 10000 : 1000;
+storemaxhealth = endless ? 10000 : 1000;
     me.x = 25;
     me.y = 25;
 toynum=20;
@@ -297,6 +299,10 @@ if (key_pressed(KEY_Y) and doormove == false)
         int session_seconds = int((timeelapsed.ms() % 60000) / 1000);
         speak("You've been playing for a total of " + session_minutes + " minutes, " + session_seconds + " seconds.");
     }
+}
+if(key_pressed(KEY_S) and doormove==false and !endless)
+{
+speak("This store has"+storehealth+" hp remaining.");
 }
 if(key_pressed(KEY_H) and doormove==false)
 {
@@ -571,6 +577,7 @@ mustype="gamemus";
 toytrackslot=muspool.play_stationary_extended(mustype+".ogg",true,0,0,toymusvolume,toymuspitch,false);
 if(endless) spawn_door(random(25,50), random(25,50), 0, 0, random(100,200), random(30,60));
 spawn_platform(0, maxx, 0, maxy, "marble");
+gametimer.force(1000*300);
 while(true)
 {
 wait(5);
@@ -601,6 +608,10 @@ ammo=0;
 if(health>=maxhealth)
 {
 health=maxhealth;
+}
+if(storehealth>=storemaxhealth)
+{
+storehealth=storemaxhealth;
 }
 if(bossespawntimer.elapsed>=bossespawntime and bosses.length()<bossnum and bossespawn==true and !bossdefeated and !endless)
 {
@@ -764,6 +775,8 @@ if (res != -1 && choice == "yes")
     gametimer.restart();
     health = endless ? 10000 : 1000;
 maxhealth = endless ? 10000 : 1000;
+    storehealth = endless ? 10000 : 1000;
+storemaxhealth = endless ? 10000 : 1000;
 if(endless) clear_inv();
     me.x = 25;
     me.y = 25;
