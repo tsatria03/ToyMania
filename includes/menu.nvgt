@@ -357,6 +357,7 @@ learnCategories["Cars"] = cars;
 dictionary doors;
 doors["Close"] = "doorclose.ogg";
 doors["Jam"] = "doorjam.ogg";
+doors["Lock"] = "doorlock.ogg";
 doors["Loop"] = "doorloop.ogg";
 doors["Move"] = "doormove.ogg";
 doors["Open"] = "dooropen.ogg";

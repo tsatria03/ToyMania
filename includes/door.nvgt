@@ -3,7 +3,7 @@ door@[]doors(0);
 class door
 {
 bool is_moving=false;
-int closesound, doorsound, jamsound, unlocksound, movesound, opensound;
+int closesound, doorsound, jamsound, locksound, unlocksound, movesound, opensound;
 int startx, starty;
 int endx, endy;
 int speed;
@@ -34,6 +34,7 @@ doors[i].jamsound = doorpool.play_stationary("doorjam.ogg", false);
             }
             if (collected_keys < doors[i].required_keys)
             {
+doors[i].locksound = doorpool.play_stationary("doorlock.ogg", false);
                 speak("This door is locked. You need " + doors[i].required_keys + " or more keys to unlock it.");
             }
             else
