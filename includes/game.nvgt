@@ -579,6 +579,7 @@ toytrackslot=muspool.play_stationary_extended(mustype+".ogg",true,0,0,toymusvolu
 p.play_stationary(gmt(me.x,me.y)+"land.ogg", false);
 if(endless) spawn_door(random(25,50), random(25,50), 0, 0, random(100,200), random(30,60));
 spawn_platform(0, maxx, 0, maxy, "marble");
+gametimer.force(1000*300);
 while(true)
 {
 wait(5);

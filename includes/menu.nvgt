@@ -425,7 +425,7 @@ for (int i = 1; i <= 40; i++) toyloop.insert_last("toyloop" + i + ".ogg");
 toys["Loop" + vdesc] = toyloop;
 learnCategories["Toys"] = toys;
 dictionary ui;
-ui["Complete: used in speaker tests"] = "complete.ogg";
+ui["Complete: used in speaker tests and various other menus"] = "complete.ogg";
 ui["Dialog close"] = "dlgclose.ogg";
 ui["Dialog copy"] = "dlgcoppy.ogg";
 ui["Dialog open"] = "dlgopen.ogg";
@@ -1135,6 +1135,7 @@ m.add_item(copexpsounds ? "Disable copy and export confirmation sounds. This set
 m.add_item(quit_menu ? "Disable quit confirmation prompts. This setting controls whether the game will show a prompt to quit the current game session before quitting from the Escape or pause menu." : "Enable quit confirmation prompts. This setting controls whether the game will show a prompt to quit the current game session before quitting from the Escape or pause menu.", "qcm");
 m.add_item(playcounts ? "Disable countdown sound effects for the normal game mode. This setting controls the sounds played when you only have 10 seconts left in the sixth level of the normal game mode." : "Enable countdown sound effects for the normal game mode. This setting controls the sounds played when you only have 10 seconts left in the sixth level of the normal game mode.", "countsound");
 m.add_item(playlevels ? "Disable levelup sound effects for all game modes. This setting controls the sounds played when you reach the next level in a game." : "Enable levelup sound effects for all game modes. This setting controls the sounds played when you reach the next level in a game.", "levsound");
+m.add_item("open save data location", "sdloc");
 m.add_item("reset settings", "rest");
 m.add_item("save settings", "sv");
 m.add_item("back", "back");
@@ -1244,6 +1245,25 @@ if (preffsm == "levsound")
 play_toggle(playlevels);
 dlgmessage_return((playlevels ? "Levelup sound effects enabled." : "Levelup sound effects disabled."));
     settingsmenu();
+}
+if (preffsm == "sdloc")
+{
+speak("loading");
+wait(500);
+    string basePath = DIRECTORY_APPDATA + "tsatria03/ToyMania";
+    basePath = string_replace(basePath, "/", "\\", true);
+    bool result = run("C:\\Windows\\explorer.exe", basePath, false, false);
+    if (!result)
+    {
+        alert("Error", "Could not open " + basePath + ". Please re-create this folder and try again.");
+        settingsmenu();
+    }
+    else
+    {
+dlgplay("complete.ogg");
+        dlgmessage_return("The save data location has been successfully opened.");
+        settingsmenu();
+    }
 }
 if (preffsm == "rest")
 {
