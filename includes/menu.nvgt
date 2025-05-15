@@ -625,7 +625,6 @@ destroy_all_bullets();
             destroy_all_gards();
             destroy_all_doors();
             destroy_all_keys();
-destroy_all_platforms();
             destroy_all_toys();
             gametimer.restart();
     health = endless ? 10000 : 1000;
@@ -661,10 +660,10 @@ medium_storedest = false;
 if(psmem == "vds")
 {
     setupmenu(false);
-    m.add_item("Current player HP: " + health);
-m.add_item("Current store HP: " + storehealth);
     m.add_item("Current level: " + level + " (" + (endless ? "Endless Mode" : "Normal Mode") + ")");
     m.add_item("Current location: " + me.x + ", " + me.y);
+    m.add_item("player HP: " + health);
+m.add_item("store HP: " + storehealth);
     m.add_item("Cars on field: " + cars.length());
     m.add_item("Guards on field: " + gards.length());
     m.add_item("Keys on field: " + keys.length());

@@ -1,4 +1,5 @@
 new in 2.9
+Added destructible platform effects during store collapse. As the store takes damage in Level 6, glass platforms now dynamically appear on either sides of the map, representing structural damage from the blast sight.
 Made it so you feel half the effects of a store explosion. This makes it seam more realistic as if you were in an actual store with a bomb going off.
 Added warning sounds for when the store gets damaged in normal mode.
 Added some more player related sounds into the learn game sounds menu.

@@ -44,7 +44,6 @@ destroy_all_bullets();
     destroy_all_gards();
     destroy_all_doors();
     destroy_all_keys();
-destroy_all_platforms();
     destroy_all_toys();
     gametimer.restart();
     health = endless ? 10000 : 1000;
@@ -573,14 +572,13 @@ if (endless)
     draw_random_weapon();
 else
     draw_weapon("bat");
-p.play_stationary(gmt(me.x,me.y)+"land.ogg", false);
 ambtype="gameamb";
 toyambslot=ambpool.play_stationary_extended(ambtype+".ogg",true,0,0,toyambvolume,toyambpitch,false);
 mustype="gamemus";
 toytrackslot=muspool.play_stationary_extended(mustype+".ogg",true,0,0,toymusvolume,toymuspitch,false);
+p.play_stationary(gmt(me.x,me.y)+"land.ogg", false);
 if(endless) spawn_door(random(25,50), random(25,50), 0, 0, random(100,200), random(30,60));
 spawn_platform(0, maxx, 0, maxy, "marble");
-gametimer.force(1000*300);
 while(true)
 {
 wait(5);
@@ -723,18 +721,20 @@ if (!countdown_started and boss_timer.elapsed >boss_time_limit-10000)
 }
 if (!small_storedest and boss_timer.elapsed >boss_time_limit-60000)
 {
+health-=random(200/2, 400/2);
 storehealth-=random(200, 400);
-health=storehealth/2;
 small_storedest = true;
+spawn_platform(0, 10, 0, 50, "glass");
 painslot=p.play_stationary("playerpain.ogg", false);
 pool.play_stationary("storealert_small.ogg", false);
 pool.play_stationary("storedest_small.ogg", false);
 }
 if (!medium_storedest and boss_timer.elapsed >boss_time_limit-30000)
 {
+health-=random(300/2, 600/2);
 storehealth-=random(300, 600);
-health=storehealth/2;
 medium_storedest = true;
+spawn_platform(40, 50, 0, 50, "glass");
 painslot=p.play_stationary("playerpain.ogg", false);
 pool.play_stationary("storealert_medium.ogg", false);
 pool.play_stationary("storedest_medium.ogg", false);
@@ -761,7 +761,6 @@ destroy_all_bullets();
     destroy_all_gards();
     destroy_all_keys();
 destroy_all_objs();
-destroy_all_platforms();
     destroy_all_toys();
 alarm_started = false;
 countdown_started = false;
@@ -920,7 +919,6 @@ destroy_all_bullets();
     destroy_all_gards();
     destroy_all_keys();
 destroy_all_objs();
-destroy_all_platforms();
     destroy_all_toys();
 alarm_started = false;
 countdown_started = false;
