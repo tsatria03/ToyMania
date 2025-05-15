@@ -1,3 +1,5 @@
+new in 2.9
+Added support for spawning dynamic platforms, used later on.
 new in 2.8
 Added speech and sound feedback to jammed doors. If anything is near a door and you try to press enter to open it, you'll get notified that it can't be opened because there's something near it, causing you not to end up passing through it to exit.
 Made it so doors can't be opened if enemies are nearby. If a boss, guard, or car is within 2 tiles of a door, the player is now blocked from opening it. This adds more realism by forcing players to clear out the area before leaving the store.

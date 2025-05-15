@@ -313,41 +313,41 @@ movetime=walktime;
 if (key_down(KEY_LEFT) and movetimer.elapsed>=movetime and me.x!=0 and doormove==false)
 {
 me.x-=1;
+p.play_stationary(gmt(me.x,me.y)+"walk"+random(1,5)+".ogg", false);
 moved_steps+=1;
 total_moved_steps+=1;
 update_achievements();
 writedata();
-p.play_stationary("playerstep"+random(1,5)+".ogg", false);
 movetimer.restart();
 }
 if (key_down(KEY_RIGHT) and movetimer.elapsed>=movetime and me.x!=maxx and doormove==false)
 {
 me.x+=1;
+p.play_stationary(gmt(me.x,me.y)+"walk"+random(1,5)+".ogg", false);
 moved_steps+=1;
 total_moved_steps+=1;
 update_achievements();
 writedata();
-p.play_stationary("playerstep"+random(1,5)+".ogg", false);
 movetimer.restart();
 }
 if (key_down(KEY_DOWN) and movetimer.elapsed>=movetime and me.y!=0 and doormove==false)
 {
 me.y-=1;
+p.play_stationary(gmt(me.x,me.y)+"walk"+random(1,5)+".ogg", false);
 moved_steps+=1;
 total_moved_steps+=1;
 update_achievements();
 writedata();
-p.play_stationary("playerstep"+random(1,5)+".ogg", false);
 movetimer.restart();
 }
 if (key_down(KEY_UP) and movetimer.elapsed>=movetime and me.y!=maxy and doormove==false)
 {
 me.y+=1;
+p.play_stationary(gmt(me.x,me.y)+"walk"+random(1,5)+".ogg", false);
 moved_steps+=1;
 total_moved_steps+=1;
 update_achievements();
 writedata();
-p.play_stationary("playerstep"+random(1,5)+".ogg", false);
 movetimer.restart();
 }
 if(key_down(KEY_SPACE) and firetimer2.elapsed>=firetime2 and weapontype=="machinegun" and doormove==false)
@@ -570,6 +570,7 @@ toyambslot=ambpool.play_stationary_extended(ambtype+".ogg",true,0,0,toyambvolume
 mustype="gamemus";
 toytrackslot=muspool.play_stationary_extended(mustype+".ogg",true,0,0,toymusvolume,toymuspitch,false);
 if(endless) spawn_door(random(25,50), random(25,50), 0, 0, random(100,200), random(30,60));
+spawn_platform(0, max, 0, maxy, "marble");
 while(true)
 {
 wait(5);

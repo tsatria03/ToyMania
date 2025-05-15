@@ -19,6 +19,7 @@
 #include"item.nvgt"
 #include"key.nvgt"
 #include"menu.nvgt"
+#include"platform.nvgt"
 #include"savefuncks.nvgt"
 #include"savedata.nvgt"
 #include"toy.nvgt"

@@ -1,3 +1,4 @@
+Make it so parts of the store gets damaged the longer you stay in at level6.
 Add difficulty options to the normal game mode.
 
 *Done. Prevent players from collecting items, keys, toys, or being hit by bullets and enemies while inside a door.
