@@ -230,6 +230,8 @@ setdisabled.ogg
 setenabled.ogg
 speaker_stone_throw.ogg
 speaker_sword_clank.ogg
+storealert_medium.ogg
+storealert_small.ogg
 storedest_large.ogg
 storedest_medium.ogg
 storedest_small.ogg
@@ -278,4 +280,4 @@ toyloop6.ogg
 toyloop7.ogg
 toyloop8.ogg
 toyloop9.ogg
-total files: 280
+total files: 282

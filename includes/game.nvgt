@@ -724,12 +724,14 @@ if (!small_storedest and boss_timer.elapsed >boss_time_limit-60000)
 {
 storehealth-=random(200, 400);
 small_storedest = true;
+pool.play_stationary("storealert_small.ogg", false);
 pool.play_stationary("storedest_small.ogg", false);
 }
 if (!medium_storedest and boss_timer.elapsed >boss_time_limit-30000)
 {
 storehealth-=random(300, 600);
 medium_storedest = true;
+pool.play_stationary("storealert_medium.ogg", false);
 pool.play_stationary("storedest_medium.ogg", false);
 }
     if (boss_timer.elapsed > boss_time_limit-1000)
