@@ -57,6 +57,8 @@ toynum=20;
     if (!endless) bossespawn = false;
 alarm_started = false;
 countdown_started = false;
+small_storedest = false;
+medium_storedest = false;
     carspawn = false;
     gardspawn = false;
     keydest = false;
@@ -570,7 +572,7 @@ if (endless)
     draw_random_weapon();
 else
     draw_weapon("bat");
-p.play_stationary("playerland.ogg", false);
+p.play_stationary(gmt(me.x,me.y)+"land.ogg", false);
 ambtype="gameamb";
 toyambslot=ambpool.play_stationary_extended(ambtype+".ogg",true,0,0,toyambvolume,toyambpitch,false);
 mustype="gamemus";
@@ -703,6 +705,8 @@ toytrackslot=muspool.play_stationary_extended(mustype+".ogg",true,0,0,toymusvolu
     boss_timer.restart();
     alarm_started = false;
 countdown_started = false;
+small_storedest = false;
+medium_storedest = false;
 }
 if (!endless && level == 6)
 {
@@ -718,13 +722,13 @@ if (!countdown_started and boss_timer.elapsed >boss_time_limit-10000)
 }
 if (!small_storedest and boss_timer.elapsed >boss_time_limit-60000)
 {
-storehealth-=random(150, 300);
+storehealth-=random(200, 400);
 small_storedest = true;
 pool.play_stationary("storedest_small.ogg", false);
 }
 if (!medium_storedest and boss_timer.elapsed >boss_time_limit-30000)
 {
-storehealth-=random(250, 500);
+storehealth-=random(300, 600);
 medium_storedest = true;
 pool.play_stationary("storedest_medium.ogg", false);
 }
@@ -753,6 +757,8 @@ destroy_all_objs();
     destroy_all_toys();
 alarm_started = false;
 countdown_started = false;
+small_storedest = false;
+medium_storedest = false;
 alarmpool.destroy_sound(alarmslot);
     pool.destroy_sound(countslot);
 p.destroy_sound(painslot);
@@ -761,7 +767,7 @@ p.destroy_sound(painslot);
 p.play_stationary("playerdeath.ogg", false);
 dlgplay("storedest_large.ogg");
 string[] failMessages = {"BOOM! You stuck around too long, and now the store has turned into a pile of ashes. Try escaping with a bit of haste next time!", "Time’s up! The store just blew sky-high, and your session stats flew with it too. Sorry not sorry!", "Well, that literally backfired. The store's gone, and so is your progress!", "Nice sightseeing, but the store had a strict 'explode-on-time' policy. Better run next time!", "Oh dear! Your hesitation turned the store into fireworks. You didn’t escape, but at least it was quite the show to watch!"};
-dlgplay("playerfall.ogg");
+dlgplay(gmt(me.x,me.y)+"fall.ogg");
 dlgmessage_return(random_string(failMessages));
 setupmenu(false);
 m.add_item("Yes", "yes");
@@ -795,6 +801,8 @@ if(endless) clear_inv();
 toynum=20;
 alarm_started = false;
 countdown_started = false;
+small_storedest = false;
+medium_storedest = false;
     bossdefeated = false;
     bossespawn = false;
     carspawn = false;
@@ -907,13 +915,15 @@ destroy_all_objs();
     destroy_all_toys();
 alarm_started = false;
 countdown_started = false;
+small_storedest = false;
+medium_storedest = false;
 alarmpool.destroy_sound(alarmslot);
 pool.destroy_sound(countslot);
     p.destroy_sound(painslot);
     ambpool.destroy_sound(toyambslot);
     muspool.destroy_sound(toytrackslot);
     dlgplay("playerdeath.ogg");
-    dlgplay("playerfall.ogg");
+    dlgplay(gmt(me.x,me.y)+"fall.ogg");
 dlgmessage_return("You just died on level "+level+ " of the " + (endless ? "Endless" : "Normal") + " game mode!"+" Here are your current results for this game session:"+ "\r\nToys collected: " + collected_toys +"\r\nKeys collected: " + collected_keys +"\r\nGuards defeated: " + killed_gards +"\r\nCars destroyed: " + destroyed_cars +"\r\nSteps taken: " + moved_steps +"\r\nTime survived: " + timeelapsed.m() + " minutes, " + timeelapsed.s() + " seconds" +"\r\nBetter luck next time!");
     session_playtime += timeelapsed.ms();
     total_playtime += timeelapsed.ms();

@@ -76,9 +76,6 @@ gamealarm.ogg
 gameamb.ogg
 gamecopy.ogg
 gamecount.ogg
-gamedeath_large.ogg
-gamedeath_medium.ogg
-gamedeath_small.ogg
 gamelaunch.ogg
 gamemus.ogg
 gamexport.ogg
@@ -119,6 +116,8 @@ gard2walk5.ogg
 gard2walk6.ogg
 gard2walk7.ogg
 gard2walk8.ogg
+glassfall.ogg
+glassland.ogg
 glasswalk1.ogg
 glasswalk2.ogg
 glasswalk3.ogg
@@ -198,6 +197,8 @@ machinegunshell1.ogg
 machinegunshell2.ogg
 machinegunshell3.ogg
 machinegunshell4.ogg
+marblefall.ogg
+marbleland.ogg
 marblewalk1.ogg
 marblewalk2.ogg
 marblewalk3.ogg
@@ -216,11 +217,9 @@ playerbuy2.ogg
 playerbuy3.ogg
 playerbuy4.ogg
 playerdeath.ogg
-playerfall.ogg
 playerheal1.ogg
 playerheal2.ogg
 playerheal3.ogg
-playerland.ogg
 playerlevel.ogg
 playerpain.ogg
 playertel.ogg
@@ -231,6 +230,9 @@ setdisabled.ogg
 setenabled.ogg
 speaker_stone_throw.ogg
 speaker_sword_clank.ogg
+storedest_large.ogg
+storedest_medium.ogg
+storedest_small.ogg
 toybreak1.ogg
 toybreak2.ogg
 toybreak3.ogg
@@ -276,4 +278,4 @@ toyloop6.ogg
 toyloop7.ogg
 toyloop8.ogg
 toyloop9.ogg
-total files: 278
+total files: 280

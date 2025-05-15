@@ -1,4 +1,5 @@
 new in 2.9
+Added some more player related sounds into the learn game sounds menu.
 Improved the sixth level of the normal game mode. The store will now start to come a part the longer you're in it. This is indicated by the store's health, and it's accompanying sounds to go along with it.
 Made it so pressing the lettor S tells you the maximim HP out of it's current HP remaining for the store.
 Made it so pressing the lettor H tells you the maximim HP out of it's current HP remaining for the player.
