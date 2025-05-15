@@ -1,3 +1,5 @@
+new in 3.0beta
+Added automatic creation of save and stats directories at game startup to prevent missing folder issues. A new settings menu option to directly open the save data location in File Explorer has also been added as well.
 new in 2.9
 Added a sound for when the door is locked in all game modes.
 Added destructible platform effects during store collapse. As the store takes damage in Level 6, glass platforms now dynamically appear on either sides of the map, representing structural damage from the blast sight.
