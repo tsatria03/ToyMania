@@ -20,7 +20,7 @@ ArchitecturesAllowed=x64compatible
 ArchitecturesInstallIn64BitMode=x64compatible
 PrivilegesRequired=admin
 OutputDir=.
-OutputBaseFilename=ToyMania_Installer_Password_is_GrateCollector
+OutputBaseFilename=ToyMania_windows_installer_password_is_GrateCollector
 Password=GrateCollector
 Encryption=yes
 SolidCompression=yes
@@ -34,9 +34,9 @@ Name: "desktopicon"; Description: "Create a desktop shortcut"; GroupDescription:
 Name: "startmenuicon"; Description: "Create a Start Menu shortcut"; GroupDescription: "Additional icons:"
 
 [Files]
-Source: "C:\Users\tsatr\OneDrive\Documents\GitHub\ToyMania\releases\windows\ToyMania_windows_password_is_GrateCollector\tm\*"; \
+Source: "C:\Users\tsatr\OneDrive\Documents\GitHub\ToyMania\releases\windows\ToyMania_windows_portable_password_is_GrateCollector\tm\*"; \
   DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs
-Source: "C:\Users\tsatr\OneDrive\Documents\GitHub\ToyMania\releases\windows\ToyMania_windows_password_is_GrateCollector\tm\docks\readme.txt"; \
+Source: "C:\Users\tsatr\OneDrive\Documents\GitHub\ToyMania\releases\windows\ToyMania_windows_portable_password_is_GrateCollector\tm\docks\readme.txt"; \
 DestDir: "{app}"; Flags: ignoreversion
 
 [Icons]
