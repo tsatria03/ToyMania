@@ -716,6 +716,18 @@ if (!countdown_started and boss_timer.elapsed >boss_time_limit-10000)
     countdown_started = true;
     if(playcounts==true) countslot=pool.play_stationary("gamecount.ogg", false);
 }
+if (!small_storedest and boss_timer.elapsed >boss_time_limit-60000)
+{
+storehealth-=random(150, 300);
+small_storedest = true;
+pool.play_stationary("storedest_small.ogg", false);
+}
+if (!medium_storedest and boss_timer.elapsed >boss_time_limit-30000)
+{
+storehealth-=random(250, 500);
+medium_storedest = true;
+pool.play_stationary("storedest_medium.ogg", false);
+}
     if (boss_timer.elapsed > boss_time_limit-1000)
     {
 if (heartbeat_playing)
@@ -747,7 +759,7 @@ p.destroy_sound(painslot);
     ambpool.destroy_sound(toyambslot);
     muspool.destroy_sound(toytrackslot);
 p.play_stationary("playerdeath.ogg", false);
-dlgplay("gamedeath"+random(1,3)+".ogg");
+dlgplay("storedest_large.ogg");
 string[] failMessages = {"BOOM! You stuck around too long, and now the store has turned into a pile of ashes. Try escaping with a bit of haste next time!", "Time’s up! The store just blew sky-high, and your session stats flew with it too. Sorry not sorry!", "Well, that literally backfired. The store's gone, and so is your progress!", "Nice sightseeing, but the store had a strict 'explode-on-time' policy. Better run next time!", "Oh dear! Your hesitation turned the store into fireworks. You didn’t escape, but at least it was quite the show to watch!"};
 dlgplay("playerfall.ogg");
 dlgmessage_return(random_string(failMessages));
