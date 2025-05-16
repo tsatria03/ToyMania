@@ -1341,11 +1341,13 @@ if (form.is_pressed(ambTest))
     if (ambpool.sound_is_playing(toyambslot))
 {
 spool.play_stationary("setdisabled.ogg",false);
+speak("ambience off");
         ambpool.destroy_sound(toyambslot);
     }
 else
 {
 spool.play_stationary("setenabled.ogg",false);
+speak("ambience on");
         toyambslot = ambpool.play_stationary("gameamb.ogg", true);
     }
 }
@@ -1354,6 +1356,7 @@ if (form.is_pressed(musTest))
     if (muspool.sound_is_playing(toytrackslot))
     {
         spool.play_stationary("setdisabled.ogg", false);
+speak("music off");
         muspool.destroy_sound(toytrackslot);
         lastMusicIndex = -1;
     }
@@ -1364,6 +1367,7 @@ if (form.is_pressed(musTest))
         {
 mustype = form.get_list_item_id(musList, musIndex);
             spool.play_stationary("setenabled.ogg", false);
+speak("music on");
             muspool.destroy_sound(toytrackslot);
             toytrackslot = muspool.play_stationary(mustype + ".ogg", true);
             lastMusicIndex = musIndex;
@@ -1375,11 +1379,13 @@ if (form.is_pressed(alarmTest))
     if (alarmpool.sound_is_playing(alarmslot))
 {
 spool.play_stationary("setdisabled.ogg",false);
+speak("alarm off");
         alarmpool.destroy_sound(alarmslot);
     }
 else
 {
 spool.play_stationary("setenabled.ogg",false);
+speak("alarm on");
         alarmslot = alarmpool.play_stationary("gamealarm.ogg", true);
     }
 }
@@ -1388,11 +1394,13 @@ if (form.is_pressed(heartbeatTest))
     if (heartpool.sound_is_playing(heartslot))
 {
 spool.play_stationary("setdisabled.ogg",false);
+speak("heartbeat off");
         heartpool.destroy_sound(heartslot);
     }
 else
 {
 spool.play_stationary("setenabled.ogg",false);
+speak("heartbeat on");
         heartslot = heartpool.play_stationary("heartstart.ogg", true);
     }
 }
