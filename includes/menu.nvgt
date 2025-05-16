@@ -1124,7 +1124,7 @@ else
 void preffsmenu()
 {
 form.reset();
-    form.create_window("Preferences dialog. You can adjust various game options here.", false, false);
+    form.create_window("Preferences", false);
     int audsets = form.create_button("&audio settings");
 int gamsets = form.create_button("&game settings");
 int back = form.create_button("&back");
@@ -1412,10 +1412,12 @@ alarmpool.destroy_sound(alarmslot);
 heartpool.destroy_sound(heartslot);
 string[]@ devices=get_sound_output_devices();
 devices.remove_at(0);
+devices.sort_ascending();
 setupmenu(false);
 for(uint i=0; i<devices.length(); i++)
 {
-m.add_item(devices[i],devices[i]);
+    string soundstate = (i + 1 == sound_output_device) ? ": active" : ": inactive";
+m.add_item(devices[i] + soundstate, devices[i]);
 }
 m.intro_text="Choose a sound device you would like to use in the game.";
 int mres=m.run();
@@ -1427,6 +1429,7 @@ soundsetsmenu();
     {
         soundcard = devices[mres];
         sound_output_device = mres + 1;
+dlgplay("complete.ogg");
 dlgmessage_return("Sound device set to "+soundcard+".");
 soundsetsmenu();
 }
