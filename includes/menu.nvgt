@@ -1124,12 +1124,18 @@ form.reset();
     form.create_window("Preferences dialog. You can adjust various game options here.", false, false);
     int audsets = form.create_button("&audio settings");
 int gamsets = form.create_button("&game settings");
+int close = form.create_button("&close");
 form.focus(audsets);
 spool.play_stationary("menuopen.ogg",false);
     while (true)
     {
         form.monitor();
         wait(5);
+        if (form.is_pressed(close) || key_repeating(KEY_ESCAPE))
+        {
+spool.play_stationary("menuclose.ogg",false);
+            mainmenu();
+        }
         if (form.is_pressed(gamsets))
         {
 gamsetsmenu();
@@ -1138,10 +1144,6 @@ gamsetsmenu();
         {
 soundsetsmenu();
 }
-        if (key_pressed(KEY_ESCAPE))
-        {
-mainmenu();
-}
     }
 }
 void gamsetsmenu()
@@ -1149,33 +1151,33 @@ void gamsetsmenu()
     form.reset();
     form.create_window("Game settings", false);
 int glb = form.create_checkbox("Enable behind pitch decrease.", behind_pitch);
-int glb2 = form.create_input_box("Behind pitch decrease description", "This setting controls whether the pitch of sounds decrease when you are behind something.", "", 0, true, true);
+int glb2 = form.create_input_box("Behind pitch decrease: description", "This setting controls whether the pitch of sounds decrease when you are behind something.", "", 0, true, true);
 int glh = form.create_checkbox("Enable HRTF support.", hrtf);
-int glh2 = form.create_input_box("HRTF description", "This setting enhances the 3D sound positioning effect for headphone users.", "", 0, true, true);
+int glh2 = form.create_input_box("HRTF: description", "This setting enhances the 3D sound positioning effect for headphone users.", "", 0, true, true);
 int achsound = form.create_checkbox("Enable achievement sound effects.", play_ach_scores);
-int achsound2 = form.create_input_box("Achievement SFX description", "This setting controls the sounds played when unlocking achievements.", "", 0, true, true);
+int achsound2 = form.create_input_box("Achievement SFX: description", "This setting controls the sounds played when unlocking achievements.", "", 0, true, true);
 int achvoice = form.create_checkbox("Enable achievement speech feedback.", speak_ach_scores);
-int achvoice2 = form.create_input_box("Achievement speech description", "This setting controls the spoken announcements of achievement progresses.", "", 0, true, true);
+int achvoice2 = form.create_input_box("Achievement speech: description", "This setting controls the spoken announcements of achievement progresses.", "", 0, true, true);
 int dlgspeech = form.create_checkbox("Enable dialog end speech feedback.", speak_dlg_enter);
-int dlgspeech2 = form.create_input_box("Dialog speech description", "This setting controls whether the phrase 'Press enter to continue' is spoken after dialog messages.", "", 0, true, true);
+int dlgspeech2 = form.create_input_box("Dialog speech: description", "This setting controls whether the phrase 'Press enter to continue' is spoken after dialog messages.", "", 0, true, true);
 int loadspeech = form.create_checkbox("Enable menu loading speech feedback.", speak_menu_loading);
-int loadspeech2 = form.create_input_box("Menu loading speech description", "This setting controls whether the 'Loading' phrase is spoken when opening various menus.", "", 0, true, true);
+int loadspeech2 = form.create_input_box("Menu loading speech: description", "This setting controls whether the 'Loading' phrase is spoken when opening various menus.", "", 0, true, true);
 int gcp = form.create_checkbox("Enable post-game copy and export prompts.", gamcopy);
-int gcp2 = form.create_input_box("Post-game copy/export description", "This setting controls whether the game asks if you'd like to copy your session stats after pause, death or victory.", "", 0, true, true);
+int gcp2 = form.create_input_box("Post-game copy/export: description", "This setting controls whether the game asks if you'd like to copy your session stats after pause, death or victory.", "", 0, true, true);
 int scp = form.create_checkbox("Enable stat copy and export options.", statscopy);
-int scp2 = form.create_input_box("Stat copy/export description", "This setting controls the showing of all copy and export entries from various stat based menus.", "", 0, true, true);
+int scp2 = form.create_input_box("Stat copy/export: description", "This setting controls the showing of all copy and export entries from various stat based menus.", "", 0, true, true);
 int lps = form.create_checkbox("Enable looping of previewed sounds.", loop_previews);
-int lps2 = form.create_input_box("Loop previews description", "This setting controls whether the sounds found in the Learn Sounds menu loop until another sound is selected or the Escape key is pressed.", "", 0, true, true);
+int lps2 = form.create_input_box("Loop previews: description", "This setting controls whether the sounds found in the Learn Sounds menu loop until another sound is selected or the Escape key is pressed.", "", 0, true, true);
 int vsc = form.create_checkbox("Enable variant-based sound descriptions.", variant_descriptions);
-int vsc2 = form.create_input_box("Variant sound description", "This setting controls whether sounds that have multiple variants will include a description along side them.", "", 0, true, true);
+int vsc2 = form.create_input_box("Variant sound: description", "This setting controls whether sounds that have multiple variants will include a description along side them.", "", 0, true, true);
 int cfs = form.create_checkbox("Enable copy and export confirmation sounds.", copexpsounds);
-int cfs2 = form.create_input_box("Copy/export sound description", "This setting controls the playing of short chimes after copying or exporting files to and from the clipboard.", "", 0, true, true);
+int cfs2 = form.create_input_box("Copy/export sound: description", "This setting controls the playing of short chimes after copying or exporting files to and from the clipboard.", "", 0, true, true);
 int qcm = form.create_checkbox("Enable quit confirmation prompts.", quit_menu);
-int qcm2 = form.create_input_box("Quit prompt description", "This setting controls whether the game will show a prompt to quit the current game session before quitting from the Escape or pause menu.", "", 0, true, true);
+int qcm2 = form.create_input_box("Quit prompt: description", "This setting controls whether the game will show a prompt to quit the current game session before quitting from the Escape or pause menu.", "", 0, true, true);
 int countsound = form.create_checkbox("Enable countdown sound effects.", playcounts);
-int countsound2 = form.create_input_box("Countdown SFX description", "This setting controls the sounds played when you only have 10 seconds left in the sixth level of the normal game mode.", "", 0, true, true);
+int countsound2 = form.create_input_box("Countdown SFX: description", "This setting controls the sounds played when you only have 10 seconds left in the sixth level of the normal game mode.", "", 0, true, true);
 int levsound = form.create_checkbox("Enable levelup sound effects.", playlevels);
-int levsound2 = form.create_input_box("Level-up SFX description", "This setting controls the sounds played when you reach the next level in a game.", "", 0, true, true);
+int levsound2 = form.create_input_box("Level-up SFX: description", "This setting controls the sounds played when you reach the next level in a game.", "", 0, true, true);
     int sdloc = -1;
     if (system_is_windows)
         sdloc = form.create_button("&open save data location");
@@ -1229,7 +1231,7 @@ mainmenu();
             dlgmessage_return("Settings saved.");
             mainmenu();
         }
-        if (form.is_pressed(cancel) || key_pressed(KEY_ESCAPE))
+        if (form.is_pressed(cancel) || key_repeating(KEY_ESCAPE))
         {
 spool.play_stationary("menuclose.ogg",false);
             preffsmenu();
@@ -1277,7 +1279,7 @@ heartvolume = (form.get_slider(gameHeartbeatVolumeSlider) / 2) - 50;
         muspool.update_sound_start_values(toytrackslot, 0, toymusvolume, toymuspitch);
         alarmpool.update_sound_start_values(alarmslot, 0, alarmvolume, alarmpitch);
         heartpool.update_sound_start_values(heartslot, 0, heartvolume, heartpitch);
-        if (form.is_pressed(cansets) || key_pressed(KEY_ESCAPE))
+        if (form.is_pressed(cansets) || key_repeating(KEY_ESCAPE))
         {
 spool.play_stationary("menuclose.ogg",false);
             preffsmenu();

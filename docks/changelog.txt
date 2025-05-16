@@ -1,6 +1,7 @@
 new in 3.0
 Separated the preferences menu into 2 different sections. You can now access and save audio and game settings independently of each other.
-Separated the descriptions for all setting toggles into dedicated read-only input boxes next to each toggle. This makes the settings menu more screen reader-friendly and easier to navigate for blind and visually impaired players.
+Added the ability to adjust the ambience, music, alarm, and heartbeat volumes in the game settings menu.
+Separated the descriptions for all setting toggles into dedicated read-only input boxes next to each toggle. This makes the settings menu more screen reader-friendly and easier to navigate.
 Revampt the intire settings menu. It will now use the native audio form's buttons and checkboxes moving forward.
 Added automatic creation of save and stats directories at game startup to prevent missing folder issues. A new settings menu option to directly open the save data location in File Explorer has also been added as well.
 new in 2.9
