@@ -210,6 +210,20 @@ if (st.d.exists("showset_desc"))
 {
 showset_desc = st.read_bool("showset_desc");
 }
+if(st.d.exists("soundcard"))
+{
+soundcard=st.read_string("soundcard");
+string[]@devices=get_sound_output_devices();
+devices.remove_at(0);
+for(uint i=0; i<devices.length(); i++)
+{
+if(devices[i]==soundcard)
+{
+sound_output_device=i+1;
+break;
+}
+}
+}
 }
 void writepreffs()
 {
@@ -235,5 +249,6 @@ st.add("quit_menu", quit_menu);
 st.add("playcounts", playcounts);
 st.add("playlevels", playlevels);
 st.add("showset_desc", showset_desc);
+st.add("soundcard",soundcard);
 st.save();
 }

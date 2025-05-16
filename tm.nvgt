@@ -51,6 +51,7 @@ string ambtype="gameamb";
 string mustype="gamemus";
 string current_weapon;
 string weapontype="bat";
+string soundcard="Default";
 string version="3.0";
 timer boss_timer, bossespawntimer, carspawntimer, firetimer, firetimer2, gametimer, gardspawntimer, objspawntimer, keyspawntimer, movetimer, runtimer, toyspawntimer, usetimer, walktimer;
 file achfile, dockfile, gamfile, statfile;
@@ -162,6 +163,8 @@ total_playtime=0;
 }
 void resetpreffs()
 {
+soundcard="Default";
+sound_output_device=1;
 menumusvolume=0;
 stoneplays=0;
 swordplays=0;

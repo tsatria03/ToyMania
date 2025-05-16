@@ -1,8 +1,8 @@
 Add checkboxes and lists to test ambience, music, alarm, and heartbeat sounds in the audio settings menu
-Add an option to set the output device in the audio settings menu.
-Add an option to toggle showing descriptions in the game settings menu.
 Add difficulty menu items to the normal game mode.
 
+*Done. Add an option to set the output device in the audio settings menu.
+*Done. Add an option to toggle showing descriptions in the game settings menu.
 *Done. Convert the settings menu to use the native audio form's checkboxes.
 *Done. Add separate volume controls for ambience, music, alarm, and heartbeat in the settings menu.
 *Done. Make it so parts of the store gets damaged the longer you stay in at level6.
