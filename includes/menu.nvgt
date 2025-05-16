@@ -1127,14 +1127,14 @@ form.reset();
     form.create_window("Preferences dialog. You can adjust various game options here.", false, false);
     int audsets = form.create_button("&audio settings");
 int gamsets = form.create_button("&game settings");
-int close = form.create_button("&close");
+int back = form.create_button("&back");
 form.focus(audsets);
 spool.play_stationary("menuopen.ogg",false);
     while (true)
     {
         form.monitor();
         wait(5);
-        if (form.is_pressed(close) || key_repeating(KEY_ESCAPE))
+        if (form.is_pressed(back) || key_repeating(KEY_ESCAPE))
         {
 spool.play_stationary("menuclose.ogg",false);
             mainmenu();
@@ -1224,6 +1224,7 @@ if(confirm=="yes")
 {
 if(file_exists(DIRECTORY_APPDATA+"tsatria03/ToyMania/saves/settings.tmg")) file_delete(DIRECTORY_APPDATA+"tsatria03/ToyMania/saves/settings.tmg");
 resetpreffs();
+dlgplay("complete.ogg", false);
 dlgmessage_return("Settings reset.");
 mainmenu();
 }
@@ -1231,6 +1232,7 @@ mainmenu();
         if (form.is_pressed(sv))
         {
             writepreffs();
+dlgplay("complete.ogg", false);
             dlgmessage_return("Settings saved.");
             mainmenu();
         }
@@ -1267,9 +1269,11 @@ int gameAmbienceVolumeSlider = form.create_slider("game ambience volume, ", (toy
 int gameMusicVolumeSlider = form.create_slider("game music volume, ", (toymusvolume + 50) * 2, 0, 100, "percent", 1);
 int gameAlarmVolumeSlider = form.create_slider("game alarm volume, ", (alarmvolume + 50) * 2, 0, 100, "percent", 1);
 int gameHeartbeatVolumeSlider = form.create_slider("game heartbeat volume, ", (heartvolume + 50) * 2, 0, 100, "percent", 1);
+    int rest = form.create_button("&reset settings");
 int savesets = form.create_button("&save settings", true);
 int cansets = form.create_button("&cancel");
 form.focus(gameAmbienceVolumeSlider);
+spool.play_stationary("menuopen.ogg",false);
     while (true)
     {
         wait(5);
@@ -1287,9 +1291,31 @@ heartvolume = (form.get_slider(gameHeartbeatVolumeSlider) / 2) - 50;
 spool.play_stationary("menuclose.ogg",false);
             preffsmenu();
         }
+        if (form.is_pressed(rest))
+        {
+setupmenu(false);
+    m.add_item("Yes", "yes");
+    m.add_item("No", "no");
+m.intro_text="Are you sure you want to reset all of your settings?";
+int mres=m.run();
+string confirm = m.get_selected_item_id();
+    if (mres == -1 or confirm == "no")
+    {
+        soundsetsmenu();
+    }
+if(confirm=="yes")
+{
+if(file_exists(DIRECTORY_APPDATA+"tsatria03/ToyMania/saves/settings.tmg")) file_delete(DIRECTORY_APPDATA+"tsatria03/ToyMania/saves/settings.tmg");
+resetpreffs();
+dlgplay("complete.ogg", false);
+dlgmessage_return("Settings reset.");
+mainmenu();
+}
+}
         if (form.is_pressed(savesets))
         {
 writepreffs();
+dlgplay("complete.ogg", false);
 dlgmessage_return("Settings saved.");
 mainmenu();
 }
