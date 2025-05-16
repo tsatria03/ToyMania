@@ -206,6 +206,10 @@ if (st.d.exists("playlevels"))
 {
 playlevels = st.read_bool("playlevels");
 }
+if (st.d.exists("showset_desc"))
+{
+showset_desc = st.read_bool("showset_desc");
+}
 }
 void writepreffs()
 {
@@ -230,5 +234,6 @@ st.add("copexpsounds", copexpsounds);
 st.add("quit_menu", quit_menu);
 st.add("playcounts", playcounts);
 st.add("playlevels", playlevels);
+st.add("showset_desc", showset_desc);
 st.save();
 }
