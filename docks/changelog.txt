@@ -1,4 +1,5 @@
 new in 3.0
+Made it so all preview sounds found in the audio settings menu properly get destroyed upon exiting the menu, or going into various other menus.
 Improved the music preview behavior. The selected track now only plays when toggled on by the user, and updates in real-time when switching tracks.
 Made it so preview sound buttons in the audio settings menu now correctly toggle their sounds on and off when pressed repeatedly. Previously, sounds would continue playing with no way to stop them from the same button.
 Added the ability to test ambience, music, alarm, and heartbeat sounds in the audio settings menu.
