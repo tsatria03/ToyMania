@@ -721,12 +721,14 @@ void weaponsmenu()
     string selected = m.get_selected_item_id();
     if (res == -1)
     {
-        gametimer.resume();
+        boss_timer.resume();
+gametimer.resume();
 speak("canceled");
         return;
     }
     if (selected != current_weapon)
     {
+boss_timer.resume();
 gametimer.resume();
         draw_weapon(selected);
             return;
@@ -735,6 +737,7 @@ gametimer.resume();
     {
         speak("This weapon is already equipped.");
     }
+boss_timer.resume();
     gametimer.resume();
         return;
 }

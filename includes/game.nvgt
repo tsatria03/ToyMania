@@ -187,6 +187,7 @@ writepreffs();
 }
 if (key_pressed(KEY_W) and doormove == false)
 {
+boss_timer.pause();
 gametimer.pause();
     weaponsmenu();
 }
