@@ -1,4 +1,6 @@
 new in 3.0beta
+Separated the descriptions for all setting toggles into dedicated read-only input boxes next to each toggle. This makes the settings menu more screen reader-friendly and easier to navigate for blind and visually impaired players.
+Revampt the intire settings menu. It will now use the native audio form's buttons and checkboxes moving forward.
 Added automatic creation of save and stats directories at game startup to prevent missing folder issues. A new settings menu option to directly open the save data location in File Explorer has also been added as well.
 new in 2.9
 Added a sound for when the door is locked in all game modes.

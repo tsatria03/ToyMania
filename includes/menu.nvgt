@@ -23,7 +23,7 @@ if (main == "sm")
 {
 if(speak_menu_loading==true) speak("loading");
 m.fade_music();
-settingsmenu();
+gamsetsmenu();
 }
 if(main == "st")
 {
@@ -1118,155 +1118,66 @@ else
         view_lifetime_stats();
     }
 }
-void settingsmenu()
+void gamsetsmenu()
 {
-setupmenu(false);
-m.add_item(behind_pitch ? "Disable behind pitch decrease. This setting controls whether the pitch of sounds decrease when you are behind something." : "Enable behind pitch decrease. This setting controls whether the pitch of sounds decrease when you are behind something.", "glb");
-m.add_item(hrtf ? "Disable HRTF support. This setting enhances the 3D sound positioning effect for headphone users." : "Enable HRTF support. This setting enhances the 3D sound positioning effect for headphone users.", "glh");
-m.add_item(play_ach_scores ? "Disable achievement sound effects. This setting controls the sounds played when unlocking achievements." : "Enable achievement sound effects. This setting controls the sounds played when unlocking achievements.", "achsound");
-m.add_item(speak_ach_scores ? "Disable achievement speech feedback. This setting controls the spoken announcements of game achievement progresses." : "Enable achievement speech feedback. This setting controls the spoken announcements of achievement progresses.", "achvoice");
-m.add_item(speak_dlg_enter ? "Disable dialog end speech feedback. This setting controls whether the phrase 'Press enter to continue' is spoken after dialog messages." : "Enable dialog end speech feedback. This setting controls whether the phrase 'Press enter to continue' is spoken after dialog messages.", "dlgspeech");
-m.add_item(speak_menu_loading ? "Disable menu loading speech feedback. This setting controls whether the 'Loading' phrase is spoken when opening various menus." : "Enable menu loading speech feedback. This setting controls whether the 'Loading' phrase is spoken when opening various menus.", "loadspeech");
-m.add_item(gamcopy ? "Disable post-game copy and export prompts. This Setting controls weather the game asks if you'd like to copy your session stats after pause, death or victory." : "Enable post-game copy and export prompts. This Setting controls weather the game asks if you'd like to copy your session stats after pause, death or victory.", "gcp");
-m.add_item(statscopy ? "Disable stat copy and export options. This setting controls the showing of all copy and export entries from various stat based menus." : "Enable stat copy and export options. This setting controls the showing of all copy and export entries from various stat based menus.", "scp");
-m.add_item(loop_previews ? "Disable looping of previewed sounds. This setting controls whether the sounds found in the Learn Sounds menu loop until another sound is selected or the Escape key is pressed." : "Enable looping of previewed sounds. This setting controls whether the sounds found in the Learn Sounds menu loop until another sound is selected or the Escape key is pressed.", "lps");
-m.add_item(variant_descriptions ? "Disable variant-based sound descriptions. This setting controls weather sounds that have multiple variants will include a description along side them." : "Enable variant-based sound descriptions. This setting controls weather sounds that have multiple variants will include a description along side them.", "vsc");
-m.add_item(copexpsounds ? "Disable copy and export confirmation sounds. This setting controls the playing of short chimes after copying or exporting files to and from the clipboard." : "Enable copy and export confirmation sounds. This setting controls the playing of short chimes after copying or exporting files to and from the clipboard.", "cfs");
-m.add_item(quit_menu ? "Disable quit confirmation prompts. This setting controls whether the game will show a prompt to quit the current game session before quitting from the Escape or pause menu." : "Enable quit confirmation prompts. This setting controls whether the game will show a prompt to quit the current game session before quitting from the Escape or pause menu.", "qcm");
-m.add_item(playcounts ? "Disable countdown sound effects for the normal game mode. This setting controls the sounds played when you only have 10 seconts left in the sixth level of the normal game mode." : "Enable countdown sound effects for the normal game mode. This setting controls the sounds played when you only have 10 seconts left in the sixth level of the normal game mode.", "countsound");
-m.add_item(playlevels ? "Disable levelup sound effects for all game modes. This setting controls the sounds played when you reach the next level in a game." : "Enable levelup sound effects for all game modes. This setting controls the sounds played when you reach the next level in a game.", "levsound");
-if(system_is_windows) m.add_item("open save data location", "sdloc");
-m.add_item("reset settings", "rest");
-m.add_item("save settings", "sv");
-m.add_item("back", "back");
-m.intro_text = "Settings menu. You can adjust various game options here.";
-int mres=m.run();
-string preffsm = m.get_selected_item_id();
-if(mres==-1)
-{
-mainmenu();
-}
-if (preffsm == "glb")
-{
-behind_pitch = !behind_pitch;
-play_toggle(behind_pitch);
-apply_pitch_settings();
-dlgmessage_return((behind_pitch ? "Behind pitch decrease enabled." : "Behind pitch decrease disabled."));
-settingsmenu();
-}
-if (preffsm == "glh")
-{
-hrtf = !hrtf;
-sound_global_hrtf = hrtf;
-play_toggle(hrtf);
-dlgmessage_return((hrtf ? "HRTF support enabled." : "HRTF support disabled."));
-settingsmenu();
-}
-if (preffsm == "achsound")
-{
-    play_ach_scores = !play_ach_scores;
-play_toggle(play_ach_scores);
-dlgmessage_return((play_ach_scores ? "Achievement sound effects enabled." : "Achievement sound effects disabled."));
-    settingsmenu();
-}
-if (preffsm == "achvoice")
-{
-    speak_ach_scores = !speak_ach_scores;
-play_toggle(speak_ach_scores);
-dlgmessage_return((speak_ach_scores ? "Achievement speech feedback enabled." : "Achievement speech feedback disabled."));
-    settingsmenu();
-}
-if (preffsm == "dlgspeech")
-{
-    speak_dlg_enter = !speak_dlg_enter;
-play_toggle(speak_dlg_enter);
-    dlgmessage_return(speak_dlg_enter ? "Dialog end speech feedback enabled." : "Dialog end speech feedback disabled.");
-    settingsmenu();
-}
-if (preffsm == "loadspeech")
-{
-    speak_menu_loading = !speak_menu_loading;
-play_toggle(speak_menu_loading);
-    dlgmessage_return(speak_menu_loading ? "Menu loading speech feedback enabled." : "Menu loading speech feedback disabled.");
-    settingsmenu();
-}
-if (preffsm == "gcp")
-{
-gamcopy = !gamcopy;
-play_toggle(gamcopy);
-dlgmessage_return(gamcopy ? "Post-game copy and export prompts enabled." : "Post-game copy prompts disabled.");
-settingsmenu();
-}
-if (preffsm == "scp")
-{
-statscopy = !statscopy;
-play_toggle(statscopy);
-dlgmessage_return(statscopy ? "Stat copy and export options enabled." : "Stat copy and export options disabled.");
-settingsmenu();
-}
-if(preffsm == "lps")
-{
-loop_previews = !loop_previews;
-play_toggle(loop_previews);
-dlgmessage_return(loop_previews ? "Looping of previewed sounds enabled." : "Looping of previewed sounds disabled.");
-settingsmenu();
-}
-if(preffsm == "vsc")
-{
-variant_descriptions = !variant_descriptions;
-play_toggle(variant_descriptions);
-dlgmessage_return(variant_descriptions ? "Variant based sound descriptions enabled." : "Variant based sound descriptions disabled.");
-settingsmenu();
-}
-if (preffsm == "cfs")
-{
-    copexpsounds = !copexpsounds;
-    play_toggle(copexpsounds);
-    dlgmessage_return(copexpsounds ? "Copy and export confermation sounds enabled." : "Copy and export confermation sounds disabled.");
-    settingsmenu();
-}
-if (preffsm == "qcm")
-{
-    quit_menu = !quit_menu;
-    play_toggle(quit_menu);
-    dlgmessage_return(quit_menu ? "Quit confirmation promptss enabled." : "Quit confirmation prompts disabled.");
-    settingsmenu();
-}
-if (preffsm == "countsound")
-{
-    playcounts = !playcounts;
-play_toggle(playcounts);
-dlgmessage_return((playcounts ? "Countdown sound effects enabled." : "Countdown sound effects disabled."));
-    settingsmenu();
-}
-if (preffsm == "levsound")
-{
-    playlevels = !playlevels;
-play_toggle(playlevels);
-dlgmessage_return((playlevels ? "Levelup sound effects enabled." : "Levelup sound effects disabled."));
-    settingsmenu();
-}
-if (preffsm == "sdloc")
-{
-speak("loading");
-wait(500);
-    string basePath = DIRECTORY_APPDATA + "tsatria03/ToyMania";
-    basePath = string_replace(basePath, "/", "\\", true);
-    bool result = run("C:\\Windows\\explorer.exe", basePath, false, false);
-    if (!result)
+    form.reset();
+    form.create_window("Settings menu. You can adjust various game options here.", false);
+int glb = form.create_checkbox("Enable behind pitch decrease.", behind_pitch);
+int glb2 = form.create_input_box("Behind pitch decrease description", "This setting controls whether the pitch of sounds decrease when you are behind something.", "", 0, true, true);
+int glh = form.create_checkbox("Enable HRTF support.", hrtf);
+int glh2 = form.create_input_box("HRTF description", "This setting enhances the 3D sound positioning effect for headphone users.", "", 0, true, true);
+int achsound = form.create_checkbox("Enable achievement sound effects.", play_ach_scores);
+int achsound2 = form.create_input_box("Achievement SFX description", "This setting controls the sounds played when unlocking achievements.", "", 0, true, true);
+int achvoice = form.create_checkbox("Enable achievement speech feedback.", speak_ach_scores);
+int achvoice2 = form.create_input_box("Achievement speech description", "This setting controls the spoken announcements of achievement progresses.", "", 0, true, true);
+int dlgspeech = form.create_checkbox("Enable dialog end speech feedback.", speak_dlg_enter);
+int dlgspeech2 = form.create_input_box("Dialog speech description", "This setting controls whether the phrase 'Press enter to continue' is spoken after dialog messages.", "", 0, true, true);
+int loadspeech = form.create_checkbox("Enable menu loading speech feedback.", speak_menu_loading);
+int loadspeech2 = form.create_input_box("Menu loading speech description", "This setting controls whether the 'Loading' phrase is spoken when opening various menus.", "", 0, true, true);
+int gcp = form.create_checkbox("Enable post-game copy and export prompts.", gamcopy);
+int gcp2 = form.create_input_box("Post-game copy/export description", "This setting controls whether the game asks if you'd like to copy your session stats after pause, death or victory.", "", 0, true, true);
+int scp = form.create_checkbox("Enable stat copy and export options.", statscopy);
+int scp2 = form.create_input_box("Stat copy/export description", "This setting controls the showing of all copy and export entries from various stat based menus.", "", 0, true, true);
+int lps = form.create_checkbox("Enable looping of previewed sounds.", loop_previews);
+int lps2 = form.create_input_box("Loop previews description", "This setting controls whether the sounds found in the Learn Sounds menu loop until another sound is selected or the Escape key is pressed.", "", 0, true, true);
+int vsc = form.create_checkbox("Enable variant-based sound descriptions.", variant_descriptions);
+int vsc2 = form.create_input_box("Variant sound description", "This setting controls whether sounds that have multiple variants will include a description along side them.", "", 0, true, true);
+int cfs = form.create_checkbox("Enable copy and export confirmation sounds.", copexpsounds);
+int cfs2 = form.create_input_box("Copy/export sound description", "This setting controls the playing of short chimes after copying or exporting files to and from the clipboard.", "", 0, true, true);
+int qcm = form.create_checkbox("Enable quit confirmation prompts.", quit_menu);
+int qcm2 = form.create_input_box("Quit prompt description", "This setting controls whether the game will show a prompt to quit the current game session before quitting from the Escape or pause menu.", "", 0, true, true);
+int countsound = form.create_checkbox("Enable countdown sound effects.", playcounts);
+int countsound2 = form.create_input_box("Countdown SFX description", "This setting controls the sounds played when you only have 10 seconds left in the sixth level of the normal game mode.", "", 0, true, true);
+int levsound = form.create_checkbox("Enable levelup sound effects.", playlevels);
+int levsound2 = form.create_input_box("Level-up SFX description", "This setting controls the sounds played when you reach the next level in a game.", "", 0, true, true);
+    int sdloc = -1;
+    if (system_is_windows)
+        sdloc = form.create_button("&open save data location");
+    int rest = form.create_button("&reset settings");
+    int sv = form.create_button("&save settings", true);
+    int cancel = form.create_button("&cancel");
+    form.focus(glb);
+    while (true)
     {
-        alert("Error", "Could not open " + basePath + ". Please re-create this folder and try again.");
-        settingsmenu();
-    }
-    else
-    {
-dlgplay("complete.ogg");
-        dlgmessage_return("The save data location has been successfully opened.");
-        settingsmenu();
-    }
-}
-if (preffsm == "rest")
-{
+        wait(5);
+        form.monitor();
+            behind_pitch = form.is_checked(glb);
+            hrtf = form.is_checked(glh);
+            sound_global_hrtf = hrtf;
+            play_ach_scores = form.is_checked(achsound);
+            speak_ach_scores = form.is_checked(achvoice);
+            speak_dlg_enter = form.is_checked(dlgspeech);
+            speak_menu_loading = form.is_checked(loadspeech);
+            gamcopy = form.is_checked(gcp);
+            statscopy = form.is_checked(scp);
+            loop_previews = form.is_checked(lps);
+            variant_descriptions = form.is_checked(vsc);
+            copexpsounds = form.is_checked(cfs);
+            quit_menu = form.is_checked(qcm);
+            playcounts = form.is_checked(countsound);
+            playlevels = form.is_checked(levsound);
+        if (form.is_pressed(rest))
+        {
 setupmenu(false);
     m.add_item("Yes", "yes");
     m.add_item("No", "no");
@@ -1275,7 +1186,7 @@ int mres=m.run();
 string confirm = m.get_selected_item_id();
     if (mres == -1 or confirm == "no")
     {
-        settingsmenu();
+        gamsetsmenu();
     }
 if(confirm=="yes")
 {
@@ -1285,14 +1196,33 @@ dlgmessage_return("Settings reset.");
 mainmenu();
 }
 }
-if (preffsm == "sv")
-{
-writepreffs();
-dlgmessage_return("Settings saved.");
-mainmenu();
-}
-if (preffsm == "back")
-{
-mainmenu();
-}
+        if (form.is_pressed(sv))
+        {
+            writepreffs();
+            dlgmessage_return("Settings saved.");
+            mainmenu();
+        }
+        if (form.is_pressed(cancel) || key_pressed(KEY_ESCAPE))
+        {
+            mainmenu();
+        }
+        if (system_is_windows && form.is_pressed(sdloc))
+        {
+            speak("loading");
+            wait(500);
+            string basePath = DIRECTORY_APPDATA + "tsatria03/ToyMania";
+            basePath = string_replace(basePath, "/", "\\", true);
+            bool result = run("C:\\Windows\\explorer.exe", basePath, false, false);
+            if (!result)
+            {
+                alert("Error", "Could not open " + basePath + ". Please re-create this folder and try again.");
+            }
+            else
+            {
+                dlgplay("complete.ogg");
+                dlgmessage_return("The save data location has been successfully opened.");
+gamsetsmenu();
+            }
+        }
+    }
 }

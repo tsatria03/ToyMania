@@ -355,10 +355,6 @@ sound_pool@[] pools = {p, pool, alarmpool, ambpool, bulletpool, heartpool, objpo
         }
     }
 }
-void play_toggle(bool setting)
-{
-dlgplay(setting ? "setenabled.ogg" : "setdisabled.ogg", false);
-}
 void restart()
 {
 if(SCRIPT_COMPILED)
