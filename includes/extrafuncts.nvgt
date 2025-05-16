@@ -227,6 +227,38 @@ speak(weapontype + " randomly equipped");
 p.destroy_sound(weaponslot);
 weaponslot = p.play_stationary(weapontype + "draw.ogg", false);
 }
+void check_weapon_reload()
+{
+    if (isReloading and reloadTimer.elapsed >= reloadDuration)
+    {
+        ammo = 100;
+        isReloading = false;
+        speak("Reload complete.");
+    }
+}
+void reload_weapon()
+{
+    if (isReloading)
+    {
+        speak("This weapon is still reloading.");
+        return;
+    }
+    if (weapontype != "machinegun")
+    {
+        speak("This weapon does not take any ammo.");
+    }
+    else if (ammo >= 1)
+    {
+        speak("This weapon is already loaded with ammo.");
+    }
+    else
+    {
+        isReloading = true;
+        reloadTimer.restart();
+        weaponslot = p.play_stationary("machinegunreload"+random(1,2)+".ogg", false);
+        speak("Reloading...");
+    }
+}
 void apply_pitch_settings()
 {
 int pitchValue = behind_pitch ? 5 : 0;

@@ -1,4 +1,5 @@
 new in 3.0
+Introduced a new realistic weapon reloading system. Reloading a weapon will now take time instead of instantly restoring ammo.
 Added options in the game settings menu to enable or disable the complete and toggle switch sounds.
 Improved the sound device selection menu by sorting the available devices alphabetically and labeling them as “active” or “inactive” based on the current selection. This makes it easier for users to help them identify the correct output device.
 Added speech and sound feedback to the toggleable sound test switches found in the audio settings menu.

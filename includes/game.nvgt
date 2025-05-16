@@ -202,24 +202,9 @@ if(key_pressed(KEY_Z) and doormove==false and endless)
 if(weapontype=="machinegun") speak("You have "+ammo+"rounds of ammo available in this weapon.");
 if(weapontype!="machinegun") speak("This weapon does not take any ammo.");
 }
-if(key_pressed(KEY_R) and doormove==false and endless)
+if (key_pressed(KEY_R) and doormove == false and endless)
 {
-if(weapontype!="machinegun")
-{
-speak("This weapon does not take any ammo.");
-}
-else
-{
-if(weapontype=="machinegun" and ammo>=1)
-{
-speak("This weapon is already loaded with ammo.");
-}
-else if(weapontype=="machinegun" and ammo<=0)
-{
-ammo=100;
-if(weapontype=="machinegun") weaponslot=p.play_stationary(weapontype+"reload.ogg",false);
-}
-}
+reload_weapon();
 }
 if (key_pressed(KEY_D) and doormove == false)
 {
@@ -589,6 +574,7 @@ bfloop();
 bulletloop();
 if(!endless) bossloop();
 carloop();
+check_weapon_reload();
 doorcheck();
 doorloop();
 gardloop();

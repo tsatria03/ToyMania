@@ -472,8 +472,8 @@ weapons["Machine Gun Draw: used in endless mode"] = "machinegundraw.ogg";
 weapons["Machine Gun Empty: used in endless mode"] = "machinegunempty.ogg";
 weapons["Machine Gun Fire: used in endless mode"] = "machinegunfire.ogg";
 weapons["Machine Gun Hit: used in endless mode"] = "machinegunhit.ogg";
+weapons["Machine Gun Reload: used in endless mode" + vdesc] = array<string> = {"machinegunreload1.ogg", "machinegunreload2.ogg"};
 weapons["Machine Gun Shell: used in endless mode" + vdesc] = array<string> = {"machinegunshell1.ogg", "machinegunshell2.ogg", "machinegunshell3.ogg", "machinegunshell4.ogg"};
-weapons["Machine Gun Reload: used in endless mode"] = "machinegunreload.ogg";
 learnCategories["Weapons"] = weapons;
 string[] sortedKeys = learnCategories.get_keys();
 sortedKeys.sort_ascending();
@@ -1127,7 +1127,7 @@ form.reset();
     form.create_window("Preferences", false);
     int audsets = form.create_button("&audio settings");
 int gamsets = form.create_button("&game settings");
-int back = form.create_button("&back");
+int back = form.create_button("&Return to main menu");
 form.focus(audsets);
 spool.play_stationary("menuopen.ogg",false);
     while (true)
@@ -1258,7 +1258,7 @@ mainmenu();
             writepreffs();
 if(completesound==true) dlgplay("complete.ogg", false);
             dlgmessage_return("Settings saved.");
-            mainmenu();
+            preffsmenu();
         }
         if (form.is_pressed(cancel) || key_repeating(KEY_ESCAPE))
         {
@@ -1476,7 +1476,7 @@ heartpool.destroy_sound(heartslot);
 writepreffs();
 if(completesound==true) dlgplay("complete.ogg", false);
 dlgmessage_return("Settings saved.");
-mainmenu();
+preffsmenu();
 }
     }
 }
