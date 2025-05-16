@@ -1,4 +1,7 @@
 new in 3.0
+Improved the music preview behavior. The selected track now only plays when toggled on by the user, and updates in real-time when switching tracks.
+Made it so preview sound buttons in the audio settings menu now correctly toggle their sounds on and off when pressed repeatedly. Previously, sounds would continue playing with no way to stop them from the same button.
+Added the ability to test ambience, music, alarm, and heartbeat sounds in the audio settings menu.
 Added the ability to set your sound devices in the audio settings menu.
 Added an option in the game settings menu to show or hide read only toggle descriptions.
 Resolved an issue where the store in level 6 on normal mode had a very high chance of exploding even after a user has paused or whent into another menu inside the game.

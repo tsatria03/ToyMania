@@ -42,6 +42,7 @@ int runtime=100;
 int usetime=100;
 int walktime=200;
 int64 session_playtime = 0;
+int lastMusicIndex = -1;
 int64 total_playtime = 0;
 string savePath = DIRECTORY_APPDATA + "tsatria03/ToyMania/saves/";
 string statsPath = DIRECTORY_APPDATA + "tsatria03/ToyMania/stats/";

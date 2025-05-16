@@ -1285,6 +1285,13 @@ int gameAmbienceVolumeSlider = form.create_slider("game ambience volume, ", (toy
 int gameMusicVolumeSlider = form.create_slider("game music volume, ", (toymusvolume + 50) * 2, 0, 100, "percent", 1);
 int gameAlarmVolumeSlider = form.create_slider("game alarm volume, ", (alarmvolume + 50) * 2, 0, 100, "percent", 1);
 int gameHeartbeatVolumeSlider = form.create_slider("game heartbeat volume, ", (heartvolume + 50) * 2, 0, 100, "percent", 1);
+    int ambTest = form.create_button("Toggle ambience sound test: switch");
+    int musTest = form.create_button("Toggle music sound test: switch");
+    int alarmTest = form.create_button("Toggle alarm sound test: switch");
+    int heartbeatTest = form.create_button("Toggle heartbeat sound test: switch");
+    int musList = form.create_list("Music Tracks", 2);
+    form.add_list_item(musList, "bossmus.ogg", "bossmus");
+    form.add_list_item(musList, "gamemus.ogg", "gamemus");
 int sdm = form.create_button("Select sound &device. Currently set to " + soundcard);
     int rest = form.create_button("&reset settings");
 int savesets = form.create_button("&save settings", true);
@@ -1295,6 +1302,22 @@ spool.play_stationary("menuopen.ogg",false);
     {
         wait(5);
         form.monitor();
+int currentMusIndex = form.get_list_position(musList);
+if (currentMusIndex != lastMusicIndex && currentMusIndex != -1)
+{
+    lastMusicIndex = currentMusIndex;
+mustype = form.get_list_item_id(musList, currentMusIndex);
+    if (muspool.sound_is_playing(toytrackslot))
+    {
+        muspool.destroy_sound(toytrackslot);
+            toytrackslot = muspool.play_stationary(mustype + ".ogg", true);
+lastMusicIndex = currentMusIndex;
+    }
+    else
+    {
+            muspool.destroy_sound(toytrackslot);
+lastMusicIndex = -1;
+    }
 toyambvolume = (form.get_slider(gameAmbienceVolumeSlider) / 2) - 50;
 toymusvolume = (form.get_slider(gameMusicVolumeSlider) / 2) - 50;
 alarmvolume = (form.get_slider(gameAlarmVolumeSlider) / 2) - 50;
@@ -1308,6 +1331,66 @@ heartvolume = (form.get_slider(gameHeartbeatVolumeSlider) / 2) - 50;
 spool.play_stationary("menuclose.ogg",false);
             preffsmenu();
         }
+if (form.is_pressed(ambTest))
+{
+    if (ambpool.sound_is_playing(toyambslot))
+{
+spool.play_stationary("setdisabled.ogg",false);
+        ambpool.destroy_sound(toyambslot);
+    }
+else
+{
+spool.play_stationary("setenabled.ogg",false);
+        toyambslot = ambpool.play_stationary("gameamb.ogg", true);
+    }
+}
+if (form.is_pressed(musTest))
+{
+    if (muspool.sound_is_playing(toytrackslot))
+    {
+        spool.play_stationary("setdisabled.ogg", false);
+        muspool.destroy_sound(toytrackslot);
+        lastMusicIndex = -1;
+    }
+    else
+    {
+        int musIndex = form.get_list_position(musList);
+        if (musIndex >= 0)
+        {
+mustype = form.get_list_item_id(musList, musIndex);
+            spool.play_stationary("setenabled.ogg", false);
+            muspool.destroy_sound(toytrackslot);
+            toytrackslot = muspool.play_stationary(mustype + ".ogg", true);
+            lastMusicIndex = musIndex;
+        }
+    }
+}
+if (form.is_pressed(alarmTest))
+{
+    if (alarmpool.sound_is_playing(alarmslot))
+{
+spool.play_stationary("setdisabled.ogg",false);
+        alarmpool.destroy_sound(alarmslot);
+    }
+else
+{
+spool.play_stationary("setenabled.ogg",false);
+        alarmslot = alarmpool.play_stationary("gamealarm.ogg", true);
+    }
+}
+if (form.is_pressed(heartbeatTest))
+{
+    if (heartpool.sound_is_playing(heartslot))
+{
+spool.play_stationary("setdisabled.ogg",false);
+        heartpool.destroy_sound(heartslot);
+    }
+else
+{
+spool.play_stationary("setenabled.ogg",false);
+        heartslot = heartpool.play_stationary("heartstart.ogg", true);
+    }
+}
 if(form.is_pressed(sdm))
 {
 string[]@ devices=get_sound_output_devices();
