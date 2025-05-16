@@ -23,7 +23,7 @@ if (main == "sm")
 {
 if(speak_menu_loading==true) speak("loading");
 m.fade_music();
-gamsetsmenu();
+preffsmenu();
 }
 if(main == "st")
 {
@@ -1118,10 +1118,36 @@ else
         view_lifetime_stats();
     }
 }
+void preffsmenu()
+{
+form.reset();
+    form.create_window("Preferences dialog. You can adjust various game options here.", false, false);
+    int audsets = form.create_button("&audio settings");
+int gamsets = form.create_button("&game settings");
+form.focus(audsets);
+spool.play_stationary("menuopen.ogg",false);
+    while (true)
+    {
+        form.monitor();
+        wait(5);
+        if (form.is_pressed(gamsets))
+        {
+gamsetsmenu();
+}
+        if (form.is_pressed(audsets))
+        {
+soundsetsmenu();
+}
+        if (key_pressed(KEY_ESCAPE))
+        {
+mainmenu();
+}
+    }
+}
 void gamsetsmenu()
 {
     form.reset();
-    form.create_window("Settings menu. You can adjust various game options here.", false);
+    form.create_window("Game settings", false);
 int glb = form.create_checkbox("Enable behind pitch decrease.", behind_pitch);
 int glb2 = form.create_input_box("Behind pitch decrease description", "This setting controls whether the pitch of sounds decrease when you are behind something.", "", 0, true, true);
 int glh = form.create_checkbox("Enable HRTF support.", hrtf);
@@ -1156,7 +1182,8 @@ int levsound2 = form.create_input_box("Level-up SFX description", "This setting 
     int rest = form.create_button("&reset settings");
     int sv = form.create_button("&save settings", true);
     int cancel = form.create_button("&cancel");
-    form.focus(glb);
+form.focus(glb);
+spool.play_stationary("menuopen.ogg",false);
     while (true)
     {
         wait(5);
@@ -1204,7 +1231,8 @@ mainmenu();
         }
         if (form.is_pressed(cancel) || key_pressed(KEY_ESCAPE))
         {
-            mainmenu();
+spool.play_stationary("menuclose.ogg",false);
+            preffsmenu();
         }
         if (system_is_windows && form.is_pressed(sdloc))
         {
@@ -1224,5 +1252,41 @@ mainmenu();
 gamsetsmenu();
             }
         }
+    }
+}
+void soundsetsmenu()
+{
+form.reset();
+    form.create_window("audio settings", false);
+int gameAmbienceVolumeSlider = form.create_slider("game ambience volume, ", (toyambvolume + 50) * 2, 0, 100, "percent", 1);
+int gameMusicVolumeSlider = form.create_slider("game music volume, ", (toymusvolume + 50) * 2, 0, 100, "percent", 1);
+int gameAlarmVolumeSlider = form.create_slider("game alarm volume, ", (alarmvolume + 50) * 2, 0, 100, "percent", 1);
+int gameHeartbeatVolumeSlider = form.create_slider("game heartbeat volume, ", (heartvolume + 50) * 2, 0, 100, "percent", 1);
+int savesets = form.create_button("&save settings", true);
+int cansets = form.create_button("&cancel");
+form.focus(gameAmbienceVolumeSlider);
+    while (true)
+    {
+        wait(5);
+        form.monitor();
+toyambvolume = (form.get_slider(gameAmbienceVolumeSlider) / 2) - 50;
+toymusvolume = (form.get_slider(gameMusicVolumeSlider) / 2) - 50;
+alarmvolume = (form.get_slider(gameAlarmVolumeSlider) / 2) - 50;
+heartvolume = (form.get_slider(gameHeartbeatVolumeSlider) / 2) - 50;
+        ambpool.update_sound_start_values(toyambslot, 0, toyambvolume, toyambpitch);
+        muspool.update_sound_start_values(toytrackslot, 0, toymusvolume, toymuspitch);
+        alarmpool.update_sound_start_values(alarmslot, 0, alarmvolume, alarmpitch);
+        heartpool.update_sound_start_values(heartslot, 0, heartvolume, heartpitch);
+        if (form.is_pressed(cansets) || key_pressed(KEY_ESCAPE))
+        {
+spool.play_stationary("menuclose.ogg",false);
+            preffsmenu();
+        }
+        if (form.is_pressed(savesets))
+        {
+writepreffs();
+dlgmessage_return("Settings saved.");
+mainmenu();
+}
     }
 }

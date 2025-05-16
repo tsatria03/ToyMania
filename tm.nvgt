@@ -50,7 +50,7 @@ string ambtype="gameamb";
 string mustype="gamemus";
 string current_weapon;
 string weapontype="bat";
-string version="3.0beta";
+string version="3.0";
 timer boss_timer, bossespawntimer, carspawntimer, firetimer, firetimer2, gametimer, gardspawntimer, objspawntimer, keyspawntimer, movetimer, runtimer, toyspawntimer, usetimer, walktimer;
 file achfile, dockfile, gamfile, statfile;
 instance gamstence("tm");
