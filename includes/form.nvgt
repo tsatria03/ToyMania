@@ -3508,11 +3508,11 @@ class control {
 	void checkbox_toggle() {
 		if (checked == true) {
 			checked = false;
-spool.play_stationary("setdisabled.ogg",false);
+if(togglesound==true) spool.play_stationary("setdisabled.ogg",false);
 			speak("Unchecked", true);
 		} else {
 			checked = true;
-spool.play_stationary("setenabled.ogg",false);
+if(togglesound==true) spool.play_stationary("setenabled.ogg",false);
 			speak("Checked", true);
 		}
 	}

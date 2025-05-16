@@ -206,6 +206,14 @@ if (st.d.exists("playlevels"))
 {
 playlevels = st.read_bool("playlevels");
 }
+if (st.d.exists("completesound"))
+{
+completesound = st.read_bool("completesound");
+}
+if (st.d.exists("togglesound"))
+{
+togglesound = st.read_bool("togglesound");
+}
 if (st.d.exists("showset_desc"))
 {
 showset_desc = st.read_bool("showset_desc");
@@ -228,6 +236,7 @@ break;
 void writepreffs()
 {
 st.add("menumusvolume", menumusvolume);
+st.add("soundcard",soundcard);
 st.add("stoneplays", stoneplays);
 st.add("swordplays", swordplays);
 st.add("alarmvolume", alarmvolume);
@@ -248,7 +257,8 @@ st.add("copexpsounds", copexpsounds);
 st.add("quit_menu", quit_menu);
 st.add("playcounts", playcounts);
 st.add("playlevels", playlevels);
+st.add("completesound", completesound);
+st.add("togglesound", togglesound);
 st.add("showset_desc", showset_desc);
-st.add("soundcard",soundcard);
 st.save();
 }

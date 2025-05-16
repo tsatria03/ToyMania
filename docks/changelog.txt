@@ -1,4 +1,5 @@
 new in 3.0
+Added options in the game settings menu to enable or disable the complete and toggle switch sounds.
 Improved the sound device selection menu by sorting the available devices alphabetically and labeling them as “active” or “inactive” based on the current selection. This makes it easier for users to help them identify the correct output device.
 Added speech and sound feedback to the toggleable sound test switches found in the audio settings menu.
 Made it so all preview sounds found in the audio settings menu properly get destroyed upon exiting the menu, or going into various other menus.

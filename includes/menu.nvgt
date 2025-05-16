@@ -54,7 +54,7 @@ stoneplays+=1;
 writepreffs();
         dlgplay("speaker_stone_throw.ogg");
     }
-dlgplay("complete.ogg", false);
+if(completesound==true) dlgplay("complete.ogg", false);
 dlgmessage_return("Speaker test complete.");
     mainmenu();
 }
@@ -1195,7 +1195,13 @@ if (showset_desc) countsound2 = form.create_input_box("Countdown SFX: descriptio
 int levsound = form.create_checkbox("Enable levelup sound effects.", playlevels);
 int levsound2 = -1;
 if (showset_desc) levsound2 = form.create_input_box("Level-up SFX: description", "This setting controls the sounds played when you reach the next level in a game.", "", 0, true, true);
-int showdesc = form.create_checkbox("Enable showing toggle descriptions.", showset_desc);
+int compsound = form.create_checkbox("Enable action complete sounds.", completesound);
+int compsound2 = -1;
+if (showset_desc) compsound2 = form.create_input_box("Complete SFX: description", "This setting controls the sounds played when you complete sertain actions throughout various menus.", "", 0, true, true);
+int togsound = form.create_checkbox("Enable toggle switch sounds.", togglesound);
+int togsound2 = -1;
+if (showset_desc) togsound2 = form.create_input_box("Toggle switch SFX: description", "This setting controls the sounds played when you enable or disable sertain settings found in the prefferences menu.", "", 0, true, true);
+int showdesc = form.create_checkbox("Enable showing toggleable item descriptions.", showset_desc);
     int sdloc = -1;
     if (system_is_windows)
         sdloc = form.create_button("&open save data location");
@@ -1223,6 +1229,8 @@ spool.play_stationary("menuopen.ogg",false);
             quit_menu = form.is_checked(qcm);
             playcounts = form.is_checked(countsound);
             playlevels = form.is_checked(levsound);
+completesound = form.is_checked(compsound);
+togglesound = form.is_checked(togsound);
 showset_desc = form.is_checked(showdesc);
         if (form.is_pressed(rest))
         {
@@ -1240,7 +1248,7 @@ if(confirm=="yes")
 {
 if(file_exists(DIRECTORY_APPDATA+"tsatria03/ToyMania/saves/settings.tmg")) file_delete(DIRECTORY_APPDATA+"tsatria03/ToyMania/saves/settings.tmg");
 resetpreffs();
-dlgplay("complete.ogg", false);
+if(completesound==true) dlgplay("complete.ogg", false);
 dlgmessage_return("Settings reset.");
 mainmenu();
 }
@@ -1248,7 +1256,7 @@ mainmenu();
         if (form.is_pressed(sv))
         {
             writepreffs();
-dlgplay("complete.ogg", false);
+if(completesound==true) dlgplay("complete.ogg", false);
             dlgmessage_return("Settings saved.");
             mainmenu();
         }
@@ -1270,7 +1278,7 @@ spool.play_stationary("menuclose.ogg",false);
             }
             else
             {
-                dlgplay("complete.ogg");
+if(completesound==true) dlgplay("complete.ogg");
                 dlgmessage_return("The save data location has been successfully opened.");
 gamsetsmenu();
             }
@@ -1340,13 +1348,13 @@ if (form.is_pressed(ambTest))
 {
     if (ambpool.sound_is_playing(toyambslot))
 {
-spool.play_stationary("setdisabled.ogg",false);
+if(togglesound==true) spool.play_stationary("setdisabled.ogg",false);
 speak("ambience off");
         ambpool.destroy_sound(toyambslot);
     }
 else
 {
-spool.play_stationary("setenabled.ogg",false);
+if(togglesound==true) spool.play_stationary("setenabled.ogg",false);
 speak("ambience on");
         toyambslot = ambpool.play_stationary("gameamb.ogg", true);
     }
@@ -1355,7 +1363,7 @@ if (form.is_pressed(musTest))
 {
     if (muspool.sound_is_playing(toytrackslot))
     {
-        spool.play_stationary("setdisabled.ogg", false);
+if(togglesound==true) spool.play_stationary("setdisabled.ogg", false);
 speak("music off");
         muspool.destroy_sound(toytrackslot);
         lastMusicIndex = -1;
@@ -1366,7 +1374,7 @@ speak("music off");
         if (musIndex >= 0)
         {
 mustype = form.get_list_item_id(musList, musIndex);
-            spool.play_stationary("setenabled.ogg", false);
+if(togglesound==true) spool.play_stationary("setenabled.ogg", false);
 speak("music on");
             muspool.destroy_sound(toytrackslot);
             toytrackslot = muspool.play_stationary(mustype + ".ogg", true);
@@ -1378,13 +1386,13 @@ if (form.is_pressed(alarmTest))
 {
     if (alarmpool.sound_is_playing(alarmslot))
 {
-spool.play_stationary("setdisabled.ogg",false);
+if(togglesound==true) spool.play_stationary("setdisabled.ogg",false);
 speak("alarm off");
         alarmpool.destroy_sound(alarmslot);
     }
 else
 {
-spool.play_stationary("setenabled.ogg",false);
+if(togglesound==true) spool.play_stationary("setenabled.ogg",false);
 speak("alarm on");
         alarmslot = alarmpool.play_stationary("gamealarm.ogg", true);
     }
@@ -1393,13 +1401,13 @@ if (form.is_pressed(heartbeatTest))
 {
     if (heartpool.sound_is_playing(heartslot))
 {
-spool.play_stationary("setdisabled.ogg",false);
+if(togglesound==true) spool.play_stationary("setdisabled.ogg",false);
 speak("heartbeat off");
         heartpool.destroy_sound(heartslot);
     }
 else
 {
-spool.play_stationary("setenabled.ogg",false);
+if(togglesound==true) spool.play_stationary("setenabled.ogg",false);
 speak("heartbeat on");
         heartslot = heartpool.play_stationary("heartstart.ogg", true);
     }
@@ -1429,7 +1437,7 @@ soundsetsmenu();
     {
         soundcard = devices[mres];
         sound_output_device = mres + 1;
-dlgplay("complete.ogg");
+if(completesound==true) dlgplay("complete.ogg");
 dlgmessage_return("Sound device set to "+soundcard+".");
 soundsetsmenu();
 }
@@ -1454,7 +1462,7 @@ if(confirm=="yes")
 {
 if(file_exists(DIRECTORY_APPDATA+"tsatria03/ToyMania/saves/settings.tmg")) file_delete(DIRECTORY_APPDATA+"tsatria03/ToyMania/saves/settings.tmg");
 resetpreffs();
-dlgplay("complete.ogg", false);
+if(completesound==true) dlgplay("complete.ogg", false);
 dlgmessage_return("Settings reset.");
 mainmenu();
 }
@@ -1466,7 +1474,7 @@ muspool.destroy_sound(toytrackslot);
 alarmpool.destroy_sound(alarmslot);
 heartpool.destroy_sound(heartslot);
 writepreffs();
-dlgplay("complete.ogg", false);
+if(completesound==true) dlgplay("complete.ogg", false);
 dlgmessage_return("Settings saved.");
 mainmenu();
 }
