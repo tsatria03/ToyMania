@@ -634,7 +634,8 @@ keyspawntimer.restart();
 }
 if(objspawntimer.elapsed>=objspawntime and objs.length()<objnum and objspawn==true and endless)
 {
-spawn_obj(random(0,maxx), random(0,maxy), random(3000,6000), "potion", objdest);
+string[] objtypes={"ammo_pack", "potion"};
+spawn_obj(random(0,maxx), random(0,maxy), random(3000,6000), random_string(objtypes), objdest);
 objspawntimer.restart();
 }
 if(toyspawntimer.elapsed>=toyspawntime and toys.length()<toynum and toyspawn==true)

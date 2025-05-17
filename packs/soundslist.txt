@@ -193,7 +193,8 @@ machinegundraw.ogg
 machinegunempty.ogg
 machinegunfire.ogg
 machinegunhit.ogg
-machinegunreload.ogg
+machinegunreload1.ogg
+machinegunreload2.ogg
 machinegunshell1.ogg
 machinegunshell2.ogg
 machinegunshell3.ogg
@@ -281,4 +282,4 @@ toyloop6.ogg
 toyloop7.ogg
 toyloop8.ogg
 toyloop9.ogg
-total files: 283
+total files: 284
