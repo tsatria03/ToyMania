@@ -51,8 +51,8 @@ health-=bullets[i].damage;
     {
         isReloading = false;
 p.destroy_sound(weaponslot);
-        p.play_stationary(weapontype+"fail.ogg", false);
-        speak("Reload interrupted!");
+        weaponslot=p.play_stationary("machinegunfail.ogg", false);
+        speak("Error. Reload interrupted!");
     }
 bullets.remove_at(i);
 return;
