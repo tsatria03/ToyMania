@@ -204,7 +204,7 @@ else if (weapon == "machinegun" and endless)
 wepdamage = 27;
 weprange = 9;
 weprange2 = 10;
-ammo = 100;
+ammo = maxammo;
 speak(weapontype + " equipped");
 p.destroy_sound(weaponslot);
 weaponslot = p.play_stationary(weapontype + "draw.ogg", false);
@@ -237,6 +237,7 @@ void check_weapon_reload()
         {
             ammo += ammo_to_load;
             reserved_ammo -= ammo_to_load;
+p.play_stationary(weapontype+"ping.ogg",false);
             speak("Reload complete. " + round(ammo_to_load, 0) + " rounds of ammo loaded.");
         }
         else
