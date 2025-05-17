@@ -32,7 +32,7 @@ bool isReloading = false;
 int reloadDuration = 2500;
 timer reloadTimer;
 double alarmvolume=0, alarmpitch=100, heartvolume=0, heartpitch=100, toyambvolume=0, toyambpitch=100, toymusvolume=0, toymuspitch=100;
-double ammo=50, maxammo=50, reserved_ammo=250;
+double ammo=50, maxammo=50, reserved_ammo=250, max_reserved_ammo=250;
 double collected_keys=0, collected_toys=0, destroyed_cars=0, health=1000, maxhealth=1000, storehealth=1000, storemaxhealth=1000, killed_gards=0, level=1, moved_steps=0, swordplays=0, stoneplays=0, total_collected_toys=0, total_collected_keys=0, total_killed_gards=0, total_destroyed_cars=0, total_moved_steps=0;
 double maxx=50, maxy=50;
 int achslot, invslot, itemslot, painslot, toyambslot, toytrackslot, weaponslot;

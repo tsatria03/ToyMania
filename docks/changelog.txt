@@ -1,5 +1,6 @@
 new in 3.1
-Made it so taking damage during a reload cancels the reload attempt. If the player is hit by an enemy while reloading their machine gun, the reload is now interrupted with an audible sound and speech feedback.
+Fixed a bug where ammo packs could give negative ammo when the player's ammo reserve was near or above the maximum cap. Ammo packs now correctly calculate the missing reserved ammo, and will only add the valid amount, preventing overfilling or negative ammo gained messages.
+Made it so taking damage during a reload cancels the reload attempt. If the player is hit by an enemy while reloading their machine gun, the reload of the weapon is now interrupted with an audible sound and speech feedback.
 Upgraded the maximum reserved ammo that the machine gun can reload at a time from 20 to 50.
 Added a ping sound to the machine gun weapon to signify that it has been reloaded successfully.
 Fixed a bug where using a health potion could increase the player's health above the maximum threshold, resulting in inaccurate health percentage readings. Your health is now properly capped at 100% when you're fully healed.

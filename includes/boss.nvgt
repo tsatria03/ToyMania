@@ -94,6 +94,7 @@ bosses[i].firetimer.restart();
     if (isReloading)
     {
         isReloading = false;
+p.destroy_sound(weaponslot);
         p.play_stationary(weapontype+"fail.ogg", false);
         speak("Reload interrupted!");
     }

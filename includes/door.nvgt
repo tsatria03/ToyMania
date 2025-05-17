@@ -34,8 +34,8 @@ doors[i].jamsound = doorpool.play_stationary("doorjam.ogg", false);
             }
             if (collected_keys < doors[i].required_keys)
             {
-doorpool.destroy_sound(doors[i].locksound);
-doors[i].locksound = doorpool.play_stationary("doorlock.ogg", false);
+temp.destroy_sound(doors[i].locksound);
+doors[i].locksound = temp.play_stationary("doorlock"+random(1,2)+".ogg", false);
                 speak("This door is locked. You need " + doors[i].required_keys + " or more keys to unlock it.");
             }
             else
