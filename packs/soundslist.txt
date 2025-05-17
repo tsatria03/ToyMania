@@ -1,3 +1,7 @@
+ammoget1.ogg
+ammoget2.ogg
+ammoloop.ogg
+ammopack.ogg
 batdraw.ogg
 batfire1.ogg
 batfire2.ogg
@@ -56,7 +60,8 @@ dlgopen.ogg
 dlgscroll.ogg
 doorclose.ogg
 doorjam.ogg
-doorlock.ogg
+doorlock1.ogg
+doorlock2.ogg
 doorloop.ogg
 doormove.ogg
 dooropen.ogg
@@ -131,6 +136,9 @@ hammerfire3.ogg
 hammerhit1.ogg
 hammerhit2.ogg
 hammerhit3.ogg
+healthdrink.ogg
+healthget.ogg
+healthloop.ogg
 heartstart.ogg
 heartstop.ogg
 invcycle1.ogg
@@ -145,8 +153,6 @@ itembreak3.ogg
 itembreak4.ogg
 itembreak5.ogg
 itembreak6.ogg
-itemget.ogg
-itemloop.ogg
 itemspawn.ogg
 keybreak1.ogg
 keybreak2.ogg
@@ -191,10 +197,11 @@ laserhit.ogg
 life_achievement.ogg
 machinegundraw.ogg
 machinegunempty.ogg
+machinegunfail.ogg
 machinegunfire.ogg
 machinegunhit.ogg
-machinegunreload1.ogg
-machinegunreload2.ogg
+machinegunping.ogg
+machinegunreload.ogg
 machinegunshell1.ogg
 machinegunshell2.ogg
 machinegunshell3.ogg
@@ -225,7 +232,6 @@ playerheal3.ogg
 playerlevel.ogg
 playerpain.ogg
 playertel.ogg
-potionuse.ogg
 resume.ogg
 session_achievement.ogg
 setdisabled.ogg
@@ -282,4 +288,4 @@ toyloop6.ogg
 toyloop7.ogg
 toyloop8.ogg
 toyloop9.ogg
-total files: 284
+total files: 290
