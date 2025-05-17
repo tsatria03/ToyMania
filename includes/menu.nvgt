@@ -4,6 +4,7 @@ setupmenu();
 m.add_item("game menu", "gm");
 m.add_item("settings menu", "sm");
 m.add_item("speaker test menu", "st");
+m.add_item("check for game updates", "chup");
 if(system_is_windows) m.add_item("restart game", "rt");
 m.add_item("exit game", "ex");
 m.intro_text = "Main menu. Please choose an option with your arrow keys, then press enter to activate one.";
@@ -57,6 +58,12 @@ writepreffs();
 if(completesound==true) dlgplay("complete.ogg", false);
 dlgmessage_return("Speaker test complete.");
     mainmenu();
+}
+if (main == "chup")
+{
+speak("checking");
+m.fade_music();
+check_for_updates(version, "ToyMania");
 }
 if (main == "rt")
 {

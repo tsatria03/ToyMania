@@ -26,5 +26,6 @@
 #include"savefuncks.nvgt"
 #include"savedata.nvgt"
 #include"toy.nvgt"
+#include"updater.nvgt"
 #include"virtual_dialogs.nvgt"
 typedef uint8 usmall; typedef int8 small;

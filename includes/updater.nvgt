@@ -1,0 +1,70 @@
+bool is_newer_version(string oldv, string newv)
+{
+    oldv = string_trim_sides(oldv);
+    newv = string_trim_sides(newv);
+    return string_to_number(newv) > string_to_number(oldv);
+}
+bool check_for_updates(string old_version, string projectname)
+{
+    string version_url = "https://tsatria03.github.io/projects/" + projectname + "/version.txt";
+    string new_version = url_get(version_url);
+    if (new_version == "" || string_contains(new_version, "<!DOCTYPE", 1) > -1)
+{
+        alert("error", "Could not check for updates at this time.");
+mainmenu();
+        return false;
+    }
+    if (!is_newer_version(old_version, new_version))
+{
+        alert("error", "You already have the latest version of the game.");
+mainmenu();
+        return false;
+    }
+    int response = question("Update Available", "A new version of " + projectname + " is available. Your version: " + old_version + ". New version: " + new_version + ". Would you like to download it now?");
+    if (response == 1)
+{
+string url = get_download_url(projectname, new_version);
+        string filename = get_disk_filename(url);
+        string result = dl_file(url, filename);
+        if (result == "finished")
+{
+            alert("Success", "The update has been downloaded as " + filename + ". Please extract or run it to complete the update.");
+mainmenu();
+        }
+else if (result == "canceled" && file_exists(filename))
+{
+            file_delete(filename);
+            alert("error", "The update was unexpectedly canceled.");
+mainmenu();
+        }
+else
+{
+            alert("Error", "Something went wrong during the update. Please try again later.");
+mainmenu();
+}
+    }
+    return false;
+}
+string get_download_url(string projectname, string new_version)
+{
+    bool is_mac = system_is_unix;
+    bool is_portable = false;
+    if (!is_mac)
+    {
+        int choice = question("Choose version", "Do you want to download the portable version?");
+        is_portable = (choice == 1);
+    }
+    string base = "https://github.com/tsatria03/" + projectname + "/releases/download/V" + new_version + "/";
+    if (is_mac)
+        return base + "ToyMania_mac_portable_password_is_GrateCollector.zip";
+    else if (is_portable)
+        return base + "ToyMania_windows_portable_password_is_GrateCollector.7z";
+    else
+        return base + "ToyMania_windows_installer_password_is_GrateCollector.exe";
+}
+string get_disk_filename(string url)
+{
+    string[] parts = string_split(url, "/", true);
+    if (parts.length()> 0) return parts[parts.length()- 1];
+    return "update_file";
+}
