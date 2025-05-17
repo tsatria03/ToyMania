@@ -1,4 +1,5 @@
 new in 3.2
+Added some more item and player related sounds into the learn game sounds menu.
 Added a money reward system for reaching higher levels in Endless mode. Players now earn money based on their current level. This encourages consistent progression and spending throughout gameplay.
 Updated the readme file with added and modified keyboard shortcuts.
 Added quantity selection and validation prompts to the shop menu to prevent invalid or unaffordable purchases.

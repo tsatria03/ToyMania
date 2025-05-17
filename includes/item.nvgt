@@ -37,6 +37,7 @@ if(absolute(me.x - objs[i].itx) <= 2 and absolute(me.y - objs[i].ity) <= 2 and d
 objpool.destroy_sound(objs[i].objsound);
 if(objs[i].objtype=="ammo_pack") objs[i].getsound=objpool.play_stationary("ammoget"+random(1,2)+".ogg",false);
 if(objs[i].objtype=="potion") objs[i].getsound=objpool.play_stationary("healthget.ogg",false);
+p.play_stationary("playergive.ogg",false);
 give(objs[i].objtype,1);
 speak(objs[i].objtype);
 objs.remove_at(i);

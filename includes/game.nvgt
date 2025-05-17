@@ -857,9 +857,10 @@ mainmenu();
 if (endless and gametimer.elapsed >= last_level_time + (1000 * 60))
 {
     p.play_stationary("playerlevel.ogg", false);
+p.play_stationary("getdollars.ogg",false);
     level++;
 money += level * 20;
-speak("Congradulations! You earned $" + (level * 20) + " for surviving to level " + level + ".");
+speak("Congradulations! You earned $" + (level * 20) + " for surviving to level " + level + ". Grate work!");
     last_level_time = gametimer.elapsed;
     if (level == 2)
     {
