@@ -69,7 +69,7 @@ if (current == "ammo_pack")
     }
     itemslot = p.play_stationary("ammopack.ogg", false);
     give("ammo_pack", -1);
-    double ammo_gained = min(random(20, 40), missing_ammo);
+    double ammo_gained = min(random(5, 10), missing_ammo);
     reserved_ammo += ammo_gained;
     speak("You received " + round(ammo_gained, 0) + " rounds of ammo from this pack.");
     return;
@@ -84,7 +84,9 @@ if (current == "potion")
     itemslot = p.play_stationary("healthdrink.ogg", false);
     itemslot = p.play_stationary("playerheal" + random(1, 3) + ".ogg", false);
     give("potion", -1);
-    health = min(health + maxhealth / 4, maxhealth);
+double heal_percent = random(5, 10);
+double heal_amount = maxhealth * (heal_percent / 100.0);
+health = min(health + heal_amount, maxhealth);
     speak("Healed to " + round(health / maxhealth * 100, 2) + " percent health.");
     return;
 }
