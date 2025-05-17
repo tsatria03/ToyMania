@@ -474,6 +474,7 @@ weapons["Laser Fire"] = "laserfire.ogg";
 weapons["Laser Hit"] = "laserhit.ogg";
 weapons["Machine Gun Draw: used in endless mode"] = "machinegundraw.ogg";
 weapons["Machine Gun Empty: used in endless mode"] = "machinegunempty.ogg";
+weapons["Machine Gun Fail: used in endless mode"] = "machinegunfail.ogg";
 weapons["Machine Gun Fire: used in endless mode"] = "machinegunfire.ogg";
 weapons["Machine Gun Hit: used in endless mode"] = "machinegunhit.ogg";
 weapons["Machine Gun Ping: used in endless mode"] = "machinegunping.ogg";

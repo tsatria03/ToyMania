@@ -57,6 +57,12 @@ if(gards[i].gardtype=="gard2") gards[i].wepsound=gardpool.play_2d(gards[i].gardt
 painslot=p.play_stationary("playerpain.ogg", false);
 health-=gards[i].damage;
 gards[i].firetimer.restart();
+    if (isReloading)
+    {
+        isReloading = false;
+        p.play_stationary(weapontype+"fail.ogg", false);
+        speak("Reload interrupted!");
+    }
 }
 if(gards[i].gardhealth<=0)
 {

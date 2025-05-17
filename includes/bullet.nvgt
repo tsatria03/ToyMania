@@ -47,6 +47,12 @@ if (absolute(me.x - bullets[i].bullx) <= 2 && absolute(me.y - bullets[i].bully) 
 {
 painslot=p.play_stationary("playerpain.ogg", false);
 health-=bullets[i].damage;
+    if (isReloading)
+    {
+        isReloading = false;
+        p.play_stationary(weapontype+"fail.ogg", false);
+        speak("Reload interrupted!");
+    }
 bullets.remove_at(i);
 return;
 }
