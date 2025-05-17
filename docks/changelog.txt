@@ -1,4 +1,5 @@
 new in 3.1
+Fixed a bug where using a health potion could increase the player's health above the maximum threshold, resulting in inaccurate health percentage readings. Your health is now properly capped at 100% when healed.
 Made it so reloading the machine gun transfers ammo from your reserve instead of restoring a fixed amount. If the reserved ammo is low, only the available rounds of ammo are loaded.
 Made it so The Z key now reports both the currently loaded and reserved ammo values for the machine gun.
 Improved the inventory ammo pack logic to respect your current reserved ammo.
@@ -23,7 +24,7 @@ Resolved an issue where the store in level 6 on normal mode had a very high chan
 Separated the preferences menu into 2 different sections. You can now access and save audio and game settings independently of each other.
 Added the ability to adjust the ambience, music, alarm, and heartbeat volumes in the game settings menu outside of the main game.
 Separated the descriptions for all setting toggles into dedicated read-only input boxes next to each toggle. This makes the settings menu more screen reader-friendly and easier to navigate.
-Revampt the intire settings menu. It will now use the native audio form's buttons and checkboxes moving forward.
+Revamped the intire settings menu. It will now use the native audio form buttons and checkboxes moving forward.
 new in 2.9
 Added a sound for when the door is locked in all game modes.
 Added destructible platform effects during store collapse. As the store takes damage in Level 6, glass platforms now dynamically appear on either sides of the map, representing structural damage from the blast sight.
