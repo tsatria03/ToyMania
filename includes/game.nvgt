@@ -574,9 +574,9 @@ p.play_stationary(gmt(me.x,me.y)+"land.ogg", false);
 if (endless)
 {
     spawn_platform(0, 10, 0, 50, "glass");
-    spawn_healzone(0, 10, 0, 50, 0, random(30, 60), random(1500, 3000));
+    spawn_healzone(0, 10, 0, 50, 0, random(30, 60), random(1500, 3000), "fire");
     spawn_platform(40, 50, 0, 50, "glass");
-    spawn_healzone(40, 50, 0, 50, 1, random(30, 60), random(1500, 3000));
+    spawn_healzone(40, 50, 0, 50, 1, random(30, 60), random(1500, 3000), "windchime");
 }
 if(endless) spawn_door(random(25,50), random(25,50), 0, 0, random(100,200), random(30,60));
 while(true)
@@ -601,6 +601,7 @@ bulletpool.update_listener_2d(me.x,me.y);
 carpool.update_listener_2d(me.x,me.y);
 doorpool.update_listener_2d(me.x,me.y);
 gardpool.update_listener_2d(me.x,me.y);
+healpool.update_listener_2d(me.x,me.y);
 keypool.update_listener_2d(me.x,me.y);
 if(endless) objpool.update_listener_2d(me.x,me.y);
 toypool.update_listener_2d(me.x,me.y);

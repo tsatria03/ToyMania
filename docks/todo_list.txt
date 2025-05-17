@@ -1,6 +1,8 @@
+Add a shop in the endless mode to buy stuff from.
 Add minimal soundpack support.
 Add difficulty menu items to the normal game mode.
 
+*Done. Fix healing zones to have different sounds.
 *Done. Add an option in the game settings menu to enable or disable the toggle switch sounds.
 *Done. Add an option in the game settings menu to enable or disable the complete sounds.
 *Done. Add buttons and lists to test ambience, music, alarm, and heartbeat sounds in the audio settings menu.
