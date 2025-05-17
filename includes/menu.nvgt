@@ -152,6 +152,7 @@ m.add_item("Endless. This mode lets you play for as long as you can survive. The
     m.fade_music();
     dlgplay("gamelaunch.ogg");
     level = 1;
+money = 0;
     collected_toys = 0;
     collected_keys = 0;
     killed_gards = 0;
@@ -615,7 +616,8 @@ return;
             resume_game();
             fade_multi_pool();
             level = 1;
-            collected_toys = 0;
+            money = 0;
+collected_toys = 0;
             collected_keys = 0;
             killed_gards = 0;
             destroyed_cars = 0;
@@ -701,6 +703,55 @@ pausemenu();
         }
 }
     }
+void shopmenu()
+{
+    string[] objtypes = {"ammo_pack", "potion"};
+    setupmenu(false);
+    m.add_item("You have " + round(money, 0) + " dollars available to spend");
+    for (uint i = 0; i < objtypes.length(); i++)
+{
+        m.add_item(objtypes[i].replace("_", " ", true), objtypes[i]);
+    }
+    m.add_item("back", "back");
+    m.intro_text = "Shop menu. What would you like to buy?";
+    int mres = m.run();
+    string shopem = m.get_selected_item_id();
+    if (mres == -1 || shopem == "back")
+{
+resume_game();
+        speak("Canceled");
+        return;
+    }
+    if (money <= 0)
+{
+        dlgmessage_return("Error: you don't have enough money to complete this action.");
+resume_game();
+        return;
+    }
+    vd.set_disallowed_chars("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ !@#$%^&*()[]{};:'\"\\|,.<>?/+=`~", false, "This character is not allowed.");
+    string amount_input = vd.input_box("", "How many " + shopem.replace("_", " ", true) + "s would you like to buy?");
+    if (amount_input == "") return;
+    double amount = string_to_number(amount_input);
+    if (amount <= 0)
+{
+resume_game();
+        speak("Invalid quantity.");
+        return;
+    }
+    double total_cost = amount;
+    if (money < total_cost)
+{
+        dlgmessage_return("You don't have enough money to buy that many.");
+resume_game();
+        return;
+    }
+    p.play_stationary("playerbuy" + random(1, 4) + ".ogg", false);
+    give(shopem, int(amount));
+    money -= total_cost;
+resume_game();
+    speak("Purchase completed. You bought " + int(amount) + " " + shopem.replace("_", " ", true) + (amount == 1 ? "." : "s."));
+return;
+}
 void weaponsmenu()
 {
     setupmenu(false);

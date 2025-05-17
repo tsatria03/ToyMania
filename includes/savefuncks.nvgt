@@ -15,8 +15,6 @@ achievements.insert_last(AchievementTracker("Playtime", "Time Traveler", generat
 }
 void readdata()
 {
-string savePath = DIRECTORY_APPDATA + "tsatria03/ToyMania/saves/";
-if (!directory_exists(savePath)) directory_create(savePath);
     sd.load();
 if (st.d.exists("endless"))
 {
@@ -25,6 +23,10 @@ endless = st.read_bool("endless");
     if (sd.d.exists("level"))
 {
         level = sd.read_double("level");
+    }
+    if (sd.d.exists("money"))
+{
+        money = sd.read_double("money");
     }
     if (sd.d.exists("collected_toys"))
 {
@@ -97,6 +99,7 @@ void writedata()
     last_played_time = get_time(true, false);
 st.add("endless", endless);
     sd.add("level", level);
+sd.add("money", money);
     sd.add("collected_toys", collected_toys);
     sd.add("collected_keys", collected_keys);
     sd.add("killed_gards", killed_gards);

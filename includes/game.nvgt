@@ -24,6 +24,7 @@ boss_timer.resume();
 gametimer.resume();
     fade_multi_pool();
     level = 1;
+money = 0;
     collected_toys = 0;
     collected_keys = 0;
     killed_gards = 0;
@@ -186,6 +187,11 @@ ambpool.update_sound_start_values(toyambslot,0,toyambvolume,toyambpitch);
 speak("source "+toyambvolume);
 writepreffs();
 }
+if (key_pressed(KEY_S) and doormove == false and endless)
+{
+pause_game();
+    shopmenu();
+}
 if (key_pressed(KEY_W) and doormove == false)
 {
 boss_timer.pause();
@@ -237,6 +243,10 @@ if (key_pressed(KEY_D) and doormove == false)
 if(key_pressed(KEY_L) and doormove==false)
 {
 speak("You're currently on level " + level + " of the " + (endless ? "Endless" : "Normal") + " game mode.");
+}
+if(key_pressed(KEY_M) and doormove==false and endless)
+{
+speak("You currently have "+money+" dollars available to spend.");
 }
 if(key_pressed(KEY_C) and doormove==false)
 {
@@ -803,6 +813,7 @@ if (res != -1 && choice == "yes")
 {
     dlgplay("gamelaunch.ogg");
     level = 1;
+money = 0;
     collected_toys = 0;
     collected_keys = 0;
     killed_gards = 0;
