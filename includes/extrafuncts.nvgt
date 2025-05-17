@@ -229,11 +229,21 @@ weaponslot = p.play_stationary(weapontype + "draw.ogg", false);
 }
 void check_weapon_reload()
 {
-    if (isReloading and reloadTimer.elapsed >= reloadDuration)
+    if (isReloading && reloadTimer.elapsed >= reloadDuration)
     {
-        ammo = 100;
+        double needed_ammo = maxammo - ammo;
+        double ammo_to_load = min(needed_ammo, reserved_ammo);
+        if (ammo_to_load > 0)
+        {
+            ammo += ammo_to_load;
+            reserved_ammo -= ammo_to_load;
+            speak("Reload complete. " + round(ammo_to_load, 0) + " rounds loaded.");
+        }
+        else
+        {
+            speak("Reload failed. No reserve ammo left.");
+        }
         isReloading = false;
-        speak("Reload complete.");
     }
 }
 void reload_weapon()
@@ -251,12 +261,16 @@ void reload_weapon()
     {
         speak("This weapon is already loaded with ammo.");
     }
+    else if (reserved_ammo <= 0)
+    {
+        speak("No reserved ammo available.");
+    }
     else
     {
         isReloading = true;
         reloadTimer.restart();
-        weaponslot = p.play_stationary("machinegunreload"+random(1,2)+".ogg", false);
-        speak("Reloading...");
+        weaponslot = p.play_stationary("machinegunreload" + random(1, 2) + ".ogg", false);
+        speak("Reloading.");
     }
 }
 void apply_pitch_settings()

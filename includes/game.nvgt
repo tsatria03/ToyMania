@@ -197,10 +197,16 @@ temp.play_stationary("pause.ogg",false);
 pause_game();
 pausemenu();
 }
-if(key_pressed(KEY_Z) and doormove==false and endless)
+if (key_pressed(KEY_Z) and doormove == false and endless)
 {
-if(weapontype=="machinegun") speak("You have "+ammo+"rounds of ammo available in this weapon.");
-if(weapontype!="machinegun") speak("This weapon does not take any ammo.");
+    if (weapontype == "machinegun")
+    {
+        speak("You have "+round(ammo,0) + " out of " + round(maxammo,0) + " rounds of ammo loaded, and " + round(reserved_ammo,0) + " rounds of ammo in reserve.");
+    }
+    else
+    {
+        speak("This weapon does not take any ammo.");
+    }
 }
 if (key_pressed(KEY_R) and doormove == false and endless)
 {
@@ -565,7 +571,6 @@ toytrackslot=muspool.play_stationary_extended(mustype+".ogg",true,0,0,toymusvolu
 p.play_stationary(gmt(me.x,me.y)+"land.ogg", false);
 if(endless) spawn_door(random(25,50), random(25,50), 0, 0, random(100,200), random(30,60));
 spawn_platform(0, maxx, 0, maxy, "marble");
-collected_keys=50;
 gametimer.force(1000*300);
 while(true)
 {
@@ -595,9 +600,21 @@ if(ammo<=0)
 {
 ammo=0;
 }
+if(ammo>=maxammo)
+{
+ammo=maxammo;
+}
+if(health<=0)
+{
+health=0;
+}
 if(health>=maxhealth)
 {
 health=maxhealth;
+}
+if(storehealth<=0)
+{
+storehealth=0;
 }
 if(storehealth>=storemaxhealth)
 {

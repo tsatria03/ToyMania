@@ -1,4 +1,10 @@
+new in 3.1
+Made it so reloading the machine gun transfers ammo from your reserve instead of restoring a fixed amount. If the reserved ammo is low, only the available rounds of ammo are loaded.
+Made it so The Z key now reports both the currently loaded and reserved ammo values for the machine gun.
+Improved the inventory ammo pack logic to respect your current reserved ammo.
+Implemented separate ammo, maxammo, and reserved_ammo values for machine guns to support more realistic reloads.
 new in 3.0
+Fixed a bug where using an ammo pack in your inventory would incorrectly set your total ammo to the pack's value instead of adding to it. The item now properly increases your current ammo by a random amount between 20 and 40, and reports the correct ammo gained from the opened pack.
 Added the ability to collect and use ammo packs in endless mode, along with health potions.
 Added some more item related sounds into the learn game sounds menu.
 Replaced the machine gun reloading sounds with better ones.
@@ -6,6 +12,7 @@ Introduced a new realistic weapon reloading system. Reloading a weapon will now 
 Added options in the game settings menu to enable or disable the complete and toggle switch sounds.
 Improved the sound device selection menu by sorting the available devices alphabetically and labeling them as “active” or “inactive” based on the current selection. This makes it easier for users to help them identify the correct output device.
 Added speech and sound feedback to the toggleable sound test switches found in the audio settings menu.
+Fixed an issue where music previews would play automatically when entering the sound settings menu.
 Made it so all preview sounds found in the audio settings menu properly get destroyed upon exiting the menu, or going into various other menus.
 Improved the music preview behavior. The selected track now only plays when toggled on by the user, and updates in real-time when switching tracks.
 Made it so preview sound buttons in the audio settings menu now correctly toggle their sounds on and off when pressed repeatedly. Previously, sounds would continue playing with no way to stop them from the same button.
@@ -17,7 +24,6 @@ Separated the preferences menu into 2 different sections. You can now access and
 Added the ability to adjust the ambience, music, alarm, and heartbeat volumes in the game settings menu outside of the main game.
 Separated the descriptions for all setting toggles into dedicated read-only input boxes next to each toggle. This makes the settings menu more screen reader-friendly and easier to navigate.
 Revampt the intire settings menu. It will now use the native audio form's buttons and checkboxes moving forward.
-Added automatic creation of save and stats directories at game startup to prevent missing folder issues. A new settings menu option to directly open the save data location in File Explorer for windows has also been added as well.
 new in 2.9
 Added a sound for when the door is locked in all game modes.
 Added destructible platform effects during store collapse. As the store takes damage in Level 6, glass platforms now dynamically appear on either sides of the map, representing structural damage from the blast sight.
@@ -243,7 +249,7 @@ Decreased the amount of keys you need to collect to unlock the door. This value 
 Made it so the ammo of the machine gun resets upon redrawing it.
 Fixed a bug where keys and toys were being broken at the start of a new game despite the clock not allowing them to do it.
 Added a door that will randomly spawn on the map while you're on the boss area. You can't open this door unless you've collected all of the keys that are required to unlock it.
-Fixed a bug where you were still able to hit bosses, cars, and guards while your machinegun was empty.
+Fixed a bug where you were still able to hit bosses, cars, and guards while your machine gun was empty.
 Added 2 new weapons. The laser, and the machine gun.
 Changed the key to run from control to alt.
 Made it so keys get destroyed if you don't collect them on time.
