@@ -2,7 +2,7 @@ new in 3.1
 Upgraded the maximum reserved ammo that the machine gun can reload at a time from 20 to 50.
 Added a ping sound to the machine gun weapon to signify that it has been reloaded successfully.
 Fixed a bug where using a health potion could increase the player's health above the maximum threshold, resulting in inaccurate health percentage readings. Your health is now properly capped at 100% when you're fully healed.
-Made it so reloading the machine gun transfers ammo from your reserve instead of restoring a fixed amount. If the reserved ammo is low, only the available rounds of ammo are loaded.
+Made it so reloading the machine gun transfers ammo from your reserved ammo instead of restoring a fixed amount. If the reserved ammo is low, only the available rounds of ammo are loaded.
 Made it so The Z key now reports both the currently loaded and reserved ammo values for the machine gun.
 Improved the inventory ammo pack logic to respect your current reserved ammo.
 Implemented separate ammo, maxammo, and reserved_ammo values for machine guns to support more realistic reloads.

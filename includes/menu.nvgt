@@ -224,6 +224,7 @@ if(confirm=="yes")
 {
 if(file_exists(DIRECTORY_APPDATA+"tsatria03/ToyMania/saves/game.tmg")) file_delete(DIRECTORY_APPDATA+"tsatria03/ToyMania/saves/game.tmg");
 resetgame();
+if(completesound==true) dlgplay("complete.ogg", false);
 dlgmessage_return("Game progresses cleared.");
 gamemenu();
 }
@@ -826,6 +827,7 @@ m.intro_text = "Choose which game achievements to clear. This will clear your ga
     }
     writedata();
 string modeLabel = (achmode == "session") ? "session" : (achmode == "lifetime") ? "lifetime" : "session and lifetime";
+if(completesound==true) dlgplay("complete.ogg", false);
 dlgmessage_return("Your " + modeLabel + " achievements have been cleared.");
     achesmenu();
 }
@@ -977,6 +979,7 @@ statsmenu();
         moved_steps = 0;
 session_playtime = 0;
 writedata();
+if(completesound==true) dlgplay("complete.ogg", false);
         dlgmessage_return("Your session stats have been cleared.");
     }
     if (gsm == "lifetime")
@@ -988,6 +991,7 @@ writedata();
         total_moved_steps = 0;
         total_playtime = 0;
         writedata();
+if(completesound==true) dlgplay("complete.ogg", false);
         dlgmessage_return("Your lifetime stats have been cleared.");
     }
     if (gsm == "both")
@@ -1004,6 +1008,7 @@ writedata();
         total_moved_steps = 0;
         total_playtime = 0;
         writedata();
+if(completesound==true) dlgplay("complete.ogg", false);
         dlgmessage_return("Your session and lifetime stats have been cleared.");
     }
     statsmenu();
