@@ -705,18 +705,27 @@ pausemenu();
     }
 void shopmenu()
 {
+    dictionary prices;
+    prices.set("ammo_pack", 5.0);
+    prices.set("potion", 10.0);
     string[] objtypes = {"ammo_pack", "potion"};
     setupmenu(false);
-    m.add_item("You have " + round(money, 0) + " dollars available to spend");
-    for (uint i = 0; i < objtypes.length(); i++)
+m.add_item("You have " + round(money, 0) + " dollars available to spend", "shopinfo");
+for (uint i = 0; i < objtypes.length(); i++)
 {
-        m.add_item(objtypes[i].replace("_", " ", true), objtypes[i]);
-    }
+    string itemID = objtypes[i];
+    string itemName = itemID.replace("_", " ", true);
+    int ownedCount = max(0, item_exists(itemID));
+    double itemPrice = 1.0;
+    if (prices.exists(itemID)) prices.get(itemID, itemPrice);
+    string label = itemName + ", costs " + round(itemPrice, 0) + " dollar" + (itemPrice != 1 ? "s" : "") + ". You currently have " + ownedCount + " of these in your inventory.";
+    m.add_item(label, itemID);
+}
     m.add_item("back", "back");
     m.intro_text = "Shop menu. What would you like to buy?";
     int mres = m.run();
     string shopem = m.get_selected_item_id();
-    if (mres == -1 || shopem == "back")
+if (mres == -1 || shopem == "back" || shopem == "shopinfo")
 {
 resume_game();
         speak("Canceled");
@@ -738,7 +747,9 @@ resume_game();
         speak("Invalid quantity.");
         return;
     }
-    double total_cost = amount;
+double price = 1.0;
+if (prices.exists(shopem)) prices.get(shopem, price);
+double total_cost = amount * price;
     if (money < total_cost)
 {
         dlgmessage_return("You don't have enough money to buy that many.");
