@@ -237,11 +237,11 @@ void check_weapon_reload()
         {
             ammo += ammo_to_load;
             reserved_ammo -= ammo_to_load;
-            speak("Reload complete. " + round(ammo_to_load, 0) + " rounds loaded.");
+            speak("Reload complete. " + round(ammo_to_load, 0) + " rounds of ammo loaded.");
         }
         else
         {
-            speak("Reload failed. No reserve ammo left.");
+            speak("Reload failed. This weapon has No more reserved ammo left.");
         }
         isReloading = false;
     }
@@ -263,13 +263,14 @@ void reload_weapon()
     }
     else if (reserved_ammo <= 0)
     {
-        speak("No reserved ammo available.");
+if(ammo<=0 and weapontype=="machinegun") weaponslot=p.play_stationary(weapontype+"empty.ogg", false);
+        speak("This weapon has no more reserved ammo to reload.");
     }
     else
     {
         isReloading = true;
         reloadTimer.restart();
-        weaponslot = p.play_stationary("machinegunreload" + random(1, 2) + ".ogg", false);
+        weaponslot = p.play_stationary("machinegunreload.ogg", false);
         speak("Reloading.");
     }
 }

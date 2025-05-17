@@ -475,7 +475,7 @@ weapons["Machine Gun Draw: used in endless mode"] = "machinegundraw.ogg";
 weapons["Machine Gun Empty: used in endless mode"] = "machinegunempty.ogg";
 weapons["Machine Gun Fire: used in endless mode"] = "machinegunfire.ogg";
 weapons["Machine Gun Hit: used in endless mode"] = "machinegunhit.ogg";
-weapons["Machine Gun Reload: used in endless mode" + vdesc] = array<string> = {"machinegunreload1.ogg", "machinegunreload2.ogg"};
+weapons["Machine Gun Reload: used in endless mode"] = "machinegunreload.ogg";
 weapons["Machine Gun Shell: used in endless mode" + vdesc] = array<string> = {"machinegunshell1.ogg", "machinegunshell2.ogg", "machinegunshell3.ogg", "machinegunshell4.ogg"};
 learnCategories["Weapons"] = weapons;
 string[] sortedKeys = learnCategories.get_keys();
