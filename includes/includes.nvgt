@@ -15,6 +15,7 @@
 #include"game.nvgt"
 #include"gametime.nvgt"
 #include"gard.nvgt"
+#include"healzone.nvgt"
 #include"inventory.nvgt"
 #include"item.nvgt"
 #include"key.nvgt"

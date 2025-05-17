@@ -1,4 +1,5 @@
 new in 3.1
+Added post-destruction zones to Endless Mode. Two glass platforms now appear at the start of Endless Mode as remnants of the destroyed store from Normal Mode. One zone damages the player, while the other one gradually heals the player over time.
 Fixed a bug where ammo packs could give negative ammo when the player's ammo reserve was near or above the maximum cap. Ammo packs now correctly calculate the missing reserved ammo, and will only add the valid amount, preventing overfilling or negative ammo gained messages.
 Made it so taking damage during a reload cancels the reload attempt. If the player is hit by an enemy while reloading their machine gun, the reload of the weapon is now interrupted with an audible sound and speech feedback.
 Upgraded the maximum reserved ammo that the machine gun can reload at a time from 20 to 50.

@@ -39,6 +39,7 @@ gametimer.resume();
     }
 if(endless) clear_inv();
     if (!endless) destroy_all_bosses();
+if (endless) destroy_all_healzones();
 destroy_all_bullets();
     destroy_all_cars();
     destroy_all_gards();
@@ -570,6 +571,13 @@ mustype="gamemus";
 toytrackslot=muspool.play_stationary_extended(mustype+".ogg",true,0,0,toymusvolume,toymuspitch,false);
 spawn_platform(0, maxx, 0, maxy, "marble");
 p.play_stationary(gmt(me.x,me.y)+"land.ogg", false);
+if (endless)
+{
+    spawn_platform(0, 10, 0, 50, "glass");
+    spawn_healzone(0, 10, 0, 50, 0, random(30, 60), random(1500, 3000));
+    spawn_platform(40, 50, 0, 50, "glass");
+    spawn_healzone(40, 50, 0, 50, 1, random(30, 60), random(1500, 3000));
+}
 if(endless) spawn_door(random(25,50), random(25,50), 0, 0, random(100,200), random(30,60));
 while(true)
 {
@@ -582,6 +590,7 @@ check_weapon_reload();
 doorcheck();
 doorloop();
 gardloop();
+healzoneloop();
 keyloop();
 if(endless) objloop();
 toyloop();
@@ -761,6 +770,7 @@ temp.play_stationary("heartstop.ogg", false);
     toyspawn = false;
 if(endless) clear_inv();
     if(!endless) destroy_all_bosses();
+if (endless) destroy_all_healzones();
 destroy_all_bullets();
     destroy_all_cars();
     destroy_all_doors();
@@ -809,6 +819,7 @@ maxhealth = endless ? 10000 : 1000;
     storehealth = endless ? 10000 : 1000;
 storemaxhealth = endless ? 10000 : 1000;
 if(endless) clear_inv();
+if (endless) destroy_all_healzones();
     me.x = 25;
     me.y = 25;
 toynum=20;
@@ -919,6 +930,7 @@ temp.play_stationary("heartstop.ogg", false);
     toyspawn = false;
 if(endless) clear_inv();
     if(!endless) destroy_all_bosses();
+if (endless) destroy_all_healzones();
 destroy_all_bullets();
     destroy_all_cars();
     destroy_all_doors();

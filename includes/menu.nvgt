@@ -169,6 +169,7 @@ maxhealth = endless ? 10000 : 1000;
     storehealth = endless ? 10000 : 1000;
 storemaxhealth = endless ? 10000 : 1000;
 if(endless) clear_inv();
+if (endless) destroy_all_healzones();
     me.x = 25;
     me.y = 25;
 toynum=20;
@@ -627,6 +628,7 @@ return;
             }
             if (endless) clear_inv();
             if (!endless) destroy_all_bosses();
+if (endless) destroy_all_healzones();
 destroy_all_bullets();
             destroy_all_cars();
             destroy_all_gards();
