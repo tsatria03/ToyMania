@@ -221,6 +221,10 @@ if (st.d.exists("showset_desc"))
 {
 showset_desc = st.read_bool("showset_desc");
 }
+if (st.d.exists("auto_check_updates"))
+{
+auto_check_updates = st.read_bool("auto_check_updates");
+}
 if(st.d.exists("soundcard"))
 {
 soundcard=st.read_string("soundcard");
@@ -263,5 +267,6 @@ st.add("playlevels", playlevels);
 st.add("completesound", completesound);
 st.add("togglesound", togglesound);
 st.add("showset_desc", showset_desc);
+st.add("auto_check_updates", auto_check_updates);
 st.save();
 }

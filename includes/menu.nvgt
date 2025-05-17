@@ -63,7 +63,7 @@ if (main == "chup")
 {
 speak("checking");
 m.fade_music();
-check_for_updates(version, "ToyMania");
+check_for_updates(current_version, "ToyMania");
 }
 if (main == "rt")
 {
@@ -1237,6 +1237,7 @@ void gamsetsmenu()
 {
     form.reset();
     form.create_window("Game settings", false);
+int autoUpdateToggle = form.create_checkbox("Automatically check for game updates on startup", auto_check_updates);
 int glb = form.create_checkbox("Enable behind pitch decrease.", behind_pitch);
 int glb2 = -1;
 if (showset_desc) glb2 = form.create_input_box("Behind pitch decrease: description", "This setting controls whether the pitch of sounds decrease when you are behind something.", "", 0, true, true);
@@ -1292,12 +1293,13 @@ int showdesc = form.create_checkbox("Enable showing toggleable item descriptions
     int rest = form.create_button("&reset settings");
     int sv = form.create_button("&save settings", true);
     int cancel = form.create_button("&cancel");
-form.focus(glb);
+form.focus(autoUpdateToggle);
 spool.play_stationary("menuopen.ogg",false);
     while (true)
     {
         wait(5);
         form.monitor();
+auto_check_updates=form.is_checked(autoUpdateToggle);
             behind_pitch = form.is_checked(glb);
             hrtf = form.is_checked(glh);
             sound_global_hrtf = hrtf;

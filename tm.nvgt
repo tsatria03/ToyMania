@@ -30,6 +30,7 @@ bool completesound=true;
 bool togglesound=true;
 bool showset_desc=true;
 bool isReloading = false;
+bool auto_check_updates = true;
 int reloadDuration = 2500;
 timer reloadTimer;
 double alarmvolume=0, alarmpitch=100, heartvolume=0, heartpitch=100, toyambvolume=0, toyambpitch=100, toymusvolume=0, toymuspitch=100;
@@ -60,7 +61,8 @@ string mustype="gamemus";
 string current_weapon;
 string weapontype="bat";
 string soundcard="Default";
-string version="3.1";
+string current_version="3.2";
+string title_version="3.2";
 timer boss_timer, bossespawntimer, carspawntimer, firetimer, firetimer2, gametimer, gardspawntimer, objspawntimer, keyspawntimer, movetimer, runtimer, toyspawntimer, usetimer, walktimer;
 file achfile, dockfile, gamfile, statfile;
 instance gamstence("tm");
@@ -123,7 +125,7 @@ if (@timeelapsed.handle == null)
 {
     timeelapsed.set_timer(gametimer);
 }
-show_window("ToyMania, version "+version);
+show_window("ToyMania, version "+title_version);
 if(gamstence.is_already_running)
 {
 alert("error", "You can only have one instence of this game running!");
@@ -131,6 +133,13 @@ exit();
 }
 else
 {
+    if (auto_check_updates)
+    {
+wait(1000);
+speak("Checking for updates...");
+        wait(1000);
+        check_for_updates(current_version, "ToyMania");
+    }
 mainmenu();
 }
 }
