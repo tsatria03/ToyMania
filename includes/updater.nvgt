@@ -16,11 +16,11 @@ mainmenu();
     }
     if (!is_newer_version(old_version, new_version))
 {
-        alert("error", "You already have the latest version of the game.");
+        alert("No updates found", "You already have the latest version of the game.");
 mainmenu();
         return false;
     }
-    int response = question("Update Available", "A new version of " + projectname + " is available. Your version: " + old_version + ". New version: " + new_version + ". Would you like to download it now?");
+    int response = question("Update available", "A new version of " + projectname + " is available. Your version: " + old_version + ". New version: " + new_version + ". Would you like to download it now?");
     if (response == 1)
 {
 string url = get_download_url(projectname, new_version);
@@ -34,12 +34,12 @@ mainmenu();
 else if (result == "canceled" && file_exists(filename))
 {
             file_delete(filename);
-            alert("error", "The update was unexpectedly canceled.");
+            alert("Update canceled", "The update was unexpectedly canceled.");
 mainmenu();
         }
 else
 {
-            alert("Error", "Something went wrong during the update. Please try again later.");
+            alert("Update failed", "Something went wrong during the update. Please try again later.");
 mainmenu();
 }
     }
@@ -48,19 +48,25 @@ mainmenu();
 string get_download_url(string projectname, string new_version)
 {
     bool is_mac = system_is_unix;
-    bool is_portable = false;
-    if (!is_mac)
-    {
-        int choice = question("Choose version", "Do you want to download the portable version?");
-        is_portable = (choice == 1);
-    }
     string base = "https://github.com/tsatria03/" + projectname + "/releases/download/V" + new_version + "/";
     if (is_mac)
+    {
         return base + "ToyMania_mac_portable_password_is_GrateCollector.zip";
-    else if (is_portable)
-        return base + "ToyMania_windows_portable_password_is_GrateCollector.7z";
+    }
     else
-        return base + "ToyMania_windows_installer_password_is_GrateCollector.exe";
+    {
+        setupmenu(false);
+        m.add_item("Windows Installer", "installer");
+        m.add_item("Windows Portable", "portable");
+        m.intro_text = "Which version of the game would you like to download?";
+        int mres = m.run();
+        string version_choice = m.get_selected_item_id();
+        if (mres == -1 || version_choice == "") return "";
+        if (version_choice == "portable")
+            return base + "ToyMania_windows_portable_password_is_GrateCollector.7z";
+        else
+            return base + "ToyMania_windows_installer_password_is_GrateCollector.exe";
+    }
 }
 string get_disk_filename(string url)
 {
