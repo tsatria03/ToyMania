@@ -50,9 +50,6 @@ int runtime=100;
 int usetime=100;
 int walktime=200;
 int lastMusicIndex = -1;
-int last_update_check_time = 0;
-int update_check_interval = 1000 * 60 * 60 * 3;
-int update_interval_microseconds = 3 * HOURS;
 int64 session_playtime = 0;
 int64 total_playtime = 0;
 string savePath = DIRECTORY_APPDATA + "tsatria03/ToyMania/saves/";
@@ -137,36 +134,29 @@ exit();
 }
 else
 {
-if (auto_check_updates)
-{
-    if (last_update_check_timestamp.elapsed >= update_check_interval)
+    if (auto_check_updates)
     {
         wait(1000);
         speak("Checking for updates...");
-        wait(1000); // Let it speak before proceeding
-        if (check_for_updates(current_version, "ToyMania"))
-        {
-            last_update_check_timestamp.update();
-writepreffs();
-        }
+        wait(1000);
+        check_for_updates(current_version, "ToyMania");
     }
-}
-mainmenu();
+    mainmenu();
 }
 }
 void pause_game()
 {
-paused=true;
-pause_pools();
 boss_timer.pause();
 gametimer.pause();
+paused=true;
+pause_pools();
 }
 void resume_game()
 {
-paused=false;
-resume_pools();
 boss_timer.resume();
 gametimer.resume();
+paused=false;
+resume_pools();
 }
 void resetgame()
 {
@@ -223,6 +213,4 @@ playcounts=true;
 playlevels=true;
 completesound=true;
 togglesound=true;
-last_update_check_time = 0;
-update_check_interval = 1000 * 60 * 60 * 3;
 }

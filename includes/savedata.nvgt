@@ -104,7 +104,7 @@ d.set(name,value);
 //function to read a number.
 int read_int64(string name)
 {
-int tmp;
+int64 tmp;
 d.get(name,tmp);
 return tmp;
 }

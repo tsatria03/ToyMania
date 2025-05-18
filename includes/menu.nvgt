@@ -233,6 +233,7 @@ if(confirm=="yes")
 {
 if(file_exists(DIRECTORY_APPDATA+"tsatria03/ToyMania/saves/game.tmg")) file_delete(DIRECTORY_APPDATA+"tsatria03/ToyMania/saves/game.tmg");
 resetgame();
+writedata();
 if(completesound==true) dlgplay("complete.ogg", false);
 dlgmessage_return("Game progresses cleared.");
 gamemenu();
@@ -1334,6 +1335,7 @@ if(confirm=="yes")
 {
 if(file_exists(DIRECTORY_APPDATA+"tsatria03/ToyMania/saves/settings.tmg")) file_delete(DIRECTORY_APPDATA+"tsatria03/ToyMania/saves/settings.tmg");
 resetpreffs();
+writepreffs();
 if(completesound==true) dlgplay("complete.ogg", false);
 dlgmessage_return("Settings reset.");
 mainmenu();
