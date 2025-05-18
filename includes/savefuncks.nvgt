@@ -152,6 +152,14 @@ if (st.d.exists("toymusvolume"))
 {
 toymusvolume = st.read_double("toymusvolume");
 }
+if (st.d.exists("auto_check_updates"))
+{
+auto_check_updates = st.read_bool("auto_check_updates");
+}
+if (st.d.exists("showset_desc"))
+{
+showset_desc = st.read_bool("showset_desc");
+}
 if (st.d.exists("behind_pitch"))
 {
 behind_pitch = st.read_bool("behind_pitch");
@@ -217,13 +225,13 @@ if (st.d.exists("togglesound"))
 {
 togglesound = st.read_bool("togglesound");
 }
-if (st.d.exists("showset_desc"))
+if (st.d.exists("last_update_check_time"))
 {
-showset_desc = st.read_bool("showset_desc");
+last_update_check_time = st.read_int("last_update_check_time");
 }
-if (st.d.exists("auto_check_updates"))
+if (st.d.exists("update_check_interval"))
 {
-auto_check_updates = st.read_bool("auto_check_updates");
+update_check_interval = st.read_int("update_check_interval");
 }
 if(st.d.exists("soundcard"))
 {
@@ -250,6 +258,8 @@ st.add("alarmvolume", alarmvolume);
 st.add("heartvolume", heartvolume);
 st.add("toyambvolume", toyambvolume);
 st.add("toymusvolume", toymusvolume);
+st.add("auto_check_updates", auto_check_updates);
+st.add("showset_desc", showset_desc);
 st.add("behind_pitch", behind_pitch);
 st.add("hrtf", hrtf);
 st.add("play_ach_scores", play_ach_scores);
@@ -266,7 +276,7 @@ st.add("playcounts", playcounts);
 st.add("playlevels", playlevels);
 st.add("completesound", completesound);
 st.add("togglesound", togglesound);
-st.add("showset_desc", showset_desc);
-st.add("auto_check_updates", auto_check_updates);
+st.add("last_update_check_time", last_update_check_time);
+st.add("update_check_interval", update_check_interval);
 st.save();
 }

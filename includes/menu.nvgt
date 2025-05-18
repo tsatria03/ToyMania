@@ -1237,7 +1237,8 @@ void gamsetsmenu()
 {
     form.reset();
     form.create_window("Game settings", false);
-int autoUpdateToggle = form.create_checkbox("Automatically check for game updates on startup", auto_check_updates);
+int autoUpdateToggle = form.create_checkbox("Check for game updates at startup", auto_check_updates);
+int showdesc = form.create_checkbox("Show toggleable item descriptions.", showset_desc);
 int glb = form.create_checkbox("Enable behind pitch decrease.", behind_pitch);
 int glb2 = -1;
 if (showset_desc) glb2 = form.create_input_box("Behind pitch decrease: description", "This setting controls whether the pitch of sounds decrease when you are behind something.", "", 0, true, true);
@@ -1286,7 +1287,6 @@ if (showset_desc) compsound2 = form.create_input_box("Complete SFX: description"
 int togsound = form.create_checkbox("Enable toggle switch sounds.", togglesound);
 int togsound2 = -1;
 if (showset_desc) togsound2 = form.create_input_box("Toggle switch SFX: description", "This setting controls the sounds played when you enable or disable sertain settings found in the prefferences menu.", "", 0, true, true);
-int showdesc = form.create_checkbox("Enable showing toggleable item descriptions.", showset_desc);
     int sdloc = -1;
     if (system_is_windows)
         sdloc = form.create_button("&open save data location");

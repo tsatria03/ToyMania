@@ -1,10 +1,10 @@
 new in 3.2
+Made it so the game automatically checks for new updates every 3 hours to avoid repetitive manual checks.
 Added support for automatic update checking on game launch. If the option is enabled in the game settings menu, the game will now check for the latest version online and prompt the user to update it if it's available.
 Implemented an automatic version checker that compares your local game version against the latest version available online.
 Introduced a built-in update downloader that retrieves the correct update based on your platform (Windows or Mac) and package type (installer or portable), with progress tracking, error handling, and cleanup of incomplete files.
 Added a “Check for Game Updates” option to the main menu, allowing players to easily check for and download the latest version of the game.
 Made it so using a potion now heals a random amount between 5 and 10 percent of your maximum health.
-Added some more item and player related sounds into the learn game sounds menu.
 Added a money reward system for reaching higher levels in Endless mode. Players now earn money based on their current level. This encourages consistent progression and spending throughout gameplay.
 Added quantity selection and validation prompts to the shop menu to prevent invalid or unaffordable purchases.
 Added a shop menu to the endless mode that allows you to buy various items from the store with the currency the game provides. This menu is accessed by pressing the letter S. You can also check how much money you currently have by pressing the letter M.

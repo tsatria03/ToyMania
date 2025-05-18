@@ -49,8 +49,10 @@ int firetime=50, firetime2=100;
 int runtime=100;
 int usetime=100;
 int walktime=200;
-int64 session_playtime = 0;
 int lastMusicIndex = -1;
+int last_update_check_time = 0;
+int update_check_interval = 1000 * 60 * 60 * 3;
+int64 session_playtime = 0;
 int64 total_playtime = 0;
 string savePath = DIRECTORY_APPDATA + "tsatria03/ToyMania/saves/";
 string statsPath = DIRECTORY_APPDATA + "tsatria03/ToyMania/stats/";
@@ -133,13 +135,21 @@ exit();
 }
 else
 {
-    if (auto_check_updates)
+if (auto_check_updates)
+{
+    int current_time= gametimer.elapsed;
+    if (current_time - last_update_check_time >= update_check_interval)
     {
 wait(1000);
-speak("Checking for updates...");
-        wait(1000);
-        check_for_updates(current_version, "ToyMania");
+            speak("Checking for updates...");
+            wait(1000); // Let it speak before proceeding
+        if (check_for_updates(current_version, "ToyMania"))
+        {
+            last_update_check_time = current_time;
+            writepreffs();
+        }
     }
+}
 mainmenu();
 }
 }
@@ -194,6 +204,8 @@ alarmvolume=0;
 heartvolume=0;
 toyambvolume=0;
 toymusvolume=0;
+auto_check_updates = true;
+showset_desc=true;
 behind_pitch=true;
 hrtf=true;
 play_ach_scores=true;
@@ -210,5 +222,6 @@ playcounts=true;
 playlevels=true;
 completesound=true;
 togglesound=true;
-showset_desc=true;
+last_update_check_time = 0;
+update_check_interval = 1000 * 60 * 60 * 3;
 }
