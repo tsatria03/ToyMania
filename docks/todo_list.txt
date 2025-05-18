@@ -1,5 +1,6 @@
-Add minimal soundpack support.
+Add tts configuration settings.
 Add difficulty menu items to the normal game mode.
+Add minimal soundpack support.
 
 *Done. Add a shop in the endless mode to buy stuff from.
 *Done. Fix healing zones to have different sounds.
