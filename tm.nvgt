@@ -61,8 +61,7 @@ string mustype="gamemus";
 string current_weapon;
 string weapontype="bat";
 string soundcard="Default";
-string current_version="3.3";
-string title_version="3.3";
+string current_version="2.2";
 timer boss_timer, bossespawntimer, carspawntimer, firetimer, firetimer2, gametimer, gardspawntimer, objspawntimer, keyspawntimer, movetimer, runtimer, toyspawntimer, usetimer, walktimer;
 file achfile, dockfile, gamfile, statfile;
 instance gamstence("tm");
@@ -126,7 +125,7 @@ if (@timeelapsed.handle == null)
 {
     timeelapsed.set_timer(gametimer);
 }
-show_window("ToyMania, version "+title_version);
+show_window("ToyMania, version "+current_version);
 if(gamstence.is_already_running)
 {
 alert("error", "You can only have one instence of this game running!");

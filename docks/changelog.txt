@@ -1,4 +1,5 @@
 new in 3.3
+Addressed a critical issue with the game updater where downloaded update files appeared corrupted or were only a few bytes in size. This was caused by an incorrect GitHub release tag format in the update URL. The updater now automatically appends a trailing zero to version numbers to match GitHub's expected release tag structure, ensuring downloads are valid and uncorrupted.
 Improved the auto updater. From now on, it will check for updates in the backround at startup, instead of always telling the user that no updates are found upon launching the game every time.
 Moved the music tracks list over to the botum of the test toggle switches found in the sound settings menu.
 new in 3.2
