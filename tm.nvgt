@@ -62,7 +62,7 @@ string current_weapon;
 string weapontype="bat";
 string soundcard="Default";
 string current_version="3.2";
-string title_version="3.2";
+string title_version="3.3";
 timer boss_timer, bossespawntimer, carspawntimer, firetimer, firetimer2, gametimer, gardspawntimer, objspawntimer, keyspawntimer, movetimer, runtimer, toyspawntimer, usetimer, walktimer;
 file achfile, dockfile, gamfile, statfile;
 instance gamstence("tm");

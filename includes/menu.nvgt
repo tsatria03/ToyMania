@@ -1381,13 +1381,13 @@ int gameAmbienceVolumeSlider = form.create_slider("game ambience volume: adjusta
 int gameMusicVolumeSlider = form.create_slider("game music volume: adjustable", (toymusvolume + 50) * 2, 0, 100, "percent", 1);
 int gameAlarmVolumeSlider = form.create_slider("game alarm volume: adjustable", (alarmvolume + 50) * 2, 0, 100, "percent", 1);
 int gameHeartbeatVolumeSlider = form.create_slider("game heartbeat volume: adjustable", (heartvolume + 50) * 2, 0, 100, "percent", 1);
-    int musList = form.create_list("Music Tracks: menu", 2);
-form.add_list_item(musList, "BossMusic: normal mode", "bossmus");
-form.add_list_item(musList, "Game Music: normal and endless mode", "gamemus");
     int ambTest = form.create_button("Toggle ambience sound test: switch");
     int musTest = form.create_button("Toggle music sound test: switch");
     int alarmTest = form.create_button("Toggle alarm sound test: switch");
     int heartbeatTest = form.create_button("Toggle heartbeat sound test: switch");
+    int musList = form.create_list("Test Tracks: menu", 2);
+form.add_list_item(musList, "BossMusic: normal mode", "bossmus");
+form.add_list_item(musList, "Game Music: normal and endless mode", "gamemus");
 int sdm = form.create_button("Select sound &device. Currently set to " + soundcard);
     int rest = form.create_button("&reset settings");
 int savesets = form.create_button("&save settings", true);

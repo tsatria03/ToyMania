@@ -1,3 +1,5 @@
+new in 3.3
+Moved the music tracks list over to the botum of the test toggle switches found in the sound settings menu.
 new in 3.2
 Added support for automatic update checking on game launch. If the option is enabled in the game settings menu, the game will now check for the latest version online and prompt the user to update it if it's available.
 Implemented an automatic version checker that compares your local game version against the latest version available online.
