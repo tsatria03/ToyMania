@@ -1,7 +1,8 @@
 new in 3.3
+Added a prompt to delete update archives or installers after a successful update, helping keep the overall game folder clean.
 Repackaged update archives to extract directly into the game's directory, removing unnecessary subfolders for a smoother update experience.
 Added support for extracting password-protected 7z update files in the game updater. This allows seamless in-game installation of encrypted update archives using a well-known password found in the file.
-Made it so the updater now checks if the update file already exists locally, and skips the download if so.
+Made it so the updater now checks if the update file already exists locally, and skips the download if it finds one.
 Added overwrite confirmation prompts after extracting downloaded archives to prevent unintentional file loss.
 Introduced automatic extraction of downloaded 7z updates. This is only for Windows users. Mac users are instructed to manually extract the updates, do to automated extraction not being possible on those devices.
 Addressed a critical issue with the game updater where downloaded update files appeared corrupted or were only a few bytes in size. This was caused by an incorrect GitHub release tag format in the update URL. The updater now automatically appends a trailing zero to version numbers to match GitHub's expected release tag structure, ensuring downloads are valid and uncorrupted.

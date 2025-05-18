@@ -48,9 +48,11 @@ bool check_for_updates(string old_version, string projectname, bool precheck = f
     }
 else
 {
+wait(500);
         alert("Notice", "The update file already exists. Skipping download.");
     }
-    string ext = filename.substr(filename.rfind(".") + 1);
+    wait(500);
+string ext = filename.substr(filename.rfind(".") + 1);
     setupmenu(false);
     if (ext == "exe")
 {
@@ -58,7 +60,7 @@ else
     }
 else if (ext == "7z" || ext == "zip")
 {
-        m.add_item("Extract Update (Overwrite Game Files)", "extract");
+        m.add_item("Extract file", "extract");
     }
     m.add_item("Cancel", "cancel");
     m.intro_text = "The update has been downloaded. What would you like to do with " + bare_name + "?";
@@ -102,12 +104,21 @@ else if (ext == "7z" || ext == "zip")
         speak("Extracting update...");
         wait(1000);
 bool success = run("lib/7zr.exe", "x \"" + filename + "\" -pGrateCollector -aoa -y", true, true);
-        if (success)
+if (success)
 {
-            file_delete(filename);
-            alert("Success", "Update extracted and applied successfully. The game will now restart.");
-            restart();
-        }
+    int cleanup = question("Cleanup", "The update has been extracted successfully. Would you like to delete the downloaded archive?");
+    if (cleanup == 1 && file_exists(filename))
+    {
+        file_delete(filename);
+        speak("Archive deleted.");
+    }
+    else
+    {
+        speak("Archive kept.");
+    }
+    alert("Success", "Update extracted and applied successfully. The game will now restart.");
+    restart();
+}
 else
 {
             alert("Extraction Failed", "Failed to extract the archive.");
