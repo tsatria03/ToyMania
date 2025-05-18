@@ -1,4 +1,5 @@
 new in 3.3
+Added support for extracting password-protected 7z update files in the game updater. This allows seamless in-game installation of encrypted update archives using a well-known password found in the file.
 Made it so the updater now checks if the update file already exists locally, and skips the download if so.
 Added overwrite confirmation prompts after extracting downloaded archives to prevent unintentional file loss.
 Introduced automatic extraction of downloaded 7z updates. This is only for Windows users. Mac users are instructed to manually extract the updates, do to automated extraction not being possible on those devices.

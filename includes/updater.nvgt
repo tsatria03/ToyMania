@@ -101,7 +101,7 @@ else if (ext == "7z" || ext == "zip")
         }
         speak("Extracting update...");
         wait(1000);
-        bool success = run("lib/7zr.exe", "x \"" + filename + "\" -aoa -y", true, true);
+bool success = run("lib/7zr.exe", "x \"" + filename + "\" -pGrateCollector -aoa -y", true, true);
         if (success)
 {
             file_delete(filename);
