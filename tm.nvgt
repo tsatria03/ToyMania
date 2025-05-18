@@ -52,6 +52,7 @@ int walktime=200;
 int lastMusicIndex = -1;
 int last_update_check_time = 0;
 int update_check_interval = 1000 * 60 * 60 * 3;
+int update_interval_microseconds = 3 * HOURS;
 int64 session_playtime = 0;
 int64 total_playtime = 0;
 string savePath = DIRECTORY_APPDATA + "tsatria03/ToyMania/saves/";
@@ -77,6 +78,7 @@ savedata st(DIRECTORY_APPDATA+"tsatria03/ToyMania/saves/settings.tmg", "JPl3mWxE
 AchievementTracker[] achievements;
 sound_pool spool, temp, p, alarmpool, ambpool, bulletpool, heartpool, healpool, objpool, muspool, pool, bosspool, carpool, doorpool, gardpool, keypool, toypool;
 time_elapsed timeelapsed;
+timestamp last_update_check_timestamp;
 virtual_dialogs vd;
 vector me;
 void main()
@@ -137,16 +139,15 @@ else
 {
 if (auto_check_updates)
 {
-    int current_time= gametimer.elapsed;
-    if (current_time - last_update_check_time >= update_check_interval)
+    if (last_update_check_timestamp.elapsed >= update_check_interval)
     {
-wait(1000);
-            speak("Checking for updates...");
-            wait(1000); // Let it speak before proceeding
+        wait(1000);
+        speak("Checking for updates...");
+        wait(1000); // Let it speak before proceeding
         if (check_for_updates(current_version, "ToyMania"))
         {
-            last_update_check_time = current_time;
-            writepreffs();
+            last_update_check_timestamp.update();
+writepreffs();
         }
     }
 }

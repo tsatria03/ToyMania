@@ -1237,8 +1237,8 @@ void gamsetsmenu()
 {
     form.reset();
     form.create_window("Game settings", false);
-int autoUpdateToggle = form.create_checkbox("Check for game updates at startup", auto_check_updates);
-int showdesc = form.create_checkbox("Show toggleable item descriptions.", showset_desc);
+int autoUpdateToggle = form.create_checkbox("Enable checking for game updates at startup.", auto_check_updates);
+int showdesc = form.create_checkbox("Enable showing toggleable item descriptions.", showset_desc);
 int glb = form.create_checkbox("Enable behind pitch decrease.", behind_pitch);
 int glb2 = -1;
 if (showset_desc) glb2 = form.create_input_box("Behind pitch decrease: description", "This setting controls whether the pitch of sounds decrease when you are behind something.", "", 0, true, true);

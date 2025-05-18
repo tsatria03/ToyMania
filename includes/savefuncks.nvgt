@@ -231,7 +231,21 @@ last_update_check_time = st.read_int("last_update_check_time");
 }
 if (st.d.exists("update_check_interval"))
 {
-update_check_interval = st.read_int("update_check_interval");
+    update_check_interval = st.read_int("update_check_interval");
+}
+else
+{
+    update_check_interval = 3 * HOURS;
+}
+int64 saved_utc;
+if (st.d.exists("last_update_check_utc"))
+{
+    saved_utc = st.read_int64("last_update_check_utc");
+    last_update_check_timestamp = timestamp_from_UTC_time(saved_utc);
+}
+else
+{
+    last_update_check_timestamp.update();
 }
 if(st.d.exists("soundcard"))
 {
@@ -278,5 +292,6 @@ st.add("completesound", completesound);
 st.add("togglesound", togglesound);
 st.add("last_update_check_time", last_update_check_time);
 st.add("update_check_interval", update_check_interval);
+st.add("last_update_check_utc", last_update_check_timestamp.UTC_time);
 st.save();
 }
