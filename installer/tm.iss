@@ -1,10 +1,9 @@
 #define MyAppName "ToyMania"
-#define MyAppVersion "3.2"
+#define MyAppVersion "3.3"
 #define MyAppPublisher "tsatria03"
 #define MyAppURL "https://tsatria03.itch.io/toymania"
 #define MyAppExeName "tm.exe"
-#define MyReadme "readme.txt" ; Optional, if you have a readme file
-
+#define MyReadme "readme.txt"
 [Setup]
 AppId={{64477427-9EAA-4A52-905B-269D21D008DA}}
 AppName={#MyAppName}
@@ -34,9 +33,9 @@ Name: "desktopicon"; Description: "Create a desktop shortcut"; GroupDescription:
 Name: "startmenuicon"; Description: "Create a Start Menu shortcut"; GroupDescription: "Additional icons:"
 
 [Files]
-Source: "C:\Users\tsatr\OneDrive\Documents\GitHub\ToyMania\releases\windows\ToyMania_windows_portable_password_is_GrateCollector\tm\*"; \
+Source: "C:\Users\tsatr\OneDrive\Documents\GitHub\ToyMania\releases\windows\ToyMania_windows_portable_password_is_GrateCollector\*"; \
   DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs
-Source: "C:\Users\tsatr\OneDrive\Documents\GitHub\ToyMania\releases\windows\ToyMania_windows_portable_password_is_GrateCollector\tm\docks\readme.txt"; \
+Source: "C:\Users\tsatr\OneDrive\Documents\GitHub\ToyMania\releases\windows\ToyMania_windows_portable_password_is_GrateCollector\docks\readme.txt"; \
 DestDir: "{app}"; Flags: ignoreversion
 
 [Icons]
