@@ -1,4 +1,5 @@
 new in 3.3
+Added a Master Volume Control to the Audio Settings menu. Players can now adjust the overall volume of all game sounds using the dedicated "Master Volume" slider.
 Added a prompt to delete update archives or installers after a successful update, helping keep the overall game folder clean.
 Repackaged update archives to extract directly into the game's directory, removing unnecessary subfolders for a smoother update experience.
 Added support for extracting password-protected 7z update files in the game updater. This allows seamless in-game installation of encrypted update archives using a well-known password found in the file.

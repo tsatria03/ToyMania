@@ -37,6 +37,7 @@ double alarmvolume=0, alarmpitch=100, heartvolume=0, heartpitch=100, toyambvolum
 double ammo=50, maxammo=50, reserved_ammo=250, max_reserved_ammo=250;
 double collected_keys=0, collected_toys=0, destroyed_cars=0, health=1000, maxhealth=1000, storehealth=1000, storemaxhealth=1000, killed_gards=0, level=1, money=0, moved_steps=0, swordplays=0, stoneplays=0, total_collected_toys=0, total_collected_keys=0, total_killed_gards=0, total_destroyed_cars=0, total_moved_steps=0;
 double maxx=50, maxy=50;
+float master_volume = 1.0;
 int achslot, invslot, itemslot, painslot, toyambslot, toytrackslot, weaponslot;
 int alarmslot, heartslot, countslot;
 int bossnum=1, carnum=5, gardnum=10, keynum=15, objnum=15, toynum=20;
@@ -61,7 +62,7 @@ string mustype="gamemus";
 string current_weapon;
 string weapontype="bat";
 string soundcard="Default";
-string version="1.3";
+string version="3.3";
 timer boss_timer, bossespawntimer, carspawntimer, firetimer, firetimer2, gametimer, gardspawntimer, objspawntimer, keyspawntimer, movetimer, runtimer, toyspawntimer, usetimer, walktimer;
 file achfile, dockfile, gamfile, poastfile, statfile;
 instance gamstence("tm");

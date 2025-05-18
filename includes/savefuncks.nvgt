@@ -152,6 +152,11 @@ if (st.d.exists("toymusvolume"))
 {
 toymusvolume = st.read_double("toymusvolume");
 }
+if (st.d.exists("master_volume"))
+{
+    master_volume = st.read_float("master_volume");
+    set_sound_master_volume(master_volume); // Apply it
+}
 if (st.d.exists("auto_check_updates"))
 {
 auto_check_updates = st.read_bool("auto_check_updates");
@@ -250,6 +255,7 @@ st.add("alarmvolume", alarmvolume);
 st.add("heartvolume", heartvolume);
 st.add("toyambvolume", toyambvolume);
 st.add("toymusvolume", toymusvolume);
+st.add("master_volume", master_volume);
 st.add("auto_check_updates", auto_check_updates);
 st.add("showset_desc", showset_desc);
 st.add("behind_pitch", behind_pitch);
