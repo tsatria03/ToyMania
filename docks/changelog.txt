@@ -1,4 +1,7 @@
 new in 3.3
+Made it so the updater now checks if the update file already exists locally, and skips the download if so.
+Added overwrite confirmation prompts after extracting downloaded archives to prevent unintentional file loss.
+Introduced automatic extraction of downloaded 7z updates. This is only for Windows users. Mac users are instructed to manually extract the updates, do to automated extraction not being possible on those devices.
 Addressed a critical issue with the game updater where downloaded update files appeared corrupted or were only a few bytes in size. This was caused by an incorrect GitHub release tag format in the update URL. The updater now automatically appends a trailing zero to version numbers to match GitHub's expected release tag structure, ensuring downloads are valid and uncorrupted.
 Improved the auto updater. From now on, it will check for updates in the backround at startup, instead of always telling the user that no updates are found upon launching the game every time.
 Moved the music tracks list over to the botum of the test toggle switches found in the sound settings menu.

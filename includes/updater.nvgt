@@ -4,53 +4,117 @@ bool is_newer_version(string oldv, string newv)
     newv = string_trim_sides(newv);
     return string_to_number(newv) > string_to_number(oldv);
 }
-bool check_for_updates(string old_version, string projectname, bool precheck=false)
+bool check_for_updates(string old_version, string projectname, bool precheck = false)
 {
-        if(precheck==true) speak("Checking for updates...");
-        if(precheck==true) wait(1000);
+    if (precheck)
+{
+        speak("Checking for updates...");
+        wait(1000);
+    }
     string version_url = "https://tsatria03.github.io/projects/" + projectname + "/version.txt";
     string new_version = url_get(version_url);
     if (new_version == "" || string_contains(new_version, "<!DOCTYPE", 1) > -1)
 {
-        alert("error", "Could not check for updates at this time.");
-mainmenu();
+        alert("Error", "Could not check for updates at this time.");
+        mainmenu();
         return false;
     }
     if (!is_newer_version(old_version, new_version))
 {
-        if(precheck==true) alert("No updates found", "You already have the latest version of the game.");
-mainmenu();
+        if (precheck) alert("No updates found", "You already have the latest version.");
+        mainmenu();
         return false;
     }
-    int response = question("Update available", "A new version of " + projectname + " is available. Your version: " + old_version + ". New version: " + new_version + ". Would you like to download it now?");
-    if (response == 1)
+    int response = question("Update Available", "A new version of " + projectname + " is available. Your version: " + old_version + ". New version: " + new_version + ". Would you like to download it now?");
+    if (response != 1)
 {
-wait(500);
-string url = get_download_url(projectname, new_version);
-        string filename = get_disk_filename(url);
+        mainmenu();
+        return false;
+    }
+    wait(500);
+    string url = get_download_url(projectname, new_version);
+    string filename = get_disk_filename(url);
+    string bare_name = strip_extension(strip_directory(filename));
+    if (!file_exists(filename))
+{
         string result = dl_file(url, filename);
-        if (result == "finished")
+        if (result != "finished")
 {
-            alert("Success", "The update has been downloaded successfully. Please extract or run it to complete the game's installation.");
-mainmenu();
+            if (result == "canceled" && file_exists(filename)) file_delete(filename);
+            alert("Download Failed", "The update could not be downloaded.");
+            mainmenu();
+            return false;
         }
-else if (result == "canceled" && file_exists(filename))
+    }
+else
+{
+        alert("Notice", "The update file already exists. Skipping download.");
+    }
+    string ext = filename.substr(filename.rfind(".") + 1);
+    setupmenu(false);
+    if (ext == "exe")
+{
+        m.add_item("Run Installer", "run");
+    }
+else if (ext == "7z" || ext == "zip")
+{
+        m.add_item("Extract Update (Overwrite Game Files)", "extract");
+    }
+    m.add_item("Cancel", "cancel");
+    m.intro_text = "The update has been downloaded. What would you like to do with " + bare_name + "?";
+    int mres = m.run();
+    string choice = m.get_selected_item_id();
+    if (mres == -1 || choice == "cancel")
+{
+        speak("Canceled");
+        mainmenu();
+        return false;
+    }
+    if (choice == "run")
+{
+        if (!run(filename, "", false, false))
+{
+            alert("Error", "Could not launch the installer.");
+        }
+        mainmenu();
+        return false;
+    }
+    if (choice == "extract")
+{
+        if (system_is_unix)
+{
+            alert("Manual Extraction Required", "Please manually extract the update file using a suitable tool. Automatic extraction is not supported on this Mac.");
+            mainmenu();
+            return false;
+        }
+        setupmenu(false);
+        m.add_item("Yes", "yes");
+        m.add_item("No", "no");
+        m.intro_text = "Are you sure you want to overwrite your existing game files?";
+        int confirm = m.run();
+        string confirm_choice = m.get_selected_item_id();
+        if (confirm == -1 || confirm_choice != "yes")
+{
+            speak("Update canceled.");
+            mainmenu();
+            return false;
+        }
+        speak("Extracting update...");
+        wait(1000);
+        bool success = run("lib/7zr.exe", "x \"" + filename + "\" -aoa -y", true, true);
+        if (success)
 {
             file_delete(filename);
-            alert("Update canceled", "The update was unexpectedly canceled.");
-mainmenu();
+            alert("Success", "Update extracted and applied successfully. The game will now restart.");
+            restart();
         }
 else
 {
-            alert("Update failed", "Something went wrong during the update. Please try again later.");
-mainmenu();
-}
+            alert("Extraction Failed", "Failed to extract the archive.");
+        }
     }
-    else
-{
-mainmenu();
-}
-    return false;
+    mainmenu();
+    return true;
 }
 string get_download_url(string projectname, string new_version)
 {

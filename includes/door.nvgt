@@ -125,10 +125,9 @@ if (gamcopy == true)
         }
         else if (choice == "export")
         {
-            file postfile;
-            postfile.open(DIRECTORY_APPDATA+"tsatria03/ToyMania/stats/player_posts.txt", "w");
-            postfile.write(statsummary);
-            postfile.close();
+            poastfile.open(DIRECTORY_APPDATA+"tsatria03/ToyMania/stats/player_posts.txt", "w");
+            poastfile.write(statsummary);
+            poastfile.close();
             if (copexpsounds == true) dlgplay("gamexport.ogg", false);
             dlgmessage_return("All game session results exported to stats/player_posts.txt.");
         }
