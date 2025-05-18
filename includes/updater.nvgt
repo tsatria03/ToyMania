@@ -4,8 +4,10 @@ bool is_newer_version(string oldv, string newv)
     newv = string_trim_sides(newv);
     return string_to_number(newv) > string_to_number(oldv);
 }
-bool check_for_updates(string old_version, string projectname)
+bool check_for_updates(string old_version, string projectname, bool precheck=false)
 {
+        if(precheck==true) speak("Checking for updates...");
+        if(precheck==true) wait(1000);
     string version_url = "https://tsatria03.github.io/projects/" + projectname + "/version.txt";
     string new_version = url_get(version_url);
     if (new_version == "" || string_contains(new_version, "<!DOCTYPE", 1) > -1)
@@ -16,19 +18,20 @@ mainmenu();
     }
     if (!is_newer_version(old_version, new_version))
 {
-        alert("No updates found", "You already have the latest version of the game.");
+        if(precheck==true) alert("No updates found", "You already have the latest version of the game.");
 mainmenu();
         return false;
     }
     int response = question("Update available", "A new version of " + projectname + " is available. Your version: " + old_version + ". New version: " + new_version + ". Would you like to download it now?");
     if (response == 1)
 {
+wait(500);
 string url = get_download_url(projectname, new_version);
         string filename = get_disk_filename(url);
         string result = dl_file(url, filename);
         if (result == "finished")
 {
-            alert("Success", "The update has been downloaded as " + filename + ". Please extract or run it to complete the update.");
+            alert("Success", "The update has been downloaded successfully. Please extract or run it to complete the game's installation.");
 mainmenu();
         }
 else if (result == "canceled" && file_exists(filename))
@@ -43,6 +46,10 @@ else
 mainmenu();
 }
     }
+    else
+{
+mainmenu();
+}
     return false;
 }
 string get_download_url(string projectname, string new_version)
@@ -58,10 +65,11 @@ string get_download_url(string projectname, string new_version)
         setupmenu(false);
         m.add_item("Windows Installer", "installer");
         m.add_item("Windows Portable", "portable");
+m.add_item("cancel", "cancel");
         m.intro_text = "Which version of the game would you like to download?";
         int mres = m.run();
         string version_choice = m.get_selected_item_id();
-        if (mres == -1 || version_choice == "") return "";
+        if (mres == -1 || version_choice == "cancel") mainmenu();
         if (version_choice == "portable")
             return base + "ToyMania_windows_portable_password_is_GrateCollector.7z";
         else

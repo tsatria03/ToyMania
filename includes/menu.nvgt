@@ -61,9 +61,9 @@ dlgmessage_return("Speaker test complete.");
 }
 if (main == "chup")
 {
-speak("checking");
+if(speak_menu_loading==true) speak("loading");
 m.fade_music();
-check_for_updates(current_version, "ToyMania");
+check_for_updates(current_version, "ToyMania", true);
 }
 if (main == "rt")
 {
