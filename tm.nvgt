@@ -1,6 +1,6 @@
 #pragma document docks
 #pragma plugin nvgt_curl
-#pragma embed "packs/assets.tmg"
+#pragma embed "data/assets.tmg"
 #include"includes/includes.nvgt"
 bool behind_pitch=true;
 bool hrtf=true;

@@ -72,6 +72,7 @@ featfire3.ogg
 feathit1.ogg
 feathit2.ogg
 feathit3.ogg
+fireloop.ogg
 fistdraw.ogg
 fistfire1.ogg
 fistfire2.ogg
@@ -122,6 +123,7 @@ gard2walk5.ogg
 gard2walk6.ogg
 gard2walk7.ogg
 gard2walk8.ogg
+getdollars.ogg
 glassfall.ogg
 glassland.ogg
 glasswalk1.ogg
@@ -221,11 +223,8 @@ menumus.ogg
 menuopen.ogg
 menuwrap.ogg
 pause.ogg
-playerbuy1.ogg
-playerbuy2.ogg
-playerbuy3.ogg
-playerbuy4.ogg
 playerdeath.ogg
+playergive.ogg
 playerheal1.ogg
 playerheal2.ogg
 playerheal3.ogg
@@ -240,6 +239,10 @@ speaker_stone_throw.ogg
 speaker_sword_clank.ogg
 storealert_medium.ogg
 storealert_small.ogg
+storebuy1.ogg
+storebuy2.ogg
+storebuy3.ogg
+storebuy4.ogg
 storedest_large.ogg
 storedest_medium.ogg
 storedest_small.ogg
@@ -288,4 +291,5 @@ toyloop6.ogg
 toyloop7.ogg
 toyloop8.ogg
 toyloop9.ogg
-total files: 290
+windchimeloop.ogg
+total files: 294
