@@ -338,7 +338,6 @@ p.play_stationary(gmt(me.x,me.y)+"walk"+random(1,5)+".ogg", false);
 moved_steps+=1;
 total_moved_steps+=1;
 update_achievements();
-writedata();
 movetimer.restart();
 }
 if (key_down(KEY_RIGHT) and movetimer.elapsed>=movetime and me.x!=maxx and doormove==false)
@@ -348,7 +347,6 @@ p.play_stationary(gmt(me.x,me.y)+"walk"+random(1,5)+".ogg", false);
 moved_steps+=1;
 total_moved_steps+=1;
 update_achievements();
-writedata();
 movetimer.restart();
 }
 if (key_down(KEY_DOWN) and movetimer.elapsed>=movetime and me.y!=0 and doormove==false)
@@ -358,7 +356,6 @@ p.play_stationary(gmt(me.x,me.y)+"walk"+random(1,5)+".ogg", false);
 moved_steps+=1;
 total_moved_steps+=1;
 update_achievements();
-writedata();
 movetimer.restart();
 }
 if (key_down(KEY_UP) and movetimer.elapsed>=movetime and me.y!=maxy and doormove==false)
@@ -451,6 +448,11 @@ storehealth=0;
 if(storehealth>=storemaxhealth)
 {
 storehealth=storemaxhealth;
+}
+if (savedata_timer.elapsed >= save_interval)
+{
+    writedata();
+    savedata_timer.restart();
 }
 if(bossespawntimer.elapsed>=bossespawntime and bosses.length()<bossnum and bossespawn==true and !bossdefeated and !endless)
 {

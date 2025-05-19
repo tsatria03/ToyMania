@@ -546,6 +546,7 @@ void pausemenu()
         m.add_item("Read current game session statistics", "rs");
         m.add_item("Quit game", "qmg");
         m.add_item("Resume game", "rmg");
+m.add_item("Save game", "smg");
 m.add_item("view detailed stats", "vds");
     m.intro_text = "Pause menu.";
     int mres = m.run();
@@ -681,6 +682,14 @@ cardest=false;
             resume_game();
             return;
         }
+        if (psmem == "smg")
+{
+            temp.play_stationary("resume.ogg", false);
+speak("game saved");
+            resume_game();
+writedata();
+            return;
+        }
 if(psmem == "vds")
 {
     setupmenu(false);
@@ -752,7 +761,10 @@ resume_game();
     }
     vd.set_disallowed_chars("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ !@#$%^&*()[]{};:'\"\\|,.<>?/+=`~", false, "This character is not allowed.");
     string amount_input = vd.input_box("", "How many " + shopem.replace("_", " ", true) + "s would you like to buy?");
-    if (amount_input == "") return;
+    if (amount_input == "")
+speak("canceled");
+resume_game();
+        return;
     double amount = string_to_number(amount_input);
     if (amount <= 0)
 {

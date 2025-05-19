@@ -1,9 +1,9 @@
 new in 3.4
+Added a manual "Save Game" option to the pause menu, and implemented a timed auto-save system that saves the game every 5 seconds to reduce lag spikes caused by frequent disk writes during player movement.
 Made it so the directional door tracking logic is Reversed to match the real-world orientation of the player. The system now correctly reports when a door is in front, behind, left, or right based on the player's overall location.
-Added directional tracking to doors in Normal Mode. Pressing the letter D now tells players where the door is located in relation to them, such as in front or behind them. It also includes the approximate distance of it in feet.
-Added support for loading and saving the TTS rate, volume, voice, and screen reader preferences.
+Added directional tracking to doors in Normal Mode. Pressing the letter D now tells players where the door is located in relation to them, such as in front or behind them. It also includes the approximate distance of the door in feet.
+Added support for loading and saving the rate, volume, voice, and screen reader preferences in the tts configuration menu.
 Added a TTS configuration button to the main speech settings menu. Users can now adjust the rate, volume, and voice for the sapi 5 engin. They can also choose the screen reader output at witch the game speaks in.
-Added some more weapon related sounds into the learn game sounds menu.
 Added an option to toggle auto running when the player moves in the game settings menu. The default is holding down the alt or control key to walk, and releasing one of those to run.
 Fixed an issue where adjusting the master volume in the sound settings menu didn't work what so ever.
 Made it so cars don't start shooting you with bullets untill you reach the third level in normal and endless mode.
