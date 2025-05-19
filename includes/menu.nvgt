@@ -470,8 +470,8 @@ weapons["Boot Hit" + vdesc] = array<string> = {"boothit1.ogg", "boothit2.ogg", "
 weapons["Club Draw"] = "clubdraw.ogg";
 weapons["Club Fire" + vdesc] = array<string> = {"clubfire1.ogg", "clubfire2.ogg", "clubfire3.ogg"};
 weapons["Club Hit" + vdesc] = array<string> = {"clubhit1.ogg", "clubhit2.ogg", "clubhit3.ogg"};
-weapons["dart tube launch: unused" + vdesc] = array<string> = {"dartblow1.wav", "dartblow2.wav", "dartblow3.wav"};
-weapons["dart tube hit: unused" + vdesc] = array<string> = {"darthit1.wav", "darthit2.wav", "darthit3.wav"};
+weapons["Dart tube fire: unused" + vdesc] = array<string> = {"dartblow1.wav", "dartblow2.wav", "dartblow3.wav"};
+weapons["Dart tube hit: unused" + vdesc] = array<string> = {"darthit1.wav", "darthit2.wav", "darthit3.wav"};
 weapons["Feat Draw"] = "featdraw.ogg";
 weapons["Feat Fire" + vdesc] = array<string> = {"featfire1.ogg", "featfire2.ogg", "featfire3.ogg"};
 weapons["Feat Hit" + vdesc] = array<string> = {"feathit1.ogg", "feathit2.ogg", "feathit3.ogg"};
@@ -1213,9 +1213,10 @@ void preffsmenu()
 {
 form.reset();
     form.create_window("Preferences", false);
-    int audsets = form.create_button("&audio settings");
+int audsets = form.create_button("&audio settings");
 int gamsets = form.create_button("&game settings");
-int back = form.create_button("&Return to main menu");
+int speechsets = form.create_button("&tts settings");
+int back = form.create_button("&back");
 form.focus(audsets);
 spool.play_stationary("menuopen.ogg",false);
     while (true)
@@ -1234,6 +1235,10 @@ gamsetsmenu();
         if (form.is_pressed(audsets))
         {
 soundsetsmenu();
+}
+        if (form.is_pressed(speechsets))
+        {
+speechsetsmenu();
 }
     }
 }
@@ -1571,6 +1576,63 @@ ambpool.destroy_sound(toyambslot);
 muspool.destroy_sound(toytrackslot);
 alarmpool.destroy_sound(alarmslot);
 heartpool.destroy_sound(heartslot);
+writepreffs();
+if(completesound==true) dlgplay("complete.ogg", false);
+dlgmessage_return("Settings saved.");
+preffsmenu();
+}
+    }
+}
+void speechsetsmenu()
+{
+form.reset();
+    form.create_window("tts settings", false);
+int ttscfg = form.create_button("Configure voice");
+    int rest = form.create_button("&reset settings");
+int savesets = form.create_button("&save settings", true);
+int cansets = form.create_button("&cancel");
+form.focus(ttscfg);
+spool.play_stationary("menuopen.ogg",false);
+    while (true)
+    {
+        wait(5);
+        form.monitor();
+        if (form.is_pressed(cansets) || key_repeating(KEY_ESCAPE))
+        {
+spool.play_stationary("menuclose.ogg",false);
+            preffsmenu();
+        }
+if (form.is_pressed(ttscfg))
+{
+    spool.play_stationary("menuopen.ogg", false);
+    tts_config(tts, true);
+dlgmessage_return("This is your current voice configuration.");
+    spool.play_stationary("menuclose.ogg", false);
+    speechsetsmenu();
+}
+        if (form.is_pressed(rest))
+        {
+setupmenu(false);
+    m.add_item("Yes", "yes");
+    m.add_item("No", "no");
+m.intro_text="Are you sure you want to reset all of your settings?";
+int mres=m.run();
+string confirm = m.get_selected_item_id();
+    if (mres == -1 or confirm == "no")
+    {
+        speechsetsmenu();
+    }
+if(confirm=="yes")
+{
+if(file_exists(DIRECTORY_APPDATA+"tsatria03/ToyMania/saves/settings.tmg")) file_delete(DIRECTORY_APPDATA+"tsatria03/ToyMania/saves/settings.tmg");
+resetpreffs();
+if(completesound==true) dlgplay("complete.ogg", false);
+dlgmessage_return("Settings reset.");
+mainmenu();
+}
+}
+        if (form.is_pressed(savesets))
+        {
 writepreffs();
 if(completesound==true) dlgplay("complete.ogg", false);
 dlgmessage_return("Settings saved.");
