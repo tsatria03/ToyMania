@@ -1241,6 +1241,7 @@ void gamsetsmenu()
     form.create_window("Game settings", false);
 int autoUpdateToggle = form.create_checkbox("Enable checking for game updates at startup.", auto_check_updates);
 int showdesc = form.create_checkbox("Enable showing toggleable item descriptions.", showset_desc);
+int runmode = form.create_checkbox("Enable automatic running when moving.", autorun);
 int glb = form.create_checkbox("Enable behind pitch decrease.", behind_pitch);
 int glb2 = -1;
 if (showset_desc) glb2 = form.create_input_box("Behind pitch decrease: description", "This setting controls whether the pitch of sounds decrease when you are behind something.", "", 0, true, true);
@@ -1302,6 +1303,8 @@ spool.play_stationary("menuopen.ogg",false);
         wait(5);
         form.monitor();
 auto_check_updates=form.is_checked(autoUpdateToggle);
+showset_desc = form.is_checked(showdesc);
+autorun = form.is_checked(runmode);
             behind_pitch = form.is_checked(glb);
             hrtf = form.is_checked(glh);
             sound_global_hrtf = hrtf;
@@ -1319,7 +1322,6 @@ auto_check_updates=form.is_checked(autoUpdateToggle);
             playlevels = form.is_checked(levsound);
 completesound = form.is_checked(compsound);
 togglesound = form.is_checked(togsound);
-showset_desc = form.is_checked(showdesc);
         if (form.is_pressed(rest))
         {
 setupmenu(false);
@@ -1383,7 +1385,7 @@ int gameMusicVolumeSlider = form.create_slider("game music volume: adjustable", 
 int gameAlarmVolumeSlider = form.create_slider("game alarm volume: adjustable", (alarmvolume + 50) * 2, 0, 100, "percent", 1);
 int gameHeartbeatVolumeSlider = form.create_slider("game heartbeat volume: adjustable", (heartvolume + 50) * 2, 0, 100, "percent", 1);
 int menuMusicVolumeSlider = form.create_slider("menu music volume: adjustable", (menumusvolume + 50) * 2, 0, 100, "percent", 1);
-int masterVolumeSlider = form.create_slider("Master volume: adjustable", int(master_volume * 100), 0, 100, "percent", 1);
+int masterVolumeSlider = form.create_slider("master volume: adjustable", (int(master_volume) + 50) * 2, 0, 100, "percent", 1);
     int ambTest = form.create_button("Toggle ambience sound test: switch");
     int musTest = form.create_button("Toggle music sound test: switch");
     int alarmTest = form.create_button("Toggle alarm sound test: switch");
@@ -1423,7 +1425,7 @@ toymusvolume = (form.get_slider(gameMusicVolumeSlider) / 2) - 50;
 alarmvolume = (form.get_slider(gameAlarmVolumeSlider) / 2) - 50;
 heartvolume = (form.get_slider(gameHeartbeatVolumeSlider) / 2) - 50;
 menumusvolume = (form.get_slider(menuMusicVolumeSlider) / 2) - 50;
-master_volume = form.get_slider(masterVolumeSlider) / 100.0;
+master_volume = (form.get_slider(masterVolumeSlider) / 2) - 50;
 set_sound_master_volume(master_volume);
         ambpool.update_sound_start_values(toyambslot, 0, toyambvolume, toyambpitch);
         muspool.update_sound_start_values(toytrackslot, 0, toymusvolume, toymuspitch);

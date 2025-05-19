@@ -314,13 +314,19 @@ if(key_pressed(KEY_H) and doormove==false)
 {
 speak("You have "+health+" out of "+maxhealth+" HP remaining.");
 }
-if(alt_is_down() or control_is_down())
+if (autorun)
 {
-movetime=runtime;
+    if (alt_is_down() or control_is_down())
+        movetime = walktime;
+    else
+        movetime = runtime;
 }
 else
 {
-movetime=walktime;
+    if (alt_is_down() or control_is_down())
+        movetime = runtime;
+    else
+        movetime = walktime;
 }
 if (key_down(KEY_LEFT) and movetimer.elapsed>=movetime and me.x!=0 and doormove==false)
 {

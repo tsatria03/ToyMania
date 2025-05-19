@@ -1,4 +1,6 @@
 new in 3.4
+Added an option to toggle auto running when the player moves in the game settings menu. The default is holding down the alt or control key to walk, and releasing one of those to run.
+Fixed an issue where adjusting the master volume in the sound settings menu didn't work what so ever.
 Made it so cars don't start shooting you with bullets untill you reach the third level in normal and endless mode.
 Adjusted the key requirements to unlock the door in the normal and endless game modes. The normal mode will now require a random amount between 10 and 20 keys. The endless mode will now require a random amount between 20 and 40 keys.
 Added the ability to adjust the menu music volume in the game settings menu.
