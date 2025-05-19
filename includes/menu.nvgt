@@ -1380,6 +1380,7 @@ int gameAmbienceVolumeSlider = form.create_slider("game ambience volume: adjusta
 int gameMusicVolumeSlider = form.create_slider("game music volume: adjustable", (toymusvolume + 50) * 2, 0, 100, "percent", 1);
 int gameAlarmVolumeSlider = form.create_slider("game alarm volume: adjustable", (alarmvolume + 50) * 2, 0, 100, "percent", 1);
 int gameHeartbeatVolumeSlider = form.create_slider("game heartbeat volume: adjustable", (heartvolume + 50) * 2, 0, 100, "percent", 1);
+int menuMusicVolumeSlider = form.create_slider("menu music volume: adjustable", (menumusvolume + 50) * 2, 0, 100, "percent", 1);
 int masterVolumeSlider = form.create_slider("Master volume: adjustable", int(master_volume * 100), 0, 100, "percent", 1);
     int ambTest = form.create_button("Toggle ambience sound test: switch");
     int musTest = form.create_button("Toggle music sound test: switch");
@@ -1419,6 +1420,7 @@ toyambvolume = (form.get_slider(gameAmbienceVolumeSlider) / 2) - 50;
 toymusvolume = (form.get_slider(gameMusicVolumeSlider) / 2) - 50;
 alarmvolume = (form.get_slider(gameAlarmVolumeSlider) / 2) - 50;
 heartvolume = (form.get_slider(gameHeartbeatVolumeSlider) / 2) - 50;
+menumusvolume = (form.get_slider(menuMusicVolumeSlider) / 2) - 50;
 master_volume = form.get_slider(masterVolumeSlider) / 100.0;
 set_sound_master_volume(master_volume);
         ambpool.update_sound_start_values(toyambslot, 0, toyambvolume, toyambpitch);

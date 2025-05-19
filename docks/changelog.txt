@@ -1,3 +1,5 @@
+new in 3.4
+Added the ability to adjust the menu music volume in the game settings menu.
 new in 3.3
 Added a Master Volume Control to the Audio Settings menu. Players can now adjust the overall volume of all game sounds using the dedicated "Master Volume" slider.
 Added a prompt to delete update archives or installers after a successful update, helping keep the overall game folder clean.
