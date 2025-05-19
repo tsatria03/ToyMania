@@ -10,7 +10,6 @@
 #include"car.nvgt"
 #include"dlg.nvgt"
 #include"door.nvgt"
-#include"downloader.nvgt"
 #include"extrafuncts.nvgt"
 #include"form.nvgt"
 #include"form_menu.nvgt"
