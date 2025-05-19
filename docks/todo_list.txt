@@ -1,14 +1,14 @@
-Make the cars not shoot you untill you reach a sertain level.
-Make it easier to collect keys in the normal and endless modes.
+Add the ability to auto run instead of holding down the alt or control key.
 Make the doors easier to track.
 Make lasers use batteries.
 Add dart tubes as items for stunning enemies.
-Add the ability to auto run instead of holding down the alt or control key.
 Add difficulty menu items to the normal game mode.
 Add tts configuration settings.
 Add an online scoreboard system.
 Add minimal soundpack support.
 
+*Done. Make the cars not shoot you untill you reach a sertain level.
+*Done. Make it easier to collect keys in the normal and endless modes.
 *Done. Add a shop in the endless mode to buy stuff from.
 *Done. Fix healing zones to have different sounds.
 *Done. Add an option in the game settings menu to enable or disable the toggle switch sounds.

@@ -1,4 +1,5 @@
 new in 3.4
+Made it so cars don't start shooting you with bullets untill you reach the third level in normal and endless mode.
 Adjusted the key requirements to unlock the door in the normal and endless game modes. The normal mode will now require a random amount between 10 and 20 keys. The endless mode will now require a random amount between 20 and 40 keys.
 Added the ability to adjust the menu music volume in the game settings menu.
 new in 3.3

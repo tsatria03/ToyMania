@@ -62,6 +62,7 @@ countdown_started = false;
 small_storedest = false;
 medium_storedest = false;
     carspawn = false;
+cardest=false;
     gardspawn = false;
     keydest = false;
     keyspawn = false;
@@ -493,6 +494,7 @@ if(!endless and level==2 and gametimer.elapsed>=1000*120)
 {
 if(playlevels==true) p.play_stationary("playerlevel.ogg",false);
 level=3;
+cardest=true;
 carnum=10;
 toydest=true;
 toynum=30;
@@ -502,6 +504,7 @@ if(!endless and level==3 and gametimer.elapsed>=1000*180)
 if(playlevels==true) p.play_stationary("playerlevel.ogg",false);
 level=4;
 carspawn=false;
+cardest=false;
 gardspawn=true;
 toynum=35;
 }
@@ -578,9 +581,11 @@ temp.play_stationary("heartstop.ogg", false);
 }
     if(!endless) bossdefeated = false;
     if(!endless) bossespawn = false;
-    carspawn = false;
+carspawn=false;
+cardest=false;
     gardspawn = false;
     keyspawn = false;
+keydest=false;
     toyspawn = false;
 if(endless) clear_inv();
     if(!endless) destroy_all_bosses();
@@ -644,7 +649,8 @@ small_storedest = false;
 medium_storedest = false;
     bossdefeated = false;
     bossespawn = false;
-    carspawn = false;
+cardest=false;
+carspawn=false;
     gardspawn = false;
     keydest = false;
     keyspawn = false;
@@ -669,13 +675,14 @@ speak("Congradulations! You earned $" + (level * 20) + " for surviving to level 
     {
         carspawn = true;
         toyspawn = true;
-    objdest = true;
     objspawn = true;
         toynum = 25;
     }
     else if (level == 3)
     {
+cardest=true;
         carnum = 10;
+    objdest = true;
         toydest = true;
         toynum = 30;
     }
@@ -692,11 +699,11 @@ speak("Congradulations! You earned $" + (level * 20) + " for surviving to level 
     }
     else if (level == 6)
     {
-carnum=3;
-gardnum=5;
+carnum=1;
+gardnum=3;
         keyspawn = true;
         keydest = true;
-        toynum = 10;
+        toynum = 5;
     }
     else
     {
@@ -705,6 +712,7 @@ gardnum=5;
         carnum += 2;
         if (carnum > 30) carnum = 30;
         carspawn = true;
+cardest=true;
         gardnum += 2;
         if (gardnum > 20) gardnum = 20;
         gardspawn = true;
@@ -742,9 +750,13 @@ temp.play_stationary("heartstop.ogg", false);
 }
     if(!endless) bossdefeated = false;
     if(!endless) bossespawn = false;
+cardest=false;
     carspawn = false;
     gardspawn = false;
+keydest=false;
     keyspawn = false;
+objspawn=false;
+objdest=false;
     toyspawn = false;
 if(endless) clear_inv();
     if(!endless) destroy_all_bosses();
