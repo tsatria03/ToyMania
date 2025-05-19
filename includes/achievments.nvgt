@@ -67,3 +67,63 @@ percent = round((double(progressInTier) * 100.0) / double(tierRange), 2);
 return baseName + ": Tier " + currentTier + " of " + thresholds.length() + ". Current progress: " + progressInTier + " (" + percent + "%). " + neededToNext + " total " + name.lower() + " needed to reach the next tier.";
 }
 }
+void update_achievements()
+{
+    for (uint i = 0; i < achievements.length(); i++)
+    {
+        bool unlocked = false;
+        while (achievements[i].check_progress())
+        {
+            unlocked = true;
+        }
+        if (unlocked)
+        {
+            string actionVerb = "";
+            string unit = "";
+            if (achievements[i].name == "Toys")
+            {
+                actionVerb = "collected a total of ";
+                unit = "toys";
+            }
+            else if (achievements[i].name == "Keys")
+            {
+                actionVerb = "collected a total of ";
+                unit = "keys";
+            }
+            else if (achievements[i].name == "Guards")
+            {
+                actionVerb = "killed a total of ";
+                unit = "guards";
+            }
+            else if (achievements[i].name == "Cars")
+            {
+                actionVerb = "destroyed a total of ";
+                unit = "cars";
+            }
+            else if (achievements[i].name == "Steps")
+            {
+                actionVerb = "taken a total of ";
+                unit = "steps";
+            }
+            else if (achievements[i].name == "Playtime")
+            {
+                actionVerb = "played for a total of ";
+                unit = "minutes";
+            }
+            string typeLabel = achievements[i].isSessionBased ? "Session " : "Lifetime ";
+            string baseName = achievements[i].baseName;
+            int value = achievements[i].get_value();
+            string soundName = achievements[i].isSessionBased ? "session_achievement.ogg" : "life_achievement.ogg";
+            if (achievements[i].currentTier >= achievements[i].thresholds.length())
+            {
+                if(play_ach_scores==true) achslot = pool.play_stationary(soundName, false);
+                if(speak_ach_scores==true) speak("Amazing! You've completed all tiers of the " + typeLabel + baseName + " achievement! Press enter to continue.");
+            }
+            else
+            {
+                if(play_ach_scores==true) achslot = pool.play_stationary(soundName, false);
+                if(speak_ach_scores==true) speak("Congratulations! You just unlocked Tier " + achievements[i].currentTier + " of the " + typeLabel + baseName + " achievement. You've " + actionVerb + value + " " + unit + ". Nice work!");
+            }
+        }
+    }
+}

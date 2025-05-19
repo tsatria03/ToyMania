@@ -28,4 +28,5 @@
 #include"toy.nvgt"
 #include"updater.nvgt"
 #include"virtual_dialogs.nvgt"
+#include"weapons.nvgt"
 typedef uint8 usmall; typedef int8 small;
