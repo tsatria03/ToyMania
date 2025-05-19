@@ -1215,7 +1215,7 @@ form.reset();
     form.create_window("Preferences", false);
 int audsets = form.create_button("&audio settings");
 int gamsets = form.create_button("&game settings");
-int speechsets = form.create_button("&tts settings");
+int speechsets = form.create_button("&speech settings");
 int back = form.create_button("&back");
 form.focus(audsets);
 spool.play_stationary("menuopen.ogg",false);
@@ -1586,8 +1586,9 @@ preffsmenu();
 void speechsetsmenu()
 {
 form.reset();
-    form.create_window("tts settings", false);
-int ttscfg = form.create_button("Configure voice");
+    form.create_window("speech settings", false);
+int ttscfg = form.create_button("&Configure voice");
+int speechtest = form.create_button("&preview voice");
     int rest = form.create_button("&reset settings");
 int savesets = form.create_button("&save settings", true);
 int cansets = form.create_button("&cancel");
@@ -1606,8 +1607,12 @@ if (form.is_pressed(ttscfg))
 {
     spool.play_stationary("menuopen.ogg", false);
     tts_config(tts, true);
-dlgmessage_return("This is your current voice configuration.");
     spool.play_stationary("menuclose.ogg", false);
+    speechsetsmenu();
+}
+if (form.is_pressed(speechtest))
+{
+dlgmessage_return("This is your current voice configuration.");
     speechsetsmenu();
 }
         if (form.is_pressed(rest))

@@ -92,8 +92,8 @@ void tts_config(tts_voice@ v, bool main_config = false) {
 	int f_voices = f.create_list("Voice");
 	int f_rate = f.create_slider("Rate", v.rate, -10, 10);
 	int f_volume = f.create_slider("Volume", v.volume, 0, 100);
-	int f_save = f.create_button("&Save settings", true);
-	int f_cancel = f.create_button("Cancel", false, true);
+	int f_okay = f.create_button("&okay", true);
+	int f_cancel = f.create_button("&Cancel", false, true);
 	string[]@ voicenames = v.list_voices();
 	for (uint i = 0; i < voicenames.length(); i++)
 		f.add_list_item(f_voices, voicenames[i] != "" ? voicenames[i] : "Unknown voice " + (i + 1));
@@ -110,15 +110,13 @@ void tts_config(tts_voice@ v, bool main_config = false) {
 			if (v.voice != orig_voice) v.set_voice(orig_voice);
 			if (v.rate != orig_rate) v.set_rate(orig_rate);
 			if (v.volume != orig_volume) v.set_volume(orig_volume);
-			speak("Canceled");
 			break;
-		} else if (f.is_pressed(f_save)) {
+		} else if (f.is_pressed(f_okay)) {
 			if (!main_config) {
 				v.set_voice(f.get_list_position(f_voices));
 				v.set_rate(f.get_slider(f_rate));
 				v.set_volume(f.get_slider(f_volume));
 			}
-			speak("Text to speech settings saved");
 			break;
 		}
 	}
