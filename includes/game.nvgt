@@ -366,11 +366,11 @@ if (key_pressed(KEY_SPACE) and firetimer.elapsed >= firetime and doormove == fal
     fire_weapon();
     firetimer.restart();
 }
-/*if (key_down(KEY_SPACE) and firetimer2.elapsed >= firetime2 and doormove == false and endless and weapontype=="machinegun")
+if (key_down(KEY_SPACE) and firetimer2.elapsed >= firetime2 and doormove == false and endless and weapontype=="machinegun")
 {
     fire_weapon();
     firetimer2.restart();
-}*/
+}
 }
 void toygame()
 {
@@ -391,7 +391,7 @@ if (endless)
     spawn_platform(40, 50, 0, 50, "glass");
     spawn_healzone(40, 50, 0, 50, 1, random(30, 60), random(1500, 3000), "windchime");
 }
-if(endless) spawn_door(random(25,50), random(25,50), 0, 0, random(100,200), random(30,60));
+if(endless) spawn_door(random(25,50), random(25,50), 0, 0, random(100,200), random(20,40));
 while(true)
 {
 wait(5);
@@ -523,7 +523,7 @@ toytrackslot=muspool.play_stationary_extended(mustype+".ogg",true,0,0,toymusvolu
     destroy_all_cars();
     destroy_all_gards();
     destroy_all_toys();
-    spawn_door(random(25, 50), random(25, 50), 0, 0, random(100, 200), random(15, 30));
+    spawn_door(random(25, 50), random(25, 50), 0, 0, random(100, 200), random(10,20));
     carspawn = false;
     gardspawn = false;
     toyspawn = false;
