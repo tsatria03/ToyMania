@@ -54,6 +54,12 @@ clubhit1.ogg
 clubhit2.ogg
 clubhit3.ogg
 complete.ogg
+dartblow1.wav
+dartblow2.wav
+dartblow3.wav
+darthit1.wav
+darthit2.wav
+darthit3.wav
 dlgclose.ogg
 dlgcoppy.ogg
 dlgopen.ogg
@@ -292,4 +298,4 @@ toyloop7.ogg
 toyloop8.ogg
 toyloop9.ogg
 windchimeloop.ogg
-total files: 294
+total files: 300

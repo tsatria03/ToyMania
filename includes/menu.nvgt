@@ -470,6 +470,8 @@ weapons["Boot Hit" + vdesc] = array<string> = {"boothit1.ogg", "boothit2.ogg", "
 weapons["Club Draw"] = "clubdraw.ogg";
 weapons["Club Fire" + vdesc] = array<string> = {"clubfire1.ogg", "clubfire2.ogg", "clubfire3.ogg"};
 weapons["Club Hit" + vdesc] = array<string> = {"clubhit1.ogg", "clubhit2.ogg", "clubhit3.ogg"};
+weapons["dart tube launch: unused" + vdesc] = array<string> = {"dartblow1.wav", "dartblow2.wav", "dartblow3.wav"};
+weapons["dart tube hit: unused" + vdesc] = array<string> = {"darthit1.wav", "darthit2.wav", "darthit3.wav"};
 weapons["Feat Draw"] = "featdraw.ogg";
 weapons["Feat Fire" + vdesc] = array<string> = {"featfire1.ogg", "featfire2.ogg", "featfire3.ogg"};
 weapons["Feat Hit" + vdesc] = array<string> = {"feathit1.ogg", "feathit2.ogg", "feathit3.ogg"};
