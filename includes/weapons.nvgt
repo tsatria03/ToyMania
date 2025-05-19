@@ -1,3 +1,22 @@
+int get_weapon_damage()
+{
+    if (weapontype == "bat") return random(3, 6);
+    if (weapontype == "boot") return random(6, 9);
+    if (weapontype == "club") return random(9, 12);
+    if (weapontype == "feat") return random(12, 15);
+    if (weapontype == "fist") return random(15, 18);
+    if (weapontype == "hammer") return random(18, 21);
+    if (weapontype == "knife") return random(21, 24);
+    if (weapontype == "laser") return random(24, 27);
+    return 0;
+}
+string get_weapon_hit_sound()
+{
+    if (weapontype == "laser")
+        return "laserhit.ogg"; // Only one laser hit sound
+    int count = (weapontype == "fist") ? 2 : 3;
+    return weapontype + "hit" + random(1, count) + ".ogg";
+}
 void check_weapon_reload()
 {
     if (isReloading && reloadTimer.elapsed >= reloadDuration)
@@ -16,34 +35,6 @@ p.play_stationary(weapontype+"ping.ogg",false);
             speak("Reload failed. This weapon has No more reserved ammo left.");
         }
         isReloading = false;
-    }
-}
-void reload_weapon()
-{
-    if (isReloading)
-    {
-        speak("This weapon is still reloading.");
-        return;
-    }
-    if (weapontype != "machinegun")
-    {
-        speak("This weapon does not take any ammo.");
-    }
-    else if (ammo >= 1)
-    {
-        speak("This weapon is already loaded with ammo.");
-    }
-    else if (reserved_ammo <= 0)
-    {
-if(ammo<=0 and weapontype=="machinegun") weaponslot=p.play_stationary(weapontype+"empty.ogg", false);
-        speak("This weapon has no more reserved ammo to reload.");
-    }
-    else
-    {
-        isReloading = true;
-        reloadTimer.restart();
-        weaponslot = p.play_stationary("machinegunreload.ogg", false);
-        speak("Reloading.");
     }
 }
 void draw_weapon(string weapon)
@@ -150,4 +141,132 @@ draw_weapon(weapon);
 speak(weapontype + " randomly equipped");
 p.destroy_sound(weaponslot);
 weaponslot = p.play_stationary(weapontype + "draw.ogg", false);
+}
+void fire_weapon()
+{
+    bool isMachineGun = (weapontype == "machinegun");
+    if (isMachineGun)
+    {
+        if (ammo <= 0)
+        {
+            weaponslot = p.play_stationary(weapontype + "empty.ogg", false);
+            return;
+        }
+        ammo -= 1;
+        weaponslot = p.play_stationary(weapontype + "fire.ogg", false);
+    }
+    else
+    {
+    string firesound;
+    if (weapontype == "laser")
+    {
+        firesound = "laserfire.ogg";
+    }
+    else
+    {
+        firesound = weapontype + "fire";
+        firesound += (weapontype == "fist") ? random(1, 2) : random(1, 3);
+        firesound += ".ogg";
+    }
+    weaponslot = p.play_stationary(firesound, false);
+}
+    fire_on_target("boss");
+    fire_on_target("car");
+    fire_on_target("gard");
+}
+void fire_on_target(string targetType)
+{
+    int dmg = (weapontype == "machinegun") ? random(27, 30) : get_weapon_damage();
+    string hitsound = get_weapon_hit_sound();
+    if (targetType == "boss")
+    {
+        for (uint i = 0; i < bosses.length(); i++)
+        {
+            if (absolute(bosses[i].bossx - me.x) <= weprange && absolute(bosses[i].bossy - me.y) <= weprange2)
+            {
+                if (weapontype == "machinegun")
+                {
+                    p.play_2d(weapontype + "hit.ogg", me.x, me.y, bosses[i].bossx, bosses[i].bossy, false);
+                    p.play_2d(weapontype + "shell" + random(1, 4) + ".ogg", me.x, me.y, bosses[i].bossx, bosses[i].bossy, false);
+                }
+                else
+                {
+                    p.play_2d(hitsound, me.x, me.y, bosses[i].bossx, bosses[i].bossy, false);
+                }
+                bosses[i].hurtsound = bosspool.play_2d(bosses[i].bosstype + "pain.ogg", me.x, me.y, bosses[i].bossx, bosses[i].bossy, false);
+                bosses[i].bosshealth -= dmg;
+            }
+        }
+    }
+    else if (targetType == "car")
+    {
+        for (uint i = 0; i < cars.length(); i++)
+        {
+            if (absolute(cars[i].carx - me.x) <= weprange && absolute(cars[i].cary - me.y) <= weprange2)
+            {
+                if (weapontype == "machinegun")
+                {
+                    p.play_2d(weapontype + "hit.ogg", me.x, me.y, cars[i].carx, cars[i].cary, false);
+                    p.play_2d(weapontype + "shell" + random(1, 4) + ".ogg", me.x, me.y, cars[i].carx, cars[i].cary, false);
+                }
+                else
+                {
+                    p.play_2d(hitsound, me.x, me.y, cars[i].carx, cars[i].cary, false);
+                }
+                cars[i].hurtsound = carpool.play_2d(cars[i].cartype + "pain.ogg", me.x, me.y, cars[i].carx, cars[i].cary, false);
+                cars[i].carhealth -= dmg;
+            }
+        }
+    }
+    else if (targetType == "gard")
+    {
+        for (uint i = 0; i < gards.length(); i++)
+        {
+            if (absolute(gards[i].gardx - me.x) <= weprange && absolute(gards[i].gardy - me.y) <= weprange2)
+            {
+                string painsound = "";
+                if (gards[i].gardtype == "gard1") painsound = "gard1pain" + random(1, 5) + ".ogg";
+                else if (gards[i].gardtype == "gard2") painsound = "gard2pain.ogg";
+                if (weapontype == "machinegun")
+                {
+                    p.play_2d(weapontype + "hit.ogg", me.x, me.y, gards[i].gardx, gards[i].gardy, false);
+                    p.play_2d(weapontype + "shell" + random(1, 4) + ".ogg", me.x, me.y, gards[i].gardx, gards[i].gardy, false);
+                }
+                else
+                {
+                    p.play_2d(hitsound, me.x, me.y, gards[i].gardx, gards[i].gardy, false);
+                }
+                gards[i].hurtsound = gardpool.play_2d(painsound, me.x, me.y, gards[i].gardx, gards[i].gardy, false);
+                gards[i].gardhealth -= dmg;
+            }
+        }
+    }
+}
+void reload_weapon()
+{
+    if (isReloading)
+    {
+        speak("This weapon is still reloading.");
+        return;
+    }
+    if (weapontype != "machinegun")
+    {
+        speak("This weapon does not take any ammo.");
+    }
+    else if (ammo >= 1)
+    {
+        speak("This weapon is already loaded with ammo.");
+    }
+    else if (reserved_ammo <= 0)
+    {
+if(ammo<=0 and weapontype=="machinegun") weaponslot=p.play_stationary(weapontype+"empty.ogg", false);
+        speak("This weapon has no more reserved ammo to reload.");
+    }
+    else
+    {
+        isReloading = true;
+        reloadTimer.restart();
+        weaponslot = p.play_stationary("machinegunreload.ogg", false);
+        speak("Reloading.");
+    }
 }

@@ -1,10 +1,12 @@
-Make it easier to collect keys in the normal and endless modes.
-Add an online scoreboard system.
 Make the cars not shoot you untill you reach a sertain level.
+Make it easier to collect keys in the normal and endless modes.
 Make the doors easier to track.
+Make lasers use batteries.
+Add dart tubes as items for stunning enemies.
 Add the ability to auto run instead of holding down the alt or control key.
-Add tts configuration settings.
 Add difficulty menu items to the normal game mode.
+Add tts configuration settings.
+Add an online scoreboard system.
 Add minimal soundpack support.
 
 *Done. Add a shop in the endless mode to buy stuff from.
