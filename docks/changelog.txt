@@ -1,5 +1,6 @@
 new in 3.4
-Added directional tracking to doors in Normal Mode. Pressing the letter D now tells players where the door is located in relation to them, such as straight ahead, behind and to the right, etc. It also includes the approximate distance of it in feet.
+Made it so the directional door tracking logic is Reversed to match the real-world orientation of the player. The system now correctly reports when a door is in front, behind, left, or right based on the player's overall location.
+Added directional tracking to doors in Normal Mode. Pressing the letter D now tells players where the door is located in relation to them, such as in front or behind them. It also includes the approximate distance of it in feet.
 Added support for loading and saving the TTS rate, volume, voice, and screen reader preferences.
 Added a TTS configuration button to the main speech settings menu. Users can now adjust the rate, volume, and voice for the sapi 5 engin. They can also choose the screen reader output at witch the game speaks in.
 Added some more weapon related sounds into the learn game sounds menu.

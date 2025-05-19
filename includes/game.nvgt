@@ -234,12 +234,12 @@ if (key_pressed(KEY_D) and doormove == false)
     {
         int dx = doors[0].startx - me.x;
         int dy = doors[0].starty - me.y;
-        int distance = absolute(dx) + absolute(dy);
+        int distance = abs(dx) + abs(dy);
         string direction = "";
-        if (dy < 0) direction += "behind";
-        else if (dy > 0) direction += "straight ahead";
-        if (dx < 0) direction += (direction == "" ? "left" : " and to the left");
-        else if (dx > 0) direction += (direction == "" ? "right" : " and to the right");
+        if (dy < 0) direction += "behind you";
+        else if (dy > 0) direction += "in front of you";
+        if (dx < 0) direction += (direction == "" ? "on your left" : " and to the left");
+        else if (dx > 0) direction += (direction == "" ? "on your right" : " and to the right");
         if (direction == "") direction = "right here";
         speak("The door is " + direction + ", about " + distance + " feet away. You need " + doors[0].required_keys + " or more keys to unlock it.");
     }
@@ -402,7 +402,6 @@ if (endless)
     spawn_healzone(40, 50, 0, 50, 1, random(30, 60), random(1500, 3000), "windchime");
 }
 if(endless) spawn_door(random(25,50), random(25,50), 0, 0, random(100,200), random(20,40));
-gametimer.force(300000);
 while(true)
 {
 wait(5);
