@@ -1,13 +1,13 @@
 new in 3.5
-Made it so the updater now adjusts where updates are saved depending on the game version and platform. For installed Windows versions, installer and portable updates are redirected to the user's Downloads folder if the game lacks write permissions. Portable Windows downloads save updates directly to the game directory, while Mac updates are always saved to the user's Downloads folder.
+Made it so mac and windows update files get deleted propperly upon successful extraction.
 Added fallback behavior for failed update extractions. If an update extraction fails, the game will now provide clearer feedback and avoids restarting or exiting abruptly, allowing users to try again without patencial data loss.
-Added the ability to disable menu wrapping in the game settings menu.
 Added write-permission checks before downloading updates. If the game is running from a protected location like Program Files, users will now be prompted to download the update to their Downloads folder instead.
+Made it so the updater now adjusts where updates are saved depending on the game version and platform. For installed Windows versions, installer and portable updates are redirected to the user's Downloads folder if the game lacks write permissions. Portable Windows downloads save updates directly to the game directory, while Mac updates are always saved to the user's Downloads folder.
 Made it so users are notified to manually run the new version of the game upon successful extraction.
 Removed the outdated file replacement logic to prevent errors during updates.
 Improved platform detection to handle Windows and Mac update downloads separately and more reliably.
-Improved the in-game updater. Windows installer updates are now downloaded directly to the user's Downloads folder for proper access permissions. Windows portable updates are now downloaded to the game folder and extracted locally without replacing the running executable file.
 Updated the readme file with added and modified keyboard shortcuts.
+Added the ability to disable menu wrapping in the game settings menu.
 Added some more weapon related sounds into the learn game sounds menu.
 new in 3.4
 Added a manual "Save Game" option to the pause menu, and implemented a timed auto-save system that saves the game every 5 seconds to reduce lag spikes caused by frequent disk writes during player movement.

@@ -1,10 +1,10 @@
-*Unfinished. Add an option to disable menu wrapping in the game settings menu.
 *Unfinished. Make lasers use batteries.
 *Unfinished. Add dart tubes as items for stunning enemies.
 *Unfinished. Add difficulty menu items to the normal game mode.
 *Unfinished. Add an online scoreboard system.
 *Unfinished. Add minimal soundpack support.
 
+*Finished. Add an option to disable menu wrapping in the game settings menu.
 *Finished. Make the doors easier to track.
 *Finished. Add tts configuration settings.
 *Finished. Add the ability to auto run instead of holding down the alt or control key.
