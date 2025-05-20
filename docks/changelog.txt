@@ -1,5 +1,6 @@
 new in 3.5
-Added a write-permission check before downloading updates. If the game is running from a protected location like Program Files, users will now be prompted to download the update to their Downloads folder instead.
+Added the ability to disable menu wrapping in the game settings menu.
+Added write-permission checks before downloading updates. If the game is running from a protected location like Program Files, users will now be prompted to download the update to their Downloads folder instead.
 Made it so users are notified to manually run the new version of the game upon successful extraction.
 Removed the outdated file replacement logic to prevent errors during updates.
 Improved platform detection to handle Windows and Mac update downloads separately and more reliably.

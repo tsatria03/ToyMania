@@ -13,6 +13,7 @@
 
 int menumusvolume=0;
 double preview_volume = 0;
+bool menuwrap=true;
 void fade(sound@ handle, double final_volume = -50, double delay = 25)
 {
 if (handle.volume == final_volume or !handle.active)
@@ -255,7 +256,7 @@ m.add_music("");
 m.reset();
 m.automatic_intro = true;
 m.focus_first_item = false;
-m.wrap = true;
+m.wrap = menuwrap;
 m.click_sound = "menuclick.ogg";
 m.close_sound = "menuclose.ogg";
 m.edge_sound = "menuedge.ogg";
