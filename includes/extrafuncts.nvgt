@@ -263,22 +263,22 @@ sound_pool@[] pools = {p, pool, alarmpool, ambpool, bulletpool, heartpool, healp
         }
     }
 }
-void restart()
+void restart(string appid, string scriptid="tm.nvgt")
 {
 if(SCRIPT_COMPILED)
 {
-bool success=run("tm.exe","",false,false);
+bool success=run(appid,"",false,false);
 if(!success)
 {
-alert("errorr", "Unable to restart tm.exe!");
+alert("errorr", "Unable to restart "+appid+"!");
 }
 }
 else
 {
-bool success=run("c:\\nvgt\\nvgtw.exe","tm.nvgt",false,false);
+bool success=run("c:\\nvgt\\nvgtw.exe", scriptid,false,false);
 if(!success)
 {
-alert("errorr", "Unable to restart tm.nvgt!");
+alert("errorr", "Unable to restart "+scriptid+"!");
 }
 }
 exit();

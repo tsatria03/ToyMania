@@ -69,7 +69,7 @@ if (main == "rt")
 {
 speak("restarting");
 m.fade_music();
-restart();
+restart("tm.exe");
 }
 if (main == "ex")
 {
@@ -178,6 +178,7 @@ maxhealth = endless ? 10000 : 1000;
 storemaxhealth = endless ? 10000 : 1000;
 if(endless) clear_inv();
 if (endless) destroy_all_healzones();
+destroy_all_doors();
     me.x = 25;
     me.y = 25;
 toynum=20;

@@ -33,9 +33,9 @@ Name: "desktopicon"; Description: "Create a desktop shortcut"; GroupDescription:
 Name: "startmenuicon"; Description: "Create a Start Menu shortcut"; GroupDescription: "Additional icons:"
 
 [Files]
-Source: "C:\Users\tsatr\OneDrive\Documents\GitHub\ToyMania\releases\windows\ToyMania_windows_portable_password_is_GrateCollector\*"; \
+Source: "C:\Users\tsatr\OneDrive\Documents\GitHub\ToyMania\releases\windows\ToyMania_windows_portable_password_is_GrateCollector\tm\*"; \
   DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs
-Source: "C:\Users\tsatr\OneDrive\Documents\GitHub\ToyMania\releases\windows\ToyMania_windows_portable_password_is_GrateCollector\docks\readme.txt"; \
+Source: "C:\Users\tsatr\OneDrive\Documents\GitHub\ToyMania\releases\windows\ToyMania_windows_portable_password_is_GrateCollector\tm\docks\readme.txt"; \
 DestDir: "{app}"; Flags: ignoreversion
 
 [Icons]

@@ -1,4 +1,3 @@
-sound@ progress_sound;
 bool is_newer_version(string oldv, string newv)
 {
     oldv = string_trim_sides(oldv);
@@ -90,35 +89,14 @@ else if (ext == "7z" || ext == "zip")
             mainmenu();
             return false;
         }
-        setupmenu(false);
-        m.add_item("Yes", "yes");
-        m.add_item("No", "no");
-        m.intro_text = "Are you sure you want to overwrite your existing game files?";
-        int confirm = m.run();
-        string confirm_choice = m.get_selected_item_id();
-        if (confirm == -1 || confirm_choice != "yes")
-{
-            speak("Update canceled.");
-            mainmenu();
-            return false;
-        }
         speak("Extracting update...");
         wait(1000);
 bool success = run("lib/7zr.exe", "x \"" + filename + "\" -pGrateCollector -aoa -y", true, true);
 if (success)
 {
-    int cleanup = question("Cleanup", "The update has been extracted successfully. Would you like to delete the downloaded archive?");
-    if (cleanup == 1 && file_exists(filename))
-    {
-        file_delete(filename);
-        speak("Archive deleted.");
-    }
-    else
-    {
-        speak("Archive kept.");
-    }
-    alert("Success", "Update extracted and applied successfully. The game will now restart.");
-    restart();
+    if (file_exists(filename)) file_delete(filename);
+alert("Update Complete", "The update has been successfully extracted to the tm folder. Please run the new version of the game to continue.");
+exit();
 }
 else
 {
@@ -199,6 +177,15 @@ status="finished";
 }
 return status;
 }
+string get_downloads_folder()
+{
+    if (system_is_windows)
+        return expand_environment_variables("%USERPROFILE%\\Downloads\\");
+    else if (system_is_unix)
+        return expand_environment_variables("$HOME/Downloads/");
+    else
+        return "";
+}
 string get_download_url(string projectname, string new_version)
 {
     bool is_mac = system_is_unix;
@@ -226,23 +213,11 @@ m.add_item("cancel", "cancel");
 string get_disk_filename(string url)
 {
     string[] parts = string_split(url, "/", true);
-    if (parts.length()> 0) return parts[parts.length()- 1];
-    return "update_file";
-}
-void beep_percentage(double val)
-{
-if(val<0 && val!=val)
-{
-return;
-}
-val=round(val,0);
-val=clamp(val,0,100);
-uint freq=uint(110*pow(2,val/25));
-float dur=40;
-float amp=0.4;
-uint sr=44100;
-float[]@ samples=triangle_wave(freq,dur,amp,sr);
-samples=adsr_envelope(samples,5,0,1,5,sr);
-@progress_sound=push_audio(samples,sr);
-progress_sound.play();
+    string filename = (parts.length() > 0) ? parts[parts.length() - 1] : "update_file";
+    string ext = filename.substr(filename.rfind(".") + 1);
+    if (system_is_windows && ext == "exe")
+        return get_downloads_folder() + filename;
+    else if (system_is_unix && (ext == "zip" || ext == "dmg"))
+        return get_downloads_folder() + filename;
+    return filename;
 }

@@ -1,3 +1,8 @@
+new in 3.5
+Removed outdated file replacement logic to prevent errors during updates.
+Made it so users are notified to manually run the new version of the game upon successful extraction.
+Improved platform detection to handle Windows and Mac update downloads separately and more reliably.
+Improved the in-game updater. Windows installer updates are now downloaded directly to the user's Downloads folder for proper access permissions. Windows portable updates are now downloaded to the game folder and extracted locally without replacing the running executable file.
 new in 3.4
 Added a manual "Save Game" option to the pause menu, and implemented a timed auto-save system that saves the game every 5 seconds to reduce lag spikes caused by frequent disk writes during player movement.
 Made it so the directional door tracking logic is Reversed to match the real-world orientation of the player. The system now correctly reports when a door is in front, behind, left, or right based on the player's overall location.
