@@ -1,3 +1,4 @@
+sound@ progress_sound;
 bool is_newer_version(string oldv, string newv)
 {
     oldv = string_trim_sides(oldv);
@@ -230,7 +231,6 @@ string get_disk_filename(string url)
 }
 void beep_percentage(double val)
 {
-sound@ progress_sound;
 if(val<0 && val!=val)
 {
 return;
