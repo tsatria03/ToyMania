@@ -21,7 +21,8 @@ bool check_for_updates(string old_version, string projectname, bool precheck = f
     }
     if (!is_newer_version(old_version, new_version))
 {
-        if (precheck) alert("No updates available", "You already have the latest version of the game.");
+        if (precheck)
+            alert("No updates available", "You already have the latest version of the game.");
         mainmenu();
         return false;
     }
@@ -35,24 +36,42 @@ bool check_for_updates(string old_version, string projectname, bool precheck = f
     string url = get_download_url(projectname, new_version);
     string filename = get_disk_filename(url);
     string bare_name = strip_extension(strip_directory(filename));
-    if (!file_exists(filename))
+if (!file_exists(filename))
 {
-        string result = dl_file(url, filename);
-        if (result != "finished")
+    string test_file = filename + ".test";
+    if (!put_file_contents(test_file, "test"))
 {
-            if (result == "canceled" && file_exists(filename)) file_delete(filename);
-            alert("Download Failed", "The update could not be downloaded.");
+wait(500);
+        int choice = question("Permission Denied", "This update can't be downloaded to this directory because it's write-protected. Would you like to download this file to your Downloads folder instead?");
+        if (choice != 1)
+{
+            speak("Update canceled.");
             mainmenu();
             return false;
         }
+        string downloads_folder = get_downloads_folder();
+        filename = downloads_folder + strip_directory(filename);
     }
 else
 {
-wait(500);
-        alert("Notice", "The update file already exists. Skipping download.");
+        file_delete(test_file);
     }
+    string result = dl_file(url, filename);
+    if (result != "finished")
+{
+        if (result == "canceled" && file_exists(filename)) file_delete(filename);
+        alert("Download Failed", "The update could not be downloaded.");
+        mainmenu();
+        return false;
+    }
+}
+else
+{
     wait(500);
-string ext = filename.substr(filename.rfind(".") + 1);
+    alert("Notice", "The update file already exists. Skipping download.");
+}
+    wait(500);
+    string ext = filename.substr(filename.rfind(".") + 1);
     setupmenu(false);
     if (ext == "exe")
 {
@@ -72,8 +91,7 @@ else if (ext == "7z" || ext == "zip")
         mainmenu();
         return false;
     }
-    if (choice == "run")
-{
+    if (choice == "run") {
         if (!run(filename, "", false, false))
 {
             alert("Error", "Could not launch the installer.");
@@ -85,19 +103,19 @@ else if (ext == "7z" || ext == "zip")
 {
         if (system_is_unix)
 {
-            alert("Manual Extraction Required", "Please manually extract the update file using a suitable tool. Automatic extraction is not supported on this Mac.");
+            alert("Manual Extraction Required", "Please manually extract the update file using a suitable tool. Automatic extraction is not supported on this platform.");
             mainmenu();
             return false;
         }
         speak("Extracting update...");
         wait(1000);
-bool success = run("lib/7zr.exe", "x \"" + filename + "\" -pGrateCollector -aoa -y", true, true);
-if (success)
+        bool success = run("lib/7zr.exe", "x \"" + filename + "\" -pGrateCollector -aoa -y", true, true);
+        if (success)
 {
-    if (file_exists(filename)) file_delete(filename);
-alert("Update Complete", "The update has been successfully extracted to the tm folder. Please run the new version of the game to continue.");
-exit();
-}
+            if (file_exists(filename)) file_delete(filename);
+            alert("Update Complete", "The update has been successfully extracted to the tm folder. Please run the new version of the game to continue.");
+            exit();
+        }
 else
 {
             alert("Extraction Failed", "Failed to extract the archive.");
@@ -213,11 +231,5 @@ m.add_item("cancel", "cancel");
 string get_disk_filename(string url)
 {
     string[] parts = string_split(url, "/", true);
-    string filename = (parts.length() > 0) ? parts[parts.length() - 1] : "update_file";
-    string ext = filename.substr(filename.rfind(".") + 1);
-    if (system_is_windows && ext == "exe")
-        return get_downloads_folder() + filename;
-    else if (system_is_unix && (ext == "zip" || ext == "dmg"))
-        return get_downloads_folder() + filename;
-    return filename;
+    return (parts.length() > 0) ? parts[parts.length() - 1] : "update_file";
 }
