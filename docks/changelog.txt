@@ -1,3 +1,5 @@
+new in 3.6
+Added some more guard related sounds into the learn game sounds menu.
 new in 3.5
 Made it so mac and windows update files get deleted propperly upon successful extraction.
 Added fallback behavior for failed update extractions. If an update extraction fails, the game will now provide clearer feedback and avoids restarting or exiting abruptly, allowing users to try again without patencial data loss.

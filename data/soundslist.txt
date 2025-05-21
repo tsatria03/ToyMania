@@ -129,6 +129,17 @@ gard2walk5.ogg
 gard2walk6.ogg
 gard2walk7.ogg
 gard2walk8.ogg
+gard3death.wav
+gard3fall1.wav
+gard3fall2.wav
+gard3hit.wav
+gard3pain.wav
+gard3taunt.wav
+gard3walk1.wav
+gard3walk2.wav
+gard3walk3.wav
+gard3walk4.wav
+gard3walk5.wav
 getdollars.ogg
 glassfall.ogg
 glassland.ogg
@@ -298,4 +309,4 @@ toyloop7.ogg
 toyloop8.ogg
 toyloop9.ogg
 windchimeloop.ogg
-total files: 300
+total files: 311

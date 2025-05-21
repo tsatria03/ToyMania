@@ -227,6 +227,7 @@ void fire_on_target(string targetType)
                 string painsound = "";
                 if (gards[i].gardtype == "gard1") painsound = "gard1pain" + random(1, 5) + ".ogg";
                 else if (gards[i].gardtype == "gard2") painsound = "gard2pain.ogg";
+else if (gards[i].gardtype == "gard3") painsound = "gard3pain.wav";
                 if (weapontype == "machinegun")
                 {
                     p.play_2d(weapontype + "hit.ogg", me.x, me.y, gards[i].gardx, gards[i].gardy, false);

@@ -51,7 +51,7 @@ bosses[i].healtimer.restart();
 if(bosses[i].launchtimer.elapsed>=bosses[i].launchtime)
 {
 bosses[i].launchsound=bosspool.play_2d(bosses[i].bosstype+"launch.ogg", me.x, me.y, bosses[i].bossx, bosses[i].bossy, false);
-string[] bosstyp={"gard1", "gard2"};
+string[] bosstyp={"gard1", "gard2", "gard3"};
 spawn_gard(bosses[i].bossx-random(1,5), bosses[i].bossy-random(1,5), random(30,60), random(30,60), random(75,750), random(75,750), random_string(bosstyp));
 bosses[i].launchtimer.restart();
 }

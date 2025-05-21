@@ -1,3 +1,4 @@
+*Unfinished. Add the settings menu inside the pause menu.
 *Unfinished. Make lasers use batteries.
 *Unfinished. Add dart tubes as items for stunning enemies.
 *Unfinished. Add difficulty menu items to the normal game mode.

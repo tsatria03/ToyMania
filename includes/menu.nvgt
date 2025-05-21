@@ -388,6 +388,12 @@ guards["Guard 2 Hit" + vdesc] = array<string> = {"gard2hit1.ogg", "gard2hit2.ogg
 guards["Guard 2 Pain"] = "gard2pain.ogg";
 guards["Guard 2 Taunt"] = "gard2taunt.ogg";
 guards["Guard 2 Walk" + vdesc] = array<string> = {"gard2walk1.ogg", "gard2walk2.ogg", "gard2walk3.ogg", "gard2walk4.ogg", "gard2walk5.ogg", "gard2walk6.ogg", "gard2walk7.ogg", "gard2walk8.ogg"};
+guards["Guard 3 Death"] = "gard3death.wav";
+guards["Guard 3 Fall" + vdesc] = array<string> = {"gard3fall1.wav", "gard3fall2.wav"};
+guards["Guard 3 Hit"] = "gard3hit.wav";
+guards["Guard 3 Pain"] = "gard3pain.wav";
+guards["Guard 3 Taunt"] = "gard3taunt.wav";
+guards["Guard 3 Walk" + vdesc] = array<string> = {"gard3walk1.wav", "gard3walk2.wav", "gard3walk3.wav", "gard3walk4.wav", "gard3walk5.wav"};
 learnCategories["Guards"] = guards;
 dictionary items;
 items["Ammo_pack loop: used in endless mode"] = "ammoloop.ogg";
