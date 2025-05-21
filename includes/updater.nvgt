@@ -56,6 +56,7 @@ else
 {
         file_delete(test_file);
     }
+wait(500);
     string result = dl_file(url, filename);
     if (result != "finished")
 {
@@ -91,12 +92,14 @@ else if (ext == "7z" || ext == "zip")
         mainmenu();
         return false;
     }
-    if (choice == "run") {
+    if (choice == "run")
+{
+wait(500);
         if (!run(filename, "", false, false))
 {
             alert("Error", "Could not launch the installer.");
         }
-        mainmenu();
+        exit();
         return false;
     }
     if (choice == "extract")
@@ -107,6 +110,7 @@ else if (ext == "7z" || ext == "zip")
             mainmenu();
             return false;
         }
+wait(500);
         speak("Extracting update...");
         wait(1000);
         bool success = run("lib/7zr.exe", "x \"" + filename + "\" -pGrateCollector -aoa -y", true, true);
