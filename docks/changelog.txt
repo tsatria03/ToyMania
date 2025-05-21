@@ -1,4 +1,5 @@
 new in 3.6
+Removed the save game option found in the pause menu.
 Added some more guard related sounds into the learn game sounds menu.
 new in 3.5
 Made it so mac and windows update files get deleted propperly upon successful extraction.

@@ -553,7 +553,6 @@ void pausemenu()
         m.add_item("Read current game session statistics", "rs");
         m.add_item("Quit game", "qmg");
         m.add_item("Resume game", "rmg");
-m.add_item("Save game", "smg");
 m.add_item("view detailed stats", "vds");
     m.intro_text = "Pause menu.";
     int mres = m.run();
@@ -687,14 +686,6 @@ cardest=false;
 {
             temp.play_stationary("resume.ogg", false);
             resume_game();
-            return;
-        }
-        if (psmem == "smg")
-{
-            temp.play_stationary("resume.ogg", false);
-speak("game saved");
-            resume_game();
-writedata();
             return;
         }
 if(psmem == "vds")
