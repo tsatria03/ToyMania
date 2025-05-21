@@ -1,3 +1,4 @@
+*Unfinished. remove the save game option in the pause menu.
 *Unfinished. Add the settings menu inside the pause menu.
 *Unfinished. Make lasers use batteries.
 *Unfinished. Add dart tubes as items for stunning enemies.
