@@ -402,7 +402,6 @@ if (endless)
     spawn_healzone(rightx - 5, rightx, miny2, maxy2, 1, random(30, 60), random(1500, 3000), "windchime");
 }
 if(endless) spawn_door(random(25,50), random(25,50), 0, 0, random(100,200), random(20,40));
-gametimer.force(1000*300);
 while(true)
 {
 wait(5);
