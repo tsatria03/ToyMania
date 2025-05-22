@@ -223,8 +223,6 @@ machinegunping.ogg
 machinegunreload.ogg
 machinegunshell1.ogg
 machinegunshell2.ogg
-machinegunshell3.ogg
-machinegunshell4.ogg
 marblefall.ogg
 marbleland.ogg
 marblewalk1.ogg
@@ -240,6 +238,15 @@ menumus.ogg
 menuopen.ogg
 menuwrap.ogg
 pause.ogg
+pistoldraw.ogg
+pistolempty.ogg
+pistolfail.ogg
+pistolfire.ogg
+pistolhit.ogg
+pistolping.ogg
+pistolreload.ogg
+pistolshell1.ogg
+pistolshell2.ogg
 playerdeath.ogg
 playergive.ogg
 playerheal1.ogg
@@ -309,4 +316,4 @@ toyloop7.ogg
 toyloop8.ogg
 toyloop9.ogg
 windchimeloop.ogg
-total files: 311
+total files: 318

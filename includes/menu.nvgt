@@ -501,7 +501,15 @@ weapons["Machine Gun Fire: used in endless mode"] = "machinegunfire.ogg";
 weapons["Machine Gun Hit: used in endless mode"] = "machinegunhit.ogg";
 weapons["Machine Gun Ping: used in endless mode"] = "machinegunping.ogg";
 weapons["Machine Gun Reload: used in endless mode"] = "machinegunreload.ogg";
-weapons["Machine Gun Shell: used in endless mode" + vdesc] = array<string> = {"machinegunshell1.ogg", "machinegunshell2.ogg", "machinegunshell3.ogg", "machinegunshell4.ogg"};
+weapons["Machine Gun Shell: used in endless mode" + vdesc] = array<string> = {"machinegunshell1.ogg", "machinegunshell2.ogg"};
+weapons["Pistol Draw: used in endless mode"] = "pistoldraw.ogg";
+weapons["Pistol Empty: used in endless mode"] = "pistolempty.ogg";
+weapons["Pistol Fail: used in endless mode"] = "pistolfail.ogg";
+weapons["Pistol Fire: used in endless mode"] = "pistolfire.ogg";
+weapons["Pistol Hit: used in endless mode"] = "pistolhit.ogg";
+weapons["Pistol Ping: used in endless mode"] = "pistolping.ogg";
+weapons["Pistol Reload: used in endless mode"] = "pistolreload.ogg";
+weapons["Pistol Shell: used in endless mode" + vdesc] = array<string> = {"pistolshell1.ogg", "pistolshell2.ogg"};
 learnCategories["Weapons"] = weapons;
 string[] sortedKeys = learnCategories.get_keys();
 sortedKeys.sort_ascending();
@@ -805,9 +813,17 @@ void weaponsmenu()
         horizRanges.insert_last(9);
         vertRanges.insert_last(10);
     }
+    else
+    {
+        weaponNames.insert_last("Pistol");
+        weaponIds.insert_last("pistol");
+        damages.insert_last(27);
+        horizRanges.insert_last(9);
+        vertRanges.insert_last(10);
+    }
     for (uint i = 0; i < weaponNames.length(); i++)
     {
-        string label = weaponNames[i] + ": Attack " + damages[i] + ". Horizontal range " + horizRanges[i] + ". Vertical range " + vertRanges[i]+".";
+        string label = weaponNames[i] + ": Attack " + damages[i] + ". Horizontal range " + horizRanges[i] + ". Vertical range " + vertRanges[i] + ".";
         if (weaponIds[i] == current_weapon)
             label += " (Equipped)";
         m.add_item(label, weaponIds[i]);
@@ -817,25 +833,25 @@ void weaponsmenu()
     string selected = m.get_selected_item_id();
     if (res == -1)
     {
-        boss_timer.resume();
-gametimer.resume();
-speak("canceled");
+        speak("Canceled");
+    boss_timer.resume();
+    gametimer.resume();
         return;
     }
     if (selected != current_weapon)
     {
-boss_timer.resume();
-gametimer.resume();
         draw_weapon(selected);
-            return;
-}
-    else
-    {
-        speak("This weapon is already equipped.");
-    }
-boss_timer.resume();
+    boss_timer.resume();
     gametimer.resume();
         return;
+    }
+else
+{
+    speak("This weapon is already equipped.");
+    boss_timer.resume();
+    gametimer.resume();
+        return;
+}
 }
 void achesmenu()
 {

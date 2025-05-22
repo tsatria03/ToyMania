@@ -75,47 +75,41 @@ cardest=false;
 if (key_pressed(KEY_1) and doormove == false and current_weapon != "bat")
 {
     draw_weapon("bat");
-    current_weapon = "bat";
 }
 if (key_pressed(KEY_2) and doormove == false and current_weapon != "boot")
 {
     draw_weapon("boot");
-    current_weapon = "boot";
 }
 if (key_pressed(KEY_3) and doormove == false and current_weapon != "club")
 {
     draw_weapon("club");
-    current_weapon = "club";
 }
 if (key_pressed(KEY_4) and doormove == false and current_weapon != "feat")
 {
     draw_weapon("feat");
-    current_weapon = "feat";
 }
 if (key_pressed(KEY_5) and doormove == false and current_weapon != "fist")
 {
     draw_weapon("fist");
-    current_weapon = "fist";
 }
 if (key_pressed(KEY_6) and doormove == false and current_weapon != "hammer")
 {
     draw_weapon("hammer");
-    current_weapon = "hammer";
 }
 if (key_pressed(KEY_7) and doormove == false and current_weapon != "knife")
 {
     draw_weapon("knife");
-    current_weapon = "knife";
 }
 if (key_pressed(KEY_8) and doormove == false and current_weapon != "laser")
 {
     draw_weapon("laser");
-    current_weapon = "laser";
 }
-if (key_pressed(KEY_9) and doormove == false and endless and current_weapon != "machinegun")
+if (key_pressed(KEY_9) and doormove==false)
 {
-    draw_weapon("machinegun");
-    current_weapon = "machinegun";
+    if (endless)
+        draw_weapon("machinegun");
+    else
+        draw_weapon("pistol");
 }
 if(key_repeating(KEY_TAB) and key_up(KEY_LMENU) and key_up(KEY_RMENU) and endless)
 {
@@ -200,9 +194,9 @@ temp.play_stationary("pause.ogg",false);
 pause_game();
 pausemenu();
 }
-if (key_pressed(KEY_Z) and doormove == false and endless)
+if (key_pressed(KEY_Z) and doormove == false)
 {
-    if (weapontype == "machinegun")
+    if (weapontype == "machinegun" or weapontype == "pistol")
     {
         speak("You have "+round(ammo,0) + " out of " + round(maxammo,0) + " rounds of ammo loaded, and " + round(reserved_ammo,0) + " rounds of ammo in reserve.");
     }
@@ -211,9 +205,9 @@ if (key_pressed(KEY_Z) and doormove == false and endless)
         speak("This weapon does not take any ammo.");
     }
 }
-if (key_pressed(KEY_R) and doormove == false and endless)
+if (key_pressed(KEY_R) and doormove == false and (weapontype == "machinegun" or weapontype == "pistol"))
 {
-reload_weapon();
+    reload_weapon();
 }
 if (key_pressed(KEY_D) and doormove == false)
 {
@@ -371,12 +365,12 @@ update_achievements();
 writedata();
 movetimer.restart();
 }
-if (key_pressed(KEY_SPACE) and firetimer.elapsed >= firetime and doormove == false and weapontype!="machinegun")
+if (key_pressed(KEY_SPACE) and firetimer.elapsed >= firetime and doormove == false and (weapontype != "machinegun"))
 {
     fire_weapon();
     firetimer.restart();
 }
-if (key_down(KEY_SPACE) and firetimer2.elapsed >= firetime2 and doormove == false and endless and weapontype=="machinegun")
+if (key_down(KEY_SPACE) and firetimer2.elapsed >= firetime2 and doormove == false and endless and weapontype == "machinegun")
 {
     fire_weapon();
     firetimer2.restart();

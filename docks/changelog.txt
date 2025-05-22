@@ -1,5 +1,7 @@
 new in 3.6
-Enhanced the prefferences menu by moving the open, reset and save buttons out of the other categories of settings into the main prefferences category.
+Made it so the pistol weapon is only exclusive to the normal mode. You can press the number 9 key to equip the pistol in normal mode, and machine gun in endless mode. This change also applies to the weapons menu for both modes as well.
+Added a new pistol weapon for the normal Mode. Players now have access to this weapon in place of the former machine gun. The machine gun can still be used in endless mode.
+Enhanced the preferences menu by moving the open, reset and save buttons out of the other categories into the main preferences category.
 Fixed an issue where the letter S key didn't work in normal mode to view the store's current health.
 Improved the updater for mac devices. If an update is available for that platform, users are now prompted to manually download the update in their browser. The download link is automatically copied to their clipboard for convenience, making it easier for them to quickly paste it for downloading.
 Added randomized platform and heal zone placements in Endless Mode. Platforms and heal zones no longer spawn in the same 2 spots like they once did before.
@@ -19,7 +21,7 @@ Updated the readme file with added and modified keyboard shortcuts.
 Added the ability to disable menu wrapping in the game settings menu.
 Added some more weapon related sounds into the learn game sounds menu.
 new in 3.4
-Added a manual "Save Game" option to the pause menu, and implemented a timed auto-save system that saves the game every 5 seconds to reduce lag spikes caused by frequent disk writes during player movement.
+Added a manual save game option to the pause menu, and implemented a timed auto-save system that saves the game every 5 seconds to reduce lag spikes caused by frequent disk writes during player movement.
 Made it so the directional door tracking logic is Reversed to match the real-world orientation of the player. The system now correctly reports when a door is in front, behind, left, or right based on the player's overall location.
 Added directional tracking to doors in Normal Mode. Pressing the letter D now tells players where the door is located in relation to them, such as in front or behind them. It also includes the approximate distance of the door in feet.
 Added support for loading and saving the rate, volume, voice, and screen reader preferences in the tts configuration menu.
@@ -30,7 +32,7 @@ Made it so cars don't start shooting you with bullets untill you reach the third
 Adjusted the key requirements to unlock the door in the normal and endless game modes. The normal mode will now require a random amount between 10 and 20 keys. The endless mode will now require a random amount between 20 and 40 keys.
 Added the ability to adjust the menu music volume in the game settings menu.
 new in 3.3
-Added a Master Volume Control to the Audio Settings menu. Players can now adjust the overall volume of all game sounds using the dedicated "Master Volume" slider.
+Added a Master Volume Control to the Audio Settings menu. Players can now adjust the overall volume of all game sounds using the dedicated master volume slider.
 Added a prompt to delete update archives or installers after a successful update, helping keep the overall game folder clean.
 Repackaged update archives to extract directly into the game's directory, removing unnecessary subfolders for a smoother update experience.
 Added support for extracting password-protected 7z update files in the game updater. This allows seamless in-game installation of encrypted update archives using a well-known password found in the file.
