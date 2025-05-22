@@ -1227,7 +1227,12 @@ form.reset();
     form.create_window("Preferences", false);
 int audsets = form.create_button("&audio settings");
 int gamsets = form.create_button("&game settings");
-int speechsets = form.create_button("&speech settings");
+int speechsets = form.create_button("s&peech settings");
+    int sdloc = -1;
+    if (system_is_windows)
+        sdloc = form.create_button("&open save data location");
+    int rest = form.create_button("&reset settings");
+int savesets = form.create_button("&save settings", true);
 int back = form.create_button("&back");
 form.focus(audsets);
 spool.play_stationary("menuopen.ogg",false);
@@ -1251,6 +1256,53 @@ soundsetsmenu();
         if (form.is_pressed(speechsets))
         {
 speechsetsmenu();
+}
+        if (system_is_windows && form.is_pressed(sdloc))
+        {
+            speak("loading");
+            wait(500);
+            string basePath = DIRECTORY_APPDATA + "tsatria03/ToyMania";
+            basePath = string_replace(basePath, "/", "\\", true);
+            bool result = run("C:\\Windows\\explorer.exe", basePath, false, false);
+            if (!result)
+            {
+                alert("Error", "Could not open " + basePath + ". Please re-create this folder and try again.");
+            }
+            else
+            {
+if(completesound==true) dlgplay("complete.ogg");
+                dlgmessage_return("The save data location has been successfully opened.");
+gamsetsmenu();
+            }
+        }
+        if (form.is_pressed(rest))
+        {
+setupmenu(false);
+    m.add_item("Yes", "yes");
+    m.add_item("No", "no");
+m.intro_text="Are you sure you want to reset all of your settings?";
+int mres=m.run();
+string confirm = m.get_selected_item_id();
+    if (mres == -1 or confirm == "no")
+    {
+        gamsetsmenu();
+    }
+if(confirm=="yes")
+{
+if(file_exists(DIRECTORY_APPDATA+"tsatria03/ToyMania/saves/settings.tmg")) file_delete(DIRECTORY_APPDATA+"tsatria03/ToyMania/saves/settings.tmg");
+resetpreffs();
+writepreffs();
+if(completesound==true) dlgplay("complete.ogg", false);
+dlgmessage_return("Settings reset.");
+mainmenu();
+}
+}
+        if (form.is_pressed(savesets))
+        {
+writepreffs();
+if(completesound==true) dlgplay("complete.ogg", false);
+dlgmessage_return("Settings saved.");
+mainmenu();
 }
     }
 }
@@ -1310,12 +1362,8 @@ if (showset_desc) compsound2 = form.create_input_box("Complete SFX: description"
 int togsound = form.create_checkbox("Enable toggle switch sounds.", togglesound);
 int togsound2 = -1;
 if (showset_desc) togsound2 = form.create_input_box("Toggle switch SFX: description", "This setting controls the sounds played when you enable or disable sertain settings found in the prefferences menu.", "", 0, true, true);
-    int sdloc = -1;
-    if (system_is_windows)
-        sdloc = form.create_button("&open save data location");
-    int rest = form.create_button("&reset settings");
-    int sv = form.create_button("&save settings", true);
     int cancel = form.create_button("&cancel");
+int ok = form.create_button("&okay");
 form.focus(autoUpdateToggle);
 spool.play_stationary("menuopen.ogg",false);
     while (true)
@@ -1343,57 +1391,14 @@ autorun = form.is_checked(runmode);
             playlevels = form.is_checked(levsound);
 completesound = form.is_checked(compsound);
 togglesound = form.is_checked(togsound);
-        if (form.is_pressed(rest))
-        {
-setupmenu(false);
-    m.add_item("Yes", "yes");
-    m.add_item("No", "no");
-m.intro_text="Are you sure you want to reset all of your settings?";
-int mres=m.run();
-string confirm = m.get_selected_item_id();
-    if (mres == -1 or confirm == "no")
-    {
-        gamsetsmenu();
-    }
-if(confirm=="yes")
-{
-if(file_exists(DIRECTORY_APPDATA+"tsatria03/ToyMania/saves/settings.tmg")) file_delete(DIRECTORY_APPDATA+"tsatria03/ToyMania/saves/settings.tmg");
-resetpreffs();
-writepreffs();
-if(completesound==true) dlgplay("complete.ogg", false);
-dlgmessage_return("Settings reset.");
-mainmenu();
-}
-}
-        if (form.is_pressed(sv))
-        {
-            writepreffs();
-if(completesound==true) dlgplay("complete.ogg", false);
-            dlgmessage_return("Settings saved.");
-            preffsmenu();
-        }
         if (form.is_pressed(cancel) || key_repeating(KEY_ESCAPE))
         {
 spool.play_stationary("menuclose.ogg",false);
             preffsmenu();
         }
-        if (system_is_windows && form.is_pressed(sdloc))
+        if (form.is_pressed(ok))
         {
-            speak("loading");
-            wait(500);
-            string basePath = DIRECTORY_APPDATA + "tsatria03/ToyMania";
-            basePath = string_replace(basePath, "/", "\\", true);
-            bool result = run("C:\\Windows\\explorer.exe", basePath, false, false);
-            if (!result)
-            {
-                alert("Error", "Could not open " + basePath + ". Please re-create this folder and try again.");
-            }
-            else
-            {
-if(completesound==true) dlgplay("complete.ogg");
-                dlgmessage_return("The save data location has been successfully opened.");
-gamsetsmenu();
-            }
+            preffsmenu();
         }
     }
 }
@@ -1415,9 +1420,8 @@ int masterGameVolumeSlider = form.create_slider("master game volume: adjustable"
 form.add_list_item(musList, "BossMusic: normal mode", "bossmus");
 form.add_list_item(musList, "Game Music: normal and endless mode", "gamemus");
 int sdm = form.create_button("Select sound &device. Currently set to " + soundcard);
-    int rest = form.create_button("&reset settings");
-int savesets = form.create_button("&save settings", true);
-int cansets = form.create_button("&cancel");
+int cancel = form.create_button("&cancel");
+int ok = form.create_button("&okay");
 form.focus(gameAmbienceVolumeSlider);
 spool.play_stationary("menuopen.ogg",false);
     while (true)
@@ -1452,13 +1456,21 @@ set_sound_master_volume(master_volume);
         muspool.update_sound_start_values(toytrackslot, 0, toymusvolume, toymuspitch);
         alarmpool.update_sound_start_values(alarmslot, 0, alarmvolume, alarmpitch);
         heartpool.update_sound_start_values(heartslot, 0, heartvolume, heartpitch);
-        if (form.is_pressed(cansets) || key_repeating(KEY_ESCAPE))
+        if (form.is_pressed(cancel) || key_repeating(KEY_ESCAPE))
         {
 ambpool.destroy_sound(toyambslot);
 muspool.destroy_sound(toytrackslot);
 alarmpool.destroy_sound(alarmslot);
 heartpool.destroy_sound(heartslot);
 spool.play_stationary("menuclose.ogg",false);
+            preffsmenu();
+        }
+        if (form.is_pressed(ok))
+        {
+ambpool.destroy_sound(toyambslot);
+muspool.destroy_sound(toytrackslot);
+alarmpool.destroy_sound(alarmslot);
+heartpool.destroy_sound(heartslot);
             preffsmenu();
         }
 if (form.is_pressed(ambTest))
@@ -1559,42 +1571,6 @@ dlgmessage_return("Sound device set to "+soundcard+".");
 soundsetsmenu();
 }
 }
-        if (form.is_pressed(rest))
-        {
-ambpool.destroy_sound(toyambslot);
-muspool.destroy_sound(toytrackslot);
-alarmpool.destroy_sound(alarmslot);
-heartpool.destroy_sound(heartslot);
-setupmenu(false);
-    m.add_item("Yes", "yes");
-    m.add_item("No", "no");
-m.intro_text="Are you sure you want to reset all of your settings?";
-int mres=m.run();
-string confirm = m.get_selected_item_id();
-    if (mres == -1 or confirm == "no")
-    {
-        soundsetsmenu();
-    }
-if(confirm=="yes")
-{
-if(file_exists(DIRECTORY_APPDATA+"tsatria03/ToyMania/saves/settings.tmg")) file_delete(DIRECTORY_APPDATA+"tsatria03/ToyMania/saves/settings.tmg");
-resetpreffs();
-if(completesound==true) dlgplay("complete.ogg", false);
-dlgmessage_return("Settings reset.");
-mainmenu();
-}
-}
-        if (form.is_pressed(savesets))
-        {
-ambpool.destroy_sound(toyambslot);
-muspool.destroy_sound(toytrackslot);
-alarmpool.destroy_sound(alarmslot);
-heartpool.destroy_sound(heartslot);
-writepreffs();
-if(completesound==true) dlgplay("complete.ogg", false);
-dlgmessage_return("Settings saved.");
-preffsmenu();
-}
     }
 }
 void speechsetsmenu()
@@ -1603,8 +1579,6 @@ form.reset();
     form.create_window("speech settings", false);
 int ttscfg = form.create_button("&Configure voice");
 int speechtest = form.create_button("&preview voice");
-    int rest = form.create_button("&reset settings");
-int savesets = form.create_button("&save settings", true);
 int cansets = form.create_button("&cancel");
 form.focus(ttscfg);
 spool.play_stationary("menuopen.ogg",false);
@@ -1628,34 +1602,6 @@ if (form.is_pressed(speechtest))
 {
 dlgmessage_return("This is your current voice configuration.");
     speechsetsmenu();
-}
-        if (form.is_pressed(rest))
-        {
-setupmenu(false);
-    m.add_item("Yes", "yes");
-    m.add_item("No", "no");
-m.intro_text="Are you sure you want to reset all of your settings?";
-int mres=m.run();
-string confirm = m.get_selected_item_id();
-    if (mres == -1 or confirm == "no")
-    {
-        speechsetsmenu();
-    }
-if(confirm=="yes")
-{
-if(file_exists(DIRECTORY_APPDATA+"tsatria03/ToyMania/saves/settings.tmg")) file_delete(DIRECTORY_APPDATA+"tsatria03/ToyMania/saves/settings.tmg");
-resetpreffs();
-if(completesound==true) dlgplay("complete.ogg", false);
-dlgmessage_return("Settings reset.");
-mainmenu();
-}
-}
-        if (form.is_pressed(savesets))
-        {
-writepreffs();
-if(completesound==true) dlgplay("complete.ogg", false);
-dlgmessage_return("Settings saved.");
-preffsmenu();
 }
     }
 }
