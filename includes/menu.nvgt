@@ -745,10 +745,10 @@ for (uint i = 0; i < objtypes.length(); i++)
     m.intro_text = "Shop menu. What would you like to buy?";
     int mres = m.run();
     string shopem = m.get_selected_item_id();
-if (mres == -1 || shopem == "back" || shopem == "shopinfo")
+if (mres == -1 || shopem == "shopinfo" || shopem == "back")
 {
-resume_game();
         speak("Canceled");
+resume_game();
         return;
     }
     if (money <= 0)
@@ -760,14 +760,16 @@ resume_game();
     vd.set_disallowed_chars("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ !@#$%^&*()[]{};:'\"\\|,.<>?/+=`~", false, "This character is not allowed.");
     string amount_input = vd.input_box("", "How many " + shopem.replace("_", " ", true) + "s would you like to buy?");
     if (amount_input == "")
+{
 speak("canceled");
 resume_game();
         return;
-    double amount = string_to_number(amount_input);
+    }
+double amount = string_to_number(amount_input);
     if (amount <= 0)
 {
-resume_game();
         speak("Invalid quantity.");
+resume_game();
         return;
     }
 double price = 1.0;
@@ -783,8 +785,8 @@ resume_game();
 p.play_stationary("playergive.ogg",false);
     give(shopem, int(amount));
     money -= total_cost;
-resume_game();
     speak("Purchase completed. You bought " + int(amount) + " " + shopem.replace("_", " ", true) + (amount == 1 ? "." : "s."));
+resume_game();
 return;
 }
 void weaponsmenu()

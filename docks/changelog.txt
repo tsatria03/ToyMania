@@ -1,4 +1,5 @@
 new in 3.6
+Fixed an issue where the shop menu in endless mode refused to let players make successful purchases.
 Removed the save game option found in the pause menu.
 Added some more guard related sounds into the learn game sounds menu.
 new in 3.5
