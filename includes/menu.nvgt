@@ -144,7 +144,7 @@ mainmenu();
 if (gamem == "ty")
 {
     setupmenu(false);
-m.add_item("Normal. This mode lets you complete objectives and defeat the boss, and find the unlockable door to win. Great for structured gameplay.", "normal");
+m.add_item("Normal. This is a timed driven mode where you must collect items, survive hazards, and defeat the boss before the store explodes. There is one unlockable door that you must find to win.", "normal");
 m.add_item("Endless. This mode lets you play for as long as you can survive. The game will get harder over time with no final boss, and just one unlockable door to win. This mode will also include ammo packs and health potions that drop from time to time for use durring intense guard fights.", "endless");
     m.add_item("Back", "back");
     m.intro_text = "Choose how you want to play the game.";
@@ -177,7 +177,7 @@ maxhealth = endless ? 10000 : 1000;
     storehealth = endless ? 10000 : 1000;
 storemaxhealth = endless ? 10000 : 1000;
 if(endless) clear_inv();
-if (endless) destroy_all_healzones();
+destroy_all_healzones();
 destroy_all_doors();
     me.x = 25;
     me.y = 25;
@@ -657,7 +657,7 @@ collected_toys = 0;
             }
             if (endless) clear_inv();
             if (!endless) destroy_all_bosses();
-if (endless) destroy_all_healzones();
+destroy_all_healzones();
 destroy_all_bullets();
             destroy_all_cars();
             destroy_all_gards();
