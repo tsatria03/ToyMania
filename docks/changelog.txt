@@ -1,4 +1,5 @@
 new in 3.6
+Improved the updater for mac devices. If an update is available for that platform, users are now prompted to manually download the update in their browser. The download link is automatically copied to their clipboard for convenience, making it easier for them to quickly paste it for downloading.
 Added randomized platform and heal zone placements in Endless Mode. Platforms and heal zones no longer spawn in the same 2 spots like they once did before.
 Made it so store destruction platforms in level 6 of normal mode now spawn at randomized positions of the map. The glass platforms that usually spawn during the store countdown are no longer fixed to the same 2 spots. They now appear at random locations on the left and right sides of the map.
 Fixed an issue where the shop menu in endless mode refused to work to make successful purchases.

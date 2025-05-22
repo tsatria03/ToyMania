@@ -106,7 +106,8 @@ wait(500);
 {
         if (system_is_unix)
 {
-            alert("Manual Extraction Required", "Please manually extract the update file using a suitable tool. Automatic extraction is not supported on this platform.");
+    clipboard_set_text(url);
+    alert("Manual Download Required", "This update must be installed manually for this platform. The download link has been copied to your clipboard. Please paste it into your browser to download the update.");
             mainmenu();
             return false;
         }
