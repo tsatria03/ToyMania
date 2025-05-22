@@ -1,5 +1,6 @@
 new in 3.6
-Fixed an issue where the shop menu in endless mode refused to let players make successful purchases.
+Made it so store destruction platforms in level 6 of normal mode spawn at randomized positions of the map. The glass platforms that usually spawn during the store countdown are no longer fixed to the same 2 spots. They now appear at random locations on the left and right sides of the map, making each playthrough more dynamic and unpredictable.
+Fixed an issue where the shop menu in endless mode refused to work to make successful purchases.
 Removed the save game option found in the pause menu.
 Added some more guard related sounds into the learn game sounds menu.
 new in 3.5

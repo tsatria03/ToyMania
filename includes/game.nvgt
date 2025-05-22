@@ -568,7 +568,11 @@ if (!small_storedest and boss_timer.elapsed >boss_time_limit-60000)
 health-=random(200/2, 400/2);
 storehealth-=random(200, 400);
 small_storedest = true;
-spawn_platform(0, 10, 0, 50, "glass");
+double x1 = random(0, 5);
+double x2 = x1 + 5;
+double y1 = random(0, 45);
+double y2 = y1 + 5;
+spawn_platform(x1, x2, y1, y2, "glass");
 painslot=p.play_stationary("playerpain.ogg", false);
 pool.play_stationary("storealert_small.ogg", false);
 pool.play_stationary("storedest_small.ogg", false);
@@ -578,7 +582,12 @@ if (!medium_storedest and boss_timer.elapsed >boss_time_limit-30000)
 health-=random(300/2, 600/2);
 storehealth-=random(300, 600);
 medium_storedest = true;
-spawn_platform(40, 50, 0, 50, "glass");
+double x1 = random(45, 49);
+double x2 = x1 + 5;
+if (x2 > 50) x2 = 50;
+double y1 = random(0, 45);
+double y2 = y1 + 5;
+spawn_platform(x1, x2, y1, y2, "glass");
 painslot=p.play_stationary("playerpain.ogg", false);
 pool.play_stationary("storealert_medium.ogg", false);
 pool.play_stationary("storedest_medium.ogg", false);

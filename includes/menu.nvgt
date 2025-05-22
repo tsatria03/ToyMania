@@ -723,70 +723,70 @@ pausemenu();
         }
 }
     }
-void shopmenu()
+void shopmenu() 
 {
     dictionary prices;
     prices.set("ammo_pack", 5.0);
     prices.set("potion", 10.0);
     string[] objtypes = {"ammo_pack", "potion"};
     setupmenu(false);
-m.add_item("You have " + round(money, 0) + " dollars available to spend", "shopinfo");
-for (uint i = 0; i < objtypes.length(); i++)
+    m.add_item("You have " + round(money, 0) + " dollars available to spend", "shopinfo");
+    for (uint i = 0; i < objtypes.length(); i++)
 {
-    string itemID = objtypes[i];
-    string itemName = itemID.replace("_", " ", true);
-    int ownedCount = max(0, item_exists(itemID));
-    double itemPrice = 1.0;
-    if (prices.exists(itemID)) prices.get(itemID, itemPrice);
-    string label = itemName + ", costs " + round(itemPrice, 0) + " dollar" + (itemPrice != 1 ? "s" : "") + ". You currently have " + ownedCount + " of these in your inventory.";
-    m.add_item(label, itemID);
-}
+        string itemID = objtypes[i];
+        string itemName = itemID.replace("_", " ", true);
+        int ownedCount = max(0, item_exists(itemID));
+        double itemPrice = 1.0;
+        if (prices.exists(itemID)) prices.get(itemID, itemPrice);
+        string label = itemName + ", costs " + round(itemPrice, 0) + " dollar" + (itemPrice != 1 ? "s" : "") + ". You currently have " + ownedCount + " of these in your inventory.";
+        m.add_item(label, itemID);
+    }
     m.add_item("back", "back");
     m.intro_text = "Shop menu. What would you like to buy?";
     int mres = m.run();
     string shopem = m.get_selected_item_id();
-if (mres == -1 || shopem == "shopinfo" || shopem == "back")
+    if (mres == -1 || shopem == "shopinfo" || shopem == "back")
 {
         speak("Canceled");
-resume_game();
+        resume_game();
         return;
     }
     if (money <= 0)
 {
         dlgmessage_return("Error: you don't have enough money to complete this action.");
-resume_game();
+        resume_game();
         return;
     }
     vd.set_disallowed_chars("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ !@#$%^&*()[]{};:'\"\\|,.<>?/+=`~", false, "This character is not allowed.");
     string amount_input = vd.input_box("", "How many " + shopem.replace("_", " ", true) + "s would you like to buy?");
     if (amount_input == "")
 {
-speak("canceled");
-resume_game();
+        speak("canceled");
+        resume_game();
         return;
     }
-double amount = string_to_number(amount_input);
+    double amount = string_to_number(amount_input);
     if (amount <= 0)
 {
         speak("Invalid quantity.");
-resume_game();
+        resume_game();
         return;
     }
-double price = 1.0;
-if (prices.exists(shopem)) prices.get(shopem, price);
-double total_cost = amount * price;
+    double price = 1.0;
+    if (prices.exists(shopem)) prices.get(shopem, price);
+    double total_cost = amount * price;
     if (money < total_cost)
 {
         dlgmessage_return("You don't have enough money to buy that many.");
-resume_game();
+        resume_game();
         return;
     }
     p.play_stationary("storebuy" + random(1, 4) + ".ogg", false);
-p.play_stationary("playergive.ogg",false);
+    p.play_stationary("playergive.ogg", false);
     give(shopem, int(amount));
     money -= total_cost;
     speak("Purchase completed. You bought " + int(amount) + " " + shopem.replace("_", " ", true) + (amount == 1 ? "." : "s."));
-resume_game();
+    resume_game();
 return;
 }
 void weaponsmenu()
