@@ -278,6 +278,7 @@ setupmenu(false);
 m.click_sound = "";
 m.enter_sound="";
 m.open_sound = "";
+m.edge_sound="";
 m.wrap_sound = "";
 m.add_items(sfx_names);
 m.add_item("back", "back");

@@ -415,12 +415,12 @@ guards["Guard 3 Walk" + vdesc] = array<string> = {"gard3walk1.wav", "gard3walk2.
 learnCategories["Guards"] = guards;
 dictionary items;
 items["Ammo_pack loop: used in endless mode"] = "ammoloop.ogg";
-items["Cycle inventory: used in endless mode" + vdesc] = array<string> = {"invcycle1.ogg", "invcycle2.ogg", "invcycle3.ogg", "invcycle4.ogg", "invcycle5.ogg", "invcycle6.ogg"};
 items["Drink potion: used in endless mode"] = "healthdrink.ogg";
 items["Get ammo_pack: used in endless mode" + vdesc] = array<string> = {"ammoget1.ogg", "ammoget2.ogg"};
 items["Get money: used in endless mode"] = "getdollars.ogg";
 items["Get potion: used in endless mode"] = "healthget.ogg";
 items["Item break: used in endless mode" + vdesc] = array<string> = {"itembreak1.ogg", "itembreak2.ogg", "itembreak3.ogg", "itembreak4.ogg", "itembreak5.ogg", "itembreak6.ogg"};
+items["Item give: used in endless mode"] = "playergive.ogg";
 items["Item spawn: used in endless mode"] = "itemspawn.ogg";
 items["Potion loop: used in endless mode"] = "healthloop.ogg";
 items["Open ammo_pack: used in endless mode"] = "ammopack.ogg";
@@ -437,11 +437,11 @@ player["Alarm: used in normal mode"] = "gamealarm.ogg";
 player["Alert medium: used in normal mode"] = "storealert_medium.ogg";
 player["Alert small: used in normal mode"] = "storealert_small.ogg";
 player["Countdown: used in normal mode"] = "gamecount.ogg";
+player["Cycle inventory: used in endless mode" + vdesc] = array<string> = {"invcycle1.ogg", "invcycle2.ogg", "invcycle3.ogg", "invcycle4.ogg", "invcycle5.ogg", "invcycle6.ogg"};
 player["Death"] = "playerdeath.ogg";
 player["Explode large: used in normal mode"] = "storedest_large.ogg";
 player["Explode medium: used in normal mode"] = "storedest_medium.ogg";
 player["Explode small: used in normal mode"] = "storedest_small.ogg";
-player["Give item: used in endless mode"] = "playergive.ogg";
 player["Glass fall: used in normal mode"] = "glassfall.ogg";
 player["Glass land: used in normal mode"] = "glassland.ogg";
 player["Glass walk: used in normal mode" + vdesc] = array<string> = {"glasswalk1.ogg", "glasswalk2.ogg", "glasswalk3.ogg", "glasswalk4.ogg", "glasswalk5.ogg"};
@@ -533,6 +533,15 @@ string[] sortedKeys = learnCategories.get_keys();
 sortedKeys.sort_ascending();
 setupmenu(false);
 m.intro_text = "Learn game sounds menu. You can preview the most important sounds used by the game here. This menu is organized by sound category for easier viewing.";
+int restoreIndex = 0;
+for (uint i = 0; i < sortedKeys.length(); i++)
+{
+    if (sortedKeys[i] == last_learn_category)
+    {
+        restoreIndex = i;
+        break;
+    }
+}
 for (uint i = 0; i < sortedKeys.length(); i++)
 {
 string key = sortedKeys[i];
@@ -557,6 +566,7 @@ if (cat.exists(subkeys[j]))
     }
 }
 }
+m.set_focused_item(restoreIndex);
 m.add_item(key + ": This category has a total of " + count + " sound" + (count == 1 ? "" : "s"), key);
 }
 m.add_item("Back", "back");
@@ -568,6 +578,7 @@ gamemenu();
 }
 if (learnCategories.exists(sel))
 {
+    last_learn_category = sel;
 m.intro_text = sel + " menu. Press the up or down arrow keys to navigate the list, and enter to play one.";
 learn_game_sounds_menu(cast<dictionary@>(learnCategories[sel]), "", m);
 }

@@ -148,7 +148,7 @@ toymusvolume = st.read_double("toymusvolume");
 if (st.d.exists("master_volume"))
 {
     master_volume = st.read_float("master_volume");
-    set_sound_master_volume(master_volume); // Apply it
+    set_sound_master_volume(master_volume);
 }
 if (st.d.exists("auto_check_updates"))
 {
