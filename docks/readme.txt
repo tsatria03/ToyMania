@@ -26,6 +26,8 @@ Letter, P: Opens the pause menu, if pressed.
 Letter, R: Reloads ammo into weapons that take them in the endless game mode, if pressed.
 Letter, S: Opens the shop menu in the endless game mode, if pressed.
 Letter, M: Announces how much money you currently have in the endless game mode, if pressed.
+Alt plus letter A: opens the audio settings menu within the current game session, if pressed.
+Alt plus letter G: opens the game settings menu within the current game session, if pressed.
 Page up: Razes the in-game music volume by 1 decibel, if pressed/held down.
 Page down: Lowers the in-game music volume by 1 decibel, if pressed/held down.
 Shift plus Page up: Razes the in-game alarm volume by 1 decibel, if pressed/held down.
