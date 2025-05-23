@@ -214,10 +214,15 @@ if (key_pressed(KEY_D) and doormove == false)
     if (doors.length() == 0)
     {
         speak("There are no doors currently present.");
+        return;
+    }
+    if (shift_is_down())
+    {
+        speak("You need " + doors[0].required_keys + " or more keys to unlock the door.");
     }
     else if (endless)
     {
-        speak("The door is at " + doors[0].startx + ", " + doors[0].starty + ". You need " + doors[0].required_keys + " or more keys to unlock it.");
+        speak("The door is at " + doors[0].startx + ", " + doors[0].starty + ".");
     }
     else
     {
@@ -230,7 +235,7 @@ if (key_pressed(KEY_D) and doormove == false)
         if (dx < 0) direction += (direction == "" ? "on your left" : " and to the left");
         else if (dx > 0) direction += (direction == "" ? "on your right" : " and to the right");
         if (direction == "") direction = "right here";
-        speak("The door is " + direction + ", about " + distance + " feet away. You need " + doors[0].required_keys + " or more keys to unlock it.");
+        speak("The door is " + direction + ", about " + distance + " feet away.");
     }
 }
 if(key_pressed(KEY_L) and doormove==false)
@@ -478,7 +483,7 @@ if(!endless) destroy_all_cars();
 int gardchoice;
 if(gardchoice==1) spawn_gard(random(0,maxx), random(0,maxy), random(20,40), random(20,40), random(100,1000), random(100,1000), "gard1");
 if(gardchoice==2) spawn_gard(random(0,maxx), random(0,maxy), random(30,60), random(30,60), random(75,750), random(75,750), "gard2");
-if(gardchoice==3) spawn_gard(random(0,maxx), random(0,maxy), random(40,80), random(40,80), random(50,500), random(50,500), "gard3");
+if(gardchoice==3) spawn_gard(random(0,maxx), random(0,maxy), random(30,60), random(30,60), random(75,750), random(75,750), "gard3");
 gardchoice=random(1,3);
 gardspawntimer.restart();
 }

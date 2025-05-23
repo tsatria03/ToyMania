@@ -1,3 +1,7 @@
+new in 3.7
+Replaced some of the pistol sounds with better ones.
+Made it so the door tracking info is separated into two different keys. Shift D will tell you how many keys are required to unlock the door, and D will tell you where the door is located in both normal and endless modes.
+Made the third guard easier to kill for all game modes.
 new in 3.6
 Made it so the pistol weapon is only exclusive to the normal mode. You can press the number 9 key to equip the pistol in normal mode, and machine gun in endless mode. This change also applies to the weapons menu for both modes as well.
 Added a new pistol weapon for the normal Mode. Players now have access to this weapon in place of the former machine gun. The machine gun can still be used in endless mode.
