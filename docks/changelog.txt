@@ -1,4 +1,6 @@
 new in 3.7
+You can now press alt G to quickly open the game settings menu within the game. These settings will only hold the check boxes related to the actual game session you're currently playing.
+You can now press alt A to quickly open the audio settings menu within the game. These settings will only hold the sliders related to the actual game session you're currently playing.
 Replaced some of the pistol sounds with better ones.
 Made it so the door tracking info is separated into two different keys. Shift D will tell you how many keys are required to unlock the door, and D will tell you where the door is located in both normal and endless modes.
 Made the third guard easier to kill for all game modes.

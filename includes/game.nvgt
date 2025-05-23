@@ -194,6 +194,16 @@ temp.play_stationary("pause.ogg",false);
 pause_game();
 pausemenu();
 }
+if(alt_is_down() and key_pressed(KEY_A))
+{
+pause_game();
+soundsetsmenu2();
+}
+if(alt_is_down() and key_pressed(KEY_G))
+{
+pause_game();
+gamsetsmenu2();
+}
 if (key_pressed(KEY_Z) and doormove == false)
 {
     if (weapontype == "machinegun" or weapontype == "pistol")

@@ -1418,6 +1418,53 @@ spool.play_stationary("menuclose.ogg",false);
         }
     }
 }
+void gamsetsmenu2()
+{
+    form.reset();
+    form.create_window("Game settings", false);
+int runmode = form.create_checkbox("Enable automatic running when moving.", autorun);
+int glb = form.create_checkbox("Enable behind pitch decrease.", behind_pitch);
+int glh = form.create_checkbox("Enable HRTF support.", hrtf);
+int achsound = form.create_checkbox("Enable achievement sound effects.", play_ach_scores);
+int achvoice = form.create_checkbox("Enable achievement speech feedback.", speak_ach_scores);
+int gcp = form.create_checkbox("Enable post-game copy and export prompts.", gamcopy);
+int qcm = form.create_checkbox("Enable quit confirmation prompts.", quit_menu);
+int countsound = form.create_checkbox("Enable countdown sound effects.", playcounts);
+int levsound = form.create_checkbox("Enable levelup sound effects.", playlevels);
+    int cancel = form.create_button("&cancel");
+int ok = form.create_button("&okay");
+form.focus(runmode);
+spool.play_stationary("menuopen.ogg",false);
+    while (true)
+    {
+        wait(5);
+        form.monitor();
+autorun = form.is_checked(runmode);
+            behind_pitch = form.is_checked(glb);
+            hrtf = form.is_checked(glh);
+            sound_global_hrtf = hrtf;
+            play_ach_scores = form.is_checked(achsound);
+            speak_ach_scores = form.is_checked(achvoice);
+            gamcopy = form.is_checked(gcp);
+            quit_menu = form.is_checked(qcm);
+            playcounts = form.is_checked(countsound);
+            playlevels = form.is_checked(levsound);
+        if (form.is_pressed(cancel) || key_repeating(KEY_ESCAPE))
+        {
+spool.play_stationary("menuclose.ogg",false);
+speak("canceled");
+resume_game();
+return;
+        }
+        if (form.is_pressed(ok))
+        {
+writepreffs();
+speak("Settings saved.");
+resume_game();
+return;
+        }
+    }
+}
 void soundsetsmenu()
 {
 form.reset();
@@ -1589,6 +1636,46 @@ soundsetsmenu();
 }
     }
 }
+void soundsetsmenu2()
+{
+form.reset();
+    form.create_window("audio settings", false);
+int gameAmbienceVolumeSlider = form.create_slider("game ambience volume: adjustable", (toyambvolume + 50) * 2, 0, 100, "percent", 1);
+int gameMusicVolumeSlider = form.create_slider("game music volume: adjustable", (toymusvolume + 50) * 2, 0, 100, "percent", 1);
+int gameAlarmVolumeSlider = form.create_slider("game alarm volume: adjustable", (alarmvolume + 50) * 2, 0, 100, "percent", 1);
+int gameHeartbeatVolumeSlider = form.create_slider("game heartbeat volume: adjustable", (heartvolume + 50) * 2, 0, 100, "percent", 1);
+int cancel = form.create_button("&cancel");
+int ok = form.create_button("&okay");
+form.focus(gameAmbienceVolumeSlider);
+spool.play_stationary("menuopen.ogg",false);
+    while (true)
+    {
+        wait(5);
+        form.monitor();
+toyambvolume = (form.get_slider(gameAmbienceVolumeSlider) / 2) - 50;
+toymusvolume = (form.get_slider(gameMusicVolumeSlider) / 2) - 50;
+alarmvolume = (form.get_slider(gameAlarmVolumeSlider) / 2) - 50;
+heartvolume = (form.get_slider(gameHeartbeatVolumeSlider) / 2) - 50;
+        ambpool.update_sound_start_values(toyambslot, 0, toyambvolume, toyambpitch);
+        muspool.update_sound_start_values(toytrackslot, 0, toymusvolume, toymuspitch);
+        alarmpool.update_sound_start_values(alarmslot, 0, alarmvolume, alarmpitch);
+        heartpool.update_sound_start_values(heartslot, 0, heartvolume, heartpitch);
+        if (form.is_pressed(cancel) || key_repeating(KEY_ESCAPE))
+        {
+spool.play_stationary("menuclose.ogg",false);
+speak("canceled");
+resume_game();
+return;
+        }
+        if (form.is_pressed(ok))
+        {
+writepreffs();
+speak("Settings saved.");
+resume_game();
+return;
+        }
+}
+    }
 void speechsetsmenu()
 {
 form.reset();
