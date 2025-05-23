@@ -1,10 +1,10 @@
-*Unfinished. Add the settings menu inside the pause menu.
 *Unfinished. Make lasers use batteries.
 *Unfinished. Add dart tubes as items for stunning enemies.
 *Unfinished. Add difficulty menu items to the normal game mode.
 *Unfinished. Add an online scoreboard system.
 *Unfinished. Add minimal soundpack support.
 
+*Finished.  Make it easier to access common audio/game settings within the current game session the user is playing.
 *Finished. Make it so store explosions don't always spawn glass in the same two sides of the map, far left/right.
 *Finished. remove the save game option in the pause menu.
 *Finished. Add an option to disable menu wrapping in the game settings menu.
