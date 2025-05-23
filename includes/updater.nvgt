@@ -36,6 +36,13 @@ bool check_for_updates(string old_version, string projectname, bool precheck = f
     string url = get_download_url(projectname, new_version);
     string filename = get_disk_filename(url);
     string bare_name = strip_extension(strip_directory(filename));
+if (system_is_unix)
+{
+    clipboard_set_text(url);
+alert("Manual Download Required", "This update must be installed manually for this platform. The download link has been copied to your clipboard. Please paste it into your browser to download the update.");
+    mainmenu();
+    return false;
+}
 if (!file_exists(filename))
 {
     string test_file = filename + ".test";
@@ -104,13 +111,6 @@ wait(500);
     }
     if (choice == "extract")
 {
-        if (system_is_unix)
-{
-    clipboard_set_text(url);
-    alert("Manual Download Required", "This update must be installed manually for this platform. The download link has been copied to your clipboard. Please paste it into your browser to download the update.");
-            mainmenu();
-            return false;
-        }
 wait(500);
         speak("Extracting update...");
         wait(1000);

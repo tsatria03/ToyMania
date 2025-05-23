@@ -1,4 +1,5 @@
 new in 3.7
+Fixed an issue on mac devices where the updater would download the update file, along with copying the download link to the clipboard. From now on, the clipboard action will only be performed to prevent redundant or inaccessible downloads inside the game's bundle.
 Added some more speaker test sounds into the speaker test menu.
 Updated the readme file with added and modified keyboard shortcuts.
 You can now press alt G to quickly open the game settings menu within the game. These settings will only hold the check boxes related to the actual game session you're currently playing.
