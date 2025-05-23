@@ -259,6 +259,8 @@ resume.ogg
 session_achievement.ogg
 setdisabled.ogg
 setenabled.ogg
+speaker_8bit.ogg
+speaker_crash_car.ogg
 speaker_stone_throw.ogg
 speaker_sword_clank.ogg
 storealert_medium.ogg
@@ -316,4 +318,4 @@ toyloop7.ogg
 toyloop8.ogg
 toyloop9.ogg
 windchimeloop.ogg
-total files: 318
+total files: 320
