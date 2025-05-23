@@ -1,27 +1,30 @@
-# Auto detect text files and perform LF normalization
-* text=auto
+# Normalize line endings to LF
+* text=auto eol=lf
 
-#binary files
+# --- Binary files ---
 *.dat linguist-language=Binary
+*.exe binary
+*.ogg binary
+*.mp3 binary
+*.wav binary
+*.zip binary
 
-# nvgt files
+# --- NVGT & Game-related ---
 *.nvgt linguist-language=AngelScript
-
-# simple fighter game files
 *.sif linguist-language=INI
+*.gml linguist-language=GameMaker
+*.unity linguist-language=ShaderLab
 
-# Web Development files
-*.js linguist-language=JavaScript
-*.ts linguist-language=TypeScript
+# --- Web Development ---
 *.html linguist-language=HTML
 *.css linguist-language=CSS
+*.js linguist-language=JavaScript
+*.ts linguist-language=TypeScript
 *.php linguist-language=PHP
 
-# General Purpose files
+# --- General Purpose Programming ---
 *.py linguist-language=Python
 *.java linguist-language=Java
-*.h linguist-language=C++
-*.c linguist-language=C
 *.cs linguist-language=C#
 *.rb linguist-language=Ruby
 *.go linguist-language=Go
@@ -29,35 +32,38 @@
 *.swift linguist-language=Swift
 *.kt linguist-language=Kotlin
 
-# Scripting files
-*.lua linguist-language=Lua
-*.pl linguist-language=Perl
+# --- Scripting / Systems ---
 *.sh linguist-language=Shell
 *.ps1 linguist-language=PowerShell
+*.pl linguist-language=Perl
+*.lua linguist-language=Lua
+*.bat linguist-language=Batchfile
 
-# Game Development files
-*.gd linguist-language=GDScript
-*.as linguist-language=AngelScript
+# --- Game/Low-level Code ---
+*.c linguist-language=C
 *.cpp linguist-language=C++
-*.gml linguist-language=GameMaker
-*.unity linguist-language=ShaderLab
+*.h linguist-language=C++
+*.as linguist-language=AngelScript
 
-# Data files
+# --- Config & Data Formats ---
 *.json linguist-language=JSON
 *.xml linguist-language=XML
 *.yaml linguist-language=YAML
 *.yml linguist-language=YAML
 *.csv linguist-language=CSV
 *.sql linguist-language=SQL
-
-# Config Files
 *.ini linguist-language=INI
-*.conf linguist-language=Configuration
 *.cfg linguist-language=Configuration
+*.conf linguist-language=Configuration
 *.toml linguist-language=TOML
 
-# Documentation files
+# --- Documentation ---
 *.md linguist-language=Markdown
 *.txt linguist-language=Text
 *.doc linguist-language=Text
 *.pdf linguist-language=Text
+
+# --- Force LF on GitHub Actions workflows ---
+*.yml text eol=lf
+*.yaml text eol=lf
+.github/workflows/* text eol=lf
