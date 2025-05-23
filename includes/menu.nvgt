@@ -43,7 +43,7 @@ m.intro_text = "Speaker test menu. Choose a sound to test your audio setup. For 
     }
     if (soundsel == "bit")
 {
-if(speak_menu_loading==true) speak("loading");
+if(speak_menu_loading==true) speak("loading eight bit");
 m.fade_music();
 bitplays+=1;
 writepreffs();
@@ -51,7 +51,7 @@ writepreffs();
     }
     if (soundsel == "crash")
 {
-if(speak_menu_loading==true) speak("loading");
+if(speak_menu_loading==true) speak("loading crash car");
 m.fade_music();
 crashplays+=1;
 writepreffs();
@@ -59,7 +59,7 @@ writepreffs();
     }
     if (soundsel == "clank")
 {
-if(speak_menu_loading==true) speak("loading");
+if(speak_menu_loading==true) speak("loading sword clank");
 m.fade_music();
 swordplays+=1;
 writepreffs();
@@ -67,7 +67,7 @@ writepreffs();
     }
     if (soundsel == "stone")
 {
-if(speak_menu_loading==true) speak("loading");
+if(speak_menu_loading==true) speak("loading stone throw");
 m.fade_music();
 stoneplays+=1;
 writepreffs();
@@ -1700,17 +1700,18 @@ form.reset();
     form.create_window("speech settings", false);
 int ttscfg = form.create_button("&Configure voice");
 int speechtest = form.create_button("&preview voice");
-int cansets = form.create_button("&cancel");
+int cancel = form.create_button("&cancel");
+int ok = form.create_button("&okay");
 form.focus(ttscfg);
 spool.play_stationary("menuopen.ogg",false);
     while (true)
     {
         wait(5);
         form.monitor();
-        if (form.is_pressed(cansets) || key_repeating(KEY_ESCAPE))
+        if (form.is_pressed(cancel) || key_repeating(KEY_ESCAPE))
         {
 spool.play_stationary("menuclose.ogg",false);
-            preffsmenu();
+preffsmenu();
         }
 if (form.is_pressed(ttscfg))
 {
@@ -1724,5 +1725,9 @@ if (form.is_pressed(speechtest))
 dlgmessage_return("This is your current voice configuration.");
     speechsetsmenu();
 }
+        if (form.is_pressed(ok))
+        {
+preffsmenu();
+        }
     }
 }

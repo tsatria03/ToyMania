@@ -1,12 +1,13 @@
 new in 3.7
+Improved the speaker test menu by announcing the sound name along side the "Loading" prompt when a test sound is selected.
 Fixed an issue on mac devices where the updater would download the update file, along with copying the download link to the clipboard. From now on, the clipboard action will only be performed to prevent redundant or inaccessible downloads inside the game's bundle.
 Added some more speaker test sounds into the speaker test menu.
 Updated the readme file with added and modified keyboard shortcuts.
 You can now press alt G to quickly open the game settings menu within the game. These settings will only hold the check boxes related to the actual game session you're currently playing.
 You can now press alt A to quickly open the audio settings menu within the game. These settings will only hold the sliders related to the actual game session you're currently playing.
 Replaced some of the pistol sounds with better ones.
-Made it so the door tracking info is separated into two different keys. Shift D will tell you how many keys are required to unlock the door, and D will tell you where the door is located in both normal and endless modes.
-Made the third guard easier to kill for all game modes.
+Made it so the door tracking info is separated into two different keys. Shift D will tell you how many keys are required to unlock the door, and D alone will tell you where the door is located in both normal and endless modes.
+Made it so the third guard is easier to kill for all game modes.
 new in 3.6
 Made it so the pistol weapon is only exclusive to the normal mode. You can press the number 9 key to equip the pistol in normal mode, and machine gun in endless mode. This change also applies to the weapons menu for both modes as well.
 Added a new pistol weapon for the normal Mode. Players now have access to this weapon in place of the former machine gun. The machine gun can still be used in endless mode.
