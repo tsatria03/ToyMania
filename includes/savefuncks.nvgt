@@ -113,6 +113,14 @@ if (st.d.exists("menumusvolume"))
 {
 menumusvolume = st.read_int("menumusvolume");
 }
+if (st.d.exists("bitplays"))
+{
+bitplays = st.read_double("bitplays");
+}
+if (st.d.exists("crashplays"))
+{
+crashplays = st.read_double("crashplays");
+}
 if (st.d.exists("stoneplays"))
 {
 stoneplays = st.read_double("stoneplays");
@@ -247,6 +255,8 @@ void writepreffs()
 {
 st.add("menumusvolume", menumusvolume);
 st.add("soundcard",soundcard);
+st.add("bitplays", bitplays);
+st.add("crashplays", crashplays);
 st.add("stoneplays", stoneplays);
 st.add("swordplays", swordplays);
 st.add("alarmvolume", alarmvolume);

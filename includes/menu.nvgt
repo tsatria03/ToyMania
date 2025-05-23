@@ -29,6 +29,8 @@ preffsmenu();
 if(main == "st")
 {
     setupmenu(false);
+m.add_item("eight bit. This sound has been played a total of "+bitplays+" times.", "bit");
+m.add_item("crash car. This sound has been played a total of "+crashplays+" times.", "crash");
     m.add_item("Sword Clank. This sound has been played a total of "+swordplays+" times.", "clank");
     m.add_item("Stone Throw. This sound has been played a total of "+stoneplays+" times.", "stone");
     m.add_item("Back", "back");
@@ -38,6 +40,22 @@ m.intro_text = "Speaker test menu. Choose a sound to test your audio setup. For 
     if (mres == -1 or soundsel == "back")
 {
         mainmenu();
+    }
+    if (soundsel == "bit")
+{
+if(speak_menu_loading==true) speak("loading");
+m.fade_music();
+bitplays+=1;
+writepreffs();
+        dlgplay("speaker_8bit.ogg");
+    }
+    if (soundsel == "crash")
+{
+if(speak_menu_loading==true) speak("loading");
+m.fade_music();
+crashplays+=1;
+writepreffs();
+        dlgplay("speaker_crash_car.ogg");
     }
     if (soundsel == "clank")
 {

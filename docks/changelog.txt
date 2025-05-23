@@ -1,4 +1,5 @@
 new in 3.7
+Added some more speaker test sounds into the speaker test menu.
 Updated the readme file with added and modified keyboard shortcuts.
 You can now press alt G to quickly open the game settings menu within the game. These settings will only hold the check boxes related to the actual game session you're currently playing.
 You can now press alt A to quickly open the audio settings menu within the game. These settings will only hold the sliders related to the actual game session you're currently playing.
