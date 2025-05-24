@@ -30,7 +30,7 @@ jobs:
           AUTHOR="${{ github.event.sender.login }}"
           MESSAGE="${{ github.event.head_commit.message }}"
           LINK="https://github.com/${{ github.repository }}/commit/${{ github.sha }}"
-          TEXT="New commit from ${AUTHOR}: ${MESSAGE}\n\nView the commit here: ${LINK}"
+          TEXT="New commit from ${AUTHOR}: ${MESSAGE} View the commit here: ${LINK}"
           curl -s -X POST https://api.telegram.org/bot${TELEGRAM_TOKEN}/sendMessage \
             -d chat_id="${TELEGRAM_CHAT_ID}" \
             --data-urlencode text="${TEXT}"
@@ -48,7 +48,7 @@ jobs:
           TITLE="${{ github.event.release.name }}"
           AUTHOR="${{ github.actor }}"
           LINK="${{ github.event.release.html_url }}"
-          TEXT="New release from ${AUTHOR}: ${TITLE} (Tag: ${TAG})\n\nView the release here: ${LINK}"
+          TEXT="New release from ${AUTHOR}: ${TITLE} (Tag: ${TAG}) View the release here: ${LINK}"
           curl -s -X POST https://api.telegram.org/bot${TELEGRAM_TOKEN}/sendMessage \
             -d chat_id="${TELEGRAM_CHAT_ID}" \
             --data-urlencode text="${TEXT}"
@@ -65,7 +65,7 @@ jobs:
           USER="${{ github.event.issue.user.login }}"
           TITLE="${{ github.event.issue.title }}"
           LINK="${{ github.event.issue.html_url }}"
-          TEXT="New issue from ${USER}: ${TITLE}\n\nView the issue here: ${LINK}"
+          TEXT="New issue from ${USER}: ${TITLE} View the issue here: ${LINK}"
           curl -s -X POST https://api.telegram.org/bot${TELEGRAM_TOKEN}/sendMessage \
             -d chat_id="${TELEGRAM_CHAT_ID}" \
             --data-urlencode text="${TEXT}"
@@ -82,7 +82,7 @@ jobs:
           USER="${{ github.event.comment.user.login }}"
           BODY="${{ github.event.comment.body }}"
           LINK="${{ github.event.comment.html_url }}"
-          TEXT="New comment from ${USER}: ${BODY}\n\nView the comment here: ${LINK}"
+          TEXT="New comment from ${USER}: ${BODY} View the comment here: ${LINK}"
           curl -s -X POST https://api.telegram.org/bot${TELEGRAM_TOKEN}/sendMessage \
             -d chat_id="${TELEGRAM_CHAT_ID}" \
             --data-urlencode text="${TEXT}"
@@ -99,7 +99,7 @@ jobs:
           USER="${{ github.event.pull_request.user.login }}"
           TITLE="${{ github.event.pull_request.title }}"
           LINK="${{ github.event.pull_request.html_url }}"
-          TEXT="New pull request from ${USER}: ${TITLE}\n\nView the pull request here: ${LINK}"
+          TEXT="New pull request from ${USER}: ${TITLE} View the pull request here: ${LINK}"
           curl -s -X POST https://api.telegram.org/bot${TELEGRAM_TOKEN}/sendMessage \
             -d chat_id="${TELEGRAM_CHAT_ID}" \
             --data-urlencode text="${TEXT}"
@@ -115,7 +115,7 @@ jobs:
         run: |
           USER="${{ github.event.sender.login }}"
           LINK="https://github.com/${{ github.repository }}"
-          TEXT="⭐ ToyMania was starred by ${USER}\n\nView the repository: ${LINK}"
+          TEXT="⭐ ToyMania was starred by ${USER} View the repository: ${LINK}"
           curl -s -X POST https://api.telegram.org/bot${TELEGRAM_TOKEN}/sendMessage \
             -d chat_id="${TELEGRAM_CHAT_ID}" \
             --data-urlencode text="${TEXT}"
@@ -131,7 +131,7 @@ jobs:
         run: |
           USER="${{ github.event.forkee.owner.login }}"
           LINK="${{ github.event.forkee.html_url }}"
-          TEXT="🍴 ToyMania was forked by ${USER}\n\nView their fork here: ${LINK}"
+          TEXT="🍴 ToyMania was forked by ${USER} View their fork here: ${LINK}"
           curl -s -X POST https://api.telegram.org/bot${TELEGRAM_TOKEN}/sendMessage \
             -d chat_id="${TELEGRAM_CHAT_ID}" \
             --data-urlencode text="${TEXT}"
