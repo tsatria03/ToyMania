@@ -31,11 +31,9 @@ void check_weapon_reload()
         ammo += ammo_to_load;
         reserved_ammo -= ammo_to_load;
         p.play_stationary(weapontype + "ping.ogg", false);
-        speak("Reload complete. " + round(ammo_to_load, 0) + " rounds of ammo loaded.");
     }
     else
     {
-        speak("Reload failed. No reserved ammo left.");
     }
     isReloading = false;
 }
@@ -232,7 +230,6 @@ void reload_weapon()
     isReloading = true;
     reloadTimer.restart();
     weaponslot = p.play_stationary(weapontype + "reload.ogg", false);
-    speak("Reloading.");
 }
 void reset_weapons()
 {
