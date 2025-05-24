@@ -45,10 +45,9 @@ void draw_weapon(string weapon)
     current_weapon = weapon;
     weapontype = weapon;
     p.destroy_sound(weaponslot);
-    ammo = 0;
-    maxammo = 0;
-    reserved_ammo = 0;
-    max_reserved_ammo = 0;
+    wepdamage = 0;
+    weprange = 0;
+    weprange2 = 0;
     firetime = 50;
     firetime2 = 100;
     reloadDuration = 0;
@@ -62,29 +61,37 @@ void draw_weapon(string weapon)
     else if (weapon == "laser") { wepdamage = 24; weprange = 8;  weprange2 = 9; }
     else if (weapon == "machinegun" && endless)
     {
-        ammo = 50;
-        maxammo = 50;
-        reserved_ammo = 250;
-        max_reserved_ammo = 250;
         wepdamage = 27;
         weprange = 9;
         weprange2 = 10;
         firetime = 50;
         firetime2 = 100;
         reloadDuration = 2500;
+        if (!machinegun_initialized)
+        {
+            ammo = 50;
+            maxammo = 50;
+            reserved_ammo = 250;
+            max_reserved_ammo = 250;
+            machinegun_initialized = true;
+        }
     }
     else if (weapon == "pistol" && !endless)
     {
-        ammo = 50;
-        maxammo = 50;
-        reserved_ammo = 250;
-        max_reserved_ammo = 250;
         wepdamage = 27;
         weprange = 9;
         weprange2 = 10;
         firetime = 50;
         firetime2 = 100;
         reloadDuration = 2000;
+        if (!pistol_initialized)
+        {
+            ammo = 50;
+            maxammo = 50;
+            reserved_ammo = 250;
+            max_reserved_ammo = 250;
+            pistol_initialized = true;
+        }
     }
     speak(weapontype + " equipped");
     weaponslot = p.play_stationary(weapontype + "draw.ogg", false);
@@ -226,4 +233,22 @@ void reload_weapon()
     reloadTimer.restart();
     weaponslot = p.play_stationary(weapontype + "reload.ogg", false);
     speak("Reloading.");
+}
+void reset_weapons()
+{
+    current_weapon = "";
+    weapontype = "";
+    wepdamage = 0;
+    weprange = 0;
+    weprange2 = 0;
+    ammo = 0;
+    maxammo = 0;
+    reserved_ammo = 0;
+    max_reserved_ammo = 0;
+    firetime = 50;
+    firetime2 = 100;
+    reloadDuration = 0;
+    isReloading = false;
+    pistol_initialized = false;
+    machinegun_initialized = false;
 }

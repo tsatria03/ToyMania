@@ -1,3 +1,6 @@
+new in 3.8
+Made it so weapons now reset properly at the start of each new game session. All weapon stats, including ammo, firing timers, and reload statuses are now cleared when starting a new game. This ensures a clean and consistent gameplay experience without leftover values from previous played sessions.
+Fixed a bug where ammo-based weapons would reset their ammo and reserved ammo counts when re-equipped. Ammo and reserved ammo now persist between weapon swaps, making it so collecting ammo packs work properly in endless mode.
 new in 3.7
 Made it so the Learn Game Sounds menu remembers your last selected sound category. This is useful for returning to a specific sound group without having to start over again from the top of the menu every time.
 Improved the speaker test menu by announcing the sound name along side the Loading prompt when a test sound is selected.
