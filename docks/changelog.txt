@@ -1,4 +1,5 @@
 new in 3.8
+Made it so the Learn Game Sounds menu also remembers the last selected sound of a category. This makes it quicker to pick up where you left off, especially when reviewing long lists of sounds.
 Fixed a bug where doors took priority over items when pressing shift enter when you were near one.
 Added the teleporter item to the endless mode. This item is also available in the shop menu as well.
 Changed the order of some door related sounds.
