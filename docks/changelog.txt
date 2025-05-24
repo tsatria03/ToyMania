@@ -1,7 +1,7 @@
 new in 3.7
-Made it so the Learn Game Sounds menu remembers your last selected sound category. This is useful for returning to a specific sound group without having to start over again from the top every time.
+Made it so the Learn Game Sounds menu remembers your last selected sound category. This is useful for returning to a specific sound group without having to start over again from the top of the menu every time.
 Improved the speaker test menu by announcing the sound name along side the Loading prompt when a test sound is selected.
-Fixed an issue on mac devices where the updater would download the update file, along with copying the download link to the clipboard. From now on, the clipboard action will only be performed to prevent redundant or inaccessible downloads inside the game's bundle.
+Fixed an issue on mac devices where the updater would download the update file, along with copying the download link to the clipboard. From now on, the clipboard action will only be performed to prevent redundant or inaccessible downloads inside the game's mac bundle.
 Added some more speaker test sounds into the speaker test menu.
 Updated the readme file with added and modified keyboard shortcuts.
 You can now press alt G to quickly open the game settings menu within the game. These settings will only hold the check boxes related to the actual game session you're currently playing.
@@ -80,7 +80,7 @@ Fixed a bug where using an ammo pack in your inventory would incorrectly set you
 Added the ability to collect and use ammo packs in endless mode, along with health potions.
 Added some more item related sounds into the learn game sounds menu.
 Replaced the machine gun reloading sounds with better ones.
-Introduced a new realistic weapon reloading system. Reloading a weapon will now take time instead of instantly restoring ammo.
+Introduced a new realistic weapon reloading system. Reloading a weapon will now take some time instead of instantly restoring ammo.
 Added options in the game settings menu to enable or disable the complete and toggle switch sounds.
 Improved the sound device selection menu by sorting the available devices alphabetically and labeling them as “active” or “inactive” based on the current selection. This makes it easier for users to help them identify the correct output device.
 Added speech and sound feedback to the toggleable sound test switches found in the audio settings menu.
@@ -115,7 +115,7 @@ Added the ability to adjust the preview volumes of sounds found in the learn gam
 Updated the readme file with added and modified keyboard shortcuts.
 Added the ability to adjust the heartbeat volume in all game modes. You can press shift plus home or end to adjust this. This setting is automaticly saved the next time you start a new game session.
 Made it so players can no longer collect items, keys, or toys while inside a door. They also can't be hit by bullets or enemies either. This prevents unintended interactions and ensures smoother transitions when exiting a level.
-Made it so game data and settings are now saved to the user's AppData folder under tsatria03/ToyMania/saves, and tsatria03/ToyMania/stats. This ensures proper user configuration and seamless OS integration.
+Made it so game data and settings are now saved to the user's AppData folder under tsatria03/ToyMania/saves, and tsatria03/ToyMania/stats. This ensures proper user configuration and seamless platform integration.
 Completely removed the coppying, exporting, and viewing of player titles for all lifetime stats.
 Addressed an issue where coppied and exported stats weren't being split into lines properly for reading.
 new in 2.7
