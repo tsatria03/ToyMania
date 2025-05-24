@@ -24,7 +24,7 @@ void doorcheck()
 {
     for (uint i = 0; i < doors.length(); i++)
     {
-        if (absolute(me.x - doors[i].startx) <= 2 && absolute(me.y - doors[i].starty) <= 2 && key_pressed(KEY_RETURN))
+        if (absolute(me.x - doors[i].startx) <= 2 && absolute(me.y - doors[i].starty) <= 2 && !shift_is_down() && key_pressed(KEY_RETURN))
         {
             if (entity_near_door(doors[i].startx, doors[i].starty))
             {

@@ -1,8 +1,9 @@
 new in 3.8
+Fixed a bug where doors took priority over items when pressing shift enter when you were near one.
 Added the teleporter item to the endless mode. This item is also available in the shop menu as well.
 Changed the order of some door related sounds.
 Made it so pressing the letter C key now only tells you the coordinates you're located at, along with the tile you're walking on.
-Removed all announcements related to reloading ammo based weapons. You now should only here the accompanying sounds that go with reloading them.
+Removed all announcements related to reloading ammo based weapons. You should now only here the accompanying sounds that go with reloading them.
 Made it so weapons now reset properly at the start of each new game session. All weapon stats, including ammo, firing timers, and reload statuses are now cleared when starting a new game. This ensures a clean and consistent gameplay experience without leftover values from previous played sessions.
 Fixed a bug where ammo-based weapons would reset their ammo and reserved ammo counts when re-equipped. Ammo and reserved ammo now persist between weapon draws, making ammo packs work properly in endless mode.
 new in 3.7

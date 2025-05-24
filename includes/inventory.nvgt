@@ -96,7 +96,7 @@ if (current == "teleporter")
     give("teleporter", -1);
 me.x=random(0,maxx);
 me.y=random(0,maxy);
-    speak("Teleported to "+me.x+", "+me.y+".");
+    speak("Moved to "+me.x+", "+me.y+".");
     return;
 }
 }
