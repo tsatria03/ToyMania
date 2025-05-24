@@ -96,7 +96,6 @@ bosses[i].firetimer.restart();
         isReloading = false;
 p.destroy_sound(weaponslot);
         weaponslot=p.play_stationary("machinegunfail.ogg", false);
-        speak("Error. Reload interrupted!");
     }
 }
 if(bosses[i].bosshealth<=0)

@@ -730,7 +730,7 @@ if(psmem == "vds")
 {
     setupmenu(false);
     m.add_item("Current level: " + level + " (" + (endless ? "Endless Mode" : "Normal Mode") + ")");
-    m.add_item("Current location: " + me.x + ", " + me.y);
+    m.add_item("Current location: " + me.x + ", " + me.y+". You're walking on "+gmt(me.x,me.y)+".");
     m.add_item("player HP: " + health);
 m.add_item("store HP: " + storehealth);
     m.add_item("Cars on field: " + cars.length());

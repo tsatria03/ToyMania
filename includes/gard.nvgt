@@ -65,7 +65,6 @@ gards[i].firetimer.restart();
         isReloading = false;
 p.destroy_sound(weaponslot);
         weaponslot=p.play_stationary("machinegunfail.ogg", false);
-        speak("Reload interrupted!");
     }
 }
 if(gards[i].gardhealth<=0)

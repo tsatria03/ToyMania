@@ -258,7 +258,7 @@ speak("You currently have "+money+" dollars available to spend.");
 }
 if(key_pressed(KEY_C) and doormove==false)
 {
-speak("current location, "+me.x+", "+me.y);
+speak(me.x+", "+me.y+" on "+gmt(me.x,me.y)+".");
 }
 if(key_pressed(KEY_O) and doormove==false)
 {
