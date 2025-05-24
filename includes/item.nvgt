@@ -18,6 +18,7 @@ autobreak=br;
 spawnsound=objpool.play_2d("itemspawn.ogg", me.x, me.y, itx, ity, false);
 if(objtype=="ammo_pack") objsound=objpool.play_2d("ammoloop.ogg", me.x, me.y, itx, ity, true);
 if(objtype=="potion") objsound=objpool.play_2d("healthloop.ogg", me.x, me.y, itx, ity, true);
+if(objtype=="teleporter") objsound=objpool.play_2d("teleloop.ogg", me.x, me.y, itx, ity, true);
 objpool.update_sound_2d(objsound,itx,ity);
 }
 }
@@ -37,6 +38,7 @@ if(absolute(me.x - objs[i].itx) <= 2 and absolute(me.y - objs[i].ity) <= 2 and d
 objpool.destroy_sound(objs[i].objsound);
 if(objs[i].objtype=="ammo_pack") objs[i].getsound=objpool.play_stationary("ammoget"+random(1,2)+".ogg",false);
 if(objs[i].objtype=="potion") objs[i].getsound=objpool.play_stationary("healthget.ogg",false);
+if(objs[i].objtype=="teleporter") objs[i].getsound=objpool.play_stationary("teleget.ogg",false);
 p.play_stationary("playergive.ogg",false);
 give(objs[i].objtype,1);
 speak(objs[i].objtype);

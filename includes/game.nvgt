@@ -504,7 +504,7 @@ keyspawntimer.restart();
 }
 if(objspawntimer.elapsed>=objspawntime and objs.length()<objnum and objspawn==true and endless)
 {
-string[] objtypes={"ammo_pack", "potion"};
+string[] objtypes={"ammo_pack", "potion", "teleporter"};
 spawn_obj(random(0,maxx), random(0,maxy), random(3000,6000), random_string(objtypes), objdest);
 objspawntimer.restart();
 }

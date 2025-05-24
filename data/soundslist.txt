@@ -65,9 +65,9 @@ dlgcoppy.ogg
 dlgopen.ogg
 dlgscroll.ogg
 doorclose.ogg
-doorjam.ogg
-doorlock1.ogg
-doorlock2.ogg
+doorjam1.ogg
+doorjam2.ogg
+doorlock.ogg
 doorloop.ogg
 doormove.ogg
 dooropen.ogg
@@ -254,7 +254,6 @@ playerheal2.ogg
 playerheal3.ogg
 playerlevel.ogg
 playerpain.ogg
-playertel.ogg
 resume.ogg
 session_achievement.ogg
 setdisabled.ogg
@@ -272,6 +271,9 @@ storebuy4.ogg
 storedest_large.ogg
 storedest_medium.ogg
 storedest_small.ogg
+tel.ogg
+teleget.ogg
+teleloop.ogg
 toybreak1.ogg
 toybreak2.ogg
 toybreak3.ogg
@@ -318,4 +320,4 @@ toyloop7.ogg
 toyloop8.ogg
 toyloop9.ogg
 windchimeloop.ogg
-total files: 320
+total files: 322

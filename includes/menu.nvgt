@@ -420,11 +420,13 @@ items["Drink potion: used in endless mode"] = "healthdrink.ogg";
 items["Get ammo_pack: used in endless mode" + vdesc] = array<string> = {"ammoget1.ogg", "ammoget2.ogg"};
 items["Get money: used in endless mode"] = "getdollars.ogg";
 items["Get potion: used in endless mode"] = "healthget.ogg";
+items["Get teleporter: used in endless mode"] = "teleget.ogg";
 items["Item break: used in endless mode" + vdesc] = array<string> = {"itembreak1.ogg", "itembreak2.ogg", "itembreak3.ogg", "itembreak4.ogg", "itembreak5.ogg", "itembreak6.ogg"};
 items["Item give: used in endless mode"] = "playergive.ogg";
 items["Item spawn: used in endless mode"] = "itemspawn.ogg";
 items["Potion loop: used in endless mode"] = "healthloop.ogg";
 items["Open ammo_pack: used in endless mode"] = "ammopack.ogg";
+items["Teleport: used in endless mode"] = "tel.ogg";
 learnCategories["Items"] = items;
 dictionary keys;
 keys["Break" + vdesc] = array<string> = {"keybreak1.ogg", "keybreak2.ogg", "keybreak3.ogg", "keybreak4.ogg", "keybreak5.ogg", "keybreak6.ogg"};
@@ -443,13 +445,13 @@ player["Death"] = "playerdeath.ogg";
 player["Explode large: used in normal mode"] = "storedest_large.ogg";
 player["Explode medium: used in normal mode"] = "storedest_medium.ogg";
 player["Explode small: used in normal mode"] = "storedest_small.ogg";
+player["Game Launch"] = "gamelaunch.ogg";
 player["Glass fall: used in normal mode"] = "glassfall.ogg";
 player["Glass land: used in normal mode"] = "glassland.ogg";
 player["Glass walk: used in normal mode" + vdesc] = array<string> = {"glasswalk1.ogg", "glasswalk2.ogg", "glasswalk3.ogg", "glasswalk4.ogg", "glasswalk5.ogg"};
 player["Heart start"] = "heartstart.ogg";
 player["Heart stop"] = "heartstop.ogg";
 player["Heal: used in endless mode" + vdesc] = array<string> = {"playerheal1.ogg", "playerheal2.ogg", "playerheal3.ogg"};
-player["Launch"] = "gamelaunch.ogg";
 player["Level up"] = "playerlevel.ogg";
 player["Life achievement"] = "life_achievement.ogg";
 player["Marble fall"] = "marblefall.ogg";
@@ -458,7 +460,6 @@ player["Marble walk" + vdesc] = array<string> = {"marblewalk1.ogg", "marblewalk2
 player["Pain"] = "playerpain.ogg";
 player["Store purchase: used in endless mode" + vdesc] = array<string> = {"storebuy1.ogg", "storebuy2.ogg", "storebuy3.ogg", "storebuy4.ogg"};
 player["Session achievement"] = "session_achievement.ogg";
-player["Teleport: unused"] = "playertel.ogg";
 learnCategories["Player"] = player;
 dictionary toys;
 toys["Break" + vdesc] = array<string> = {"toybreak1.ogg", "toybreak2.ogg", "toybreak3.ogg"};
@@ -766,7 +767,8 @@ void shopmenu()
     dictionary prices;
     prices.set("ammo_pack", 5.0);
     prices.set("potion", 10.0);
-    string[] objtypes = {"ammo_pack", "potion"};
+prices.set("teleporter", 15.0);
+    string[] objtypes = {"ammo_pack", "potion", "teleporter"};
     setupmenu(false);
     m.add_item("You have " + round(money, 0) + " dollars available to spend", "shopinfo");
     for (uint i = 0; i < objtypes.length(); i++)
@@ -806,7 +808,7 @@ void shopmenu()
     double amount = string_to_number(amount_input);
     if (amount <= 0)
 {
-        speak("Invalid quantity.");
+        speak("Error. Invalid quantity.");
         resume_game();
         return;
     }
@@ -815,7 +817,7 @@ void shopmenu()
     double total_cost = amount * price;
     if (money < total_cost)
 {
-        dlgmessage_return("You don't have enough money to buy that many.");
+        dlgmessage_return("You don't have enough money to buy that much.");
         resume_game();
         return;
     }
