@@ -1,3 +1,6 @@
+*Unfinished. Fix weapon ranges.
+*Unfinished. Add more weapons to fight with.
+*Unfinished. Expand the endless grid map from 50 to 100 squares for both x and y.
 *Unfinished. Make it so both pistol and machine gun weapons can be used in endless mode.
 *Unfinished. Add car and guard related items for the endless mode, such as car and guard callers.
 *Unfinished. Make lasers use batteries.
