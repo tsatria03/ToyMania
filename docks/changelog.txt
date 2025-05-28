@@ -1,3 +1,5 @@
+new in 3.9
+Added the ability to pause the playing sound in the learn game sounds menu. You can press the spacebar to do this. This is mostly useful for sounds that are looped.
 new in 3.8
 Made it so the preview volume in the learn game sounds menu now resets itself back to it's default value after exiting the menu.
 Made it so the Learn Game Sounds menu also remembers the last selected sound of a category. This makes it quicker to pick up where you left off, especially when reviewing long lists of sounds.

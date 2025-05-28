@@ -11,8 +11,8 @@
  * 3. This notice may not be removed or altered from any source distribution.
 */
 
-int menumusvolume=0;
 double preview_volume = 0;
+int menumusvolume=0;
 bool menuwrap=true;
 void fade(sound@ handle, double final_volume = -50, double delay = 25)
 {
@@ -305,6 +305,17 @@ void learn_game_sounds_menu(dictionary@ sfx, const string&in audio_prefix = "", 
             audio.set_volume(preview_volume);
             speak("preview " + preview_volume);
         }
+if(key_repeating(KEY_SPACE))
+{
+if(!audio.paused)
+{
+audio.pause();
+}
+else
+{
+audio.play();
+}
+}
         int old_pos = m.focused_item;
         bool r = m.monitor();
         if (!r && m.selected_item < 0)
