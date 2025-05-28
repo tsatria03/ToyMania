@@ -26,6 +26,22 @@ bool int_to_bool(int i)
 {
 return i==1? true:false;
 }
+bool string_starts_with(const string& in str, const string& in start)
+{
+if (str.length()>=start.length())
+{
+return (str.substr(0, start.length()) == start);
+}
+return false;
+}
+bool string_ends_with(const string& in str,const string& in ending)
+{
+if (str.length()>=ending.length())
+{
+return (str.substr(str.length()-ending.length())==ending);
+}
+return false;
+}
 bool entity_near_door(int x, int y)
 {
     for (uint i = 0; i < bosses.length(); i++)
