@@ -114,7 +114,7 @@ wait(500);
 wait(500);
         speak("Extracting update...");
         wait(1000);
-        bool success = run("lib/7zr.exe", "x \"" + filename + "\" -pGrateCollector -aoa -y", true, true);
+        bool success = run("lib/7zr.exe", "x \"" + filename + "\" -pGreatCollector -aoa -y", true, true);
         if (success)
 {
             if (file_exists(filename)) file_delete(filename);
@@ -215,7 +215,7 @@ string get_download_url(string projectname, string new_version)
     string base = "https://github.com/tsatria03/" + projectname + "/releases/download/V" + new_version+"0";
     if (is_mac)
     {
-        return base + "/ToyMania_mac_portable_password_is_GrateCollector.zip";
+        return base + "/ToyMania_mac_portable_password_is_GreatCollector.zip";
     }
     else
     {
@@ -228,9 +228,9 @@ m.add_item("cancel", "cancel");
         string version_choice = m.get_selected_item_id();
         if (mres == -1 || version_choice == "cancel") mainmenu();
         if (version_choice == "portable")
-            return base + "/ToyMania_windows_portable_password_is_GrateCollector.7z";
+            return base + "/ToyMania_windows_portable_password_is_GreatCollector.7z";
         else
-            return base + "/ToyMania_windows_installer_password_is_GrateCollector.exe";
+            return base + "/ToyMania_windows_installer_password_is_GreatCollector.exe";
     }
 }
 string get_disk_filename(string url)
