@@ -310,12 +310,10 @@ if(key_repeating(KEY_SPACE))
 if(audio.playing)
 {
 audio.pause();
-if(audio.active) speak("audio paused");
 }
 else
 {
 loop_previews ? audio.play_looped() : audio.play();
-if(audio.active) speak("audio playing");
 }
 }
         int old_pos = m.focused_item;

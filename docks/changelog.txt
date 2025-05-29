@@ -1,4 +1,4 @@
-new in 3.9
+new in 3.9beta
 Updated some boss and weapon related sounds.
 Added the ability to pause the playing sound in the learn game sounds menu. You can press the spacebar to do this. This is mostly useful for sounds that are looped.
 new in 3.8
