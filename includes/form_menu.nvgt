@@ -307,13 +307,15 @@ void learn_game_sounds_menu(dictionary@ sfx, const string&in audio_prefix = "", 
         }
 if(key_repeating(KEY_SPACE))
 {
-if(!audio.paused)
+if(audio.playing)
 {
 audio.pause();
+if(audio.active) speak("audio paused");
 }
 else
 {
-audio.play();
+loop_previews ? audio.play_looped() : audio.play();
+if(audio.active) speak("audio playing");
 }
 }
         int old_pos = m.focused_item;
