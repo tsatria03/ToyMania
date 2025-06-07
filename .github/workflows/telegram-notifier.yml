@@ -115,7 +115,7 @@ jobs:
         run: |
           USER="${{ github.event.sender.login }}"
           LINK="https://github.com/${{ github.repository }}"
-          TEXT="⭐ ToyMania was starred by ${USER} View the repository: ${LINK}"
+          TEXT="ToyMania was starred by ${USER} View the repository: ${LINK}"
           curl -s -X POST https://api.telegram.org/bot${TELEGRAM_TOKEN}/sendMessage \
             -d chat_id="${TELEGRAM_CHAT_ID}" \
             --data-urlencode text="${TEXT}"
@@ -131,7 +131,7 @@ jobs:
         run: |
           USER="${{ github.event.forkee.owner.login }}"
           LINK="${{ github.event.forkee.html_url }}"
-          TEXT="🍴 ToyMania was forked by ${USER} View their fork here: ${LINK}"
+          TEXT="ToyMania was forked by ${USER} View their fork here: ${LINK}"
           curl -s -X POST https://api.telegram.org/bot${TELEGRAM_TOKEN}/sendMessage \
             -d chat_id="${TELEGRAM_CHAT_ID}" \
             --data-urlencode text="${TEXT}"
