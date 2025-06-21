@@ -1,6 +1,7 @@
 gard@[]gards(0);
 class gard
 {
+bool fireable=true, moveable=true, moveable2=true;
 int defsound, firesound, hurtsound, gardsound, spawnsound, stepsound, wepsound;
 int gardhealth;
 int gardx;
@@ -35,24 +36,24 @@ if(gards[i].gardtype=="gard2") gards[i].stepsound=gardpool.play_2d("gard2walk"+r
 if(gards[i].gardtype=="gard3") gards[i].stepsound=gardpool.play_2d("gard3walk"+random(1,5)+".wav",me.x,me.y,gards[i].gardx,gards[i].gardy,false);
 gardpool.update_sound_2d(gards[i].gardsound,gards[i].gardx,gards[i].gardy);
 gards[i].gardtimer.restart();
-if(gards[i].gardx<me.x)
+if(gards[i].gardx<me.x and gards[i].moveable==true)
 {
 gards[i].gardx++;
 }
-if(gards[i].gardx>me.x)
+if(gards[i].gardx>me.x and gards[i].moveable==true)
 {
 gards[i].gardx--;
 }
-if(gards[i].gardy<me.y)
+if(gards[i].gardy<me.y and gards[i].moveable2==true)
 {
 gards[i].gardy++;
 }
-if(gards[i].gardy>me.y)
+if(gards[i].gardy>me.y and gards[i].moveable2==true)
 {
 gards[i].gardy--;
 }
 }
-if(me.x==gards[i].gardx and me.y==gards[i].gardy and gards[i].firetimer.elapsed>=gards[i].firetime and doormove == false)
+if(me.x==gards[i].gardx and me.y==gards[i].gardy and gards[i].firetimer.elapsed>=gards[i].firetime and  gards[i].fireable==true and doormove == false)
 {
 if(gards[i].gardtype=="gard1") gards[i].wepsound=gardpool.play_2d(gards[i].gardtype+"hit"+random(1,3)+".ogg", me.x, me.y, gards[i].gardx, gards[i].gardy, false);
 if(gards[i].gardtype=="gard2") gards[i].wepsound=gardpool.play_2d(gards[i].gardtype+"hit"+random(1,3)+".ogg", me.x, me.y, gards[i].gardx, gards[i].gardy, false);

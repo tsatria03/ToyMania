@@ -2,7 +2,7 @@ car@[] cars(0);
 class car
 {
 bool hitplayer;
-bool firing = false;
+bool firing=false, fireable=true, moveable=true, moveable2=true;
 int carsound, firesound, defsound, hurtsound;
 int carx, cary;
 int cardir, cardir2;
@@ -35,8 +35,8 @@ for (uint i = 0; i < cars.length(); i++)
 {
 if (cars[i].cartimer.elapsed >= cars[i].cartime)
 {
-cars[i].carx += cars[i].cardir == 1 ? 1 : -1;
-cars[i].cary += cars[i].cardir2 == 1 ? 1 : -1;
+if(cars[i].moveable==true) cars[i].carx += cars[i].cardir == 1 ? 1 : -1;
+if(cars[i].moveable2==true) cars[i].cary += cars[i].cardir2 == 1 ? 1 : -1;
 carpool.update_sound_2d(cars[i].carsound, cars[i].carx, cars[i].cary);
 cars[i].cartimer.restart();
 if (cars[i].cardir == 1 && cars[i].carx > maxx) cars[i].cardir = 0;
@@ -56,13 +56,13 @@ cars.remove_at(i);
 return;
 }
 }
-if (!cars[i].firing && cars[i].burstTimer.elapsed >= cars[i].burstCooldown && cars[i].hitplayer==true)
+if (cars[i].fireable==true && !cars[i].firing && cars[i].burstTimer.elapsed >= cars[i].burstCooldown && cars[i].hitplayer==true)
 {
     cars[i].firing = true;
     cars[i].shotsFired = 0;
     cars[i].firetimer.restart();
 }
-if (cars[i].firing && cars[i].firetimer.elapsed >= cars[i].fire_interval && cars[i].hitplayer==true)
+if (cars[i].fireable==true && cars[i].firing && cars[i].firetimer.elapsed >= cars[i].fire_interval && cars[i].hitplayer==true)
 {
     string direction;
     int dx = me.x - cars[i].carx;

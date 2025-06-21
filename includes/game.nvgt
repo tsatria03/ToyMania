@@ -431,6 +431,7 @@ gardloop();
 healzoneloop();
 keyloop();
 if(endless) objloop();
+stuncheck();
 toyloop();
 toy_game_input();
 p.update_listener_2d(me.x,me.y);

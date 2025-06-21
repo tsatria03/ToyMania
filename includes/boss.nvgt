@@ -1,6 +1,7 @@
 boss@[]bosses(0);
 class boss
 {
+bool fireable=true, healable=true, launchable=true, moveable=true, moveable2=true, telable=true;
 int bossesound, defsound, healsound, hurtsound, launchsound, spawnsound, stepsound, telsound, wepsound;
 int bosshealth;
 int bossx;
@@ -43,19 +44,19 @@ void bossloop()
 {
 for(uint i=0; i<bosses.length(); i++)
 {
-if(bosses[i].healtimer.elapsed>=bosses[i].healtime)
+if(bosses[i].healtimer.elapsed>=bosses[i].healtime and bosses[i].healable==true)
 {
 bosses[i].regenerate_bosshp(random(bosses[i].bosshealth/10,bosses[i].bosshealth/5));
 bosses[i].healtimer.restart();
 }
-if(bosses[i].launchtimer.elapsed>=bosses[i].launchtime)
+if(bosses[i].launchtimer.elapsed>=bosses[i].launchtime and bosses[i].launchable==true)
 {
 bosses[i].launchsound=bosspool.play_2d(bosses[i].bosstype+"launch.ogg", me.x, me.y, bosses[i].bossx, bosses[i].bossy, false);
 string[] bosstyp={"gard1", "gard2", "gard3"};
 spawn_gard(bosses[i].bossx-random(1,5), bosses[i].bossy-random(1,5), random(30,60), random(30,60), random(75,750), random(75,750), random_string(bosstyp));
 bosses[i].launchtimer.restart();
 }
-if(bosses[i].teltimer.elapsed>=bosses[i].teltime)
+if(bosses[i].teltimer.elapsed>=bosses[i].teltime and bosses[i].telable==true)
 {
 bosses[i].telsound=bosspool.play_2d(bosses[i].bosstype+"tel"+random(1,3)+".ogg", me.x, me.y, bosses[i].bossx, bosses[i].bossy, false);
 bosses[i].teleport_boss(random(0, me.x-random(1,5)), random(0, me.y-random(1,5)));
@@ -68,24 +69,24 @@ if(bosses[i].bosstimer.elapsed>=bosses[i].bosstime)
 bosses[i].stepsound=bosspool.play_2d(bosses[i].bosstype+"walk"+random(1,4)+".ogg",me.x,me.y,bosses[i].bossx,bosses[i].bossy,false);
 bosspool.update_sound_2d(bosses[i].bossesound,bosses[i].bossx,bosses[i].bossy);
 bosses[i].bosstimer.restart();
-if(bosses[i].bossx<me.x)
+if(bosses[i].bossx<me.x and bosses[i].moveable==true)
 {
 bosses[i].bossx++;
 }
-if(bosses[i].bossx>me.x)
+if(bosses[i].bossx>me.x and bosses[i].moveable==true)
 {
 bosses[i].bossx--;
 }
-if(bosses[i].bossy<me.y)
+if(bosses[i].bossy<me.y and bosses[i].moveable2==true)
 {
 bosses[i].bossy++;
 }
-if(bosses[i].bossy>me.y)
+if(bosses[i].bossy>me.y and bosses[i].moveable2==true)
 {
 bosses[i].bossy--;
 }
 }
-if(me.x==bosses[i].bossx and me.y==bosses[i].bossy and bosses[i].firetimer.elapsed>=bosses[i].firetime and doormove == false)
+if(me.x==bosses[i].bossx and me.y==bosses[i].bossy and bosses[i].firetimer.elapsed>=bosses[i].firetime and bosses[i].fireable==true and doormove == false)
 {
 bosses[i].wepsound=bosspool.play_2d(bosses[i].bosstype+"hit"+random(1,2)+".ogg", me.x, me.y, bosses[i].bossx, bosses[i].bossy, false);
 painslot=p.play_stationary("playerpain.ogg", false);
