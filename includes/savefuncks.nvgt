@@ -231,6 +231,16 @@ if (st.d.exists("togglesound"))
 {
 togglesound = st.read_bool("togglesound");
 }
+    if (st.d.exists("currentlangfile"))
+    {
+        currentlangfile = st.read_string("currentlangfile");
+load_language(currentlangfile);
+    }
+    else
+    {
+        currentlangfile = "english";
+load_language(currentlangfile);
+    }
 if (st.d.exists("tts_config"))
 {
     string config = st.read_string("tts_config");
@@ -284,6 +294,7 @@ st.add("playcounts", playcounts);
 st.add("playlevels", playlevels);
 st.add("completesound", completesound);
 st.add("togglesound", togglesound);
+st.add("currentlangfile", currentlangfile);
 st.add("tts_config", tts_dump_config(tts, true));
 st.save();
 }

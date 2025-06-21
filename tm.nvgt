@@ -45,6 +45,7 @@ int bossnum=1, carnum=5, gardnum=10, keynum=15, objnum=15, toynum=20;
 int bossespawntime=5000, objspawntime=2500, carspawntime=1000, gardspawntime=500, keyspawntime=250, toyspawntime=125;
 int boss_time_limit = 90000;
 int last_level_time = 0;
+int stundir=0;
 int weprange=5, weprange2=10, wepdamage=20;
 int firetime=50, firetime2=100;
 int runtime=100;
@@ -55,6 +56,7 @@ int save_interval = 5000;
 int reloadDuration = 2500;
 int64 session_playtime = 0;
 int64 total_playtime = 0;
+string currentlangfile = "None";
 string last_learn_category = "";
 string last_learn_sound = "";
 string savePath = DIRECTORY_APPDATA + "tsatria03/ToyMania/saves/";
@@ -67,6 +69,7 @@ string current_weapon;
 string weapontype="bat";
 string soundcard="Default";
 string version;
+dictionary g_lang;
 timer reloadTimer;
 timer savedata_timer;
 timer boss_timer, bossespawntimer, carspawntimer, firetimer, firetimer2, gametimer, gardspawntimer, objspawntimer, keyspawntimer, movetimer, runtimer, toyspawntimer, usetimer, walktimer;
@@ -96,6 +99,7 @@ if (!directory_exists(savePath)) directory_create(savePath);
 if (!directory_exists(statsPath)) directory_create(statsPath);
 readdata();
 readpreffs();
+load_language(currentlangfile);
 sound_global_hrtf=hrtf;
 apply_pitch_pool_settings();
 p.max_distance = 0;
@@ -133,7 +137,7 @@ if (@timeelapsed.handle == null)
     timeelapsed.set_timer(gametimer);
 }
 getver();
-show_window("ToyMania, version "+version);
+show_window(trl("ToyMania, version ")+version);
 if(gamstence.is_already_running)
 {
 alert("error", "You can only have one instence of this game running!");

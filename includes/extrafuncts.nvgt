@@ -114,6 +114,19 @@ mt=platforms[i].tile;
 }
 return mt;
 }
+string trim(const string&in str)
+{
+string result = str;
+while (result.length() > 0 && (string_left(result, 1) == " " || string_left(result, 1) == "\n" || string_left(result, 1) == "\r"))
+{
+result = string_trim_left(result, 1);
+}
+while (result.length() > 0 && (string_right(result, 1) == " " || string_right(result, 1) == "\n" || string_right(result, 1) == "\r"))
+{
+result = string_trim_right(result, 1);
+}
+return result;
+}
 string string_trim_sides(const string& in str)
 {
 string result=str;

@@ -1,5 +1,5 @@
 #define MyAppName "ToyMania"
-#define MyAppVersion "3.9beta"
+#define MyAppVersion "3.9"
 #define MyAppPublisher "tsatria03"
 #define MyAppURL "https://tsatria03.itch.io/toymania"
 #define MyAppExeName "tm.exe"

@@ -1,3 +1,5 @@
+*Unfinished. Fix the shop menu to return the user back to it's menu after purchasing something.
+*Unfinished. Convert all health values to use percentages.
 *Unfinished. Fix the open save folder option on mac.
 *Unfinished. Fix weapon ranges.
 *Unfinished. Add more weapons to fight with.
