@@ -53,13 +53,17 @@ bool speak_translated(string text, bool interrupt = tts_default_interrupt, bool 
 			}
 		}
 		if (!found) {
+    lines.insert_last(line);
+    lines.sort_ascending();
 			file writer;
-			if (writer.open(path, "a")) {
-				writer.write(line + "\r\n");
-				writer.close();
-			}
-		}
-	}
+			if (writer.open(path, "w")) {
+        for (uint i = 0; i < lines.length(); i++) {
+            writer.write(lines[i] + "\r\n");
+        }
+        writer.close();
+    }
+}
+}
 	if (translated.length() > 10000) {
 		string tmp = translated;
 		while (tmp.length() > 0) {
@@ -115,7 +119,7 @@ void load_language(string langfile)
 {
     g_lang.clear();
     if (langfile.lower() == "none")
-    {
+{
         currentlangfile = "None";
         writepreffs();
         return;
@@ -123,29 +127,29 @@ void load_language(string langfile)
     bool fallback = false;
     string filepath;
     if (langfile.find("/") != -1)
-    {
+{
         string[] parts = string_split(langfile, "/");
         if (parts.length() == 2)
-        {
+{
             filepath = "data/lang/variants/" + parts[0] + "/" + parts[1] + ".lng";
         }
-        else
-        {
+else
+{
             alert("Warning", "Invalid language path format: '" + langfile + "'. Falling back to English.");
             langfile = "English";
             filepath = "data/lang/normal/English.lng";
             fallback = true;
         }
     }
-    else
-    {
+else
+{
         filepath = "data/lang/normal/" + langfile + ".lng";
     }
     string content = get_file_contents(filepath);
     if (trim(content) == "")
-    {
+{
         if (langfile != "English")
-        {
+{
             alert("Warning", "The language file '" + filepath + "' is missing or empty. Falling back to English.");
             fallback = true;
             langfile = "English";
@@ -153,7 +157,7 @@ void load_language(string langfile)
             content = get_file_contents(filepath);
         }
         if (trim(content) == "")
-        {
+{
             alert("Critical Error", "The fallback language file 'English.lng' is missing or empty. Cannot continue.");
             exit();
         }
@@ -161,12 +165,12 @@ void load_language(string langfile)
     string[] lines = string_split(content, "\r\n");
     bool foundValidEntry = false;
     for (uint i = 0; i < lines.length(); i++)
-    {
+{
         string line = trim(lines[i]);
         if (line == "" || line[0] == ';' || line[0] == '#') continue;
         int eq = line.find("=");
         if (eq > 0)
-        {
+{
             string key = trim(line.substr(0, eq));
             string value = trim(line.substr(eq + 1));
             g_lang.set(clean_key(key), value);
@@ -174,24 +178,42 @@ void load_language(string langfile)
         }
     }
     if (!foundValidEntry)
-    {
+{
         if (langfile != "English")
-        {
+{
             alert("Warning", "The language file '" + filepath + "' contained no valid entries. Falling back to English.");
             fallback = true;
-            langfile = "English";
-            load_language(langfile);
+            load_language("English"); // Recursively retry with fallback
             return;
         }
-        else
-        {
+else
+{
             alert("Critical Error", "The fallback language file 'English.lng' contains no valid entries. Cannot continue.");
             exit();
         }
     }
-    if (fallback)
-    {
-        currentlangfile = "English";
-        writepreffs();
-    }
+    currentlangfile = fallback ? "English" : langfile;
+    writepreffs();
+    sort_language_file(filepath);
+}
+void sort_language_file(string path) {
+	string[] lines;
+	file reader;
+	if (reader.open(path, "r")) {
+		lines = string_split(reader.read(), "\r\n", true);
+		reader.close();
+	}	
+	array<string> filtered;
+	for (uint i = 0; i < lines.length(); i++) {
+		string line = trim(lines[i]);
+		if (line == "" || line[0] == ';' || line[0] == '#') continue;
+		filtered.insert_last(line);
+	}
+	filtered.sort_ascending();
+	file writer;
+	if (writer.open(path, "w")) {
+		for (uint i = 0; i < filtered.length(); i++)
+			writer.write(filtered[i] + "\r\n");
+		writer.close();
+	}
 }
