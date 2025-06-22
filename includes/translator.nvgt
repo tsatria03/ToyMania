@@ -1,17 +1,20 @@
+string currentlangfile = "none";
+dictionary g_lang;
+file langfile;
 array<string> list_languages()
 {
     array<string> result;
-    string[] normalLangs = find_files("languages/normal/*.lng");
+    string[] normalLangs = find_files("data/lang/normal/*.lng");
     for (uint i = 0; i < normalLangs.length(); i++)
     {
         string name = strip_extension(strip_directory(normalLangs[i]));
         result.insert_last(name);
     }
-    string[] variantLangDirs = find_directories("languages/variants/*");
+    string[] variantLangDirs = find_directories("data/lang/variants/*");
     for (uint i = 0; i < variantLangDirs.length(); i++)
     {
         string langFolder = strip_directory(variantLangDirs[i]);
-        string[] variants = find_files("languages/variants/" + langFolder + "/*.lng");
+        string[] variants = find_files("data/lang/variants/" + langFolder + "/*.lng");
         for (uint j = 0; j < variants.length(); j++)
         {
             string variantName = strip_extension(strip_directory(variants[j]));
@@ -20,6 +23,73 @@ array<string> list_languages()
     }
     result.sort_ascending();
     return result;
+}
+bool speak_translated(string text, bool interrupt = tts_default_interrupt, bool braille = true) {
+	string original = text;
+	string translated = trl(text);
+	speechbuff = translated;
+	if (translated == original && currentlangfile.lower() != "none") {
+		string path;
+		if (currentlangfile.find("/") != -1) {
+			string[] parts = string_split(currentlangfile, "/");
+			if (parts.length() == 2) {
+				path = "data/lang/variants/" + parts[0] + "/" + parts[1] + ".lng";
+			}
+		} else {
+			path = "data/lang/normal/" + currentlangfile + ".lng";
+		}
+		string[] lines;
+		file reader;
+		if (reader.open(path, "r")) {
+			lines = string_split(reader.read(), "\r\n", true);
+			reader.close();
+		}
+		string line = original + "=" + original;
+		bool found = false;
+		for (uint i = 0; i < lines.length(); i++) {
+			if (trim(lines[i]) == line) {
+				found = true;
+				break;
+			}
+		}
+		if (!found) {
+			file writer;
+			if (writer.open(path, "a")) {
+				writer.write(line + "\r\n");
+				writer.close();
+			}
+		}
+	}
+	if (translated.length() > 10000) {
+		string tmp = translated;
+		while (tmp.length() > 0) {
+			uint pos = 4096;
+			while (pos > 2048 and pos < tmp.length() and tmp[pos] != " ") pos--;
+			raw_speak_translated(tmp.substr(0, pos), interrupt and tmp.length() == translated.length());
+			tmp = tmp.substr(pos);
+		}
+	} else {
+		raw_speak_translated(translated, interrupt);
+	}
+	return true;
+}
+void raw_speak_translated(string text, bool interrupt) {
+	if (interrupt and tts.speaking) tts.stop();
+	if (@tts_config_form != null) {
+		use_sr = tts_config_form.is_checked(0);
+		if (!use_sr) {
+			int voice = tts_config_form.get_list_position(1);
+			int rate = tts_config_form.get_slider(2);
+			int volume = tts_config_form.get_slider(3);
+			if (voice > -1 and tts.voice != voice) tts.set_voice(voice);
+			if (tts.rate != rate) tts.set_rate(rate);
+			if (tts.volume != volume) tts.set_volume(volume);
+		}
+	}
+	if (!use_sr or !screen_reader_has_speech())
+		tts.speak(text, interrupt);
+	else
+		screen_reader_speak(text, interrupt);
 }
 string clean_key(string key)
 {
@@ -57,19 +127,19 @@ void load_language(string langfile)
         string[] parts = string_split(langfile, "/");
         if (parts.length() == 2)
         {
-            filepath = "languages/variants/" + parts[0] + "/" + parts[1] + ".lng";
+            filepath = "data/lang/variants/" + parts[0] + "/" + parts[1] + ".lng";
         }
         else
         {
             alert("Warning", "Invalid language path format: '" + langfile + "'. Falling back to English.");
             langfile = "English";
-            filepath = "languages/normal/English.lng";
+            filepath = "data/lang/normal/English.lng";
             fallback = true;
         }
     }
     else
     {
-        filepath = "languages/normal/" + langfile + ".lng";
+        filepath = "data/lang/normal/" + langfile + ".lng";
     }
     string content = get_file_contents(filepath);
     if (trim(content) == "")
@@ -79,7 +149,7 @@ void load_language(string langfile)
             alert("Warning", "The language file '" + filepath + "' is missing or empty. Falling back to English.");
             fallback = true;
             langfile = "English";
-            filepath = "languages/normal/English.lng";
+            filepath = "data/lang/normal/English.lng";
             content = get_file_contents(filepath);
         }
         if (trim(content) == "")
@@ -125,4 +195,3 @@ void load_language(string langfile)
         writepreffs();
     }
 }
-

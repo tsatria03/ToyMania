@@ -123,11 +123,11 @@ form.focus(f_list);
 return;
 }
 play(open_sound);
-speak(intro_text.format(form.get_list_count(0)));
+speak_translated(intro_text.format(form.get_list_count(0)));
 if (focus_first_item) form.set_list_position(0, 0, true);
 else {
 string text = form.get_list_item(0, form.get_list_position(0));
-if (!text.empty()) speak(text, false);
+if (!text.empty()) speak_translated(text, false);
 }
 }
 // The following function returns true if the menu should keep running or false if it has been exited or if an option has been selected.
@@ -155,11 +155,11 @@ voltimer.restart();
 }
 if(alt_is_down() and key_down(KEY_LEFT) and key_repeating(KEY_RIGHT) or alt_is_down() and key_down(KEY_RIGHT) and key_repeating(KEY_LEFT))
 {
-speak("music volume, "+menumusvolume);
+speak_translated("music volume, "+menumusvolume);
 }
 if(key_repeating(KEY_TAB) and intro_text.length()>0)
 {
-speak(intro_text);
+speak_translated(intro_text);
 }
 form.monitor();
 if (form.is_pressed(f_cancel)) {
@@ -253,12 +253,12 @@ m.wrap = true;
 m.add_item(prompt);
 m.add_item("yes");
 m.add_item("no");
-speak(prompt);
+speak_translated(prompt);
 m.automatic_intro = false;
 while (m.selected_item < 1) {
 wait(5);
 if (m.monitor()) continue;
-if (m.selected_item == 0) speak(prompt);
+if (m.selected_item == 0) speak_translated(prompt);
 else break;
 }
 return m.selected_item == 1;
@@ -297,13 +297,13 @@ void learn_game_sounds_menu(dictionary@ sfx, const string&in audio_prefix = "", 
 {
             preview_volume += 1;
             audio.set_volume(preview_volume);
-            speak("preview " + preview_volume);
+            speak_translated("preview " + preview_volume);
         }
         if (shift_is_down() and key_repeating(KEY_NEXT) and preview_volume != -50)
 {
             preview_volume -= 1;
             audio.set_volume(preview_volume);
-            speak("preview " + preview_volume);
+            speak_translated("preview " + preview_volume);
         }
 if(key_repeating(KEY_SPACE))
 {
@@ -353,7 +353,7 @@ loop_previews ? audio.play_looped() : audio.play();
             loop_previews ? audio.play_looped() : audio.play();
         } else
 {
-            speak("Unable to play " + selected_label);
+            speak_translated("Unable to play " + selected_label);
         }
     }
 }

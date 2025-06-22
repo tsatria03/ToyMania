@@ -132,12 +132,12 @@ void update_achievements()
             if (achievements[i].currentTier >= achievements[i].thresholds.length())
             {
                 if(play_ach_scores==true) achslot = pool.play_stationary(soundName, false);
-                if(speak_ach_scores==true) speak("Amazing! You've completed all tiers of the " + typeLabel + baseName + " achievement! Press enter to continue.");
+                if(speak_ach_scores==true) speak_translated("Amazing! You've completed all tiers of the " + typeLabel + baseName + " achievement! Press enter to continue.");
             }
             else
             {
                 if(play_ach_scores==true) achslot = pool.play_stationary(soundName, false);
-                if(speak_ach_scores==true) speak("Congratulations! You just unlocked Tier " + achievements[i].currentTier + " of the " + typeLabel + baseName + " achievement. You've " + actionVerb + value + " " + unit + ". Nice work!");
+                if(speak_ach_scores==true) speak_translated("Congratulations! You just unlocked Tier " + achievements[i].currentTier + " of the " + typeLabel + baseName + " achievement. You've " + actionVerb + value + " " + unit + ". Nice work!");
             }
         }
     }

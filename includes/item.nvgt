@@ -41,7 +41,7 @@ if(objs[i].objtype=="potion") objs[i].getsound=objpool.play_stationary("healthge
 if(objs[i].objtype=="teleporter") objs[i].getsound=objpool.play_stationary("teleget.ogg",false);
 p.play_stationary("playergive.ogg",false);
 give(objs[i].objtype,1);
-speak(objs[i].objtype);
+speak_translated(objs[i].objtype);
 objs.remove_at(i);
 return;
 }

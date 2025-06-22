@@ -12,7 +12,7 @@ int mres=m.run();
 string main = m.get_selected_item_id();
 if(mres==-1)
 {
-speak("exiting");
+speak_translated("exiting");
 m.fade_music();
 exit();
 }
@@ -22,7 +22,7 @@ gamemenu();
 }
 if (main == "sm")
 {
-if(speak_menu_loading==true) speak("loading");
+if(speak_menu_loading==true) speak_translated("loading");
 m.fade_music();
 preffsmenu();
 }
@@ -43,7 +43,7 @@ int mres = m.run();
     }
     if (soundsel == "bit")
 {
-if(speak_menu_loading==true) speak("loading eight bit");
+if(speak_menu_loading==true) speak_translated("loading eight bit");
 m.fade_music();
 bitplays+=1;
 writepreffs();
@@ -51,7 +51,7 @@ writepreffs();
     }
     if (soundsel == "crash")
 {
-if(speak_menu_loading==true) speak("loading crash car");
+if(speak_menu_loading==true) speak_translated("loading crash car");
 m.fade_music();
 crashplays+=1;
 writepreffs();
@@ -59,7 +59,7 @@ writepreffs();
     }
     if (soundsel == "clank")
 {
-if(speak_menu_loading==true) speak("loading sword clank");
+if(speak_menu_loading==true) speak_translated("loading sword clank");
 m.fade_music();
 swordplays+=1;
 writepreffs();
@@ -67,7 +67,7 @@ writepreffs();
     }
     if (soundsel == "stone")
 {
-if(speak_menu_loading==true) speak("loading stone throw");
+if(speak_menu_loading==true) speak_translated("loading stone throw");
 m.fade_music();
 stoneplays+=1;
 writepreffs();
@@ -79,19 +79,19 @@ dlgmessage_return("Speaker test complete.");
 }
 if (main == "chup")
 {
-if(speak_menu_loading==true) speak("loading");
+if(speak_menu_loading==true) speak_translated("loading");
 m.fade_music();
 check_for_updates(version, "ToyMania", true);
 }
 if (main == "rt")
 {
-speak("restarting");
+speak_translated("restarting");
 m.fade_music();
 restart("tm.exe");
 }
 if (main == "ex")
 {
-speak("exiting");
+speak_translated("exiting");
 m.fade_music();
 exit();
 }
@@ -113,25 +113,25 @@ gamemenu();
 }
 if(dnm=="changelog")
 {
-if(speak_menu_loading==true) speak("loading");
+if(speak_menu_loading==true) speak_translated("loading");
 m.fade_music();
 dockread("docks/changelog.txt");
 }
 if(dnm=="credits")
 {
-if(speak_menu_loading==true) speak("loading");
+if(speak_menu_loading==true) speak_translated("loading");
 m.fade_music();
 dockread("docks/credits.txt");
 }
 if(dnm=="readme")
 {
-if(speak_menu_loading==true) speak("loading");
+if(speak_menu_loading==true) speak_translated("loading");
 m.fade_music();
 dockread("docks/readme.txt");
 }
 if(dnm=="todo_list")
 {
-if(speak_menu_loading==true) speak("loading");
+if(speak_menu_loading==true) speak_translated("loading");
 m.fade_music();
 dockread("docks/todo_list.txt");
 }
@@ -173,7 +173,7 @@ m.add_item("Endless. This mode lets you play for as long as you can survive. The
         gamemenu();
     }
     endless = (mode == "endless");
-    if (speak_menu_loading) speak(endless ? "loading endless mode" : "loading normal mode");
+    if (speak_menu_loading) speak_translated(endless ? "loading endless mode" : "loading normal mode");
     m.fade_music();
     dlgplay("gamelaunch.ogg");
     level = 1;
@@ -220,7 +220,7 @@ reset_weapons();
 }
 if (gamem == "gsm")
 {
-if(speak_menu_loading==true) speak("loading");
+if(speak_menu_loading==true) speak_translated("loading");
 m.fade_music();
 learnsoundsmenu();
 }
@@ -238,7 +238,7 @@ statsmenu();
 }
 if (gamem == "cgr")
 {
-if(speak_menu_loading==true) speak("loading");
+if(speak_menu_loading==true) speak_translated("loading");
 m.fade_music();
 setupmenu(false);
     m.add_item("Yes", "yes");
@@ -262,7 +262,7 @@ gamemenu();
 }
 if (gamem == "cys")
 {
-if(speak_menu_loading==true) speak("loading");
+if(speak_menu_loading==true) speak_translated("loading");
 m.fade_music();
     string result = "";
     result += "Session Achievements:\r\n";
@@ -309,7 +309,7 @@ if(copexpsounds==true) dlgplay("gamecopy.ogg" ,false);
 }
 if (gamem == "cys2")
 {
-if (speak_menu_loading) speak("loading");
+if (speak_menu_loading) speak_translated("loading");
 m.fade_music();
 gamfile.open(DIRECTORY_APPDATA+"tsatria03/ToyMania/stats/player_progresses.txt", "w");
 string result = "";
@@ -788,7 +788,7 @@ prices.set("teleporter", 15.0);
     string shopem = m.get_selected_item_id();
     if (mres == -1 || shopem == "shopinfo" || shopem == "back")
 {
-        speak("Canceled");
+        speak_translated("Canceled");
         resume_game();
         return;
     }
@@ -802,14 +802,14 @@ prices.set("teleporter", 15.0);
     string amount_input = vd.input_box("", "How many " + shopem.replace("_", " ", true) + "s would you like to buy?");
     if (amount_input == "")
 {
-        speak("canceled");
+        speak_translated("canceled");
         resume_game();
         return;
     }
     double amount = string_to_number(amount_input);
     if (amount <= 0)
 {
-        speak("Error. Invalid quantity.");
+        speak_translated("Error. Invalid quantity.");
         resume_game();
         return;
     }
@@ -826,7 +826,7 @@ prices.set("teleporter", 15.0);
     p.play_stationary("playergive.ogg", false);
     give(shopem, int(amount));
     money -= total_cost;
-    speak("Purchase completed. You bought " + int(amount) + " " + shopem.replace("_", " ", true) + (amount == 1 ? "." : "s."));
+    speak_translated("Purchase completed. You bought " + int(amount) + " " + shopem.replace("_", " ", true) + (amount == 1 ? "." : "s."));
     resume_game();
 return;
 }
@@ -866,7 +866,7 @@ void weaponsmenu()
     string selected = m.get_selected_item_id();
     if (res == -1)
     {
-        speak("Canceled");
+        speak_translated("Canceled");
     boss_timer.resume();
     gametimer.resume();
         return;
@@ -880,7 +880,7 @@ void weaponsmenu()
     }
 else
 {
-    speak("This weapon is already equipped.");
+    speak_translated("This weapon is already equipped.");
     boss_timer.resume();
     gametimer.resume();
         return;
@@ -904,19 +904,19 @@ gamemenu();
 }
        if (achm == "session")
 {
-if(speak_menu_loading==true) speak("loading");
+if(speak_menu_loading==true) speak_translated("loading");
 m.fade_music();
         show_session_achievements();
     }
 if (achm == "lifetime")
 {
-if(speak_menu_loading==true) speak("loading");
+if(speak_menu_loading==true) speak_translated("loading");
 m.fade_music();
         show_lifetime_achievements();
 }
 if (achm == "chm") 
 {
-if(speak_menu_loading==true) speak("loading");
+if(speak_menu_loading==true) speak_translated("loading");
 m.fade_music();
     setupmenu(false);
     m.add_item("Session achievements", "session");
@@ -973,7 +973,7 @@ dlgmessage_return("Your " + modeLabel + " achievements have been cleared.");
 }
 if (achm == "cys")
 {
-if(speak_menu_loading==true) speak("loading");
+if(speak_menu_loading==true) speak_translated("loading");
 m.fade_music();
     string achievementSummary = "Session Achievements:\r\n";
     for (uint i = 0; i < achievements.length(); i++)
@@ -998,7 +998,7 @@ if(copexpsounds==true) dlgplay("gamecopy.ogg" ,false);
 }
 if (achm == "cys2")
 {
-if (speak_menu_loading) speak("loading");
+if (speak_menu_loading) speak_translated("loading");
 m.fade_music();
 achfile.open(DIRECTORY_APPDATA+"tsatria03/ToyMania/stats/player_achievements.txt", "w");
 string achievementSummary = "Session Achievements:\r\n";
@@ -1074,19 +1074,19 @@ gamemenu();
 }
        if (statsm == "session")
 {
-if(speak_menu_loading==true) speak("loading");
+if(speak_menu_loading==true) speak_translated("loading");
 m.fade_music();
         view_session_stats();
     }
 if (statsm == "lifetime")
 {
-if(speak_menu_loading==true) speak("loading");
+if(speak_menu_loading==true) speak_translated("loading");
 m.fade_music();
         view_lifetime_stats();
 }
 if (statsm == "gs")
 {
-if(speak_menu_loading==true) speak("loading");
+if(speak_menu_loading==true) speak_translated("loading");
 m.fade_music();
     setupmenu(false);
     m.add_item("session stats", "session");
@@ -1155,7 +1155,7 @@ if(completesound==true) dlgplay("complete.ogg", false);
 }
 if (statsm == "cys")
 {
-if(speak_menu_loading==true) speak("loading");
+if(speak_menu_loading==true) speak_translated("loading");
 m.fade_music();
 int session_minutes = int(session_playtime / 60000);
 int session_seconds = int((session_playtime % 60000) / 1000);
@@ -1185,7 +1185,7 @@ if(copexpsounds==true) dlgplay("gamecopy.ogg" ,false);
 }
 if (statsm == "cys2")
 {
-if (speak_menu_loading) speak("loading");
+if (speak_menu_loading) speak_translated("loading");
 m.fade_music();
 statfile.open(DIRECTORY_APPDATA+"tsatria03/ToyMania/stats/player_statistics.txt", "w");
 int session_minutes = int(session_playtime / 60000);
@@ -1308,7 +1308,7 @@ speechsetsmenu();
 }
         if (system_is_windows && form.is_pressed(sdloc))
         {
-            speak("loading");
+            speak_translated("loading");
             wait(500);
             string basePath = DIRECTORY_APPDATA + "tsatria03/ToyMania";
             basePath = string_replace(basePath, "/", "\\", true);
@@ -1485,14 +1485,14 @@ autorun = form.is_checked(runmode);
         if (form.is_pressed(cancel) || key_repeating(KEY_ESCAPE))
         {
 spool.play_stationary("menuclose.ogg",false);
-speak("canceled");
+speak_translated("canceled");
 resume_game();
 return;
         }
         if (form.is_pressed(ok))
         {
 writepreffs();
-speak("Settings saved.");
+speak_translated("Settings saved.");
 resume_game();
 return;
         }
@@ -1574,13 +1574,13 @@ if (form.is_pressed(ambTest))
     if (ambpool.sound_is_playing(toyambslot))
 {
 if(togglesound==true) spool.play_stationary("setdisabled.ogg",false);
-speak("ambience off");
+speak_translated("ambience off");
         ambpool.destroy_sound(toyambslot);
     }
 else
 {
 if(togglesound==true) spool.play_stationary("setenabled.ogg",false);
-speak("ambience on");
+speak_translated("ambience on");
         toyambslot = ambpool.play_stationary("gameamb.ogg", true);
     }
 }
@@ -1589,7 +1589,7 @@ if (form.is_pressed(musTest))
     if (muspool.sound_is_playing(toytrackslot))
     {
 if(togglesound==true) spool.play_stationary("setdisabled.ogg", false);
-speak("music off");
+speak_translated("music off");
         muspool.destroy_sound(toytrackslot);
         lastMusicIndex = -1;
     }
@@ -1600,7 +1600,7 @@ speak("music off");
         {
 mustype = form.get_list_item_id(musList, musIndex);
 if(togglesound==true) spool.play_stationary("setenabled.ogg", false);
-speak("music on");
+speak_translated("music on");
             muspool.destroy_sound(toytrackslot);
             toytrackslot = muspool.play_stationary(mustype + ".ogg", true);
             lastMusicIndex = musIndex;
@@ -1612,13 +1612,13 @@ if (form.is_pressed(alarmTest))
     if (alarmpool.sound_is_playing(alarmslot))
 {
 if(togglesound==true) spool.play_stationary("setdisabled.ogg",false);
-speak("alarm off");
+speak_translated("alarm off");
         alarmpool.destroy_sound(alarmslot);
     }
 else
 {
 if(togglesound==true) spool.play_stationary("setenabled.ogg",false);
-speak("alarm on");
+speak_translated("alarm on");
         alarmslot = alarmpool.play_stationary("gamealarm.ogg", true);
     }
 }
@@ -1627,13 +1627,13 @@ if (form.is_pressed(heartbeatTest))
     if (heartpool.sound_is_playing(heartslot))
 {
 if(togglesound==true) spool.play_stationary("setdisabled.ogg",false);
-speak("heartbeat off");
+speak_translated("heartbeat off");
         heartpool.destroy_sound(heartslot);
     }
 else
 {
 if(togglesound==true) spool.play_stationary("setenabled.ogg",false);
-speak("heartbeat on");
+speak_translated("heartbeat on");
         heartslot = heartpool.play_stationary("heartstart.ogg", true);
     }
 }
@@ -1696,14 +1696,14 @@ heartvolume = (form.get_slider(gameHeartbeatVolumeSlider) / 2) - 50;
         if (form.is_pressed(cancel) || key_repeating(KEY_ESCAPE))
         {
 spool.play_stationary("menuclose.ogg",false);
-speak("canceled");
+speak_translated("canceled");
 resume_game();
 return;
         }
         if (form.is_pressed(ok))
         {
 writepreffs();
-speak("Settings saved.");
+speak_translated("Settings saved.");
 resume_game();
 return;
         }
@@ -1716,8 +1716,8 @@ form.reset();
 int ttscfg = form.create_button("&Configure voice");
 int speechtest = form.create_button("&preview voice");
     array<string> languageFiles = list_languages();    
-languageFiles.insert_at(0, "None");
-    int langList = form.create_list("Game Translation Language: ", languageFiles.length());
+languageFiles.insert_at(0, "none");
+    int langList = form.create_list("Translation Language: ", languageFiles.length());
     for (uint i = 0; i < languageFiles.length(); i++)
     {
         form.add_list_item(langList, languageFiles[i], languageFiles[i]);

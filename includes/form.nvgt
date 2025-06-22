@@ -131,22 +131,17 @@ class audio_form {
 		active = true;
 		if (!silent && change_screen_title && window_title != "")
 			show_window(window_title);
-		/*if(@ui_speech==null)
-		{
-		tts_voice temp_voice;
-		@ui_speech=temp_voice;
-		}*/
 		if (window_title == "" || silent)
 			return;
 		if (speak_control_attributes_separately) {
-			speak(window_title, true);
+			speak_translated(window_title, true);
 			if (say_dialog)
-				speak("Dialog", false);
+				speak_translated("Dialog", false);
 		} else {
 			if (say_dialog)
-				speak(window_title + " Dialog", true);
+				speak_translated(window_title + " Dialog", true);
 			else
-				speak(window_title, true);
+				speak_translated(window_title, true);
 		}
 	}
 	bool set_checkbox_mark(int control_index, bool checked) {
@@ -1041,7 +1036,7 @@ spool.play_stationary("menuclick.ogg",false);
 			return false;
 		}
 		if (speak_deletion_status)
-			speak(c_form[control_index].list[list_index].item + " deleted.", true);
+			speak_translated(c_form[control_index].list[list_index].item + " deleted.", true);
 		c_form[control_index].list.remove_at(list_index);
 		c_form[control_index].list_length--;
 		if (reset_cursor or c_form[control_index].list.length() < 1)
@@ -1053,9 +1048,9 @@ spool.play_stationary("menuclick.ogg",false);
 				c_form[control_index].list_position = 0;
 		}
 		if ((speak_deletion_status) && (c_form[control_index].list_position > -1)) {
-			speak(c_form[control_index].list[get_list_position(control_index)].item, false);
+			speak_translated(c_form[control_index].list[get_list_position(control_index)].item, false);
 			if (c_form[control_index].list[get_list_position(control_index)].checked)
-				speak("Checked", false);
+				speak_translated("Checked", false);
 		}
 		return true;
 	}
@@ -1081,9 +1076,9 @@ spool.play_stationary("menuclick.ogg",false);
 		selections = get_list_selections(control_index);
 		if (speak_deletion_status) {
 			if (selections.length() == 1)
-				speak(c_form[control_index].list[selections[0]].item + " deleted.", true);
+				speak_translated(c_form[control_index].list[selections[0]].item + " deleted.", true);
 			else
-				speak(selections.length() + " items deleted.", true);
+				speak_translated(selections.length() + " items deleted.", true);
 		}
 		for (int counter = 0; counter < selections.length(); counter++) {
 			int current_delete = (selections[counter] - counter);
@@ -1099,9 +1094,9 @@ spool.play_stationary("menuclick.ogg",false);
 				c_form[control_index].list_position = 0;
 		}
 		if ((speak_deletion_status) && (c_form[control_index].list_position > -1)) {
-			speak(c_form[control_index].list[get_list_position(control_index)].item, false);
+			speak_translated(c_form[control_index].list[get_list_position(control_index)].item, false);
 			if (c_form[control_index].list[get_list_position(control_index)].checked)
-				speak("Checked", false);
+				speak_translated("Checked", false);
 		}
 		return true;
 	}
@@ -1253,9 +1248,9 @@ spool.play_stationary("menuclick.ogg",false);
 		}
 		c_form[control_index].list_position = position;
 		if ((speak_new_item) && (c_form[control_index].list_position > -1)) {
-			speak(c_form[control_index].list[position].item, false);
+			speak_translated(c_form[control_index].list[position].item, false);
 			if (c_form[control_index].list[position].checked)
-				speak("Checked", false);
+				speak_translated("Checked", false);
 		}
 		return true;
 	}
@@ -2196,7 +2191,7 @@ spool.play_stationary("menuclick.ogg",false);
 				if (keyboard_modifiers & KEYMOD_SHIFT != 0) dir = -1;
 				audioform_keyboard_echo = audioform_change_keyboard_echo(audioform_keyboard_echo, dir);
 				this.set_default_keyboard_echo(audioform_keyboard_echo);
-				speak(audioform_keyboard_echo_string(audioform_keyboard_echo));
+				speak_translated(audioform_keyboard_echo_string(audioform_keyboard_echo));
 			}
 		}
 		if (@utility_form == null)
@@ -2355,25 +2350,6 @@ spool.play_stationary("menuclick.ogg",false);
 		if (focus > -1 && focus < c_form.length() && c_form[focus].type == ct_form) return c_form[focus].subform;
 		return this;
 	}
-
-	/*
-	private bool speak(string text, bool interrupt)
-	{
-	if((speech_output<=0)||(speech_output>4))
-	{
-	if(interrupt)
-	{
-	return ui_speech.speak_interrupt(text);
-	}
-	return ui_speech.speak(text);
-	}
-	if(interrupt)
-	{
-	return screen_reader_speak_interrupt(speech_output, text);
-	}
-	return screen_reader_speak(speech_output, text);
-	}
-	*/
 	//internal properties
 	bool subform = false;
 	private int speech_output;
@@ -2510,9 +2486,9 @@ class control {
 		if (type == ct_form && @subform != null) {
 			if (caption != "") {
 				if (interrupt_previous_speech == true)
-					speak(caption, true);
+					speak_translated(caption, true);
 				else
-					speak(caption, false);
+					speak_translated(caption, false);
 			}
 			int f = subform.get_current_focus();
 			if (f < 0) f = 0;
@@ -2526,42 +2502,42 @@ class control {
 			hotkey_text = " Alt+" + hotkey_letter;
 		if (separate_attributes == true) {
 			if (interrupt_previous_speech == true)
-				speak(caption, true);
+				speak_translated(caption, true);
 			else
-				speak(caption, false);
-			speak(typename, false);
+				speak_translated(caption, false);
+			speak_translated(typename, false);
 		} else {
 			if (interrupt_previous_speech == true)
-				speak(caption + " " + typename + hotkey_text, true);
+				speak_translated(caption + " " + typename + hotkey_text, true);
 			else
-				speak(caption + " " + typename + hotkey_text, false);
+				speak_translated(caption + " " + typename + hotkey_text, false);
 		}
 		if (hotkey_letter != "" && separate_attributes == true)
-			speak("Alt+" + hotkey_letter, false);
+			speak_translated("Alt+" + hotkey_letter, false);
 		if ((type == ct_input) && (password_mask != "")) {
 			if (text.length() > 0)
-				speak(text.length() + " characters", false);
+				speak_translated(text.length() + " characters", false);
 			else
-				speak("Blank", false);
+				speak_translated("Blank", false);
 		}
 		if ((type == ct_input) && (password_mask == "")) {
 			if (text.length() > 0) {
 				if (sel_start >= 0) {
 					if (sel_end - sel_start >= 1024)
-						speak(highlight_selection_speech_text + " " + (sel_end - sel_start + 1) + " characters", false);
+						speak_translated(highlight_selection_speech_text + " " + (sel_end - sel_start + 1) + " characters", false);
 					else
-						speak(highlight_selection_speech_text + " " + text.substr(sel_start, sel_end - sel_start + 1), false);
+						speak_translated(highlight_selection_speech_text + " " + text.substr(sel_start, sel_end - sel_start + 1), false);
 				} else
-					speak(read_line(current_line_start_position()), false);
+					speak_translated(read_line(current_line_start_position()), false);
 			} else
-				speak("Blank", false);
+				speak_translated("Blank", false);
 		}
 		if (type == ct_status_bar)
-			speak(text, false);
+			speak_translated(text, false);
 		if (type == ct_progress)
 			speak_progress(false);
 		if (type == ct_slider)
-			speak(slider_value_string(), false);
+			speak_translated(slider_value_string(), false);
 		if ((type == ct_list) && (list_position > -1)) speak_list_item(false);
 		focused = true;
 	}
@@ -2584,7 +2560,7 @@ class control {
 			if (!read_only) {
 				if (char != "") {
 					if (this.disallowed_chars.length() > 0 && this.is_disallowed_char(char)) {
-						if (this.char_disallowed_description != "") speak(this.char_disallowed_description);
+						if (this.char_disallowed_description != "") speak_translated(this.char_disallowed_description);
 						return;
 					}
 					if (overwrite)
@@ -2749,7 +2725,7 @@ class control {
 					slider_value = old;
 					return;
 				}
-				speak(slider_value_string(), true);
+				speak_translated(slider_value_string(), true);
 			}
 		}
 		if (type == ct_list) {
@@ -2803,16 +2779,16 @@ class control {
 					return;
 				if (list[list_position].checked) {
 					list[list_position].checked = false;
-					speak("Unchecked", true);
+					speak_translated("Unchecked", true);
 				} else {
 					list[list_position].checked = true;
-					speak("Checked", true);
+					speak_translated("Checked", true);
 				}
 			}
 			if (list_multiselect && (((key_down(KEY_LCTRL)) || (key_down(KEY_RCTRL))) && (key_repeating(KEY_A)))) {
 				for (int counter = 0; counter <= list_length; counter++)
 					list[counter].checked = true;
-				speak("All items selected", true);
+				speak_translated("All items selected", true);
 			}
 			if (key_repeating(list_is_tab_panel ? KEY_LEFT : KEY_UP)) {
 				if (list_position <= 0) {
@@ -2891,15 +2867,15 @@ class control {
 				return;
 			pressed = false;
 			if (link_url.empty()) {
-				speak("Error, link url is empty!");
+				speak_translated("Error, link url is empty!");
 				return;
 			}
 			if (regexp_match(link_url, "^(https?:\/\/)?(?:[a-zA-Z0-9_-]+(?::[a-zA-Z0-9._%+-]+)?@)?([a-zA-Z0-9.-]+\.[a-zA-Z]{2,})(:\d{2,5})?(\/[^\s?#]*)?(\?[^\s#]*)?(#[^\s]*)?$")) {
-			speak("Invalid url (%0)".format(link_url));
+			speak_translated("Invalid url (%0)".format(link_url));
 				return;
 			}
 			bool open_response = urlopen(link_url);
-			speak(open_response ? "Opening %0".format(link_url) : "Couldn't open the url. Unexpected error occured!");
+			speak_translated(open_response ? "Opening %0".format(link_url) : "Couldn't open the url. Unexpected error occured!");
 		}
 	}
 	string slider_value_string() {
@@ -2936,7 +2912,7 @@ class control {
 			int pos2 = bgt_string_contains(text, "\n", line);
 			if (pos2 > -1) max_col = pos2 - pos - 1;
 		} else {
-			if (!silent) speak("line number out of range");
+			if (!silent) speak_translated("line number out of range");
 			return false;
 		}
 		if (col > max_col) col = max_col;
@@ -2945,7 +2921,7 @@ class control {
 		cursor = pos;
 		sel_start = -1;
 		sel_end = -1;
-		if (!silent) speak(read_line(current_line_start_position()), false);
+		if (!silent) speak_translated(read_line(current_line_start_position()), false);
 		return true;
 	}
 	bool search(const string& in text, int dir = 1, bool silent = false) {
@@ -2968,13 +2944,13 @@ class control {
 				if (nav_items[i].find(text) < 0) continue;
 				list_position = i;
 				if (!silent) {
-					if (wrapped != "") speak(wrapped);
+					if (wrapped != "") speak_translated(wrapped);
 					speak_list_item();
 				}
 				return true;
 			}
 			if (!silent)
-				speak(already_on_result ? "nothing else found" : "nothing found");
+				speak_translated(already_on_result ? "nothing else found" : "nothing found");
 			return false;
 		} else if (type == ct_input) {
 			string wrapped = "";
@@ -2985,19 +2961,19 @@ class control {
 				idx = dir > 0 ? this.text.find(text, tmp_cursor) : this.text.rfind(text, tmp_cursor);
 			}
 			if (idx < 0) {
-				if (!silent) speak("nothing found");
+				if (!silent) speak_translated("nothing found");
 				return false;
 			}
 			if (cursor == idx) {
-				if (!silent) speak("nothing else found");
+				if (!silent) speak_translated("nothing else found");
 				return false;
 			}
 			cursor = idx;
 			sel_start = -1;
 			sel_end = -1;
 			if (!silent) {
-				if (wrapped != "") speak(wrapped);
-				speak(read_line(current_line_start_position()), wrapped == "");
+				if (wrapped != "") speak_translated(wrapped);
+				speak_translated(read_line(current_line_start_position()), wrapped == "");
 			}
 			return true;
 		} else
@@ -3009,7 +2985,7 @@ class control {
 		if (sel_start < 0) {
 			sel_start = utf8prev(text, cursor);
 			sel_end = sel_start;
-			speak(input_box_speak(find_appropriate_character(text.substr(sel_start, 4)), true) + " " + highlight_selection_speech_text, true);
+			speak_translated(input_box_speak_translated(find_appropriate_character(text.substr(sel_start, 4)), true) + " " + highlight_selection_speech_text, true);
 			return;
 		}
 		int old_cursor = cursor;
@@ -3017,9 +2993,9 @@ class control {
 			cursor = utf8prev(text, cursor);
 		if ((cursor == sel_start || old_cursor == sel_start) && sel_start > 0) {
 			sel_start = utf8prev(text, sel_start);
-			speak(input_box_speak(find_appropriate_character(text.substr(sel_start, 4)), true) + " " + highlight_selection_speech_text, true);
+			speak_translated(input_box_speak_translated(find_appropriate_character(text.substr(sel_start, 4)), true) + " " + highlight_selection_speech_text, true);
 		} else if (cursor == sel_end || (old_cursor == sel_end) && sel_end > 0 && sel_end < text.length()) {
-			speak(input_box_speak(find_appropriate_character(text.substr(sel_end, 4)), true) + " " + highlight_unselection_speech_text, true);
+			speak_translated(input_box_speak_translated(find_appropriate_character(text.substr(sel_end, 4)), true) + " " + highlight_unselection_speech_text, true);
 			sel_end = utf8prev(text, sel_end);
 		}
 		if (sel_end < sel_start && sel_start > -1) {
@@ -3033,15 +3009,15 @@ class control {
 		if (sel_start == -1 && sel_end == -1 && cursor < text.length()) {
 			sel_start = cursor;
 			sel_end = cursor;
-			speak(input_box_speak(find_appropriate_character(text.substr(sel_start, 4)), true) + " " + highlight_selection_speech_text, true);
+			speak_translated(input_box_speak_translated(find_appropriate_character(text.substr(sel_start, 4)), true) + " " + highlight_selection_speech_text, true);
 			cursor = utf8next(text, cursor);
 			return;
 		}
 		if (utf8prev(text, cursor) == sel_end && cursor < text.length()) {
 			sel_end = utf8next(text, sel_end);
-			speak(input_box_speak(find_appropriate_character(text.substr(sel_end, 4)), true) + " " + highlight_selection_speech_text, true);
+			speak_translated(input_box_speak_translated(find_appropriate_character(text.substr(sel_end, 4)), true) + " " + highlight_selection_speech_text, true);
 		} else if ((cursor == sel_start || utf8prev(text, cursor) == sel_start) && cursor <= text.length() && sel_start > -1) {
-			speak(input_box_speak(find_appropriate_character(text.substr(sel_start, 4)), true) + " " + highlight_unselection_speech_text, true);
+			speak_translated(input_box_speak_translated(find_appropriate_character(text.substr(sel_start, 4)), true) + " " + highlight_unselection_speech_text, true);
 			sel_start = utf8next(text, sel_start);
 		}
 		if (cursor < text.length())
@@ -3056,12 +3032,12 @@ class control {
 		sel_end = -1;
 		if (!multiline) {
 			cursor = text.length();
-			speak(read_line(0), true, false);
+			speak_translated(read_line(0), true, false);
 			return;
 		}
 		int line_start = current_line_start_position();
 		if (line_start == text.length() || line_start < 0) {
-			speak("Blank", true);
+			speak_translated("Blank", true);
 			if (line_start == text.length())
 				cursor = text.length();
 			return;
@@ -3070,10 +3046,10 @@ class control {
 			if (text[counter] != "\n")
 				continue;
 			cursor = counter + 1;
-			speak(read_line(cursor), true, false);
+			speak_translated(read_line(cursor), true, false);
 			return;
 		}
-		speak(read_line(line_start), true, false);
+		speak_translated(read_line(line_start), true, false);
 		cursor = text.length();
 	}
 	void previous_line() {
@@ -3083,22 +3059,22 @@ class control {
 		if (line_start <= 0 || !multiline) {
 			cursor = 0;
 			if (text == "")
-				speak("Blank");
+				speak_translated("Blank");
 			else
-				speak(read_line(0), true, false);
+				speak_translated(read_line(0), true, false);
 			return;
 		}
 		cursor = line_start - 1;
 		cursor = current_line_start_position();
 		if (cursor < 0)
 			cursor = 0;
-		speak(read_line(cursor), true, false);
+		speak_translated(read_line(cursor), true, false);
 	}
 	void highlight_all() {
 		if (text == "") {
 			sel_start = -1;
 			sel_end = -1;
-			speak("nothing to select");
+			speak_translated("nothing to select");
 			return;
 		}
 		sel_start = 0;
@@ -3108,9 +3084,9 @@ class control {
 	}
 	private void speak_selected(const string& in selection) {
 		if (selection.length() >= 1024 || password_mask != "")
-			speak(selection.length() + " characters " + highlight_selection_speech_text);
+			speak_translated(selection.length() + " characters " + highlight_selection_speech_text);
 		else
-			speak(selection + " " + highlight_selection_speech_text, true, false);
+			speak_translated(selection + " " + highlight_selection_speech_text, true, false);
 	}
 	void add(string character, bool silent = false) {
 		if(type != ct_input)
@@ -3130,7 +3106,7 @@ class control {
 			cursor += character.length();
 		}
 		if (echo_flag == textflag_characters || echo_flag == textflag_characters_words)
-			speak(input_box_speak(find_appropriate_character(character)), true);
+			speak_translated(input_box_speak_translated(find_appropriate_character(character)), true);
 		if (audioform_word_separators .find(character) > -1 && (echo_flag == textflag_words || echo_flag == textflag_characters_words)) {
 			int temp_position = cursor - 1;
 			while (temp_position > 0 && (temp_position >= text.length() || audioform_word_separators .find(text[temp_position - 1]) < 0 && text[temp_position - 1] != "\n"))
@@ -3139,7 +3115,7 @@ class control {
 			if (password_mask != "") {
 				for (uint i = 0; i < word.length(); i++) word[i] = password_mask;
 			}
-			speak(word, echo_flag != textflag_characters_words);
+			speak_translated(word, echo_flag != textflag_characters_words);
 		}
 	}
 	void edit(string character) {
@@ -3152,12 +3128,12 @@ class control {
 		if (read_only == false)
 			text[cursor] = character;
 		if (echo_flag == textflag_characters || echo_flag == textflag_characters_words)
-			speak(input_box_speak(find_appropriate_character(character)), true);
+			speak_translated(input_box_speak_translated(find_appropriate_character(character)), true);
 		if (audioform_word_separators .find(character) > -1 && (echo_flag == textflag_words || echo_flag == textflag_characters_words)) {
 			int temp_position = cursor - 1;
 			while (temp_position > 0 && (temp_position >= text.length() || audioform_word_separators .find(text[temp_position - 1]) < 0))
 				temp_position--;
-			speak(read_word_from_position(temp_position), echo_flag != textflag_characters_words);
+			speak_translated(read_word_from_position(temp_position), echo_flag != textflag_characters_words);
 		}
 	}
 	bool add_silent(string content, int position) {
@@ -3237,24 +3213,24 @@ class control {
 	}
 	void copy_highlighted() {
 		if (sel_start < 0 || sel_end < 0 || sel_start > sel_end) {
-			speak("Nothing selected", true);
+			speak_translated("Nothing selected", true);
 			return;
 		}
 		string copy_text = text.substr(0, sel_end + 1).substr(sel_start);
-		speak("Copied to clipboard", true);
+		speak_translated("Copied to clipboard", true);
 		clipboard_set_text(copy_text);
 	}
 	void cut_highlighted() {
 		if (read_only == true) {
-			speak("Cannot cut from a read only edit box.", true);
+			speak_translated("Cannot cut from a read only edit box.", true);
 			return;
 		}
 		if (sel_start < 0 || sel_end < 0 || sel_start > sel_end) {
-			speak("Nothing selected", true);
+			speak_translated("Nothing selected", true);
 			return;
 		}
 		string copy_text = text.substr(0, sel_end + 1).substr(sel_start);
-		speak("Cut Selected", true);
+		speak_translated("Cut Selected", true);
 		clipboard_set_text(copy_text);
 		delete_highlighted(0, false);
 	}
@@ -3265,15 +3241,15 @@ class control {
 			paste = paste_single[0];
 		paste = paste.replace("\r", "", true);
 		if (paste == "") {
-			speak("clipboard empty", true);
+			speak_translated("clipboard empty", true);
 			return;
 		}
 		if ((max_length > 0) && ((text + paste).length() - (sel_end - sel_start) > max_length)) {
-			speak("clipboard data can't fit", true);
+			speak_translated("clipboard data can't fit", true);
 			return;
 		}
 		if (this.disallowed_chars.length() > 0 && this.is_disallowed_char(paste)) {
-			if (this.char_disallowed_description != "") speak(this.char_disallowed_description);
+			if (this.char_disallowed_description != "") speak_translated(this.char_disallowed_description);
 			return;
 		}
 		string new_text = text;
@@ -3285,7 +3261,7 @@ class control {
 		}
 		text = new_text.substr(0, cursor) + paste + new_text.substr(cursor);
 		cursor += paste.length();
-		speak("Text Pasted", true);
+		speak_translated("Text Pasted", true);
 	}
 	void delete_word_left() {
 		move_word_left(true, false);
@@ -3310,7 +3286,7 @@ class control {
 			sel_start = -1;
 			sel_end = -1;
 			if (speak_deleted)
-				speak("selection deleted");
+				speak_translated("selection deleted");
 			return;
 		} else if (from_start == 0 && cursor > 0) {
 			int old_cursor = cursor;
@@ -3318,7 +3294,7 @@ class control {
 			if (cursor >= text.length())
 				cursor = text.length() - 1;
 			if (speak_deleted)
-				speak(input_box_speak(find_appropriate_character(text.substr(cursor, 4)), true) + (delete_speech_text != "" ? " " + delete_speech_text : ""), true);
+				speak_translated(input_box_speak_translated(find_appropriate_character(text.substr(cursor, 4)), true) + (delete_speech_text != "" ? " " + delete_speech_text : ""), true);
 			text = text.substr(0, cursor) + text.substr(old_cursor);
 		} else if (from_start == 1) {
 			string del_char = "Blank";
@@ -3326,7 +3302,7 @@ class control {
 				del_char = text.substr(cursor, 4);
 			text = text.substr(0, cursor) + text.substr(cursor + utf8size(text.substr(cursor, 1)));
 			if (speak_deleted)
-				speak(input_box_speak(find_appropriate_character(del_char), true), true);
+				speak_translated(input_box_speak_translated(find_appropriate_character(del_char), true), true);
 		}
 	}
 	void move_left() {
@@ -3336,9 +3312,9 @@ class control {
 		if (cursor < 0)
 			cursor = 0;
 		if (cursor >= text.length())
-			speak("Blank");
+			speak_translated("Blank");
 		else
-			speak(input_box_speak(find_appropriate_character(text.substr(cursor, 4)), true), true);
+			speak_translated(input_box_speak_translated(find_appropriate_character(text.substr(cursor, 4)), true), true);
 	}
 	void move_right() {
 		sel_start = -1;
@@ -3347,16 +3323,16 @@ class control {
 		if (cursor > text.length())
 			cursor = text.length();
 		if (cursor >= text.length())
-			speak("Blank");
+			speak_translated("Blank");
 		else
-			speak(input_box_speak(find_appropriate_character(text.substr(cursor, 4)), true), true);
+			speak_translated(input_box_speak_translated(find_appropriate_character(text.substr(cursor, 4)), true), true);
 	}
 	void add_new_line() {
 		if (multiline == false)
 			return;
 		add("\n");
 		if (echo_flag != textflag_none)
-			speak("New Line", true);
+			speak_translated("New Line", true);
 	}
 	int current_line_start_position(bool word = false) {
 		if (text == "")
@@ -3417,10 +3393,10 @@ class control {
 			name = "Read Only " + name;
 		return name;
 	}
-	string input_box_speak(string character) {
-		return input_box_speak(character, false);
+	string input_box_speak_translated(string character) {
+		return input_box_speak_translated(character, false);
 	}
-	string input_box_speak(string character, bool ignore_echo_flag) {
+	string input_box_speak_translated(string character, bool ignore_echo_flag) {
 		if (character == " ")
 			return "Space";
 		if (character == "\n")
@@ -3509,11 +3485,11 @@ class control {
 		if (checked == true) {
 			checked = false;
 if(togglesound==true) spool.play_stationary("setdisabled.ogg",false);
-			speak("Unchecked", true);
+			speak_translated("Unchecked", true);
 		} else {
 			checked = true;
 if(togglesound==true) spool.play_stationary("setenabled.ogg",false);
-			speak("Checked", true);
+			speak_translated("Checked", true);
 		}
 	}
 	string find_appropriate_character(string original_character) {
@@ -3531,7 +3507,7 @@ if(togglesound==true) spool.play_stationary("setenabled.ogg",false);
 		speak_progress(true);
 	}
 	void speak_progress(bool interrupt) {
-		speak("" + progress + " " + percentage_speech_text, interrupt);
+		speak_translated("" + progress + " " + percentage_speech_text, interrupt);
 	}
 	void beep_progress() {
 		string frequency = "";
@@ -3566,15 +3542,15 @@ if(togglesound==true) spool.play_stationary("setenabled.ogg",false);
 	void line_start() {
 		if (cursor == 0) {
 			if (text != "")
-				speak(input_box_speak(find_appropriate_character(text.substr(0, 4)), true));
+				speak_translated(input_box_speak_translated(find_appropriate_character(text.substr(0, 4)), true));
 			else
-				speak("Blank");
+				speak_translated("Blank");
 			return;
 		}
 		int line_start = current_line_start_position();
 		if (line_start < text.length()) {
 			cursor = line_start;
-			speak(input_box_speak(find_appropriate_character(text.substr(cursor, 4)), true));
+			speak_translated(input_box_speak_translated(find_appropriate_character(text.substr(cursor, 4)), true));
 		}
 		sel_start = -1;
 		sel_end = -1;
@@ -3585,13 +3561,13 @@ if(togglesound==true) spool.play_stationary("setenabled.ogg",false);
 			if (i == text.length() or text[i] == "\n") break;
 		}
 		cursor = i;
-		speak("Blank");
+		speak_translated("Blank");
 		sel_start = -1;
 		sel_end = -1;
 	}
 	void move_word_left(bool highlighting = false, bool speak_selection_status = true) {
 		if (text == "") {
-			if (speak_selection_status) speak("Blank");
+			if (speak_selection_status) speak_translated("Blank");
 			return;
 		}
 		if (highlighting) {
@@ -3609,19 +3585,19 @@ if(togglesound==true) spool.play_stationary("setenabled.ogg",false);
 				if (sel_end == -1)
 					sel_end = cursor - 1;
 				if (speak_selection_status) speak_selected(text.substr(sel_start, cursor - sel_start));
-				else speak(text.substr(sel_start, cursor - sel_start), true, false);
+				else speak_translated(text.substr(sel_start, cursor - sel_start), true, false);
 				cursor = sel_start;
 				return;
 			} else if (cursor == sel_end || cursor - 1 == sel_end) {
 				sel_end = pos - 1;
-				if (speak_selection_status) speak(text.substr(pos, cursor - 1 - pos) + " " + highlight_unselection_speech_text, true, false);
-				else speak(text.substr(pos, cursor - 1 - pos), true, false);
+				if (speak_selection_status) speak_translated(text.substr(pos, cursor - 1 - pos) + " " + highlight_unselection_speech_text, true, false);
+				else speak_translated(text.substr(pos, cursor - 1 - pos), true, false);
 				cursor = pos;
 				return;
 			}
 		}
 		if (cursor <= 0) {
-			speak(read_word_from_position(0), true, false);
+			speak_translated(read_word_from_position(0), true, false);
 			return;
 		}
 		int cur_word = current_line_start_position(true);
@@ -3632,11 +3608,11 @@ if(togglesound==true) spool.play_stationary("setenabled.ogg",false);
 			cursor = tmp_cursor;
 		}
 		cursor = cur_word;
-		speak(read_word_from_position(cur_word), true, false);
+		speak_translated(read_word_from_position(cur_word), true, false);
 	}
 	void move_word_right(bool highlighting = false, bool speak_selection_status = true) {
 		if (text == "" || cursor < 0 || cursor >= text.length()) {
-			if (speak_selection_status) speak("Blank");
+			if (speak_selection_status) speak_translated("Blank");
 			return;
 		}
 		bool found_boundary = audioform_word_separators .find(text[cursor]) > -1;
@@ -3659,12 +3635,12 @@ if(togglesound==true) spool.play_stationary("setenabled.ogg",false);
 					sel_start = cursor;
 				sel_end = new_word - 1;
 				if (speak_selection_status) speak_selected(text.substr(cursor, new_word - cursor));
-				else speak(text.substr(cursor, new_word - cursor), true, false);
+				else speak_translated(text.substr(cursor, new_word - cursor), true, false);
 				cursor = new_word;
 				return;
 			} else if (cursor == sel_start || cursor - 1 == sel_start) {
-				if (speak_selection_status) speak(text.substr(sel_start, new_word - sel_start) + " " + highlight_unselection_speech_text, true, false);
-				else speak(text.substr(sel_start, new_word - sel_start), true, false);
+				if (speak_selection_status) speak_translated(text.substr(sel_start, new_word - sel_start) + " " + highlight_unselection_speech_text, true, false);
+				else speak_translated(text.substr(sel_start, new_word - sel_start), true, false);
 				sel_start = new_word;
 				cursor = new_word;
 				return;
@@ -3672,30 +3648,30 @@ if(togglesound==true) spool.play_stationary("setenabled.ogg",false);
 		}
 		cursor = new_word;
 		if (cursor < text.length())
-			speak(read_word_from_position(cursor), true, false);
+			speak_translated(read_word_from_position(cursor), true, false);
 		else
-			speak("Blank");
+			speak_translated("Blank");
 	}
 	void field_start() {
 		cursor = 0;
 		sel_start = -1;
 		sel_end = -1;
 		if (text.length() == 0) {
-			speak("Blank", true);
+			speak_translated("Blank", true);
 			return;
 		}
-		speak(read_line(0), true, false);
+		speak_translated(read_line(0), true, false);
 	}
 	void field_end() {
 		sel_start = -1;
 		sel_end = -1;
 		if (text.length() == 0) {
-			speak("Blank", true);
+			speak_translated("Blank", true);
 			return;
 		}
 		cursor = text.length();
 		int line_start = current_line_start_position();
-		speak(read_line(line_start), true, false);
+		speak_translated(read_line(line_start), true, false);
 	}
 	string read_word_from_position(int position) {
 		if (text == "")
@@ -3758,7 +3734,7 @@ if(togglesound==true) spool.play_stationary("setenabled.ogg",false);
 			cursor = sel_start;
 		} else if (cursor == sel_end || cursor - 1 == sel_end) {
 			sel_end = line_start;
-			speak(text.substr(sel_end, cursor - sel_end) + " " + highlight_unselection_speech_text, true, false);
+			speak_translated(text.substr(sel_end, cursor - sel_end) + " " + highlight_unselection_speech_text, true, false);
 			cursor = sel_end;
 		}
 		if (sel_end < sel_start) {
@@ -3796,7 +3772,7 @@ if(togglesound==true) spool.play_stationary("setenabled.ogg",false);
 			speak_selected(text.substr(old_cursor, sel_end - old_cursor));
 		} else if (cursor == sel_start || cursor - 1 == sel_start) {
 			sel_start = line_end;
-			speak(text.substr(cursor, line_end - cursor) + " " + highlight_unselection_speech_text, true, false);
+			speak_translated(text.substr(cursor, line_end - cursor) + " " + highlight_unselection_speech_text, true, false);
 			cursor = line_end;
 		}
 		if (sel_end < sel_start) {
@@ -3815,28 +3791,10 @@ if(togglesound==true) spool.play_stationary("setenabled.ogg",false);
 		sel_end = end;
 	}
 	void speak_list_item(bool interrupt = true) {
-		if (list_is_tab_panel) speak(list[list_position].item + " tab", (interrupt ? true : false));
-		else if (!list_is_tab_panel and list[list_position].checked) speak(list[list_position].item + " Checked", (interrupt ? true : false));
-		else speak(list[list_position].item, (interrupt ? true : false));
+		if (list_is_tab_panel) speak_translated(list[list_position].item + " tab", (interrupt ? true : false));
+		else if (!list_is_tab_panel and list[list_position].checked) speak_translated(list[list_position].item + " Checked", (interrupt ? true : false));
+		else speak_translated(list[list_position].item, (interrupt ? true : false));
 	}
-	/*
-	bool speak(string text, bool interrupt)
-	{
-	if((speech_output<=0)||(speech_output>4))
-	{
-	if(interrupt)
-	{
-	return ui_speech.speak_interrupt(text);
-	}
-	return ui_speech.speak(text);
-	}
-	if(interrupt)
-	{
-	return screen_reader_speak_interrupt(speech_output, text);
-	}
-	return screen_reader_speak(speech_output, text);
-	}
-	*/
 }
 class list_item {
 	string item;
@@ -3893,13 +3851,13 @@ class go_to_index : utility_form {
 		} else if (f.is_pressed(f_ok)) {
 			string idx = f.get_text(f_index);
 			if (!idx.is_digits() or idx.substr(0, 1) == "0") {
-				speak("enter a positive number");
+				speak_translated("enter a positive number");
 				f.focus(f_index);
 				return;
 			}
 			if (parent.get_control_type(control_index) == ct_list) {
 				if (!parent.set_list_position(control_index, parse_int(idx) - 1)) {
-					speak("invalid item number!");
+					speak_translated("invalid item number!");
 					f.focus(f_index);
 				} else {
 					@parent.utility_form = null;
@@ -3909,12 +3867,12 @@ class go_to_index : utility_form {
 			}
 			string col = f.get_text(f_col);
 			if (!col.is_digits()) {
-				speak("enter a positive number");
+				speak_translated("enter a positive number");
 				f.focus(f_col);
 				return;
 			}
 			if (!parent.set_line(control_index, parse_int(idx), parse_int(col))) {
-				speak("invalid line number!");
+				speak_translated("invalid line number!");
 				f.focus(f_index);
 			} else {
 				@parent.utility_form = null;
@@ -3935,7 +3893,7 @@ class search_for : utility_form {
 		this.control_index = control_index;
 		if (type != ct_input and type != ct_list or parent.get_password_mask(control_index) != "") {
 			if (type == ct_input)
-				speak("this is a protected text field");
+				speak_translated("this is a protected text field");
 			return;
 		}
 		string current = "";
@@ -3959,13 +3917,13 @@ class search_for : utility_form {
 		} else if (search_forward or f.is_pressed(f_prev)) {
 			string text = f.get_text(f_text);
 			if (text == "") {
-				speak("enter some text to search for");
+				speak_translated("enter some text to search for");
 				f.focus(f_text);
 				return;
 			}
 			parent.utility_form_data.set("last_search", text);
 			if (!parent.search(control_index, text, search_forward ? 1 : -1)) {
-				speak("nothing found");
+				speak_translated("nothing found");
 				f.focus(f_text);
 			} else {
 				@parent.utility_form = null;
