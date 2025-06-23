@@ -28,6 +28,7 @@
 #include"savedata.nvgt"
 #include"toy.nvgt"
 #include"translator.nvgt"
+#include"translator_speech.nvgt"
 #include"updater.nvgt"
 #include"virtual_dialogs.nvgt"
 #include"weapons.nvgt"

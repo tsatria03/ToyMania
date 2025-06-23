@@ -1,0 +1,71 @@
+int create_translated_button(string caption, bool primary = false, bool cancel = false, bool overwrite = true) {
+	string translated = trl_check(caption);
+	return create_button(translated, primary, cancel, overwrite);
+}
+int create_translated_checkbox(string caption, bool initial_value = false, bool read_only = false) {
+	string translated = trl_check(caption);
+	return create_checkbox(translated, initial_value, read_only);
+}
+int create_translated_input_box(string caption, string default_text = "", string password_mask = "", int maximum_length = 0, bool read_only = false, bool multiline = false, bool multiline_enter = true) {
+	string translated = trl_check(caption);
+string translated2 = trl_check(default_text);
+	return create_input_box(translated, translated2, password_mask, maximum_length, read_only, multiline, multiline_enter);
+}
+int create_translated_slider(string caption, double default_value = 50, double minimum_value = 0, double maximum_value = 100, string text = "", double step_size = 1) {
+	string translated = trl_check(caption);
+	return create_slider(translated, default_value, minimum_value, maximum_value, text, step_size);
+}
+void create_translated_window(string window_title, bool change_screen_title = true, bool say_dialog = true, bool silent = false) {
+	string translated = trl_check(window_title);
+	create_window(translated, change_screen_title, say_dialog, silent);
+}
+
+int add_translated_item(const string&in text, const string&in id = "", int position = -1) {
+	return add_item(trl_check(text), id, position);
+}
+void add_translated_items(string[]@ item_list) {
+	for (uint i = 0; i < item_list.length(); i++) {
+		add_translated_item(item_list[i]);
+	}
+}
+
+int alert_translated(string title, string text, bool can_cancel = false, uint flags = 0) {
+	return alert(trl_check(title), trl_check(text), can_cancel, flags);
+}
+bool show_translated_window(const string& in title) {
+	return show_window(trl_check(title));
+}
+bool speak_translated(string text, bool interrupt = tts_default_interrupt, bool braille = true) {
+	string translated = trl_check(text);
+	speechbuff = translated;
+	if (translated.length() > 10000) {
+		string tmp = translated;
+		while (tmp.length() > 0) {
+			uint pos = 4096;
+			while (pos > 2048 and pos < tmp.length() and tmp[pos] != " ") pos--;
+			raw_speak_translated(tmp.substr(0, pos), interrupt and tmp.length() == translated.length());
+			tmp = tmp.substr(pos);
+		}
+	} else {
+		raw_speak_translated(translated, interrupt);
+	}
+	return true;
+}
+void raw_speak_translated(string text, bool interrupt) {
+	if (interrupt and tts.speaking) tts.stop();
+	if (@tts_config_form != null) {
+		use_sr = tts_config_form.is_checked(0);
+		if (!use_sr) {
+			int voice = tts_config_form.get_list_position(1);
+			int rate = tts_config_form.get_slider(2);
+			int volume = tts_config_form.get_slider(3);
+			if (voice > -1 and tts.voice != voice) tts.set_voice(voice);
+			if (tts.rate != rate) tts.set_rate(rate);
+			if (tts.volume != volume) tts.set_volume(volume);
+		}
+	}
+	if (!use_sr or !screen_reader_has_speech())
+		tts.speak(text, interrupt);
+	else
+		screen_reader_speak(text, interrupt);
+}

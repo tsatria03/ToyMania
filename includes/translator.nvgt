@@ -24,77 +24,6 @@ array<string> list_languages()
     result.sort_ascending();
     return result;
 }
-bool speak_translated(string text, bool interrupt = tts_default_interrupt, bool braille = true) {
-	string original = text;
-	string translated = trl(text);
-	speechbuff = translated;
-	if (translated == original && currentlangfile.lower() != "none") {
-		string path;
-		if (currentlangfile.find("/") != -1) {
-			string[] parts = string_split(currentlangfile, "/");
-			if (parts.length() == 2) {
-				path = "data/lang/variants/" + parts[0] + "/" + parts[1] + ".lng";
-			}
-		} else {
-			path = "data/lang/normal/" + currentlangfile + ".lng";
-		}
-		string[] lines;
-		file reader;
-		if (reader.open(path, "r")) {
-			lines = string_split(reader.read(), "\r\n", true);
-			reader.close();
-		}
-		string line = original + "=" + original;
-		bool found = false;
-		for (uint i = 0; i < lines.length(); i++) {
-			if (trim(lines[i]) == line) {
-				found = true;
-				break;
-			}
-		}
-		if (!found) {
-    lines.insert_last(line);
-    lines.sort_ascending();
-			file writer;
-			if (writer.open(path, "w")) {
-        for (uint i = 0; i < lines.length(); i++) {
-            writer.write(lines[i] + "\r\n");
-        }
-        writer.close();
-    }
-}
-}
-	if (translated.length() > 10000) {
-		string tmp = translated;
-		while (tmp.length() > 0) {
-			uint pos = 4096;
-			while (pos > 2048 and pos < tmp.length() and tmp[pos] != " ") pos--;
-			raw_speak_translated(tmp.substr(0, pos), interrupt and tmp.length() == translated.length());
-			tmp = tmp.substr(pos);
-		}
-	} else {
-		raw_speak_translated(translated, interrupt);
-	}
-	return true;
-}
-void raw_speak_translated(string text, bool interrupt) {
-	if (interrupt and tts.speaking) tts.stop();
-	if (@tts_config_form != null) {
-		use_sr = tts_config_form.is_checked(0);
-		if (!use_sr) {
-			int voice = tts_config_form.get_list_position(1);
-			int rate = tts_config_form.get_slider(2);
-			int volume = tts_config_form.get_slider(3);
-			if (voice > -1 and tts.voice != voice) tts.set_voice(voice);
-			if (tts.rate != rate) tts.set_rate(rate);
-			if (tts.volume != volume) tts.set_volume(volume);
-		}
-	}
-	if (!use_sr or !screen_reader_has_speech())
-		tts.speak(text, interrupt);
-	else
-		screen_reader_speak(text, interrupt);
-}
 string clean_key(string key)
 {
     key = trim(key).lower();
@@ -114,6 +43,52 @@ string trl(string key)
     if (!g_lang.exists(cleanedKey))
         return key;
     return string(g_lang[cleanedKey]);
+}
+string trl_check(const string& in key) {
+	string translated = trl(key);
+	if (translated == key && currentlangfile.lower() != "none") {
+		check_translations({key});
+	}
+	return translated;
+}
+void check_translations(string[] phrases) {
+	if (currentlangfile.lower() == "none") return;
+	string path;
+	if (currentlangfile.find("/") != -1) {
+		string[] parts = string_split(currentlangfile, "/");
+		if (parts.length() == 2)
+			path = "data/lang/variants/" + parts[0] + "/" + parts[1] + ".lng";
+	} else {
+		path = "data/lang/normal/" + currentlangfile + ".lng";
+	}
+	string[] lines;
+	file reader;
+	if (reader.open(path, "r")) {
+		lines = string_split(reader.read(), "\r\n", true);
+		reader.close();
+	}
+	array<string> missing;
+	for (uint p = 0; p < phrases.length(); p++) {
+		string line = phrases[p] + "=" + phrases[p];
+		bool found = false;
+		for (uint i = 0; i < lines.length(); i++) {
+			if (trim(lines[i]) == line) {
+				found = true;
+				break;
+			}
+		}
+		if (!found) missing.insert_last(line);
+	}
+	if (missing.length() > 0) {
+		lines.insert_last(missing);
+		lines.sort_ascending();
+		file writer;
+		if (writer.open(path, "w")) {
+			for (uint i = 0; i < lines.length(); i++)
+				writer.write(lines[i] + "\r\n");
+			writer.close();
+		}
+	}
 }
 void load_language(string langfile)
 {
@@ -135,7 +110,7 @@ void load_language(string langfile)
         }
 else
 {
-            alert("Warning", "Invalid language path format: '" + langfile + "'. Falling back to English.");
+            alert("Error", "Invalid language path format: " + langfile + ". Falling back to English.");
             langfile = "English";
             filepath = "data/lang/normal/English.lng";
             fallback = true;
@@ -150,7 +125,7 @@ else
 {
         if (langfile != "English")
 {
-            alert("Warning", "The language file '" + filepath + "' is missing or empty. Falling back to English.");
+            alert("Error", "The language file " + filepath + " is missing or empty. Falling back to English.");
             fallback = true;
             langfile = "English";
             filepath = "data/lang/normal/English.lng";
@@ -158,7 +133,7 @@ else
         }
         if (trim(content) == "")
 {
-            alert("Critical Error", "The fallback language file 'English.lng' is missing or empty. Cannot continue.");
+            alert("Error", "The fallback language file English.lng is missing or empty. Cannot continue.");
             exit();
         }
     }
@@ -181,14 +156,14 @@ else
 {
         if (langfile != "English")
 {
-            alert("Warning", "The language file '" + filepath + "' contained no valid entries. Falling back to English.");
+            alert("Error", "The language file " + filepath + " contained no valid entries. Falling back to English.");
             fallback = true;
             load_language("English"); // Recursively retry with fallback
             return;
         }
 else
 {
-            alert("Critical Error", "The fallback language file 'English.lng' contains no valid entries. Cannot continue.");
+            alert("Error", "The fallback language file English.lng contains no valid entries. Cannot continue.");
             exit();
         }
     }

@@ -135,7 +135,7 @@ if (@timeelapsed.handle == null)
     timeelapsed.set_timer(gametimer);
 }
 getver();
-show_window(trl("ToyMania, version ")+version);
+show_window("ToyMania, version "+version);
 if(gamstence.is_already_running)
 {
 alert("error", "You can only have one instence of this game running!");
@@ -230,6 +230,7 @@ playcounts=true;
 playlevels=true;
 completesound=true;
 togglesound=true;
+currentlangfile="english";
 use_sr = true;
 tts.set_voice(0);
 tts.set_rate(0);

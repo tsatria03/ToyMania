@@ -180,16 +180,16 @@ void dockread(const string&in filename)
 {
 if(!file_exists(filename))
 {
-alert("Error","Could not fined "+string_replace(filename, "docks/", "", true));
+alert("Error", "Could not fined "+string_replace(filename, "docks/", "", true));
 docksmenu();
 }
 dockfile.open(filename,"rb");
 string docktext=dockfile.read();
 dockfile.close();
 form.reset();
-form.create_window("Viewing "+string_replace(filename, "docks/", "", true),false,false,false);
+form.create_translated_window("Viewing "+string_replace(filename, "docks/", "", true),false,false,false);
 int dockbox=form.create_input_box(string_replace(filename, "docks/", "", true), docktext, read_only:true, multiline:true);
-int dockclose=form.create_button("&close",false,true);
+int dockclose=form.create_translated_button("&close",false,true);
 form.focus(dockbox);
 while(true)
 {

@@ -8,7 +8,7 @@ bool check_for_updates(string old_version, string projectname, bool precheck = f
 {
     if (precheck)
 {
-        speak_translated("Checking for updates...");
+        speak("Checking for updates...");
         wait(1000);
     }
     string version_url = "https://tsatria03.github.io/projects/" + projectname + "/version.txt";
@@ -52,7 +52,7 @@ wait(500);
         int choice = question("Permission Denied", "This update can't be downloaded to this directory because it's write-protected. Would you like to download this file to your Downloads folder instead?");
         if (choice != 1)
 {
-            speak_translated("Update canceled.");
+            speak("Update canceled.");
             mainmenu();
             return false;
         }
@@ -95,7 +95,7 @@ else if (ext == "7z" || ext == "zip")
     string choice = m.get_selected_item_id();
     if (mres == -1 || choice == "cancel")
 {
-        speak_translated("Canceled");
+        speak("Canceled");
         mainmenu();
         return false;
     }
@@ -112,7 +112,7 @@ wait(500);
     if (choice == "extract")
 {
 wait(500);
-        speak_translated("Extracting update...");
+        speak("Extracting update...");
         wait(1000);
         bool success = run("lib/7zr.exe", "x \"" + filename + "\" -pGreatCollector -aoa -y", true, true);
         if (success)
@@ -132,7 +132,7 @@ else
 string dl_file(string url, string disk_file,bool quiet=false,string msg="Downloading. Press Space for percentage, 1 2 and 3 keys for detailed progress, or escape to cancel. Press m to mute or unmute progress beeps. Press h to read this help message again.")
 {
 internet_request r(url, disk_file);
-if(!quiet) speak_translated(msg);
+if(!quiet) speak(msg);
 double last_percentage=0;
 int progbeeps=1;
 string status;
@@ -147,50 +147,50 @@ last_percentage=r.download_percent;
 if (key_pressed(KEY_ESCAPE))
 {
 status="canceled";
-speak_translated(status);
+speak(status);
 return status;
 }
 if (key_pressed(KEY_1))
 {
 string size=round(r.download_size/1024/1024, 2)+" MB ("+round(r.download_size/1024, 2)+" KB)";
-speak_translated("File size: "+size);
+speak("File size: "+size);
 }
 if (key_pressed(KEY_2))
 {
 string size=round(r.bytes_downloaded/1024/1024, 2)+" MB ("+round(r.bytes_downloaded/1024, 2)+" KB)";
-speak_translated("Total downloaded: "+size);
+speak("Total downloaded: "+size);
 }
 if (key_pressed(KEY_3))
 {
 string size=(round(r.download_size/1024/1024, 2)-round(r.bytes_downloaded/1024/1024, 2))+" MB( "+(round(r.download_size/1024, 2)-round(r.bytes_downloaded/1024, 2))+" KB)";
-speak_translated("Total remaining: "+size);
+speak("Total remaining: "+size);
 }
 if (key_pressed(KEY_H))
 {
-speak_translated(msg);
+speak(msg);
 }
 if (key_pressed(KEY_M))
 {
 if(progbeeps==1)
 {
 progbeeps=0;
-speak_translated("Progress beeps muted.");
+speak("Progress beeps muted.");
 }
 else if(progbeeps==0)
 {
 progbeeps=1;
-speak_translated("Progress beeps unmuted.");
+speak("Progress beeps unmuted.");
 }
 }
 if (key_pressed(KEY_SPACE))
 {
 if(r.download_percent==r.download_percent && r.download_percent>=0)
 {
-speak_translated(round(r.download_percent, 2)+" percent downloaded");
+speak(round(r.download_percent, 2)+" percent downloaded");
 }
 else
 {
-speak_translated("Download progress unavailable.");
+speak("Download progress unavailable.");
 }
 }
 if(r.complete==true)

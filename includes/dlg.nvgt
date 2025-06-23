@@ -1,7 +1,7 @@
 void dlg(string message, bool dlgcoppy=true, int timeout=-1)
 {
 timer timeouter;
-speak_translated(message);
+speak(message);
 while(true)
 {
 wait(5);
@@ -11,12 +11,12 @@ if (key_repeating(KEY_C) and dlgcoppy==true)
 {
 temp.destroy_all();
 temp.play_stationary("dlgcoppy.ogg", false);
-speak_translated("Text copied");
+speak("Text copied");
 clipboard_copy_text(message);
 }
 if (key_repeating(KEY_LEFT) or key_repeating(KEY_RIGHT) or key_repeating(KEY_UP) or key_repeating(KEY_DOWN))
 {
-speak_translated(message);
+speak(message);
 }
 if(key_repeating(KEY_RETURN) or key_down(KEY_A))
 {
