@@ -249,6 +249,29 @@ class audio_form {
 		}
 		return true;
 	}
+
+int create_translated_button(string caption, bool primary = false, bool cancel = false, bool overwrite = true) {
+	string translated = trl_check(caption);
+	return create_button(translated, primary, cancel, overwrite);
+}
+int create_translated_checkbox(string caption, bool initial_value = false, bool read_only = false) {
+	string translated = trl_check(caption);
+	return create_checkbox(translated, initial_value, read_only);
+}
+int create_translated_input_box(string caption, string default_text = "", string password_mask = "", int maximum_length = 0, bool read_only = false, bool multiline = false, bool multiline_enter = true) {
+	string translated = trl_check(caption);
+string translated2 = trl_check(default_text);
+	return create_input_box(translated, translated2, password_mask, maximum_length, read_only, multiline, multiline_enter);
+}
+int create_translated_slider(string caption, double default_value = 50, double minimum_value = 0, double maximum_value = 100, string text = "", double step_size = 1) {
+	string translated = trl_check(caption);
+	return create_slider(translated, default_value, minimum_value, maximum_value, text, step_size);
+}
+void create_translated_window(string window_title, bool change_screen_title = true, bool say_dialog = true, bool silent = false) {
+	string translated = trl_check(window_title);
+	create_window(translated, change_screen_title, say_dialog, silent);
+}
+
 	int create_input_box(string caption, string default_text = "", string password_mask = "", int maximum_length = 0, bool read_only = false, bool multiline = false, bool multiline_enter = true) {
 		form_error = 0;
 		if (active_controls >= 50) {
