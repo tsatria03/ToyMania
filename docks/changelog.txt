@@ -1,8 +1,9 @@
 new in 4.0
+Made it so pure numbers are excluded from being translated for all language files in the game.
 Made it so when a language file is loaded, the game now automatically sorts all key-value entries alphabetically by key. This makes translation files easier to navigate and edit manually.
 Made it so the game now automatically writes missing translation strings to the currently selected language file as placeholders. If a string is not yet translated, it will be written in the format key=key so users can easily fill in their own translations later.
-new in 3.9
 You can now disable the translation system entirely in the preferences menu. When you select the none option, the game completely disables the loading of translation files and falls back to using the built-in hardcoded English strings.
+new in 3.9
 Updated the readme file with expanded translation guides to include support for language variants, along with clearer instructions for creating both base and styled translations.
 Revamped the language selection list found in the prefferences menu. The language selection interface has been streamlined into a single list that includes both base languages and their variants. This makes it easier to browse all of the options while keeping things accessible via first-letter navigation.
 Reorganized the language file structure. Base languages such as English and Spanish are now stored in the normal folder. Variants of these languages such as English/Angry, English/Happy, and English/Sad are placed in the variants folder under their respective language subfolders for better organization and scalability.
@@ -11,6 +12,7 @@ Fixed an issue where translations were case-sensitive. From now on, You no longe
 Updated the readme file with a new guide on creating your own translation languages to use in the game.
 Added the option to directly change the language of the game in the prefferences menu.
 Started the process of making this game translatable to other languages.
+Updated some boss and weapon related sounds.
 Added the ability to pause the playing sound in the learn game sounds menu. You can press the spacebar to do this. This is mostly useful for sounds that are looped.
 new in 3.8
 Made it so the preview volume in the learn game sounds menu now resets itself back to it's default value after exiting the menu.

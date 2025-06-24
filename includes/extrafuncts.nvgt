@@ -26,6 +26,16 @@ bool int_to_bool(int i)
 {
 return i==1? true:false;
 }
+bool is_numeric_string(const string& in s)
+{
+for (uint i = 0; i < s.length(); i++)
+{
+string c = s.substr(i, 1);
+if (!c.is_digits() && c != "." && c != "-" && c != "+")
+return false;
+}
+return s.length() > 0;
+}
 bool string_starts_with(const string& in str, const string& in start)
 {
 if (str.length()>=start.length())

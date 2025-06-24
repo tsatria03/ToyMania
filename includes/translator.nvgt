@@ -38,57 +38,71 @@ string clean_key(string key)
 }
 string trl(string key)
 {
-    if (currentlangfile.lower() == "none") return key;
-    string cleanedKey = clean_key(key);
-    if (!g_lang.exists(cleanedKey))
-        return key;
-    return string(g_lang[cleanedKey]);
+if (currentlangfile.lower() == "none") return key;
+if (is_numeric_string(key)) return key;
+string cleanedKey = clean_key(key);
+if (!g_lang.exists(cleanedKey))
+return key;
+return string(g_lang[cleanedKey]);
 }
-string trl_check(const string& in key) {
-	string translated = trl(key);
-	if (translated == key && currentlangfile.lower() != "none") {
-		check_translations({key});
-	}
-	return translated;
+string trl_check(const string& in key)
+{
+if (is_numeric_string(key)) return key;
+string translated = trl(key);
+if (translated == key && currentlangfile.lower() != "none")
+{
+check_translations({key});
 }
-void check_translations(string[] phrases) {
-	if (currentlangfile.lower() == "none") return;
-	string path;
-	if (currentlangfile.find("/") != -1) {
-		string[] parts = string_split(currentlangfile, "/");
-		if (parts.length() == 2)
-			path = "data/lang/variants/" + parts[0] + "/" + parts[1] + ".lng";
-	} else {
-		path = "data/lang/normal/" + currentlangfile + ".lng";
-	}
-	string[] lines;
-	file reader;
-	if (reader.open(path, "r")) {
-		lines = string_split(reader.read(), "\r\n", true);
-		reader.close();
-	}
-	array<string> missing;
-	for (uint p = 0; p < phrases.length(); p++) {
-		string line = phrases[p] + "=" + phrases[p];
-		bool found = false;
-		for (uint i = 0; i < lines.length(); i++) {
-			if (trim(lines[i]) == line) {
-				found = true;
-				break;
-			}
-		}
-		if (!found) missing.insert_last(line);
-	}
-	if (missing.length() > 0) {
-		lines.insert_last(missing);
-		lines.sort_ascending();
-		file writer;
-		if (writer.open(path, "w")) {
-			for (uint i = 0; i < lines.length(); i++)
-				writer.write(lines[i] + "\r\n");
-			writer.close();
-		}
-	}
+return translated;
+}
+void check_translations(string[] phrases)
+{
+if (currentlangfile.lower() == "none") return;
+string path;
+if (currentlangfile.find("/") != -1)
+{
+string[] parts = string_split(currentlangfile, "/");
+if (parts.length() == 2)
+path = "data/lang/variants/" + parts[0] + "/" + parts[1] + ".lng";
+}
+else
+{
+path = "data/lang/normal/" + currentlangfile + ".lng";
+}
+string[] lines;
+file reader;
+if (reader.open(path, "r"))
+{
+lines = string_split(reader.read(), "\r\n", true);
+reader.close();
+}
+array<string> missing;
+for (uint p = 0; p < phrases.length(); p++)
+{
+string line = phrases[p] + "=" + phrases[p];
+bool found = false;
+for (uint i = 0; i < lines.length(); i++)
+{
+if (trim(lines[i]) == line)
+{
+found = true;
+break;
+}
+}
+if (!found) missing.insert_last(line);
+}
+if (missing.length() > 0)
+{
+lines.insert_last(missing);
+lines.sort_ascending();
+file writer;
+if (writer.open(path, "w"))
+{
+for (uint i = 0; i < lines.length(); i++)
+writer.write(lines[i] + "\r\n");
+writer.close();
+}
+}
 }
 void load_language(string langfile)
 {
@@ -172,23 +186,23 @@ else
     sort_language_file(filepath);
 }
 void sort_language_file(string path) {
-	string[] lines;
-	file reader;
-	if (reader.open(path, "r")) {
-		lines = string_split(reader.read(), "\r\n", true);
-		reader.close();
-	}	
-	array<string> filtered;
-	for (uint i = 0; i < lines.length(); i++) {
-		string line = trim(lines[i]);
-		if (line == "" || line[0] == ';' || line[0] == '#') continue;
-		filtered.insert_last(line);
-	}
-	filtered.sort_ascending();
-	file writer;
-	if (writer.open(path, "w")) {
-		for (uint i = 0; i < filtered.length(); i++)
-			writer.write(filtered[i] + "\r\n");
-		writer.close();
-	}
+string[] lines;
+file reader;
+if (reader.open(path, "r")) {
+lines = string_split(reader.read(), "\r\n", true);
+reader.close();
+}
+array<string> filtered;
+for (uint i = 0; i < lines.length(); i++) {
+string line = trim(lines[i]);
+if (line == "" || line[0] == ';' || line[0] == '#') continue;
+filtered.insert_last(line);
+}
+filtered.sort_ascending();
+file writer;
+if (writer.open(path, "w")) {
+for (uint i = 0; i < filtered.length(); i++)
+writer.write(filtered[i] + "\r\n");
+writer.close();
+}
 }
