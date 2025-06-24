@@ -109,14 +109,13 @@ music_added = true;
 
 // Item IDs are entirely optional.
 int add_translated_item(const string&in text, const string&in id = "", int position = -1) {
-	return add_item(trl_check(text), id, position);
+return add_item(process_digits(text), id, position);
 }
 void add_translated_items(string[]@ item_list) {
-	for (uint i = 0; i < item_list.length(); i++) {
-		add_translated_item(item_list[i]);
-	}
+for (uint i = 0; i < item_list.length(); i++) {
+add_translated_item(item_list[i]);
 }
-
+}
 int add_item(const string&in text, const string&in id = "", int position = -1) {
 if (!form.add_list_item(f_list, text, id, position, false, focus_first_item)) return -1;
 if (position == -1) position = form.get_list_count(f_list) -1;

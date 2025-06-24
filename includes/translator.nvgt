@@ -36,23 +36,19 @@ string clean_key(string key)
     }
     return cleaned;
 }
-string trl(string key)
-{
+string trl(string key) {
 if (currentlangfile.lower() == "none") return key;
-string cleanedKey = clean_key(remove_digits(key));
-if (!g_lang.exists(cleanedKey))
-return key;
+string cleanedKey = clean_key(key);
+if (!g_lang.exists(cleanedKey)) return key;
 return string(g_lang[cleanedKey]);
 }
-string trl_check(const string& in key)
-{
-string baseKey = remove_digits(key);
-string translated = trl(key);
-if (translated == key && currentlangfile.lower() != "none")
-{
-check_translations({baseKey});
+string trl_check(const string& in key) {
+if (currentlangfile.lower() == "none") return key;
+string cleanedKey = clean_key(key);
+if (!g_lang.exists(cleanedKey)) {
+check_translations({key});
 }
-return translated;
+return trl(key);
 }
 void check_translations(string[] phrases)
 {
@@ -75,33 +71,29 @@ if (reader.open(path, "r"))
 lines = string_split(reader.read(), "\r\n", true);
 reader.close();
 }
-array<string> missing;
+dictionary unique_lines;
+for (uint i = 0; i < lines.length(); i++) {
+string line = lines[i];
+if (line != "") {
+unique_lines[line] = true;
+}
+}
 for (uint p = 0; p < phrases.length(); p++)
 {
-string stripped = remove_digits(phrases[p]);
-string line = stripped + "=" + stripped;
-bool found = false;
-for (uint i = 0; i < lines.length(); i++)
-{
-if (trim(lines[i]) == line)
-{
-found = true;
-break;
+string line = phrases[p] + "=" + phrases[p];
+if (!unique_lines.exists(line)) {
+unique_lines[line] = true;
 }
 }
-if (!found) missing.insert_last(line);
-}
-if (missing.length() > 0)
-{
-lines.insert_last(missing);
-lines.sort_ascending();
+string[] sorted_lines = unique_lines.get_keys();
+sorted_lines.sort_ascending();
 file writer;
 if (writer.open(path, "w"))
 {
-for (uint i = 0; i < lines.length(); i++)
-writer.write(lines[i] + "\r\n");
-writer.close();
+for (uint i = 0; i < sorted_lines.length(); i++) {
+writer.write(sorted_lines[i] + "\r\n");
 }
+writer.close();
 }
 }
 void load_language(string langfile)
@@ -124,7 +116,7 @@ void load_language(string langfile)
         }
 else
 {
-            alert("Error", "Invalid language path format: " + langfile + ". Falling back to English.");
+            alert_translated("Error", "Invalid language path format: " + langfile + ". Falling back to English.");
             langfile = "English";
             filepath = "data/lang/normal/English.lng";
             fallback = true;
@@ -139,7 +131,7 @@ else
 {
         if (langfile != "English")
 {
-            alert("Error", "The language file " + filepath + " is missing or empty. Falling back to English.");
+            alert_translated("Error", "The language file " + filepath + " is missing or empty. Falling back to English.");
             fallback = true;
             langfile = "English";
             filepath = "data/lang/normal/English.lng";
@@ -147,7 +139,7 @@ else
         }
         if (trim(content) == "")
 {
-            alert("Error", "The fallback language file English.lng is missing or empty. Cannot continue.");
+            alert_translated("Error", "The fallback language file English.lng is missing or empty. Cannot continue.");
             exit();
         }
     }
@@ -170,14 +162,14 @@ else
 {
         if (langfile != "English")
 {
-            alert("Error", "The language file " + filepath + " contained no valid entries. Falling back to English.");
+            alert_translated("Error", "The language file " + filepath + " contained no valid entries. Falling back to English.");
             fallback = true;
             load_language("English"); // Recursively retry with fallback
             return;
         }
 else
 {
-            alert("Error", "The fallback language file English.lng contains no valid entries. Cannot continue.");
+            alert_translated("Error", "The fallback language file English.lng contains no valid entries. Cannot continue.");
             exit();
         }
     }

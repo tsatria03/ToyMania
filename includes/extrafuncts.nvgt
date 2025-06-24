@@ -26,16 +26,6 @@ bool int_to_bool(int i)
 {
 return i==1? true:false;
 }
-bool is_pure_number(const string& in s)
-{
-if (s == "") return false;
-for (uint i = 0; i < s.length(); i++)
-{
-string c = s.substr(i, 1);
-if (!c.is_digits() && c != "." && c != "-" && c != "+") return false;
-}
-return true;
-}
 bool string_starts_with(const string& in str, const string& in start)
 {
 if (str.length()>=start.length())
@@ -124,6 +114,32 @@ mt=platforms[i].tile;
 }
 return mt;
 }
+string process_digits(const string& in msg) {
+string result = "";
+string buffer = "";
+bool inDigits = msg.length() > 0 && msg[0].is_digits();
+for (uint i = 0; i < msg.length(); i++) {
+string c = msg.substr(i, 1);
+bool isDigit = (c.is_digits() || c == "." || c == "-" || c == "+");
+if (isDigit == inDigits) {
+buffer += c;
+} else {
+if (inDigits) {
+result += buffer;
+} else {
+result += trl_check(buffer);
+}
+buffer = c;
+inDigits = isDigit;
+}
+}
+if (inDigits) {
+result += buffer;
+} else {
+result += trl_check(buffer);
+}
+return result;
+}
 string trim(const string&in str)
 {
 string result = str;
@@ -154,15 +170,6 @@ string random_string(string[] array)
 {
 string retval=array[random(0,array.length()-1)];
 return retval;
-}
-string remove_digits(const string &in s)
-{
-string result = "";
-for (uint i = 0; i < s.length(); i++)
-{
-if (!s[i].is_digits()) result += s[i];
-}
-return result;
 }
 string strip_extension(string filename)
 {
