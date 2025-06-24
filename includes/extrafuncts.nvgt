@@ -26,15 +26,15 @@ bool int_to_bool(int i)
 {
 return i==1? true:false;
 }
-bool is_numeric_string(const string& in s)
+bool is_pure_number(const string& in s)
 {
+if (s == "") return false;
 for (uint i = 0; i < s.length(); i++)
 {
 string c = s.substr(i, 1);
-if (!c.is_digits() && c != "." && c != "-" && c != "+")
-return false;
+if (!c.is_digits() && c != "." && c != "-" && c != "+") return false;
 }
-return s.length() > 0;
+return true;
 }
 bool string_starts_with(const string& in str, const string& in start)
 {
@@ -155,6 +155,15 @@ string random_string(string[] array)
 string retval=array[random(0,array.length()-1)];
 return retval;
 }
+string remove_digits(const string &in s)
+{
+string result = "";
+for (uint i = 0; i < s.length(); i++)
+{
+if (!s[i].is_digits()) result += s[i];
+}
+return result;
+}
 string strip_extension(string filename)
 {
     int dotIndex = filename.rfind(".");
@@ -190,7 +199,7 @@ void dockread(const string&in filename)
 {
 if(!file_exists(filename))
 {
-alert("Error", "Could not fined "+string_replace(filename, "docks/", "", true));
+alert_translated("Error", "Could not fined "+string_replace(filename, "docks/", "", true));
 docksmenu();
 }
 dockfile.open(filename,"rb");
@@ -309,7 +318,7 @@ if(SCRIPT_COMPILED)
 bool success=run(appid,"",false,false);
 if(!success)
 {
-alert("errorr", "Unable to restart "+appid+"!");
+alert_translated("errorr", "Unable to restart "+appid+"!");
 }
 }
 else
@@ -317,7 +326,7 @@ else
 bool success=run("c:\\nvgt\\nvgtw.exe", scriptid,false,false);
 if(!success)
 {
-alert("errorr", "Unable to restart "+scriptid+"!");
+alert_translated("errorr", "Unable to restart "+scriptid+"!");
 }
 }
 exit();

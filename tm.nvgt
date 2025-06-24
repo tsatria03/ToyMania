@@ -135,10 +135,10 @@ if (@timeelapsed.handle == null)
     timeelapsed.set_timer(gametimer);
 }
 getver();
-show_window("ToyMania, version "+version);
+show_translated_window("ToyMania, version "+version);
 if(gamstence.is_already_running)
 {
-alert("error", "You can only have one instence of this game running!");
+alert_translated("error", "You can only have one instence of this game running!");
 exit();
 }
 else

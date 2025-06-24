@@ -29,14 +29,14 @@ void doorcheck()
             if (entity_near_door(doors[i].startx, doors[i].starty))
             {
 doors[i].jamsound = doorpool.play_stationary("doorjam"+random(1,2)+".ogg", false);
-                speak("The door is jammed! Something dangerous is nearby!");
+                speak_translated("The door is jammed! Something dangerous is nearby!");
                 return;
             }
             if (collected_keys < doors[i].required_keys)
             {
 temp.destroy_sound(doors[i].locksound);
 doors[i].locksound = temp.play_stationary("doorlock.ogg", false);
-                speak("This door is locked. You need " + doors[i].required_keys + " or more keys to unlock it.");
+                speak_translated("This door is locked. You need " + doors[i].required_keys + " or more keys to unlock it.");
             }
             else
             {

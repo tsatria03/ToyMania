@@ -39,19 +39,18 @@ string clean_key(string key)
 string trl(string key)
 {
 if (currentlangfile.lower() == "none") return key;
-if (is_numeric_string(key)) return key;
-string cleanedKey = clean_key(key);
+string cleanedKey = clean_key(remove_digits(key));
 if (!g_lang.exists(cleanedKey))
 return key;
 return string(g_lang[cleanedKey]);
 }
 string trl_check(const string& in key)
 {
-if (is_numeric_string(key)) return key;
+string baseKey = remove_digits(key);
 string translated = trl(key);
 if (translated == key && currentlangfile.lower() != "none")
 {
-check_translations({key});
+check_translations({baseKey});
 }
 return translated;
 }
@@ -79,7 +78,8 @@ reader.close();
 array<string> missing;
 for (uint p = 0; p < phrases.length(); p++)
 {
-string line = phrases[p] + "=" + phrases[p];
+string stripped = remove_digits(phrases[p]);
+string line = stripped + "=" + stripped;
 bool found = false;
 for (uint i = 0; i < lines.length(); i++)
 {
