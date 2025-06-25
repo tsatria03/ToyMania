@@ -1,6 +1,7 @@
 new in 4.0
+Made it so all health bars are spoken in percentages, not in actual values.
 Fixed An issue where the check_translations function would append duplicate lines to the language translation file every time it was called, causing clutter and unnecessary repetition.
-Made it so the translation system now Preserves complete keys and values without having to aggressivly trimm the contents of the written file.
+Made it so the translation system now Preserves complete keys and values without having to aggressivly trimm the contents of the file.
 Made it so pure numbers are excluded from being translated for all language files in the game.
 Made it so when a language file is loaded, the game now automatically sorts all key-value entries alphabetically by key. This makes translation files easier to navigate and edit manually.
 Made it so the game now automatically writes missing translation strings to the currently selected language file as placeholders. If a string is not yet translated, it will be written in the format key=key so users can easily fill in their own translations later.

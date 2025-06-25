@@ -386,4 +386,3 @@ m.enter_sound = "menuenter.ogg";
 m.open_sound = "menuopen.ogg";
 m.wrap_sound = "menuwrap.ogg";
 }
-

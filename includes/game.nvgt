@@ -322,12 +322,12 @@ pause_game();
 }
 else
 {
-speak_translated("This store has "+storehealth+" out of "+storemaxhealth+" HP remaining.");
+speak_translated("This store has "+round(storehealth / storemaxhealth * 100, 2) + " percent health remaining.");
 }
 }
 if(key_pressed(KEY_H) and doormove==false)
 {
-speak_translated("You have "+health+" out of "+maxhealth+" HP remaining.");
+speak_translated("You have "+round(health / maxhealth * 100, 2) + " percent health remaining.");
 }
 if (autorun)
 {
