@@ -696,6 +696,7 @@ collected_toys = 0;
 destroy_all_healzones();
 destroy_all_bullets();
             destroy_all_cars();
+destroy_all_darts();
             destroy_all_gards();
             destroy_all_doors();
             destroy_all_keys();
