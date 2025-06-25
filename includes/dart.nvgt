@@ -1,0 +1,190 @@
+dart@[]darts(0);
+class dart
+{
+int dartx;
+int darty;
+int range;
+int range2;
+int damage;
+int speed;
+string direction;
+timer speedtimer;
+dart(int dx,int dy,int dtr,int dtr2,int dmg,int sp,string dr)
+{
+dartx=dx;
+darty=dy;
+range=dtr;
+range2=dtr2;
+damage=dmg;
+speed=sp;
+direction=dr;
+}
+}
+void dartloop()
+{
+for(uint i=0; i<darts.length(); i++)
+{
+if(darts[i].speedtimer.elapsed>=darts[i].speed)
+{
+darts[i].speedtimer.restart();
+if(darts[i].direction=="right")
+{
+darts[i].dartx++;
+}
+if(darts[i].direction=="left")
+{
+darts[i].dartx--;
+}
+if(darts[i].direction=="up")
+{
+darts[i].darty++;
+}
+if(darts[i].direction=="down")
+{
+darts[i].darty--;
+}
+if (abs(darts[i].dartx - me.x) > darts[i].range || abs(darts[i].darty - me.y) > darts[i].range2)
+{
+darts.remove_at(i);
+return;
+}
+}
+for(uint i1=0; i1<cars.length(); i1++)
+{
+if (absolute(cars[i1].carx - darts[i].dartx) <= 2 && absolute(cars[i1].cary - darts[i].darty) <= 2)
+{
+dartpool.play_2d("darthit.ogg", me.x, me.y, cars[i1].carx, cars[i1].cary, false);
+stun_target("car", cars[i1].cartype, stundir);
+darts.remove_at(i);
+return;
+}
+}
+for(uint i2=0; i2<bosses.length(); i2++)
+{
+if (absolute(bosses[i2].bossx - darts[i].dartx) <= 2 && absolute(bosses[i2].bossy - darts[i].darty) <= 2)
+{
+dartpool.play_2d("darthit.ogg", me.x, me.y, bosses[i2].bossx, bosses[i2].bossy, false);
+stun_target("boss", bosses[i2].bosstype, stundir);
+darts.remove_at(i);
+return;
+}
+}
+for(uint i3=0; i3<gards.length(); i3++)
+{
+if (absolute(gards[i3].gardx - darts[i].dartx) <= 2 && absolute(gards[i3].gardy - darts[i].darty) <= 2)
+{
+dartpool.play_2d("darthit.ogg", me.x, me.y, gards[i3].gardx, gards[i3].gardy, false);
+stun_target("gard", gards[i3].gardtype, stundir);
+darts.remove_at(i);
+return;
+}
+}
+}
+}
+void stun_target(string entity, string id, int st)
+{
+stundir=st;
+if(entity=="car")
+{
+for(uint i=0; i<cars.length(); i++)
+{
+if(cars[i].cartype==id)
+{
+stuntimer.restart();
+stunned=true;
+cars[i].hurtsound = carpool.play_2d(cars[i].cartype + "pain.ogg", me.x, me.y, cars[i].carx, cars[i].cary, false);
+cars[i].carhealth-=darts[i].damage;
+cars[i].fireable=false;
+cars[i].moveable=false;
+cars[i].moveable2=false;
+}
+}
+}
+if(entity=="boss")
+{
+for(uint i=0; i<bosses.length(); i++)
+{
+if(bosses[i].bosstype==id)
+{
+stuntimer.restart();
+stunned=true;
+bosses[i].hurtsound = bosspool.play_2d(bosses[i].bosstype + "pain.ogg", me.x, me.y, bosses[i].bossx, bosses[i].bossy, false);
+bosses[i].bosshealth-=darts[i].damage;
+bosses[i].fireable=false;
+bosses[i].healable=false;
+bosses[i].launchable=false;
+bosses[i].moveable=false;
+bosses[i].moveable2=false;
+bosses[i].telable=false;
+}
+}
+}
+else if(entity=="gard")
+{
+for(uint i=0; i<gards.length(); i++)
+{
+if(gards[i].gardtype==id)
+{
+stuntimer.restart();
+stunned=true;
+            string painsound = "gard3pain.wav";
+            if (gards[i].gardtype == "gard1") painsound = "gard1pain" + random(1, 5) + ".ogg";
+            else if (gards[i].gardtype == "gard2") painsound = "gard2pain.ogg";
+gards[i].hurtsound = gardpool.play_2d(painsound, me.x, me.y, gards[i].gardx, gards[i].gardy, false);
+gards[i].gardhealth-=darts[i].damage;
+gards[i].fireable=false;
+gards[i].moveable=false;
+gards[i].moveable2=false;
+}
+}
+}
+}
+void stuncheck()
+{
+if(stunned==true && stuntimer.elapsed>=stundir)
+{
+stunned = false;
+}
+for(uint i=0; i<cars.length(); i++)
+{
+if(stunned==true && stuntimer.elapsed>=stundir)
+{
+stunned=false;
+cars[i].fireable=true;
+cars[i].moveable=true;
+cars[i].moveable2=true;
+}
+}
+for(uint i=0; i<bosses.length(); i++)
+{
+if(stunned==true && stuntimer.elapsed>=stundir)
+{
+stunned=false;
+bosses[i].fireable=true;
+bosses[i].healable=true;
+bosses[i].launchable=true;
+bosses[i].moveable=true;
+bosses[i].moveable2=true;
+bosses[i].telable=true;
+}
+}
+for(uint i=0; i<gards.length(); i++)
+{
+if(stunned==true && stuntimer.elapsed>=stundir)
+{
+stunned=false;
+gards[i].fireable=true;
+gards[i].moveable=true;
+gards[i].moveable2=true;
+}
+}
+}
+void spawn_dart(int x,int y,int range,int range2,int damage,int speed,string direction)
+{
+dart dt1(x,y,range,range2,damage,speed,direction);
+darts.insert_last(dt1);
+}
+void destroy_all_darts()
+{
+darts.resize(0);
+}

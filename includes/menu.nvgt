@@ -418,8 +418,12 @@ guards["Guard 3 Walk" + vdesc] = array<string> = {"gard3walk1.wav", "gard3walk2.
 learnCategories["Guards"] = guards;
 dictionary items;
 items["Ammo_pack loop: used in endless mode"] = "ammoloop.ogg";
+items["Dart fire: used in endless mode"] = "dartfire.ogg";
+items["Dart hit: used in endless mode"] = "darthit.ogg";
+items["Dart loop: used in endless mode" + vdesc] = array<string> = {"dartloop1.wav", "dartloop2.wav", "dartloop3.wav"};
 items["Drink potion: used in endless mode"] = "healthdrink.ogg";
 items["Get ammo_pack: used in endless mode" + vdesc] = array<string> = {"ammoget1.ogg", "ammoget2.ogg"};
+items["Get dart: used in endless mode"] = "dartget.ogg";
 items["Get money: used in endless mode"] = "getdollars.ogg";
 items["Get potion: used in endless mode"] = "healthget.ogg";
 items["Get teleporter: used in endless mode"] = "teleget.ogg";
@@ -500,8 +504,6 @@ weapons["Boot Hit" + vdesc] = array<string> = {"boothit1.ogg", "boothit2.ogg", "
 weapons["Club Draw"] = "clubdraw.ogg";
 weapons["Club Fire" + vdesc] = array<string> = {"clubfire1.ogg", "clubfire2.ogg", "clubfire3.ogg"};
 weapons["Club Hit" + vdesc] = array<string> = {"clubhit1.ogg", "clubhit2.ogg", "clubhit3.ogg"};
-weapons["Dart tube fire: unused" + vdesc] = array<string> = {"dartblow1.wav", "dartblow2.wav", "dartblow3.wav"};
-weapons["Dart tube hit: unused" + vdesc] = array<string> = {"darthit1.wav", "darthit2.wav", "darthit3.wav"};
 weapons["Feat Draw"] = "featdraw.ogg";
 weapons["Feat Fire" + vdesc] = array<string> = {"featfire1.ogg", "featfire2.ogg", "featfire3.ogg"};
 weapons["Feat Hit" + vdesc] = array<string> = {"feathit1.ogg", "feathit2.ogg", "feathit3.ogg"};
@@ -736,7 +738,7 @@ if(psmem == "vds")
 {
     setupmenu(false);
     m.add_translated_item("Current level: " + level + " (" + (endless ? "Endless Mode" : "Normal Mode") + ")");
-    m.add_translated_item("Current location: " + me.x + ", " + me.y+". You're walking on "+gmt(me.x,me.y)+".");
+    m.add_translated_item("Current location: " + me.x + ", " + me.y+". You're walking on "+gmt(me.x,me.y)+". Facing "+facing+".");
     m.add_translated_item("player HP: "+round(health / maxhealth * 100, 0) + " percent.");
 m.add_translated_item("store HP: "+round(storehealth / storemaxhealth * 100, 0) + " percent.");
     m.add_translated_item("Cars on field: " + cars.length());
@@ -771,9 +773,10 @@ void shopmenu()
 {
     dictionary prices;
     prices.set("ammo_pack", 5.0);
-    prices.set("potion", 10.0);
-prices.set("teleporter", 15.0);
-    string[] objtypes = {"ammo_pack", "potion", "teleporter"};
+prices.set("dart", 10.0);
+    prices.set("potion", 15.0);
+prices.set("teleporter", 20.0);
+    string[] objtypes = {"ammo_pack", "dart", "potion", "teleporter"};
     setupmenu(false);
     m.add_translated_item("You have " + round(money, 0) + " dollars available to spend", "shopinfo");
     for (uint i = 0; i < objtypes.length(); i++)

@@ -1,4 +1,6 @@
 new in 4.0
+Added the ability to face a certain direction when moving. This is very useful for aiming at various entities when using tactical items in the game.
+Added the dart item for purchase in the shop menu. These will stun enemies for a certain amount of time when used from your inventory. This item is only available in the endless game.
 Made it so you get spawned in different places of the map depending on witch game mode you're playing on.
 Made it so the endless map is now expanded from 50 to 100 square tiles for both x and y on the grid.
 Made it so all health bars are now spoken in percentages, not in actual values.

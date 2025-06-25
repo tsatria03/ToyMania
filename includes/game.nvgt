@@ -260,7 +260,7 @@ speak_translated("You currently have "+money+" dollars available to spend.");
 }
 if(key_pressed(KEY_C) and doormove==false)
 {
-speak_translated(me.x+", "+me.y+" on "+gmt(me.x,me.y)+".");
+speak_translated(me.x+", "+me.y+" on "+gmt(me.x,me.y)+". Facing "+facing+".");
 }
 if(key_pressed(KEY_O) and doormove==false)
 {
@@ -348,6 +348,7 @@ else
 if (key_down(KEY_LEFT) and movetimer.elapsed>=movetime and me.x!=0 and doormove==false)
 {
 me.x-=1;
+facing="left";
 p.play_stationary(gmt(me.x,me.y)+"walk"+random(1,5)+".ogg", false);
 moved_steps+=1;
 total_moved_steps+=1;
@@ -357,6 +358,7 @@ movetimer.restart();
 if (key_down(KEY_RIGHT) and movetimer.elapsed>=movetime and me.x!=maxx and doormove==false)
 {
 me.x+=1;
+facing="right";
 p.play_stationary(gmt(me.x,me.y)+"walk"+random(1,5)+".ogg", false);
 moved_steps+=1;
 total_moved_steps+=1;
@@ -366,6 +368,7 @@ movetimer.restart();
 if (key_down(KEY_DOWN) and movetimer.elapsed>=movetime and me.y!=0 and doormove==false)
 {
 me.y-=1;
+facing="backward";
 p.play_stationary(gmt(me.x,me.y)+"walk"+random(1,5)+".ogg", false);
 moved_steps+=1;
 total_moved_steps+=1;
@@ -375,6 +378,7 @@ movetimer.restart();
 if (key_down(KEY_UP) and movetimer.elapsed>=movetime and me.y!=maxy and doormove==false)
 {
 me.y+=1;
+facing="forward";
 p.play_stationary(gmt(me.x,me.y)+"walk"+random(1,5)+".ogg", false);
 moved_steps+=1;
 total_moved_steps+=1;
@@ -507,7 +511,7 @@ keyspawntimer.restart();
 }
 if(objspawntimer.elapsed>=objspawntime and objs.length()<objnum and objspawn==true and endless)
 {
-string[] objtypes={"ammo_pack", "potion", "teleporter"};
+string[] objtypes={"ammo_pack", "dart", "potion", "teleporter"};
 spawn_obj(random(0,maxx), random(0,maxy), random(3000,6000), random_string(objtypes), objdest);
 objspawntimer.restart();
 }
