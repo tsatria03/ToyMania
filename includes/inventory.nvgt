@@ -64,20 +64,20 @@ if (current == "ammo_pack")
     double missing_ammo = max(0, max_reserved_ammo - reserved_ammo);
     if (missing_ammo == 0)
     {
-        speak_translated("You already have enough reserved ammo.");
+        speak_translated("You already have enough reserved ammo for this weapon.");
         return;
     }
     itemslot = p.play_stationary("ammopack.ogg", false);
     give("ammo_pack", -1);
     double ammo_gained = min(random(5, 10), missing_ammo);
     reserved_ammo += ammo_gained;
-    speak_translated("You received " + round(ammo_gained, 0) + " rounds of ammo from this pack.");
+    speak_translated("You received " + round(ammo_gained, 0) + " rounds of ammo from the pack for this weapon.");
     return;
 }
 if (current == "dart")
 {
     itemslot = dartpool.play_stationary("dartfire.ogg", false);
-    give("teleporter", -1);
+    give("dart", -1);
 spawn_dart(me.x, me.y, 5, 10, random(5, 10), 30, facing);
     return;
 }
