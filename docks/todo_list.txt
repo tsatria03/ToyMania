@@ -1,4 +1,3 @@
-*Unfinished. Expand the endless grid map from 50 to 100 squares for both x and y.
 *Unfinished. Add dart tubes as items for stunning enemies.
 *Unfinished. Fix the shop menu to return the user back to the menu after purchasing something.
 *Unfinished. Fix the open save folder option on mac.
@@ -11,6 +10,7 @@
 *Unfinished. Add an online scoreboard system.
 *Unfinished. Add minimal soundpack support.
 
+*Finished. Expand the endless grid map from 50 to 100 squares for both x and y.
 *Finished. Convert all health values to use percentages.
 *Finished. Make it easier to access common audio/game settings within the current game session the user is playing.
 *Finished. Make it so store explosions don't always spawn glass in the same two sides of the map, far left/right.
