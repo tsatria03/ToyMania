@@ -1,5 +1,6 @@
 new in 4.0
-Made it so the endless map is now expanded from 50 to 100 squares for both x and y on the grid.
+Made it so you get spawned in different places of the map depending on witch game mode you're playing on.
+Made it so the endless map is now expanded from 50 to 100 square tiles for both x and y on the grid.
 Made it so all health bars are now spoken in percentages, not in actual values.
 Fixed An issue where the check_translations function would append duplicate lines to the language translation file every time it was called, causing clutter and unnecessary repetition.
 Made it so the translation system now Preserves complete keys and values without having to aggressivly trimm the contents of the file.
