@@ -733,8 +733,8 @@ if(psmem == "vds")
     setupmenu(false);
     m.add_translated_item("Current level: " + level + " (" + (endless ? "Endless Mode" : "Normal Mode") + ")");
     m.add_translated_item("Current location: " + me.x + ", " + me.y+". You're walking on "+gmt(me.x,me.y)+".");
-    m.add_translated_item("player HP: "+round(health / maxhealth * 100, 2) + " percent.");
-m.add_translated_item("store HP: "+round(storehealth / storemaxhealth * 100, 2) + " percent.");
+    m.add_translated_item("player HP: "+round(health / maxhealth * 100, 0) + " percent.");
+m.add_translated_item("store HP: "+round(storehealth / storemaxhealth * 100, 0) + " percent.");
     m.add_translated_item("Cars on field: " + cars.length());
     m.add_translated_item("Guards on field: " + gards.length());
     m.add_translated_item("Keys on field: " + keys.length());
