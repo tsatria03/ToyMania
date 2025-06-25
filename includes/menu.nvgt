@@ -802,7 +802,7 @@ prices.set("teleporter", 20.0);
     if (money <= 0)
 {
         dlgmessage_return("Error: you don't have enough money to complete this action.");
-        resume_game();
+shopmenu();
         return;
     }
     vd.set_disallowed_chars("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ !@#$%^&*()[]{};:'\"\\|,.<>?/+=`~", false, "This character is not allowed.");
@@ -810,14 +810,14 @@ prices.set("teleporter", 20.0);
     if (amount_input == "")
 {
         speak_translated("canceled");
-        resume_game();
+shopmenu();
         return;
     }
     double amount = string_to_number(amount_input);
     if (amount <= 0)
 {
         speak_translated("Error. Invalid quantity.");
-        resume_game();
+shopmenu();
         return;
     }
     double price = 1.0;
@@ -826,16 +826,16 @@ prices.set("teleporter", 20.0);
     if (money < total_cost)
 {
         dlgmessage_return("You don't have enough money to buy that much.");
-        resume_game();
+shopmenu();
         return;
     }
     p.play_stationary("storebuy" + random(1, 4) + ".ogg", false);
     p.play_stationary("playergive.ogg", false);
     give(shopem, int(amount));
     money -= total_cost;
-    speak_translated("Purchase completed. You bought " + int(amount) + " " + shopem.replace("_", " ", true) + (amount == 1 ? "." : "s."));
-    resume_game();
-return;
+    dlgmessage_return("Purchase completed. You bought " + int(amount) + " " + shopem.replace("_", " ", true) + (amount == 1 ? "." : "s."));
+shopmenu();
+        return;
 }
 void weaponsmenu()
 {

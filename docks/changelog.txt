@@ -1,4 +1,6 @@
 new in 4.0
+Made it so when a user has Purchased an item from the endless shop, the game returns them back to the menu, rather than making them exit the shop menu entirely. This also applies to making invalid purchases as well.
+
 Updated the todo list file to include a description tag for things that either need to be finished, or things that have already been finished in the game.
 Fixed a bug where darts acted like teleporters when being used from your inventory.
 Added the ability to face a certain direction when moving. This is very useful for aiming at various entities when using tactical items in the game.
