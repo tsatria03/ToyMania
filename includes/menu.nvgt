@@ -465,7 +465,8 @@ player["Marble fall"] = "marblefall.ogg";
 player["Marble land"] = "marbleland.ogg";
 player["Marble walk" + vdesc] = array<string> = {"marblewalk1.ogg", "marblewalk2.ogg", "marblewalk3.ogg", "marblewalk4.ogg", "marblewalk5.ogg"};
 player["Pain"] = "playerpain.ogg";
-player["Store purchase: used in endless mode" + vdesc] = array<string> = {"storebuy1.ogg", "storebuy2.ogg", "storebuy3.ogg", "storebuy4.ogg"};
+player["Purchase error: used in endless mode"] = "storefail.ogg";
+player["Purchase: used in endless mode" + vdesc] = array<string> = {"storebuy1.ogg", "storebuy2.ogg", "storebuy3.ogg", "storebuy4.ogg"};
 player["Session achievement"] = "session_achievement.ogg";
 learnCategories["Player"] = player;
 dictionary toys;
@@ -802,7 +803,8 @@ prices.set("teleporter", 20.0);
     }
     if (money <= 0)
 {
-        dlgmessage_return("Error: you don't have enough money to complete this action.");
+        p.play_stationary("storefail.ogg", false);
+dlgmessage_return("Error: you don't have enough money to complete this action.");
 shopmenu();
         return;
     }
@@ -810,14 +812,16 @@ shopmenu();
     string amount_input = vd.input_box("", "How many " + shopem.replace("_", " ", true) + "s would you like to buy?");
     if (amount_input == "")
 {
-        speak_translated("canceled");
+p.play_stationary("storefail.ogg", false);
+dlgmessage_return("Error. Invalid quantity. Please enter a valid amount for this item.");
 shopmenu();
         return;
     }
     double amount = string_to_number(amount_input);
     if (amount <= 0)
 {
-        speak_translated("Error. Invalid quantity.");
+p.play_stationary("storefail.ogg", false);
+dlgmessage_return("Error. Invalid quantity. Please enter a valid amount for this item.");
 shopmenu();
         return;
     }
@@ -826,15 +830,14 @@ shopmenu();
     double total_cost = amount * price;
     if (money < total_cost)
 {
-        dlgmessage_return("You don't have enough money to buy that much.");
+dlgmessage_return("Error. You don't have enough money to buy " + int(amount) + " " + shopem.replace("_", " ", true) + (amount == 1 ? "." : "s."));
 shopmenu();
         return;
     }
     p.play_stationary("storebuy" + random(1, 4) + ".ogg", false);
-    p.play_stationary("playergive.ogg", false);
     give(shopem, int(amount));
     money -= total_cost;
-    dlgmessage_return("Purchase completed. You bought " + int(amount) + " " + shopem.replace("_", " ", true) + (amount == 1 ? "." : "s."));
+    dlgmessage_return("Purchase complete. You bought " + int(amount) + " " + shopem.replace("_", " ", true) + (amount == 1 ? "." : "s."));
 shopmenu();
         return;
 }

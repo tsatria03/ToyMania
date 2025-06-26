@@ -54,12 +54,12 @@ clubhit1.ogg
 clubhit2.ogg
 clubhit3.ogg
 complete.ogg
-dartblow1.wav
-dartblow2.wav
-dartblow3.wav
-darthit1.wav
-darthit2.wav
-darthit3.wav
+dartfire.ogg
+dartget.ogg
+darthit.ogg
+dartloop1.wav
+dartloop2.wav
+dartloop3.wav
 dlgclose.ogg
 dlgcoppy.ogg
 dlgopen.ogg
@@ -254,6 +254,7 @@ playerheal2.ogg
 playerheal3.ogg
 playerlevel.ogg
 playerpain.ogg
+playerturn.ogg
 resume.ogg
 session_achievement.ogg
 setdisabled.ogg
@@ -271,6 +272,7 @@ storebuy4.ogg
 storedest_large.ogg
 storedest_medium.ogg
 storedest_small.ogg
+storefail.ogg
 tel.ogg
 teleget.ogg
 teleloop.ogg
@@ -320,4 +322,4 @@ toyloop7.ogg
 toyloop8.ogg
 toyloop9.ogg
 windchimeloop.ogg
-total files: 322
+total files: 324

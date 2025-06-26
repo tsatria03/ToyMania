@@ -3,8 +3,6 @@ class gard
 {
 bool fireable=true, moveable=true, moveable2=true;
     bool stunned;
-    int stundir;
-    timer stuntimer;
 int defsound, firesound, hurtsound, gardsound, spawnsound, stepsound, wepsound;
 int gardhealth;
 int gardx;
@@ -12,8 +10,9 @@ int gardy;
 int damage;
 int firetime;
 int gardtime;
+    int stundir;
 string gardtype;
-timer firetimer, gardtimer;
+timer firetimer, gardtimer, stuntimer;
 gard(int gx,int gy,int hp,int dm,int ft,int sp,string gt)
 {
 gardx=gx;
@@ -34,9 +33,12 @@ for(uint i=0; i<gards.length(); i++)
 {
 if(gards[i].gardtimer.elapsed>=gards[i].gardtime)
 {
-if(gards[i].gardtype=="gard1") gards[i].stepsound=gardpool.play_2d("gard1walk"+random(1,5)+".ogg",me.x,me.y,gards[i].gardx,gards[i].gardy,false);
-if(gards[i].gardtype=="gard2") gards[i].stepsound=gardpool.play_2d("gard2walk"+random(1,8)+".ogg",me.x,me.y,gards[i].gardx,gards[i].gardy,false);
-if(gards[i].gardtype=="gard3") gards[i].stepsound=gardpool.play_2d("gard3walk"+random(1,5)+".wav",me.x,me.y,gards[i].gardx,gards[i].gardy,false);
+    if (gards[i].moveable || gards[i].moveable2)
+    {
+        if (gards[i].gardtype == "gard1") gards[i].stepsound = gardpool.play_2d("gard1walk" + random(1, 5) + ".ogg", me.x, me.y, gards[i].gardx, gards[i].gardy, false);
+        if (gards[i].gardtype == "gard2") gards[i].stepsound = gardpool.play_2d("gard2walk" + random(1, 8) + ".ogg", me.x, me.y, gards[i].gardx, gards[i].gardy, false);
+        if (gards[i].gardtype == "gard3") gards[i].stepsound = gardpool.play_2d("gard3walk" + random(1, 5) + ".wav", me.x, me.y, gards[i].gardx, gards[i].gardy, false);
+    }
 gardpool.update_sound_2d(gards[i].gardsound,gards[i].gardx,gards[i].gardy);
 gards[i].gardtimer.restart();
 if(gards[i].gardx<me.x and gards[i].moveable==true)

@@ -54,30 +54,19 @@ for(uint i1=0; i1<cars.length(); i1++)
 if (absolute(cars[i1].carx - darts[i].dartx) <= 2 && absolute(cars[i1].cary - darts[i].darty) <= 2)
 {
 dartpool.play_2d("darthit.ogg", me.x, me.y, cars[i1].carx, cars[i1].cary, false);
-int stundir=1000;
+int stundir=random(1500,3000);
 stun_target("car", cars[i1].cartype, darts[i].damage, stundir);
 darts.remove_at(i);
 return;
 }
 }
-for(uint i2=0; i2<bosses.length(); i2++)
+for(uint i2=0; i2<gards.length(); i2++)
 {
-if (absolute(bosses[i2].bossx - darts[i].dartx) <= 2 && absolute(bosses[i2].bossy - darts[i].darty) <= 2)
+if (absolute(gards[i2].gardx - darts[i].dartx) <= 2 && absolute(gards[i2].gardy - darts[i].darty) <= 2)
 {
-dartpool.play_2d("darthit.ogg", me.x, me.y, bosses[i2].bossx, bosses[i2].bossy, false);
-int stundir=1000;
-stun_target("boss", bosses[i2].bosstype, darts[i].damage, stundir);
-darts.remove_at(i);
-return;
-}
-}
-for(uint i3=0; i3<gards.length(); i3++)
-{
-if (absolute(gards[i3].gardx - darts[i].dartx) <= 2 && absolute(gards[i3].gardy - darts[i].darty) <= 2)
-{
-dartpool.play_2d("darthit.ogg", me.x, me.y, gards[i3].gardx, gards[i3].gardy, false);
-int stundir=1000;
-stun_target("gard", gards[i3].gardtype, darts[i].damage, stundir);
+dartpool.play_2d("darthit.ogg", me.x, me.y, gards[i2].gardx, gards[i2].gardy, false);
+int stundir2=random(1500,3000);
+stun_target("gard", gards[i2].gardtype, darts[i].damage, stundir2);
 darts.remove_at(i);
 return;
 }
@@ -100,26 +89,6 @@ cars[i].carhealth-=dmg;
 cars[i].fireable=false;
 cars[i].moveable=false;
 cars[i].moveable2=false;
-}
-}
-}
-if(entity=="boss")
-{
-for(uint i=0; i<bosses.length(); i++)
-{
-if(bosses[i].bosstype==id)
-{
-bosses[i].stuntimer.restart();
-bosses[i].stunned=true;
-bosses[i].stundir = st;
-bosses[i].hurtsound = bosspool.play_2d(bosses[i].bosstype + "pain.ogg", me.x, me.y, bosses[i].bossx, bosses[i].bossy, false);
-bosses[i].bosshealth-=dmg;
-bosses[i].fireable=false;
-bosses[i].healable=false;
-bosses[i].launchable=false;
-bosses[i].moveable=false;
-bosses[i].moveable2=false;
-bosses[i].telable=false;
 }
 }
 }
@@ -154,19 +123,6 @@ void stuncheck()
             cars[i].fireable = true;
             cars[i].moveable = true;
             cars[i].moveable2 = true;
-        }
-    }
-    for (uint i = 0; i < bosses.length(); i++)
-{
-        if (bosses[i].stunned && bosses[i].stuntimer.elapsed >= bosses[i].stundir)
-{
-            bosses[i].stunned = false;
-            bosses[i].fireable = true;
-            bosses[i].healable = true;
-            bosses[i].launchable = true;
-            bosses[i].moveable = true;
-            bosses[i].moveable2 = true;
-            bosses[i].telable = true;
         }
     }
     for (uint i = 0; i < gards.length(); i++)

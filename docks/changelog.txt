@@ -1,4 +1,5 @@
 new in 4.0
+Made it so guards don't play step sounds while they are stunned in the game. They'll only play them after they've fully recovered.
 Fixed a bug where enemies remained stunned indefinitely after being hit by a dart, instead of recovering once the stun duration has fully ended.
 Updated the readme file with added and modified keyboard shortcuts.
 Fixed a bug where the glass remnents from the destroied store in the Endless map didn't respect the new maximum map hight and width, causing it to continue spawning within the old maximum map hight and width.
@@ -6,7 +7,6 @@ Fixed a bug where firing darts at certain enemies would cause the game to crash 
 Added the ability to manually aim at a target by holding shift and pressing the arrow keys.
 Added some more item and player related sounds into the learn game sounds menu.
 Made it so when a user has Purchased an item from the endless shop, the game returns them back to the menu, rather than making them exit the shop menu entirely. This also applies to making invalid purchases as well.
-Updated the todo list file to include a description tag for things that either need to be finished, or things that have already been finished in the game.
 Fixed a bug where darts acted like teleporters when being used from your inventory.
 Added the ability to face a certain direction when moving. This is very useful for aiming at various entities when using tactical items in the game.
 Added the dart item for purchase in the shop menu. These will stun enemies for a certain amount of time when used from your inventory. This item is only available in the endless game.

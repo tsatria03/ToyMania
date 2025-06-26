@@ -4,8 +4,6 @@ class car
 bool hitplayer;
 bool firing=false, fireable=true, moveable=true, moveable2=true;
     bool stunned;
-    int stundir;
-    timer stuntimer;
 int carsound, firesound, defsound, hurtsound;
 int carx, cary;
 int cardir, cardir2;
@@ -15,10 +13,9 @@ int shotsFired = 0;
 int shotsPerBurst = 10;
 int burstCooldown = 2000;
 int fire_interval = 50;
+    int stundir;
 string cartype;
-timer cartimer;
-timer burstTimer;
-timer firetimer;
+timer cartimer, burstTimer, firetimer, stuntimer;
 car(int cx, int cy, int cd, int cd2, int hp, int sp, string ct, bool hpl)
 {
 carx = cx;
