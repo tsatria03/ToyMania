@@ -231,7 +231,7 @@ playcounts=true;
 playlevels=true;
 completesound=true;
 togglesound=true;
-currentlangfile="english";
+currentlangfile="none";
 use_sr = true;
 tts.set_voice(0);
 tts.set_rate(0);

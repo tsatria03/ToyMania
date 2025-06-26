@@ -1,4 +1,5 @@
 new in 4.0
+Fixed a bug where the glass platforms and healing zones in Endless Mode didn't respect the new maximum map hight and width, causing them to continue spawning within the old maximum map hight and width. This also applies to the exit door as well.
 Fixed a bug where firing darts at certain enemies would cause the game to crash unexpectedly.
 Added the ability to manually aim at a target by holding shift and pressing the arrow keys.
 Added some more item and player related sounds into the learn game sounds menu.

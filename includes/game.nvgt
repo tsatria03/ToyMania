@@ -435,18 +435,18 @@ spawn_platform(0, maxx, 0, maxy, "marble");
 p.play_stationary(gmt(me.x,me.y)+"land.ogg", false);
 if (endless)
 {
-    int leftx = random(0, 5);
-    int rightx = random(45, 50);
-    int miny1 = random(0, 25);
-    int maxy1 = miny1 + 10;
-    int miny2 = random(25, 45);
-    int maxy2 = miny2 + 10;
-    spawn_platform(leftx, leftx + 5, miny1, maxy1, "glass");
-    spawn_healzone(leftx, leftx + 5, miny1, maxy1, 0, random(30, 60), random(1500, 3000), "fire");
-    spawn_platform(rightx - 5, rightx, miny2, maxy2, "glass");
-    spawn_healzone(rightx - 5, rightx, miny2, maxy2, 1, random(30, 60), random(1500, 3000), "windchime");
+    int leftx = random(0, 10);
+    int rightx = random(90, 99);
+    int miny1 = random(0, 50);
+    int maxy1 = min(miny1 + 10, 99); // Clamp to map height
+    int miny2 = random(50, 89);
+    int maxy2 = min(miny2 + 10, 99);
+    spawn_platform(leftx, min(leftx + 5, 99), miny1, maxy1, "glass");
+    spawn_healzone(leftx, min(leftx + 5, 99), miny1, maxy1, 0, random(30, 60), random(1500, 3000), "fire");
+    spawn_platform(max(rightx - 5, 0), rightx, miny2, maxy2, "glass");
+    spawn_healzone(max(rightx - 5, 0), rightx, miny2, maxy2, 1, random(30, 60), random(1500, 3000), "windchime");
 }
-if(endless) spawn_door(random(25,50), random(25,50), 0, 0, random(100,200), random(20,40));
+if(endless) spawn_door(random(50, 100), random(50, 100), 0, 0, random(100,200), random(20,40));
 while(true)
 {
 wait(5);
