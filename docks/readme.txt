@@ -41,6 +41,10 @@ Left arrow: Moves left on the X axis, if pressed/held down.
 Right arrow: Moves right on the X axis, if pressed/held down.
 Up arrow: Moves up on the y axis, if pressed/held down.
 Down arrow: Moves down on the Y axis, if pressed/ held down.
+Shift plus left arrow: Faces left for aiming, if pressed/held down.
+Shift plus right arrow: Faces right for aiming, if pressed/held down.
+Shift plus up arrow: Faces forward for aiming, if pressed/held down.
+Shift plus down arrow: Faces backward for aiming, if pressed/held down.
 Alt or Control plus left arrow: Moves left at double speed on the X axis, if pressed/held down.
 Alt or Control plus right arrow: Moves right at double speed on the X axis, if pressed/held down.
 Alt or Control plus up arrow: Moves up at double speed on the Y axis, if pressed/held down.
