@@ -54,7 +54,7 @@ for(uint i1=0; i1<cars.length(); i1++)
 if (absolute(cars[i1].carx - darts[i].dartx) <= 2 && absolute(cars[i1].cary - darts[i].darty) <= 2)
 {
 dartpool.play_2d("darthit.ogg", me.x, me.y, cars[i1].carx, cars[i1].cary, false);
-stun_target("car", cars[i1].cartype, stundir);
+stun_target("car", cars[i1].cartype, darts[i].damage, stundir);
 darts.remove_at(i);
 return;
 }
@@ -64,7 +64,7 @@ for(uint i2=0; i2<bosses.length(); i2++)
 if (absolute(bosses[i2].bossx - darts[i].dartx) <= 2 && absolute(bosses[i2].bossy - darts[i].darty) <= 2)
 {
 dartpool.play_2d("darthit.ogg", me.x, me.y, bosses[i2].bossx, bosses[i2].bossy, false);
-stun_target("boss", bosses[i2].bosstype, stundir);
+stun_target("boss", bosses[i2].bosstype, darts[i].damage, stundir);
 darts.remove_at(i);
 return;
 }
@@ -74,14 +74,14 @@ for(uint i3=0; i3<gards.length(); i3++)
 if (absolute(gards[i3].gardx - darts[i].dartx) <= 2 && absolute(gards[i3].gardy - darts[i].darty) <= 2)
 {
 dartpool.play_2d("darthit.ogg", me.x, me.y, gards[i3].gardx, gards[i3].gardy, false);
-stun_target("gard", gards[i3].gardtype, stundir);
+stun_target("gard", gards[i3].gardtype, darts[i].damage, stundir);
 darts.remove_at(i);
 return;
 }
 }
 }
 }
-void stun_target(string entity, string id, int st)
+void stun_target(string entity, string id, int dmg, int st)
 {
 stundir=st;
 if(entity=="car")
@@ -93,7 +93,7 @@ if(cars[i].cartype==id)
 stuntimer.restart();
 stunned=true;
 cars[i].hurtsound = carpool.play_2d(cars[i].cartype + "pain.ogg", me.x, me.y, cars[i].carx, cars[i].cary, false);
-cars[i].carhealth-=darts[i].damage;
+cars[i].carhealth-=dmg;
 cars[i].fireable=false;
 cars[i].moveable=false;
 cars[i].moveable2=false;
@@ -109,7 +109,7 @@ if(bosses[i].bosstype==id)
 stuntimer.restart();
 stunned=true;
 bosses[i].hurtsound = bosspool.play_2d(bosses[i].bosstype + "pain.ogg", me.x, me.y, bosses[i].bossx, bosses[i].bossy, false);
-bosses[i].bosshealth-=darts[i].damage;
+bosses[i].bosshealth-=dmg;
 bosses[i].fireable=false;
 bosses[i].healable=false;
 bosses[i].launchable=false;
@@ -131,7 +131,7 @@ stunned=true;
             if (gards[i].gardtype == "gard1") painsound = "gard1pain" + random(1, 5) + ".ogg";
             else if (gards[i].gardtype == "gard2") painsound = "gard2pain.ogg";
 gards[i].hurtsound = gardpool.play_2d(painsound, me.x, me.y, gards[i].gardx, gards[i].gardy, false);
-gards[i].gardhealth-=darts[i].damage;
+gards[i].gardhealth-=dmg;
 gards[i].fireable=false;
 gards[i].moveable=false;
 gards[i].moveable2=false;

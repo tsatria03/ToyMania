@@ -1,5 +1,5 @@
 #These are the things that need to be finished for future versions of the game.
-*Unfinished. Fix the shop menu to return the user back to the menu after purchasing something.
+
 *Unfinished. Add car and guard related items for the endless mode, such as car and guard callers.
 *Unfinished. Fix the open save folder option on mac.
 *Unfinished. Fix weapon ranges.
@@ -11,6 +11,8 @@
 *Unfinished. Add minimal soundpack support.
 
 #These are the things that are already finished from earlier versions of the game.
+
+*Finished. Fix the shop menu to return the user back to the menu after purchasing something.
 *Finished. Add darts as items for stunning enemies.
 *Finished. Expand the endless grid map from 50 to 100 squares for both x and y.
 *Finished. Convert all health values to use percentages.
