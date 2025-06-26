@@ -2,6 +2,9 @@ boss@[]bosses(0);
 class boss
 {
 bool fireable=true, healable=true, launchable=true, moveable=true, moveable2=true, telable=true;
+    bool stunned;
+    int stundir;
+    timer stuntimer;
 int bossesound, defsound, healsound, hurtsound, launchsound, spawnsound, stepsound, telsound, wepsound;
 int bosshealth;
 int bossx;

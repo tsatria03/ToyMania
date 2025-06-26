@@ -3,6 +3,9 @@ class car
 {
 bool hitplayer;
 bool firing=false, fireable=true, moveable=true, moveable2=true;
+    bool stunned;
+    int stundir;
+    timer stuntimer;
 int carsound, firesound, defsound, hurtsound;
 int carx, cary;
 int cardir, cardir2;

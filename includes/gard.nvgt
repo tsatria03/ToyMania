@@ -2,6 +2,9 @@ gard@[]gards(0);
 class gard
 {
 bool fireable=true, moveable=true, moveable2=true;
+    bool stunned;
+    int stundir;
+    timer stuntimer;
 int defsound, firesound, hurtsound, gardsound, spawnsound, stepsound, wepsound;
 int gardhealth;
 int gardx;

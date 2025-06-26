@@ -1,4 +1,5 @@
 new in 4.0
+Fixed a bug where enemies remained stunned indefinitely after being hit by a dart, instead of recovering once the stun duration has fully ended.
 Updated the readme file with added and modified keyboard shortcuts.
 Fixed a bug where the glass remnents from the destroied store in the Endless map didn't respect the new maximum map hight and width, causing it to continue spawning within the old maximum map hight and width.
 Fixed a bug where firing darts at certain enemies would cause the game to crash unexpectedly.
