@@ -636,7 +636,7 @@ if (gamcopy == true)
     setupmenu(false);
     m.add_translated_item("Copy results to clipboard", "copy");
     m.add_translated_item("Export results to file", "export");
-    m.add_translated_item("Return to main menu.", "cancel");
+    m.add_translated_item("Return to pause menu.", "cancel");
     m.intro_text = "What would you like to do with the current results for this game session?";
     int r = m.run();
     string resp = m.get_selected_item_id();
@@ -809,7 +809,7 @@ shopmenu();
         return;
     }
     vd.set_disallowed_chars("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ !@#$%^&*()[]{};:'\"\\|,.<>?/+=`~", false, "This character is not allowed.");
-    string amount_input = vd.input_box("", "How many " + shopem.replace("_", " ", true) + "s would you like to buy?");
+    string amount_input = vd.translated_input_box("", "How many " + shopem.replace("_", " ", true) + "s would you like to buy?");
     if (amount_input == "")
 {
 p.play_stationary("storefail.ogg", false);
@@ -1513,16 +1513,16 @@ void soundsetsmenu()
 {
 form.reset();
     form.create_translated_window("audio settings", false);
-int gameAmbienceVolumeSlider = form.create_translated_slider("game ambience volume: adjustable", (toyambvolume + 50) * 2, 0, 100, "percent", 1);
-int gameMusicVolumeSlider = form.create_translated_slider("game music volume: adjustable", (toymusvolume + 50) * 2, 0, 100, "percent", 1);
 int gameAlarmVolumeSlider = form.create_translated_slider("game alarm volume: adjustable", (alarmvolume + 50) * 2, 0, 100, "percent", 1);
+int gameAmbienceVolumeSlider = form.create_translated_slider("game ambience volume: adjustable", (toyambvolume + 50) * 2, 0, 100, "percent", 1);
 int gameHeartbeatVolumeSlider = form.create_translated_slider("game heartbeat volume: adjustable", (heartvolume + 50) * 2, 0, 100, "percent", 1);
+int gameMusicVolumeSlider = form.create_translated_slider("game music volume: adjustable", (toymusvolume + 50) * 2, 0, 100, "percent", 1);
 int menuMusicVolumeSlider = form.create_translated_slider("menu music volume: adjustable", (menumusvolume + 50) * 2, 0, 100, "percent", 1);
 int masterGameVolumeSlider = form.create_translated_slider("master game volume: adjustable", (int(master_volume) + 50) * 2, 0, 100, "percent", 1);
-    int ambTest = form.create_translated_button("Toggle ambience sound test: switch");
-    int musTest = form.create_translated_button("Toggle music sound test: switch");
-    int alarmTest = form.create_translated_button("Toggle alarm sound test: switch");
-    int heartbeatTest = form.create_translated_button("Toggle heartbeat sound test: switch");
+    int alarmTest = form.create_translated_button("alarm sound test: switch");
+    int ambTest = form.create_translated_button("ambience sound test: switch");
+    int heartbeatTest = form.create_translated_button("heartbeat sound test: switch");
+    int musTest = form.create_translated_button("music sound test: switch");
     int musList = form.create_list("Test Tracks: menu", 2);
 form.add_list_item(musList, "BossMusic: normal mode", "bossmus");
 form.add_list_item(musList, "Game Music: normal and endless mode", "gamemus");

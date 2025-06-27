@@ -107,6 +107,48 @@ bool is_disallowed_char(string char) {
     }
 }
 
+string translated_input_box(const string title, const string text, const string default_text = "", string disallowed_chars = "", string char_disallowed_description = "", const int flags = 0)
+{
+    string result;
+    int text_box, ok_button, cancel_button;
+    this.form.reset();
+    this.create_dialog(trl_check(title));
+    text_box = this.form.create_input_box(trl_check(text), default_text);
+    ok_button = this.form.create_button(trl_check("&OK"), true);
+    cancel_button = this.form.create_button(trl_check("&Cancel"), cancel = true);
+    this.form.focus(text_box);
+
+    if (this.disallowed_chars.length() > 0)
+    {
+        string translated_description = char_disallowed_description == "" ? trl_check("This character is not allowed.") : trl_check(char_disallowed_description);
+        this.form.set_disallowed_chars(text_box, this.disallowed_chars, this.use_only_disallowed_chars, translated_description);   
+    }
+
+    while (true)
+    {
+        wait(5);
+        this.monitor();
+        if (this.form.is_pressed(ok_button))
+        {
+            result = this.form.get_text(text_box);
+            if (result.length() == 0) speak(trl_check("Input is required"));
+            if (result.length() >= 1) break;
+        }
+        else if (this.form.is_pressed(cancel_button))
+        {
+            break;
+        }
+    }
+
+    this.destroy_window();
+    return result;
+}
+string translated_virtual_input_box(const string title, const string text, const string default_text = "", string disallowed_chars = "", string char_disallowed_description = "", const int flags = 0)
+{
+    virtual_dialogs vd;
+    return vd.translated_input_box(title, text, default_text, disallowed_chars, char_disallowed_description, flags);
+}
+
 bool info_box(const string title, const string label, const string text) {
 int text_box, close_button, cancel_button;
 bool result = false;

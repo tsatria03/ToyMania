@@ -94,7 +94,7 @@ if (current == "potion")
 double heal_percent = random(5, 10);
 double heal_amount = maxhealth * (heal_percent / 100.0);
 health = min(health + heal_amount, maxhealth);
-    speak_translated("Healed to " + round(health / maxhealth * 100, 0) + " percent health.");
+    speak_translated("Healed to " + round(health / maxhealth * 100, 0) + " percent HP.");
     return;
 }
 if (current == "teleporter")
