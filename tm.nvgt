@@ -146,6 +146,7 @@ else
     {
         check_for_updates(version, "ToyMania");
     }
+wait(500);
     mainmenu();
 }
 }
