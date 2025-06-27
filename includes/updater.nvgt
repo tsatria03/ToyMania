@@ -230,7 +230,7 @@ m.add_item("cancel", "cancel");
         if (version_choice == "portable")
             return base + "/ToyMania_windows_portable_password_is_GreatCollector.7z";
         else
-            return base + "/ToyMania_windows_installer_password_is_GreatCollector.exe";
+            return base + "/ToyMania_windows_installer.exe";
     }
 }
 string get_disk_filename(string url)
