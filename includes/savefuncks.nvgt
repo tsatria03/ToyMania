@@ -1,9 +1,9 @@
 void readdata()
 {
     sd.load();
-if (st.d.exists("endless"))
+if (sd.d.exists("endless"))
 {
-endless = st.read_bool("endless");
+endless = sd.read_bool("endless");
 }
     if (sd.d.exists("level"))
 {
@@ -82,7 +82,7 @@ void writedata()
 {
     last_played_date = get_date(true, false);
     last_played_time = get_time(true, false);
-st.add("endless", endless);
+sd.add("endless", endless);
     sd.add("level", level);
 sd.add("money", money);
     sd.add("collected_toys", collected_toys);

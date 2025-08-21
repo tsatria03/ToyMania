@@ -2,6 +2,7 @@
 pack obj;
 void main()
 {
+if (!directory_exists("data/res/")) directory_create("data/res/");
 string filename=input_box("Simple pack lister", "Enter the path/name to a pack file, such as sounds.dat");
 if(filename=="") exit();
 bool success=obj.open(filename);
@@ -17,6 +18,9 @@ for(uint i=0; i<list.length(); i++)
 final_list+=list[i]+"\r\n";
 }
 final_list+="total files: "+list.length()+"\r\n";
-clipboard_copy_text(final_list);
-alert("Complete! ", "The sound list is now on your clipboard. ");
+file slist;
+slist.open("data/res/soundslist.txt", "a");
+slist.write(final_list);
+slist.close();
+alert("Complete! ", "The sound list has now been written to data/res/soundslist.txt.");
 }

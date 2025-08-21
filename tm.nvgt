@@ -1,6 +1,6 @@
 #pragma document docks
 #pragma plugin nvgt_curl
-#pragma embed "data/assets.tmg"
+#pragma embed "data/res/assets.tmg"
 #include"includes/includes.nvgt"
 bool behind_pitch=true;
 bool hrtf=true;
@@ -81,7 +81,6 @@ savedata st(DIRECTORY_APPDATA+"tsatria03/ToyMania/saves/settings.tmg", "JPl3mWxE
 AchievementTracker[] achievements;
 sound_pool spool, temp, p, alarmpool, ambpool, bulletpool, dartpool, heartpool, healpool, objpool, muspool, pool, bosspool, carpool, doorpool, gardpool, keypool, toypool;
 time_elapsed timeelapsed;
-timestamp last_update_check_timestamp;
 virtual_dialogs vd;
 vector me;
 void main()

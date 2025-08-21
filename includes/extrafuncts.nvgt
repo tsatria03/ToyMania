@@ -114,6 +114,17 @@ mt=platforms[i].tile;
 }
 return mt;
 }
+string string_join(string[]@ arr, string delimiter=" ", int start_index = 0)
+{
+	if(arr.length()<=0 or delimiter.is_empty()) return "";
+	string val;
+	for(int i=start_index; i<arr.length()-1; i++)
+	{
+		val += arr[i]+delimiter;
+	}
+	val += arr[arr.length()-1];
+	return val;
+}
 string process_digits(const string& in msg) {
 string result = "";
 string buffer = "";
