@@ -804,7 +804,7 @@ prices.set("teleporter", 20.0);
     if (money <= 0)
 {
         p.play_stationary("storefail.ogg", false);
-dlgmessage_return("Error: you don't have enough money to complete this action.");
+dlgmessage_return("Error: you don't have enough money to purchase this item.");
 shopmenu();
         return;
     }
@@ -1332,7 +1332,7 @@ speechsetsmenu();
             {
 if(completesound==true) dlgplay("complete.ogg");
                 dlgmessage_return("The save data location has been successfully opened.");
-gamsetsmenu();
+preffsmenu();
             }
         }
         if (form.is_pressed(rest))
@@ -1345,7 +1345,7 @@ int mres=m.run();
 string confirm = m.get_selected_item_id();
     if (mres == -1 or confirm == "no")
     {
-        gamsetsmenu();
+        preffsmenu();
     }
 if(confirm=="yes")
 {
@@ -1529,7 +1529,7 @@ form.add_list_item(musList, "Game Music: normal and endless mode", "gamemus");
 int sdm = form.create_translated_button("Select sound &device. Currently set to " + soundcard);
 int cancel = form.create_translated_button("&cancel");
 int ok = form.create_translated_button("&okay");
-form.focus(gameAmbienceVolumeSlider);
+form.focus(gameAlarmVolumeSlider);
 spool.play_stationary("menuopen.ogg",false);
     while (true)
     {

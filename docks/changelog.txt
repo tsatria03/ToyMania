@@ -1,4 +1,6 @@
-new in 4.0
+New in 4.1.
+Fixed various bugs found in sertain preffrance-based menus.
+New in 4.0.
 Made it so guards don't play step sounds while they are stunned in the game. They'll only play them after they've fully recovered.
 Fixed a bug where enemies remained stunned indefinitely after being hit by a dart, instead of recovering once the stun duration has fully ended.
 Updated the readme file with added and modified keyboard shortcuts.
@@ -19,7 +21,7 @@ Made it so pure numbers are excluded from being translated for all language file
 Made it so when a language file is loaded, the game now automatically sorts all key-value entries alphabetically by key. This makes translation files easier to navigate and edit manually.
 Made it so the game now automatically writes missing translation strings to the currently selected language file as placeholders. If a string is not yet translated, it will be written in the format key=key so users can easily fill in their own translations later.
 You can now disable the translation system entirely in the preferences menu. When you select the none option, the game completely disables the loading of translation files and falls back to using the built-in hardcoded English strings.
-new in 3.9
+New in 3.9.
 Updated the readme file with expanded translation guides to include support for language variants, along with clearer instructions for creating both base and styled translations.
 Revamped the language selection list found in the prefferences menu. The language selection interface has been streamlined into a single list that includes both base languages and their variants. This makes it easier to browse all of the options while keeping things accessible via first-letter navigation.
 Reorganized the language file structure. Base languages such as English and Spanish are now stored in the normal folder. Variants of these languages such as English/Angry, English/Happy, and English/Sad are placed in the variants folder under their respective language subfolders for better organization and scalability.
@@ -30,7 +32,7 @@ Added the option to directly change the language of the game in the prefferences
 Started the process of making this game translatable to other languages.
 Updated some boss and weapon related sounds.
 Added the ability to pause the playing sound in the learn game sounds menu. You can press the spacebar to do this. This is mostly useful for sounds that are looped.
-new in 3.8
+New in 3.8.
 Made it so the preview volume in the learn game sounds menu now resets itself back to it's default value after exiting the menu.
 Made it so the Learn Game Sounds menu also remembers the last selected sound of a category. This makes it quicker to pick up where you left off, especially when reviewing long lists of sounds.
 Fixed a bug where doors took priority over items when pressing shift enter when you were near one.
@@ -41,7 +43,7 @@ Made it so pressing the letter C key now only tells you the coordinates you're l
 Removed all announcements related to reloading ammo based weapons. You should now only here the accompanying sounds that go with reloading them.
 Made it so weapons now reset properly at the start of each new game session. All weapon stats, including ammo, firing timers, and reload statuses are now cleared when starting a new game. This ensures a clean and consistent gameplay experience without leftover values from previous played sessions.
 Fixed a bug where ammo-based weapons would reset their ammo and reserved ammo counts when re-equipped. Ammo and reserved ammo now persist between weapon draws, making ammo packs work properly in endless mode.
-new in 3.7
+New in 3.7.
 Made it so the Learn Game Sounds menu remembers your last selected sound category. This is useful for returning to a specific sound group without having to start over again from the top of the menu every time.
 Improved the speaker test menu by announcing the sound name along side the Loading prompt when a test sound is selected.
 Fixed an issue on mac devices where the updater would download the update file, along with copying the download link to the clipboard. From now on, the clipboard action will only be performed to prevent redundant or inaccessible downloads inside the game's mac bundle.
@@ -52,7 +54,7 @@ You can now press alt A to quickly open the audio settings menu within the game.
 Replaced some of the pistol sounds with better ones.
 Made it so the door tracking info is separated into two different keys. Shift D will tell you how many keys are required to unlock the door, and D alone will tell you where the door is located in both normal and endless modes.
 Made it so the third guard is easier to kill for all game modes.
-new in 3.6
+New in 3.6.
 Made it so the pistol weapon is only exclusive to the normal mode. You can press the number 9 key to equip the pistol in normal mode, and machine gun in endless mode. This change also applies to the weapons menu for both modes as well.
 Added a new pistol weapon for the normal Mode. Players now have access to this weapon in place of the former machine gun. The machine gun can still be used in endless mode.
 Enhanced the preferences menu by moving the open, reset and save buttons out of the other categories into the main preferences category.
@@ -63,7 +65,7 @@ Fixed an issue where the shop menu in endless mode refused to work to make succe
 Improved the updater for mac devices. If an update is available for that platform, users are now prompted to manually download the update in their browser. The download link is automatically copied to their clipboard for convenience, making it easier for them to quickly paste it for downloading.
 Removed the save game option found in the pause menu.
 Added some more guard and weapon related sounds into the learn game sounds menu.
-new in 3.5
+New in 3.5.
 Made it so mac and windows update files get deleted propperly upon successful extraction.
 Added fallback behavior for failed update extractions. If an update extraction fails, the game will now provide clearer feedback and avoids restarting or exiting abruptly, allowing users to try again without patencial data loss.
 Added write-permission checks before downloading updates. If the game is running from a protected location like Program Files, users will now be prompted to download the update to their Downloads folder instead.
@@ -74,7 +76,7 @@ Improved platform detection to handle Windows and Mac update downloads separatel
 Updated the readme file with added and modified keyboard shortcuts.
 Added the ability to disable menu wrapping in the game settings menu.
 Added some more weapon related sounds into the learn game sounds menu.
-new in 3.4
+New in 3.4.
 Added a manual save game option to the pause menu, and implemented a timed auto-save system that saves the game every 5 seconds to reduce lag spikes caused by frequent disk writes during player movement.
 Made it so the directional door tracking logic is Reversed to match the real-world orientation of the player. The system now correctly reports when a door is in front, behind, left, or right based on the player's overall location.
 Added directional tracking to doors in Normal Mode. Pressing the letter D now tells players where the door is located in relation to them, such as in front or behind them. It also includes the approximate distance of the door in feet.
@@ -85,7 +87,7 @@ Fixed an issue where adjusting the master volume in the sound settings menu didn
 Made it so cars don't start shooting you with bullets untill you reach the third level in normal and endless mode.
 Adjusted the key requirements to unlock the door in the normal and endless game modes. The normal mode will now require a random amount between 10 and 20 keys. The endless mode will now require a random amount between 20 and 40 keys.
 Added the ability to adjust the menu music volume in the game settings menu.
-new in 3.3
+New in 3.3.
 Added a Master Volume Control to the Audio Settings menu. Players can now adjust the overall volume of all game sounds using the dedicated master volume slider.
 Added a prompt to delete update archives or installers after a successful update, helping keep the overall game folder clean.
 Repackaged update archives to extract directly into the game's directory, removing unnecessary subfolders for a smoother update experience.
@@ -96,7 +98,7 @@ Introduced automatic extraction of downloaded 7z updates. This is only for Windo
 Addressed a critical issue with the game updater where downloaded update files appeared corrupted or were only a few bytes in size. This was caused by an incorrect GitHub release tag format in the update URL. The updater now automatically appends a trailing zero to version numbers to match GitHub's expected release tag structure, ensuring downloads are valid and uncorrupted.
 Improved the auto updater. From now on, it will check for updates in the backround at startup, instead of always telling the user that no updates are found upon launching the game every time.
 Moved the music tracks list over to the botum of the test toggle switches found in the sound settings menu.
-new in 3.2
+New in 3.2.
 Added support for automatic update checking on game launch. If the option is enabled in the game settings menu, the game will now check for the latest version online and prompt the user to update it if it's available.
 Implemented an automatic version checker that compares your local game version against the latest version available online.
 Introduced a built-in update downloader that retrieves the correct update based on your platform (Windows or Mac) and package type (installer or portable), with progress tracking, error handling, and cleanup of incomplete files.
@@ -107,7 +109,7 @@ Added quantity selection and validation prompts to the shop menu to prevent inva
 Updated the readme file with added and modified keyboard shortcuts.
 Added a shop menu to the endless mode that allows you to buy various items from the store with the currency the game provides. This menu is accessed by pressing the letter S. You can also check how much money you currently have by pressing the letter M.
 Made it so healing zones now have different loop sounds.
-new in 3.1
+New in 3.1.
 Added post-destruction zones to Endless Mode. Two glass platforms now appear at the start of Endless Mode as remnants of the destroyed store from Normal Mode. One zone damages the player, while the other one gradually heals the player over time.
 Fixed a bug where ammo packs could give negative ammo when the player's ammo reserve was near or above the maximum cap. Ammo packs now correctly calculate the missing reserved ammo, and will only add the valid amount, preventing overfilling or negative ammo gained messages.
 Made it so taking damage during a reload cancels the reload attempt. If the player is hit by an enemy while reloading their machine gun, the reload of the weapon is now interrupted with an audible sound and speech feedback.
@@ -118,7 +120,7 @@ Made it so reloading the machine gun transfers ammo from your reserved ammo inst
 Made it so The Z key now reports both the currently loaded and reserved ammo values for the machine gun.
 Improved the inventory ammo pack logic to respect your current reserved ammo.
 Implemented separate ammo, maxammo, and reserved_ammo values for machine guns to support more realistic reloads.
-new in 3.0
+New in 3.0.
 Fixed a bug where using an ammo pack in your inventory would incorrectly set your total ammo to the pack's value instead of adding to it. The item now properly increases your current ammo by a random amount between 5 and 10, and reports the correct ammo gained from the opened pack.
 Added the ability to collect and use ammo packs in endless mode, along with health potions.
 Added some more item related sounds into the learn game sounds menu.
@@ -139,7 +141,7 @@ Separated the preferences menu into 2 different sections. You can now access and
 Added the ability to adjust the ambience, music, alarm, and heartbeat volumes in the game settings menu outside of the main game.
 Separated the descriptions for all setting toggles into dedicated read-only input boxes next to each toggle. This makes the settings menu more screen reader-friendly and easier to navigate.
 Revamped the intire settings menu. It will now use the native audio form buttons and checkboxes moving forward.
-new in 2.9
+New in 2.9.
 Added a sound for when the door is locked in all game modes.
 Added destructible platform effects during store collapse. As the store takes damage in Level 6, glass platforms now dynamically appear on either sides of the map, representing structural damage from the blast sight.
 Made it so you feel half the effects of a store explosion. This makes it seam more realistic as if you were in an actual store with a bomb going off.
@@ -150,7 +152,7 @@ Made it so pressing the lettor S tells you the maximim HP out of it's current HP
 Made it so pressing the lettor H tells you the maximim HP out of it's current HP remaining for the player.
 Added the ability to check the store's HP. You can press the letter S to do this in normal mode.
 Updated some of the player related sounds found in the learn game sounds menu.
-new in 2.8
+New in 2.8.
 Added speech and sound feedback to jammed doors. If anything is near a door and you try to press enter to open it, you'll get notified that it can't be opened because there's something near it, causing you not to end up passing through it to exit.
 Made it so doors can't be opened if enemies are nearby. If a boss, guard, or car is within 2 tiles of a door, the player is now blocked from opening it. This adds more realism by forcing players to clear out the area before leaving the store.
 Fixed an issue where preview volume would reset itself back to 0 upon selecting another playable sound in the learn game sounds menu.
@@ -161,7 +163,7 @@ Made it so players can no longer collect items, keys, or toys while inside a doo
 Made it so game data and settings are now saved to the user's AppData folder under tsatria03/ToyMania/saves, and tsatria03/ToyMania/stats. This ensures proper user configuration and seamless platform integration.
 Completely removed the coppying, exporting, and viewing of player titles for all lifetime stats.
 Addressed an issue where coppied and exported stats weren't being split into lines properly for reading.
-new in 2.7
+New in 2.7.
 Made it so extra keys don't get spawned after reaching the required key count in all game Modes. Once you've collected enough keys to unlock the door, no more of them will spawn on the map. This keeps the overall playfield cleaner to work with.
 Added door distance feedback to the letter D keyboard shortcut in Normal Mode. Pressing it now tells you how far the exit door is from your current location in feet, followed by how many keys are required to open it. This improves situational awareness during the final time-limited phase.
 Added an option in the settings menu to enable or disable level-up sounds for all game modes. This lets players choose whether they want to hear an audio cue each time they advance a level, offering a quieter experience for those who don't prefer it.
@@ -172,7 +174,7 @@ Fixed a bug where the move sound for doors weren't looping propperly.
 Replaced all of the door sounds with new ones.
 Updated some of the descriptions found in the learn game sounds menu.
 Updated the credits.txt file to include music attributions used in this game.
-new in 2.6
+New in 2.6.
 Made it so You no longer have to be perfectly on top of a door to open it. You can now open doors while being slightly to the left, right, forward, or backward.
 Added a retry menu after failing Level 6 due to time running out. Players now have the option to instantly restart the Normal game mode after failing to escape the store in time. Instead of being taken back to the main menu, a quick “Try Again” prompt offers a more seamless and convenient way to attempt another run.
 Added randomized failure messages for when the time runs out in level 6. If the player fails to escape the store in time, a random humorous message will pop up instead of a static alert.
@@ -183,7 +185,7 @@ Replaced the main game ambience and music with new ones. Credit goes to the prod
 Added music to the time limited level. This music will play through out the entire level, even after a successfull boss defeat.
 Updated the Y key behavior in Normal Mode to announce how much time is remaining when playing the sixth level, instead of the total playtime. This helps players stay aware of the countdown, and therefore better manage their time before the store goes boom.
 Updated the D key behavior in Normal Mode to only announce how many keys are needed to unlock the door, without revealing the door’s location. This helps maintain focus and urgency during the time-limited phase of level 6.
-new in 2.5
+New in 2.5.
 Fixed an issue where the alarm sound in level 6 would continue to play even after the user has either died or won the game.
 The normal game mode is now time based. Players now have a limited amount of time to defeat the boss and escape the store once they reach level 6. A looping alarm sound will play during this final phase. Failing to exit in time will result in the entire store exploding.
 Recoded the post-game menus to support exporting session stats to a file. Players can now choose whether to copy their results to the clipboard, or export them to data/stats/player_posts.txt. This can be durring or after a game session has ended.
@@ -194,7 +196,7 @@ Made it so the damage of bullets fired by cars is randomized per car type. Diffe
 Added machine gun-style burst firing to car bullets. Each car now fires in bursts of multiple bullets at a rapid speed, followed by a cooldown between bursts.
 Upgraded the cars used in this game. They can now shoot bullets at the player. This brings the same level of threat and chaos previously reserved for bosses and guards. Each car now has a ranged attack that makes them more than just anoying distractions.
 Added some more car and player related sounds into the learn game sounds menu.
-new in 2.4
+New in 2.4.
 Added the ability to view the stats of various weapons found in the Weapons menu. Players can now see the damage, horizontal range, and vertical range of each weapon directly from the menu. This makes it easier to compare and choose weapons based on their effectiveness without needing to equip them first.
 Added the ability to draw and equip weapons with the new weapons menu. You can access this menu by pressing the letter W. This shortcut is also mentioned in the readme file as well.
 Made it so pressing the number row keys doesn't draw the same weapon multiple times. From now on, switching to an already equipped weapon won't retrigger drawing the weapon again.
@@ -205,7 +207,7 @@ Added some more UI related sounds into the learn game sounds menu.
 Made it so your inventory gets reset upon starting a new game in endless mode.
 Adjusted some hitting sounds for bosses and guards.
 Fixed a bug where the sounds of health related items would still play even after a game has ended in endless mode.
-new in 2.3
+New in 2.3.
 Improved level progression in Endless Mode. The game now tracks the times between level-ups to ensure that the level only increases once every 60 seconds, preventing the level sound from playing continuously. This adds stability and makes level advancements more predictable during long Endless Mode runs.
 Added a sound count indicator to each category in the Learn game Sounds menu. Players can now see how many sounds are available in each category before entering the menu. This helps estimate the size of each group of sounds and improves overall navigation and clarity.
 Fixed a bug where the key requirement for unlocking doors would randomly change every time the player interacted with them. The required number of keys is now determined when the door is spawned and remains consistent throughout the session.
@@ -216,7 +218,7 @@ Added menu wrapping to the game. If you've reached the botum of a menu, it will 
 Updated the readme file with added and modified keyboard shortcuts.
 Added useable items to the game. This will only be used in endless mode.
 Added an inventory system to the game. This will only be used in endless mode.
-new in 2.2
+New in 2.2.
 Made it so returning from a sound category in the learn sounds menu now brings players back to the category selection menu instead of going back to the game menu. This allows users to jump between categories without having to restart the entire process from the beginning.
 Made it so categories in the Learn Sounds menu are now displayed in alphabetical order. This helps users find what they're looking for more quickly.
 Made it so each sound category in the Learn Sounds menu has it's own descriptive title. When entering a category, the menu intro text updates to reflect the selected group, giving users clear context while browsing the sounds they want to view.
@@ -227,7 +229,7 @@ Added a playtime counter to the test speakers menu. These counters are for the s
 Made it so the pause and resume sounds don't play when the user presses the escape key to open the quit menu.
 Fixed a bug where pressing the escape key didn't pause the game propperly when opening up the quit menu.
 Made it so the number of toys that are spawned is set to 20 by default upon starting a new game session.
-new in 2.1
+New in 2.1.
 Added an option in the settings menu to enable or disable copy and export confirmation sounds. This is ideal for advanced players who prefer to have less auditory confirmation.
 Removed the speaker test complete sound. This sound has been renamed, and is now being used elsewhere.
 Fixed an issue where session playtime would incorrectly increase while the game was paused. The session timer is now properly synchronized with the actual gameplay time.
@@ -238,7 +240,7 @@ Fixed a bug where cars would mysteriously disappear during the spawning of guard
 Renamed the documentation menu, and moved it over to the game menu.
 Fixed an issue where the pause menu could behave unexpectedly, such as returning to the main menu without resetting progress or resuming gameplay properly.
 Made it so you can run with either the alt or control key.
-new in 2.0
+New in 2.0.
 Added an option in the pause menu to copy your current level and game mode to the clipboard for easy sharing or progress tracking.
 Fixed a bug where the game failed to restart propperly upon activating it in the main menu.
 Implemented a health warning system in all of the game modes. If your health gets below a certain threshold, a heartbeat sound will play to signify that you're in real danger of dying.
@@ -259,7 +261,7 @@ Fixed an issue where cars would disappear between levels 4 and 6 in endless mode
 Added descriptions to the game mode options found in the start game menu.
 Added an Endless Mode to the game. Players can now choose between easy and Endless before starting a game. In Endless Mode, gameplay difficulty gradually increases over time without a final level, encouraging long play sessions and making session-based achievements more meaningful.
 Addressed an issue where the behind pitch decrease option wasn't working propperly in the game when it was disabled in the settings menu.
-new in 1.9
+New in 1.9.
 Made it so the former manual stat copy option found in the settings menu also controls the export items section located in several in-game menus. Players can now choose to show or hide both clipboard and file export items for achievements, statistics, and overall progress from various stat-based menus.
 Added the ability to directly export all of your achievements and game statistics to a file from several in-game menus.
 Added the ability to clear your game progresses in the game menu.
@@ -270,7 +272,7 @@ Fixed a bug where the death screen didn't announce the actual level you were on 
 Added a keyboard shortcut to check how many steps you've taken during the game session.
 Moved the clear achievements and game statistics menus over to the main achievement and statistic menus. The descriptions of those menus are also updated as well.
 Moved the learn sounds menu over to the game menu.
-new in 1.8
+New in 1.8.
 Added sounds for toggling various options found in the settings menu.
 Added a sound for copying various achievements and other game statistics to the clipboard.
 Added an option in the settings menu to enable or disable looping of previewed sounds. This allows players to choose whether the sounds in the Learn Sounds menu continue playing until another sound is selected, or the Escape key is pressed. This is useful for continuous ambiences or short burst effects.
@@ -281,7 +283,7 @@ Added support for randomized variants of sounds found in the learn sounds menu.
 Added a Learn Sounds menu to the main menu. This allows players to preview important sound effects used throughout the game, helping them build familiarity with audio cues while starting out.
 Added an option to show the post-game stat copy prompt in the settings menu. Players can now enable or disable the clipboard prompt that appears after a game session ends. This gives more control over whether session results are automatically offered for copying.
 Added an option to show or hide the manual stat copy menu items in the settings menu. This allows players to show or hide the clipboard copy options for achievements and statistics found in various stat based menus.
-new in 1.7
+New in 1.7.
 Updated the readme file with some missing keyboard shortcuts that weren't there before.
 Added a hidden keyboard shortcut to announce the current music volume in the main menu. Holding Alt and pressing Left + Right or Right + Left arrows now speaks the current menu music volume.
 Added options to the settings menu for toggling spoken menu loading prompts and dialog end statements. These options allow players to disable the automatic Loading and Press enter to continue speech, offering a cleaner experience for advanced users.
@@ -292,7 +294,7 @@ Modified the description found in the speaker test menu to include a helpful pro
 Added a speaker test menu to the main menu. Players can now choose between the Sword Clank and Stone Throw sound to verify their speaker setup. The speaker test menu also includes a description to guide users in selecting an appropriate sound to test their audio setup.
 Added options to the settings menu for toggling achievement sounds and spoken notifications when unlocking various achievements during gameplay.
 Changed the growth multiplier for all session-based achievements to a higher value for a more consistent and challenging progression curve. This ensures each tier scales appropriately with player effort, preventing accidental full completions from minimal activity.
-new in 1.6
+New in 1.6.
 Added descriptive labels to audio setting toggles like HRTF and behind pitch decrease, making their purpose clearer to players who don't know what those toggles do.
 Updated the achievement and statistics reset menus with improved descriptions to clarify what each reset option does when the player clicks on them.
 Made it so the achievement reset system also clears lifetime stats, along with session stats. This ensures that resetting achievements now fully wipes out all of the associated progress, including playtime, toys, keys, guards, cars, and steps.
@@ -303,7 +305,7 @@ Added the ability to copy your entire game progress to the clipboard in the game
 Added descriptive messages to all major game menus. These include, but are not limited to, the main Game menu, the Achievements menu, the Statistics menu, and the Settings menu. These short descriptions provide context and guidance, making navigation easier for new and returning players alike.
 Made it so the sounds found in the speaker test option is randomized in the main menu.
 Added distinct achievement sounds based on the type of achievement the player receives. Session based achievements now play session_achievement.ogg, and lifetime achievements now play life_achievement.ogg. This provides clearer audio feedback for each type of achievement the player gets.
-new in 1.5
+New in 1.5.
 Made it so session-based achievements have a more Balanced Progression. Session-based achievements now have different starting thresholds and growth rates compared to lifetime achievements. This ensures that they have a shorter focused goal during a single gameplay session while keeping lifetime achievements as long-term milestones.
 Fixed an issue where session achievements retained their previous progress while session stats were reset. This in turn caused negative percentages to appear. It now properly resets the current Tier when restarting or exiting a game session.
 Improved the format for exported achievements to match the existing stats export style. Each entry includes the tier number, percentage progress, and how much is needed to reach the next tier.
@@ -314,7 +316,7 @@ Improved the clear achievements menu. Added a new clear achievements menu that a
 Added a full Session Achievement system that tracks your progress within a single game session across toys collected, keys found, guards defeated, cars destroyed, steps taken, and total time played. Each session achievement includes 50 scalable tiers that reset each run, encouraging fast-paced and high-performance gameplay.
 Added a test speakers’ option in the main menu.
 Recoded the entire menu system.
-new in 1.4
+New in 1.4.
 Added Last Played Timestamp to the Stats Menu. You can now see the exact date and time of your last session in the Lifetime Stats menu. This information is also included when copying your full game stats to the clipboard.
 Added the ability to copy your player title descriptions along with your player titles in the stats menu.
 Added descriptive titles to the Player Titles menu. Each rank now includes a short description, giving players more insight into their progress and what their rank represents.
@@ -325,7 +327,7 @@ Improved the achievement progress text to be clearer and more informative in the
 Made the achievement summaries clearer to read in the achievement’s menu. This change also applies to the in-game summaries as well.
 Added some sounds to indicate unlocked achievements.
 Added a new achievement reset menu with multiple options for clearing progress. Players can now choose to reset only their achievement tiers or both tiers and related game stats for full flexibility.
-new in 1.3
+New in 1.3.
 Added the ability to save your Achievement progress. This is loaded along with your other game stats.
 Added an option to the settings menu that lets you clear all of your achievements you've unlocked in the game.
 Made it so when an achievement has been unlocked, a dialog now congratulates the player and describes what was accomplished.
@@ -336,7 +338,7 @@ Made it so Session Stats and Lifetime Stats are split into 2 separate menus for 
 Added the ability to copy all of your game stats to the clipboard in the stats menu.
 Added a confirmation menu when clearing game stats. Players are now asked to confirm their choice before clearing session, lifetime, or all stats, preventing accidental data loss.
 Added a new option in the Settings Menu to clear your game stats. You can now reset your session stats, lifetime stats, or both, with clear feedback after each action.
-new in 1.2
+New in 1.2.
 Improved the readability of the win and death screens by breaking long stat messages into separate, easier to read lines.
 Added the ability to view total playtime in the stats menu. This shows how many minutes and seconds you've played across all sessions, even after restarting the game.
 Added separation of session stats and lifetime stats. In-game stat keys, such as T, I, F, and Q now report only the current session's progress, while the Stats Menu displays lifetime totals of all of the things you've collected, destroyed, and or killed.
@@ -347,7 +349,7 @@ Addressed an issue where collected keys and toys weren't being tracked properly 
 Added some menu sounds to the game.
 Added the ability to save your settings in the settings menu.
 You can now enable/disable global behind pitch decrease for the game in the settings menu.
-new in 1.1
+New in 1.1.
 You can now enable/disable global hrtf support for the game in the settings menu.
 Added a basic settings menu to the game.
 Added menu music. The volume of the music will be saved the next time you launch the game.
@@ -358,7 +360,7 @@ The death screen now tells you how many keys and toys you've collected upon bein
 Made it so You no longer have to be perfectly on top of a key or toy to pick it up. You can now collect keys and toys while being slightly to the left, right, forward, or backward.
 Fixed an issue where the boss would continuously resurrect itself upon successful defeat.
 Reduced the amount of keys you need to collect to unlock the door to 15, instead of 30.
-new in 1.0
+New in 1.0.
 Replaced the boss hitting sounds with new ones.
 Decreased the amount of keys you need to collect to unlock the door. This value will also be spoken when trying to unlock the door.
 Made it so the ammo of the machine gun resets upon redrawing it.

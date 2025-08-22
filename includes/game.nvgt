@@ -438,7 +438,7 @@ if (endless)
     int leftx = random(0, 10);
     int rightx = random(90, 99);
     int miny1 = random(0, 50);
-    int maxy1 = min(miny1 + 10, 99); // Clamp to map height
+    int maxy1 = min(miny1 + 10, 99);
     int miny2 = random(50, 89);
     int maxy2 = min(miny2 + 10, 99);
     spawn_platform(leftx, min(leftx + 5, 99), miny1, maxy1, "glass");

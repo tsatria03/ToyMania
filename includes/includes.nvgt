@@ -11,6 +11,7 @@
 #include"bullet.nvgt"
 #include"car.nvgt"
 #include"dart.nvgt"
+#include"datetime.nvgt"
 #include"dlg.nvgt"
 #include"door.nvgt"
 #include"extrafuncts.nvgt"

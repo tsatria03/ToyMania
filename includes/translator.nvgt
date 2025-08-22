@@ -208,7 +208,7 @@ else
 {
             alert_translated("Error", "The language file " + filepath + " contained no valid entries. Falling back to English.");
             fallback = true;
-            load_language("English"); // Recursively retry with fallback
+            load_language("English");
             return;
         }
 else
