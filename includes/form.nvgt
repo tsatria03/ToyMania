@@ -249,23 +249,6 @@ class audio_form {
 		}
 		return true;
 	}
-int create_translated_button(string caption, bool primary = false, bool cancel = false, bool overwrite = true) {
-return create_button(process_digits(caption), primary, cancel, overwrite);
-}
-int create_translated_checkbox(string caption, bool initial_value = false, bool read_only = false) {
-return create_checkbox(process_digits(caption), initial_value, read_only);
-}
-int create_translated_input_box(string caption, string default_text = "", string password_mask = "", int maximum_length = 0, bool read_only = false, bool multiline = false, bool multiline_enter = true) {
-string translatedCaption = process_digits(caption);
-string translatedDefault = process_digits(default_text);
-return create_input_box(translatedCaption, translatedDefault, password_mask, maximum_length, read_only, multiline, multiline_enter);
-}
-int create_translated_slider(string caption, double default_value = 50, double minimum_value = 0, double maximum_value = 100, string text = "", double step_size = 1) {
-return create_slider(process_digits(caption), default_value, minimum_value, maximum_value, text, step_size);
-}
-void create_translated_window(string window_title, bool change_screen_title = true, bool say_dialog = true, bool silent = false) {
-create_window(process_digits(window_title), change_screen_title, say_dialog, silent);
-}
 	int create_input_box(string caption, string default_text = "", string password_mask = "", int maximum_length = 0, bool read_only = false, bool multiline = false, bool multiline_enter = true) {
 		form_error = 0;
 		if (active_controls >= 50) {

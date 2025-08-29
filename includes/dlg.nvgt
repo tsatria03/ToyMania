@@ -1,22 +1,27 @@
-void dlg(string message, bool dlgcoppy=true, int timeout=-1)
+bool dlg(string message, bool dlgcoppy=true, int timeout=-1)
 {
 timer timeouter;
-speak_translated(message);
+speak(message);
 while(true)
 {
 wait(5);
 if (timeout>-1 and timeouter.elapsed>=timeout)
-return;
+return false;
 if (key_repeating(KEY_C) and dlgcoppy==true)
 {
 temp.destroy_all();
 temp.play_stationary("dlgcoppy.ogg", false);
-speak_translated("Text copied");
+speak("Text copied");
 clipboard_copy_text(message);
 }
 if (key_repeating(KEY_LEFT) or key_repeating(KEY_RIGHT) or key_repeating(KEY_UP) or key_repeating(KEY_DOWN))
 {
-speak_translated(message);
+speak(message);
+}
+if (key_repeating(KEY_ESCAPE))
+{
+temp.destroy_all();
+return true;
 }
 if(key_repeating(KEY_RETURN) or key_down(KEY_A))
 {
@@ -24,18 +29,26 @@ temp.destroy_all();
 break;
 }
 }
+return false;
 }
 void dlgmessage(string messages)
 {
 temp.play_stationary("dlgopen.ogg", false);
-string[] d=string_split(messages,"\r\n",true);
-dlg(d[0]);
-if (d.length()>1)
+string[] d = string_split(messages, "\r\n", true);
+bool escaped = dlg(d[0]);
+if (escaped)
 {
-for (uint i=1; i<d.length(); i++)
+temp.play_stationary("dlgclose.ogg", false);
+return;
+}
+for (uint i = 1; i < d.length(); i++)
 {
 temp.play_stationary("dlgscroll.ogg", false);
-dlg(d[i]);
+escaped = dlg(d[i]);
+if (escaped)
+{
+temp.play_stationary("dlgclose.ogg", false);
+return;
 }
 }
 temp.play_stationary("dlgclose.ogg", false);

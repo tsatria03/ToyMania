@@ -1,18 +1,18 @@
 void mainmenu()
 {
 setupmenu();
-m.add_translated_item("game menu", "gm");
-m.add_translated_item("settings menu", "sm");
-m.add_translated_item("speaker test menu", "st");
-m.add_translated_item("check for game updates", "chup");
-if(system_is_windows) m.add_translated_item("restart game", "rt");
-m.add_translated_item("exit game", "ex");
+m.add_item("game menu", "gm");
+m.add_item("settings menu", "sm");
+m.add_item("speaker test menu", "st");
+m.add_item("check for game updates", "chup");
+if(system_is_windows) m.add_item("restart game", "rt");
+m.add_item("exit game", "ex");
 m.intro_text = "Main menu. Please choose an option with your arrow keys, then press enter to activate one.";
 int mres=m.run();
 string main = m.get_selected_item_id();
 if(mres==-1)
 {
-speak_translated("exiting");
+speak("exiting");
 m.fade_music();
 exit();
 }
@@ -22,18 +22,18 @@ gamemenu();
 }
 if (main == "sm")
 {
-if(speak_menu_loading==true) speak_translated("loading");
+if(speak_menu_loading==true) speak("loading");
 m.fade_music();
 preffsmenu();
 }
 if(main == "st")
 {
     setupmenu(false);
-m.add_translated_item("eight bit. This sound has been played a total of "+bitplays+" times.", "bit");
-m.add_translated_item("crash car. This sound has been played a total of "+crashplays+" times.", "crash");
-m.add_translated_item("Sword Clank. This sound has been played a total of "+swordplays+" times.", "clank");
-m.add_translated_item("Stone Throw. This sound has been played a total of "+stoneplays+" times.", "stone");
-m.add_translated_item("Back", "back");
+m.add_item("eight bit. This sound has been played a total of "+bitplays+" times.", "bit");
+m.add_item("crash car. This sound has been played a total of "+crashplays+" times.", "crash");
+m.add_item("Sword Clank. This sound has been played a total of "+swordplays+" times.", "clank");
+m.add_item("Stone Throw. This sound has been played a total of "+stoneplays+" times.", "stone");
+m.add_item("Back", "back");
 m.intro_text = "Speaker test menu. Choose a sound to test your audio setup. For the most accurate results, please use headphones. Please also make sure to check if they are worn correctly.";
 int mres = m.run();
     string soundsel = m.get_selected_item_id();
@@ -43,7 +43,7 @@ int mres = m.run();
     }
     if (soundsel == "bit")
 {
-if(speak_menu_loading==true) speak_translated("loading eight bit");
+if(speak_menu_loading==true) speak("loading eight bit");
 m.fade_music();
 bitplays+=1;
 writepreffs();
@@ -51,7 +51,7 @@ writepreffs();
     }
     if (soundsel == "crash")
 {
-if(speak_menu_loading==true) speak_translated("loading crash car");
+if(speak_menu_loading==true) speak("loading crash car");
 m.fade_music();
 crashplays+=1;
 writepreffs();
@@ -59,7 +59,7 @@ writepreffs();
     }
     if (soundsel == "clank")
 {
-if(speak_menu_loading==true) speak_translated("loading sword clank");
+if(speak_menu_loading==true) speak("loading sword clank");
 m.fade_music();
 swordplays+=1;
 writepreffs();
@@ -67,7 +67,7 @@ writepreffs();
     }
     if (soundsel == "stone")
 {
-if(speak_menu_loading==true) speak_translated("loading stone throw");
+if(speak_menu_loading==true) speak("loading stone throw");
 m.fade_music();
 stoneplays+=1;
 writepreffs();
@@ -79,19 +79,19 @@ dlgmessage_return("Speaker test complete.");
 }
 if (main == "chup")
 {
-if(speak_menu_loading==true) speak_translated("loading");
+if(speak_menu_loading==true) speak("loading");
 m.fade_music();
 check_for_updates(version, "ToyMania", true);
 }
 if (main == "rt")
 {
-speak_translated("restarting");
+speak("restarting");
 m.fade_music();
 restart("tm.exe");
 }
 if (main == "ex")
 {
-speak_translated("exiting");
+speak("exiting");
 m.fade_music();
 exit();
 }
@@ -99,11 +99,11 @@ exit();
 void docksmenu()
 {
 setupmenu();
-m.add_translated_item("changelog", "changelog");
-m.add_translated_item("credits", "credits");
-m.add_translated_item("readme", "readme");
-m.add_translated_item("todo_list", "todo_list");
-m.add_translated_item("back", "back");
+m.add_item("changelog", "changelog");
+m.add_item("credits", "credits");
+m.add_item("readme", "readme");
+m.add_item("todo_list", "todo_list");
+m.add_item("back", "back");
 m.intro_text = "User guides menu. You can access help guides and other resources explaining how the game works here.";
 int mres=m.run();
 string dnm=m.get_selected_item_id();
@@ -113,25 +113,25 @@ gamemenu();
 }
 if(dnm=="changelog")
 {
-if(speak_menu_loading==true) speak_translated("loading");
+if(speak_menu_loading==true) speak("loading");
 m.fade_music();
 dockread("docks/changelog.txt");
 }
 if(dnm=="credits")
 {
-if(speak_menu_loading==true) speak_translated("loading");
+if(speak_menu_loading==true) speak("loading");
 m.fade_music();
 dockread("docks/credits.txt");
 }
 if(dnm=="readme")
 {
-if(speak_menu_loading==true) speak_translated("loading");
+if(speak_menu_loading==true) speak("loading");
 m.fade_music();
 dockread("docks/readme.txt");
 }
 if(dnm=="todo_list")
 {
-if(speak_menu_loading==true) speak_translated("loading");
+if(speak_menu_loading==true) speak("loading");
 m.fade_music();
 dockread("docks/todo_list.txt");
 }
@@ -143,15 +143,15 @@ gamemenu();
 void gamemenu()
 {
 setupmenu();
-m.add_translated_item("start game", "ty");
-m.add_translated_item("learn game sounds", "gsm");
-m.add_translated_item("read game user guides", "dm");
-m.add_translated_item("view game achievements", "ach");
-m.add_translated_item("view game statistics", "stats");
-m.add_translated_item("Clear game progresses.", "cgr");
-if(statscopy==true) m.add_translated_item("Copy all game progresses to clipboard", "cys");
-if(statscopy==true) m.add_translated_item("Export all game progresses to file", "cys2");
-m.add_translated_item("back", "back");
+m.add_item("start game", "ty");
+m.add_item("learn game sounds", "gsm");
+m.add_item("read game user guides", "dm");
+m.add_item("view game achievements", "ach");
+m.add_item("view game statistics", "stats");
+m.add_item("Clear game progresses.", "cgr");
+if(statscopy==true) m.add_item("Copy all game progresses to clipboard", "cys");
+if(statscopy==true) m.add_item("Export all game progresses to file", "cys2");
+m.add_item("back", "back");
 m.intro_text = "Game menu. You can start a new game session, learn about important sounds, view achievements, or check your stats here.";
 int mres=m.run();
 string gamem = m.get_selected_item_id();
@@ -162,9 +162,9 @@ mainmenu();
 if (gamem == "ty")
 {
     setupmenu(false);
-m.add_translated_item("Normal. This is a timed based mode where you must collect items, survive hazards, and defeat the boss before the store explodes. There is one unlockable door that you must find to win.", "normal");
-m.add_translated_item("Endless. This mode lets you play for as long as you can survive. The game will get harder over time with no final boss, and just one unlockable door to win. This mode will also include ammo packs and health potions that drop from time to time for use durring intense guard fights.", "endless");
-    m.add_translated_item("Back", "back");
+m.add_item("Normal. This is a timed based mode where you must collect items, survive hazards, and defeat the boss before the store explodes. There is one unlockable door that you must find to win.", "normal");
+m.add_item("Endless. This mode lets you play for as long as you can survive. The game will get harder over time with no final boss, and just one unlockable door to win. This mode will also include ammo packs and health potions that drop from time to time for use durring intense guard fights.", "endless");
+    m.add_item("Back", "back");
     m.intro_text = "Choose how you want to play the game.";
     int gres = m.run();
     string mode = m.get_selected_item_id();
@@ -173,7 +173,7 @@ m.add_translated_item("Endless. This mode lets you play for as long as you can s
         gamemenu();
     }
     endless = (mode == "endless");
-    if (speak_menu_loading) speak_translated(endless ? "loading endless mode" : "loading normal mode");
+    if (speak_menu_loading) speak(endless ? "loading endless mode" : "loading normal mode");
     m.fade_music();
     dlgplay("gamelaunch.ogg");
     level = 1;
@@ -222,7 +222,7 @@ reset_weapons();
 }
 if (gamem == "gsm")
 {
-if(speak_menu_loading==true) speak_translated("loading");
+if(speak_menu_loading==true) speak("loading");
 m.fade_music();
 learnsoundsmenu();
 }
@@ -240,11 +240,11 @@ statsmenu();
 }
 if (gamem == "cgr")
 {
-if(speak_menu_loading==true) speak_translated("loading");
+if(speak_menu_loading==true) speak("loading");
 m.fade_music();
 setupmenu(false);
-    m.add_translated_item("Yes", "yes");
-    m.add_translated_item("No", "no");
+    m.add_item("Yes", "yes");
+    m.add_item("No", "no");
 m.intro_text="Are you sure you want to reset all of your game progresses?";
 int mres=m.run();
 string confirm = m.get_selected_item_id();
@@ -264,7 +264,7 @@ gamemenu();
 }
 if (gamem == "cys")
 {
-if(speak_menu_loading==true) speak_translated("loading");
+if(speak_menu_loading==true) speak("loading");
 m.fade_music();
     string result = "";
     result += "Session Achievements:\r\n";
@@ -311,7 +311,7 @@ if(copexpsounds==true) dlgplay("gamecopy.ogg" ,false);
 }
 if (gamem == "cys2")
 {
-if (speak_menu_loading) speak_translated("loading");
+if (speak_menu_loading) speak("loading");
 m.fade_music();
 gamfile.open(DIRECTORY_APPDATA+"tsatria03/ToyMania/stats/player_progresses.txt", "w");
 string result = "";
@@ -575,9 +575,9 @@ if (cat.exists(subkeys[j]))
 }
 }
 m.set_focused_item(restoreIndex);
-m.add_translated_item(key+": This category has a total of " + count + " sound" + (count == 1 ? "" : "s"), key);
+m.add_item(key+": This category has a total of " + count + " sound" + (count == 1 ? "" : "s"), key);
 }
-m.add_translated_item("Back", "back");
+m.add_item("Back", "back");
 int res = m.run();
 string sel = m.get_selected_item_id();
 if (res == -1 or sel == "back")
@@ -594,11 +594,11 @@ learn_game_sounds_menu(cast<dictionary@>(learnCategories[sel]), "", m);
 void pausemenu()
 {
     setupmenu(false);
-        m.add_translated_item("Copy level and game mode to clipboard", "clg");
-        m.add_translated_item("Read current game session statistics", "rs");
-        m.add_translated_item("Quit game", "qmg");
-        m.add_translated_item("Resume game", "rmg");
-m.add_translated_item("view detailed stats", "vds");
+        m.add_item("Copy level and game mode to clipboard", "clg");
+        m.add_item("Read current game session statistics", "rs");
+        m.add_item("Quit game", "qmg");
+        m.add_item("Resume game", "rmg");
+m.add_item("view detailed stats", "vds");
     m.intro_text = "Pause menu.";
     int mres = m.run();
     string psmem = m.get_selected_item_id();
@@ -634,9 +634,9 @@ int session_seconds = int((timeelapsed.ms() % 60000) / 1000);
 if (gamcopy == true)
 {
     setupmenu(false);
-    m.add_translated_item("Copy results to clipboard", "copy");
-    m.add_translated_item("Export results to file", "export");
-    m.add_translated_item("Return to pause menu.", "cancel");
+    m.add_item("Copy results to clipboard", "copy");
+    m.add_item("Export results to file", "export");
+    m.add_item("Return to pause menu.", "cancel");
     m.intro_text = "What would you like to do with the current results for this game session?";
     int r = m.run();
     string resp = m.get_selected_item_id();
@@ -666,8 +666,8 @@ return;
             if (quit_menu==true)
 {
                 setupmenu(false);
-                m.add_translated_item("Yes", "yes");
-                m.add_translated_item("No", "no");
+                m.add_item("Yes", "yes");
+                m.add_item("No", "no");
                 m.intro_text = "Are you sure you want to quit the game? You will lose all progress for this current game session.";
                 int confirmres = m.run();
                 string confirm = m.get_selected_item_id();
@@ -739,23 +739,23 @@ cardest=false;
 if(psmem == "vds")
 {
     setupmenu(false);
-    m.add_translated_item("Current level: " + level + " (" + (endless ? "Endless Mode" : "Normal Mode") + ")");
-    m.add_translated_item("Current location: " + me.x + ", " + me.y+". You're walking on "+gmt(me.x,me.y)+". Facing "+facing+".");
-    m.add_translated_item("player HP: "+round(health / maxhealth * 100, 0) + " percent.");
-if(!endless) m.add_translated_item("store HP: "+round(storehealth / storemaxhealth * 100, 0) + " percent.");
-    m.add_translated_item("Cars on field: " + cars.length());
-    m.add_translated_item("Guards on field: " + gards.length());
-    m.add_translated_item("Keys on field: " + keys.length());
-    m.add_translated_item("Toys on field: " + toys.length());
-    m.add_translated_item("Cars destroyed: " + destroyed_cars);
-    m.add_translated_item("Guards defeated: " + killed_gards);
-    m.add_translated_item("Keys collected: " + collected_keys);
-    m.add_translated_item("Steps taken: " + moved_steps);
-    m.add_translated_item("Toys collected: " + collected_toys);
+    m.add_item("Current level: " + level + " (" + (endless ? "Endless Mode" : "Normal Mode") + ")");
+    m.add_item("Current location: " + me.x + ", " + me.y+". You're walking on "+gmt(me.x,me.y)+". Facing "+facing+".");
+    m.add_item("player HP: "+round(health / maxhealth * 100, 0) + " percent.");
+if(!endless) m.add_item("store HP: "+round(storehealth / storemaxhealth * 100, 0) + " percent.");
+    m.add_item("Cars on field: " + cars.length());
+    m.add_item("Guards on field: " + gards.length());
+    m.add_item("Keys on field: " + keys.length());
+    m.add_item("Toys on field: " + toys.length());
+    m.add_item("Cars destroyed: " + destroyed_cars);
+    m.add_item("Guards defeated: " + killed_gards);
+    m.add_item("Keys collected: " + collected_keys);
+    m.add_item("Steps taken: " + moved_steps);
+    m.add_item("Toys collected: " + collected_toys);
     int session_minutes = int(timeelapsed.ms() / 60000);
     int session_seconds = int((timeelapsed.ms() % 60000) / 1000);
-    m.add_translated_item("Total time played: " + session_minutes + " minutes, " + session_seconds + " seconds");
-m.add_translated_item("back", "back");
+    m.add_item("Total time played: " + session_minutes + " minutes, " + session_seconds + " seconds");
+m.add_item("back", "back");
 m.intro_text = "Detailed stats menu.";
     int vres = m.run();
     string psmem2 = m.get_selected_item_id();
@@ -780,7 +780,7 @@ prices.set("dart", 10.0);
 prices.set("teleporter", 20.0);
     string[] objtypes = {"ammo_pack", "dart", "potion", "teleporter"};
     setupmenu(false);
-    m.add_translated_item("You have " + round(money, 0) + " dollars available to spend", "shopinfo");
+    m.add_item("You have " + round(money, 0) + " dollars available to spend", "shopinfo");
     for (uint i = 0; i < objtypes.length(); i++)
 {
         string itemID = objtypes[i];
@@ -789,15 +789,15 @@ prices.set("teleporter", 20.0);
         double itemPrice = 1.0;
         if (prices.exists(itemID)) prices.get(itemID, itemPrice);
         string label = itemName + ", costs " + round(itemPrice, 0) + " dollar" + (itemPrice != 1 ? "s" : "") + ". You currently have " + ownedCount + " of these in your inventory.";
-        m.add_translated_item(label, itemID);
+        m.add_item(label, itemID);
     }
-    m.add_translated_item("back", "back");
+    m.add_item("back", "back");
     m.intro_text = "Shop menu. What would you like to buy?";
     int mres = m.run();
     string shopem = m.get_selected_item_id();
     if (mres == -1 || shopem == "shopinfo" || shopem == "back")
 {
-        speak_translated("Canceled");
+        speak("Canceled");
         resume_game();
         return;
     }
@@ -809,7 +809,7 @@ shopmenu();
         return;
     }
     vd.set_disallowed_chars("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ !@#$%^&*()[]{};:'\"\\|,.<>?/+=`~", false, "This character is not allowed.");
-    string amount_input = vd.translated_input_box("", "How many " + shopem.replace("_", " ", true) + "s would you like to buy?");
+    string amount_input = vd.input_box("", "How many " + shopem.replace("_", " ", true) + "s would you like to buy?");
     if (amount_input == "")
 {
 p.play_stationary("storefail.ogg", false);
@@ -870,14 +870,14 @@ void weaponsmenu()
         string label = weaponNames[i] + ": Attack " + damages[i] + ". Horizontal range " + horizRanges[i] + ". Vertical range " + vertRanges[i] + ".";
         if (weaponIds[i] == current_weapon)
             label += " (Equipped)";
-        m.add_translated_item(label, weaponIds[i]);
+        m.add_item(label, weaponIds[i]);
     }
     m.intro_text = "Weapons menu.";
     int res = m.run();
     string selected = m.get_selected_item_id();
     if (res == -1)
     {
-        speak_translated("Canceled");
+        speak("Canceled");
     boss_timer.resume();
     gametimer.resume();
         return;
@@ -891,7 +891,7 @@ void weaponsmenu()
     }
 else
 {
-    speak_translated("This weapon is already equipped.");
+    speak("This weapon is already equipped.");
     boss_timer.resume();
     gametimer.resume();
         return;
@@ -900,12 +900,12 @@ else
 void achesmenu()
 {
 setupmenu();
-    m.add_translated_item("Session Achievements", "session");
-    m.add_translated_item("Lifetime Achievements", "lifetime");
-m.add_translated_item("Clear game achievements.", "chm");
-if(statscopy==true) m.add_translated_item("Copy all game Achievements to clipboard.", "cys");
-if(statscopy==true) m.add_translated_item("Export all game achievements to file", "cys2");
-    m.add_translated_item("back", "back");
+    m.add_item("Session Achievements", "session");
+    m.add_item("Lifetime Achievements", "lifetime");
+m.add_item("Clear game achievements.", "chm");
+if(statscopy==true) m.add_item("Copy all game Achievements to clipboard.", "cys");
+if(statscopy==true) m.add_item("Export all game achievements to file", "cys2");
+    m.add_item("back", "back");
 m.intro_text = "Achievements menu. You can view your unlocked session and lifetime achievements, or clear or copy all of your achievements here.";
 int mres=m.run();
 string achm = m.get_selected_item_id();
@@ -915,25 +915,25 @@ gamemenu();
 }
        if (achm == "session")
 {
-if(speak_menu_loading==true) speak_translated("loading");
+if(speak_menu_loading==true) speak("loading");
 m.fade_music();
         show_session_achievements();
     }
 if (achm == "lifetime")
 {
-if(speak_menu_loading==true) speak_translated("loading");
+if(speak_menu_loading==true) speak("loading");
 m.fade_music();
         show_lifetime_achievements();
 }
 if (achm == "chm") 
 {
-if(speak_menu_loading==true) speak_translated("loading");
+if(speak_menu_loading==true) speak("loading");
 m.fade_music();
     setupmenu(false);
-    m.add_translated_item("Session achievements", "session");
-    m.add_translated_item("Lifetime achievements", "lifetime");
-    m.add_translated_item("Session and lifetime achievements", "both");
-    m.add_translated_item("Back", "back");
+    m.add_item("Session achievements", "session");
+    m.add_item("Lifetime achievements", "lifetime");
+    m.add_item("Session and lifetime achievements", "both");
+    m.add_item("Back", "back");
 m.intro_text = "Choose which game achievements to clear. This will clear your game statistics.";
     int mres = m.run();
     string achmode = m.get_selected_item_id();
@@ -942,8 +942,8 @@ m.intro_text = "Choose which game achievements to clear. This will clear your ga
         achesmenu();
     }
     setupmenu(false);
-    m.add_translated_item("Yes", "yes");
-    m.add_translated_item("No", "no");
+    m.add_item("Yes", "yes");
+    m.add_item("No", "no");
     m.intro_text = "Are you sure you want to reset your " + (achmode == "session" ? "session" : achmode == "lifetime" ? "lifetime" : "session and lifetime") + " achievements? This action can't be undone.";
     mres = m.run();
     string confirm = m.get_selected_item_id();
@@ -984,7 +984,7 @@ dlgmessage_return("Your " + modeLabel + " achievements have been cleared.");
 }
 if (achm == "cys")
 {
-if(speak_menu_loading==true) speak_translated("loading");
+if(speak_menu_loading==true) speak("loading");
 m.fade_music();
     string achievementSummary = "Session Achievements:\r\n";
     for (uint i = 0; i < achievements.length(); i++)
@@ -1009,7 +1009,7 @@ if(copexpsounds==true) dlgplay("gamecopy.ogg" ,false);
 }
 if (achm == "cys2")
 {
-if (speak_menu_loading) speak_translated("loading");
+if (speak_menu_loading) speak("loading");
 m.fade_music();
 achfile.open(DIRECTORY_APPDATA+"tsatria03/ToyMania/stats/player_achievements.txt", "w");
 string achievementSummary = "Session Achievements:\r\n";
@@ -1041,9 +1041,9 @@ void show_session_achievements()
     for (uint i = 0; i < achievements.length(); i++)
     {
         if (achievements[i].isSessionBased)
-            m.add_translated_item(achievements[i].get_progress_status(), "");
+            m.add_item(achievements[i].get_progress_status(), "");
     }
-    m.add_translated_item("Back", "back");
+    m.add_item("Back", "back");
 m.intro_text = "Session Achievements menu. These achievements reset every run and track short-term progress.";
     int r = m.run();
     if (r == -1 or m.get_selected_item_id() == "back")
@@ -1057,9 +1057,9 @@ void show_lifetime_achievements()
     for (uint i = 0; i < achievements.length(); i++)
     {
         if (!achievements[i].isSessionBased)
-            m.add_translated_item(achievements[i].get_progress_status(), "");
+            m.add_item(achievements[i].get_progress_status(), "");
     }
-    m.add_translated_item("Back", "back");
+    m.add_item("Back", "back");
 m.intro_text = "Lifetime Achievements menu. These achievements track your long-term overall game progress.";
     int r = m.run();
     if (r == -1 or m.get_selected_item_id() == "back")
@@ -1070,12 +1070,12 @@ m.intro_text = "Lifetime Achievements menu. These achievements track your long-t
 void statsmenu()
 {
 setupmenu();
-    m.add_translated_item("Session Statistics", "session");
-    m.add_translated_item("Lifetime Statistics", "lifetime");
-m.add_translated_item("Clear game statistics.", "gs");
-if(statscopy==true) m.add_translated_item("Copy all game statistics to clipboard.", "cys");
-if(statscopy==true) m.add_translated_item("Export all game statistics to file", "cys2");
-    m.add_translated_item("back", "back");
+    m.add_item("Session Statistics", "session");
+    m.add_item("Lifetime Statistics", "lifetime");
+m.add_item("Clear game statistics.", "gs");
+if(statscopy==true) m.add_item("Copy all game statistics to clipboard.", "cys");
+if(statscopy==true) m.add_item("Export all game statistics to file", "cys2");
+    m.add_item("back", "back");
 m.intro_text = "Statistics menu. You can check your gameplay stats and unlockable player titles, or clear or copy all of your stats here.";
 int mres=m.run();
 string statsm = m.get_selected_item_id();
@@ -1085,25 +1085,25 @@ gamemenu();
 }
        if (statsm == "session")
 {
-if(speak_menu_loading==true) speak_translated("loading");
+if(speak_menu_loading==true) speak("loading");
 m.fade_music();
         view_session_stats();
     }
 if (statsm == "lifetime")
 {
-if(speak_menu_loading==true) speak_translated("loading");
+if(speak_menu_loading==true) speak("loading");
 m.fade_music();
         view_lifetime_stats();
 }
 if (statsm == "gs")
 {
-if(speak_menu_loading==true) speak_translated("loading");
+if(speak_menu_loading==true) speak("loading");
 m.fade_music();
     setupmenu(false);
-    m.add_translated_item("session stats", "session");
-    m.add_translated_item("lifetime stats", "lifetime");
-    m.add_translated_item("session and lifetime stats", "both");
-    m.add_translated_item("Back", "back");
+    m.add_item("session stats", "session");
+    m.add_item("lifetime stats", "lifetime");
+    m.add_item("session and lifetime stats", "both");
+    m.add_item("Back", "back");
 m.intro_text = "Choose which game statistics to clear. This will not clear your game achievements.";
     int mres = m.run();
     string gsm = m.get_selected_item_id();
@@ -1112,8 +1112,8 @@ m.intro_text = "Choose which game statistics to clear. This will not clear your 
         statsmenu();
     }
     setupmenu(false);
-    m.add_translated_item("Yes", "yes");
-    m.add_translated_item("No", "no");
+    m.add_item("Yes", "yes");
+    m.add_item("No", "no");
     m.intro_text = "Are you sure you want to clear " + (gsm == "session" ? "your session stats" : gsm == "lifetime" ? "your lifetime stats" : "your session and lifetime stats") + "? This action can't be undone.";
     mres = m.run();
     string confirm = m.get_selected_item_id();
@@ -1166,7 +1166,7 @@ if(completesound==true) dlgplay("complete.ogg", false);
 }
 if (statsm == "cys")
 {
-if(speak_menu_loading==true) speak_translated("loading");
+if(speak_menu_loading==true) speak("loading");
 m.fade_music();
 int session_minutes = int(session_playtime / 60000);
 int session_seconds = int((session_playtime % 60000) / 1000);
@@ -1196,7 +1196,7 @@ if(copexpsounds==true) dlgplay("gamecopy.ogg" ,false);
 }
 if (statsm == "cys2")
 {
-if (speak_menu_loading) speak_translated("loading");
+if (speak_menu_loading) speak("loading");
 m.fade_music();
 statfile.open(DIRECTORY_APPDATA+"tsatria03/ToyMania/stats/player_statistics.txt", "w");
 int session_minutes = int(session_playtime / 60000);
@@ -1234,15 +1234,15 @@ gamemenu();
 void view_session_stats()
 {
     setupmenu(false);
-    m.add_translated_item("You have collected " + collected_toys + " toys.", "");
-    m.add_translated_item("You have collected " + collected_keys + " keys.", "");
-    m.add_translated_item("You have killed " + killed_gards + " guards.", "");
-    m.add_translated_item("You have destroyed " + destroyed_cars + " cars.", "");
-    m.add_translated_item("You have taken " + moved_steps + " steps.", "");
+    m.add_item("You have collected " + collected_toys + " toys.", "");
+    m.add_item("You have collected " + collected_keys + " keys.", "");
+    m.add_item("You have killed " + killed_gards + " guards.", "");
+    m.add_item("You have destroyed " + destroyed_cars + " cars.", "");
+    m.add_item("You have taken " + moved_steps + " steps.", "");
 int session_minutes = session_playtime / 60000;
 int session_seconds = (session_playtime % 60000) / 1000;
-m.add_translated_item("You've been playing for " + session_minutes + " minutes, " + session_seconds + " seconds.", "");
-    m.add_translated_item("Back", "back");
+m.add_item("You've been playing for " + session_minutes + " minutes, " + session_seconds + " seconds.", "");
+    m.add_item("Back", "back");
 m.intro_text = "Session Statistics menu. You can view your stats for the current game session here.";
     int mres = m.run();
     string statsm = m.get_selected_item_id();
@@ -1258,17 +1258,17 @@ else
 void view_lifetime_stats()
 {
     setupmenu(false);
-    m.add_translated_item("Last Played Date: " + last_played_date, "");
-    m.add_translated_item("Last Played Time: " + last_played_time, "");
-    m.add_translated_item("You have collected a total of " + total_collected_toys + " toys.", "");
-    m.add_translated_item("You have collected a total of " + total_collected_keys + " keys.", "");
-    m.add_translated_item("You have killed a total of " + total_killed_gards + " guards.", "");
-    m.add_translated_item("You have destroyed a total of " + total_destroyed_cars + " cars.", "");
-    m.add_translated_item("You have taken a total of " + total_moved_steps + " steps.", "");
+    m.add_item("Last Played Date: " + last_played_date, "");
+    m.add_item("Last Played Time: " + last_played_time, "");
+    m.add_item("You have collected a total of " + total_collected_toys + " toys.", "");
+    m.add_item("You have collected a total of " + total_collected_keys + " keys.", "");
+    m.add_item("You have killed a total of " + total_killed_gards + " guards.", "");
+    m.add_item("You have destroyed a total of " + total_destroyed_cars + " cars.", "");
+    m.add_item("You have taken a total of " + total_moved_steps + " steps.", "");
     int total_minutes = int(total_playtime / 60000);
     int total_seconds = int((total_playtime % 60000) / 1000);
-    m.add_translated_item("You've been playing for a total of " + total_minutes + " minutes, " + total_seconds + " seconds.", "");
-    m.add_translated_item("Back", "back");
+    m.add_item("You've been playing for a total of " + total_minutes + " minutes, " + total_seconds + " seconds.", "");
+    m.add_item("Back", "back");
 m.intro_text = "Lifetime Statistics menu. You can see your total stats across all of your game sessions here.";
     int mres = m.run();
     string statsm = m.get_selected_item_id();
@@ -1284,16 +1284,16 @@ else
 void preffsmenu()
 {
 form.reset();
-    form.create_translated_window("Preferences", false);
-int audsets = form.create_translated_button("&audio settings");
-int gamsets = form.create_translated_button("&game settings");
-int speechsets = form.create_translated_button("s&peech settings");
+    form.create_window("Preferences", false);
+int audsets = form.create_button("&audio settings");
+int gamsets = form.create_button("&game settings");
+int speechsets = form.create_button("s&peech settings");
     int sdloc = -1;
     if (system_is_windows)
-        sdloc = form.create_translated_button("&open save data location");
-    int rest = form.create_translated_button("&reset settings");
-int savesets = form.create_translated_button("&save settings", true);
-int back = form.create_translated_button("&back");
+        sdloc = form.create_button("&open save data location");
+    int rest = form.create_button("&reset settings");
+int savesets = form.create_button("&save settings", true);
+int back = form.create_button("&back");
 form.focus(audsets);
 spool.play_stationary("menuopen.ogg",false);
     while (true)
@@ -1319,14 +1319,14 @@ speechsetsmenu();
 }
         if (system_is_windows && form.is_pressed(sdloc))
         {
-            speak_translated("loading");
+            speak("loading");
             wait(500);
             string basePath = DIRECTORY_APPDATA + "tsatria03/ToyMania";
             basePath = string_replace(basePath, "/", "\\", true);
             bool result = run("C:\\Windows\\explorer.exe", basePath, false, false);
             if (!result)
             {
-                alert_translated("Error", "Could not open " + basePath + ". Please re-create this folder and try again.");
+                alert("Error", "Could not open " + basePath + ". Please re-create this folder and try again.");
             }
             else
             {
@@ -1338,8 +1338,8 @@ preffsmenu();
         if (form.is_pressed(rest))
         {
 setupmenu(false);
-    m.add_translated_item("Yes", "yes");
-    m.add_translated_item("No", "no");
+    m.add_item("Yes", "yes");
+    m.add_item("No", "no");
 m.intro_text="Are you sure you want to reset all of your settings?";
 int mres=m.run();
 string confirm = m.get_selected_item_id();
@@ -1369,61 +1369,61 @@ mainmenu();
 void gamsetsmenu()
 {
     form.reset();
-    form.create_translated_window("Game settings", false);
-int autoUpdateToggle = form.create_translated_checkbox("Enable checking for game updates at startup.", auto_check_updates);
-int menuWrap = form.create_translated_checkbox("Enable menu wrapping in all menus.", menuwrap);
-int showdesc = form.create_translated_checkbox("Enable showing toggleable item descriptions.", showset_desc);
-int runmode = form.create_translated_checkbox("Enable automatic running when moving.", autorun);
-int glb = form.create_translated_checkbox("Enable behind pitch decrease.", behind_pitch);
+    form.create_window("Game settings", false);
+int autoUpdateToggle = form.create_checkbox("Enable checking for game updates at startup.", auto_check_updates);
+int menuWrap = form.create_checkbox("Enable menu wrapping in all menus.", menuwrap);
+int showdesc = form.create_checkbox("Enable showing toggleable item descriptions.", showset_desc);
+int runmode = form.create_checkbox("Enable automatic running when moving.", autorun);
+int glb = form.create_checkbox("Enable behind pitch decrease.", behind_pitch);
 int glb2 = -1;
-if (showset_desc) glb2 = form.create_translated_input_box("Behind pitch decrease: description", "This setting controls whether the pitch of sounds decrease when you are behind something.", "", 0, true, true);
-int glh = form.create_translated_checkbox("Enable HRTF support.", hrtf);
+if (showset_desc) glb2 = form.create_input_box("Behind pitch decrease: description", "This setting controls whether the pitch of sounds decrease when you are behind something.", "", 0, true, true);
+int glh = form.create_checkbox("Enable HRTF support.", hrtf);
 int glh2 = -1;
-if (showset_desc) glh2 = form.create_translated_input_box("HRTF: description", "This setting enhances the 3D sound positioning effect for headphone users.", "", 0, true, true);
-int achsound = form.create_translated_checkbox("Enable achievement sound effects.", play_ach_scores);
+if (showset_desc) glh2 = form.create_input_box("HRTF: description", "This setting enhances the 3D sound positioning effect for headphone users.", "", 0, true, true);
+int achsound = form.create_checkbox("Enable achievement sound effects.", play_ach_scores);
 int achsound2 = -1;
-if (showset_desc) achsound2 = form.create_translated_input_box("Achievement SFX: description", "This setting controls the sounds played when unlocking achievements.", "", 0, true, true);
-int achvoice = form.create_translated_checkbox("Enable achievement speech feedback.", speak_ach_scores);
+if (showset_desc) achsound2 = form.create_input_box("Achievement SFX: description", "This setting controls the sounds played when unlocking achievements.", "", 0, true, true);
+int achvoice = form.create_checkbox("Enable achievement speech feedback.", speak_ach_scores);
 int achvoice2 = -1;
-if (showset_desc) achvoice2 = form.create_translated_input_box("Achievement speech: description", "This setting controls the spoken announcements of achievement progresses.", "", 0, true, true);
-int dlgspeech = form.create_translated_checkbox("Enable dialog end speech feedback.", speak_dlg_enter);
+if (showset_desc) achvoice2 = form.create_input_box("Achievement speech: description", "This setting controls the spoken announcements of achievement progresses.", "", 0, true, true);
+int dlgspeech = form.create_checkbox("Enable dialog end speech feedback.", speak_dlg_enter);
 int dlgspeech2 = -1;
-if (showset_desc) dlgspeech2 = form.create_translated_input_box("Dialog speech: description", "This setting controls whether the phrase 'Press enter to continue' is spoken after dialog messages.", "", 0, true, true);
-int loadspeech = form.create_translated_checkbox("Enable menu loading speech feedback.", speak_menu_loading);
+if (showset_desc) dlgspeech2 = form.create_input_box("Dialog speech: description", "This setting controls whether the phrase 'Press enter to continue' is spoken after dialog messages.", "", 0, true, true);
+int loadspeech = form.create_checkbox("Enable menu loading speech feedback.", speak_menu_loading);
 int loadspeech2 = -1;
-if (showset_desc) loadspeech2 = form.create_translated_input_box("Menu loading speech: description", "This setting controls whether the 'Loading' phrase is spoken when opening various menus.", "", 0, true, true);
-int gcp = form.create_translated_checkbox("Enable post-game copy and export prompts.", gamcopy);
+if (showset_desc) loadspeech2 = form.create_input_box("Menu loading speech: description", "This setting controls whether the 'Loading' phrase is spoken when opening various menus.", "", 0, true, true);
+int gcp = form.create_checkbox("Enable post-game copy and export prompts.", gamcopy);
 int gcp2 = -1;
-if (showset_desc) gcp2 = form.create_translated_input_box("Post-game copy/export: description", "This setting controls whether the game asks if you'd like to copy your session stats after pause, death or victory.", "", 0, true, true);
-int scp = form.create_translated_checkbox("Enable stat copy and export options.", statscopy);
+if (showset_desc) gcp2 = form.create_input_box("Post-game copy/export: description", "This setting controls whether the game asks if you'd like to copy your session stats after pause, death or victory.", "", 0, true, true);
+int scp = form.create_checkbox("Enable stat copy and export options.", statscopy);
 int scp2 = -1;
-if (showset_desc) scp2 = form.create_translated_input_box("Stat copy/export: description", "This setting controls the showing of all copy and export entries from various stat based menus.", "", 0, true, true);
-int lps = form.create_translated_checkbox("Enable looping of previewed sounds.", loop_previews);
+if (showset_desc) scp2 = form.create_input_box("Stat copy/export: description", "This setting controls the showing of all copy and export entries from various stat based menus.", "", 0, true, true);
+int lps = form.create_checkbox("Enable looping of previewed sounds.", loop_previews);
 int lps2 = -1;
-if (showset_desc) lps2 = form.create_translated_input_box("Loop previews: description", "This setting controls whether the sounds found in the Learn Sounds menu loop until another sound is selected or the Escape key is pressed.", "", 0, true, true);
-int vsc = form.create_translated_checkbox("Enable variant-based sound descriptions.", variant_descriptions);
+if (showset_desc) lps2 = form.create_input_box("Loop previews: description", "This setting controls whether the sounds found in the Learn Sounds menu loop until another sound is selected or the Escape key is pressed.", "", 0, true, true);
+int vsc = form.create_checkbox("Enable variant-based sound descriptions.", variant_descriptions);
 int vsc2 = -1;
-if (showset_desc) vsc2 = form.create_translated_input_box("Variant sound: description", "This setting controls whether sounds that have multiple variants will include a description along side them.", "", 0, true, true);
-int cfs = form.create_translated_checkbox("Enable copy and export confirmation sounds.", copexpsounds);
+if (showset_desc) vsc2 = form.create_input_box("Variant sound: description", "This setting controls whether sounds that have multiple variants will include a description along side them.", "", 0, true, true);
+int cfs = form.create_checkbox("Enable copy and export confirmation sounds.", copexpsounds);
 int cfs2 = -1;
-if (showset_desc) cfs2 = form.create_translated_input_box("Copy/export sound: description", "This setting controls the playing of short chimes after copying or exporting files to and from the clipboard.", "", 0, true, true);
-int qcm = form.create_translated_checkbox("Enable quit confirmation prompts.", quit_menu);
+if (showset_desc) cfs2 = form.create_input_box("Copy/export sound: description", "This setting controls the playing of short chimes after copying or exporting files to and from the clipboard.", "", 0, true, true);
+int qcm = form.create_checkbox("Enable quit confirmation prompts.", quit_menu);
 int qcm2 = -1;
-if (showset_desc) qcm2 = form.create_translated_input_box("Quit prompt: description", "This setting controls whether the game will show a prompt to quit the current game session before quitting from the Escape or pause menu.", "", 0, true, true);
-int countsound = form.create_translated_checkbox("Enable countdown sound effects.", playcounts);
+if (showset_desc) qcm2 = form.create_input_box("Quit prompt: description", "This setting controls whether the game will show a prompt to quit the current game session before quitting from the Escape or pause menu.", "", 0, true, true);
+int countsound = form.create_checkbox("Enable countdown sound effects.", playcounts);
 int countsound2 = -1;
-if (showset_desc) countsound2 = form.create_translated_input_box("Countdown SFX: description", "This setting controls the sounds played when you only have 10 seconds left in the sixth level of the normal game mode.", "", 0, true, true);
-int levsound = form.create_translated_checkbox("Enable levelup sound effects.", playlevels);
+if (showset_desc) countsound2 = form.create_input_box("Countdown SFX: description", "This setting controls the sounds played when you only have 10 seconds left in the sixth level of the normal game mode.", "", 0, true, true);
+int levsound = form.create_checkbox("Enable levelup sound effects.", playlevels);
 int levsound2 = -1;
-if (showset_desc) levsound2 = form.create_translated_input_box("Level-up SFX: description", "This setting controls the sounds played when you reach the next level in a game.", "", 0, true, true);
-int compsound = form.create_translated_checkbox("Enable action complete sounds.", completesound);
+if (showset_desc) levsound2 = form.create_input_box("Level-up SFX: description", "This setting controls the sounds played when you reach the next level in a game.", "", 0, true, true);
+int compsound = form.create_checkbox("Enable action complete sounds.", completesound);
 int compsound2 = -1;
-if (showset_desc) compsound2 = form.create_translated_input_box("Complete SFX: description", "This setting controls the sounds played when you complete sertain actions throughout various menus.", "", 0, true, true);
-int togsound = form.create_translated_checkbox("Enable toggle switch sounds.", togglesound);
+if (showset_desc) compsound2 = form.create_input_box("Complete SFX: description", "This setting controls the sounds played when you complete sertain actions throughout various menus.", "", 0, true, true);
+int togsound = form.create_checkbox("Enable toggle switch sounds.", togglesound);
 int togsound2 = -1;
-if (showset_desc) togsound2 = form.create_translated_input_box("Toggle switch SFX: description", "This setting controls the sounds played when you enable or disable sertain settings found in the prefferences menu.", "", 0, true, true);
-    int cancel = form.create_translated_button("&cancel");
-int ok = form.create_translated_button("&okay");
+if (showset_desc) togsound2 = form.create_input_box("Toggle switch SFX: description", "This setting controls the sounds played when you enable or disable sertain settings found in the prefferences menu.", "", 0, true, true);
+    int cancel = form.create_button("&cancel");
+int ok = form.create_button("&okay");
 form.focus(autoUpdateToggle);
 spool.play_stationary("menuopen.ogg",false);
     while (true)
@@ -1465,18 +1465,18 @@ spool.play_stationary("menuclose.ogg",false);
 void gamsetsmenu2()
 {
     form.reset();
-    form.create_translated_window("Game settings", false);
-int runmode = form.create_translated_checkbox("Enable automatic running when moving.", autorun);
-int glb = form.create_translated_checkbox("Enable behind pitch decrease.", behind_pitch);
-int glh = form.create_translated_checkbox("Enable HRTF support.", hrtf);
-int achsound = form.create_translated_checkbox("Enable achievement sound effects.", play_ach_scores);
-int achvoice = form.create_translated_checkbox("Enable achievement speech feedback.", speak_ach_scores);
-int gcp = form.create_translated_checkbox("Enable post-game copy and export prompts.", gamcopy);
-int qcm = form.create_translated_checkbox("Enable quit confirmation prompts.", quit_menu);
-int countsound = form.create_translated_checkbox("Enable countdown sound effects.", playcounts);
-int levsound = form.create_translated_checkbox("Enable levelup sound effects.", playlevels);
-    int cancel = form.create_translated_button("&cancel");
-int ok = form.create_translated_button("&okay");
+    form.create_window("Game settings", false);
+int runmode = form.create_checkbox("Enable automatic running when moving.", autorun);
+int glb = form.create_checkbox("Enable behind pitch decrease.", behind_pitch);
+int glh = form.create_checkbox("Enable HRTF support.", hrtf);
+int achsound = form.create_checkbox("Enable achievement sound effects.", play_ach_scores);
+int achvoice = form.create_checkbox("Enable achievement speech feedback.", speak_ach_scores);
+int gcp = form.create_checkbox("Enable post-game copy and export prompts.", gamcopy);
+int qcm = form.create_checkbox("Enable quit confirmation prompts.", quit_menu);
+int countsound = form.create_checkbox("Enable countdown sound effects.", playcounts);
+int levsound = form.create_checkbox("Enable levelup sound effects.", playlevels);
+    int cancel = form.create_button("&cancel");
+int ok = form.create_button("&okay");
 form.focus(runmode);
 spool.play_stationary("menuopen.ogg",false);
     while (true)
@@ -1496,14 +1496,14 @@ autorun = form.is_checked(runmode);
         if (form.is_pressed(cancel) || key_repeating(KEY_ESCAPE))
         {
 spool.play_stationary("menuclose.ogg",false);
-speak_translated("canceled");
+speak("canceled");
 resume_game();
 return;
         }
         if (form.is_pressed(ok))
         {
 writepreffs();
-speak_translated("Settings saved.");
+speak("Settings saved.");
 resume_game();
 return;
         }
@@ -1512,23 +1512,23 @@ return;
 void soundsetsmenu()
 {
 form.reset();
-    form.create_translated_window("audio settings", false);
-int gameAlarmVolumeSlider = form.create_translated_slider("game alarm volume: adjustable", (alarmvolume + 50) * 2, 0, 100, "percent", 1);
-int gameAmbienceVolumeSlider = form.create_translated_slider("game ambience volume: adjustable", (toyambvolume + 50) * 2, 0, 100, "percent", 1);
-int gameHeartbeatVolumeSlider = form.create_translated_slider("game heartbeat volume: adjustable", (heartvolume + 50) * 2, 0, 100, "percent", 1);
-int gameMusicVolumeSlider = form.create_translated_slider("game music volume: adjustable", (toymusvolume + 50) * 2, 0, 100, "percent", 1);
-int menuMusicVolumeSlider = form.create_translated_slider("menu music volume: adjustable", (menumusvolume + 50) * 2, 0, 100, "percent", 1);
-int masterGameVolumeSlider = form.create_translated_slider("master game volume: adjustable", (int(master_volume) + 50) * 2, 0, 100, "percent", 1);
-    int alarmTest = form.create_translated_button("alarm sound test: switch");
-    int ambTest = form.create_translated_button("ambience sound test: switch");
-    int heartbeatTest = form.create_translated_button("heartbeat sound test: switch");
-    int musTest = form.create_translated_button("music sound test: switch");
+    form.create_window("audio settings", false);
+int gameAlarmVolumeSlider = form.create_slider("game alarm volume: adjustable", (alarmvolume + 50) * 2, 0, 100, "percent", 1);
+int gameAmbienceVolumeSlider = form.create_slider("game ambience volume: adjustable", (toyambvolume + 50) * 2, 0, 100, "percent", 1);
+int gameHeartbeatVolumeSlider = form.create_slider("game heartbeat volume: adjustable", (heartvolume + 50) * 2, 0, 100, "percent", 1);
+int gameMusicVolumeSlider = form.create_slider("game music volume: adjustable", (toymusvolume + 50) * 2, 0, 100, "percent", 1);
+int menuMusicVolumeSlider = form.create_slider("menu music volume: adjustable", (menumusvolume + 50) * 2, 0, 100, "percent", 1);
+int masterGameVolumeSlider = form.create_slider("master game volume: adjustable", (int(master_volume) + 50) * 2, 0, 100, "percent", 1);
+    int alarmTest = form.create_button("alarm sound test: switch");
+    int ambTest = form.create_button("ambience sound test: switch");
+    int heartbeatTest = form.create_button("heartbeat sound test: switch");
+    int musTest = form.create_button("music sound test: switch");
     int musList = form.create_list("Test Tracks: menu", 2);
 form.add_list_item(musList, "BossMusic: normal mode", "bossmus");
 form.add_list_item(musList, "Game Music: normal and endless mode", "gamemus");
-int sdm = form.create_translated_button("Select sound &device. Currently set to " + soundcard);
-int cancel = form.create_translated_button("&cancel");
-int ok = form.create_translated_button("&okay");
+int sdm = form.create_button("Select sound &device. Currently set to " + soundcard);
+int cancel = form.create_button("&cancel");
+int ok = form.create_button("&okay");
 form.focus(gameAlarmVolumeSlider);
 spool.play_stationary("menuopen.ogg",false);
     while (true)
@@ -1585,13 +1585,13 @@ if (form.is_pressed(ambTest))
     if (ambpool.sound_is_playing(toyambslot))
 {
 if(togglesound==true) spool.play_stationary("setdisabled.ogg",false);
-speak_translated("ambience off");
+speak("ambience off");
         ambpool.destroy_sound(toyambslot);
     }
 else
 {
 if(togglesound==true) spool.play_stationary("setenabled.ogg",false);
-speak_translated("ambience on");
+speak("ambience on");
         toyambslot = ambpool.play_stationary("gameamb.ogg", true);
     }
 }
@@ -1600,7 +1600,7 @@ if (form.is_pressed(musTest))
     if (muspool.sound_is_playing(toytrackslot))
     {
 if(togglesound==true) spool.play_stationary("setdisabled.ogg", false);
-speak_translated("music off");
+speak("music off");
         muspool.destroy_sound(toytrackslot);
         lastMusicIndex = -1;
     }
@@ -1611,7 +1611,7 @@ speak_translated("music off");
         {
 mustype = form.get_list_item_id(musList, musIndex);
 if(togglesound==true) spool.play_stationary("setenabled.ogg", false);
-speak_translated("music on");
+speak("music on");
             muspool.destroy_sound(toytrackslot);
             toytrackslot = muspool.play_stationary(mustype + ".ogg", true);
             lastMusicIndex = musIndex;
@@ -1623,13 +1623,13 @@ if (form.is_pressed(alarmTest))
     if (alarmpool.sound_is_playing(alarmslot))
 {
 if(togglesound==true) spool.play_stationary("setdisabled.ogg",false);
-speak_translated("alarm off");
+speak("alarm off");
         alarmpool.destroy_sound(alarmslot);
     }
 else
 {
 if(togglesound==true) spool.play_stationary("setenabled.ogg",false);
-speak_translated("alarm on");
+speak("alarm on");
         alarmslot = alarmpool.play_stationary("gamealarm.ogg", true);
     }
 }
@@ -1638,13 +1638,13 @@ if (form.is_pressed(heartbeatTest))
     if (heartpool.sound_is_playing(heartslot))
 {
 if(togglesound==true) spool.play_stationary("setdisabled.ogg",false);
-speak_translated("heartbeat off");
+speak("heartbeat off");
         heartpool.destroy_sound(heartslot);
     }
 else
 {
 if(togglesound==true) spool.play_stationary("setenabled.ogg",false);
-speak_translated("heartbeat on");
+speak("heartbeat on");
         heartslot = heartpool.play_stationary("heartstart.ogg", true);
     }
 }
@@ -1661,7 +1661,7 @@ setupmenu(false);
 for(uint i=0; i<devices.length(); i++)
 {
     string soundstate = (i + 1 == sound_output_device) ? ": active" : ": inactive";
-m.add_translated_item(devices[i] + soundstate, devices[i]);
+m.add_item(devices[i] + soundstate, devices[i]);
 }
 m.intro_text="Choose a sound device you would like to use in the game.";
 int mres=m.run();
@@ -1683,13 +1683,13 @@ soundsetsmenu();
 void soundsetsmenu2()
 {
 form.reset();
-    form.create_translated_window("audio settings", false);
-int gameAmbienceVolumeSlider = form.create_translated_slider("game ambience volume: adjustable", (toyambvolume + 50) * 2, 0, 100, "percent", 1);
-int gameMusicVolumeSlider = form.create_translated_slider("game music volume: adjustable", (toymusvolume + 50) * 2, 0, 100, "percent", 1);
-int gameAlarmVolumeSlider = form.create_translated_slider("game alarm volume: adjustable", (alarmvolume + 50) * 2, 0, 100, "percent", 1);
-int gameHeartbeatVolumeSlider = form.create_translated_slider("game heartbeat volume: adjustable", (heartvolume + 50) * 2, 0, 100, "percent", 1);
-int cancel = form.create_translated_button("&cancel");
-int ok = form.create_translated_button("&okay");
+    form.create_window("audio settings", false);
+int gameAmbienceVolumeSlider = form.create_slider("game ambience volume: adjustable", (toyambvolume + 50) * 2, 0, 100, "percent", 1);
+int gameMusicVolumeSlider = form.create_slider("game music volume: adjustable", (toymusvolume + 50) * 2, 0, 100, "percent", 1);
+int gameAlarmVolumeSlider = form.create_slider("game alarm volume: adjustable", (alarmvolume + 50) * 2, 0, 100, "percent", 1);
+int gameHeartbeatVolumeSlider = form.create_slider("game heartbeat volume: adjustable", (heartvolume + 50) * 2, 0, 100, "percent", 1);
+int cancel = form.create_button("&cancel");
+int ok = form.create_button("&okay");
 form.focus(gameAmbienceVolumeSlider);
 spool.play_stationary("menuopen.ogg",false);
     while (true)
@@ -1707,14 +1707,14 @@ heartvolume = (form.get_slider(gameHeartbeatVolumeSlider) / 2) - 50;
         if (form.is_pressed(cancel) || key_repeating(KEY_ESCAPE))
         {
 spool.play_stationary("menuclose.ogg",false);
-speak_translated("canceled");
+speak("canceled");
 resume_game();
 return;
         }
         if (form.is_pressed(ok))
         {
 writepreffs();
-speak_translated("Settings saved.");
+speak("Settings saved.");
 resume_game();
 return;
         }
@@ -1723,28 +1723,11 @@ return;
 void speechsetsmenu()
 {
 form.reset();
-    form.create_translated_window("speech settings", false);
-int ttscfg = form.create_translated_button("&Configure voice");
-int speechtest = form.create_translated_button("&preview voice");
-    array<string> languageFiles = list_languages();    
-languageFiles.insert_at(0, "none");
-    int langList = form.create_list("Translation Language: ", languageFiles.length());
-    for (uint i = 0; i < languageFiles.length(); i++)
-    {
-        form.add_list_item(langList, languageFiles[i], languageFiles[i]);
-    }
-int currentLangIndex = 0;
-for (uint i = 0; i < languageFiles.length(); i++)
-{
-    if (languageFiles[i].lower() == currentlangfile.lower())
-    {
-        currentLangIndex = i;
-        break;
-    }
-}
-    form.set_list_position(langList, currentLangIndex);
-int cancel = form.create_translated_button("&cancel");
-int ok = form.create_translated_button("&okay");
+    form.create_window("speech settings", false);
+int ttscfg = form.create_button("&Configure voice");
+int speechtest = form.create_button("&preview voice");
+int cancel = form.create_button("&cancel");
+int ok = form.create_button("&okay");
 form.focus(ttscfg);
 spool.play_stationary("menuopen.ogg",false);
     while (true)
@@ -1770,13 +1753,6 @@ dlgmessage_return("This is your current voice configuration.");
 }
         if (form.is_pressed(ok))
         {
-            int selectedLangIndex = form.get_list_position(langList);
-            if (selectedLangIndex >= 0 && selectedLangIndex < languageFiles.length())
-            {
-                currentlangfile = languageFiles[selectedLangIndex];
-                load_language(currentlangfile);
-show_translated_window("ToyMania, version "+version);
-            }
 preffsmenu();
         }
     }

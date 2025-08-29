@@ -108,14 +108,6 @@ music_added = true;
 }
 
 // Item IDs are entirely optional.
-int add_translated_item(const string&in text, const string&in id = "", int position = -1) {
-return add_item(process_digits(text), id, position);
-}
-void add_translated_items(string[]@ item_list) {
-for (uint i = 0; i < item_list.length(); i++) {
-add_translated_item(item_list[i]);
-}
-}
 int add_item(const string&in text, const string&in id = "", int position = -1) {
 if (!form.add_list_item(f_list, text, id, position, false, focus_first_item)) return -1;
 if (position == -1) position = form.get_list_count(f_list) -1;
@@ -131,11 +123,11 @@ form.focus(f_list);
 return;
 }
 play(open_sound);
-speak_translated(intro_text.format(form.get_list_count(0)));
+speak(intro_text.format(form.get_list_count(0)));
 if (focus_first_item) form.set_list_position(0, 0, true);
 else {
 string text = form.get_list_item(0, form.get_list_position(0));
-if (!text.empty()) speak_translated(text, false);
+if (!text.empty()) speak(text, false);
 }
 }
 // The following function returns true if the menu should keep running or false if it has been exited or if an option has been selected.
@@ -163,11 +155,11 @@ voltimer.restart();
 }
 if(alt_is_down() and key_down(KEY_LEFT) and key_repeating(KEY_RIGHT) or alt_is_down() and key_down(KEY_RIGHT) and key_repeating(KEY_LEFT))
 {
-speak_translated("music volume, "+menumusvolume);
+speak("music volume, "+menumusvolume);
 }
 if(key_repeating(KEY_TAB) and intro_text.length()>0)
 {
-speak_translated(intro_text);
+speak(intro_text);
 }
 form.monitor();
 if (form.is_pressed(f_cancel)) {
@@ -258,15 +250,15 @@ if (@m == null) @m = menu();
 m.reset();
 m.focus_first_item = true;
 m.wrap = true;
-m.add_translated_item(prompt);
-m.add_translated_item("yes");
-m.add_translated_item("no");
-speak_translated(prompt);
+m.add_item(prompt);
+m.add_item("yes");
+m.add_item("no");
+speak(prompt);
 m.automatic_intro = false;
 while (m.selected_item < 1) {
 wait(5);
 if (m.monitor()) continue;
-if (m.selected_item == 0) speak_translated(prompt);
+if (m.selected_item == 0) speak(prompt);
 else break;
 }
 return m.selected_item == 1;
@@ -289,7 +281,7 @@ void learn_game_sounds_menu(dictionary@ sfx, const string&in audio_prefix = "", 
     m.edge_sound = "";
     m.wrap_sound = "";
     m.add_items(sfx_names);
-    m.add_translated_item("back", "back");
+    m.add_item("back", "back");
     for (uint i = 0; i < sfx_names.length(); i++)
 {
         if (sfx_names[i] == last_learn_sound)
@@ -305,13 +297,13 @@ void learn_game_sounds_menu(dictionary@ sfx, const string&in audio_prefix = "", 
 {
             preview_volume += 1;
             audio.set_volume(preview_volume);
-            speak_translated("preview " + preview_volume);
+            speak("preview " + preview_volume);
         }
         if (shift_is_down() and key_repeating(KEY_NEXT) and preview_volume != -50)
 {
             preview_volume -= 1;
             audio.set_volume(preview_volume);
-speak_translated("preview " + preview_volume);
+speak("preview " + preview_volume);
         }
 if(key_repeating(KEY_SPACE))
 {
@@ -361,7 +353,7 @@ loop_previews ? audio.play_looped() : audio.play();
             loop_previews ? audio.play_looped() : audio.play();
         } else
 {
-            speak_translated("Unable to play " + selected_label);
+            speak("Unable to play " + selected_label);
         }
     }
 }

@@ -38,23 +38,23 @@ invpos=inv.get_size()-1;
 if (inv.get_size()==0)
 {
 p.destroy_sound(invslot);
-speak_translated("empty");
+speak("empty");
 }
 else
 {
 int a;
 inv.get(inv.get_keys()[invpos],a);
 if(a==1)
-speak_translated(string_replace(inv.get_keys()[invpos],"_"," ",true)+". Item "+(invpos+1)+" of "+inv.get_keys().length());
+speak(string_replace(inv.get_keys()[invpos],"_"," ",true)+". Item "+(invpos+1)+" of "+inv.get_keys().length());
 else
-speak_translated(string_replace(inv.get_keys()[invpos], "_", " ", true)+"s, "+a+". Item "+(invpos+1)+" of "+inv.get_keys().length());
+speak(string_replace(inv.get_keys()[invpos], "_", " ", true)+"s, "+a+". Item "+(invpos+1)+" of "+inv.get_keys().length());
 }
 }
 void useitem(string current)
 {
 if (inv.get_size()<=0)
 {
-speak_translated("No items");
+speak("No items");
 }
 else
 {
@@ -64,14 +64,14 @@ if (current == "ammo_pack")
     double missing_ammo = max(0, max_reserved_ammo - reserved_ammo);
     if (missing_ammo == 0)
     {
-        speak_translated("You already have enough reserved ammo for this weapon.");
+        speak("You already have enough reserved ammo for this weapon.");
         return;
     }
     itemslot = p.play_stationary("ammopack.ogg", false);
     give("ammo_pack", -1);
     double ammo_gained = min(random(5, 10), missing_ammo);
     reserved_ammo += ammo_gained;
-    speak_translated("You received " + round(ammo_gained, 0) + " rounds of ammo from the pack for this weapon.");
+    speak("You received " + round(ammo_gained, 0) + " rounds of ammo from the pack for this weapon.");
     return;
 }
 if (current == "dart")
@@ -85,7 +85,7 @@ if (current == "potion")
 {
     if (health >= maxhealth)
     {
-        speak_translated("You don't need to use this!");
+        speak("You don't need to use this!");
         return;
     }
     itemslot = p.play_stationary("healthdrink.ogg", false);
@@ -94,7 +94,7 @@ if (current == "potion")
 double heal_percent = random(5, 10);
 double heal_amount = maxhealth * (heal_percent / 100.0);
 health = min(health + heal_amount, maxhealth);
-    speak_translated("Healed to " + round(health / maxhealth * 100, 0) + " percent HP.");
+    speak("Healed to " + round(health / maxhealth * 100, 0) + " percent HP.");
     return;
 }
 if (current == "teleporter")
@@ -103,7 +103,7 @@ if (current == "teleporter")
     give("teleporter", -1);
 me.x=random(0,maxx);
 me.y=random(0,maxy);
-    speak_translated("Moved to "+me.x+", "+me.y+".");
+    speak("Moved to "+me.x+", "+me.y+".");
     return;
 }
 }

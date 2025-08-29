@@ -154,32 +154,6 @@ string string_join(string[]@ arr, string delimiter=" ", int start_index = 0)
 	val += arr[arr.length()-1];
 	return val;
 }
-string process_digits(const string& in msg) {
-string result = "";
-string buffer = "";
-bool inDigits = msg.length() > 0 && msg[0].is_digits();
-for (uint i = 0; i < msg.length(); i++) {
-string c = msg.substr(i, 1);
-bool isDigit = (c.is_digits() || c == "." || c == "-" || c == "+");
-if (isDigit == inDigits) {
-buffer += c;
-} else {
-if (inDigits) {
-result += buffer;
-} else {
-result += trl_check(buffer);
-}
-buffer = c;
-inDigits = isDigit;
-}
-}
-if (inDigits) {
-result += buffer;
-} else {
-result += trl_check(buffer);
-}
-return result;
-}
 string trim(const string&in str)
 {
 string result = str;
@@ -246,16 +220,16 @@ void dockread(const string&in filename)
 {
 if(!file_exists(filename))
 {
-alert_translated("Error", "Could not fined "+string_replace(filename, "docks/", "", true));
+alert("Error", "Could not fined "+string_replace(filename, "docks/", "", true));
 docksmenu();
 }
 dockfile.open(filename,"rb");
 string docktext=dockfile.read();
 dockfile.close();
 form.reset();
-form.create_translated_window("Viewing "+string_replace(filename, "docks/", "", true),false,false,false);
+form.create_window("Viewing "+string_replace(filename, "docks/", "", true),false,false,false);
 int dockbox=form.create_input_box(string_replace(filename, "docks/", "", true), docktext, read_only:true, multiline:true);
-int dockclose=form.create_translated_button("&close",false,true);
+int dockclose=form.create_button("&close",false,true);
 form.focus(dockbox);
 while(true)
 {
@@ -365,7 +339,7 @@ if(SCRIPT_COMPILED)
 bool success=run(appid,"",false,false);
 if(!success)
 {
-alert_translated("errorr", "Unable to restart "+appid+"!");
+alert("errorr", "Unable to restart "+appid+"!");
 }
 }
 else
@@ -373,7 +347,7 @@ else
 bool success=run("c:\\nvgt\\nvgtw.exe", scriptid,false,false);
 if(!success)
 {
-alert_translated("errorr", "Unable to restart "+scriptid+"!");
+alert("errorr", "Unable to restart "+scriptid+"!");
 }
 }
 exit();

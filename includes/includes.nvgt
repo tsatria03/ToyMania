@@ -29,7 +29,6 @@
 #include"savefuncks.nvgt"
 #include"savedata.nvgt"
 #include"toy.nvgt"
-#include"translator.nvgt"
 #include"updater.nvgt"
 #include"virtual_dialogs.nvgt"
 #include"weapons.nvgt"

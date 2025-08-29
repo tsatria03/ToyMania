@@ -1,4 +1,6 @@
 New in 4.1.
+Removed the translation system entirely do to high impact of the game's overall performance.
+Added the ability to abort entire dialogs by pressing the escape key. This is especially useful when browsing through multiline dialogs.
 Fixed various bugs found in sertain preffrance-based menus.
 New in 4.0.
 Made it so guards don't play step sounds while they are stunned in the game. They'll only play them after they've fully recovered.

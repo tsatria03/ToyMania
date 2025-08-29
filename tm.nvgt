@@ -95,7 +95,6 @@ if (!directory_exists(savePath)) directory_create(savePath);
 if (!directory_exists(statsPath)) directory_create(statsPath);
 readdata();
 readpreffs();
-load_language(currentlangfile);
 sound_global_hrtf=hrtf;
 apply_pitch_pool_settings();
 p.max_distance = 0;
@@ -133,10 +132,10 @@ if (@timeelapsed.handle == null)
     timeelapsed.set_timer(gametimer);
 }
 getver();
-show_translated_window("ToyMania, version "+version);
+show_window("ToyMania, version "+version);
 if(gamstence.is_already_running)
 {
-alert_translated("error", "You can only have one instence of this game running!");
+alert("error", "You can only have one instence of this game running!");
 exit();
 }
 else
@@ -229,7 +228,6 @@ playcounts=true;
 playlevels=true;
 completesound=true;
 togglesound=true;
-currentlangfile="none";
 use_sr = true;
 tts.set_voice(0);
 tts.set_rate(0);
