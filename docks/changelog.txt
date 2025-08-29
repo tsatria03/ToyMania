@@ -1,5 +1,6 @@
 New in 4.1.
-Removed the translation system entirely do to high impact of the game's overall performance.
+Updated the readme file with removed sections of the document that were no longer being discussed.
+Removed the translation system entirely do to it effecting the game's overall performance.
 Added the ability to abort entire dialogs by pressing the escape key. This is especially useful when browsing through multiline dialogs.
 Fixed various bugs found in sertain preffrance-based menus.
 New in 4.0.

@@ -1,65 +1,65 @@
-##These are the things that need to be finished for future versions of the game.
+####These are the things that need to be finished for future versions of the game.
 
-*Unfinished. Add car and guard related items for the endless mode, such as car and guard callers.
-*Unfinished. Fix the open save folder option on mac.
-*Unfinished. Fix weapon ranges.
-*Unfinished. Add more weapons to fight with.
-*Unfinished. Make it so both pistol and machine gun weapons can be used in endless mode.
-*Unfinished. Make lasers use batteries.
-*Unfinished. Add difficulty menu items to the normal game mode.
-*Unfinished. Add an online scoreboard system.
-*Unfinished. Add minimal soundpack support.
+****Unfinished. Add car and guard related items for the endless mode, such as car and guard callers.
+****Unfinished. Fix the open save folder option on mac.
+****Unfinished. Fix weapon ranges.
+****Unfinished. Add more weapons to fight with.
+****Unfinished. Make it so both pistol and machine gun weapons can be used in endless mode.
+****Unfinished. Make lasers use batteries.
+****Unfinished. Add difficulty menu items to the normal game mode.
+****Unfinished. Add an online scoreboard system.
+****Unfinished. Add minimal soundpack support.
 
 ##These are the things that are already finished from earlier versions of the game.
 
-*Finished. Fix the shop menu to return the user back to the menu after purchasing something.
-*Finished. Add darts as items for stunning enemies.
-*Finished. Expand the endless grid map from 50 to 100 squares for both x and y.
-*Finished. Convert all health values to use percentages.
-*Finished. Make it easier to access common audio/game settings within the current game session the user is playing.
-*Finished. Make it so store explosions don't always spawn glass in the same two sides of the map, far left/right.
-*Finished. remove the save game option in the pause menu.
-*Finished. Add an option to disable menu wrapping in the game settings menu.
-*Finished. Make the doors easier to track.
-*Finished. Add tts configuration settings.
-*Finished. Add the ability to auto run instead of holding down the alt or control key.
-*Finished. Make the cars not shoot you untill you reach a sertain level.
-*Finished. Make it easier to collect keys in the normal and endless modes.
-*Finished. Add a shop in the endless mode to buy stuff from.
-*Finished. Fix healing zones to have different sounds.
-*Finished. Add an option in the game settings menu to enable or disable the toggle switch sounds.
-*Finished. Add an option in the game settings menu to enable or disable the complete sounds.
-*Finished. Add buttons and lists to test ambience, music, alarm, and heartbeat sounds in the audio settings menu.
-*Finished. Add an option to set the output device in the audio settings menu.
-*Finished. Add an option to toggle showing descriptions in the game settings menu.
-*Finished. Convert the settings menu to use the native audio form's checkboxes.
-*Finished. Add separate volume controls for ambience, music, alarm, and heartbeat in the settings menu.
-*Finished. Make it so parts of the store gets damaged the longer you stay in it at level6.
-*Finished. Prevent players from collecting items, keys, toys, or being hit by bullets and enemies while inside a door.
-*Finished. Remove the management of player titles.
-*Finished. Make it so When you press the letter D in normal mode, it tells you how far you are away from the exit door in feat.
-*Finished. Make it so if you have collected enough keys in normal mode, they stop spawning on the map.
-*Finished. Add an option to enable or disable the countdown sounds.
-*Finished. Add an option to enable or disable the levelup sounds.
-*Finished. Make the letter D key anounce how many keys are required to unlock the door in normal mode.
-*Finished. Add an alarm system to the game.
-*Finished. Make the normal game time based.
-*Finished. Add an export option to the post game copy section.
-*Finished. Make toy cars use  different tacticts.
-*Finished. Add a way to determine how many sounds there are per category in the learn game sounds menu.
-*Finished. Randomize key requirements to unlock doors in the game.
-*Finished. Add more player and UI sounds into the learn game sounds menu.
-*Finished. Ad an endless game mode.
-*Finished. Add a learn game sounds menu.
-*Finished. Add a toggle in the settings menu to control the showing of copyable stat related menu items.
-*Finished. Add a toggle in the settings menu to control copying of game session results to the clipboard.
-*Finished. Add a toggle in the settings menu to control speaking the loading statement after clicking on some of the options found in various menus.
-*Finished. Add a toggle in the settings menu to control speaking the press enter to continue statement after presenting various dialog prompts.
-*Finished. Add a way to copy game stats to the clipboard after completing a game session.
-*Finished. Add an option to test two of the sounds found in the sounds folder for the speaker test item in the main menu.
-*Finished. Add settings for playing the achievement sounds and speaking out the results of them.
-*Finished. Fix the bug with playtime variables not updating properly.
-*Finished. Fix the bug with session-based achievements where you get up to very high tiers with the same number of collected toys.
-*Finished. Fix bosses from reappearing.
-*Finished. Reduce the number of keys need to be collected to win the game.
-*Finished. Add doors.
+**Finished. Fix the shop menu to return the user back to the menu after purchasing something.
+**Finished. Add darts as items for stunning enemies.
+**Finished. Expand the endless grid map from 50 to 100 squares for both x and y.
+**Finished. Convert all health values to use percentages.
+**Finished. Make it easier to access common audio/game settings within the current game session the user is playing.
+**Finished. Make it so store explosions don't always spawn glass in the same two sides of the map, far left/right.
+**Finished. remove the save game option in the pause menu.
+**Finished. Add an option to disable menu wrapping in the game settings menu.
+**Finished. Make the doors easier to track.
+**Finished. Add tts configuration settings.
+**Finished. Add the ability to auto run instead of holding down the alt or control key.
+**Finished. Make the cars not shoot you untill you reach a sertain level.
+**Finished. Make it easier to collect keys in the normal and endless modes.
+**Finished. Add a shop in the endless mode to buy stuff from.
+**Finished. Fix healing zones to have different sounds.
+**Finished. Add an option in the game settings menu to enable or disable the toggle switch sounds.
+**Finished. Add an option in the game settings menu to enable or disable the complete sounds.
+**Finished. Add buttons and lists to test ambience, music, alarm, and heartbeat sounds in the audio settings menu.
+**Finished. Add an option to set the output device in the audio settings menu.
+**Finished. Add an option to toggle showing descriptions in the game settings menu.
+**Finished. Convert the settings menu to use the native audio form's checkboxes.
+**Finished. Add separate volume controls for ambience, music, alarm, and heartbeat in the settings menu.
+**Finished. Make it so parts of the store gets damaged the longer you stay in it at level6.
+**Finished. Prevent players from collecting items, keys, toys, or being hit by bullets and enemies while inside a door.
+**Finished. Remove the management of player titles.
+**Finished. Make it so When you press the letter D in normal mode, it tells you how far you are away from the exit door in feat.
+**Finished. Make it so if you have collected enough keys in normal mode, they stop spawning on the map.
+**Finished. Add an option to enable or disable the countdown sounds.
+**Finished. Add an option to enable or disable the levelup sounds.
+**Finished. Make the letter D key anounce how many keys are required to unlock the door in normal mode.
+**Finished. Add an alarm system to the game.
+**Finished. Make the normal game time based.
+**Finished. Add an export option to the post game copy section.
+**Finished. Make toy cars use  different tacticts.
+**Finished. Add a way to determine how many sounds there are per category in the learn game sounds menu.
+**Finished. Randomize key requirements to unlock doors in the game.
+**Finished. Add more player and UI sounds into the learn game sounds menu.
+**Finished. Ad an endless game mode.
+**Finished. Add a learn game sounds menu.
+**Finished. Add a toggle in the settings menu to control the showing of copyable stat related menu items.
+**Finished. Add a toggle in the settings menu to control copying of game session results to the clipboard.
+**Finished. Add a toggle in the settings menu to control speaking the loading statement after clicking on some of the options found in various menus.
+**Finished. Add a toggle in the settings menu to control speaking the press enter to continue statement after presenting various dialog prompts.
+**Finished. Add a way to copy game stats to the clipboard after completing a game session.
+**Finished. Add an option to test two of the sounds found in the sounds folder for the speaker test item in the main menu.
+**Finished. Add settings for playing the achievement sounds and speaking out the results of them.
+**Finished. Fix the bug with playtime variables not updating properly.
+**Finished. Fix the bug with session-based achievements where you get up to very high tiers with the same number of collected toys.
+**Finished. Fix bosses from reappearing.
+**Finished. Reduce the number of keys need to be collected to win the game.
+**Finished. Add doors.
