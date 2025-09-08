@@ -1,4 +1,5 @@
 New in 4.1.
+Removed the open save data location option from the settings menu.
 Made it so you can no longer enter a negative quantity when buying an item in the shop menu.
 Made it so the contents of the docks folder is now compressed into it's own pack file for the game to recognize and read from.
 Removed the ability to configure tts settings entirely do to it causing the game to not run propperly ON SOME computers.
@@ -338,7 +339,7 @@ Added the ability to save your Achievement progress. This is loaded along with y
 Added an option to the settings menu that lets you clear all of your achievements you've unlocked in the game.
 Made it so when an achievement has been unlocked, a dialog now congratulates the player and describes what was accomplished.
 Added an Achievements Menu to the main screen, allowing players to view their progress across all categories.
-Added a full Lifetime Achievement system that tracks your overall progress across collected toys, found keys, defeated guards, destroyed cars, taken steps, and total time played. Each lifetime achievement features 50 scalable tiers that reward long-term dedication and consistent gameplay.
+Added a Lifetime Achievement system that tracks your overall progress across collected toys, found keys, defeated guards, destroyed cars, taken steps, and total time played. Each lifetime achievement features 50 scalable tiers that reward long-term dedication and consistent gameplay.
 Fixed an issue where session playtime would reset on game relaunch. The timer now tracks total session time across game launches.
 Made it so Session Stats and Lifetime Stats are split into 2 separate menus for easier navigation. Each menu now clearly shows relevant stat categories in a more focused view. The copy stats function is also Retained as well for sharing or tracking progress.
 Added the ability to copy all of your game stats to the clipboard in the stats menu.

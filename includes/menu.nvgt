@@ -1288,9 +1288,6 @@ form.reset();
     form.create_window("Preferences", false);
 int audsets = form.create_button("&audio settings");
 int gamsets = form.create_button("&game settings");
-    int sdloc = -1;
-    if (system_is_windows)
-        sdloc = form.create_button("&open save data location");
     int rest = form.create_button("&reset settings");
 int savesets = form.create_button("&save settings", true);
 int back = form.create_button("&back");
@@ -1313,24 +1310,6 @@ gamsetsmenu();
         {
 soundsetsmenu();
 }
-        if (system_is_windows && form.is_pressed(sdloc))
-        {
-            speak("loading");
-            wait(500);
-            string basePath = DIRECTORY_APPDATA + "tsatria03/ToyMania";
-            basePath = string_replace(basePath, "/", "\\", true);
-            bool result = run("C:\\Windows\\explorer.exe", basePath, false, false);
-            if (!result)
-            {
-                alert("Error", "Could not open " + basePath + ". Please re-create this folder and try again.");
-            }
-            else
-            {
-if(completesound==true) dlgplay("complete.ogg");
-                dlgmessage_return("The save data location has been successfully opened.");
-preffsmenu();
-            }
-        }
         if (form.is_pressed(rest))
         {
 setupmenu(false);
