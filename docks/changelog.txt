@@ -1,6 +1,6 @@
 New in 4.1.
 Made it so turning sounds play in 2d for your character.
-Added a new stone platform. This platform will now be used in the endless game moving forward.
+Added a new concrete platform to walk on. This platform will now be used in the endless game moving forward.
 Reduced some lag spikes caused from playing the endless game. You should now be able to reach up to level 20 or higher.
 Removed the open save data location option from the settings menu.
 Made it so you can no longer enter a negative quantity when buying an item in the shop menu.

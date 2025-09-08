@@ -3,7 +3,6 @@
 #define MyAppPublisher "tsatria03"
 #define MyAppURL "https://tsatria03.itch.io/toymania"
 #define MyAppExeName "tm.exe"
-#define MyReadme "readme.txt"
 
 [Setup]
 AppId={{64477427-9EAA-4A52-905B-269D21D008DA}}
@@ -34,8 +33,6 @@ Name: "startmenuicon"; Description: "Create a Start Menu shortcut"; GroupDescrip
 [Files]
 Source: "C:\Users\tsatr\OneDrive\Documents\GitHub\ToyMania\releases\windows\ToyMania_windows_portable_password_is_GreatCollector\tm\*"; \
   DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs
-Source: "C:\Users\tsatr\OneDrive\Documents\GitHub\ToyMania\releases\windows\ToyMania_windows_portable_password_is_GreatCollector\tm\docks\readme.txt"; \
-  DestDir: "{app}"; Flags: ignoreversion
 Source: "audio/logo.wav"; DestDir: "{tmp}"; Flags: dontcopy
 Source: "audio/directory.wav"; DestDir: "{tmp}"; Flags: dontcopy
 Source: "audio/startmenu.wav"; DestDir: "{tmp}"; Flags: dontcopy
@@ -51,8 +48,6 @@ Name: "{group}\{#MyAppName}"; Filename: "{app}\{#MyAppExeName}"; Tasks: startmen
 [Run]
 Filename: "{app}\{#MyAppExeName}"; Description: "Launch {#MyAppName}"; \
   Flags: nowait postinstall skipifsilent unchecked
-Filename: "{app}\{#MyReadme}"; Description: "View ReadMe file"; \
-  Flags: postinstall shellexec skipifsilent unchecked
 
 [Code]
 const
