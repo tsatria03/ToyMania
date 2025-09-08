@@ -1,4 +1,5 @@
 New in 4.1.
+Reduced some lag spikes caused from playing the endless game mode.
 Removed the open save data location option from the settings menu.
 Made it so you can no longer enter a negative quantity when buying an item in the shop menu.
 Made it so the contents of the docks folder is now compressed into it's own pack file for the game to recognize and read from.

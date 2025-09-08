@@ -67,6 +67,10 @@ int bool_to_int(bool b)
 {
 return b? 1:0;
 }
+int get_total_entities()
+{
+    return cars.length() + bullets.length() + gards.length() + toys.length() + objs.length() + keys.length();
+}
 string find_sound(string soundname)
 {
 string[] snd=find_files(soundname);
@@ -192,6 +196,39 @@ healpool.behind_pitch_decrease = pitchValue;
 objpool.behind_pitch_decrease = pitchValue;
 keypool.behind_pitch_decrease = pitchValue;
 toypool.behind_pitch_decrease = pitchValue;
+}
+void apply_misc_pool_settings()
+{
+p.max_distance = 0;
+p.pan_step = 2.5;
+p.volume_step = 2.5;
+bosspool.max_distance = 0;
+bosspool.pan_step = 2.5;
+bosspool.volume_step = 2.5;
+bulletpool.max_distance = 0;
+bulletpool.pan_step = 2.5;
+bulletpool.volume_step = 2.5;
+doorpool.max_distance = 0;
+doorpool.pan_step = 2.5;
+doorpool.volume_step = 2.5;
+carpool.max_distance = 0;
+carpool.pan_step = 2.5;
+carpool.volume_step = 2.5;
+gardpool.max_distance = 0;
+gardpool.pan_step = 2.5;
+gardpool.volume_step = 2.5;
+healpool.max_distance = 0;
+healpool.pan_step = 2.5;
+healpool.volume_step = 2.5;
+keypool.max_distance = 0;
+keypool.pan_step = 2.5;
+keypool.volume_step = 2.5;
+objpool.max_distance = 0;
+objpool.pan_step = 2.5;
+objpool.volume_step = 2.5;
+toypool.max_distance = 0;
+toypool.pan_step = 2.5;
+toypool.volume_step = 2.5;
 }
 void dockread(const string&in filename)
 {
