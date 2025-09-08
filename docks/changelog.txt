@@ -1,6 +1,7 @@
 New in 4.1.
+Made it so you can no longer enter a negative quantity when buying an item in the shop menu.
 Made it so the contents of the docks folder is now compressed into it's own pack file for the game to recognize and read from.
-Removed the ability to configure your tts voice entirely do to it causing the game to not run propperly ON SOME computers.
+Removed the ability to configure tts settings entirely do to it causing the game to not run propperly ON SOME computers.
 Updated the readme file with removed sections of the document that were no longer being discussed.
 Removed the translation system entirely do to it effecting the game's overall performance.
 Added the ability to abort entire dialogs by pressing the escape key. This is especially useful when browsing through multiline dialogs.

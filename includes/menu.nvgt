@@ -808,7 +808,7 @@ dlgmessage_return("Error: you don't have enough money to purchase this item.");
 shopmenu();
         return;
     }
-    vd.set_disallowed_chars("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ !@#$%^&*()[]{};:'\"\\|,.<>?/+=`~", false, "This character is not allowed.");
+    vd.set_disallowed_chars("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ !@#$%^&*()[]{};:'\"\\|,.<>_?/+-=`~", false, "This character is not allowed.");
     string amount_input = vd.input_box("", "How many " + shopem.replace("_", " ", true) + "s would you like to buy?");
     if (amount_input == "")
 {
@@ -830,13 +830,14 @@ shopmenu();
     double total_cost = amount * price;
     if (money < total_cost)
 {
+p.play_stationary("storefail.ogg", false);
 dlgmessage_return("Error. You don't have enough money to buy " + int(amount) + " " + shopem.replace("_", " ", true) + (amount == 1 ? "." : "s."));
 shopmenu();
         return;
     }
-    p.play_stationary("storebuy" + random(1, 4) + ".ogg", false);
     give(shopem, int(amount));
     money -= total_cost;
+    p.play_stationary("storebuy" + random(1, 4) + ".ogg", false);
     dlgmessage_return("Purchase complete. You bought " + int(amount) + " " + shopem.replace("_", " ", true) + (amount == 1 ? "." : "s."));
 shopmenu();
         return;

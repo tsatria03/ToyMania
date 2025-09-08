@@ -67,10 +67,10 @@ string mustype="gamemus";
 string current_weapon;
 string weapontype="bat";
 string soundcard="Default";
-string version;
+string version="4.1";
 timer boss_timer, bossespawntimer, carspawntimer, firetimer, firetimer2, gametimer, gardspawntimer, objspawntimer, keyspawntimer, movetimer, runtimer, toyspawntimer, usetimer, walktimer;
 timer reloadTimer, savedata_timer;
-file achfile, dockfile, dockver, gamfile, poastfile, statfile;
+file achfile, gamfile, poastfile, statfile;
 pack dockpack;
 instance gamstence("tm");
 audio_form form;
@@ -132,7 +132,6 @@ if (@timeelapsed.handle == null)
 {
     timeelapsed.set_timer(gametimer);
 }
-getver();
 show_window("ToyMania, version "+version);
 if(gamstence.is_already_running)
 {
@@ -148,12 +147,6 @@ else
 wait(500);
     mainmenu();
 }
-}
-void getver()
-{
-dockver.open("data/version.txt","rb");
-version=dockver.read();
-dockver.close();
 }
 void pause_game()
 {
