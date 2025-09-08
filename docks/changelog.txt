@@ -1,4 +1,5 @@
 New in 4.1.
+Made it so the contents of the docks folder is now compressed into it's own pack file for the game to recognize and read from.
 Removed the ability to configure your tts voice entirely do to it causing the game to not run propperly ON SOME computers.
 Updated the readme file with removed sections of the document that were no longer being discussed.
 Removed the translation system entirely do to it effecting the game's overall performance.

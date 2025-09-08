@@ -320,7 +320,7 @@ speak("You have destroyed "+destroyed_cars+" cars.");
 }
 if(key_pressed(KEY_Q) and doormove==false)
 {
-speak("You have killed"+killed_gards+" gards.");
+speak("You have killed "+killed_gards+" gards.");
 }
 if (key_pressed(KEY_Y) and doormove == false)
 {
@@ -746,7 +746,7 @@ if (endless and gametimer.elapsed >= last_level_time + (1000 * 60))
 p.play_stationary("getdollars.ogg",false);
     level++;
 money += level * 20;
-speak("Congratulations! You earned $" + (level * 20) + " for surviving to level " + level + ". Grate work!");
+speak("Congratulations! You earned $" + (level * 20) + " for surviving to level " + level + ". Great work!");
     last_level_time = gametimer.elapsed;
     if (level == 2)
     {

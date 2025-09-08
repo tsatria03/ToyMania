@@ -1,7 +1,7 @@
-#pragma document docks
+#pragma document data
 #pragma plugin nvgt_curl
-#pragma embed "data/res/assets.tmg"
 #include"includes/includes.nvgt"
+bool dockpack_loaded = false;
 bool behind_pitch=true;
 bool hrtf=true;
 bool y_is_elevation=true;
@@ -71,6 +71,7 @@ string version;
 timer boss_timer, bossespawntimer, carspawntimer, firetimer, firetimer2, gametimer, gardspawntimer, objspawntimer, keyspawntimer, movetimer, runtimer, toyspawntimer, usetimer, walktimer;
 timer reloadTimer, savedata_timer;
 file achfile, dockfile, dockver, gamfile, poastfile, statfile;
+pack dockpack;
 instance gamstence("tm");
 audio_form form;
 sound dummy;
@@ -87,7 +88,7 @@ void main()
 {
     last_played_date = get_date(true, false);
     last_played_time = get_time(true, false);
-set_sound_storage("*");
+set_sound_storage("data/assets.tmg");
 set_sound_decryption_key("LGY24P2p56riZXtvhxtONfyBQgVZZS8wJnVSJEZ0zOOeQr3THFTtlyIXYI04Dgbk2SD1DoCMFk8QuRPv7DhlAXJDb3XzEt8vd9RcU8LW0LzcXkHvJUmkWbAtJ8ITyuCF0CkpPcW6eiPsjGDU9rlVufn8GSO2vy4KAjcLe",true);
 dummy.load("dummy");
 load_achievements();
@@ -150,7 +151,7 @@ wait(500);
 }
 void getver()
 {
-dockver.open("docks/version.txt","rb");
+dockver.open("data/version.txt","rb");
 version=dockver.read();
 dockver.close();
 }

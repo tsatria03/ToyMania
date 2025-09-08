@@ -51,7 +51,7 @@ output+=contents[i]+"\r\n";
 extract_file(pfile,contents[i], "packs/"+filename+"/"+string2file(contents[i])+end);
 }
 directory_delete("packs/"+filename+"/decrypted");
-//clipboard_copy_text(output);
+clipboard_copy_text(output);
 alert("success",filename+" has been extracted. stats: "+contents.length()+" files are now in packs/"+filename);
 }
 void extract_file(pack@ pf, const string&in filename, const string&in outfile)

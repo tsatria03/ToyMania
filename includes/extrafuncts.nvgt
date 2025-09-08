@@ -49,25 +49,6 @@ return (str.substr(str.length()-ending.length())==ending);
 }
 return false;
 }
-bool entity_near_door(int x, int y)
-{
-    for (uint i = 0; i < bosses.length(); i++)
-{
-        if (absolute(bosses[i].bossx - x) <= 2 && absolute(bosses[i].bossy - y) <= 2)
-            return true;
-    }
-    for (uint i = 0; i < gards.length(); i++)
-{
-        if (absolute(gards[i].gardx - x) <= 2 && absolute(gards[i].gardy - y) <= 2)
-            return true;
-    }
-    for (uint i = 0; i < cars.length(); i++)
-{
-        if (absolute(cars[i].carx - x) <= 2 && absolute(cars[i].cary - y) <= 2)
-            return true;
-    }
-    return false;
-}
 double clamp(double value, double min, double max)
 {
 value=value<min? min:value;
@@ -85,17 +66,6 @@ return (a > b) ? a : b;
 int bool_to_int(bool b)
 {
 return b? 1:0;
-}
-int[] generate_achievement_thresholds(int start, int count, double multiplier)
-{
-int[] result;
-int value = start;
-for (int i = 0; i < count; i++)
-{
-result.insert_last(value);
-value = int(value * multiplier);
-}
-return result;
 }
 string find_sound(string soundname)
 {
@@ -225,18 +195,27 @@ toypool.behind_pitch_decrease = pitchValue;
 }
 void dockread(const string&in filename)
 {
-if(!file_exists(filename))
+string displayname = string_replace(filename, "docks/", "", true);
+if (!dockpack_loaded)
 {
-alert("Error", "Could not fined "+string_replace(filename, "docks/", "", true));
+if (!dockpack.open("data/docks.tmg", PACK_OPEN_MODE_READ))
+{
+alert("Error", "Could not open the docks.tmg file!");
 docksmenu();
 }
-dockfile.open(filename,"rb");
-string docktext=dockfile.read();
-dockfile.close();
+dockpack_loaded = true;
+}
+if (!dockpack.file_exists(displayname))
+{
+alert("Error", "Could not find "+displayname+" inside the docks.tmg file.");
+docksmenu();
+}
+uint size = dockpack.get_file_size(displayname);
+string docktext = dockpack.read_file(displayname, 0, size);
 form.reset();
-form.create_window("Viewing "+string_replace(filename, "docks/", "", true),false,false,false);
-int dockbox=form.create_input_box(string_replace(filename, "docks/", "", true), docktext, read_only:true, multiline:true);
-int dockclose=form.create_button("&close",false,true);
+form.create_window("Viewing "+displayname,false,false,false);
+int dockbox = form.create_input_box(displayname, docktext, read_only:true, multiline:true);
+int dockclose = form.create_button("&close",false,true);
 form.focus(dockbox);
 while(true)
 {

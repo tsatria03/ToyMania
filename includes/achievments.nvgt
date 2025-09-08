@@ -1,3 +1,15 @@
+int[] generate_achievement_thresholds(int start, int count, double multiplier)
+{
+int[] result;
+int value = start;
+for (int i = 0; i < count; i++)
+{
+result.insert_last(value);
+value = int(value * multiplier);
+}
+return result;
+}
+
 class AchievementTracker
 {
 string name;

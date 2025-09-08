@@ -2,7 +2,7 @@
 pack obj;
 void main()
 {
-if (!directory_exists("data/res/")) directory_create("data/res/");
+if (!directory_exists("packs/")) directory_create("packs/");
 string filename=input_box("Simple pack lister", "Enter the path/name to a pack file, such as sounds.dat");
 if(filename=="") exit();
 bool success=obj.open(filename);
@@ -19,8 +19,8 @@ final_list+=list[i]+"\r\n";
 }
 final_list+="total files: "+list.length()+"\r\n";
 file slist;
-slist.open("data/res/soundslist.txt", "w");
+slist.open("packs/soundslist.txt", "w");
 slist.write(final_list);
 slist.close();
-alert("Complete! ", "The sound list has been written to data/res/soundslist.txt.");
+alert("Complete! ", "The sound list has been written to packs/soundslist.txt.");
 }

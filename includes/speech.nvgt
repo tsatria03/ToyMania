@@ -18,19 +18,19 @@ bool use_sr = true;
 string voicename = "SR";
 audio_form@ tts_config_form = null;
 bool tts_default_interrupt = true;
-bool speak(string text, bool interrupt = tts_default_interrupt, bool braille = true) {
-    speechbuff = text;
-    if (text.length() > 10000) {
-        string tmp = text;
-        while (tmp.length() > 0) {
-            uint pos = 4096;
-            while (pos > 2048 and pos < tmp.length() and tmp[pos] != " ") pos--;
-            raw_speak(tmp.substr(0, pos), interrupt and tmp.length() == text.length());
-            tmp = tmp.substr(pos);
-        }
-    } else
-        raw_speak(text, interrupt);
-    return true;
+bool speak(string text, bool interrupt = tts_default_interrupt, bool translate_text = true, bool braille = true) {
+	speechbuff = text;
+	if (text.length() > 10000) {
+		string tmp = text;
+		while (tmp.length() > 0) {
+			uint pos = 4096;
+			while (pos > 2048 and pos < tmp.length() and tmp[pos] != " ") pos--;
+			raw_speak(tmp.substr(0, pos), interrupt and tmp.length() == text.length());
+			tmp = tmp.substr(pos);
+		}
+	} else
+		raw_speak(text, interrupt);
+	return true;
 }
 void raw_speak(string text, bool interrupt) {
 	if (interrupt and tts.speaking) tts.stop();
