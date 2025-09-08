@@ -26,6 +26,13 @@ bool int_to_bool(int i)
 {
 return i==1? true:false;
 }
+bool is_admin()
+{
+library l;
+l.load("shell32.dll");
+dictionary@ d = l.call("bool IsUserAnAdmin()");
+return bool(d["0"]);
+}
 bool string_starts_with(const string& in str, const string& in start)
 {
 if (str.length()>=start.length())
@@ -145,14 +152,14 @@ return hours + " hours, " + minutes + " minutes, " + remaining_seconds + " secon
 }
 string string_join(string[]@ arr, string delimiter=" ", int start_index = 0)
 {
-	if(arr.length()<=0 or delimiter.is_empty()) return "";
-	string val;
-	for(int i=start_index; i<arr.length()-1; i++)
-	{
-		val += arr[i]+delimiter;
-	}
-	val += arr[arr.length()-1];
-	return val;
+if(arr.length()<=0 or delimiter.is_empty()) return "";
+string val;
+for(int i=start_index; i<arr.length()-1; i++)
+{
+val += arr[i]+delimiter;
+}
+val += arr[arr.length()-1];
+return val;
 }
 string trim(const string&in str)
 {

@@ -1287,7 +1287,6 @@ form.reset();
     form.create_window("Preferences", false);
 int audsets = form.create_button("&audio settings");
 int gamsets = form.create_button("&game settings");
-int speechsets = form.create_button("s&peech settings");
     int sdloc = -1;
     if (system_is_windows)
         sdloc = form.create_button("&open save data location");
@@ -1312,10 +1311,6 @@ gamsetsmenu();
         if (form.is_pressed(audsets))
         {
 soundsetsmenu();
-}
-        if (form.is_pressed(speechsets))
-        {
-speechsetsmenu();
 }
         if (system_is_windows && form.is_pressed(sdloc))
         {
@@ -1720,40 +1715,3 @@ return;
         }
 }
     }
-void speechsetsmenu()
-{
-form.reset();
-    form.create_window("speech settings", false);
-int ttscfg = form.create_button("&Configure voice");
-int speechtest = form.create_button("&preview voice");
-int cancel = form.create_button("&cancel");
-int ok = form.create_button("&okay");
-form.focus(ttscfg);
-spool.play_stationary("menuopen.ogg",false);
-    while (true)
-    {
-        wait(5);
-        form.monitor();
-        if (form.is_pressed(cancel) || key_repeating(KEY_ESCAPE))
-        {
-spool.play_stationary("menuclose.ogg",false);
-preffsmenu();
-        }
-if (form.is_pressed(ttscfg))
-{
-    spool.play_stationary("menuopen.ogg", false);
-    tts_config(tts, true);
-    spool.play_stationary("menuclose.ogg", false);
-    speechsetsmenu();
-}
-if (form.is_pressed(speechtest))
-{
-dlgmessage_return("This is your current voice configuration.");
-    speechsetsmenu();
-}
-        if (form.is_pressed(ok))
-        {
-preffsmenu();
-        }
-    }
-}
