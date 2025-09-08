@@ -24,7 +24,7 @@ void cycle_inv(int dir)
 {
 if (dir==1)
 invpos+=1;
-if(inv.get_size()!=0) invslot=p.play_stationary("invcycle"+random(1,6)+".ogg",false);
+if(inv.get_size()!=0) invslot=p.play_stationary("invcycle"+random(1,5)+".ogg",false);
 else
 invpos-=1;
 if (invpos>=inv.get_size())

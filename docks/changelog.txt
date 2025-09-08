@@ -1,5 +1,7 @@
 New in 4.1.
-Reduced some lag spikes caused from playing the endless game mode.
+Made it so turning sounds play in 2d for your character.
+Added a new stone platform. This platform will now be used in the endless game moving forward.
+Reduced some lag spikes caused from playing the endless game. You should now be able to reach up to level 20 or higher.
 Removed the open save data location option from the settings menu.
 Made it so you can no longer enter a negative quantity when buying an item in the shop menu.
 Made it so the contents of the docks folder is now compressed into it's own pack file for the game to recognize and read from.
@@ -7,7 +9,6 @@ Removed the ability to configure tts settings entirely do to it causing the game
 Updated the readme file with removed sections of the document that were no longer being discussed.
 Removed the translation system entirely do to it effecting the game's overall performance.
 Added the ability to abort entire dialogs by pressing the escape key. This is especially useful when browsing through multiline dialogs.
-Fixed various bugs found in sertain preffrance-based menus.
 New in 4.0.
 Made it so guards don't play step sounds while they are stunned in the game. They'll only play them after they've fully recovered.
 Fixed a bug where enemies remained stunned indefinitely after being hit by a dart, instead of recovering once the stun duration has fully ended.
@@ -18,7 +19,7 @@ Added the ability to manually aim at a target by holding shift and pressing the 
 Added some more item and player related sounds into the learn game sounds menu.
 Made it so when a user has Purchased an item from the endless shop, the game returns them back to the menu, rather than making them exit the shop menu entirely. This also applies to making invalid purchases as well.
 Fixed a bug where darts acted like teleporters when being used from your inventory.
-Added the ability to face a certain direction when moving. This is very useful for aiming at various entities when using tactical items in the game.
+Added the ability to face a certain direction when moving. This is very useful for aiming at various entities when using tactical items in the game. You can pres shift plus the arrow keys to do this.
 Added the dart item for purchase in the shop menu. These will stun enemies for a certain amount of time when used from your inventory. This item is only available in the endless game.
 Made it so you get spawned in different places of the map depending on witch game mode you're playing on.
 Made it so the endless map is now expanded from 50 to 100 square tiles for both x and y on the grid.

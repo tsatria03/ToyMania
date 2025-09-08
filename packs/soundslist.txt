@@ -54,6 +54,13 @@ clubhit1.ogg
 clubhit2.ogg
 clubhit3.ogg
 complete.ogg
+concretefall.ogg
+concreteland.ogg
+concretewalk1.ogg
+concretewalk2.ogg
+concretewalk3.ogg
+concretewalk4.ogg
+concretewalk5.ogg
 dartfire.ogg
 dartget.ogg
 darthit.ogg
@@ -165,7 +172,6 @@ invcycle2.ogg
 invcycle3.ogg
 invcycle4.ogg
 invcycle5.ogg
-invcycle6.ogg
 itembreak1.ogg
 itembreak2.ogg
 itembreak3.ogg
@@ -322,4 +328,4 @@ toyloop7.ogg
 toyloop8.ogg
 toyloop9.ogg
 windchimeloop.ogg
-total files: 324
+total files: 330
