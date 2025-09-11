@@ -254,7 +254,8 @@ if (key_pressed(KEY_D) and doormove == false)
     }
     if (shift_is_down())
     {
-        speak("You need " + doors[0].required_keys + " or more keys to unlock the door.");
+int req = doors[0].required_keys;
+speak("You've collected " + collected_keys + " out of " + req + " keys. You need " + req + " or more keys to unlock the door.");
     }
     else if (endless)
     {
@@ -304,23 +305,23 @@ speak("There are "+gards.length()+" killible gards on the field.");
 }
 if(key_pressed(KEY_X) and doormove==false)
 {
-speak("You have taken "+moved_steps+" steps.");
+speak("You've taken "+moved_steps+" steps.");
 }
 if(key_pressed(KEY_T) and doormove==false)
 {
-speak("You have collected "+collected_toys+" toys.");
+speak("You've collected "+collected_toys+" toys.");
 }
 if(key_pressed(KEY_I) and doormove==false)
 {
-speak("You have collected "+collected_keys+" keys.");
+speak("You've collected "+collected_keys+" keys.");
 }
 if(key_pressed(KEY_F) and doormove==false)
 {
-speak("You have destroyed "+destroyed_cars+" cars.");
+speak("You've destroyed "+destroyed_cars+" cars.");
 }
 if(key_pressed(KEY_Q) and doormove==false)
 {
-speak("You have killed "+killed_gards+" gards.");
+speak("You've killed "+killed_gards+" gards.");
 }
 if (key_pressed(KEY_Y) and doormove == false)
 {

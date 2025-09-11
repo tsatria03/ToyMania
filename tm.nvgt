@@ -70,6 +70,7 @@ string toytyp;
 string toytyp2;
 string last_played_date;
 string last_played_time;
+string keydesc;
 string toydesc;
 string last_learn_category="";
 string last_learn_sound="";
@@ -83,9 +84,9 @@ string mustype="gamemus";
 string weapontype="melee";
 string weapontype2="bat";
 string soundcard="Default";
-string version="4.2";
+string version="4.3";
 timer boss_timer, bossespawntimer, carspawntimer, gametimer, gardspawntimer, objspawntimer, keyspawntimer, movetimer, runtimer, toyspawntimer, usetimer, walktimer, weapontimer, weapontimer2, reloadTimer, savedata_timer;
-file achfile, gamfile, poastfile, statfile, toyfile, wepfile;
+file achfile, gamfile, keyfile, poastfile, statfile, toyfile, wepfile;
 pack dockpack;
 instance gamstence("tm");
 audio_form form;
@@ -116,6 +117,7 @@ if (@timeelapsed.handle == null)
 {
     timeelapsed.set_timer(gametimer);
 }
+get_keydescs();
 get_toydescs();
 show_window("ToyMania, version "+version);
 if(gamstence.is_already_running)
@@ -134,9 +136,15 @@ wait(500);
     mainmenu();
 }
 }
+void get_keydescs()
+{
+keyfile.open("sounds/"+soundpack+"/equipments/items/normal/keys/"+keytyp+"/info.tmf","rb");
+keydesc=keyfile.read();
+keyfile.close();
+}
 void get_toydescs()
 {
-toyfile.open("sounds/"+soundpack+"/toys/"+toytyp+"/"+toytyp2+"/info.tmf","rb");
+toyfile.open("sounds/"+soundpack+"/equipments/items/normal/toys/"+toytyp+"/"+toytyp2+"/info.tmf","rb");
 toydesc=toyfile.read();
 toyfile.close();
 }
