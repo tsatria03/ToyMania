@@ -140,7 +140,7 @@ if (gamcopy == true)
         if (choice == "copy")
         {
             clipboard_copy_text(statsummary);
-            if (copexpsounds == true) dlgplay("gamecopy.ogg", false);
+            if (copexpsounds == true) dlgplay(find_sound("sounds/"+soundpack+"/menus/"+menupack+"/*copy*"), false);
             dlgmessage_return("All game session results copied to your clipboard.");
         }
         else if (choice == "export")
@@ -148,7 +148,7 @@ if (gamcopy == true)
             poastfile.open(DIRECTORY_APPDATA+"tsatria03/ToyMania/stats/player_posts.txt", "w");
             poastfile.write(statsummary);
             poastfile.close();
-            if (copexpsounds == true) dlgplay("gamexport.ogg", false);
+            if (copexpsounds == true) dlgplay(find_sound("sounds/"+soundpack+"/menus/"+menupack+"/*export*"), false);
             dlgmessage_return("All game session results exported to stats/player_posts.txt.");
         }
     }

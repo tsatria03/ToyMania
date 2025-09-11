@@ -18,6 +18,7 @@ on:
   fork:
 
 jobs:
+
   notify_commit:
     if: github.event_name == 'push' && vars.ENABLE_PUSH_NOTIFICATIONS == 'true'
     runs-on: ubuntu-latest
@@ -28,9 +29,10 @@ jobs:
       - name: Notify commit
         run: |
           AUTHOR="${{ github.event.sender.login }}"
-          MESSAGE="${{ github.event.head_commit.message }}"
+          FULL_MESSAGE="${{ github.event.head_commit.message }}"
+          SUMMARY=$(echo "$FULL_MESSAGE" | head -n 1)
           LINK="https://github.com/${{ github.repository }}/commit/${{ github.sha }}"
-          TEXT="New commit from ${AUTHOR}: ${MESSAGE} View the commit here: ${LINK}"
+          TEXT="New commit from ${AUTHOR}: ${SUMMARY} View the commit here: ${LINK}"
           curl -s -X POST https://api.telegram.org/bot${TELEGRAM_TOKEN}/sendMessage \
             -d chat_id="${TELEGRAM_CHAT_ID}" \
             --data-urlencode text="${TEXT}"

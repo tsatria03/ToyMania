@@ -113,22 +113,6 @@ if (st.d.exists("menumusvolume"))
 {
 menumusvolume = st.read_int("menumusvolume");
 }
-if (st.d.exists("bitplays"))
-{
-bitplays = st.read_double("bitplays");
-}
-if (st.d.exists("crashplays"))
-{
-crashplays = st.read_double("crashplays");
-}
-if (st.d.exists("stoneplays"))
-{
-stoneplays = st.read_double("stoneplays");
-}
-if (st.d.exists("swordplays"))
-{
-swordplays = st.read_double("swordplays");
-}
 if (st.d.exists("alarmvolume"))
 {
 alarmvolume = st.read_double("alarmvolume");
@@ -149,6 +133,18 @@ if (st.d.exists("master_volume"))
 {
     master_volume = st.read_float("master_volume");
     set_sound_master_volume(master_volume);
+}
+if(st.d.exists("dlgpack"))
+{
+dlgpack=st.read_string("dlgpack");
+}
+if(st.d.exists("menupack"))
+{
+menupack=st.read_string("menupack");
+}
+if(st.d.exists("soundpack"))
+{
+soundpack=st.read_string("soundpack");
 }
 if (st.d.exists("auto_check_updates"))
 {
@@ -250,10 +246,9 @@ void writepreffs()
 {
 st.add("menumusvolume", menumusvolume);
 st.add("soundcard",soundcard);
-st.add("bitplays", bitplays);
-st.add("crashplays", crashplays);
-st.add("stoneplays", stoneplays);
-st.add("swordplays", swordplays);
+st.add("dlgpack",dlgpack);
+st.add("menupack",menupack);
+st.add("soundpack",soundpack);
 st.add("alarmvolume", alarmvolume);
 st.add("heartvolume", heartvolume);
 st.add("toyambvolume", toyambvolume);

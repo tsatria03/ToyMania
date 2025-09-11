@@ -3,8 +3,8 @@ void mainmenu()
 setupmenu();
 m.add_item("game menu", "gm");
 m.add_item("settings menu", "sm");
-m.add_item("speaker test menu", "st");
 m.add_item("check for game updates", "chup");
+m.add_item("test speakers", "st");
 if(system_is_windows) m.add_item("restart game", "rt");
 m.add_item("exit game", "ex");
 m.intro_text = "Main menu. Please choose an option with your arrow keys, then press enter to activate one.";
@@ -28,52 +28,10 @@ preffsmenu();
 }
 if(main == "st")
 {
-    setupmenu(false);
-m.add_item("eight bit. This sound has been played a total of "+bitplays+" times.", "bit");
-m.add_item("crash car. This sound has been played a total of "+crashplays+" times.", "crash");
-m.add_item("Sword Clank. This sound has been played a total of "+swordplays+" times.", "clank");
-m.add_item("Stone Throw. This sound has been played a total of "+stoneplays+" times.", "stone");
-m.add_item("Back", "back");
-m.intro_text = "Speaker test menu. Choose a sound to test your audio setup. For the most accurate results, please use headphones. Please also make sure to check if they are worn correctly.";
-int mres = m.run();
-    string soundsel = m.get_selected_item_id();
-    if (mres == -1 or soundsel == "back")
-{
-        mainmenu();
-    }
-    if (soundsel == "bit")
-{
-if(speak_menu_loading==true) speak("loading eight bit");
+if(speak_menu_loading==true) speak("loading");
 m.fade_music();
-bitplays+=1;
-writepreffs();
-        dlgplay("speaker_8bit.ogg");
-    }
-    if (soundsel == "crash")
-{
-if(speak_menu_loading==true) speak("loading crash car");
-m.fade_music();
-crashplays+=1;
-writepreffs();
-        dlgplay("speaker_crash_car.ogg");
-    }
-    if (soundsel == "clank")
-{
-if(speak_menu_loading==true) speak("loading sword clank");
-m.fade_music();
-swordplays+=1;
-writepreffs();
-        dlgplay("speaker_sword_clank.ogg");
-    }
-    if (soundsel == "stone")
-{
-if(speak_menu_loading==true) speak("loading stone throw");
-m.fade_music();
-stoneplays+=1;
-writepreffs();
-        dlgplay("speaker_stone_throw.ogg");
-    }
-if(completesound==true) dlgplay("complete.ogg", false);
+        dlgplay(find_sound("sounds/"+soundpack+"/misc/ui/menus/"+menupack+"/*speaker*"));
+    if(completesound==true) dlgplay(find_sound("sounds/"+soundpack+"/misc/ui/menus/"+menupack+"/*complete*"), false);
 dlgmessage_return("Speaker test complete.");
     mainmenu();
 }
@@ -115,25 +73,25 @@ if(dnm=="changelog")
 {
 if(speak_menu_loading==true) speak("loading");
 m.fade_music();
-dockread("docks/changelog.txt");
+dockread("changelog.txt");
 }
 if(dnm=="credits")
 {
 if(speak_menu_loading==true) speak("loading");
 m.fade_music();
-dockread("docks/credits.txt");
+dockread("credits.txt");
 }
 if(dnm=="readme")
 {
 if(speak_menu_loading==true) speak("loading");
 m.fade_music();
-dockread("docks/readme.txt");
+dockread("readme.txt");
 }
 if(dnm=="todo_list")
 {
 if(speak_menu_loading==true) speak("loading");
 m.fade_music();
-dockread("docks/todo_list.txt");
+dockread("todo_list.txt");
 }
 if(dnm=="back")
 {
@@ -175,7 +133,7 @@ m.add_item("Endless. This mode lets you play for as long as you can survive. The
     endless = (mode == "endless");
     if (speak_menu_loading) speak(endless ? "loading endless mode" : "loading normal mode");
     m.fade_music();
-    dlgplay("gamelaunch.ogg");
+    dlgplay(find_sound("sounds/"+soundpack+"/misc/game/*launch*"));
     level = 1;
 money = 0;
     collected_toys = 0;
@@ -257,7 +215,7 @@ if(confirm=="yes")
 if(file_exists(DIRECTORY_APPDATA+"tsatria03/ToyMania/saves/game.tmg")) file_delete(DIRECTORY_APPDATA+"tsatria03/ToyMania/saves/game.tmg");
 resetgame();
 writedata();
-if(completesound==true) dlgplay("complete.ogg", false);
+if(completesound==true) dlgplay(find_sound("sounds/"+soundpack+"/misc/ui/menus/"+menupack+"/*complete*"), false);
 dlgmessage_return("Game progresses cleared.");
 gamemenu();
 }
@@ -305,7 +263,7 @@ m.fade_music();
     result += "- Steps taken: " + total_moved_steps + "\r\n";
     result += "- Total playtime: " + total_minutes + " minutes, " + total_seconds + " seconds.\r\n";
     clipboard_copy_text(result);
-if(copexpsounds==true) dlgplay("gamecopy.ogg" ,false);
+if(copexpsounds==true) dlgplay(find_sound("sounds/"+soundpack+"/misc/ui/menus/"+menupack+"/*copy*") ,false);
     dlgmessage_return("All game progresses have been copied to your clipboard.");
     gamemenu();
 }
@@ -350,7 +308,7 @@ result += "- Steps taken: " + total_moved_steps + "\r\n";
 result += "- Total playtime: " + total_minutes + " minutes, " + total_seconds + " seconds.\r\n";
 gamfile.write(result);
 gamfile.close();
-if(copexpsounds==true) dlgplay("gamexport.ogg",false);
+if(copexpsounds==true) dlgplay(find_sound("sounds/"+soundpack+"/misc/ui/menus/"+menupack+"/*export*"),false);
 dlgmessage_return("All game progresses have been exported to stats/player_progresses.txt.");
 gamemenu();
 }
@@ -480,7 +438,7 @@ for (int i = 1; i <= 40; i++) toyloop.insert_last("toyloop" + i + ".ogg");
 toys["Loop" + vdesc] = toyloop;
 learnCategories["Toys"] = toys;
 dictionary ui;
-ui["Complete: used in speaker tests and various other menus"] = "complete.ogg";
+ui["Complete: used in speaker tests and various other menus"] = find_sound("sounds/"+soundpack+"/misc/ui/menus/"+menupack+"/*complete*");
 ui["Dialog close"] = "dlgclose.ogg";
 ui["Dialog copy"] = "dlgcoppy.ogg";
 ui["Dialog open"] = "dlgopen.ogg";
@@ -495,8 +453,8 @@ ui["Menu open"] = "menuopen.ogg";
 ui["Menu wrap"] = "menuwrap.ogg";
 ui["Pause Game"] = "pause.ogg";
 ui["Resume Game"] = "resume.ogg";
-ui["Stats copy"] = "gamecopy.ogg";
-ui["Stats export"] = "gamexport.ogg";
+ui["Stats copy"] = find_sound("sounds/"+soundpack+"/misc/ui/menus/"+menupack+"/*copy*");
+ui["Stats export"] = find_sound("sounds/"+soundpack+"/misc/ui/menus/"+menupack+"/*export*");
 learnCategories["UI"] = ui;
 dictionary weapons;
 weapons["Bat Draw"] = "batdraw.ogg";
@@ -607,7 +565,7 @@ m.add_item("view detailed stats", "vds");
     string psmem = m.get_selected_item_id();
 if (mres == -1)
 {
-    temp.play_stationary("resume.ogg", false);
+    temp.play_stationary(find_sound("sounds/"+soundpack+"/misc/game/*resume*"), false);
     resume_game();
     return;
 }
@@ -616,7 +574,7 @@ if (mres == -1)
             string mode = endless ? "Endless" : "Normal";
             string info = "Current Level: " + level + "\r\nGame Mode: " + mode;
             clipboard_copy_text(info);
-            if (copexpsounds==true) dlgplay("gamecopy.ogg", false);
+            if (copexpsounds==true) dlgplay(find_sound("sounds/"+soundpack+"/misc/ui/menus/"+menupack+"/*copy*"), false);
             dlgmessage_return("Your current level and game mode has been copied to the clipboard.");
             pausemenu();
 return;
@@ -648,7 +606,7 @@ if (gamcopy == true)
         if (resp == "copy")
         {
             clipboard_copy_text(statsummary);
-            if (copexpsounds == true) dlgplay("gamecopy.ogg", false);
+            if (copexpsounds == true) dlgplay(find_sound("sounds/"+soundpack+"/misc/ui/menus/"+menupack+"/*copy*"), false);
             dlgmessage_return("All game session results copied to your clipboard.");
         }
         else if (resp == "export")
@@ -656,7 +614,7 @@ if (gamcopy == true)
             poastfile.open(DIRECTORY_APPDATA+"tsatria03/ToyMania/stats/player_posts.txt", "w");
             poastfile.write(statsummary);
             poastfile.close();
-            if (copexpsounds == true) dlgplay("gamexport.ogg", false);
+            if (copexpsounds == true) dlgplay(find_sound("sounds/"+soundpack+"/misc/ui/menus/"+menupack+"/*export*"), false);
             dlgmessage_return("All game session results exported to stats/player_posts.txt.");
         }
     }
@@ -735,7 +693,7 @@ cardest=false;
         }
         if (psmem == "rmg")
 {
-            temp.play_stationary("resume.ogg", false);
+temp.play_stationary(find_sound("sounds/"+soundpack+"/misc/game/*resume*"), false);
             resume_game();
             return;
         }
@@ -982,7 +940,7 @@ m.intro_text = "Choose which game achievements to clear. This will clear your ga
     }
     writedata();
 string modeLabel = (achmode == "session") ? "session" : (achmode == "lifetime") ? "lifetime" : "session and lifetime";
-if(completesound==true) dlgplay("complete.ogg", false);
+if(completesound==true) dlgplay(find_sound("sounds/"+soundpack+"/misc/ui/menus/"+menupack+"/*complete*"), false);
 dlgmessage_return("Your " + modeLabel + " achievements have been cleared.");
     achesmenu();
 }
@@ -1007,7 +965,7 @@ m.fade_music();
         }
     }
     clipboard_copy_text(achievementSummary);
-if(copexpsounds==true) dlgplay("gamecopy.ogg" ,false);
+if(copexpsounds==true) dlgplay(find_sound("sounds/"+soundpack+"/misc/ui/menus/"+menupack+"/*copy*") ,false);
     dlgmessage_return("All game achievements have been copied to your clipboard.");
     achesmenu();
 }
@@ -1030,7 +988,7 @@ achievementSummary += "- " + achievements[i].get_progress_status() + "\r\n";
 }
 achfile.write(achievementSummary);
 achfile.close();
-if(copexpsounds==true) dlgplay("gamexport.ogg",false);
+if(copexpsounds==true) dlgplay(find_sound("sounds/"+soundpack+"/misc/ui/menus/"+menupack+"/*export*"),false);
 dlgmessage_return("All game achievements have been exported to stats/player_achievements.txt.");
 achesmenu();
 }
@@ -1134,7 +1092,7 @@ statsmenu();
         moved_steps = 0;
 session_playtime = 0;
 writedata();
-if(completesound==true) dlgplay("complete.ogg", false);
+if(completesound==true) dlgplay(find_sound("sounds/"+soundpack+"/misc/ui/menus/"+menupack+"/*complete*"), false);
         dlgmessage_return("Your session stats have been cleared.");
     }
     if (gsm == "lifetime")
@@ -1146,7 +1104,7 @@ if(completesound==true) dlgplay("complete.ogg", false);
         total_moved_steps = 0;
         total_playtime = 0;
         writedata();
-if(completesound==true) dlgplay("complete.ogg", false);
+if(completesound==true) dlgplay(find_sound("sounds/"+soundpack+"/misc/ui/menus/"+menupack+"/*complete*"), false);
         dlgmessage_return("Your lifetime stats have been cleared.");
     }
     if (gsm == "both")
@@ -1163,7 +1121,7 @@ if(completesound==true) dlgplay("complete.ogg", false);
         total_moved_steps = 0;
         total_playtime = 0;
         writedata();
-if(completesound==true) dlgplay("complete.ogg", false);
+if(completesound==true) dlgplay(find_sound("sounds/"+soundpack+"/misc/ui/menus/"+menupack+"/*complete*"), false);
         dlgmessage_return("Your session and lifetime stats have been cleared.");
     }
     statsmenu();
@@ -1194,7 +1152,7 @@ statsummary += "- Cars destroyed: " + total_destroyed_cars + "\r\n";
 statsummary += "- Steps taken: " + total_moved_steps + "\r\n";
 statsummary += "- Total playtime: " + total_minutes + " minutes, " + total_seconds + " seconds.\r\n";
     clipboard_copy_text(statsummary);
-if(copexpsounds==true) dlgplay("gamecopy.ogg" ,false);
+if(copexpsounds==true) dlgplay(find_sound("sounds/"+soundpack+"/misc/ui/menus/"+menupack+"/*copy*") ,false);
     dlgmessage_return("All game statistics have been copied to your clipboard.");
     statsmenu();
 }
@@ -1226,7 +1184,7 @@ statsummary += "- Steps taken: " + total_moved_steps + "\r\n";
 statsummary += "- Total playtime: " + total_minutes + " minutes, " + total_seconds + " seconds.\r\n";
 statfile.write(statsummary);
 statfile.close();
-if(copexpsounds==true) dlgplay("gamexport.ogg",false);
+if(copexpsounds==true) dlgplay(find_sound("sounds/"+soundpack+"/misc/ui/menus/"+menupack+"/*export*"),false);
 dlgmessage_return("All game statistics have been exported to stats/player_statistics.txt.");
 statsmenu();
 }
@@ -1295,14 +1253,14 @@ int gamsets = form.create_button("&game settings");
 int savesets = form.create_button("&save settings", true);
 int back = form.create_button("&back");
 form.focus(audsets);
-spool.play_stationary("menuopen.ogg",false);
+spool.play_stationary(find_sound("sounds/"+soundpack+"/misc/ui/menus/"+menupack+"/*open*"),false);
     while (true)
     {
         form.monitor();
         wait(5);
         if (form.is_pressed(back) || key_repeating(KEY_ESCAPE))
         {
-spool.play_stationary("menuclose.ogg",false);
+spool.play_stationary(find_sound("sounds/"+soundpack+"/misc/ui/menus/"+menupack+"/*close*"),false);
             mainmenu();
         }
         if (form.is_pressed(gamsets))
@@ -1330,7 +1288,7 @@ if(confirm=="yes")
 if(file_exists(DIRECTORY_APPDATA+"tsatria03/ToyMania/saves/settings.tmg")) file_delete(DIRECTORY_APPDATA+"tsatria03/ToyMania/saves/settings.tmg");
 resetpreffs();
 writepreffs();
-if(completesound==true) dlgplay("complete.ogg", false);
+if(completesound==true) dlgplay(find_sound("sounds/"+soundpack+"/misc/ui/menus/"+menupack+"/*complete*"), false);
 dlgmessage_return("Settings reset.");
 mainmenu();
 }
@@ -1338,7 +1296,7 @@ mainmenu();
         if (form.is_pressed(savesets))
         {
 writepreffs();
-if(completesound==true) dlgplay("complete.ogg", false);
+if(completesound==true) dlgplay(find_sound("sounds/"+soundpack+"/misc/ui/menus/"+menupack+"/*complete*"), false);
 dlgmessage_return("Settings saved.");
 mainmenu();
 }
@@ -1403,7 +1361,7 @@ if (showset_desc) togsound2 = form.create_input_box("Toggle switch SFX: descript
     int cancel = form.create_button("&cancel");
 int ok = form.create_button("&okay");
 form.focus(autoUpdateToggle);
-spool.play_stationary("menuopen.ogg",false);
+spool.play_stationary(find_sound("sounds/"+soundpack+"/misc/ui/menus/"+menupack+"/*open*"),false);
     while (true)
     {
         wait(5);
@@ -1431,7 +1389,7 @@ completesound = form.is_checked(compsound);
 togglesound = form.is_checked(togsound);
         if (form.is_pressed(cancel) || key_repeating(KEY_ESCAPE))
         {
-spool.play_stationary("menuclose.ogg",false);
+spool.play_stationary(find_sound("sounds/"+soundpack+"/misc/ui/menus/"+menupack+"/*close*"),false);
             preffsmenu();
         }
         if (form.is_pressed(ok))
@@ -1456,7 +1414,7 @@ int levsound = form.create_checkbox("Enable levelup sound effects.", playlevels)
     int cancel = form.create_button("&cancel");
 int ok = form.create_button("&okay");
 form.focus(runmode);
-spool.play_stationary("menuopen.ogg",false);
+spool.play_stationary(find_sound("sounds/"+soundpack+"/misc/ui/menus/"+menupack+"/*open*"),false);
     while (true)
     {
         wait(5);
@@ -1473,7 +1431,7 @@ autorun = form.is_checked(runmode);
             playlevels = form.is_checked(levsound);
         if (form.is_pressed(cancel) || key_repeating(KEY_ESCAPE))
         {
-spool.play_stationary("menuclose.ogg",false);
+spool.play_stationary(find_sound("sounds/"+soundpack+"/misc/ui/menus/"+menupack+"/*close*"),false);
 speak("canceled");
 resume_game();
 return;
@@ -1505,10 +1463,23 @@ int masterGameVolumeSlider = form.create_slider("master game volume: adjustable"
 form.add_list_item(musList, "BossMusic: normal mode", "bossmus");
 form.add_list_item(musList, "Game Music: normal and endless mode", "gamemus");
 int sdm = form.create_button("Select sound &device. Currently set to " + soundcard);
+int sgm, slm, spk;
+if (dlgpack == "")
+sgm = form.create_button("Select dialo&g theme for the " + soundpack + " sound pack. Currently set to nothing");
+else
+sgm = form.create_button("Select dialo&g theme for the " + soundpack + " sound pack. Currently set to " + dlgpack);
+if (menupack == "")
+slm = form.create_button("Select &menu theme for the " + soundpack + " sound pack. Currently set to nothing");
+else
+slm = form.create_button("Select &menu theme for the " + soundpack + " sound pack. Currently set to " + menupack);
+if (soundpack == "")
+spk = form.create_button("Select sound &pack. Currently set to nothing");
+else
+spk = form.create_button("Select sound &pack. Currently set to " + soundpack);
 int cancel = form.create_button("&cancel");
 int ok = form.create_button("&okay");
 form.focus(gameAlarmVolumeSlider);
-spool.play_stationary("menuopen.ogg",false);
+spool.play_stationary(find_sound("sounds/"+soundpack+"/misc/ui/menus/"+menupack+"/*open*"),false);
     while (true)
     {
         wait(5);
@@ -1521,7 +1492,7 @@ mustype = form.get_list_item_id(musList, currentMusIndex);
     if (muspool.sound_is_playing(toytrackslot))
     {
         muspool.destroy_sound(toytrackslot);
-            toytrackslot = muspool.play_stationary(mustype + ".ogg", true);
+            toytrackslot = muspool.play_stationary(find_sound("sounds/"+soundpack+"/objects/sources/tracks/*"+mustype+"*"), true);
 lastMusicIndex = currentMusIndex;
     }
     else
@@ -1547,7 +1518,7 @@ ambpool.destroy_sound(toyambslot);
 muspool.destroy_sound(toytrackslot);
 alarmpool.destroy_sound(alarmslot);
 heartpool.destroy_sound(heartslot);
-spool.play_stationary("menuclose.ogg",false);
+spool.play_stationary(find_sound("sounds/"+soundpack+"/misc/ui/menus/"+menupack+"/*close*"),false);
             preffsmenu();
         }
         if (form.is_pressed(ok))
@@ -1562,22 +1533,22 @@ if (form.is_pressed(ambTest))
 {
     if (ambpool.sound_is_playing(toyambslot))
 {
-if(togglesound==true) spool.play_stationary("setdisabled.ogg",false);
+if(togglesound==true) spool.play_stationary(find_sound("sounds/"+soundpack+"/misc/ui/menus/"+menupack+"/*disable*"),false);
 speak("ambience off");
         ambpool.destroy_sound(toyambslot);
     }
 else
 {
-if(togglesound==true) spool.play_stationary("setenabled.ogg",false);
+if(togglesound==true) spool.play_stationary(find_sound("sounds/"+soundpack+"/misc/ui/menus/"+menupack+"/*enable*"),false);
 speak("ambience on");
-        toyambslot = ambpool.play_stationary("gameamb.ogg", true);
+        toyambslot = ambpool.play_stationary(find_sound("sounds/"+soundpack+"/objects/sources/ambiences/*gameloop*"), true);
     }
 }
 if (form.is_pressed(musTest))
 {
     if (muspool.sound_is_playing(toytrackslot))
     {
-if(togglesound==true) spool.play_stationary("setdisabled.ogg", false);
+if(togglesound==true) spool.play_stationary(find_sound("sounds/"+soundpack+"/misc/ui/menus/"+menupack+"/*disable*"), false);
 speak("music off");
         muspool.destroy_sound(toytrackslot);
         lastMusicIndex = -1;
@@ -1588,10 +1559,10 @@ speak("music off");
         if (musIndex >= 0)
         {
 mustype = form.get_list_item_id(musList, musIndex);
-if(togglesound==true) spool.play_stationary("setenabled.ogg", false);
+if(togglesound==true) spool.play_stationary(find_sound("sounds/"+soundpack+"/misc/ui/menus/"+menupack+"/*enable*"), false);
 speak("music on");
             muspool.destroy_sound(toytrackslot);
-            toytrackslot = muspool.play_stationary(mustype + ".ogg", true);
+            toytrackslot = muspool.play_stationary(find_sound("sounds/"+soundpack+"/objects/sources/tracks/*"+mustype+"*"), true);
             lastMusicIndex = musIndex;
         }
     }
@@ -1600,30 +1571,30 @@ if (form.is_pressed(alarmTest))
 {
     if (alarmpool.sound_is_playing(alarmslot))
 {
-if(togglesound==true) spool.play_stationary("setdisabled.ogg",false);
+if(togglesound==true) spool.play_stationary(find_sound("sounds/"+soundpack+"/misc/ui/menus/"+menupack+"/*disable*"), false);
 speak("alarm off");
         alarmpool.destroy_sound(alarmslot);
     }
 else
 {
-if(togglesound==true) spool.play_stationary("setenabled.ogg",false);
+if(togglesound==true) spool.play_stationary(find_sound("sounds/"+soundpack+"/misc/ui/menus/"+menupack+"/*enable*"), false);
 speak("alarm on");
-        alarmslot = alarmpool.play_stationary("gamealarm.ogg", true);
+        alarmslot = alarmpool.play_stationary(find_sound("sounds/"+soundpack+"/objects/sources/ambiences/*alarmloop*"), true);
     }
 }
 if (form.is_pressed(heartbeatTest))
 {
     if (heartpool.sound_is_playing(heartslot))
 {
-if(togglesound==true) spool.play_stationary("setdisabled.ogg",false);
+if(togglesound==true) spool.play_stationary(find_sound("sounds/"+soundpack+"/misc/ui/menus/"+menupack+"/*disable*"), false);
 speak("heartbeat off");
         heartpool.destroy_sound(heartslot);
     }
 else
 {
-if(togglesound==true) spool.play_stationary("setenabled.ogg",false);
+if(togglesound==true) spool.play_stationary(find_sound("sounds/"+soundpack+"/misc/ui/menus/"+menupack+"/*enable*"), false);
 speak("heartbeat on");
-        heartslot = heartpool.play_stationary("heartstart.ogg", true);
+        heartslot = heartpool.play_stationary(find_sound("sounds/"+soundpack+"/misc/player/*heartstart*"), true);
     }
 }
 if(form.is_pressed(sdm))
@@ -1651,12 +1622,125 @@ soundsetsmenu();
     {
         soundcard = devices[mres];
         sound_output_device = mres + 1;
-if(completesound==true) dlgplay("complete.ogg");
+if(completesound==true) dlgplay(find_sound("sounds/"+soundpack+"/misc/ui/menus/"+menupack+"/*complete*"));
 dlgmessage_return("Sound device set to "+soundcard+".");
 soundsetsmenu();
 }
 }
-    }
+if(form.is_pressed(sgm))
+{
+ambpool.destroy_sound(toyambslot);
+muspool.destroy_sound(toytrackslot);
+alarmpool.destroy_sound(alarmslot);
+heartpool.destroy_sound(heartslot);
+string[] dlgpacktyp=find_directories("sounds/"+soundpack+"/misc/ui/dialogs/*");
+if(dlgpacktyp.length()==0)
+{
+dlgmessage_return("Error. There are no dialog themes available to view.");
+soundsetsmenu();
+}
+else
+{
+string[] dlgpacks=find_directories("sounds/"+soundpack+"/misc/ui/dialogs/*");
+setupmenu(false);
+for(uint i=0; i<dlgpacks.length(); i++)
+{
+uint64 size = get_directory_size("sounds/"+soundpack+"/misc/ui/dialogs/" + dlgpacks[i]);
+string readable_size = measure_file_size(size);
+m.add_item(dlgpacks[i]+", size: "+readable_size,dlgpacks[i]);
+}
+m.intro_text="Choose the dialog theme you would like to use to read all dialogs.";
+int mres=m.run();
+if(mres==-1)
+{
+soundsetsmenu();
+}
+else if (mres>=0 and mres<dlgpacks.length())
+{
+dlgpack=dlgpacks[mres];
+if(completesound==true) dlgplay(find_sound("sounds/"+soundpack+"/misc/ui/menus/"+menupack+"/*complete*"));
+dlgmessage_return("Dialog theme set to "+dlgpack+".");
+soundsetsmenu();
+}
+}
+}
+if(form.is_pressed(slm))
+{
+ambpool.destroy_sound(toyambslot);
+muspool.destroy_sound(toytrackslot);
+alarmpool.destroy_sound(alarmslot);
+heartpool.destroy_sound(heartslot);
+string[] menupacktyp=find_directories("sounds/"+soundpack+"/misc/ui/menus/*");
+if(menupacktyp.length()==0)
+{
+dlgmessage_return("Error. There are no dialog themes available to view.");
+soundsetsmenu();
+}
+else
+{
+string[] menupacks=find_directories("sounds/"+soundpack+"/misc/ui/menus/*");
+setupmenu(false);
+for(uint i=0; i<menupacks.length(); i++)
+{
+uint64 size = get_directory_size("sounds/"+soundpack+"/misc/ui/menus/" + menupacks[i]);
+string readable_size = measure_file_size(size);
+m.add_item(menupacks[i]+", size: "+readable_size,menupacks[i]);
+}
+m.intro_text="Choose the menu theme you would like to use in all menus.";
+int mres=m.run();
+if(mres==-1)
+{
+soundsetsmenu();
+}
+else if (mres>=0 and mres<menupacks.length())
+{
+menupack=menupacks[mres];
+if(completesound==true) dlgplay(find_sound("sounds/"+soundpack+"/misc/ui/menus/"+menupack+"/*complete*"));
+dlgmessage_return("Menu theme set to "+menupack+".");
+soundsetsmenu();
+}
+}
+}
+if(form.is_pressed(spk))
+{
+ambpool.destroy_sound(toyambslot);
+muspool.destroy_sound(toytrackslot);
+alarmpool.destroy_sound(alarmslot);
+heartpool.destroy_sound(heartslot);
+string[] soundpacktyp=find_directories("sounds/*");
+if(soundpacktyp.length()==0)
+{
+dlgmessage_return("Error. There are no sound packs available to view.");
+soundsetsmenu();
+}
+else
+{
+string[] soundpacks=find_directories("sounds/*");
+setupmenu(false);
+for(uint i=0; i<soundpacks.length(); i++)
+{
+uint64 size = get_directory_size("sounds/" + soundpacks[i]);
+string readable_size = measure_file_size(size);
+m.add_item(soundpacks[i]+", size: "+readable_size,soundpacks[i]);
+}
+m.intro_text="Choose the sound pack you would like to use throughout the intire game.";
+int mres=m.run();
+if(mres==-1)
+{
+soundsetsmenu();
+}
+else if (mres>=0 and mres<soundpacks.length())
+{
+dlgpack="";
+menupack="";
+soundpack=soundpacks[mres];
+if(completesound==true) dlgplay(find_sound("sounds/"+soundpack+"/misc/ui/menus/"+menupack+"/*complete*"));
+dlgmessage_return("Sound pack set to "+soundpack+".");
+soundsetsmenu();
+}
+}
+}
+}
 }
 void soundsetsmenu2()
 {
@@ -1669,7 +1753,7 @@ int gameHeartbeatVolumeSlider = form.create_slider("game heartbeat volume: adjus
 int cancel = form.create_button("&cancel");
 int ok = form.create_button("&okay");
 form.focus(gameAmbienceVolumeSlider);
-spool.play_stationary("menuopen.ogg",false);
+spool.play_stationary(find_sound("sounds/"+soundpack+"/misc/ui/menus/"+menupack+"/*open*"),false);
     while (true)
     {
         wait(5);
@@ -1684,7 +1768,7 @@ heartvolume = (form.get_slider(gameHeartbeatVolumeSlider) / 2) - 50;
         heartpool.update_sound_start_values(heartslot, 0, heartvolume, heartpitch);
         if (form.is_pressed(cancel) || key_repeating(KEY_ESCAPE))
         {
-spool.play_stationary("menuclose.ogg",false);
+spool.play_stationary(find_sound("sounds/"+soundpack+"/misc/ui/menus/"+menupack+"/*close*"),false);
 speak("canceled");
 resume_game();
 return;

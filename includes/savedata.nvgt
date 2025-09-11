@@ -19,6 +19,11 @@ key=enckey;
 //the function to load the saved data into the dictionary.
 void load()
 {
+		if (!file_exists(fn))
+		{
+			d.clear();
+			return;
+		}
 file f;
 //fn is our previously declared filename string, so use that.
 f.open(fn,"rb");
@@ -47,6 +52,7 @@ if (key=="")
 f.write(serialize(d));
 else
 f.write(string_encrypt(serialize(d),key));
+f.close();
 }
 //overloaded function of add to add a boolion.
 void add(string name, bool value)
@@ -102,7 +108,7 @@ void add(string name, int64 value)
 d.set(name,value);
 }
 //function to read a number.
-int read_int64(string name)
+int64 read_int64(string name)
 {
 int64 tmp;
 d.get(name,tmp);

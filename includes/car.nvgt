@@ -73,17 +73,17 @@ if (cars[i].fireable==true && cars[i].firing && cars[i].firetimer.elapsed >= car
         direction = dy > 0 ? "down" : "up";
     if (cars[i].cartype == "car1")
     {
-        cars[i].firesound = bulletpool.play_2d("car1shoot.ogg", me.x, me.y, cars[i].carx, cars[i].cary, false);
+        cars[i].firesound = carpool.play_2d("car1shoot.ogg", me.x, me.y, cars[i].carx, cars[i].cary, false);
         spawn_bullet(cars[i].carx, cars[i].cary, 0, 0, random(10, 20), 30, direction);
     }
     else if (cars[i].cartype == "car2")
     {
-        cars[i].firesound = bulletpool.play_2d("car2shoot.ogg", me.x, me.y, cars[i].carx, cars[i].cary, false);
+        cars[i].firesound = carpool.play_2d("car2shoot.ogg", me.x, me.y, cars[i].carx, cars[i].cary, false);
         spawn_bullet(cars[i].carx, cars[i].cary, 0, 0, random(20, 40), 30, direction);
     }
     else if (cars[i].cartype == "car3")
     {
-        cars[i].firesound = bulletpool.play_2d("car3shoot.ogg", me.x, me.y, cars[i].carx, cars[i].cary, false);
+        cars[i].firesound = carpool.play_2d("car3shoot.ogg", me.x, me.y, cars[i].carx, cars[i].cary, false);
         spawn_bullet(cars[i].carx, cars[i].cary, 0, 0, random(30, 60), 30, direction);
     }
     cars[i].shotsFired++;

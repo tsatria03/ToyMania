@@ -29,6 +29,7 @@ bool medium_storedest=false;
 bool completesound=true;
 bool togglesound=true;
 bool showset_desc=true;
+bool melee=false;
 bool pistol_initialized = false;
 bool machinegun_initialized = false;
 bool isReloading = false;
@@ -36,8 +37,8 @@ bool auto_check_updates = true;
 bool autorun=false;
 const int max_entities = 50;
 double alarmvolume=0, alarmpitch=100, heartvolume=0, heartpitch=100, toyambvolume=0, toyambpitch=100, toymusvolume=0, toymuspitch=100;
-double ammo=50, maxammo=50, reserved_ammo=250, max_reserved_ammo=250;
-double collected_keys=0, collected_toys=0, destroyed_cars=0, health=1000, maxhealth=1000, storehealth=1000, storemaxhealth=1000, killed_gards=0, level=1, money=0, moved_steps=0, bitplays=0, crashplays=0, swordplays=0, stoneplays=0, total_collected_toys=0, total_collected_keys=0, total_killed_gards=0, total_destroyed_cars=0, total_moved_steps=0;
+double ammo=50, maxammo=50, reserved_ammo=50, max_reserved_ammo=50;
+double collected_keys=0, collected_toys=0, destroyed_cars=0, health=1000, maxhealth=1000, storehealth=1000, storemaxhealth=1000, killed_gards=0, level=1, money=0, moved_steps=0, total_collected_toys=0, total_collected_keys=0, total_killed_gards=0, total_destroyed_cars=0, total_moved_steps=0;
 double maxx=50, maxy=50;
 float master_volume = 0;
 int achslot, invslot, itemslot, painslot, toyambslot, toytrackslot, weaponslot, alarmslot, heartslot, countslot;
@@ -46,32 +47,45 @@ int bossnum=1, carnum=5, gardnum=10, keynum=15, objnum=15, toynum=20;
 int bossespawntime=5000, objspawntime=2500, carspawntime=1000, gardspawntime=500, keyspawntime=250, toyspawntime=125;
 int boss_time_limit = 90000;
 int last_level_time = 0;
-int weprange=5, weprange2=10, wepdamage=20;
-int firetime=50, firetime2=100;
+int wephold=0, wepweight=0, weprange=5, weprange2=10, wepdamage=20;
+int weapontime=50, weapontime2=100;
 int runtime=100;
 int usetime=100;
 int walktime=200;
 int lastMusicIndex = -1;
 int save_interval = 5000;
-int reloadDuration = 2500;
+int reload_duration = 2500;
 int64 session_playtime = 0;
 int64 total_playtime = 0;
-string facing="left";
-string last_learn_category = "";
-string last_learn_sound = "";
-string savePath = DIRECTORY_APPDATA + "tsatria03/ToyMania/saves/";
-string statsPath = DIRECTORY_APPDATA + "tsatria03/ToyMania/stats/";
+string current_weapon;
+string bosstyp;
+string cartyp;
+string doortyp;
+string gardtyp;
+string keytyp;
+string objtyp;
+string objtyp2;
+string tiletyp;
+string toytyp;
+string toytyp2;
 string last_played_date;
 string last_played_time;
-string ambtype="gameamb";
+string toydesc;
+string last_learn_category="";
+string last_learn_sound="";
+string facing="right";
+string savePath = DIRECTORY_APPDATA + "tsatria03/ToyMania/saves/";
+string statsPath = DIRECTORY_APPDATA + "tsatria03/ToyMania/stats/";
+string dlgpack="default";
+string menupack="default";
+string soundpack="default";
 string mustype="gamemus";
-string current_weapon;
-string weapontype="bat";
+string weapontype="melee";
+string weapontype2="bat";
 string soundcard="Default";
-string version="4.1";
-timer boss_timer, bossespawntimer, carspawntimer, firetimer, firetimer2, gametimer, gardspawntimer, objspawntimer, keyspawntimer, movetimer, runtimer, toyspawntimer, usetimer, walktimer;
-timer reloadTimer, savedata_timer;
-file achfile, gamfile, poastfile, statfile;
+string version="4.2";
+timer boss_timer, bossespawntimer, carspawntimer, gametimer, gardspawntimer, objspawntimer, keyspawntimer, movetimer, runtimer, toyspawntimer, usetimer, walktimer, weapontimer, weapontimer2, reloadTimer, savedata_timer;
+file achfile, gamfile, poastfile, statfile, toyfile, wepfile;
 pack dockpack;
 instance gamstence("tm");
 audio_form form;
@@ -89,8 +103,6 @@ void main()
 {
     last_played_date = get_date(true, false);
     last_played_time = get_time(true, false);
-set_sound_storage("data/assets.tmg");
-set_sound_decryption_key("LGY24P2p56riZXtvhxtONfyBQgVZZS8wJnVSJEZ0zOOeQr3THFTtlyIXYI04Dgbk2SD1DoCMFk8QuRPv7DhlAXJDb3XzEt8vd9RcU8LW0LzcXkHvJUmkWbAtJ8ITyuCF0CkpPcW6eiPsjGDU9rlVufn8GSO2vy4KAjcLe",true);
 dummy.load("dummy");
 load_achievements();
 if (!directory_exists(savePath)) directory_create(savePath);
@@ -104,6 +116,7 @@ if (@timeelapsed.handle == null)
 {
     timeelapsed.set_timer(gametimer);
 }
+get_toydescs();
 show_window("ToyMania, version "+version);
 if(gamstence.is_already_running)
 {
@@ -112,6 +125,7 @@ exit();
 }
 else
 {
+weaponparse();
     if (auto_check_updates)
     {
         check_for_updates(version, "ToyMania");
@@ -119,6 +133,12 @@ else
 wait(500);
     mainmenu();
 }
+}
+void get_toydescs()
+{
+toyfile.open("sounds/"+soundpack+"/toys/"+toytyp+"/"+toytyp2+"/info.tmf","rb");
+toydesc=toyfile.read();
+toyfile.close();
 }
 void pause_game()
 {
@@ -163,13 +183,12 @@ total_playtime=0;
 void resetpreffs()
 {
 soundcard="Default";
+dlgpack="default";
+menupack="default";
+soundpack="default";
 sound_output_device=1;
 menumusvolume=0;
 master_volume = 0;
-bitplays=0;
-crashplays=0;
-stoneplays=0;
-swordplays=0;
 alarmvolume=0;
 heartvolume=0;
 toyambvolume=0;

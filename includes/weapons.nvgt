@@ -21,9 +21,86 @@ string get_weapon_hit_sound()
     if (weapontype == "fist") count = 2;
     return weapontype + "hit" + random(1, count) + ".ogg";
 }
+
+void arseparse(string wepcad)
+{
+if(file_exists("sounds/"+soundpack+"/equipments/weapons/"+wepcad+"/"+weapontype2+"/info.tmf"))
+{
+bool success=wepfile.open("sounds/"+soundpack+"/equipments/weapons/"+wepcad+"/"+weapontype2+"/info.tmf", "rb");
+if(!success)
+{
+mainmenu();
+}
+string content=wepfile.read();
+string[] lines=string_split(content,"\r\n",true);
+for(uint i=0; i<lines.length(); i++)
+{
+string[] data=string_split(lines[i],"=",true);
+if (data.length()<2)
+{
+alert("Error","Error reading line "+(i+1)+".");
+mainmenu();
+}
+if (data[0]=="damage")
+{
+wepdamage=parse_int(data[1]);
+}
+if (data[0]=="mode")
+{
+wephold=parse_int(data[1]);
+}
+if (data[0]=="horizontal range")
+{
+weprange=parse_int(data[1]);
+}
+if (data[0]=="vertical range")
+{
+weprange2=parse_int(data[1]);
+}
+if (data[0]=="repeat time")
+{
+weapontime=parse_int(data[1]);
+}
+if (data[0]=="spam time")
+{
+weapontime2=parse_int(data[1]);
+}
+if (data[0]=="weight")
+{
+wepweight=parse_int(data[1]);
+}
+if (data[0]=="ammo")
+{
+ammo=parse_double(data[1]);
+}
+if (data[0]=="max ammo")
+{
+maxammo=parse_double(data[1]);
+}
+if (data[0]=="reserved ammo")
+{
+reserved_ammo=parse_double(data[1]);
+}
+if (data[0]=="max reserved ammo")
+{
+max_reserved_ammo=parse_double(data[1]);
+}
+if (data[0]=="reload time")
+{
+reload_duration=parse_int(data[1]);
+}
+}
+}
+}
+void weaponparse()
+{
+arseparse("artillery");
+arseparse("melee");
+}
+
 void check_weapon_reload()
 {
-    if (!isReloading || reloadTimer.elapsed < reloadDuration) return;
+    if (!isReloading || reloadTimer.elapsed < reload_duration) return;
     double needed_ammo = maxammo - ammo;
     double ammo_to_load = min(needed_ammo, reserved_ammo);
     if (ammo_to_load > 0)
@@ -46,9 +123,9 @@ void draw_weapon(string weapon)
     wepdamage = 0;
     weprange = 0;
     weprange2 = 0;
-    firetime = 50;
-    firetime2 = 100;
-    reloadDuration = 0;
+    weapontime = 50;
+    weapontime2 = 100;
+    reload_duration = 0;
     if (weapon == "bat")        { wepdamage = 3;  weprange = 1;  weprange2 = 2; }
     else if (weapon == "boot")  { wepdamage = 6;  weprange = 2;  weprange2 = 3; }
     else if (weapon == "club")  { wepdamage = 9;  weprange = 3;  weprange2 = 4; }
@@ -62,9 +139,9 @@ void draw_weapon(string weapon)
         wepdamage = 27;
         weprange = 9;
         weprange2 = 10;
-        firetime = 50;
-        firetime2 = 100;
-        reloadDuration = 2500;
+        weapontime = 50;
+        weapontime2 = 100;
+        reload_duration = 2500;
         if (!machinegun_initialized)
         {
             ammo = 50;
@@ -79,9 +156,9 @@ void draw_weapon(string weapon)
         wepdamage = 27;
         weprange = 9;
         weprange2 = 10;
-        firetime = 50;
-        firetime2 = 100;
-        reloadDuration = 2000;
+        weapontime = 50;
+        weapontime2 = 100;
+        reload_duration = 2000;
         if (!pistol_initialized)
         {
             ammo = 50;
@@ -242,9 +319,9 @@ void reset_weapons()
     maxammo = 0;
     reserved_ammo = 0;
     max_reserved_ammo = 0;
-    firetime = 50;
-    firetime2 = 100;
-    reloadDuration = 0;
+    weapontime = 50;
+    weapontime2 = 100;
+    reload_duration = 0;
     isReloading = false;
     pistol_initialized = false;
     machinegun_initialized = false;

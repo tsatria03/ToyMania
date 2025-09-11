@@ -95,6 +95,25 @@ mt=platforms[i].tile;
 }
 return mt;
 }
+string measure_file_size(int64 bytes)
+{
+if(bytes<1024)
+{
+return bytes+"bytes";
+}
+else if(bytes<1024*1024)
+{
+return round(double(bytes)/1024,2)+"KB";
+}
+else if(bytes<1024*1024*1024)
+{
+return round(double(bytes)/(1024*1024),2)+"MB";
+}
+else 
+{
+return round(double(bytes)/(1024*1024*1024),2)+"GB";
+}
+}
 string measure_time_units(int64 milliseconds)
 {
 int64 seconds = milliseconds / 1000;
@@ -183,6 +202,21 @@ string strip_directory(string path)
     if (lastSlash != -1)
         return path.substr(lastSlash + 1);
     return path;
+}
+uint64 get_directory_size(const string&in dir)
+{
+uint64 result=0;
+string[]@ subdirs = find_directories(dir + "/*");
+for (uint i = 0; i < subdirs.length(); i++)
+{
+result += get_directory_size(dir + "/" + subdirs[i]);
+}
+string[]@ files = find_files(dir + "/*");
+for (uint i = 0; i < files.length(); i++)
+{
+result += file_get_size(dir + "/" + files[i]);
+}
+return result;
 }
 void apply_pitch_pool_settings()
 {

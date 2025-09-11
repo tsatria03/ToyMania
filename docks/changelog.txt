@@ -1,3 +1,14 @@
+New in 4.2.
+Added an info file to all of the key folders. You can now put your own descriptions to all of the keys found in your inventory.
+Added an info file to all of the weapon folders. You can now put your own stats to all of the weapons used in the game.
+You can now choose the dialog theme you want to use for reading various game dialogs in the sound settings menu.
+You can now choose the menu theme you want to use for navigating various game menus in the sound settings menu.
+You can now choose the default soundpack to use for the entire game in the sound settings menu.
+Refactored the speaker test menu to take random speaker test sounds instead of preconfigured ones.
+Added an info file to all of the toy folders. You can now put your own descriptions to all of the toys found in your inventory.
+You can now cycle through the toys you've collected in the normal and endless games when pressing the tab key.
+Renamed all of the toys found in the toys folder with their own Distinct names. Thanks goes to my best friend Keri for helping me think of names to give each of the toys found in the folder.
+Added full soundpack support to the game. The game's sounds will no longer be encrypted from now on.
 New in 4.1.
 Made it so turning sounds play in 2d for your character.
 Added a new concrete platform to walk on. This platform will now be used in the endless game moving forward.
@@ -19,7 +30,7 @@ Added the ability to manually aim at a target by holding shift and pressing the 
 Added some more item and player related sounds into the learn game sounds menu.
 Made it so when a user has Purchased an item from the endless shop, the game returns them back to the menu, rather than making them exit the shop menu entirely. This also applies to making invalid purchases as well.
 Fixed a bug where darts acted like teleporters when being used from your inventory.
-Added the ability to face a certain direction when moving. This is very useful for aiming at various entities when using tactical items in the game. You can pres shift plus the arrow keys to do this.
+Added the ability to face a certain direction when moving. This is very useful for aiming at various entities when using tactical items in the game.
 Added the dart item for purchase in the shop menu. These will stun enemies for a certain amount of time when used from your inventory. This item is only available in the endless game.
 Made it so you get spawned in different places of the map depending on witch game mode you're playing on.
 Made it so the endless map is now expanded from 50 to 100 square tiles for both x and y on the grid.
