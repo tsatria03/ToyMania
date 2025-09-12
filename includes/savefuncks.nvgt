@@ -179,6 +179,10 @@ if (st.d.exists("speak_ach_scores"))
 {
 speak_ach_scores = st.read_bool("speak_ach_scores");
 }
+if (st.d.exists("speak_item_collects"))
+{
+speak_item_collects = st.read_bool("speak_item_collects");
+}
 if (st.d.exists("speak_dlg_enter"))
 {
 speak_dlg_enter = st.read_bool("speak_dlg_enter");
@@ -186,10 +190,6 @@ speak_dlg_enter = st.read_bool("speak_dlg_enter");
 if (st.d.exists("speak_menu_loading"))
 {
 speak_menu_loading = st.read_bool("speak_menu_loading");
-}
-if (st.d.exists("speak_item_collects"))
-{
-speak_item_collects = st.read_bool("speak_item_collects");
 }
 if (st.d.exists("gamcopy"))
 {
@@ -266,9 +266,9 @@ st.add("behind_pitch", behind_pitch);
 st.add("hrtf", hrtf);
 st.add("play_ach_scores", play_ach_scores);
 st.add("speak_ach_scores", speak_ach_scores);
+st.add("speak_item_collects", speak_item_collects);
 st.add("speak_dlg_enter", speak_dlg_enter);
 st.add("speak_menu_loading", speak_menu_loading);
-st.add("speak_item_collects", speak_item_collects);
 st.add("gamcopy", gamcopy);
 st.add("statscopy", statscopy);
 st.add("loop_previews", loop_previews);

@@ -15,7 +15,7 @@ Letter, L: Announces what level you're on and the game mode at witch you are pla
 Letter, Y: Announces how much time you've been playing the game for, if pressed. In the sixth level of the Normal game Mode, it announces how much time you have left to escape the store instead.
 Letter, T: Announces how many toys you've collected, if pressed.
 Letter, O: Announces how many collectible toys there are on the field, if pressed.
-Letter, I: Announces how many keys you've collected, if pressed.
+Letter, K: Announces how many keys you've collected, if pressed.
 Letter, U: Announces how many collectible keys there are on the field, if pressed.
 Shift plus letter D: Announces how many keys are required to unlock the winning door, if pressed.
 Letter, D: Announces the position of the winning door in Endless Mode, including its coordinates, if pressed. In Normal Mode, it tells you how far the door is in feet.

@@ -1,4 +1,7 @@
 New in 4.3.
+Resolved an issue where selecting an item in the inventory menu would cause the wrong item to be used based on the cycle's position while pressing tab to go through it.
+Added an inventory menu to make finding and using items a bit easier. You can press the letter I to open it.
+Changed the keyboard shortcut from I to K to check how many keys you've collected.
 Added an option in the game settings menu that controls weather all of the items should get announced as they're being collected. This also includes keys and toys, not just normal useable items.
 Refactored the door class to make use of the keys you currently have in your inventory, along with how many keys you already have in total.
 Fixed a bug where the pistol weapon would be randomly equipped in the endless game, even though that weapon was only reserved for the normal game.

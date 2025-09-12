@@ -803,6 +803,45 @@ shopmenu();
 shopmenu();
         return;
 }
+void invmenu()
+{
+if (inv.get_size() == 0)
+{
+speak("Your inventory is currently empty.");
+return;
+}
+setupmenu(false);
+string[] keys = inv.get_keys();
+keys.sort_ascending();
+for (uint i = 0; i < keys.length(); i++)
+{
+int amt;
+inv.get(keys[i], amt);
+string label = keys[i] + (amt == 1 ? "" : "s") + ", you have " + amt;
+m.add_item(label, keys[i]);
+}
+int total = count_total_items();
+m.intro_text = "Items menu. You currently have " + total + " item" + (total == 1 ? "" : "s") + " in your inventory.";
+int mres = m.run();
+string choice = m.get_selected_item_id();
+if (mres == -1)
+{
+speak("Canceled");
+boss_timer.resume();
+gametimer.resume();
+return;
+}
+if (choice == "")
+{
+speak("Canceled");
+boss_timer.resume();
+gametimer.resume();
+return;
+}
+useitem(choice);
+boss_timer.resume();
+gametimer.resume();
+}
 void weaponsmenu()
 {
 setupmenu(false);
@@ -1331,15 +1370,15 @@ if (showset_desc) achsound2 = form.create_input_box("Achievement SFX: descriptio
 int achvoice = form.create_checkbox("Enable achievement speech feedback.", speak_ach_scores);
 int achvoice2 = -1;
 if (showset_desc) achvoice2 = form.create_input_box("Achievement speech: description", "This setting controls the spoken announcements of achievement progresses.", "", 0, true, true);
+int collectspeech = form.create_checkbox("Enable item collect speech feedback.", speak_item_collects);
+int collectspeech2 = -1;
+if (showset_desc) collectspeech2 = form.create_input_box("Item collect speech: description", "This setting controls whether items should get announced as they're being collected.", "", 0, true, true);
 int dlgspeech = form.create_checkbox("Enable dialog end speech feedback.", speak_dlg_enter);
 int dlgspeech2 = -1;
 if (showset_desc) dlgspeech2 = form.create_input_box("Dialog speech: description", "This setting controls whether the phrase 'Press enter or space to continue' is spoken after dialog messages.", "", 0, true, true);
 int loadspeech = form.create_checkbox("Enable menu loading speech feedback.", speak_menu_loading);
 int loadspeech2 = -1;
 if (showset_desc) loadspeech2 = form.create_input_box("Menu loading speech: description", "This setting controls whether the 'Loading' phrase is spoken when opening various menus.", "", 0, true, true);
-int collectspeech = form.create_checkbox("Enable item collect speech feedback.", speak_item_collects);
-int collectspeech2 = -1;
-if (showset_desc) collectspeech2 = form.create_input_box("Item collect speech: description", "This setting controls whether items should get announced as they're being collected.", "", 0, true, true);
 int gcp = form.create_checkbox("Enable post-game copy and export prompts.", gamcopy);
 int gcp2 = -1;
 if (showset_desc) gcp2 = form.create_input_box("Post-game copy/export: description", "This setting controls whether the game asks if you'd like to copy your session stats after pause, death or victory.", "", 0, true, true);
@@ -1387,9 +1426,9 @@ autorun = form.is_checked(runmode);
             sound_global_hrtf = hrtf;
             play_ach_scores = form.is_checked(achsound);
             speak_ach_scores = form.is_checked(achvoice);
+speak_item_collects = form.is_checked(collectspeech);
             speak_dlg_enter = form.is_checked(dlgspeech);
             speak_menu_loading = form.is_checked(loadspeech);
-speak_item_collects = form.is_checked(collectspeech);
             gamcopy = form.is_checked(gcp);
             statscopy = form.is_checked(scp);
             loop_previews = form.is_checked(lps);

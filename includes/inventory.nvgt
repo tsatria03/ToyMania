@@ -52,7 +52,7 @@ speak("No items");
 }
 else
 {
-current=inv.get_keys()[invpos];
+invpos = inv.get_keys().find(current);
 if (current == "ammo_pack")
 {
     double missing_ammo = max(0, max_reserved_ammo - reserved_ammo);

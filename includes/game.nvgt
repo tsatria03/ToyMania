@@ -185,6 +185,12 @@ ambpool.update_sound_start_values(toyambslot,0,toyambvolume,toyambpitch);
 speak("source "+toyambvolume);
 writepreffs();
 }
+if (key_pressed(KEY_I) and doormove == false)
+{
+boss_timer.pause();
+gametimer.pause();
+    invmenu();
+}
 if (key_pressed(KEY_W) and doormove == false)
 {
 boss_timer.pause();
@@ -319,7 +325,7 @@ if(key_pressed(KEY_T) and doormove==false)
 {
 speak("You've collected "+collected_toys+" toys.");
 }
-if(key_pressed(KEY_I) and doormove==false)
+if(key_pressed(KEY_K) and doormove==false)
 {
 speak("You've collected "+collected_keys+" keys.");
 }
