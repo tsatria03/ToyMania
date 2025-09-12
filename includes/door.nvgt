@@ -54,13 +54,26 @@ doors[i].jamsound = doorpool.play_stationary(find_sound("sounds/"+soundpack+"/ob
                 speak("The door is jammed! Something dangerous is nearby!");
                 return;
             }
-            if (collected_keys < doors[i].required_keys)
-            {
+int inv_key_count = 0;
+string[] keycats = {"common", "other"};
+for (uint k = 0; k < keycats.length(); k++)
+{
+string cat = keycats[k];
+string[] keytypes = find_directories("sounds/" + soundpack + "/equipments/items/normal/keys/" + cat + "/*");
+for (uint j = 0; j < keytypes.length(); j++)
+{
+inv_key_count += max(0, item_exists(keytypes[j]));
+}
+}
+int total_keys_available = collected_keys + inv_key_count;
+if (total_keys_available < doors[i].required_keys)
+{
 temp.destroy_sound(doors[i].locksound);
 doors[i].locksound = temp.play_stationary(find_sound("sounds/"+soundpack+"/objects/doors/"+doors[i].doortype+"/*lock*"), false);
-                speak("This door is locked. You need " + doors[i].required_keys + " more keys to unlock it.");
-            }
-            else
+speak("This door is locked. You need " + doors[i].required_keys + " more keys to unlock it.");
+return;
+}
+else
             {
 bool used_key = false;
 string[] keycats = {"common", "other"};
