@@ -542,7 +542,15 @@ gardspawntimer.restart();
 }
 if(keyspawntimer.elapsed>=keyspawntime and keys.length()<keynum and keyspawn==true)
 {
-spawn_key(random(0,maxx), random(0,maxy), random(2500,5000), keydest);
+string[] keycats = {"common", "other"};
+string keycat = random_string(keycats);
+string[] keytypes = find_directories("sounds/" + soundpack + "/equipments/items/normal/keys/" + keycat + "/*");
+if (keytypes.length() == 0)
+{
+return;
+}
+string keyname = random_string(keytypes);
+spawn_key(random(0,maxx), random(0,maxy), random(2500,5000), keycat, keyname, keydest);
 keyspawntimer.restart();
 }
 if(objspawntimer.elapsed>=objspawntime and objs.length()<objnum and objspawn==true and endless)

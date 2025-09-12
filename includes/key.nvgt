@@ -6,15 +6,19 @@ int getsound, hurtsound, keysound, spawnsound;
 int kx;
 int ky;
 int timeout;
+string keytype;
+string keytype2;
 timer timeout_timer;
-key(int x, int y,int tt,bool br)
+key(int x,int y,int tt,string kt,string kt2,bool br)
 {
 kx=x;
 ky=y;
 timeout=tt;
+keytype=kt;
+keytype2=kt2;
 autobreak=br;
-spawnsound=keypool.play_2d("keyspawn"+random(1,8)+".ogg", me.x, me.y, kx, ky, false);
-keysound=keypool.play_2d("keyloop"+random(1,4)+".ogg", me.x, me.y, kx, ky, true);
+spawnsound=keypool.play_2d(find_sound("sounds/"+soundpack+"/equipments/items/normal/keys/"+keytype+"/"+keytype2+"/*spawn*"), me.x, me.y, kx, ky, false);
+keysound=keypool.play_2d(find_sound("sounds/"+soundpack+"/equipments/items/normal/keys/"+keytype+"/"+keytype2+"/*loop*"), me.x, me.y, kx, ky, true);
 keypool.update_sound_2d(spawnsound,kx,ky);
 keypool.update_sound_2d(keysound,kx,ky);
 }
@@ -26,14 +30,14 @@ for(uint i=0; i<keys.length(); i++)
 if(keys[i].timeout_timer.elapsed>=keys[i].timeout and keys[i].autobreak==true)
 {
 keypool.destroy_sound(keys[i].keysound);
-keys[i].hurtsound=keypool.play_2d("keybreak"+random(1,6)+".ogg", me.x, me.y, keys[i].kx, keys[i].ky, false);
+keys[i].hurtsound=keypool.play_2d(find_sound("sounds/"+soundpack+"/equipments/items/normal/keys/"+keys[i].keytype+"/"+keys[i].keytype2+"/*break*"), me.x, me.y, keys[i].kx, keys[i].ky, false);
 keys.remove_at(i);
 return;
 }
 if(absolute(me.x - keys[i].kx) <= 2 and absolute(me.y - keys[i].ky) <= 2)
 {
 keypool.destroy_sound(keys[i].keysound);
-keys[i].getsound=keypool.play_stationary("keyget"+random(1,6)+".ogg",false);
+keys[i].getsound=keypool.play_stationary(find_sound("sounds/"+soundpack+"/equipments/items/normal/keys/"+keys[i].keytype+"/"+keys[i].keytype2+"/*get*"),false);
 collected_keys+=1;
 total_collected_keys+=1;
 update_achievements();
@@ -43,12 +47,12 @@ return;
 }
 }
 }
-void spawn_key(int x, int y, int timeout, bool autobreak)
+void spawn_key(int x,int y,int timeout,string keytype,string keytype2,bool autobreak)
 {
     if (!endless && doors.length() > 0 && collected_keys >= doors[0].required_keys)
         return;
-    key k1(x, y, timeout, autobreak);
-    keys.insert_last(k1);
+    key key1(x,y,timeout,keytype,keytype2,autobreak);
+    keys.insert_last(key1);
 }
 void destroy_all_keys()
 {

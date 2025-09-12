@@ -22,33 +22,27 @@ inv.delete_all();
 }
 void cycle_inv(int dir)
 {
-if (dir==1)
-invpos+=1;
-if(inv.get_size()!=0) invslot=p.play_stationary(find_sound("sounds/"+soundpack+"/misc/player/*inv*"),false);
-else
-invpos-=1;
-if (invpos>=inv.get_size())
-{
-invpos=0;
-}
-else if (invpos<0)
-{
-invpos=inv.get_size()-1;
-}
-if (inv.get_size()==0)
+if (inv.get_size() == 0)
 {
 p.destroy_sound(invslot);
 speak("empty");
+return;
 }
+invslot = p.play_stationary(find_sound("sounds/" + soundpack + "/misc/player/*inv*"), false);
+if (dir == 1)
+invpos += 1;
 else
-{
+invpos -= 1;
+if (invpos >= inv.get_size())
+invpos = 0;
+else if (invpos < 0)
+invpos = inv.get_size() - 1;
 int a;
-inv.get(inv.get_keys()[invpos],a);
-if(a==1)
-speak(inv.get_keys()[invpos]+". Item "+(invpos+1)+" of "+inv.get_keys().length());
+inv.get(inv.get_keys()[invpos], a);
+if (a == 1)
+speak(inv.get_keys()[invpos] + ". Item " + (invpos + 1) + " of " + inv.get_keys().length());
 else
-speak(inv.get_keys()[invpos]+"s, "+a+". Item "+(invpos+1)+" of "+inv.get_keys().length());
-}
+speak(inv.get_keys()[invpos] + "s, " + a + ". Item " + (invpos + 1) + " of " + inv.get_keys().length());
 }
 void useitem(string current)
 {
@@ -59,6 +53,33 @@ speak("No items");
 else
 {
 current=inv.get_keys()[invpos];
+string[] keycats = {"common", "other"};
+for (uint i = 0; i < keycats.length(); i++)
+{
+string keycat = keycats[i];
+string[] keytypes = find_directories("sounds/" + soundpack + "/equipments/items/normal/keys/" + keycat + "/*");
+for (uint j = 0; j < keytypes.length(); j++)
+{
+string keyname = keytypes[j];
+if (current == keyname)
+{
+string path = "sounds/" + soundpack + "/equipments/items/normal/keys/" + keycat + "/" + keyname + "/info.tmf";
+if (file_exists(path))
+{
+keyfile.open(path, "rb");
+keydesc = keyfile.read();
+keyfile.close();
+speak(keydesc);
+return;
+}
+else
+{
+speak("No description available for " + keyname + ".");
+return;
+}
+}
+}
+}
 string[] toycats = {"common", "other"};
 for (uint i = 0; i < toycats.length(); i++)
 {
