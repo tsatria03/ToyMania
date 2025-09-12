@@ -805,59 +805,68 @@ shopmenu();
 }
 void weaponsmenu()
 {
-    setupmenu(false);
-    string[] weaponNames = {"Bat", "Boot", "Club", "Feat", "Fist", "Hammer", "Knife", "Laser"};
-    string[] weaponIds   = {"bat", "boot", "club", "feat", "fist", "hammer", "knife", "laser"};
-    int[] damages        = {3, 6, 9, 12, 15, 18, 21, 24};
-    int[] horizRanges    = {1, 2, 3, 4, 5, 6, 7, 8};
-    int[] vertRanges     = {2, 3, 4, 5, 6, 7, 8, 9};
-    if (endless)
-    {
-        weaponNames.insert_last("Machine Gun");
-        weaponIds.insert_last("machinegun");
-        damages.insert_last(27);
-        horizRanges.insert_last(9);
-        vertRanges.insert_last(10);
-    }
-    else
-    {
-        weaponNames.insert_last("Pistol");
-        weaponIds.insert_last("pistol");
-        damages.insert_last(27);
-        horizRanges.insert_last(9);
-        vertRanges.insert_last(10);
-    }
-    for (uint i = 0; i < weaponNames.length(); i++)
-    {
-        string label = weaponNames[i] + ": Attack " + damages[i] + ". Horizontal range " + horizRanges[i] + ". Vertical range " + vertRanges[i] + ".";
-        if (weaponIds[i] == current_weapon)
-            label += " (Equipped)";
-        m.add_item(label, weaponIds[i]);
-    }
-    m.intro_text = "Weapons menu.";
-    int res = m.run();
-    string selected = m.get_selected_item_id();
-    if (res == -1)
-    {
-        speak("Canceled");
-    boss_timer.resume();
-    gametimer.resume();
-        return;
-    }
-    if (selected != current_weapon)
-    {
-        draw_weapon(selected);
-    boss_timer.resume();
-    gametimer.resume();
-        return;
-    }
+setupmenu(false);
+string[] weaponNames = {"Bat", "Boot", "Club", "Feat", "Fist", "Hammer", "Knife", "Laser"};
+string[] weaponIds   = {"bat", "boot", "club", "feat", "fist", "hammer", "knife", "laser"};
+string[] weptypes    = {"melee", "melee", "melee", "melee", "melee", "melee", "melee", "melee"};
+int[] damages        = {3, 6, 9, 12, 15, 18, 21, 24};
+int[] horizRanges    = {1, 2, 3, 4, 5, 6, 7, 8};
+int[] vertRanges     = {2, 3, 4, 5, 6, 7, 8, 9};
+if (endless)
+{
+weaponNames.insert_last("Machine Gun");
+weaponIds.insert_last("machinegun");
+weptypes.insert_last("artillery");
+damages.insert_last(27);
+horizRanges.insert_last(9);
+vertRanges.insert_last(10);
+}
 else
 {
-    speak("This weapon is already equipped.");
-    boss_timer.resume();
-    gametimer.resume();
-        return;
+weaponNames.insert_last("Pistol");
+weaponIds.insert_last("pistol");
+weptypes.insert_last("artillery");
+damages.insert_last(27);
+horizRanges.insert_last(9);
+vertRanges.insert_last(10);
 }
+for (uint i = 0; i < weaponNames.length(); i++)
+{
+string label = weaponNames[i] + ": Attack " + damages[i] + ". Horizontal range " + horizRanges[i] + ". Vertical range " + vertRanges[i] + ".";
+if (weaponIds[i] == weapontype2)
+label += " (Equipped)";
+m.add_item(label, weaponIds[i] + "|" + weptypes[i]);
+}
+m.intro_text = "Weapons menu.";
+int res = m.run();
+string selected = m.get_selected_item_id();
+if (res == -1)
+{
+speak("Canceled");
+boss_timer.resume();
+gametimer.resume();
+return;
+}
+string[] parts = string_split(selected, "|", false);
+if (parts.length() != 2)
+{
+speak("Invalid selection.");
+boss_timer.resume();
+gametimer.resume();
+return;
+}
+string selected_weptype2 = parts[0];
+string selected_weptype = parts[1];
+if (selected_weptype2 != weapontype2 || selected_weptype != weapontype)
+{
+draw_weapon(selected_weptype, selected_weptype2);
+}
+else
+{
+speak("This weapon is already equipped.");
+}
+boss_timer.resume();
+gametimer.resume();
 }
 void achesmenu()
 {

@@ -1,18 +1,18 @@
 New in 4.3.
+Recoded the weapon logic to use the new sound pack algorithm.
 Fixed a bug where pressing shift plus tab in your inventory won't wrap around back to the first or last item in the list.
 Fixed a bug where pressing shift plus enter on some toys won't read out their descriptions for them.
-Made it so pressing shift plus D in all game modes will now tell you how many keys are collected out of the keys that need to be collected to unlock the winning door.
 New in 4.2.
+Made it so pressing shift plus D in all game modes will now tell you how many keys are collected out of the keys that need to be collected to unlock the winning door.
 Added an info file to all of the key folders. You can now put your own descriptions to all of the keys found in your inventory.
-Added an info file to all of the weapon folders. You can now put your own stats to all of the weapons used in the game.
 You can now choose the dialog theme you want to use for reading various game dialogs in the sound settings menu.
 You can now choose the menu theme you want to use for navigating various game menus in the sound settings menu.
-You can now choose the default soundpack to use for the entire game in the sound settings menu.
+You can now choose the default sound pack to use for the entire game in the sound settings menu.
 Refactored the speaker test menu to take random speaker test sounds instead of preconfigured ones.
 Added an info file to all of the toy folders. You can now put your own descriptions to all of the toys found in your inventory.
 You can now cycle through the toys you've collected in the normal and endless games when pressing the tab key.
 Renamed all of the toys found in the toys folder with their own Distinct names. Thanks goes to my best friend Keri for helping me think of names to give each of the toys found in the folder.
-Added full soundpack support to the game. The game's sounds will no longer be encrypted from now on.
+Added full sound pack support to the game. The game's sounds will no longer be encrypted from now on.
 New in 4.1.
 Made it so turning sounds play in 2d for your character.
 Added a new concrete platform to walk on. This platform will now be used in the endless game moving forward.

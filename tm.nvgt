@@ -126,7 +126,6 @@ exit();
 }
 else
 {
-weaponparse();
     if (auto_check_updates)
     {
         check_for_updates(version, "ToyMania");

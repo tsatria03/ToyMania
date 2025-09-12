@@ -75,44 +75,44 @@ cardest=false;
     toyspawn = false;
     mainmenu();
 }
-if (key_pressed(KEY_1) and doormove == false and current_weapon != "bat")
+if (key_pressed(KEY_1) && !doormove && current_weapon != "bat")
 {
-    draw_weapon("bat");
+draw_weapon("melee", "bat");
 }
-if (key_pressed(KEY_2) and doormove == false and current_weapon != "boot")
+if (key_pressed(KEY_2) && !doormove && current_weapon != "boot")
 {
-    draw_weapon("boot");
+draw_weapon("melee", "boot");
 }
-if (key_pressed(KEY_3) and doormove == false and current_weapon != "club")
+if (key_pressed(KEY_3) && !doormove && current_weapon != "club")
 {
-    draw_weapon("club");
+draw_weapon("melee", "club");
 }
-if (key_pressed(KEY_4) and doormove == false and current_weapon != "feat")
+if (key_pressed(KEY_4) && !doormove && current_weapon != "feat")
 {
-    draw_weapon("feat");
+draw_weapon("melee", "feat");
 }
-if (key_pressed(KEY_5) and doormove == false and current_weapon != "fist")
+if (key_pressed(KEY_5) && !doormove && current_weapon != "fist")
 {
-    draw_weapon("fist");
+draw_weapon("melee", "fist");
 }
-if (key_pressed(KEY_6) and doormove == false and current_weapon != "hammer")
+if (key_pressed(KEY_6) && !doormove && current_weapon != "hammer")
 {
-    draw_weapon("hammer");
+draw_weapon("melee", "hammer");
 }
-if (key_pressed(KEY_7) and doormove == false and current_weapon != "knife")
+if (key_pressed(KEY_7) && !doormove && current_weapon != "knife")
 {
-    draw_weapon("knife");
+draw_weapon("melee", "knife");
 }
-if (key_pressed(KEY_8) and doormove == false and current_weapon != "laser")
+if (key_pressed(KEY_8) && !doormove && current_weapon != "laser")
 {
-    draw_weapon("laser");
+draw_weapon("melee", "laser");
 }
-if (key_pressed(KEY_9) and doormove==false)
+if (key_pressed(KEY_9) && !doormove)
 {
-    if (endless)
-        draw_weapon("machinegun");
-    else
-        draw_weapon("pistol");
+if (endless)
+draw_weapon("artillery", "machinegun");
+else
+draw_weapon("artillery", "pistol");
 }
 if(key_repeating(KEY_TAB) and key_up(KEY_LMENU) and key_up(KEY_RMENU))
 {
@@ -232,7 +232,7 @@ gamsetsmenu2();
 }
 if (key_pressed(KEY_Z) and doormove == false)
 {
-    if (weapontype == "machinegun" or weapontype == "pistol")
+    if (weapontype2 == "machinegun" or weapontype2 == "pistol")
     {
         speak("You have "+round(ammo,0) + " out of " + round(maxammo,0) + " rounds of ammo loaded, and " + round(reserved_ammo,0) + " rounds of ammo in reserve.");
     }
@@ -435,7 +435,7 @@ void toygame()
 if (endless)
     draw_random_weapon();
 else
-    draw_weapon("bat");
+    draw_weapon("melee", "bat");
 toyambslot=ambpool.play_stationary_extended(find_sound("sounds/"+soundpack+"/objects/sources/ambiences/*gameloop*"),true,0,0,toyambvolume,toyambpitch,false);
 mustype="gamemus";
 toytrackslot=muspool.play_stationary_extended(find_sound("sounds/"+soundpack+"/objects/sources/tracks/*"+mustype+"*"),true,0,0,toymusvolume,toymuspitch,false);
