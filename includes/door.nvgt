@@ -28,8 +28,9 @@ int startx, starty;
 int endx, endy;
 int speed;
 int required_keys;
+string doortype;
 timer doortimer;
-door(int sx,int sy,int ex,int ey,int sp,int rk)
+door(int sx,int sy,int ex,int ey,int sp,int rk,string dt)
 {
 startx=sx;
 starty=sy;
@@ -37,7 +38,8 @@ endx=ex;
 endy=ey;
 speed=sp;
 required_keys=rk;
-doorsound=doorpool.play_2d("doorloop.ogg",me.x,me.y,startx,starty,true);
+doortype=dt;
+doorsound=doorpool.play_2d(find_sound("sounds/"+soundpack+"/objects/doors/"+doortype+"/*loop*"),me.x,me.y,startx,starty,true);
 }
 }
 void doorcheck()
@@ -48,19 +50,45 @@ void doorcheck()
         {
             if (entity_near_door(doors[i].startx, doors[i].starty))
             {
-doors[i].jamsound = doorpool.play_stationary("doorjam"+random(1,2)+".ogg", false);
+doors[i].jamsound = doorpool.play_stationary(find_sound("sounds/"+soundpack+"/objects/doors/"+doors[i].doortype+"/*jam*"), false);
                 speak("The door is jammed! Something dangerous is nearby!");
                 return;
             }
             if (collected_keys < doors[i].required_keys)
             {
 temp.destroy_sound(doors[i].locksound);
-doors[i].locksound = temp.play_stationary("doorlock.ogg", false);
+doors[i].locksound = temp.play_stationary(find_sound("sounds/"+soundpack+"/objects/doors/"+doors[i].doortype+"/*lock*"), false);
                 speak("This door is locked. You need " + doors[i].required_keys + " more keys to unlock it.");
             }
             else
             {
-                doors[i].unlocksound = doorpool.play_stationary("keyuse" + random(1, 6) + ".ogg", false);
+bool used_key = false;
+string[] keycats = {"common", "other"};
+for (uint k = 0; k < keycats.length(); k++)
+{
+string cat = keycats[k];
+string[] keytypes = find_directories("sounds/" + soundpack + "/equipments/items/normal/keys/" + cat + "/*");
+for (uint j = 0; j < keytypes.length(); j++)
+{
+string keyname = keytypes[j];
+if (item_exists(keyname) > 0)
+{
+give(keyname, -1);
+string path = "sounds/" + soundpack + "/equipments/items/normal/keys/" + cat + "/" + keyname + "/*use*";
+doors[i].unlocksound = doorpool.play_stationary(find_sound(path), false);
+used_key = true;
+break;
+}
+}
+if (used_key) break;
+}
+if (!used_key)
+{
+temp.destroy_sound(doors[i].locksound);
+doors[i].locksound = temp.play_stationary(find_sound("sounds/"+soundpack+"/objects/doors/"+doors[i].doortype+"/*lock*"), false);
+speak("You have enough keys, but none in your inventory to unlock the door.");
+return;
+}
                 alarmpool.destroy_sound(alarmslot);
                 ambpool.destroy_sound(toyambslot);
                 muspool.destroy_sound(toytrackslot);
@@ -70,8 +98,8 @@ doors[i].locksound = temp.play_stationary("doorlock.ogg", false);
                 wait(500);
                 doormove = true;
                 doors[i].is_moving = true;
-                doors[i].opensound = doorpool.play_stationary("dooropen.ogg", false);
-                doors[i].movesound = doorpool.play_stationary("doormove.ogg", true);
+                doors[i].opensound = doorpool.play_stationary(find_sound("sounds/"+soundpack+"/objects/doors/"+doors[i].doortype+"/*open*"), false);
+                doors[i].movesound = doorpool.play_stationary(find_sound("sounds/"+soundpack+"/objects/doors/"+doors[i].doortype+"/*move*"), true);
             }
         }
     }
@@ -107,7 +135,7 @@ me.y--;
 if(me.x==doors[i].endx and me.y==doors[i].endy)
 {
 doorpool.destroy_sound(doors[i].movesound);
-doors[i].closesound=doorpool.play_stationary("doorclose.ogg",false);
+doors[i].closesound=doorpool.play_stationary(find_sound("sounds/"+soundpack+"/objects/doors/"+doors[i].doortype+"/*close*"),false);
 doormove=false;
 doors[i].is_moving=false;
 if(endless) clear_inv();
@@ -159,10 +187,10 @@ mainmenu();
 }
 }
 }
-void spawn_door(int x,int y,int x2,int y2,int speed,int required_keys)
+void spawn_door(int x,int y,int x2,int y2,int speed,int required_keys,string doortype)
 {
-door dr1(x,y,x2,y2,speed,required_keys);
-doors.insert_last(dr1);
+door door1(x,y,x2,y2,speed,required_keys,doortype);
+doors.insert_last(door1);
 }
 void destroy_all_doors()
 {
