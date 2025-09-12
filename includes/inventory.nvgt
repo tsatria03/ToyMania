@@ -24,7 +24,7 @@ void cycle_inv(int dir)
 {
 if (dir==1)
 invpos+=1;
-if(inv.get_size()!=0) invslot=p.play_stationary("invcycle"+random(1,5)+".ogg",false);
+if(inv.get_size()!=0) invslot=p.play_stationary(find_sound("sounds/"+soundpack+"/misc/player/*inv*"),false);
 else
 invpos-=1;
 if (invpos>=inv.get_size())
@@ -45,9 +45,9 @@ else
 int a;
 inv.get(inv.get_keys()[invpos],a);
 if(a==1)
-speak(string_replace(inv.get_keys()[invpos],"_"," ",true)+". Item "+(invpos+1)+" of "+inv.get_keys().length());
+speak(inv.get_keys()[invpos]+". Item "+(invpos+1)+" of "+inv.get_keys().length());
 else
-speak(string_replace(inv.get_keys()[invpos], "_", " ", true)+"s, "+a+". Item "+(invpos+1)+" of "+inv.get_keys().length());
+speak(inv.get_keys()[invpos]+"s, "+a+". Item "+(invpos+1)+" of "+inv.get_keys().length());
 }
 }
 void useitem(string current)
@@ -59,52 +59,32 @@ speak("No items");
 else
 {
 current=inv.get_keys()[invpos];
-if (current == "ammo_pack")
+string[] toycats = {"common", "other"};
+for (uint i = 0; i < toycats.length(); i++)
 {
-    double missing_ammo = max(0, max_reserved_ammo - reserved_ammo);
-    if (missing_ammo == 0)
-    {
-        speak("You already have enough reserved ammo for this weapon.");
-        return;
-    }
-    itemslot = p.play_stationary("ammopack.ogg", false);
-    give("ammo_pack", -1);
-    double ammo_gained = min(random(5, 10), missing_ammo);
-    reserved_ammo += ammo_gained;
-    speak("You received " + round(ammo_gained, 0) + " rounds of ammo from the pack for this weapon.");
-    return;
+string toycat = toycats[i];
+string[] toytypes = find_directories("sounds/" + soundpack + "/equipments/items/normal/toys/" + toycat + "/*");
+for (uint j = 0; j < toytypes.length(); j++)
+{
+string toyname = toytypes[j];
+if (current == toyname)
+{
+string path = "sounds/" + soundpack + "/equipments/items/normal/toys/" + toycat + "/" + toyname + "/info.tmf";
+if (file_exists(path))
+{
+toyfile.open(path, "rb");
+toydesc = toyfile.read();
+toyfile.close();
+speak(toydesc);
+return;
 }
-if (current == "dart")
+else
 {
-    itemslot = dartpool.play_stationary("dartfire.ogg", false);
-    give("dart", -1);
-spawn_dart(me.x, me.y, 5, 10, random(5, 10), 30, facing);
-    return;
+speak("No description available for " + toyname + ".");
+return;
 }
-if (current == "potion")
-{
-    if (health >= maxhealth)
-    {
-        speak("You don't need to use this!");
-        return;
-    }
-    itemslot = p.play_stationary("healthdrink.ogg", false);
-    itemslot = p.play_stationary("playerheal" + random(1, 3) + ".ogg", false);
-    give("potion", -1);
-double heal_percent = random(5, 10);
-double heal_amount = maxhealth * (heal_percent / 100.0);
-health = min(health + heal_amount, maxhealth);
-    speak("Healed to " + round(health / maxhealth * 100, 0) + " percent HP.");
-    return;
 }
-if (current == "teleporter")
-{
-    itemslot = p.play_stationary("tel.ogg", false);
-    give("teleporter", -1);
-me.x=random(0,maxx);
-me.y=random(0,maxy);
-    speak("Moved to "+me.x+", "+me.y+".");
-    return;
+}
 }
 }
 }

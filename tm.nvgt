@@ -62,6 +62,7 @@ string bosstyp;
 string cartyp;
 string doortyp;
 string gardtyp;
+string healtyp;
 string keytyp;
 string objtyp;
 string objtyp2;
@@ -117,8 +118,6 @@ if (@timeelapsed.handle == null)
 {
     timeelapsed.set_timer(gametimer);
 }
-get_keydescs();
-get_toydescs();
 show_window("ToyMania, version "+version);
 if(gamstence.is_already_running)
 {
@@ -135,18 +134,6 @@ weaponparse();
 wait(500);
     mainmenu();
 }
-}
-void get_keydescs()
-{
-keyfile.open("sounds/"+soundpack+"/equipments/items/normal/keys/"+keytyp+"/info.tmf","rb");
-keydesc=keyfile.read();
-keyfile.close();
-}
-void get_toydescs()
-{
-toyfile.open("sounds/"+soundpack+"/equipments/items/normal/toys/"+toytyp+"/"+toytyp2+"/info.tmf","rb");
-toydesc=toyfile.read();
-toyfile.close();
 }
 void pause_game()
 {

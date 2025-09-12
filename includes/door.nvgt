@@ -44,7 +44,7 @@ void doorcheck()
 {
     for (uint i = 0; i < doors.length(); i++)
     {
-        if (absolute(me.x - doors[i].startx) <= 2 && absolute(me.y - doors[i].starty) <= 2 && !shift_is_down() && key_pressed(KEY_RETURN))
+        if (absolute(me.x - doors[i].startx) <= 2 && absolute(me.y - doors[i].starty) <= 2 && !shift_is_down() && key_repeating(KEY_RETURN))
         {
             if (entity_near_door(doors[i].startx, doors[i].starty))
             {
@@ -56,7 +56,7 @@ doors[i].jamsound = doorpool.play_stationary("doorjam"+random(1,2)+".ogg", false
             {
 temp.destroy_sound(doors[i].locksound);
 doors[i].locksound = temp.play_stationary("doorlock.ogg", false);
-                speak("This door is locked. You need " + doors[i].required_keys + " or more keys to unlock it.");
+                speak("This door is locked. You need " + doors[i].required_keys + " more keys to unlock it.");
             }
             else
             {

@@ -255,7 +255,15 @@ if (key_pressed(KEY_D) and doormove == false)
     if (shift_is_down())
     {
 int req = doors[0].required_keys;
-speak("You've collected " + collected_keys + " out of " + req + " keys. You need " + req + " or more keys to unlock the door.");
+int missing = req - collected_keys;
+if (missing > 0)
+{
+speak("You've collected " + collected_keys + " out of " + req + " required keys. You need " + missing + " more keys to unlock the door.");
+}
+else
+{
+speak("You've collected enough required keys to unlock the door!");
+}
     }
     else if (endless)
     {
@@ -545,7 +553,15 @@ objspawntimer.restart();
 }
 if(toyspawntimer.elapsed>=toyspawntime and toys.length()<toynum and toyspawn==true)
 {
-spawn_toy(random(0,maxx), random(0,maxy), random(5000,10000), toydest);
+string[] toycats = {"common", "other"};
+string toycat = random_string(toycats);
+string[] toytypes = find_directories("sounds/" + soundpack + "/equipments/items/normal/toys/" + toycat + "/*");
+if (toytypes.length() == 0)
+{
+return;
+}
+string toyname = random_string(toytypes);
+spawn_toy(random(0,maxx), random(0,maxy), random(5000,10000), toycat, toyname, toydest);
 toyspawntimer.restart();
 }
 }

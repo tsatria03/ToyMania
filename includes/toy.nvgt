@@ -6,14 +6,18 @@ int getsound, hurtsound, toysound;
 int tx;
 int ty;
 int timeout;
+string toytype;
+string toytype2;
 timer timeout_timer;
-toy(int x, int y,int tt,bool br)
+toy(int x,int y,int tt,string tot,string tot2,bool br)
 {
 tx=x;
 ty=y;
 timeout=tt;
+toytype=tot;
+toytype2=tot2;
 autobreak=br;
-toysound=toypool.play_2d("toyloop"+random(1,40)+".ogg", me.x, me.y, tx, ty, true);
+toysound=toypool.play_2d(find_sound("sounds/"+soundpack+"/equipments/items/normal/toys/"+toytype+"/"+toytype2+"/*loop*"), me.x, me.y, tx, ty, true);
 toypool.update_sound_2d(toysound,tx,ty);
 }
 }
@@ -24,14 +28,16 @@ for(uint i=0; i<toys.length(); i++)
 if(toys[i].timeout_timer.elapsed>=toys[i].timeout and toys[i].autobreak==true)
 {
 toypool.destroy_sound(toys[i].toysound);
-toys[i].hurtsound=toypool.play_2d("toybreak"+random(1,3)+".ogg", me.x, me.y, toys[i].tx, toys[i].ty, false);
+toys[i].hurtsound=toypool.play_2d(find_sound("sounds/"+soundpack+"/equipments/items/normal/toys/"+toys[i].toytype+"/"+toys[i].toytype2+"/*break*"), me.x, me.y, toys[i].tx, toys[i].ty, false);
 toys.remove_at(i);
 return;
 }
 if(absolute(me.x - toys[i].tx) <= 2 and absolute(me.y - toys[i].ty) <= 2 and doormove == false)
 {
 toypool.destroy_sound(toys[i].toysound);
-toys[i].getsound=toypool.play_stationary("toyget"+random(1,2)+".ogg",false);
+toys[i].getsound=toypool.play_stationary(find_sound("sounds/"+soundpack+"/equipments/items/normal/toys/"+toys[i].toytype+"/"+toys[i].toytype2+"/*get*"),false);
+give(toys[i].toytype2, 1);
+speak(toys[i].toytype2);
 collected_toys+=1;
 total_collected_toys+=1;
 update_achievements();
@@ -41,10 +47,10 @@ return;
 }
 }
 }
-void spawn_toy(int x,int y,int timeout,bool autobreak)
+void spawn_toy(int x,int y,int timeout,string toytype,string toytype2,bool autobreak)
 {
-toy t1(x,y,timeout,autobreak);
-toys.insert_last(t1);
+toy toy1(x,y,timeout,toytype,toytype2,autobreak);
+toys.insert_last(toy1);
 }
 void destroy_all_toys()
 {
