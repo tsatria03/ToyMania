@@ -51,7 +51,7 @@ health-=bullets[i].damage;
     {
         isReloading = false;
 p.destroy_sound(weaponslot);
-        weaponslot=p.play_stationary("machinegunfail.ogg", false);
+        weaponslot=p.play_stationary("machine_gunfail.ogg", false);
     }
 bullets.remove_at(i);
 return;

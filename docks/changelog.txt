@@ -1,4 +1,5 @@
 New in 4.3.
+Fixed a bug where the pistol weapon would be randomly equipped in the endless game, even though that weapon is only reserved for the normal game.
 Recoded the weapon logic to use the new sound pack algorithm.
 Fixed a bug where pressing shift plus tab in your inventory won't wrap around back to the first or last item in the list.
 Fixed a bug where pressing shift plus enter on some toys won't read out their descriptions for them.

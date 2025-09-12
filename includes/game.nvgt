@@ -110,7 +110,7 @@ draw_weapon("melee", "laser");
 if (key_pressed(KEY_9) && !doormove)
 {
 if (endless)
-draw_weapon("artillery", "machinegun");
+draw_weapon("artillery", "machine_gun");
 else
 draw_weapon("artillery", "pistol");
 }
@@ -232,7 +232,7 @@ gamsetsmenu2();
 }
 if (key_pressed(KEY_Z) and doormove == false)
 {
-    if (weapontype2 == "machinegun" or weapontype2 == "pistol")
+    if (weapontype2 == "machine_gun" or weapontype2 == "pistol")
     {
         speak("You have "+round(ammo,0) + " out of " + round(maxammo,0) + " rounds of ammo loaded, and " + round(reserved_ammo,0) + " rounds of ammo in reserve.");
     }
@@ -241,7 +241,7 @@ if (key_pressed(KEY_Z) and doormove == false)
         speak("This weapon does not take any ammo.");
     }
 }
-if (key_pressed(KEY_R) and doormove == false and (weapontype == "machinegun" or weapontype == "pistol"))
+if (key_pressed(KEY_R) and doormove == false and (weapontype2 == "machine_gun" or weapontype2 == "pistol"))
 {
     reload_weapon();
 }
@@ -419,12 +419,12 @@ update_achievements();
 writedata();
 movetimer.restart();
 }
-if (key_pressed(KEY_SPACE) and weapontimer.elapsed >= weapontime and doormove == false and (weapontype != "machinegun"))
+if (key_pressed(KEY_SPACE) and weapontimer.elapsed >= weapontime and doormove == false and (weapontype2 != "machine_gun"))
 {
     fire_weapon();
     weapontimer.restart();
 }
-if (key_down(KEY_SPACE) and weapontimer2.elapsed >= weapontime2 and doormove == false and endless and weapontype == "machinegun")
+if (key_down(KEY_SPACE) and weapontimer2.elapsed >= weapontime2 and doormove == false and endless and weapontype2 == "machine_gun")
 {
     fire_weapon();
     weapontimer2.restart();

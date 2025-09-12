@@ -70,7 +70,7 @@ gards[i].firetimer.restart();
     {
         isReloading = false;
 p.destroy_sound(weaponslot);
-        weaponslot=p.play_stationary("machinegunfail.ogg", false);
+        weaponslot=p.play_stationary("machine_gunfail.ogg", false);
     }
 }
 if(gards[i].gardhealth<=0)

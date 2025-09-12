@@ -3,7 +3,7 @@ void mainmenu()
 setupmenu();
 m.add_item("game menu", "gm");
 m.add_item("settings menu", "sm");
-m.add_item("check for game updates", "chup");
+m.add_item("check for updates", "chup");
 m.add_item("test speakers", "st");
 if(system_is_windows) m.add_item("restart game", "rt");
 m.add_item("exit game", "ex");
@@ -481,14 +481,14 @@ weapons["Knife Hit" + vdesc] = array<string> = {"knifehit1.ogg", "knifehit2.ogg"
 weapons["Laser Draw"] = "laserdraw.ogg";
 weapons["Laser Fire"] = "laserfire.ogg";
 weapons["Laser Hit"] = "laserhit.ogg";
-weapons["Machine Gun Draw: used in endless mode"] = "machinegundraw.ogg";
-weapons["Machine Gun Empty: used in endless mode"] = "machinegunempty.ogg";
-weapons["Machine Gun Fail: used in endless mode"] = "machinegunfail.ogg";
-weapons["Machine Gun Fire: used in endless mode"] = "machinegunfire.ogg";
-weapons["Machine Gun Hit: used in endless mode"] = "machinegunhit.ogg";
-weapons["Machine Gun Ping: used in endless mode"] = "machinegunping.ogg";
-weapons["Machine Gun Reload: used in endless mode"] = "machinegunreload.ogg";
-weapons["Machine Gun Shell: used in endless mode" + vdesc] = array<string> = {"machinegunshell1.ogg", "machinegunshell2.ogg"};
+weapons["Machine Gun Draw: used in endless mode"] = "machine_gundraw.ogg";
+weapons["Machine Gun Empty: used in endless mode"] = "machine_gunempty.ogg";
+weapons["Machine Gun Fail: used in endless mode"] = "machine_gunfail.ogg";
+weapons["Machine Gun Fire: used in endless mode"] = "machine_gunfire.ogg";
+weapons["Machine Gun Hit: used in endless mode"] = "machine_gunhit.ogg";
+weapons["Machine Gun Ping: used in endless mode"] = "machine_gunping.ogg";
+weapons["Machine Gun Reload: used in endless mode"] = "machine_gunreload.ogg";
+weapons["Machine Gun Shell: used in endless mode" + vdesc] = array<string> = {"machine_gunshell1.ogg", "machine_gunshell2.ogg"};
 weapons["Pistol Draw: used in normal mode"] = "pistoldraw.ogg";
 weapons["Pistol Empty: used in normal mode"] = "pistolempty.ogg";
 weapons["Pistol Fail: used in normal mode"] = "pistolfail.ogg";
@@ -815,7 +815,7 @@ int[] vertRanges     = {2, 3, 4, 5, 6, 7, 8, 9};
 if (endless)
 {
 weaponNames.insert_last("Machine Gun");
-weaponIds.insert_last("machinegun");
+weaponIds.insert_last("machine_gun");
 weptypes.insert_last("artillery");
 damages.insert_last(27);
 horizRanges.insert_last(9);
