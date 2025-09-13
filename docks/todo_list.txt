@@ -10,10 +10,10 @@
 ****Unfinished. Make lasers use batteries.
 ****Unfinished. Add difficulty menu items to the normal game mode.
 ****Unfinished. Add an online scoreboard system.
-****Unfinished. Add soundpack support.
 
 ##These are the things that are already finished from earlier versions of the game.
 
+**Finished. Add soundpack support.
 **Finished. Fix the shop menu to return the user back to the menu after purchasing something.
 **Finished. Add darts as items for stunning enemies.
 **Finished. Expand the endless grid map from 50 to 100 squares for both x and y.

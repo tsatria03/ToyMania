@@ -102,7 +102,7 @@ void gamemenu()
 {
 setupmenu();
 m.add_item("start game", "ty");
-m.add_item("learn game sounds (pack conversion in progress)", "gsm");
+m.add_item("learn game sounds: pack conversion in progress", "gsm");
 m.add_item("read game user guides", "dm");
 m.add_item("view game achievements", "ach");
 m.add_item("view game statistics", "stats");
@@ -849,9 +849,10 @@ boss_timer.resume();
 gametimer.resume();
 return;
 }
-useitem(choice);
+useitem(choice, true);
 boss_timer.resume();
 gametimer.resume();
+return;
 }
 void weaponsmenu()
 {
@@ -1470,6 +1471,7 @@ int glb = form.create_checkbox("Enable behind pitch decrease.", behind_pitch);
 int glh = form.create_checkbox("Enable HRTF support.", hrtf);
 int achsound = form.create_checkbox("Enable achievement sound effects.", play_ach_scores);
 int achvoice = form.create_checkbox("Enable achievement speech feedback.", speak_ach_scores);
+int collectspeech = form.create_checkbox("Enable item collect speech feedback.", speak_item_collects);
 int gcp = form.create_checkbox("Enable post-game copy and export prompts.", gamcopy);
 int qcm = form.create_checkbox("Enable quit confirmation prompts.", quit_menu);
 int countsound = form.create_checkbox("Enable countdown sound effects.", playcounts);
@@ -1488,6 +1490,7 @@ autorun = form.is_checked(runmode);
             sound_global_hrtf = hrtf;
             play_ach_scores = form.is_checked(achsound);
             speak_ach_scores = form.is_checked(achvoice);
+speak_item_collects = form.is_checked(collectspeech);
             gamcopy = form.is_checked(gcp);
             quit_menu = form.is_checked(qcm);
             playcounts = form.is_checked(countsound);

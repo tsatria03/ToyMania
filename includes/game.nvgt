@@ -603,14 +603,14 @@ toyspawntimer.restart();
 }
 if(!endless and level==1 and gametimer.elapsed>=1000*60)
 {
-if(playlevels==true) p.play_stationary("playerlevel.ogg",false);
+if(playlevels==true) p.play_stationary(find_sound("sounds/"+soundpack+"/misc/player/*lev*"), false);
 level=2;
 carspawn=true;
 toynum=25;
 }
 if(!endless and level==2 and gametimer.elapsed>=1000*120)
 {
-if(playlevels==true) p.play_stationary("playerlevel.ogg",false);
+if(playlevels==true) p.play_stationary(find_sound("sounds/"+soundpack+"/misc/player/*lev*"), false);
 level=3;
 cardest=true;
 carnum=10;
@@ -619,7 +619,7 @@ toynum=30;
 }
 if(!endless and level==3 and gametimer.elapsed>=1000*180)
 {
-if(playlevels==true) p.play_stationary("playerlevel.ogg",false);
+if(playlevels==true) p.play_stationary(find_sound("sounds/"+soundpack+"/misc/player/*lev*"), false);
 level=4;
 carspawn=false;
 cardest=false;

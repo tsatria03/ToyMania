@@ -44,7 +44,7 @@ speak(inv.get_keys()[invpos] + ". Item " + (invpos + 1) + " of " + inv.get_keys(
 else
 speak(inv.get_keys()[invpos] + "s, " + a + ". Item " + (invpos + 1) + " of " + inv.get_keys().length());
 }
-void useitem(string current)
+void useitem(string current, bool block_desc=false)
 {
 if (inv.get_size()<=0)
 {
@@ -69,8 +69,17 @@ if (file_exists(path))
 keyfile.open(path, "rb");
 keydesc = keyfile.read();
 keyfile.close();
+if (block_desc)
+{
+boss_timer.pause();
+gametimer.pause();
 dlgmessage_return(keydesc);
+}
+else
+{
+speak(keydesc);
 return;
+}
 }
 else
 {
@@ -148,7 +157,17 @@ if (file_exists(path + "info.tmf"))
 objfile.open(path + "info.tmf", "rb");
 objdesc = objfile.read();
 objfile.close();
+if (block_desc)
+{
+boss_timer.pause();
+gametimer.pause();
 dlgmessage_return(objdesc);
+}
+else
+{
+speak(objdesc);
+return;
+}
 }
 else
 {
@@ -175,8 +194,17 @@ if (file_exists(path))
 toyfile.open(path, "rb");
 toydesc = toyfile.read();
 toyfile.close();
+if (block_desc)
+{
+boss_timer.pause();
+gametimer.pause();
 dlgmessage_return(toydesc);
+}
+else
+{
+speak(toydesc);
 return;
+}
 }
 else
 {
