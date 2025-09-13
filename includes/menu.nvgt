@@ -102,7 +102,7 @@ void gamemenu()
 {
 setupmenu();
 m.add_item("start game", "ty");
-m.add_item("learn game sounds", "gsm");
+m.add_item("learn game sounds (conversion in progress)", "gsm");
 m.add_item("read game user guides", "dm");
 m.add_item("view game achievements", "ach");
 m.add_item("view game statistics", "stats");
@@ -182,7 +182,8 @@ if (gamem == "gsm")
 {
 if(speak_menu_loading==true) speak("loading");
 m.fade_music();
-learnsoundsmenu();
+alert("Error", "This feature is currently unavailable. Please check back for availability in the next version.");
+gamemenu();
 }
 if (gamem == "dm")
 {

@@ -83,6 +83,10 @@ return path+snd[random(0,snd.length()-1)];
 else
 return "";
 }
+string get_sound(const string&in path)
+{
+return find_sound("sounds/" + soundpack + "/" + path);
+}
 string gmt(double x, double y)
 {
 string mt;

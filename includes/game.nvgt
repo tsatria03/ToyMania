@@ -509,6 +509,14 @@ if(ammo>=maxammo)
 {
 ammo=maxammo;
 }
+if(reserved_ammo<=0)
+{
+reserved_ammo=0;
+}
+if(reserved_ammo>=max_reserved_ammo)
+{
+reserved_ammo=max_reserved_ammo;
+}
 if(health<=0)
 {
 health=0;
