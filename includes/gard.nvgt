@@ -22,9 +22,7 @@ damage=dm;
 firetime=ft;
 gardtime=sp;
 gardtype=gt;
-if(gardtype=="gard1") gardsound=gardpool.play_2d(gardtype+"taunt.ogg", me.x, me.y, gardx, gardy, true);
-if(gardtype=="gard2") gardsound=gardpool.play_2d(gardtype+"taunt.ogg", me.x, me.y, gardx, gardy, true);
-if(gardtype=="gard3") gardsound=gardpool.play_2d(gardtype+"taunt.wav", me.x, me.y, gardx, gardy, true);
+gardsound=gardpool.play_2d(find_sound("sounds/"+soundpack+"/npc/guards/"+gardtype+"/*taunt*"), me.x, me.y, gardx, gardy, true);
 }
 }
 void gardloop()
@@ -35,9 +33,7 @@ if(gards[i].gardtimer.elapsed>=gards[i].gardtime)
 {
     if (gards[i].moveable || gards[i].moveable2)
     {
-        if (gards[i].gardtype == "gard1") gards[i].stepsound = gardpool.play_2d("gard1walk" + random(1, 5) + ".ogg", me.x, me.y, gards[i].gardx, gards[i].gardy, false);
-        if (gards[i].gardtype == "gard2") gards[i].stepsound = gardpool.play_2d("gard2walk" + random(1, 8) + ".ogg", me.x, me.y, gards[i].gardx, gards[i].gardy, false);
-        if (gards[i].gardtype == "gard3") gards[i].stepsound = gardpool.play_2d("gard3walk" + random(1, 5) + ".wav", me.x, me.y, gards[i].gardx, gards[i].gardy, false);
+        gards[i].stepsound = gardpool.play_2d(find_sound("sounds/"+soundpack+"/npc/guards/"+gards[i].gardtype+"/*step*"), me.x, me.y, gards[i].gardx, gards[i].gardy, false);
     }
 gardpool.update_sound_2d(gards[i].gardsound,gards[i].gardx,gards[i].gardy);
 gards[i].gardtimer.restart();
@@ -60,33 +56,27 @@ gards[i].gardy--;
 }
 if(me.x==gards[i].gardx and me.y==gards[i].gardy and gards[i].firetimer.elapsed>=gards[i].firetime and  gards[i].fireable==true and doormove == false)
 {
-if(gards[i].gardtype=="gard1") gards[i].wepsound=gardpool.play_2d(gards[i].gardtype+"hit"+random(1,3)+".ogg", me.x, me.y, gards[i].gardx, gards[i].gardy, false);
-if(gards[i].gardtype=="gard2") gards[i].wepsound=gardpool.play_2d(gards[i].gardtype+"hit"+random(1,3)+".ogg", me.x, me.y, gards[i].gardx, gards[i].gardy, false);
-if(gards[i].gardtype=="gard3") gards[i].wepsound=gardpool.play_2d(gards[i].gardtype+"hit.wav", me.x, me.y, gards[i].gardx, gards[i].gardy, false);
-painslot=p.play_stationary("playerpain.ogg", false);
+gards[i].wepsound = gardpool.play_2d(find_sound("sounds/"+soundpack+"/npc/guards/"+gards[i].gardtype+"/*hit*"), me.x, me.y, gards[i].gardx, gards[i].gardy, false);
+painslot=p.play_stationary(find_sound("sounds/"+soundpack+"/misc/player/*hurt*"), false);
 health-=gards[i].damage;
 gards[i].firetimer.restart();
     if (isReloading)
     {
         isReloading = false;
 p.destroy_sound(weaponslot);
-        weaponslot=p.play_stationary("machine_gunfail.ogg", false);
+        weaponslot=p.play_stationary(find_sound("sounds/"+soundpack+"/equipments/weapons/"+weapontype+"/"+weapontype2+"/*fail*"), false);
     }
 }
 if(gards[i].gardhealth<=0)
 {
 gardpool.destroy_sound(gards[i].hurtsound);
 gardpool.destroy_sound(gards[i].gardsound);
-if(gards[i].gardtype=="gard1") gards[i].defsound=gardpool.play_2d(gards[i].gardtype+"death"+random(1,2)+".ogg", me.x, me.y, gards[i].gardx, gards[i].gardy, false);
-if(gards[i].gardtype=="gard2") gards[i].defsound=gardpool.play_2d(gards[i].gardtype+"death.ogg", me.x, me.y, gards[i].gardx, gards[i].gardy, false);
-if(gards[i].gardtype=="gard3") gards[i].defsound=gardpool.play_2d(gards[i].gardtype+"death.wav", me.x, me.y, gards[i].gardx, gards[i].gardy, false);
+gards[i].defsound=gardpool.play_2d(find_sound("sounds/"+soundpack+"/npc/guards/"+gards[i].gardtype+"/*death*"), me.x, me.y, gards[i].gardx, gards[i].gardy, false);
 killed_gards+=1;
 total_killed_gards+=1;
 update_achievements();
 writedata();
-if(gards[i].gardtype=="gard1") spawn_bodyfall(gards[i].gardx, gards[i].gardy, random(500,1000), "gard1");
-if(gards[i].gardtype=="gard2") spawn_bodyfall(gards[i].gardx, gards[i].gardy, random(500,1000), "gard2");
-if(gards[i].gardtype=="gard3") spawn_bodyfall(gards[i].gardx, gards[i].gardy, random(500,1000), "gard3");
+spawn_bodyfall(gards[i].gardx, gards[i].gardy, random(500,1000), find_sound("sounds/"+soundpack+"/npc/guards/"+gards[i].gardtype+"/*fall*"));
 gards.remove_at(i);
 return;
 }
@@ -105,4 +95,3 @@ gardpool.destroy_sound(gards[i].gardsound);
 }
 gards.resize(0);
 }
-

@@ -84,7 +84,7 @@ if(cars[i].cartype==id)
 cars[i].stuntimer.restart();
 cars[i].stunned=true;
 cars[i].stundir = st;
-cars[i].hurtsound = carpool.play_2d(cars[i].cartype + "pain.ogg", me.x, me.y, cars[i].carx, cars[i].cary, false);
+cars[i].hurtsound = carpool.play_2d(find_sound("sounds/"+soundpack+"/npc/cars/"+cars[i].cartype+"/*hurt*"), me.x, me.y, cars[i].carx, cars[i].cary, false);
 cars[i].carhealth-=dmg;
 cars[i].fireable=false;
 cars[i].moveable=false;
@@ -101,10 +101,7 @@ if(gards[i].gardtype==id)
 gards[i].stuntimer.restart();
 gards[i].stunned=true;
 gards[i].stundir = st;
-            string painsound = "gard3pain.wav";
-            if (gards[i].gardtype == "gard1") painsound = "gard1pain" + random(1, 5) + ".ogg";
-            else if (gards[i].gardtype == "gard2") painsound = "gard2pain.ogg";
-gards[i].hurtsound = gardpool.play_2d(painsound, me.x, me.y, gards[i].gardx, gards[i].gardy, false);
+gards[i].hurtsound = gardpool.play_2d(find_sound("sounds/"+soundpack+"/npc/guards/"+gards[i].gardtype+"/*hurt*"), me.x, me.y, gards[i].gardx, gards[i].gardy, false);
 gards[i].gardhealth-=dmg;
 gards[i].fireable=false;
 gards[i].moveable=false;

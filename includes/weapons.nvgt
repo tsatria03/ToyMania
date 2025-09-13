@@ -151,7 +151,7 @@ else
 {
 weaponslot=p.play_2d(find_sound("sounds/"+soundpack+"/equipments/weapons/"+weapontype+"/"+weapontype2+"/*hit*"), me.x, me.y, cars[i2].carx, cars[i2].cary, false);
 }
-cars[i2].hurtsound = carpool.play_2d(cars[i2].cartype + "pain.ogg", me.x, me.y, cars[i2].carx, cars[i2].cary, false);
+cars[i2].hurtsound = carpool.play_2d(find_sound("sounds/"+soundpack+"/npc/cars/"+cars[i2].cartype+"/*hurt*"), me.x, me.y, cars[i2].carx, cars[i2].cary, false);
 cars[i2].carhealth -= dmg;
 }
 }
@@ -159,9 +159,6 @@ for (uint i3 = 0; i3 < gards.length(); i3++)
 {
 if (targetType == "gard" && absolute(gards[i3].gardx - me.x) <= weprange && absolute(gards[i3].gardy - me.y) <= weprange2)
 {
-string painsound = "gard3pain.wav";
-if (gards[i3].gardtype == "gard1") painsound = "gard1pain" + random(1, 5) + ".ogg";
-else if (gards[i3].gardtype == "gard2") painsound = "gard2pain.ogg";
 if (isGun)
 {
 weaponslot=p.play_2d(find_sound("sounds/"+soundpack+"/equipments/weapons/"+weapontype+"/"+weapontype2+"/*hit*"), me.x, me.y, gards[i3].gardx, gards[i3].gardy, false);
@@ -171,7 +168,7 @@ else
 {
 weaponslot=p.play_2d(find_sound("sounds/"+soundpack+"/equipments/weapons/"+weapontype+"/"+weapontype2+"/*hit*"), me.x, me.y, gards[i3].gardx, gards[i3].gardy, false);
 }
-gards[i3].hurtsound = gardpool.play_2d(painsound, me.x, me.y, gards[i3].gardx, gards[i3].gardy, false);
+gards[i3].hurtsound = gardpool.play_2d(find_sound("sounds/"+soundpack+"/npc/guards/"+gards[i3].gardtype+"/*hurt*"), me.x, me.y, gards[i3].gardx, gards[i3].gardy, false);
 gards[i3].gardhealth -= dmg;
 }
 }

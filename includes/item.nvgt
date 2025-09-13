@@ -7,19 +7,18 @@ int itx;
 int ity;
 int timeout;
 string objtype;
+string objtype2;
 timer timeout_timer;
-obj(int x,int y,int tt,string ot,bool br)
+obj(int x,int y,int tt,string ot,string ot2,bool br)
 {
 itx=x;
 ity=y;
 timeout=tt;
 objtype=ot;
+objtype2=ot2;
 autobreak=br;
-spawnsound=objpool.play_2d("itemspawn.ogg", me.x, me.y, itx, ity, false);
-if(objtype=="ammo_pack") objsound=objpool.play_2d("ammoloop.ogg", me.x, me.y, itx, ity, true);
-if(objtype=="dart") objsound=objpool.play_2d("dartloop"+random(1,3)+".wav", me.x, me.y, itx, ity, true);
-if(objtype=="potion") objsound=objpool.play_2d("healthloop.ogg", me.x, me.y, itx, ity, true);
-if(objtype=="teleporter") objsound=objpool.play_2d("teleloop.ogg", me.x, me.y, itx, ity, true);
+spawnsound=objpool.play_2d(find_sound("sounds/"+soundpack+"/equipments/items/endless/"+objtype+"/"+objtype2+"/*spawn*"), me.x, me.y, itx, ity, false);
+objsound=objpool.play_2d(find_sound("sounds/"+soundpack+"/equipments/items/endless/"+objtype+"/"+objtype2+"/*loop*"), me.x, me.y, itx, ity, true);
 objpool.update_sound_2d(objsound,itx,ity);
 }
 }
@@ -30,29 +29,26 @@ for(uint i=0; i<objs.length(); i++)
 if(objs[i].timeout_timer.elapsed>=objs[i].timeout and objs[i].autobreak==true)
 {
 objpool.destroy_sound(objs[i].objsound);
-objs[i].hurtsound=objpool.play_2d("itembreak"+random(1,6)+".ogg", me.x, me.y, objs[i].itx, objs[i].ity, false);
+objs[i].hurtsound=objpool.play_2d(find_sound("sounds/"+soundpack+"/equipments/items/endless/"+objs[i].objtype+"/"+objs[i].objtype2+"/*break*"), me.x, me.y, objs[i].itx, objs[i].ity, false);
 objs.remove_at(i);
 return;
 }
 if(absolute(me.x - objs[i].itx) <= 2 and absolute(me.y - objs[i].ity) <= 2 and doormove == false)
 {
 objpool.destroy_sound(objs[i].objsound);
-if(objs[i].objtype=="ammo_pack") objs[i].getsound=objpool.play_stationary("ammoget"+random(1,2)+".ogg",false);
-if(objs[i].objtype=="dart") objs[i].getsound=objpool.play_stationary("dartget.ogg",false);
-if(objs[i].objtype=="potion") objs[i].getsound=objpool.play_stationary("healthget.ogg",false);
-if(objs[i].objtype=="teleporter") objs[i].getsound=objpool.play_stationary("teleget.ogg",false);
-p.play_stationary("playergive.ogg",false);
-give(objs[i].objtype,1);
-if(speak_item_collects==true) speak(objs[i].objtype);
+objs[i].getsound=objpool.play_stationary(find_sound("sounds/"+soundpack+"/equipments/items/endless/"+objs[i].objtype+"/"+objs[i].objtype2+"/*get*"),false);
+p.play_stationary(find_sound("sounds/"+soundpack+"/misc/player/*give*"),false);
+give(objs[i].objtype2,1);
+if(speak_item_collects==true) speak(objs[i].objtype2);
 objs.remove_at(i);
 return;
 }
 }
 }
-void spawn_obj(int x,int y,int timeout,string objtype,bool autobreak)
+void spawn_obj(int x,int y,int timeout,string objtype,string objtype2,bool autobreak)
 {
-obj o1(x,y,timeout,objtype,autobreak);
-objs.insert_last(o1);
+obj obj1(x,y,timeout,objtype,objtype2,autobreak);
+objs.insert_last(obj1);
 }
 void destroy_all_objs()
 {

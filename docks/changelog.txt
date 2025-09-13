@@ -1,4 +1,5 @@
 New in 4.3.
+Enhanced the shop menu in the endless game to include the quantity bought, the total cost of the purchase, and the remaining cash after the transaction.
 Resolved an issue where selecting an item in the inventory menu would cause the wrong item to be used based on the cycle's position while pressing tab to go through it.
 Added an inventory menu to make finding and using items a bit easier. You can press the letter I to open it.
 Changed the keyboard shortcut from I to K to check how many keys you've collected.
@@ -7,7 +8,7 @@ Refactored the door class to make use of the keys you currently have in your inv
 Fixed a bug where the pistol weapon would be randomly equipped in the endless game, even though that weapon was only reserved for the normal game.
 Recoded the npc and weapon logics to use the new sound pack algorithm.
 Fixed a bug where pressing shift plus tab in your inventory wouldn't wrap around back to the first or last item in the list.
-Fixed a bug where pressing shift plus enter on some keys and toys won't read out their descriptions for them.
+Fixed a bug where pressing shift plus enter on some items such as keys and toys won't read out their descriptions for them.
 New in 4.2.
 Made it so pressing shift plus D in all game modes will now tell you how many keys are collected out of the keys that need to be collected to unlock the winning door.
 Added an info file to all of the key folders. You can now put your own descriptions to all of the keys found in your inventory.

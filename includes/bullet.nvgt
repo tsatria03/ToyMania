@@ -45,13 +45,13 @@ bullets[i].bully--;
 }
 if (absolute(me.x - bullets[i].bullx) <= 2 && absolute(me.y - bullets[i].bully) <= 2 and doormove == false)
 {
-painslot=p.play_stationary("playerpain.ogg", false);
+painslot=p.play_stationary(find_sound("sounds/"+soundpack+"/misc/player/*hurt*"), false);
 health-=bullets[i].damage;
     if (isReloading)
     {
         isReloading = false;
 p.destroy_sound(weaponslot);
-        weaponslot=p.play_stationary("machine_gunfail.ogg", false);
+        weaponslot=p.play_stationary(find_sound("sounds/"+soundpack+"/equipments/weapons/"+weapontype+"/"+weapontype2+"/*fail*"), false);
     }
 bullets.remove_at(i);
 return;
@@ -67,7 +67,7 @@ for(uint i1=0; i1<objs.length(); i1++)
 if (absolute(objs[i1].itx - bullets[i].bullx) <= 2 && absolute(objs[i1].ity - bullets[i].bully) <= 2)
 {
 objpool.destroy_sound(objs[i1].objsound);
-objs[i1].hurtsound=objpool.play_2d("itembreak"+random(1,6)+".ogg", me.x, me.y, objs[i1].itx, objs[i1].ity, false);
+objs[i1].hurtsound=objpool.play_2d(find_sound("sounds/"+soundpack+"/equipments/items/endless/"+objs[i1].objtype+"/"+objs[i1].objtype2+"/*break*"), me.x, me.y, objs[i1].itx, objs[i1].ity, false);
 objs.remove_at(i1);
 bullets.remove_at(i);
 return;
@@ -78,7 +78,7 @@ for(uint i2=0; i2<keys.length(); i2++)
 if (absolute(keys[i2].kx - bullets[i].bullx) <= 2 && absolute(keys[i2].ky - bullets[i].bully) <= 2)
 {
 keypool.destroy_sound(keys[i2].keysound);
-keys[i2].hurtsound=keypool.play_2d("keybreak"+random(1,6)+".ogg", me.x, me.y, keys[i2].kx, keys[i2].ky, false);
+keys[i2].hurtsound=keypool.play_2d(find_sound("sounds/"+soundpack+"/equipments/items/normal/keys/"+keys[i2].keytype+"/"+keys[i2].keytype2+"/*break*"), me.x, me.y, keys[i2].kx, keys[i2].ky, false);
 keys.remove_at(i2);
 bullets.remove_at(i);
 return;
@@ -89,7 +89,7 @@ for(uint i3=0; i3<toys.length(); i3++)
 if (absolute(toys[i3].tx - bullets[i].bullx) <= 2 && absolute(toys[i3].ty - bullets[i].bully) <= 2)
 {
 toypool.destroy_sound(toys[i3].toysound);
-toys[i3].hurtsound=toypool.play_2d("toybreak"+random(1,3)+".ogg", me.x, me.y, toys[i3].tx, toys[i3].ty, false);
+toys[i3].hurtsound=toypool.play_2d(find_sound("sounds/"+soundpack+"/equipments/items/normal/toys/"+toys[i3].toytype+"/"+toys[i3].toytype2+"/*break*"), me.x, me.y, toys[i3].tx, toys[i3].ty, false);
 toys.remove_at(i3);
 bullets.remove_at(i);
 return;

@@ -734,82 +734,92 @@ pausemenu();
     }
 void shopmenu() 
 {
-    dictionary prices;
-    prices.set("ammo_pack", 5.0);
-prices.set("dart", 10.0);
-    prices.set("potion", 15.0);
-prices.set("teleporter", 20.0);
-    string[] objtypes = {"ammo_pack", "dart", "potion", "teleporter"};
-    setupmenu(false);
-    m.add_item("You have " + round(money, 0) + " dollars available to spend", "shopinfo");
-    for (uint i = 0; i < objtypes.length(); i++)
+dictionary prices;
+prices.set("ammo_pack", 5.0);
+prices.set("health_potion", 10.0);
+prices.set("player_teleporter", 15.0);
+prices.set("stun_dart", 20.0);
+string[] folders = {"common", "other"};
+string[] allitems;
+dictionary itemfolders;
+for (uint i = 0; i < folders.length(); i++)
 {
-        string itemID = objtypes[i];
-        string itemName = itemID.replace("_", " ", true);
-        int ownedCount = max(0, item_exists(itemID));
-        double itemPrice = 1.0;
-        if (prices.exists(itemID)) prices.get(itemID, itemPrice);
-        string label = itemName + ", costs " + round(itemPrice, 0) + " dollar" + (itemPrice != 1 ? "s" : "") + ". You currently have " + ownedCount + " of these in your inventory.";
-        m.add_item(label, itemID);
-    }
-    m.add_item("back", "back");
-    m.intro_text = "Shop menu. What would you like to buy?";
-    int mres = m.run();
-    string shopem = m.get_selected_item_id();
-    if (mres == -1 || shopem == "shopinfo" || shopem == "back")
+string folder = folders[i];
+string[] itemlist = find_directories("sounds/" + soundpack + "/equipments/items/endless/" + folder + "/*");
+for (uint j = 0; j < itemlist.length(); j++)
 {
-        speak("Canceled");
-        resume_game();
-        return;
-    }
-    if (money <= 0)
+string itemname = itemlist[j];
+allitems.insert_last(itemname);
+itemfolders.set(itemname, folder);
+}
+}
+allitems.sort_ascending();
+setupmenu(false);
+m.add_item("You have " + round(money, 0) + " dollars available to spend", "shopinfo");
+for (uint i = 0; i < allitems.length(); i++)
 {
-        p.play_stationary("storefail.ogg", false);
+string itemname = allitems[i];
+string itemname2 = itemname.replace("_", " ", true);
+int owned = max(0, item_exists(itemname));
+double itemPrice = 1.0;
+if (prices.exists(itemname)) prices.get(itemname, itemPrice);
+string label = itemname2 + ", costs " + round(itemPrice, 0) + " dollar" + (itemPrice != 1 ? "s" : "");
+label += ". You currently have " + owned + " in your inventory.";
+m.add_item(label, itemname);
+}
+m.add_item("back", "back");
+m.intro_text = "Shop menu. What would you like to buy?";
+int mres = m.run();
+string shopem = m.get_selected_item_id();
+if (mres == -1 || shopem == "shopinfo" || shopem == "back")
+{
+speak("Canceled");
+boss_timer.resume();
+gametimer.resume();
+return;
+}
+if (money <= 0)
+{
+p.play_stationary(find_sound("sounds/" + soundpack + "/misc/store/*fail*"), false);
 dlgmessage_return("Error: you don't have enough money to purchase this item.");
 shopmenu();
-        return;
-    }
-    vd.set_disallowed_chars("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ !@#$%^&*()[]{};:'\"\\|,.<>_?/+-=`~", false, "This character is not allowed.");
-    string amount_input = vd.input_box("", "How many " + shopem.replace("_", " ", true) + "s would you like to buy?");
-    if (amount_input == "")
+return;
+}
+vd.set_disallowed_chars("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ !@#$%^&*()[]{};:'\"\\|,.<>_?/+-=`~", false, "This character is not allowed.");
+string amount_input = vd.input_box("", "How many " + shopem.replace("_", " ", true) + "s would you like to buy?");
+if (amount_input == "")
 {
-p.play_stationary("storefail.ogg", false);
+p.play_stationary(find_sound("sounds/" + soundpack + "/misc/store/*fail*"), false);
 dlgmessage_return("Error. Invalid quantity. Please enter a valid amount for this item.");
 shopmenu();
-        return;
-    }
-    double amount = string_to_number(amount_input);
-    if (amount <= 0)
+return;
+}
+double amount = string_to_number(amount_input);
+if (amount <= 0)
 {
-p.play_stationary("storefail.ogg", false);
+p.play_stationary(find_sound("sounds/" + soundpack + "/misc/store/*fail*"), false);
 dlgmessage_return("Error. Invalid quantity. Please enter a valid amount for this item.");
 shopmenu();
-        return;
-    }
-    double price = 1.0;
-    if (prices.exists(shopem)) prices.get(shopem, price);
-    double total_cost = amount * price;
-    if (money < total_cost)
+return;
+}
+double price = 1.0;
+if (prices.exists(shopem)) prices.get(shopem, price);
+double total_cost = amount * price;
+if (money < total_cost)
 {
-p.play_stationary("storefail.ogg", false);
+p.play_stationary(find_sound("sounds/" + soundpack + "/misc/store/*fail*"), false);
 dlgmessage_return("Error. You don't have enough money to buy " + int(amount) + " " + shopem.replace("_", " ", true) + (amount == 1 ? "." : "s."));
 shopmenu();
-        return;
-    }
-    give(shopem, int(amount));
-    money -= total_cost;
-    p.play_stationary("storebuy" + random(1, 4) + ".ogg", false);
-    dlgmessage_return("Purchase complete. You bought " + int(amount) + " " + shopem.replace("_", " ", true) + (amount == 1 ? "." : "s."));
+return;
+}
+give(shopem, int(amount));
+money -= total_cost;
+p.play_stationary(find_sound("sounds/" + soundpack + "/misc/store/*buy*"), false);
+dlgmessage_return("Purchase complete. You bought " + int(amount) + " " + shopem.replace("_", " ", true) + (amount == 1 ? "" : "s") + " for " + round(total_cost, 0) + " dollar" + (total_cost == 1 ? "" : "s") + ". You now have " + round(money, 0) + " dollar" + (money == 1 ? "" : "s") + " remaining.");
 shopmenu();
-        return;
 }
 void invmenu()
 {
-if (inv.get_size() == 0)
-{
-speak("Your inventory is currently empty.");
-return;
-}
 setupmenu(false);
 string[] keys = inv.get_keys();
 keys.sort_ascending();
@@ -821,7 +831,7 @@ string label = keys[i] + (amt == 1 ? "" : "s") + ", you have " + amt;
 m.add_item(label, keys[i]);
 }
 int total = count_total_items();
-m.intro_text = "Items menu. You currently have " + total + " item" + (total == 1 ? "" : "s") + " in your inventory.";
+m.intro_text = "Inventory menu. You currently have " + total + " item" + (total == 1 ? "" : "s") + " available to view.";
 int mres = m.run();
 string choice = m.get_selected_item_id();
 if (mres == -1)
