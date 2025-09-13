@@ -102,7 +102,7 @@ void gamemenu()
 {
 setupmenu();
 m.add_item("start game", "ty");
-m.add_item("learn game sounds (conversion in progress)", "gsm");
+m.add_item("learn game sounds (pack conversion in progress)", "gsm");
 m.add_item("read game user guides", "dm");
 m.add_item("view game achievements", "ach");
 m.add_item("view game statistics", "stats");

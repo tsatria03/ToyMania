@@ -69,7 +69,7 @@ if (file_exists(path))
 keyfile.open(path, "rb");
 keydesc = keyfile.read();
 keyfile.close();
-speak(keydesc);
+dlgmessage_return(keydesc);
 return;
 }
 else
@@ -148,7 +148,7 @@ if (file_exists(path + "info.tmf"))
 objfile.open(path + "info.tmf", "rb");
 objdesc = objfile.read();
 objfile.close();
-speak(objdesc);
+dlgmessage_return(objdesc);
 }
 else
 {
@@ -175,7 +175,7 @@ if (file_exists(path))
 toyfile.open(path, "rb");
 toydesc = toyfile.read();
 toyfile.close();
-speak(toydesc);
+dlgmessage_return(toydesc);
 return;
 }
 else
