@@ -1,4 +1,5 @@
 New in 4.4.
+Recoded the learn game sounds menu to use the new sound pack algorithm.
 Resolved an issue where the inventory menu would count up the totals of all of the items that were present, do to having multiples of the same item. From now on, it will only count up the items that are uniquely visible in the menu, not all of them at once.
 Changed the naming scheme for choosing a new normal or endless game difficulty. Instead of announcing the difficulty number, it will now announce the difficulty names of the game, such as easy, medium, hard etcetera.
 Added the ability to choose a starting difficulty for the normal and endless game modes. This controls the overall strength of enemies and other object types in the game.
@@ -11,7 +12,7 @@ Changed the keyboard shortcut from I to K to check how many keys you've collecte
 Added an option in the game settings menu that controls weather all of the items should get announced as they're being collected. This also includes keys and toys, not just normal useable items.
 Refactored the door class to make use of the keys you currently have in your inventory, along with how many keys you already have in total.
 Fixed a bug where the pistol weapon would be randomly equipped in the endless game, even though that weapon was only reserved for the normal game.
-Recoded the npc and weapon logics to use the new sound pack algorithm.
+Recoded the npc and weapon logic to use the new sound pack algorithm.
 Fixed a bug where pressing shift plus tab in your inventory wouldn't wrap around back to the first or last item in the list.
 Fixed a bug where pressing shift plus enter on some items such as keys and toys won't read out their descriptions for them.
 New in 4.2.
