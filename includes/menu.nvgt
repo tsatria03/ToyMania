@@ -760,11 +760,10 @@ m.add_item("You have " + round(money, 0) + " dollars available to spend", "shopi
 for (uint i = 0; i < allitems.length(); i++)
 {
 string itemname = allitems[i];
-string itemname2 = itemname.replace("_", " ", true);
 int owned = max(0, item_exists(itemname));
 double itemPrice = 1.0;
 if (prices.exists(itemname)) prices.get(itemname, itemPrice);
-string label = itemname2 + ", costs " + round(itemPrice, 0) + " dollar" + (itemPrice != 1 ? "s" : "");
+string label = itemname + ", costs " + round(itemPrice, 0) + " dollar" + (itemPrice != 1 ? "s" : "");
 label += ". You currently have " + owned + " in your inventory.";
 m.add_item(label, itemname);
 }
@@ -787,7 +786,7 @@ shopmenu();
 return;
 }
 vd.set_disallowed_chars("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ !@#$%^&*()[]{};:'\"\\|,.<>_?/+-=`~", false, "This character is not allowed.");
-string amount_input = vd.input_box("", "How many " + shopem.replace("_", " ", true) + "s would you like to buy?");
+string amount_input = vd.input_box("", "How many " + shopem + "s would you like to buy?");
 if (amount_input == "")
 {
 p.play_stationary(find_sound("sounds/" + soundpack + "/misc/store/*fail*"), false);

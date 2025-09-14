@@ -1,3 +1,5 @@
+New in 4.4.
+Fixed a bug where sertain sounds weren't being played propperly in the endless game.
 New in 4.3.
 Enhanced the shop menu in the endless game to include the quantity bought, the total cost of the purchase, and the remaining cash after the transaction.
 Resolved an issue where selecting an item in the inventory menu would cause the wrong item to be used based on the cycle's position while pressing tab to go through it.

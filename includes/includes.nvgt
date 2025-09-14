@@ -112,7 +112,7 @@ string mustype="gamemus";
 string weapontype="melee";
 string weapontype2="bat";
 string soundcard="Default";
-string version="4.3";
+string version="4.4";
 timer boss_timer, bossespawntimer, carspawntimer, gametimer, gardspawntimer, objspawntimer, keyspawntimer, movetimer, runtimer, toyspawntimer, usetimer, walktimer, weapontimer, weapontimer2, reloadTimer, savedata_timer;
 file achfile, gamfile, keyfile, objfile, poastfile, statfile, toyfile, wepfile;
 pack dockpack;
