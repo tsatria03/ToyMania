@@ -1,4 +1,5 @@
 New in 4.4.
+Added an option in the game settings menu to enable or disable item giving sounds. This controls weather the sound for receiving an item in your inventory is played or not.
 Recoded the learn game sounds menu to use the new sound pack algorithm.
 Resolved an issue where the inventory menu would count up the totals of all of the items that were present, do to having multiples of the same item. From now on, it will only count up the items that are uniquely visible in the menu, not all of them at once.
 Changed the naming scheme for choosing a new normal or endless game difficulty. Instead of announcing the difficulty number, it will now announce the difficulty names of the game, such as easy, medium, hard etcetera.

@@ -149,7 +149,11 @@ return;
 }
 gamemod = string_to_int(diffchoice);
 endless = (mode == "endless");
-if (speak_menu_loading) speak((endless ? "loading endless mode." : "loading normal mode."));
+if (speak_menu_loading)
+{
+string difficulty_name =(gamemod == 1) ? "easy" :(gamemod == 3) ? "medium" :(gamemod == 5) ? "hard" :(gamemod == 7) ? "chaotic" :(gamemod == 9) ? "insane" :(gamemod == 11) ? "brutal" : "unknown";
+speak((endless ? "loading endless mode: difficulty " : "loading normal mode: difficulty ") + difficulty_name);
+}
 m.fade_music();
 dlgplay(find_sound("sounds/" + soundpack + "/misc/game/*launch*"));
 level = 1;
@@ -1404,6 +1408,9 @@ if (showset_desc) achsound2 = form.create_input_box("Achievement SFX: descriptio
 int achvoice = form.create_checkbox("Enable achievement speech feedback.", speak_ach_scores);
 int achvoice2 = -1;
 if (showset_desc) achvoice2 = form.create_input_box("Achievement speech: description", "This setting controls the spoken announcements of achievement progresses.", "", 0, true, true);
+int givesound = form.create_checkbox("Enable item giving sound effects.", play_item_gives);
+int givesound2 = -1;
+if (showset_desc) givesound2 = form.create_input_box("Item giving SFX: description", "This setting controls the sounds played when receiving items in your inventory.", "", 0, true, true);
 int collectspeech = form.create_checkbox("Enable item collect speech feedback.", speak_item_collects);
 int collectspeech2 = -1;
 if (showset_desc) collectspeech2 = form.create_input_box("Item collect speech: description", "This setting controls whether items should get announced as they're being collected.", "", 0, true, true);
@@ -1460,6 +1467,7 @@ autorun = form.is_checked(runmode);
             sound_global_hrtf = hrtf;
             play_ach_scores = form.is_checked(achsound);
             speak_ach_scores = form.is_checked(achvoice);
+play_item_gives = form.is_checked(givesound);
 speak_item_collects = form.is_checked(collectspeech);
             speak_dlg_enter = form.is_checked(dlgspeech);
             speak_menu_loading = form.is_checked(loadspeech);
@@ -1493,6 +1501,7 @@ int glb = form.create_checkbox("Enable behind pitch decrease.", behind_pitch);
 int glh = form.create_checkbox("Enable HRTF support.", hrtf);
 int achsound = form.create_checkbox("Enable achievement sound effects.", play_ach_scores);
 int achvoice = form.create_checkbox("Enable achievement speech feedback.", speak_ach_scores);
+int givesound = form.create_checkbox("Enable item giving sound effects.", play_item_gives);
 int collectspeech = form.create_checkbox("Enable item collect speech feedback.", speak_item_collects);
 int gcp = form.create_checkbox("Enable post-game copy and export prompts.", gamcopy);
 int qcm = form.create_checkbox("Enable quit confirmation prompts.", quit_menu);
@@ -1512,6 +1521,7 @@ autorun = form.is_checked(runmode);
             sound_global_hrtf = hrtf;
             play_ach_scores = form.is_checked(achsound);
             speak_ach_scores = form.is_checked(achvoice);
+play_item_gives = form.is_checked(givesound);
 speak_item_collects = form.is_checked(collectspeech);
             gamcopy = form.is_checked(gcp);
             quit_menu = form.is_checked(qcm);

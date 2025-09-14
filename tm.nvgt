@@ -93,6 +93,7 @@ behind_pitch=true;
 hrtf=true;
 play_ach_scores=true;
 speak_ach_scores=true;
+play_item_gives=true;
 speak_item_collects=true;
 speak_dlg_enter=true;
 speak_menu_loading=true;
