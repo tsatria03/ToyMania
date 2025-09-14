@@ -1,5 +1,6 @@
 New in 4.4.
-Changed the naming scheme for choosing a new normal or endless game difficulty. Instead of announcing the difficulty number, it will now announce the difficulty name of the game, such as easy, medium, hard etcetera.
+Resolved an issue where the inventory menu would count up the totals of all of the items that were present, do to having multiples of the same item. From now on, it will only count up the items that are uniquely visible in the menu, not all of them at once.
+Changed the naming scheme for choosing a new normal or endless game difficulty. Instead of announcing the difficulty number, it will now announce the difficulty names of the game, such as easy, medium, hard etcetera.
 Added the ability to choose a starting difficulty for the normal and endless game modes. This controls the overall strength of enemies and other object types in the game.
 Fixed a bug where sertain sounds weren't being played propperly in the endless game.
 New in 4.3.

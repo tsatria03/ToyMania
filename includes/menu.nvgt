@@ -132,12 +132,12 @@ gamemenu();
 return;
 }
 setupmenu(false);
-m.add_item("Very Easy", "1");
-m.add_item("Easy", "3");
-m.add_item("Medium", "5");
-m.add_item("Hard", "7");
-m.add_item("Very Hard", "9");
-m.add_item("Insane", "11");
+m.add_item("Easy", "1");
+m.add_item("Medium", "3");
+m.add_item("Hard", "5");
+m.add_item("chaotic", "7");
+m.add_item("Insane", "9");
+m.add_item("Brutal", "11");
 m.add_item("Back", "back");
 m.intro_text = "Choose the difficulty for this game mode.";
 int dres = m.run();
@@ -151,7 +151,7 @@ gamemod = string_to_int(diffchoice);
 endless = (mode == "endless");
 if (speak_menu_loading)
 {
-string difficulty_name =(gamemod == 1) ? "very easy" :(gamemod == 3) ? "easy" :(gamemod == 5) ? "medium" :(gamemod == 7) ? "hard" :(gamemod == 9) ? "very hard" :(gamemod == 11) ? "insane" : "unknown";
+string difficulty_name =(gamemod == 1) ? "easy" :(gamemod == 3) ? "medium" :(gamemod == 5) ? "hard" :(gamemod == 7) ? "chaotic" :(gamemod == 9) ? "insane" :(gamemod == 11) ? "brutal" : "unknown";
 speak((endless ? "loading endless mode: difficulty " : "loading normal mode: difficulty ") + difficulty_name);
 }
 m.fade_music();
