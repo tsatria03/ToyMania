@@ -18,8 +18,8 @@ final_list+=list[i]+"\r\n";
 }
 final_list+="total files: "+list.length()+"\r\n";
 file slist;
-slist.open("soundslist.txt", "w");
+slist.open("dockslist.txt", "w");
 slist.write(final_list);
 slist.close();
-alert("Complete! ", "The sound list has been written to soundslist.txt.");
+alert("Complete! ", "The dock list has been written to dockslist.txt.");
 }

@@ -16,6 +16,7 @@ if (@timeelapsed.handle == null)
 {
     timeelapsed.set_timer(gametimer);
 }
+getver();
 show_window("ToyMania, version "+version);
 if(gamstence.is_already_running)
 {
@@ -30,6 +31,27 @@ else
     }
 wait(500);
     mainmenu();
+}
+}
+void getver()
+{
+if (!dockpack_loaded)
+{
+if (!dockpack.open("data/docks.tmg", PACK_OPEN_MODE_READ))
+{
+alert("Error", "Could not open the docks.tmg file!");
+return;
+}
+dockpack_loaded = true;
+}
+if (dockpack.file_exists("version.txt"))
+{
+uint size = dockpack.get_file_size("version.txt");
+version = dockpack.read_file("version.txt", 0, size);
+}
+else
+{
+version = "unknown";
 }
 }
 void pause_game()

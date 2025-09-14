@@ -74,6 +74,7 @@ if (block_desc)
 boss_timer.pause();
 gametimer.pause();
 dlgmessage_return(keydesc);
+invmenu();
 }
 else
 {
@@ -162,6 +163,7 @@ if (block_desc)
 boss_timer.pause();
 gametimer.pause();
 dlgmessage_return(objdesc);
+invmenu();
 }
 else
 {
@@ -199,6 +201,7 @@ if (block_desc)
 boss_timer.pause();
 gametimer.pause();
 dlgmessage_return(toydesc);
+invmenu();
 }
 else
 {
