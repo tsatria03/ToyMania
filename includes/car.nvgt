@@ -72,7 +72,7 @@ if (cars[i].fireable==true && cars[i].firing && cars[i].firetimer.elapsed >= car
     else
         direction = dy > 0 ? "down" : "up";
         cars[i].firesound = carpool.play_2d(find_sound("sounds/"+soundpack+"/npc/cars/"+cars[i].cartype+"/*shoot*"), me.x, me.y, cars[i].carx, cars[i].cary, false);
-spawn_bullet(cars[i].carx, cars[i].cary, 0, 0, random(20, 40), 30, direction);
+spawn_bullet(cars[i].carx, cars[i].cary, 0, 0, random(10*gamemod, 20*gamemod), 20, direction);
     cars[i].shotsFired++;
     cars[i].firetimer.restart();
     if (cars[i].shotsFired >= cars[i].shotsPerBurst)

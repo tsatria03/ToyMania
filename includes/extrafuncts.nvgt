@@ -71,6 +71,36 @@ int get_total_entities()
 {
     return cars.length() + bullets.length() + gards.length() + toys.length() + objs.length() + keys.length();
 }
+int string_to_int(string str)
+{
+    int result = 0;
+    bool isNegative = false;
+    if (str.length() == 0)
+        return 0;
+    if (str.substr(0, 1) == "-")
+    {
+        isNegative = true;
+        str = str.substr(1);
+    }
+    for (uint i = 0; i < str.length(); i++)
+    {
+        string digitStr = str.substr(i, 1);
+        int digit = 0;
+        if (digitStr == "0") digit = 0;
+        else if (digitStr == "1") digit = 1;
+        else if (digitStr == "2") digit = 2;
+        else if (digitStr == "3") digit = 3;
+        else if (digitStr == "4") digit = 4;
+        else if (digitStr == "5") digit = 5;
+        else if (digitStr == "6") digit = 6;
+        else if (digitStr == "7") digit = 7;
+        else if (digitStr == "8") digit = 8;
+        else if (digitStr == "9") digit = 9;
+        else return 0;
+        result = result * 10 + digit;
+    }
+    return isNegative ? -result : result;
+}
 string find_sound(string soundname)
 {
 string[] snd=find_files(soundname);

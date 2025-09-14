@@ -83,6 +83,7 @@ int gametime, movetime;
 int bossnum=1, carnum=5, gardnum=10, keynum=15, objnum=15, toynum=20;
 int bossespawntime=5000, objspawntime=2500, carspawntime=1000, gardspawntime=500, keyspawntime=250, toyspawntime=125;
 int boss_time_limit = 90000;
+int gamemod=1;
 int last_level_time = 0;
 int weprange=5, weprange2=10, wepdamage=20;
 int weapontime=50, weapontime2=100;

@@ -119,64 +119,82 @@ mainmenu();
 }
 if (gamem == "ty")
 {
-    setupmenu(false);
-m.add_item("Normal. This is a timed based mode where you must collect as many toys as you can. You also have to survive various types of enemies, and defeat the final boss before the store explodes. There is one unlockable door that you must find by collecting all of the required keys to win.", "normal");
-m.add_item("Endless. This mode lets you play for as long as you can survive. The game will get harder over time with no final boss, and just one unlockable door to win. This mode also includes some items that drop from time to time for use durring intense grueling fights.", "endless");
-    m.add_item("Back", "back");
-    m.intro_text = "Choose the game mode you'd like to play.";
-    int gres = m.run();
-    string mode = m.get_selected_item_id();
-    if (mode == "back" or gres == -1)
-    {
-        gamemenu();
-    }
-    endless = (mode == "endless");
-    if (speak_menu_loading) speak(endless ? "loading endless mode" : "loading normal mode");
-    m.fade_music();
-    dlgplay(find_sound("sounds/"+soundpack+"/misc/game/*launch*"));
-    level = 1;
+setupmenu(false);
+m.add_item("Normal. This is a timed based mode where you must collect toys, survive various types of enemies, and defeat the final boss before the store explodes. There is one unlockable door that you must find by collecting all of the required keys to win.", "normal");
+m.add_item("Endless. This mode lets you play for as long as you can survive. The game will get harder over time with no final boss, and just one unlockable door to win. This mode also includes some items that drop from time to time for use during intense grueling fights.", "endless");
+m.add_item("Back", "back");
+m.intro_text = "Choose the game mode you'd like to play.";
+int gres = m.run();
+string mode = m.get_selected_item_id();
+if (mode == "back" or gres == -1)
+{
+gamemenu();
+return;
+}
+setupmenu(false);
+for (int i = 1; i <= 10; i++)
+{
+string label = "Difficulty " + format_int(i);
+m.add_item(label, format_int(i));
+}
+m.add_item("Back", "back");
+m.intro_text = "Choose the difficulty for this game mode.";
+int dres = m.run();
+string diffchoice = m.get_selected_item_id();
+if (diffchoice == "back" or dres == -1)
+{
+gamemenu();
+return;
+}
+gamemod = string_to_int(diffchoice);
+endless = (mode == "endless");
+if (speak_menu_loading)
+speak((endless ? "loading endless mode, difficulty " : "loading normal mode, difficulty ") + format_int(gamemod));
+m.fade_music();
+dlgplay(find_sound("sounds/" + soundpack + "/misc/game/*launch*"));
+level = 1;
 money = 0;
-    collected_toys = 0;
-    collected_keys = 0;
-    killed_gards = 0;
-    destroyed_cars = 0;
-    moved_steps = 0;
-    session_playtime = 0;
-    for (uint i = 0; i < achievements.length(); i++)
-    {
-        if (achievements[i].isSessionBased)
-            achievements[i].currentTier = 0;
-    }
-    gametimer.restart();
-    health = endless ? 10000 : 1000;
+collected_toys = 0;
+collected_keys = 0;
+killed_gards = 0;
+destroyed_cars = 0;
+moved_steps = 0;
+session_playtime = 0;
+for (uint i = 0; i < achievements.length(); i++)
+{
+if (achievements[i].isSessionBased)
+achievements[i].currentTier = 0;
+}
+gametimer.restart();
+health = endless ? 10000 : 1000;
 maxhealth = endless ? 10000 : 1000;
-    storehealth = endless ? 10000 : 1000;
+storehealth = endless ? 10000 : 1000;
 storemaxhealth = endless ? 10000 : 1000;
-if(endless) clear_inv();
+if (endless) clear_inv();
 destroy_all_healzones();
 destroy_all_doors();
-    me.x = endless ? 50 : 25;
+me.x = endless ? 50 : 25;
 me.y = endless ? 50 : 25;
-    maxx = endless ? 100 : 50;
+maxx = endless ? 100 : 50;
 maxy = endless ? 100 : 50;
-toynum=20;
+toynum = 20;
 alarm_started = false;
 countdown_started = false;
 small_storedest = false;
 medium_storedest = false;
-    bossdefeated = false;
-    bossespawn = false;
-    carspawn = false;
-cardest=false;
-    gardspawn = false;
-    keydest = false;
-    keyspawn = false;
-    objdest = false;
-    objspawn = false;
-    toydest = false;
-    toyspawn = true;
+bossdefeated = false;
+bossespawn = false;
+carspawn = false;
+cardest = false;
+gardspawn = false;
+keydest = false;
+keyspawn = false;
+objdest = false;
+objspawn = false;
+toydest = false;
+toyspawn = true;
 reset_weapons();
-    toygame();
+toygame();
 }
 if (gamem == "gsm")
 {

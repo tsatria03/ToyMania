@@ -464,9 +464,9 @@ if (endless)
     int miny2 = random(50, 89);
     int maxy2 = min(miny2 + 10, 99);
     spawn_platform(leftx, min(leftx + 5, 99), miny1, maxy1, "glass");
-    spawn_healzone(leftx, min(leftx + 5, 99), miny1, maxy1, 0, random(30, 60), random(1500, 3000), "fire");
+    spawn_healzone(leftx, min(leftx + 5, 99), miny1, maxy1, 0, random(10*gamemod, 20*gamemod), random(2000/gamemod, 4000/gamemod), "fire");
     spawn_platform(max(rightx - 5, 0), rightx, miny2, maxy2, "glass");
-    spawn_healzone(max(rightx - 5, 0), rightx, miny2, maxy2, 1, random(30, 60), random(1500, 3000), "chime");
+    spawn_healzone(max(rightx - 5, 0), rightx, miny2, maxy2, 1, random(10*gamemod, 20*gamemod), random(2000/gamemod, 4000/gamemod), "chime");
 }
 if(endless)
 {
@@ -543,13 +543,13 @@ if (get_total_entities() < max_entities)
 if(bossespawntimer.elapsed>=bossespawntime and bosses.length()<bossnum and bossespawn==true and !bossdefeated and !endless)
 {
 string[] bosstype=find_directories("sounds/"+soundpack+"/npc/bosses/*");
-spawn_boss(random(0,maxx), random(0,maxy), random(200,400), random(40,80), random(100,500), random(5000,10000), random(100,500), random(5000,10000), random(10000,20000), random_string(bosstype));
+spawn_boss(random(0,maxx), random(0,maxy), random(100*gamemod,200*gamemod), random(50*gamemod,100*gamemod), random(500/gamemod,1000/gamemod), random(5000/gamemod,10000/gamemod), random(1000/gamemod,2000/gamemod), random(10000/gamemod,20000/gamemod), random(20000/gamemod,40000/gamemod), random_string(bosstype));
 bossespawntimer.restart();
 }
 if(carspawntimer.elapsed>=carspawntime and cars.length()<carnum and carspawn==true)
 {
 string[] cartype=find_directories("sounds/"+soundpack+"/npc/cars/*");
-spawn_car(random(0,maxx), random(0,maxy), random(0,1), random(0,1), random(15,30), random(75,750), random_string(cartype), cardest);
+spawn_car(random(0,maxx), random(0,maxy), random(0,1), random(0,1), random(5*gamemod,10*gamemod), random(100/gamemod,500/gamemod), random_string(cartype), cardest);
 carspawntimer.restart();
 }
 if(gardspawntimer.elapsed>=gardspawntime and gards.length()<gardnum and gardspawn==true)
@@ -558,7 +558,7 @@ destroy_all_bullets();
 if(!endless) destroy_all_cars();
 destroy_all_darts();
 string[] gardtype=find_directories("sounds/"+soundpack+"/npc/guards/*");
-spawn_gard(random(0,maxx), random(0,maxy), random(15,30), random(15,30), random(75,750), random(75,750), random_string(gardtype));
+spawn_gard(random(0,maxx), random(0,maxy), random(10*gamemod,20*gamemod), random(5*gamemod,10*gamemod), random(250/gamemod,500/gamemod), random(500/gamemod,1000/gamemod), random_string(gardtype));
 gardspawntimer.restart();
 }
 if(keyspawntimer.elapsed>=keyspawntime and keys.length()<keynum and keyspawn==true)
@@ -571,7 +571,7 @@ if (keytypes.length() == 0)
 return;
 }
 string keyname = random_string(keytypes);
-spawn_key(random(0,maxx), random(0,maxy), random(2500,5000), keycat, keyname, keydest);
+spawn_key(random(0,maxx), random(0,maxy), random(2500/gamemod,5000/gamemod), keycat, keyname, keydest);
 keyspawntimer.restart();
 }
 if(objspawntimer.elapsed>=objspawntime and objs.length()<objnum and objspawn==true and endless)
@@ -584,7 +584,7 @@ if (objtypes.length() == 0)
 return;
 }
 string objname = random_string(objtypes);
-spawn_obj(random(0,maxx), random(0,maxy), random(3000,6000), objcat, objname, objdest);
+spawn_obj(random(0,maxx), random(0,maxy), random(3000/gamemod,6000/gamemod), objcat, objname, objdest);
 objspawntimer.restart();
 }
 if(toyspawntimer.elapsed>=toyspawntime and toys.length()<toynum and toyspawn==true)
@@ -597,7 +597,7 @@ if (toytypes.length() == 0)
 return;
 }
 string toyname = random_string(toytypes);
-spawn_toy(random(0,maxx), random(0,maxy), random(5000,10000), toycat, toyname, toydest);
+spawn_toy(random(0,maxx), random(0,maxy), random(5000/gamemod,10000/gamemod), toycat, toyname, toydest);
 toyspawntimer.restart();
 }
 }
