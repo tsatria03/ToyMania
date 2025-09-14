@@ -132,11 +132,12 @@ gamemenu();
 return;
 }
 setupmenu(false);
-for (int i = 1; i <= 10; i++)
-{
-string label = "Difficulty " + format_int(i);
-m.add_item(label, format_int(i));
-}
+m.add_item("Very Easy", "1");
+m.add_item("Easy", "3");
+m.add_item("Medium", "5");
+m.add_item("Hard", "7");
+m.add_item("Very Hard", "9");
+m.add_item("Insane", "11");
 m.add_item("Back", "back");
 m.intro_text = "Choose the difficulty for this game mode.";
 int dres = m.run();
@@ -149,7 +150,10 @@ return;
 gamemod = string_to_int(diffchoice);
 endless = (mode == "endless");
 if (speak_menu_loading)
-speak((endless ? "loading endless mode, difficulty " : "loading normal mode, difficulty ") + format_int(gamemod));
+{
+string difficulty_name =(gamemod == 1) ? "very easy" :(gamemod == 3) ? "easy" :(gamemod == 5) ? "medium" :(gamemod == 7) ? "hard" :(gamemod == 9) ? "very hard" :(gamemod == 11) ? "insane" : "unknown";
+speak((endless ? "loading endless mode: difficulty " : "loading normal mode: difficulty ") + difficulty_name);
+}
 m.fade_music();
 dlgplay(find_sound("sounds/" + soundpack + "/misc/game/*launch*"));
 level = 1;
