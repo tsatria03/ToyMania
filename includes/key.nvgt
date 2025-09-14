@@ -38,6 +38,7 @@ if(absolute(me.x - keys[i].kx) <= 2 and absolute(me.y - keys[i].ky) <= 2)
 {
 keypool.destroy_sound(keys[i].keysound);
 keys[i].getsound=keypool.play_stationary(find_sound("sounds/"+soundpack+"/equipments/items/normal/keys/"+keys[i].keytype+"/"+keys[i].keytype2+"/*get*"),false);
+p.play_stationary(find_sound("sounds/"+soundpack+"/misc/player/*give*"),false);
 give(keys[i].keytype2, 1);
 if(speak_item_collects==true) speak(keys[i].keytype2);
 collected_keys+=1;

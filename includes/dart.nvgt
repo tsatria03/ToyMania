@@ -53,7 +53,7 @@ for(uint i1=0; i1<cars.length(); i1++)
 {
 if (absolute(cars[i1].carx - darts[i].dartx) <= 2 && absolute(cars[i1].cary - darts[i].darty) <= 2)
 {
-dartpool.play_2d(find_sound("sounds/"+soundpack+"/equipments/items/endless/stun_dart/*hit*"), me.x, me.y, cars[i1].carx, cars[i1].cary, false);
+dartpool.play_2d(find_sound("sounds/"+soundpack+"/equipments/items/endless/common/stun_dart/*hit*"), me.x, me.y, cars[i1].carx, cars[i1].cary, false);
 int stundir=random(1500,3000);
 stun_target("car", cars[i1].cartype, darts[i].damage, stundir);
 darts.remove_at(i);
@@ -64,7 +64,7 @@ for(uint i2=0; i2<gards.length(); i2++)
 {
 if (absolute(gards[i2].gardx - darts[i].dartx) <= 2 && absolute(gards[i2].gardy - darts[i].darty) <= 2)
 {
-dartpool.play_2d(find_sound("sounds/"+soundpack+"/equipments/items/endless/stun_dart/*hit*"), me.x, me.y, cars[i1].carx, cars[i1].cary, false);
+dartpool.play_2d(find_sound("sounds/"+soundpack+"/equipments/items/endless/common/stun_dart/*hit*"), me.x, me.y, gards[i2].gardx, gards[i2].gardy, false);
 int stundir2=random(1500,3000);
 stun_target("gard", gards[i2].gardtype, darts[i].damage, stundir2);
 darts.remove_at(i);
