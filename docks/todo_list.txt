@@ -1,6 +1,5 @@
 ####These are the things that need to be finished for future versions of the game.
 
-****Unfinished. Fix the learn sounds menu, and convert it to use the new sound pack system.
 ****Unfinished. Add a mode where you have to put the toys you collect in a shopping cart.
 ****Unfinished. Add a mode where you get to watch enemies fight each other. This includes cars.
 ****Unfinished. Add a new game mode that allows you to collect and play with the toys you have in your inventory.
@@ -9,11 +8,12 @@
 ****Unfinished. Add more weapons to fight with.
 ****Unfinished. Make it so both pistol and machine gun weapons can be used in endless mode.
 ****Unfinished. Make lasers use batteries.
-****Unfinished. Add difficulty menu items to the normal game mode.
 ****Unfinished. Add an online scoreboard system.
 
 ##These are the things that are already finished from earlier versions of the game.
 
+**Finished. Fix the learn sounds menu, and convert it to use the new sound pack system.
+**Finished. Add difficulty options to the normal and endless game modes.
 **Finished. Add soundpack support.
 **Finished. Fix the shop menu to return the user back to the menu after purchasing something.
 **Finished. Add darts as items for stunning enemies.
