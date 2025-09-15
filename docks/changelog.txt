@@ -1,4 +1,5 @@
 New in 4.4.
+Resolved an issue where game level elements wouldn't spawn in the endless mode despite more than a minute of playtime occuring.
 Updated the readme file with added and modified keyboard shortcuts.
 Made it so keys and toys no longer appear in your inventory after collecting them in the endless game. The endless game will only put actual useable items in your inventory from now on.
 Made it so items that have a description will now return the user back to the inventory menu after reading one, instead of making them exit the menu entirely.

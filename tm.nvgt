@@ -72,6 +72,7 @@ void resetgame()
 {
     last_played_date = get_date(true, false);
     last_played_time = get_time(true, false);
+last_level_time = 0;
 level=1;
 money=0;
 collected_keys=0;

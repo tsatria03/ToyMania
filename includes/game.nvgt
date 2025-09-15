@@ -23,7 +23,8 @@ gametimer.resume();
 boss_timer.resume();
 gametimer.resume();
     fade_multi_pool();
-    level = 1;
+    last_level_time = 0;
+level = 1;
 money = 0;
     collected_toys = 0;
     collected_keys = 0;
@@ -752,10 +753,11 @@ if (res != -1 && choice == "yes")
 {
 if (speak_menu_loading)
 {
-string difficulty_name =(gamemod == 1) ? "Very easy" :(gamemod == 2) ? "Easy" :(gamemod == 3) ? "Medium" :(gamemod == 4) ? "Hard" :(gamemod == 5) ? "Very hard" :(gamemod == 6) ? "Insane" : "unknown";
+string difficulty_name =(gamemod == 1) ? "Easy" :(gamemod == 2) ? "Medium" :(gamemod == 3) ? "Hard" :(gamemod == 4) ? "Insane" :(gamemod == 5) ? "Chaos" :"unknown";
 speak((endless ? "loading endless: mode " : "loading normal: mode ") + difficulty_name);
 }
     dlgplay(find_sound("sounds/"+soundpack+"/misc/game/*launch*"));
+last_level_time = 0;
     level = 1;
 money = 0;
     collected_toys = 0;
