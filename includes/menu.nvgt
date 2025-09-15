@@ -174,7 +174,7 @@ health = endless ? 10000 : 1000;
 maxhealth = endless ? 10000 : 1000;
 storehealth = endless ? 10000 : 1000;
 storemaxhealth = endless ? 10000 : 1000;
-if (endless) clear_inv();
+clear_inv();
 destroy_all_healzones();
 destroy_all_doors();
 me.x = endless ? 50 : 25;
@@ -683,7 +683,7 @@ collected_toys = 0;
                 if (achievements[i].isSessionBased)
                     achievements[i].currentTier = 0;
             }
-            if (endless) clear_inv();
+            clear_inv();
             if (!endless) destroy_all_bosses();
 destroy_all_healzones();
 destroy_all_bullets();

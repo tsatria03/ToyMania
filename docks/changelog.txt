@@ -1,3 +1,5 @@
+New in 4.5.
+Addressed an issue where your inventory wasn't being cleared at the start of a level upon failing the normal game mode.
 New in 4.4.
 Resolved an issue where game level elements wouldn't spawn in the endless mode despite more than a minute of playtime occuring.
 Updated the readme file with added and modified keyboard shortcuts.
