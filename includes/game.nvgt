@@ -673,8 +673,8 @@ if (!countdown_started and boss_timer.elapsed >boss_time_limit-10000)
 }
 if (!small_storedest and boss_timer.elapsed >boss_time_limit-60000)
 {
-health-=random(200/2, 400/2);
-storehealth-=random(200, 400);
+health-=random(10*gamemod/2, 50*gamemod/2);
+storehealth-=random(50*gamemod/2, 100*gamemod/2);
 small_storedest = true;
 double x1 = random(0, 5);
 double x2 = x1 + 5;
@@ -688,8 +688,8 @@ pool.play_stationary(find_sound("sounds/"+soundpack+"/misc/store/*dest_small*"),
 }
 if (!medium_storedest and boss_timer.elapsed >boss_time_limit-30000)
 {
-health-=random(300/2, 600/2);
-storehealth-=random(300, 600);
+health-=random(100*gamemod/2, 200*gamemod/2);
+storehealth-=random(200*gamemod/2, 400*gamemod/2);
 medium_storedest = true;
 double x3 = random(45, 50);
 double x4 = x3 + 5;
@@ -750,6 +750,11 @@ int res = m.run();
 string choice = m.get_selected_item_id();
 if (res != -1 && choice == "yes")
 {
+if (speak_menu_loading)
+{
+string difficulty_name =(gamemod == 1) ? "Very easy" :(gamemod == 2) ? "Easy" :(gamemod == 3) ? "Medium" :(gamemod == 4) ? "Hard" :(gamemod == 5) ? "Very hard" :(gamemod == 6) ? "Insane" : "unknown";
+speak((endless ? "loading endless: mode " : "loading normal: mode ") + difficulty_name);
+}
     dlgplay(find_sound("sounds/"+soundpack+"/misc/game/*launch*"));
     level = 1;
 money = 0;

@@ -101,8 +101,8 @@ gamemenu();
 void gamemenu()
 {
 setupmenu();
-m.add_item("start game", "ty");
-m.add_item("learn game sounds: 5 out of 10 categories converted to use packs", "gsm");
+m.add_item("play game", "ty");
+m.add_item("learn game sounds: 5 out of 10 categories have been converted to use packs", "gsm");
 m.add_item("read game user guides", "dm");
 m.add_item("view game achievements", "ach");
 m.add_item("view game statistics", "stats");
@@ -132,12 +132,12 @@ gamemenu();
 return;
 }
 setupmenu(false);
-m.add_item("Easy", "1");
+m.add_item("Very easy", "1");
+m.add_item("Easy", "2");
 m.add_item("Medium", "3");
-m.add_item("Hard", "5");
-m.add_item("chaotic", "7");
-m.add_item("Insane", "9");
-m.add_item("Brutal", "11");
+m.add_item("Hard", "4");
+m.add_item("Very hard", "5");
+m.add_item("Insane", "6");
 m.add_item("Back", "back");
 m.intro_text = "Choose the difficulty for this game mode.";
 int dres = m.run();
@@ -151,8 +151,8 @@ gamemod = string_to_int(diffchoice);
 endless = (mode == "endless");
 if (speak_menu_loading)
 {
-string difficulty_name =(gamemod == 1) ? "easy" :(gamemod == 3) ? "medium" :(gamemod == 5) ? "hard" :(gamemod == 7) ? "chaotic" :(gamemod == 9) ? "insane" :(gamemod == 11) ? "brutal" : "unknown";
-speak((endless ? "loading endless mode: difficulty " : "loading normal mode: difficulty ") + difficulty_name);
+string difficulty_name =(gamemod == 1) ? "Very easy" :(gamemod == 2) ? "Easy" :(gamemod == 3) ? "Medium" :(gamemod == 4) ? "Hard" :(gamemod == 5) ? "Very hard" :(gamemod == 6) ? "Insane" : "unknown";
+speak((endless ? "loading endless: mode " : "loading normal: mode ") + difficulty_name);
 }
 m.fade_music();
 dlgplay(find_sound("sounds/" + soundpack + "/misc/game/*launch*"));
@@ -370,7 +370,8 @@ cars["Car3 Shoot"] = get_sound("npc/cars/car3/shoot.*");
 learnCategories["Cars: converted"] = cars;
 dictionary doors;
 doors["Close"] = get_sound("objects/doors/door/close.*");
-doors["Lock"] = get_sound("objects/doors/door/lock.*");
+doors["Deny"] = get_sound("objects/doors/door/deny.*");
+doors["Grant"] = get_sound("objects/doors/door/grant.*");
 doors["Jam" + vdesc] = array<string> = {get_sound("objects/doors/door/jam1.*"), get_sound("objects/doors/door/jam2.*")};
 doors["Loop"] = get_sound("objects/doors/door/loop.*");
 doors["Move"] = get_sound("objects/doors/door/move.*");

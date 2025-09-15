@@ -69,7 +69,7 @@ int total_keys_available = collected_keys + inv_key_count;
 if (total_keys_available < doors[i].required_keys)
 {
 temp.destroy_sound(doors[i].locksound);
-doors[i].locksound = temp.play_stationary(find_sound("sounds/"+soundpack+"/objects/doors/"+doors[i].doortype+"/*lock*"), false);
+doors[i].locksound = temp.play_stationary(find_sound("sounds/"+soundpack+"/objects/doors/"+doors[i].doortype+"/*deny*"), false);
 speak("This door is locked. You need " + doors[i].required_keys + " more keys to unlock it.");
 return;
 }
@@ -97,10 +97,19 @@ if (used_key) break;
 }
 if (!used_key)
 {
+if (endless && collected_keys >= doors[i].required_keys)
+{
+collected_keys -= doors[i].required_keys;
+doors[i].unlocksound = doorpool.play_stationary(find_sound("sounds/"+soundpack+"/objects/doors/"+doors[i].doortype+"/*grant*"), false);
+used_key = true;
+}
+else
+{
 temp.destroy_sound(doors[i].locksound);
-doors[i].locksound = temp.play_stationary(find_sound("sounds/"+soundpack+"/objects/doors/"+doors[i].doortype+"/*lock*"), false);
+doors[i].locksound = temp.play_stationary(find_sound("sounds/"+soundpack+"/objects/doors/"+doors[i].doortype+"/*deny*"), false);
 speak("You have enough keys, but none in your inventory to unlock the door.");
 return;
+}
 }
                 alarmpool.destroy_sound(alarmslot);
                 ambpool.destroy_sound(toyambslot);
