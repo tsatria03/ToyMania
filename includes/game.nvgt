@@ -207,7 +207,7 @@ gametimer.pause();
 }
 if(key_pressed(KEY_P) and doormove==false)
 {
-temp.play_stationary(find_sound("sounds/"+soundpack+"/misc/game/*pause*"), false);
+temp.play_stationary(get_sound("misc/game/*pause*"), false);
 pause_game();
 pausemenu();
 }
@@ -216,22 +216,22 @@ if(shift_is_down())
 if(key_pressed(KEY_LEFT) and facing=="left"==false)
 {
 facing="left";
-p.play_2d(find_sound("sounds/"+soundpack+"/misc/player/*turn*"), me.x-1, me.y, me.x-1, me.y, false);
+p.play_2d(get_sound("misc/player/*turn*"), me.x-1, me.y, me.x-1, me.y, false);
 }
 if(key_pressed(KEY_RIGHT) and facing=="right"==false)
 {
 facing="right";
-p.play_2d(find_sound("sounds/"+soundpack+"/misc/player/*turn*"), me.x+1, me.y, me.x+1, me.y, false);
+p.play_2d(get_sound("misc/player/*turn*"), me.x+1, me.y, me.x+1, me.y, false);
 }
 if(key_pressed(KEY_DOWN) and facing=="backward"==false)
 {
 facing="backward";
-p.play_2d(find_sound("sounds/"+soundpack+"/misc/player/*turn*"), me.x, me.y-1, me.x, me.y-1, false);
+p.play_2d(get_sound("misc/player/*turn*"), me.x, me.y-1, me.x, me.y-1, false);
 }
 if(key_pressed(KEY_UP) and facing=="forward"==false)
 {
 facing="forward";
-p.play_2d(find_sound("sounds/"+soundpack+"/misc/player/*turn*"), me.x, me.y+1, me.x, me.y+1, false);
+p.play_2d(get_sound("misc/player/*turn*"), me.x, me.y+1, me.x, me.y+1, false);
 }
 }
 if(alt_is_down() and key_pressed(KEY_A))
@@ -397,7 +397,7 @@ if (!shift_is_down() and key_down(KEY_LEFT) and movetimer.elapsed>=movetime and 
 {
 me.x-=1;
 facing="left";
-p.play_stationary(find_sound("sounds/"+soundpack+"/objects/platforms/"+gmt(me.x,me.y)+"/*step*"), false);
+p.play_stationary(get_sound("objects/platforms/"+gmt(me.x,me.y)+"/*step*"), false);
 moved_steps+=1;
 total_moved_steps+=1;
 update_achievements();
@@ -407,7 +407,7 @@ if (!shift_is_down() and key_down(KEY_RIGHT) and movetimer.elapsed>=movetime and
 {
 me.x+=1;
 facing="right";
-p.play_stationary(find_sound("sounds/"+soundpack+"/objects/platforms/"+gmt(me.x,me.y)+"/*step*"), false);
+p.play_stationary(get_sound("objects/platforms/"+gmt(me.x,me.y)+"/*step*"), false);
 moved_steps+=1;
 total_moved_steps+=1;
 update_achievements();
@@ -417,7 +417,7 @@ if (!shift_is_down() and key_down(KEY_DOWN) and movetimer.elapsed>=movetime and 
 {
 me.y-=1;
 facing="backward";
-p.play_stationary(find_sound("sounds/"+soundpack+"/objects/platforms/"+gmt(me.x,me.y)+"/*step*"), false);
+p.play_stationary(get_sound("objects/platforms/"+gmt(me.x,me.y)+"/*step*"), false);
 moved_steps+=1;
 total_moved_steps+=1;
 update_achievements();
@@ -427,7 +427,7 @@ if (!shift_is_down() and key_down(KEY_UP) and movetimer.elapsed>=movetime and me
 {
 me.y+=1;
 facing="forward";
-p.play_stationary(find_sound("sounds/"+soundpack+"/objects/platforms/"+gmt(me.x,me.y)+"/*step*"), false);
+p.play_stationary(get_sound("objects/platforms/"+gmt(me.x,me.y)+"/*step*"), false);
 moved_steps+=1;
 total_moved_steps+=1;
 update_achievements();
@@ -451,11 +451,11 @@ if (endless)
     draw_random_weapon();
 else
     draw_weapon("melee", "bat");
-toyambslot=ambpool.play_stationary_extended(find_sound("sounds/"+soundpack+"/objects/sources/ambiences/*gameloop*"),true,0,0,toyambvolume,toyambpitch,false);
+toyambslot=ambpool.play_stationary_extended(get_sound("objects/sources/ambiences/*gameloop*"),true,0,0,toyambvolume,toyambpitch,false);
 mustype="gamemus";
-toytrackslot=muspool.play_stationary_extended(find_sound("sounds/"+soundpack+"/objects/sources/tracks/*"+mustype+"*"),true,0,0,toymusvolume,toymuspitch,false);
+toytrackslot=muspool.play_stationary_extended(get_sound("objects/sources/tracks/*"+mustype+"*"),true,0,0,toymusvolume,toymuspitch,false);
 spawn_platform(0, maxx, 0, maxy, endless ? "concrete" : "marble");
-p.play_stationary(find_sound("sounds/"+soundpack+"/objects/platforms/"+gmt(me.x,me.y)+"/*land*"), false);
+p.play_stationary(get_sound("objects/platforms/"+gmt(me.x,me.y)+"/*land*"), false);
 if (endless)
 {
     int leftx = random(0, 10);
@@ -604,14 +604,14 @@ toyspawntimer.restart();
 }
 if(!endless and level==1 and gametimer.elapsed>=1000*60)
 {
-if(playlevels==true) p.play_stationary(find_sound("sounds/"+soundpack+"/misc/player/*lev*"), false);
+if(playlevels==true) p.play_stationary(get_sound("misc/player/*lev*"), false);
 level=2;
 carspawn=true;
 toynum=25;
 }
 if(!endless and level==2 and gametimer.elapsed>=1000*120)
 {
-if(playlevels==true) p.play_stationary(find_sound("sounds/"+soundpack+"/misc/player/*lev*"), false);
+if(playlevels==true) p.play_stationary(get_sound("misc/player/*lev*"), false);
 level=3;
 cardest=true;
 carnum=10;
@@ -620,7 +620,7 @@ toynum=30;
 }
 if(!endless and level==3 and gametimer.elapsed>=1000*180)
 {
-if(playlevels==true) p.play_stationary(find_sound("sounds/"+soundpack+"/misc/player/*lev*"), false);
+if(playlevels==true) p.play_stationary(get_sound("misc/player/*lev*"), false);
 level=4;
 carspawn=false;
 cardest=false;
@@ -629,7 +629,7 @@ toynum=35;
 }
 if(!endless and level==4 and gametimer.elapsed>=1000*240)
 {
-if(playlevels==true) p.play_stationary(find_sound("sounds/"+soundpack+"/misc/player/*lev*"), false);
+if(playlevels==true) p.play_stationary(get_sound("misc/player/*lev*"), false);
 level=5;
 gardnum=20;
 toynum=50;
@@ -638,8 +638,8 @@ if (!endless && level == 5 && gametimer.elapsed >= 1000 * 300)
 {
 mustype="bossmus";
 muspool.destroy_sound(toytrackslot);
-toytrackslot=muspool.play_stationary_extended(find_sound("sounds/"+soundpack+"/objects/sources/tracks/*"+mustype+"*"),true,0,0,toymusvolume,toymuspitch,false);
-if(playlevels==true) p.play_stationary(find_sound("sounds/"+soundpack+"/misc/player/*lev*"), false);
+toytrackslot=muspool.play_stationary_extended(get_sound("objects/sources/tracks/*"+mustype+"*"),true,0,0,toymusvolume,toymuspitch,false);
+if(playlevels==true) p.play_stationary(get_sound("misc/player/*lev*"), false);
     level = 6;
     destroy_all_bullets();
     destroy_all_cars();
@@ -664,13 +664,13 @@ if (!endless && level == 6)
 {
     if (!alarm_started && boss_timer.elapsed >= 0)
     {
-        alarmslot=alarmpool.play_stationary_extended(find_sound("sounds/"+soundpack+"/objects/sources/ambiences/*alarmloop*"), true,0,0,alarmvolume,alarmpitch);
+        alarmslot=alarmpool.play_stationary_extended(get_sound("objects/sources/ambiences/*alarmloop*"), true,0,0,alarmvolume,alarmpitch);
         alarm_started = true;
     }
 if (!countdown_started and boss_timer.elapsed >boss_time_limit-10000)
 {
     countdown_started = true;
-    if(playcounts==true) countslot=pool.play_stationary(find_sound("sounds/"+soundpack+"/misc/game/*countdown*"), false);
+    if(playcounts==true) countslot=pool.play_stationary(get_sound("misc/game/*countdown*"), false);
 }
 if (!small_storedest and boss_timer.elapsed >boss_time_limit-60000)
 {
@@ -683,9 +683,9 @@ double y1 = random(0, 45);
 double y2 = y1 + 5;
 spawn_platform(x1, x2, y1, y2, "glass");
 spawn_healzone(x1, x2, y1, y2, 0, random(10*gamemod, 20*gamemod), random(2000/gamemod, 4000/gamemod), "fire");
-painslot=p.play_stationary(find_sound("sounds/"+soundpack+"/misc/player/*hurt*"), false);
-pool.play_stationary(find_sound("sounds/"+soundpack+"/misc/store/*alert_small*"), false);
-pool.play_stationary(find_sound("sounds/"+soundpack+"/misc/store/*dest_small*"), false);
+painslot=p.play_stationary(get_sound("misc/player/*hurt*"), false);
+pool.play_stationary(get_sound("misc/store/*alert_small*"), false);
+pool.play_stationary(get_sound("misc/store/*dest_small*"), false);
 }
 if (!medium_storedest and boss_timer.elapsed >boss_time_limit-30000)
 {
@@ -698,16 +698,16 @@ double y3 = random(0, 45);
 double y4 = y3 + 5;
 spawn_platform(x3 - 5, x3, y3, y4, "glass");
 spawn_healzone(x3 - 5, x3, y3, y4, 1, random(10*gamemod, 20*gamemod), random(2000/gamemod, 4000/gamemod), "chime");
-painslot=p.play_stationary(find_sound("sounds/"+soundpack+"/misc/player/*hurt*"), false);
-pool.play_stationary(find_sound("sounds/"+soundpack+"/misc/store/*alert_big*"), false);
-pool.play_stationary(find_sound("sounds/"+soundpack+"/misc/store/*dest_medium*"), false);
+painslot=p.play_stationary(get_sound("misc/player/*hurt*"), false);
+pool.play_stationary(get_sound("misc/store/*alert_big*"), false);
+pool.play_stationary(get_sound("misc/store/*dest_medium*"), false);
 }
     if (boss_timer.elapsed > boss_time_limit-1000)
     {
 if (heartbeat_playing)
 {
     heartpool.destroy_sound(heartslot);
-temp.play_stationary(find_sound("sounds/"+soundpack+"/misc/player/*heartstop*"), false);
+temp.play_stationary(get_sound("misc/player/*heartstop*"), false);
     heartbeat_playing = false;
 }
     if(!endless) bossdefeated = false;
@@ -738,9 +738,9 @@ alarmpool.destroy_sound(alarmslot);
 p.destroy_sound(painslot);
     ambpool.destroy_sound(toyambslot);
     muspool.destroy_sound(toytrackslot);
-p.play_stationary(find_sound("sounds/"+soundpack+"/misc/player/*death*"), false);
-dlgplay(find_sound("sounds/"+soundpack+"/misc/store/*dest_large*"));
-dlgplay(find_sound("sounds/"+soundpack+"/objects/platforms/"+gmt(me.x,me.y)+"/*fall*"));
+p.play_stationary(get_sound("misc/player/*death*"), false);
+dlgplay(get_sound("misc/store/*dest_large*"));
+dlgplay(get_sound("objects/platforms/"+gmt(me.x,me.y)+"/*fall*"));
 string[] failMessages = {"You stuck around too long, and now the store has turned into a pile of ashes. Try escaping with a bit of haste next time!", "Time’s up! The store just blew sky-high, and your session stats blew with it too!", "Well, that literally backfired. The store's gone, and so is your progress!", "Nice sight seeing, but the store had a strict 'explode-on-time' policy. Better run next time!", "Oh dear! Your hesitation turned the store into fireworks. You didn’t escape, but at least it was quite the show to watch!"};
 dlgmessage_return(random_string(failMessages));
 setupmenu(false);
@@ -756,7 +756,7 @@ if (speak_menu_loading)
 string difficulty_name =(gamemod == 1) ? "Easy" :(gamemod == 2) ? "Medium" :(gamemod == 3) ? "Hard" :(gamemod == 4) ? "Insane" :(gamemod == 5) ? "Chaos" :"unknown";
 speak((endless ? "loading endless: mode " : "loading normal: mode ") + difficulty_name);
 }
-    dlgplay(find_sound("sounds/"+soundpack+"/misc/game/*launch*"));
+    dlgplay(get_sound("misc/game/*launch*"));
 last_level_time = 0;
     level = 1;
 money = 0;
@@ -805,8 +805,8 @@ mainmenu();
 }
 if (endless and gametimer.elapsed >= last_level_time + (1000 * 60))
 {
-    if(playlevels==true) p.play_stationary(find_sound("sounds/"+soundpack+"/misc/player/*lev*"), false);
-p.play_stationary(find_sound("sounds/"+soundpack+"/misc/player/*money*"),false);
+    if(playlevels==true) p.play_stationary(get_sound("misc/player/*lev*"), false);
+p.play_stationary(get_sound("misc/player/*money*"),false);
     level++;
 money += level * 20;
 speak("Congratulations! You earned $" + (level * 20) + " for surviving to level " + level + ". Great work!");
@@ -873,7 +873,7 @@ double heartbeat_threshold = endless ? 5000 : 500;
 if (health <= heartbeat_threshold and !heartbeat_playing)
 {
     heartbeat_playing = true;
-    heartslot = heartpool.play_stationary_extended(find_sound("sounds/"+soundpack+"/misc/player/*heartstart*"), true,0,0,heartvolume,heartpitch);
+    heartslot = heartpool.play_stationary_extended(get_sound("misc/player/*heartstart*"), true,0,0,heartvolume,heartpitch);
 }
 if (health > heartbeat_threshold and heartbeat_playing)
 {
@@ -885,7 +885,7 @@ if (health <= 0)
 if (heartbeat_playing)
 {
     heartpool.destroy_sound(heartslot);
-temp.play_stationary(find_sound("sounds/"+soundpack+"/misc/player/*heartstop*"), false);
+temp.play_stationary(get_sound("misc/player/*heartstop*"), false);
     heartbeat_playing = false;
 }
     if(!endless) bossdefeated = false;
@@ -918,8 +918,8 @@ pool.destroy_sound(countslot);
     p.destroy_sound(painslot);
     ambpool.destroy_sound(toyambslot);
     muspool.destroy_sound(toytrackslot);
-    dlgplay(find_sound("sounds/"+soundpack+"/misc/player/*death*"));
-    dlgplay(find_sound("sounds/"+soundpack+"/objects/platforms/"+gmt(me.x,me.y)+"/*fall*"));
+    dlgplay(get_sound("misc/player/*death*"));
+    dlgplay(get_sound("objects/platforms/"+gmt(me.x,me.y)+"/*fall*"));
 dlgmessage_return("You just died on level "+level+ " of the " + (endless ? "Endless" : "Normal") + " game mode!"+" Here are your current results for this game session:"+ "\r\nToys collected: " + collected_toys +"\r\nKeys collected: " + collected_keys +"\r\nGuards defeated: " + killed_gards +"\r\nCars destroyed: " + destroyed_cars +"\r\nSteps taken: " + moved_steps +"\r\nTime survived: " + timeelapsed.m() + " minutes, " + timeelapsed.s() + " seconds" +"\r\nBetter luck next time!");
     session_playtime += timeelapsed.ms();
     total_playtime += timeelapsed.ms();
@@ -947,7 +947,7 @@ if (gamcopy == true)
         if (choice == "copy")
         {
             clipboard_copy_text(statsummary);
-            if (copexpsounds == true) dlgplay(find_sound("sounds/"+soundpack+"/menus/"+menupack+"/*copy*"), false);
+            if (copexpsounds == true) dlgplay(get_sound("menus/"+menupack+"/*copy*"), false);
             dlgmessage_return("All game session results copied to your clipboard.");
         }
         else if (choice == "export")
@@ -955,7 +955,7 @@ if (gamcopy == true)
             poastfile.open(DIRECTORY_APPDATA+"tsatria03/ToyMania/data/stats/player_posts.txt", "w");
             poastfile.write(statsummary);
             poastfile.close();
-            if (copexpsounds == true) dlgplay(find_sound("sounds/"+soundpack+"/menus/"+menupack+"/*export*"), false);
+            if (copexpsounds == true) dlgplay(get_sound("menus/"+menupack+"/*export*"), false);
             dlgmessage_return("All game session results exported to data/stats/player_posts.txt.");
         }
     }

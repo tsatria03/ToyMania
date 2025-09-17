@@ -26,7 +26,7 @@ carhealth = hp;
 cartime = sp;
 cartype = ct;
 hitplayer=hpl;
-carsound = carpool.play_2d(find_sound("sounds/"+soundpack+"/npc/cars/"+cartype+"/*loop*"), me.x, me.y, carx, cary, true);
+carsound = carpool.play_2d(get_sound("npc/cars/"+cartype+"/*loop*"), me.x, me.y, carx, cary, true);
 }
 }
 void carloop()
@@ -46,7 +46,7 @@ else if (cars[i].cardir2 == 0 && cars[i].cary <= 0) cars[i].cardir2 = 1;
 if (cars[i].carhealth <= 0)
 {
 carpool.destroy_sound(cars[i].carsound);
-cars[i].defsound = carpool.play_2d(find_sound("sounds/"+soundpack+"/npc/cars/"+cars[i].cartype+"/*death*"), me.x, me.y, cars[i].carx, cars[i].cary, false);
+cars[i].defsound = carpool.play_2d(get_sound("npc/cars/"+cars[i].cartype+"/*death*"), me.x, me.y, cars[i].carx, cars[i].cary, false);
 destroyed_cars += 1;
 total_destroyed_cars += 1;
 destroy_all_bullets();
@@ -71,7 +71,7 @@ if (cars[i].fireable==true && cars[i].firing && cars[i].firetimer.elapsed >= car
         direction = dx > 0 ? "right" : "left";
     else
         direction = dy > 0 ? "down" : "up";
-        cars[i].firesound = carpool.play_2d(find_sound("sounds/"+soundpack+"/npc/cars/"+cars[i].cartype+"/*shoot*"), me.x, me.y, cars[i].carx, cars[i].cary, false);
+        cars[i].firesound = carpool.play_2d(get_sound("npc/cars/"+cars[i].cartype+"/*shoot*"), me.x, me.y, cars[i].carx, cars[i].cary, false);
 spawn_bullet(cars[i].carx, cars[i].cary, 0, 0, random(10*gamemod, 20*gamemod), 20, direction);
     cars[i].shotsFired++;
     cars[i].firetimer.restart();

@@ -30,8 +30,8 @@ if(main == "st")
 {
 if(speak_menu_loading==true) speak("loading");
 m.fade_music();
-        dlgplay(find_sound("sounds/"+soundpack+"/misc/ui/menus/"+menupack+"/*speaker*"));
-    if(completesound==true) dlgplay(find_sound("sounds/"+soundpack+"/misc/ui/menus/"+menupack+"/*complete*"), false);
+        dlgplay(get_sound("misc/ui/menus/"+menupack+"/*speaker*"));
+    if(completesound==true) dlgplay(get_sound("misc/ui/menus/"+menupack+"/*complete*"), false);
 dlgmessage_return("Speaker test complete.");
     mainmenu();
 }
@@ -102,7 +102,7 @@ void gamemenu()
 {
 setupmenu();
 m.add_item("play game", "ty");
-m.add_item("learn game sounds: 5 out of 10 categories converted", "gsm");
+m.add_item("learn game sounds", "gsm");
 m.add_item("read game user guides", "dm");
 m.add_item("view game achievements", "ach");
 m.add_item("view game statistics", "stats");
@@ -121,7 +121,7 @@ if (gamem == "ty")
 {
 setupmenu(false);
 m.add_item("Normal. This is a timed based mode where you must collect toys, survive various types of enemies, and defeat the final boss before the store explodes. There is one unlockable door that you must find by collecting all of the required keys to win.", "normal");
-m.add_item("Endless. This mode lets you play for as long as you can survive. The game will get harder over time with no final boss, and just one unlockable door to win. This mode also includes some items that drop from time to time for use during intense grueling fights.", "endless");
+m.add_item("Endless. This mode lets you play for as long as you can survive. The game will get harder over time with no final boss, and just one unlockable door to win. This mode also includes some items that drop from time to time for use during intense enemy fights.", "endless");
 m.add_item("Back", "back");
 m.intro_text = "Choose the game mode you'd like to play.";
 int gres = m.run();
@@ -154,7 +154,7 @@ string difficulty_name =(gamemod == 1) ? "Easy" :(gamemod == 2) ? "Medium" :(gam
 speak((endless ? "loading endless: mode " : "loading normal: mode ") + difficulty_name);
 }
 m.fade_music();
-dlgplay(find_sound("sounds/" + soundpack + "/misc/game/*launch*"));
+dlgplay(get_sound("misc/game/*launch*"));
 last_level_time = 0;
 level = 1;
 money = 0;
@@ -237,7 +237,7 @@ if(confirm=="yes")
 if(file_exists(DIRECTORY_APPDATA+"tsatria03/ToyMania/saves/game.tmg")) file_delete(DIRECTORY_APPDATA+"tsatria03/ToyMania/saves/game.tmg");
 resetgame();
 writedata();
-if(completesound==true) dlgplay(find_sound("sounds/"+soundpack+"/misc/ui/menus/"+menupack+"/*complete*"), false);
+if(completesound==true) dlgplay(get_sound("misc/ui/menus/"+menupack+"/*complete*"), false);
 dlgmessage_return("Game progresses cleared.");
 gamemenu();
 }
@@ -285,7 +285,7 @@ m.fade_music();
     result += "- Steps taken: " + total_moved_steps + "\r\n";
     result += "- Total playtime: " + total_minutes + " minutes, " + total_seconds + " seconds.\r\n";
     clipboard_copy_text(result);
-if(copexpsounds==true) dlgplay(find_sound("sounds/"+soundpack+"/misc/ui/menus/"+menupack+"/*copy*") ,false);
+if(copexpsounds==true) dlgplay(get_sound("misc/ui/menus/"+menupack+"/*copy*") ,false);
     dlgmessage_return("All game progresses have been copied to your clipboard.");
     gamemenu();
 }
@@ -330,7 +330,7 @@ result += "- Steps taken: " + total_moved_steps + "\r\n";
 result += "- Total playtime: " + total_minutes + " minutes, " + total_seconds + " seconds.\r\n";
 gamfile.write(result);
 gamfile.close();
-if(copexpsounds==true) dlgplay(find_sound("sounds/"+soundpack+"/misc/ui/menus/"+menupack+"/*export*"),false);
+if(copexpsounds==true) dlgplay(get_sound("misc/ui/menus/"+menupack+"/*export*"),false);
 dlgmessage_return("All game progresses have been exported to stats/player_progresses.txt.");
 gamemenu();
 }
@@ -378,25 +378,25 @@ doors["Move"] = get_sound("objects/doors/door/move.*");
 doors["Open"] = get_sound("objects/doors/door/open.*");
 learnCategories["Doors"] = doors;
 dictionary guards;
-guards["Guard 1 Death" + vdesc] = array<string> = {"gard1death1.ogg", "gard1death2.ogg"};
-guards["Guard 1 Fall" + vdesc] = array<string> = {"gard1fall1.wav", "gard1fall2.wav", "gard1fall3.wav", "gard1fall4.wav", "gard1fall5.wav"};
-guards["Guard 1 Hit" + vdesc] = array<string> = {"gard1hit1.ogg", "gard1hit2.ogg", "gard1hit3.ogg"};
-guards["Guard 1 Pain" + vdesc] = array<string> = {"gard1pain1.ogg", "gard1pain2.ogg", "gard1pain3.ogg", "gard1pain4.ogg", "gard1pain5.ogg"};
-guards["Guard 1 Taunt"] = "gard1taunt.ogg";
-guards["Guard 1 Walk" + vdesc] = array<string> = {"gard1walk1.ogg", "gard1walk2.ogg", "gard1walk3.ogg", "gard1walk4.ogg", "gard1walk5.ogg"};
-guards["Guard 2 Death"] = "gard2death.ogg";
-guards["Guard 2 Fall" + vdesc] = array<string> = {"gard2fall1.wav", "gard2fall2.wav"};
-guards["Guard 2 Hit" + vdesc] = array<string> = {"gard2hit1.ogg", "gard2hit2.ogg", "gard2hit3.ogg"};
-guards["Guard 2 Pain"] = "gard2pain.ogg";
-guards["Guard 2 Taunt"] = "gard2taunt.ogg";
-guards["Guard 2 Walk" + vdesc] = array<string> = {"gard2walk1.ogg", "gard2walk2.ogg", "gard2walk3.ogg", "gard2walk4.ogg", "gard2walk5.ogg", "gard2walk6.ogg", "gard2walk7.ogg", "gard2walk8.ogg"};
-guards["Guard 3 Death"] = "gard3death.wav";
-guards["Guard 3 Fall" + vdesc] = array<string> = {"gard3fall1.wav", "gard3fall2.wav"};
-guards["Guard 3 Hit"] = "gard3hit.wav";
-guards["Guard 3 Pain"] = "gard3pain.wav";
-guards["Guard 3 Taunt"] = "gard3taunt.wav";
-guards["Guard 3 Walk" + vdesc] = array<string> = {"gard3walk1.wav", "gard3walk2.wav", "gard3walk3.wav", "gard3walk4.wav", "gard3walk5.wav"};
-//learnCategories["Guards"] = guards;
+guards["Guard Death" + vdesc] = array<string> = {get_sound("npc/guards/guard/death1.*"), get_sound("npc/guards/guard/death2.*")};
+guards["Guard Fall" + vdesc] = array<string> = {get_sound("npc/guards/guard/fall1.*"), get_sound("npc/guards/guard/fall2.*"), get_sound("npc/guards/guard/fall3.*"), get_sound("npc/guards/guard/fall4.*"), get_sound("npc/guards/guard/fall5.*")};
+guards["Guard Hit" + vdesc] = array<string> = {get_sound("npc/guards/guard/hit1.*"), get_sound("npc/guards/guard/hit2.*"), get_sound("npc/guards/guard/hit3.*")};
+guards["Guard Hurt" + vdesc] = array<string> = {get_sound("npc/guards/guard/hurt1.*"), get_sound("npc/guards/guard/hurt2.*"), get_sound("npc/guards/guard/hurt3.*"), get_sound("npc/guards/guard/hurt4.*"), get_sound("npc/guards/guard/hurt5.*")};
+guards["Guard Step" + vdesc] = array<string> = {get_sound("npc/guards/guard/step1.*"), get_sound("npc/guards/guard/step2.*"), get_sound("npc/guards/guard/step3.*"), get_sound("npc/guards/guard/step4.*"), get_sound("npc/guards/guard/step5.*")};
+guards["Guard Taunt"] = get_sound("npc/guards/guard/taunt.*");
+guards["Guard2 Death"] = get_sound("npc/guards/guard2/death.*");
+guards["Guard2 Fall" + vdesc] = array<string> = {get_sound("npc/guards/guard2/fall1.*"), get_sound("npc/guards/guard2/fall2.*")};
+guards["Guard2 Hit" + vdesc] = array<string> = {get_sound("npc/guards/guard2/hit1.*"), get_sound("npc/guards/guard2/hit2.*"), get_sound("npc/guards/guard2/hit3.*")};
+guards["Guard2 Hurt"] = get_sound("npc/guards/guard2/hurt.*");
+guards["Guard2 Step" + vdesc] = array<string> = {get_sound("npc/guards/guard2/step1.*"), get_sound("npc/guards/guard2/step2.*"), get_sound("npc/guards/guard2/step3.*"), get_sound("npc/guards/guard2/step4.*"), get_sound("npc/guards/guard2/step5.*"), get_sound("npc/guards/guard2/step6.*"), get_sound("npc/guards/guard2/step7.*"), get_sound("npc/guards/guard2/step8.*")};
+guards["Guard2 Taunt"] = get_sound("npc/guards/guard2/taunt.*");
+guards["Guard3 Death"] = get_sound("npc/guards/guard3/death.*");
+guards["Guard3 Fall" + vdesc] = array<string> = {get_sound("npc/guards/guard3/fall1.*"), get_sound("npc/guards/guard3/fall2.*")};
+guards["Guard3 Hit"] = get_sound("npc/guards/guard3/hit.*");
+guards["Guard3 Hurt"] = get_sound("npc/guards/guard3/hurt.*");
+guards["Guard3 Step" + vdesc] = array<string> = {get_sound("npc/guards/guard3/step1.*"), get_sound("npc/guards/guard3/step2.*"), get_sound("npc/guards/guard3/step3.*"), get_sound("npc/guards/guard3/step4.*"), get_sound("npc/guards/guard3/step5.*")};
+guards["Guard3 Taunt"] = get_sound("npc/guards/guard3/taunt.*");
+learnCategories["Guards"] = guards;
 dictionary items;
 items["Ammo_pack break: used in endless mode" + vdesc] = array<string> = {get_sound("equipments/items/endless/common/ammo_pack/break1.*"), get_sound("equipments/items/endless/common/ammo_pack/break2.*"), get_sound("equipments/items/endless/common/ammo_pack/break3.*"), get_sound("equipments/items/endless/common/ammo_pack/break4.*"), get_sound("equipments/items/endless/common/ammo_pack/break5.*"), get_sound("equipments/items/endless/common/ammo_pack/break6.*")};
 items["Ammo_pack get: used in endless mode" + vdesc] = array<string> = {get_sound("equipments/items/endless/common/ammo_pack/get1.*"), get_sound("equipments/items/endless/common/ammo_pack/get2.*")};
@@ -421,12 +421,42 @@ items["Stun_dart loop: used in endless mode" + vdesc] = array<string> = {get_sou
 items["Stun_dart spawn: used in endless mode"] = get_sound("equipments/items/endless/common/stun_dart/spawn.*");
 learnCategories["Items"] = items;
 dictionary keys;
-keys["Break" + vdesc] = array<string> = {"keybreak1.ogg", "keybreak2.ogg", "keybreak3.ogg", "keybreak4.ogg", "keybreak5.ogg", "keybreak6.ogg"};
-keys["Get" + vdesc] = array<string> = {"keyget1.ogg", "keyget2.ogg", "keyget3.ogg", "keyget4.ogg", "keyget5.ogg", "keyget6.ogg"};
-keys["Loop" + vdesc] = array<string> = {"keyloop1.ogg", "keyloop2.ogg", "keyloop3.ogg", "keyloop4.ogg"};
-keys["Spawn" + vdesc] = array<string> = {"keyspawn1.ogg", "keyspawn2.ogg", "keyspawn3.ogg", "keyspawn4.ogg", "keyspawn5.ogg", "keyspawn6.ogg", "keyspawn7.ogg", "keyspawn8.ogg"};
-keys["Use" + vdesc] = array<string> = {"keyuse1.ogg", "keyuse2.ogg", "keyuse3.ogg", "keyuse4.ogg", "keyuse5.ogg", "keyuse6.ogg"};
-//learnCategories["Keys"] = keys;
+keys["Black_key break"] = get_sound("equipments/items/normal/keys/common/black_key/break.*");
+keys["Black_key get"] = get_sound("equipments/items/normal/keys/common/black_key/get.*");
+keys["Black_key loop" + vdesc] = array<string> = {get_sound("equipments/items/normal/keys/common/black_key/loop1.*"), get_sound("equipments/items/normal/keys/common/black_key/loop2.*"), get_sound("equipments/items/normal/keys/common/black_key/loop3.*"), get_sound("equipments/items/normal/keys/common/black_key/loop4.*")};
+keys["Black_key spawn"] = get_sound("equipments/items/normal/keys/common/black_key/spawn.*");
+keys["Black_key use"] = get_sound("equipments/items/normal/keys/common/black_key/use.*");
+keys["Green_key break"] = get_sound("equipments/items/normal/keys/common/green_key/break.*");
+keys["Green_key get"] = get_sound("equipments/items/normal/keys/common/green_key/get.*");
+keys["Green_key loop" + vdesc] = array<string> = {get_sound("equipments/items/normal/keys/common/green_key/loop1.*"), get_sound("equipments/items/normal/keys/common/green_key/loop2.*"), get_sound("equipments/items/normal/keys/common/green_key/loop3.*"), get_sound("equipments/items/normal/keys/common/green_key/loop4.*")};
+keys["Green_key spawn"] = get_sound("equipments/items/normal/keys/common/green_key/spawn.*");
+keys["Green_key use"] = get_sound("equipments/items/normal/keys/common/green_key/use.*");
+keys["Orange_key break"] = get_sound("equipments/items/normal/keys/common/orange_key/break.*");
+keys["Orange_key get"] = get_sound("equipments/items/normal/keys/common/orange_key/get.*");
+keys["Orange_key loop" + vdesc] = array<string> = {get_sound("equipments/items/normal/keys/common/orange_key/loop1.*"), get_sound("equipments/items/normal/keys/common/orange_key/loop2.*"), get_sound("equipments/items/normal/keys/common/orange_key/loop3.*"), get_sound("equipments/items/normal/keys/common/orange_key/loop4.*")};
+keys["Orange_key spawn"] = get_sound("equipments/items/normal/keys/common/orange_key/spawn.*");
+keys["Orange_key use"] = get_sound("equipments/items/normal/keys/common/orange_key/use.*");
+keys["Pink_key break"] = get_sound("equipments/items/normal/keys/common/pink_key/break.*");
+keys["Pink_key get"] = get_sound("equipments/items/normal/keys/common/pink_key/get.*");
+keys["Pink_key loop" + vdesc] = array<string> = {get_sound("equipments/items/normal/keys/common/pink_key/loop1.*"), get_sound("equipments/items/normal/keys/common/pink_key/loop2.*"), get_sound("equipments/items/normal/keys/common/pink_key/loop3.*"), get_sound("equipments/items/normal/keys/common/pink_key/loop4.*")};
+keys["Pink_key spawn"] = get_sound("equipments/items/normal/keys/common/pink_key/spawn.*");
+keys["Pink_key use"] = get_sound("equipments/items/normal/keys/common/pink_key/use.*");
+keys["Purple_key break"] = get_sound("equipments/items/normal/keys/common/purple_key/break.*");
+keys["Purple_key get"] = get_sound("equipments/items/normal/keys/common/purple_key/get.*");
+keys["Purple_key loop" + vdesc] = array<string> = {get_sound("equipments/items/normal/keys/common/purple_key/loop1.*"), get_sound("equipments/items/normal/keys/common/purple_key/loop2.*"), get_sound("equipments/items/normal/keys/common/purple_key/loop3.*"), get_sound("equipments/items/normal/keys/common/purple_key/loop4.*")};
+keys["Purple_key spawn"] = get_sound("equipments/items/normal/keys/common/purple_key/spawn.*");
+keys["Purple_key use"] = get_sound("equipments/items/normal/keys/common/purple_key/use.*");
+keys["Red_key break"] = get_sound("equipments/items/normal/keys/common/red_key/break.*");
+keys["Red_key get"] = get_sound("equipments/items/normal/keys/common/red_key/get.*");
+keys["Red_key loop" + vdesc] = array<string> = {get_sound("equipments/items/normal/keys/common/red_key/loop1.*"), get_sound("equipments/items/normal/keys/common/red_key/loop2.*"), get_sound("equipments/items/normal/keys/common/red_key/loop3.*"), get_sound("equipments/items/normal/keys/common/red_key/loop4.*")};
+keys["Red_key spawn"] = get_sound("equipments/items/normal/keys/common/red_key/spawn.*");
+keys["Red_key use"] = get_sound("equipments/items/normal/keys/common/red_key/use.*");
+keys["Yellow_key break"] = get_sound("equipments/items/normal/keys/other/yellow_key/break.*");
+keys["Yellow_key get"] = get_sound("equipments/items/normal/keys/other/yellow_key/get.*");
+keys["Yellow_key loop"] = get_sound("equipments/items/normal/keys/other/yellow_key/loop.*");
+keys["Yellow_key spawn" + vdesc] = array<string> = {get_sound("equipments/items/normal/keys/other/yellow_key/spawn1.*"), get_sound("equipments/items/normal/keys/other/yellow_key/spawn2.*")};
+keys["Yellow_key use" + vdesc] = array<string> = {get_sound("equipments/items/normal/keys/other/yellow_key/use1.*"), get_sound("equipments/items/normal/keys/other/yellow_key/use2.*")};
+learnCategories["Keys"] = keys;
 dictionary player;
 player["Alarm: used in normal mode"] = "gamealarm.ogg";
 player["Alert medium: used in normal mode"] = "storealert_medium.ogg";
@@ -458,14 +488,129 @@ player["Pain"] = "playerpain.ogg";
 player["Purchase complete: used in endless mode" + vdesc] = array<string> = {"storebuy1.ogg", "storebuy2.ogg", "storebuy3.ogg", "storebuy4.ogg"};
 player["Purchase error: used in endless mode"] = "storefail.ogg";
 player["Session achievement"] = "session_achievement.ogg";
-//learnCategories["Player"] = player;
+learnCategories["Player"] = player;
 dictionary toys;
-toys["Break" + vdesc] = array<string> = {"toybreak1.ogg", "toybreak2.ogg", "toybreak3.ogg"};
-toys["Get" + vdesc] = array<string> = {"toyget1.ogg", "toyget2.ogg"};
-string[] toyloop;
-for (int i = 1; i <= 40; i++) toyloop.insert_last("toyloop" + i + ".ogg");
-toys["Loop" + vdesc] = toyloop;
-//learnCategories["Toys"] = toys;
+toys["articulated_rainbow_slug break" + vdesc] = array<string> = {get_sound("equipments/items/normal/toys/common/articulated_rainbow_slug/break1.*"), get_sound("equipments/items/normal/toys/common/articulated_rainbow_slug/break2.*"), get_sound("equipments/items/normal/toys/common/articulated_rainbow_slug/break3.*")};
+toys["articulated_rainbow_slug get" + vdesc] = array<string> = {get_sound("equipments/items/normal/toys/common/articulated_rainbow_slug/get1.*"), get_sound("equipments/items/normal/toys/common/articulated_rainbow_slug/get2.*")};
+toys["articulated_rainbow_slug loop"] = get_sound("equipments/items/normal/toys/common/articulated_rainbow_slug/loop.*");
+toys["big_fidget_gear_stick break" + vdesc] = array<string> = {get_sound("equipments/items/normal/toys/common/big_fidget_gear_stick/break1.*"), get_sound("equipments/items/normal/toys/common/big_fidget_gear_stick/break2.*"), get_sound("equipments/items/normal/toys/common/big_fidget_gear_stick/break3.*")};
+toys["big_fidget_gear_stick get" + vdesc] = array<string> = {get_sound("equipments/items/normal/toys/common/big_fidget_gear_stick/get1.*"), get_sound("equipments/items/normal/toys/common/big_fidget_gear_stick/get2.*")};
+toys["big_fidget_gear_stick loop"] = get_sound("equipments/items/normal/toys/common/big_fidget_gear_stick/loop.*");
+toys["big_plastic_fidget_spinner break" + vdesc] = array<string> = {get_sound("equipments/items/normal/toys/common/big_plastic_fidget_spinner/break1.*"), get_sound("equipments/items/normal/toys/common/big_plastic_fidget_spinner/break2.*"), get_sound("equipments/items/normal/toys/common/big_plastic_fidget_spinner/break3.*")};
+toys["big_plastic_fidget_spinner get" + vdesc] = array<string> = {get_sound("equipments/items/normal/toys/common/big_plastic_fidget_spinner/get1.*"), get_sound("equipments/items/normal/toys/common/big_plastic_fidget_spinner/get2.*")};
+toys["big_plastic_fidget_spinner loop"] = get_sound("equipments/items/normal/toys/common/big_plastic_fidget_spinner/loop.*");
+toys["classic_fidget_spinner break" + vdesc] = array<string> = {get_sound("equipments/items/normal/toys/common/classic_fidget_spinner/break1.*"), get_sound("equipments/items/normal/toys/common/classic_fidget_spinner/break2.*"), get_sound("equipments/items/normal/toys/common/classic_fidget_spinner/break3.*")};
+toys["classic_fidget_spinner get" + vdesc] = array<string> = {get_sound("equipments/items/normal/toys/common/classic_fidget_spinner/get1.*"), get_sound("equipments/items/normal/toys/common/classic_fidget_spinner/get2.*")};
+toys["classic_fidget_spinner loop"] = get_sound("equipments/items/normal/toys/common/classic_fidget_spinner/loop.*");
+toys["clicker_clacker break" + vdesc] = array<string> = {get_sound("equipments/items/normal/toys/common/clicker_clacker/break1.*"), get_sound("equipments/items/normal/toys/common/clicker_clacker/break2.*"), get_sound("equipments/items/normal/toys/common/clicker_clacker/break3.*")};
+toys["clicker_clacker get" + vdesc] = array<string> = {get_sound("equipments/items/normal/toys/common/clicker_clacker/get1.*"), get_sound("equipments/items/normal/toys/common/clicker_clacker/get2.*")};
+toys["clicker_clacker loop"] = get_sound("equipments/items/normal/toys/common/clicker_clacker/loop.*");
+toys["fidget_car break" + vdesc] = array<string> = {get_sound("equipments/items/normal/toys/common/fidget_car/break1.*"), get_sound("equipments/items/normal/toys/common/fidget_car/break2.*"), get_sound("equipments/items/normal/toys/common/fidget_car/break3.*")};
+toys["fidget_car get" + vdesc] = array<string> = {get_sound("equipments/items/normal/toys/common/fidget_car/get1.*"), get_sound("equipments/items/normal/toys/common/fidget_car/get2.*")};
+toys["fidget_car loop"] = get_sound("equipments/items/normal/toys/common/fidget_car/loop.*");
+toys["fidget_clicky_ball break" + vdesc] = array<string> = {get_sound("equipments/items/normal/toys/common/fidget_clicky_ball/break1.*"), get_sound("equipments/items/normal/toys/common/fidget_clicky_ball/break2.*"), get_sound("equipments/items/normal/toys/common/fidget_clicky_ball/break3.*")};
+toys["fidget_clicky_ball get" + vdesc] = array<string> = {get_sound("equipments/items/normal/toys/common/fidget_clicky_ball/get1.*"), get_sound("equipments/items/normal/toys/common/fidget_clicky_ball/get2.*")};
+toys["fidget_clicky_ball loop"] = get_sound("equipments/items/normal/toys/common/fidget_clicky_ball/loop.*");
+toys["fidget_cube break" + vdesc] = array<string> = {get_sound("equipments/items/normal/toys/common/fidget_cube/break1.*"), get_sound("equipments/items/normal/toys/common/fidget_cube/break2.*"), get_sound("equipments/items/normal/toys/common/fidget_cube/break3.*")};
+toys["fidget_cube get" + vdesc] = array<string> = {get_sound("equipments/items/normal/toys/common/fidget_cube/get1.*"), get_sound("equipments/items/normal/toys/common/fidget_cube/get2.*")};
+toys["fidget_cube loop"] = get_sound("equipments/items/normal/toys/common/fidget_cube/loop.*");
+toys["fidget_cube_2 break" + vdesc] = array<string> = {get_sound("equipments/items/normal/toys/common/fidget_cube_2/break1.*"), get_sound("equipments/items/normal/toys/common/fidget_cube_2/break2.*"), get_sound("equipments/items/normal/toys/common/fidget_cube_2/break3.*")};
+toys["fidget_cube_2 get" + vdesc] = array<string> = {get_sound("equipments/items/normal/toys/common/fidget_cube_2/get1.*"), get_sound("equipments/items/normal/toys/common/fidget_cube_2/get2.*")};
+toys["fidget_cube_2 loop"] = get_sound("equipments/items/normal/toys/common/fidget_cube_2/loop.*");
+toys["fidget_dimple break" + vdesc] = array<string> = {get_sound("equipments/items/normal/toys/common/fidget_dimple/break1.*"), get_sound("equipments/items/normal/toys/common/fidget_dimple/break2.*"), get_sound("equipments/items/normal/toys/common/fidget_dimple/break3.*")};
+toys["fidget_dimple get" + vdesc] = array<string> = {get_sound("equipments/items/normal/toys/common/fidget_dimple/get1.*"), get_sound("equipments/items/normal/toys/common/fidget_dimple/get2.*")};
+toys["fidget_dimple loop"] = get_sound("equipments/items/normal/toys/common/fidget_dimple/loop.*");
+toys["fidget_flicker_switch break" + vdesc] = array<string> = {get_sound("equipments/items/normal/toys/common/fidget_flicker_switch/break1.*"), get_sound("equipments/items/normal/toys/common/fidget_flicker_switch/break2.*"), get_sound("equipments/items/normal/toys/common/fidget_flicker_switch/break3.*")};
+toys["fidget_flicker_switch get" + vdesc] = array<string> = {get_sound("equipments/items/normal/toys/common/fidget_flicker_switch/get1.*"), get_sound("equipments/items/normal/toys/common/fidget_flicker_switch/get2.*")};
+toys["fidget_flicker_switch loop"] = get_sound("equipments/items/normal/toys/common/fidget_flicker_switch/loop.*");
+toys["fidget_hand_clapper break" + vdesc] = array<string> = {get_sound("equipments/items/normal/toys/common/fidget_hand_clapper/break1.*"), get_sound("equipments/items/normal/toys/common/fidget_hand_clapper/break2.*"), get_sound("equipments/items/normal/toys/common/fidget_hand_clapper/break3.*")};
+toys["fidget_hand_clapper get" + vdesc] = array<string> = {get_sound("equipments/items/normal/toys/common/fidget_hand_clapper/get1.*"), get_sound("equipments/items/normal/toys/common/fidget_hand_clapper/get2.*")};
+toys["fidget_hand_clapper loop"] = get_sound("equipments/items/normal/toys/common/fidget_hand_clapper/loop.*");
+toys["fidget_metal_gear_stick break" + vdesc] = array<string> = {get_sound("equipments/items/normal/toys/common/fidget_metal_gear_stick/break1.*"), get_sound("equipments/items/normal/toys/common/fidget_metal_gear_stick/break2.*"), get_sound("equipments/items/normal/toys/common/fidget_metal_gear_stick/break3.*")};
+toys["fidget_metal_gear_stick get" + vdesc] = array<string> = {get_sound("equipments/items/normal/toys/common/fidget_metal_gear_stick/get1.*"), get_sound("equipments/items/normal/toys/common/fidget_metal_gear_stick/get2.*")};
+toys["fidget_metal_gear_stick loop"] = get_sound("equipments/items/normal/toys/common/fidget_metal_gear_stick/loop.*");
+toys["fidget_pad break" + vdesc] = array<string> = {get_sound("equipments/items/normal/toys/common/fidget_pad/break1.*"), get_sound("equipments/items/normal/toys/common/fidget_pad/break2.*"), get_sound("equipments/items/normal/toys/common/fidget_pad/break3.*")};
+toys["fidget_pad get" + vdesc] = array<string> = {get_sound("equipments/items/normal/toys/common/fidget_pad/get1.*"), get_sound("equipments/items/normal/toys/common/fidget_pad/get2.*")};
+toys["fidget_pad loop"] = get_sound("equipments/items/normal/toys/common/fidget_pad/loop.*");
+toys["fidget_plastic_gear_stick break" + vdesc] = array<string> = {get_sound("equipments/items/normal/toys/common/fidget_plastic_gear_stick/break1.*"), get_sound("equipments/items/normal/toys/common/fidget_plastic_gear_stick/break2.*"), get_sound("equipments/items/normal/toys/common/fidget_plastic_gear_stick/break3.*")};
+toys["fidget_plastic_gear_stick get" + vdesc] = array<string> = {get_sound("equipments/items/normal/toys/common/fidget_plastic_gear_stick/get1.*"), get_sound("equipments/items/normal/toys/common/fidget_plastic_gear_stick/get2.*")};
+toys["fidget_plastic_gear_stick loop"] = get_sound("equipments/items/normal/toys/common/fidget_plastic_gear_stick/loop.*");
+toys["fidget_popping_cork break" + vdesc] = array<string> = {get_sound("equipments/items/normal/toys/common/fidget_popping_cork/break1.*"), get_sound("equipments/items/normal/toys/common/fidget_popping_cork/break2.*"), get_sound("equipments/items/normal/toys/common/fidget_popping_cork/break3.*")};
+toys["fidget_popping_cork get" + vdesc] = array<string> = {get_sound("equipments/items/normal/toys/common/fidget_popping_cork/get1.*"), get_sound("equipments/items/normal/toys/common/fidget_popping_cork/get2.*")};
+toys["fidget_popping_cork loop"] = get_sound("equipments/items/normal/toys/common/fidget_popping_cork/loop.*");
+toys["fidget_rainbow_star break" + vdesc] = array<string> = {get_sound("equipments/items/normal/toys/common/fidget_rainbow_star/break1.*"), get_sound("equipments/items/normal/toys/common/fidget_rainbow_star/break2.*"), get_sound("equipments/items/normal/toys/common/fidget_rainbow_star/break3.*")};
+toys["fidget_rainbow_star get" + vdesc] = array<string> = {get_sound("equipments/items/normal/toys/common/fidget_rainbow_star/get1.*"), get_sound("equipments/items/normal/toys/common/fidget_rainbow_star/get2.*")};
+toys["fidget_rainbow_star loop"] = get_sound("equipments/items/normal/toys/common/fidget_rainbow_star/loop.*");
+toys["fidget_wheel_spinner break" + vdesc] = array<string> = {get_sound("equipments/items/normal/toys/common/fidget_wheel_spinner/break1.*"), get_sound("equipments/items/normal/toys/common/fidget_wheel_spinner/break2.*"), get_sound("equipments/items/normal/toys/common/fidget_wheel_spinner/break3.*")};
+toys["fidget_wheel_spinner get" + vdesc] = array<string> = {get_sound("equipments/items/normal/toys/common/fidget_wheel_spinner/get1.*"), get_sound("equipments/items/normal/toys/common/fidget_wheel_spinner/get2.*")};
+toys["fidget_wheel_spinner loop"] = get_sound("equipments/items/normal/toys/common/fidget_wheel_spinner/loop.*");
+toys["infinity_cube break" + vdesc] = array<string> = {get_sound("equipments/items/normal/toys/common/infinity_cube/break1.*"), get_sound("equipments/items/normal/toys/common/infinity_cube/break2.*"), get_sound("equipments/items/normal/toys/common/infinity_cube/break3.*")};
+toys["infinity_cube get" + vdesc] = array<string> = {get_sound("equipments/items/normal/toys/common/infinity_cube/get1.*"), get_sound("equipments/items/normal/toys/common/infinity_cube/get2.*")};
+toys["infinity_cube loop"] = get_sound("equipments/items/normal/toys/common/infinity_cube/loop.*");
+toys["infinity_cube2 break" + vdesc] = array<string> = {get_sound("equipments/items/normal/toys/common/infinity_cube2/break1.*"), get_sound("equipments/items/normal/toys/common/infinity_cube2/break2.*"), get_sound("equipments/items/normal/toys/common/infinity_cube2/break3.*")};
+toys["infinity_cube2 get" + vdesc] = array<string> = {get_sound("equipments/items/normal/toys/common/infinity_cube2/get1.*"), get_sound("equipments/items/normal/toys/common/infinity_cube2/get2.*")};
+toys["infinity_cube2 loop"] = get_sound("equipments/items/normal/toys/common/infinity_cube2/loop.*");
+toys["mini_fidget_slug break" + vdesc] = array<string> = {get_sound("equipments/items/normal/toys/common/mini_fidget_slug/break1.*"), get_sound("equipments/items/normal/toys/common/mini_fidget_slug/break2.*"), get_sound("equipments/items/normal/toys/common/mini_fidget_slug/break3.*")};
+toys["mini_fidget_slug get" + vdesc] = array<string> = {get_sound("equipments/items/normal/toys/common/mini_fidget_slug/get1.*"), get_sound("equipments/items/normal/toys/common/mini_fidget_slug/get2.*")};
+toys["mini_fidget_slug loop"] = get_sound("equipments/items/normal/toys/common/mini_fidget_slug/loop.*");
+toys["mini_fidget_spinner break" + vdesc] = array<string> = {get_sound("equipments/items/normal/toys/common/mini_fidget_spinner/break1.*"), get_sound("equipments/items/normal/toys/common/mini_fidget_spinner/break2.*"), get_sound("equipments/items/normal/toys/common/mini_fidget_spinner/break3.*")};
+toys["mini_fidget_spinner get" + vdesc] = array<string> = {get_sound("equipments/items/normal/toys/common/mini_fidget_spinner/get1.*"), get_sound("equipments/items/normal/toys/common/mini_fidget_spinner/get2.*")};
+toys["mini_fidget_spinner loop"] = get_sound("equipments/items/normal/toys/common/mini_fidget_spinner/loop.*");
+toys["pop_it_ball break" + vdesc] = array<string> = {get_sound("equipments/items/normal/toys/common/pop_it_ball/break1.*"), get_sound("equipments/items/normal/toys/common/pop_it_ball/break2.*"), get_sound("equipments/items/normal/toys/common/pop_it_ball/break3.*")};
+toys["pop_it_ball get" + vdesc] = array<string> = {get_sound("equipments/items/normal/toys/common/pop_it_ball/get1.*"), get_sound("equipments/items/normal/toys/common/pop_it_ball/get2.*")};
+toys["pop_it_ball loop"] = get_sound("equipments/items/normal/toys/common/pop_it_ball/loop.*");
+toys["small_noise_tube break" + vdesc] = array<string> = {get_sound("equipments/items/normal/toys/common/small_noise_tube/break1.*"), get_sound("equipments/items/normal/toys/common/small_noise_tube/break2.*"), get_sound("equipments/items/normal/toys/common/small_noise_tube/break3.*")};
+toys["small_noise_tube get" + vdesc] = array<string> = {get_sound("equipments/items/normal/toys/common/small_noise_tube/get1.*"), get_sound("equipments/items/normal/toys/common/small_noise_tube/get2.*")};
+toys["small_noise_tube loop"] = get_sound("equipments/items/normal/toys/common/small_noise_tube/loop.*");
+toys["baby_rattle break" + vdesc] = array<string> = {get_sound("equipments/items/normal/toys/other/baby_rattle/break1.*"), get_sound("equipments/items/normal/toys/other/baby_rattle/break2.*"), get_sound("equipments/items/normal/toys/other/baby_rattle/break3.*")};
+toys["baby_rattle get" + vdesc] = array<string> = {get_sound("equipments/items/normal/toys/other/baby_rattle/get1.*"), get_sound("equipments/items/normal/toys/other/baby_rattle/get2.*")};
+toys["baby_rattle loop"] = get_sound("equipments/items/normal/toys/other/baby_rattle/loop.*");
+toys["baby_rattle2 break" + vdesc] = array<string> = {get_sound("equipments/items/normal/toys/other/baby_rattle2/break1.*"), get_sound("equipments/items/normal/toys/other/baby_rattle2/break2.*"), get_sound("equipments/items/normal/toys/other/baby_rattle2/break3.*")};
+toys["baby_rattle2 get" + vdesc] = array<string> = {get_sound("equipments/items/normal/toys/other/baby_rattle2/get1.*"), get_sound("equipments/items/normal/toys/other/baby_rattle2/get2.*")};
+toys["baby_rattle2 loop"] = get_sound("equipments/items/normal/toys/other/baby_rattle2/loop.*");
+toys["baby_rattle3 break" + vdesc] = array<string> = {get_sound("equipments/items/normal/toys/other/baby_rattle3/break1.*"), get_sound("equipments/items/normal/toys/other/baby_rattle3/break2.*"), get_sound("equipments/items/normal/toys/other/baby_rattle3/break3.*")};
+toys["baby_rattle3 get" + vdesc] = array<string> = {get_sound("equipments/items/normal/toys/other/baby_rattle3/get1.*"), get_sound("equipments/items/normal/toys/other/baby_rattle3/get2.*")};
+toys["baby_rattle3 loop"] = get_sound("equipments/items/normal/toys/other/baby_rattle3/loop.*");
+toys["baby_rattle4 break" + vdesc] = array<string> = {get_sound("equipments/items/normal/toys/other/baby_rattle4/break1.*"), get_sound("equipments/items/normal/toys/other/baby_rattle4/break2.*"), get_sound("equipments/items/normal/toys/other/baby_rattle4/break3.*")};
+toys["baby_rattle4 get" + vdesc] = array<string> = {get_sound("equipments/items/normal/toys/other/baby_rattle4/get1.*"), get_sound("equipments/items/normal/toys/other/baby_rattle4/get2.*")};
+toys["baby_rattle4 loop"] = get_sound("equipments/items/normal/toys/other/baby_rattle4/loop.*");
+toys["large_train break" + vdesc] = array<string> = {get_sound("equipments/items/normal/toys/other/large_train/break1.*"), get_sound("equipments/items/normal/toys/other/large_train/break2.*"), get_sound("equipments/items/normal/toys/other/large_train/break3.*")};
+toys["large_train get" + vdesc] = array<string> = {get_sound("equipments/items/normal/toys/other/large_train/get1.*"), get_sound("equipments/items/normal/toys/other/large_train/get2.*")};
+toys["large_train loop"] = get_sound("equipments/items/normal/toys/other/large_train/loop.*");
+toys["small_bird break" + vdesc] = array<string> = {get_sound("equipments/items/normal/toys/other/small_bird/break1.*"), get_sound("equipments/items/normal/toys/other/small_bird/break2.*"), get_sound("equipments/items/normal/toys/other/small_bird/break3.*")};
+toys["small_bird get" + vdesc] = array<string> = {get_sound("equipments/items/normal/toys/other/small_bird/get1.*"), get_sound("equipments/items/normal/toys/other/small_bird/get2.*")};
+toys["small_bird loop"] = get_sound("equipments/items/normal/toys/other/small_bird/loop.*");
+toys["small_car break" + vdesc] = array<string> = {get_sound("equipments/items/normal/toys/other/small_car/break1.*"), get_sound("equipments/items/normal/toys/other/small_car/break2.*"), get_sound("equipments/items/normal/toys/other/small_car/break3.*")};
+toys["small_car get" + vdesc] = array<string> = {get_sound("equipments/items/normal/toys/other/small_car/get1.*"), get_sound("equipments/items/normal/toys/other/small_car/get2.*")};
+toys["small_car loop"] = get_sound("equipments/items/normal/toys/other/small_car/loop.*");
+toys["small_train break" + vdesc] = array<string> = {get_sound("equipments/items/normal/toys/other/small_train/break1.*"), get_sound("equipments/items/normal/toys/other/small_train/break2.*"), get_sound("equipments/items/normal/toys/other/small_train/break3.*")};
+toys["small_train get" + vdesc] = array<string> = {get_sound("equipments/items/normal/toys/other/small_train/get1.*"), get_sound("equipments/items/normal/toys/other/small_train/get2.*")};
+toys["small_train loop"] = get_sound("equipments/items/normal/toys/other/small_train/loop.*");
+toys["squeaky_ball break" + vdesc] = array<string> = {get_sound("equipments/items/normal/toys/other/squeaky_ball/break1.*"), get_sound("equipments/items/normal/toys/other/squeaky_ball/break2.*"), get_sound("equipments/items/normal/toys/other/squeaky_ball/break3.*")};
+toys["squeaky_ball get" + vdesc] = array<string> = {get_sound("equipments/items/normal/toys/other/squeaky_ball/get1.*"), get_sound("equipments/items/normal/toys/other/squeaky_ball/get2.*")};
+toys["squeaky_ball loop"] = get_sound("equipments/items/normal/toys/other/squeaky_ball/loop.*");
+toys["squeaky_ball2 break" + vdesc] = array<string> = {get_sound("equipments/items/normal/toys/other/squeaky_ball2/break1.*"), get_sound("equipments/items/normal/toys/other/squeaky_ball2/break2.*"), get_sound("equipments/items/normal/toys/other/squeaky_ball2/break3.*")};
+toys["squeaky_ball2 get" + vdesc] = array<string> = {get_sound("equipments/items/normal/toys/other/squeaky_ball2/get1.*"), get_sound("equipments/items/normal/toys/other/squeaky_ball2/get2.*")};
+toys["squeaky_ball2 loop"] = get_sound("equipments/items/normal/toys/other/squeaky_ball2/loop.*");
+toys["squeaky_ball3 break" + vdesc] = array<string> = {get_sound("equipments/items/normal/toys/other/squeaky_ball3/break1.*"), get_sound("equipments/items/normal/toys/other/squeaky_ball3/break2.*"), get_sound("equipments/items/normal/toys/other/squeaky_ball3/break3.*")};
+toys["squeaky_ball3 get" + vdesc] = array<string> = {get_sound("equipments/items/normal/toys/other/squeaky_ball3/get1.*"), get_sound("equipments/items/normal/toys/other/squeaky_ball3/get2.*")};
+toys["squeaky_ball3 loop"] = get_sound("equipments/items/normal/toys/other/squeaky_ball3/loop.*");
+toys["squeaky_ball4 break" + vdesc] = array<string> = {get_sound("equipments/items/normal/toys/other/squeaky_ball4/break1.*"), get_sound("equipments/items/normal/toys/other/squeaky_ball4/break2.*"), get_sound("equipments/items/normal/toys/other/squeaky_ball4/break3.*")};
+toys["squeaky_ball4 get" + vdesc] = array<string> = {get_sound("equipments/items/normal/toys/other/squeaky_ball4/get1.*"), get_sound("equipments/items/normal/toys/other/squeaky_ball4/get2.*")};
+toys["squeaky_ball4 loop"] = get_sound("equipments/items/normal/toys/other/squeaky_ball4/loop.*");
+toys["wind_up break" + vdesc] = array<string> = {get_sound("equipments/items/normal/toys/other/wind_up/break1.*"), get_sound("equipments/items/normal/toys/other/wind_up/break2.*"), get_sound("equipments/items/normal/toys/other/wind_up/break3.*")};
+toys["wind_up get" + vdesc] = array<string> = {get_sound("equipments/items/normal/toys/other/wind_up/get1.*"), get_sound("equipments/items/normal/toys/other/wind_up/get2.*")};
+toys["wind_up loop"] = get_sound("equipments/items/normal/toys/other/wind_up/loop.*");
+toys["wind_up2 break" + vdesc] = array<string> = {get_sound("equipments/items/normal/toys/other/wind_up2/break1.*"), get_sound("equipments/items/normal/toys/other/wind_up2/break2.*"), get_sound("equipments/items/normal/toys/other/wind_up2/break3.*")};
+toys["wind_up2 get" + vdesc] = array<string> = {get_sound("equipments/items/normal/toys/other/wind_up2/get1.*"), get_sound("equipments/items/normal/toys/other/wind_up2/get2.*")};
+toys["wind_up2 loop"] = get_sound("equipments/items/normal/toys/other/wind_up2/loop.*");
+toys["wind_up3 break" + vdesc] = array<string> = {get_sound("equipments/items/normal/toys/other/wind_up3/break1.*"), get_sound("equipments/items/normal/toys/other/wind_up3/break2.*"), get_sound("equipments/items/normal/toys/other/wind_up3/break3.*")};
+toys["wind_up3 get" + vdesc] = array<string> = {get_sound("equipments/items/normal/toys/other/wind_up3/get1.*"), get_sound("equipments/items/normal/toys/other/wind_up3/get2.*")};
+toys["wind_up3 loop"] = get_sound("equipments/items/normal/toys/other/wind_up3/loop.*");
+toys["wind_up4 break" + vdesc] = array<string> = {get_sound("equipments/items/normal/toys/other/wind_up4/break1.*"), get_sound("equipments/items/normal/toys/other/wind_up4/break2.*"), get_sound("equipments/items/normal/toys/other/wind_up4/break3.*")};
+toys["wind_up4 get" + vdesc] = array<string> = {get_sound("equipments/items/normal/toys/other/wind_up4/get1.*"), get_sound("equipments/items/normal/toys/other/wind_up4/get2.*")};
+toys["wind_up4 loop"] = get_sound("equipments/items/normal/toys/other/wind_up4/loop.*");
+learnCategories["Toys"] = toys;
 dictionary ui;
 ui["Action complete: used in speaker tests and various other menus"] = get_sound("misc/ui/menus/"+menupack+"/complete.*");
 ui["Dialog close"] = get_sound("misc/ui/dialogs/"+dlgpack+"/close.*");
@@ -526,7 +671,7 @@ weapons["Pistol Hit: used in normal mode"] = "pistolhit.ogg";
 weapons["Pistol Ping: used in normal mode"] = "pistolping.ogg";
 weapons["Pistol Reload: used in normal mode"] = "pistolreload.ogg";
 weapons["Pistol Shell: used in normal mode" + vdesc] = array<string> = {"pistolshell1.ogg", "pistolshell2.ogg"};
-//learnCategories["Weapons"] = weapons;
+learnCategories["Weapons"] = weapons;
 string[] sortedKeys = learnCategories.get_keys();
 sortedKeys.sort_ascending();
 setupmenu(false);
@@ -594,7 +739,7 @@ m.add_item("view detailed stats", "vds");
     string psmem = m.get_selected_item_id();
 if (mres == -1)
 {
-    temp.play_stationary(find_sound("sounds/"+soundpack+"/misc/game/*resume*"), false);
+    temp.play_stationary(get_sound("misc/game/*resume*"), false);
     resume_game();
     return;
 }
@@ -603,7 +748,7 @@ if (mres == -1)
             string mode = endless ? "Endless" : "Normal";
             string info = "Current Level: " + level + "\r\nGame Mode: " + mode;
             clipboard_copy_text(info);
-            if (copexpsounds==true) dlgplay(find_sound("sounds/"+soundpack+"/misc/ui/menus/"+menupack+"/*copy*"), false);
+            if (copexpsounds==true) dlgplay(get_sound("misc/ui/menus/"+menupack+"/*copy*"), false);
             dlgmessage_return("Your current level and game mode has been copied to the clipboard.");
             pausemenu();
 return;
@@ -635,7 +780,7 @@ if (gamcopy == true)
         if (resp == "copy")
         {
             clipboard_copy_text(statsummary);
-            if (copexpsounds == true) dlgplay(find_sound("sounds/"+soundpack+"/misc/ui/menus/"+menupack+"/*copy*"), false);
+            if (copexpsounds == true) dlgplay(get_sound("misc/ui/menus/"+menupack+"/*copy*"), false);
             dlgmessage_return("All game session results copied to your clipboard.");
         }
         else if (resp == "export")
@@ -643,7 +788,7 @@ if (gamcopy == true)
             poastfile.open(DIRECTORY_APPDATA+"tsatria03/ToyMania/stats/player_posts.txt", "w");
             poastfile.write(statsummary);
             poastfile.close();
-            if (copexpsounds == true) dlgplay(find_sound("sounds/"+soundpack+"/misc/ui/menus/"+menupack+"/*export*"), false);
+            if (copexpsounds == true) dlgplay(get_sound("misc/ui/menus/"+menupack+"/*export*"), false);
             dlgmessage_return("All game session results exported to stats/player_posts.txt.");
         }
     }
@@ -723,7 +868,7 @@ cardest=false;
         }
         if (psmem == "rmg")
 {
-temp.play_stationary(find_sound("sounds/"+soundpack+"/misc/game/*resume*"), false);
+temp.play_stationary(get_sound("misc/game/*resume*"), false);
             resume_game();
             return;
         }
@@ -809,7 +954,7 @@ return;
 }
 if (money <= 0)
 {
-p.play_stationary(find_sound("sounds/" + soundpack + "/misc/store/*fail*"), false);
+p.play_stationary(get_sound("misc/store/*fail*"), false);
 dlgmessage_return("Error: you don't have enough money to purchase this item.");
 shopmenu();
 return;
@@ -818,7 +963,7 @@ vd.set_disallowed_chars("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ !@
 string amount_input = vd.input_box("", "How many " + shopem + "s would you like to buy?");
 if (amount_input == "")
 {
-p.play_stationary(find_sound("sounds/" + soundpack + "/misc/store/*fail*"), false);
+p.play_stationary(get_sound("misc/store/*fail*"), false);
 dlgmessage_return("Error. Invalid quantity. Please enter a valid amount for this item.");
 shopmenu();
 return;
@@ -826,7 +971,7 @@ return;
 double amount = string_to_number(amount_input);
 if (amount <= 0)
 {
-p.play_stationary(find_sound("sounds/" + soundpack + "/misc/store/*fail*"), false);
+p.play_stationary(get_sound("misc/store/*fail*"), false);
 dlgmessage_return("Error. Invalid quantity. Please enter a valid amount for this item.");
 shopmenu();
 return;
@@ -836,14 +981,14 @@ if (prices.exists(shopem)) prices.get(shopem, price);
 double total_cost = amount * price;
 if (money < total_cost)
 {
-p.play_stationary(find_sound("sounds/" + soundpack + "/misc/store/*fail*"), false);
+p.play_stationary(get_sound("misc/store/*fail*"), false);
 dlgmessage_return("Error. You don't have enough money to buy " + int(amount) + " " + shopem.replace("_", " ", true) + (amount == 1 ? "." : "s."));
 shopmenu();
 return;
 }
 give(shopem, int(amount));
 money -= total_cost;
-p.play_stationary(find_sound("sounds/" + soundpack + "/misc/store/*buy*"), false);
+p.play_stationary(get_sound("misc/store/*buy*"), false);
 dlgmessage_return("Purchase complete. You bought " + int(amount) + " " + shopem.replace("_", " ", true) + (amount == 1 ? "" : "s") + " for " + round(total_cost, 0) + " dollar" + (total_cost == 1 ? "" : "s") + ". You now have " + round(money, 0) + " dollar" + (money == 1 ? "" : "s") + " remaining.");
 shopmenu();
 }
@@ -1028,7 +1173,7 @@ m.intro_text = "Choose which game achievements to clear. This will clear your ga
     }
     writedata();
 string modeLabel = (achmode == "session") ? "session" : (achmode == "lifetime") ? "lifetime" : "session and lifetime";
-if(completesound==true) dlgplay(find_sound("sounds/"+soundpack+"/misc/ui/menus/"+menupack+"/*complete*"), false);
+if(completesound==true) dlgplay(get_sound("misc/ui/menus/"+menupack+"/*complete*"), false);
 dlgmessage_return("Your " + modeLabel + " achievements have been cleared.");
     achesmenu();
 }
@@ -1053,7 +1198,7 @@ m.fade_music();
         }
     }
     clipboard_copy_text(achievementSummary);
-if(copexpsounds==true) dlgplay(find_sound("sounds/"+soundpack+"/misc/ui/menus/"+menupack+"/*copy*") ,false);
+if(copexpsounds==true) dlgplay(get_sound("misc/ui/menus/"+menupack+"/*copy*") ,false);
     dlgmessage_return("All game achievements have been copied to your clipboard.");
     achesmenu();
 }
@@ -1076,7 +1221,7 @@ achievementSummary += "- " + achievements[i].get_progress_status() + "\r\n";
 }
 achfile.write(achievementSummary);
 achfile.close();
-if(copexpsounds==true) dlgplay(find_sound("sounds/"+soundpack+"/misc/ui/menus/"+menupack+"/*export*"),false);
+if(copexpsounds==true) dlgplay(get_sound("misc/ui/menus/"+menupack+"/*export*"),false);
 dlgmessage_return("All game achievements have been exported to stats/player_achievements.txt.");
 achesmenu();
 }
@@ -1180,7 +1325,7 @@ statsmenu();
         moved_steps = 0;
 session_playtime = 0;
 writedata();
-if(completesound==true) dlgplay(find_sound("sounds/"+soundpack+"/misc/ui/menus/"+menupack+"/*complete*"), false);
+if(completesound==true) dlgplay(get_sound("misc/ui/menus/"+menupack+"/*complete*"), false);
         dlgmessage_return("Your session stats have been cleared.");
     }
     if (gsm == "lifetime")
@@ -1192,7 +1337,7 @@ if(completesound==true) dlgplay(find_sound("sounds/"+soundpack+"/misc/ui/menus/"
         total_moved_steps = 0;
         total_playtime = 0;
         writedata();
-if(completesound==true) dlgplay(find_sound("sounds/"+soundpack+"/misc/ui/menus/"+menupack+"/*complete*"), false);
+if(completesound==true) dlgplay(get_sound("misc/ui/menus/"+menupack+"/*complete*"), false);
         dlgmessage_return("Your lifetime stats have been cleared.");
     }
     if (gsm == "both")
@@ -1209,7 +1354,7 @@ if(completesound==true) dlgplay(find_sound("sounds/"+soundpack+"/misc/ui/menus/"
         total_moved_steps = 0;
         total_playtime = 0;
         writedata();
-if(completesound==true) dlgplay(find_sound("sounds/"+soundpack+"/misc/ui/menus/"+menupack+"/*complete*"), false);
+if(completesound==true) dlgplay(get_sound("misc/ui/menus/"+menupack+"/*complete*"), false);
         dlgmessage_return("Your session and lifetime stats have been cleared.");
     }
     statsmenu();
@@ -1240,7 +1385,7 @@ statsummary += "- Cars destroyed: " + total_destroyed_cars + "\r\n";
 statsummary += "- Steps taken: " + total_moved_steps + "\r\n";
 statsummary += "- Total playtime: " + total_minutes + " minutes, " + total_seconds + " seconds.\r\n";
     clipboard_copy_text(statsummary);
-if(copexpsounds==true) dlgplay(find_sound("sounds/"+soundpack+"/misc/ui/menus/"+menupack+"/*copy*") ,false);
+if(copexpsounds==true) dlgplay(get_sound("misc/ui/menus/"+menupack+"/*copy*") ,false);
     dlgmessage_return("All game statistics have been copied to your clipboard.");
     statsmenu();
 }
@@ -1272,7 +1417,7 @@ statsummary += "- Steps taken: " + total_moved_steps + "\r\n";
 statsummary += "- Total playtime: " + total_minutes + " minutes, " + total_seconds + " seconds.\r\n";
 statfile.write(statsummary);
 statfile.close();
-if(copexpsounds==true) dlgplay(find_sound("sounds/"+soundpack+"/misc/ui/menus/"+menupack+"/*export*"),false);
+if(copexpsounds==true) dlgplay(get_sound("misc/ui/menus/"+menupack+"/*export*"),false);
 dlgmessage_return("All game statistics have been exported to stats/player_statistics.txt.");
 statsmenu();
 }
@@ -1341,14 +1486,14 @@ int gamsets = form.create_button("&game settings");
 int savesets = form.create_button("&save settings", true);
 int back = form.create_button("&back");
 form.focus(audsets);
-spool.play_stationary(find_sound("sounds/"+soundpack+"/misc/ui/menus/"+menupack+"/*open*"),false);
+spool.play_stationary(get_sound("misc/ui/menus/"+menupack+"/*open*"),false);
     while (true)
     {
         form.monitor();
         wait(5);
         if (form.is_pressed(back) || key_repeating(KEY_ESCAPE))
         {
-spool.play_stationary(find_sound("sounds/"+soundpack+"/misc/ui/menus/"+menupack+"/*close*"),false);
+spool.play_stationary(get_sound("misc/ui/menus/"+menupack+"/*close*"),false);
             mainmenu();
         }
         if (form.is_pressed(gamsets))
@@ -1376,7 +1521,7 @@ if(confirm=="yes")
 if(file_exists(DIRECTORY_APPDATA+"tsatria03/ToyMania/saves/settings.tmg")) file_delete(DIRECTORY_APPDATA+"tsatria03/ToyMania/saves/settings.tmg");
 resetpreffs();
 writepreffs();
-if(completesound==true) dlgplay(find_sound("sounds/"+soundpack+"/misc/ui/menus/"+menupack+"/*complete*"), false);
+if(completesound==true) dlgplay(get_sound("misc/ui/menus/"+menupack+"/*complete*"), false);
 dlgmessage_return("Settings reset.");
 mainmenu();
 }
@@ -1384,7 +1529,7 @@ mainmenu();
         if (form.is_pressed(savesets))
         {
 writepreffs();
-if(completesound==true) dlgplay(find_sound("sounds/"+soundpack+"/misc/ui/menus/"+menupack+"/*complete*"), false);
+if(completesound==true) dlgplay(get_sound("misc/ui/menus/"+menupack+"/*complete*"), false);
 dlgmessage_return("Settings saved.");
 mainmenu();
 }
@@ -1455,7 +1600,7 @@ if (showset_desc) togsound2 = form.create_input_box("Toggle switch SFX: descript
     int cancel = form.create_button("&cancel");
 int ok = form.create_button("&okay");
 form.focus(autoUpdateToggle);
-spool.play_stationary(find_sound("sounds/"+soundpack+"/misc/ui/menus/"+menupack+"/*open*"),false);
+spool.play_stationary(get_sound("misc/ui/menus/"+menupack+"/*open*"),false);
     while (true)
     {
         wait(5);
@@ -1485,7 +1630,7 @@ completesound = form.is_checked(compsound);
 togglesound = form.is_checked(togsound);
         if (form.is_pressed(cancel) || key_repeating(KEY_ESCAPE))
         {
-spool.play_stationary(find_sound("sounds/"+soundpack+"/misc/ui/menus/"+menupack+"/*close*"),false);
+spool.play_stationary(get_sound("misc/ui/menus/"+menupack+"/*close*"),false);
             preffsmenu();
         }
         if (form.is_pressed(ok))
@@ -1512,7 +1657,7 @@ int levsound = form.create_checkbox("Enable levelup sound effects.", playlevels)
     int cancel = form.create_button("&cancel");
 int ok = form.create_button("&okay");
 form.focus(runmode);
-spool.play_stationary(find_sound("sounds/"+soundpack+"/misc/ui/menus/"+menupack+"/*open*"),false);
+spool.play_stationary(get_sound("misc/ui/menus/"+menupack+"/*open*"),false);
     while (true)
     {
         wait(5);
@@ -1531,7 +1676,7 @@ speak_item_collects = form.is_checked(collectspeech);
             playlevels = form.is_checked(levsound);
         if (form.is_pressed(cancel) || key_repeating(KEY_ESCAPE))
         {
-spool.play_stationary(find_sound("sounds/"+soundpack+"/misc/ui/menus/"+menupack+"/*close*"),false);
+spool.play_stationary(get_sound("misc/ui/menus/"+menupack+"/*close*"),false);
 speak("canceled");
 resume_game();
 return;
@@ -1579,7 +1724,7 @@ spk = form.create_button("Select sound &pack. Currently set to " + soundpack);
 int cancel = form.create_button("&cancel");
 int ok = form.create_button("&okay");
 form.focus(gameAlarmVolumeSlider);
-spool.play_stationary(find_sound("sounds/"+soundpack+"/misc/ui/menus/"+menupack+"/*open*"),false);
+spool.play_stationary(get_sound("misc/ui/menus/"+menupack+"/*open*"),false);
     while (true)
     {
         wait(5);
@@ -1592,7 +1737,7 @@ mustype = form.get_list_item_id(musList, currentMusIndex);
     if (muspool.sound_is_playing(toytrackslot))
     {
         muspool.destroy_sound(toytrackslot);
-            toytrackslot = muspool.play_stationary(find_sound("sounds/"+soundpack+"/objects/sources/tracks/*"+mustype+"*"), true);
+            toytrackslot = muspool.play_stationary(get_sound("objects/sources/tracks/*"+mustype+"*"), true);
 lastMusicIndex = currentMusIndex;
     }
     else
@@ -1618,7 +1763,7 @@ ambpool.destroy_sound(toyambslot);
 muspool.destroy_sound(toytrackslot);
 alarmpool.destroy_sound(alarmslot);
 heartpool.destroy_sound(heartslot);
-spool.play_stationary(find_sound("sounds/"+soundpack+"/misc/ui/menus/"+menupack+"/*close*"),false);
+spool.play_stationary(get_sound("misc/ui/menus/"+menupack+"/*close*"),false);
             preffsmenu();
         }
         if (form.is_pressed(ok))
@@ -1633,22 +1778,22 @@ if (form.is_pressed(ambTest))
 {
     if (ambpool.sound_is_playing(toyambslot))
 {
-if(togglesound==true) spool.play_stationary(find_sound("sounds/"+soundpack+"/misc/ui/menus/"+menupack+"/*disable*"),false);
+if(togglesound==true) spool.play_stationary(get_sound("misc/ui/menus/"+menupack+"/*disable*"),false);
 speak("ambience off");
         ambpool.destroy_sound(toyambslot);
     }
 else
 {
-if(togglesound==true) spool.play_stationary(find_sound("sounds/"+soundpack+"/misc/ui/menus/"+menupack+"/*enable*"),false);
+if(togglesound==true) spool.play_stationary(get_sound("misc/ui/menus/"+menupack+"/*enable*"),false);
 speak("ambience on");
-        toyambslot = ambpool.play_stationary(find_sound("sounds/"+soundpack+"/objects/sources/ambiences/*gameloop*"), true);
+        toyambslot = ambpool.play_stationary(get_sound("objects/sources/ambiences/*gameloop*"), true);
     }
 }
 if (form.is_pressed(musTest))
 {
     if (muspool.sound_is_playing(toytrackslot))
     {
-if(togglesound==true) spool.play_stationary(find_sound("sounds/"+soundpack+"/misc/ui/menus/"+menupack+"/*disable*"), false);
+if(togglesound==true) spool.play_stationary(get_sound("misc/ui/menus/"+menupack+"/*disable*"), false);
 speak("music off");
         muspool.destroy_sound(toytrackslot);
         lastMusicIndex = -1;
@@ -1659,10 +1804,10 @@ speak("music off");
         if (musIndex >= 0)
         {
 mustype = form.get_list_item_id(musList, musIndex);
-if(togglesound==true) spool.play_stationary(find_sound("sounds/"+soundpack+"/misc/ui/menus/"+menupack+"/*enable*"), false);
+if(togglesound==true) spool.play_stationary(get_sound("misc/ui/menus/"+menupack+"/*enable*"), false);
 speak("music on");
             muspool.destroy_sound(toytrackslot);
-            toytrackslot = muspool.play_stationary(find_sound("sounds/"+soundpack+"/objects/sources/tracks/*"+mustype+"*"), true);
+            toytrackslot = muspool.play_stationary(get_sound("objects/sources/tracks/*"+mustype+"*"), true);
             lastMusicIndex = musIndex;
         }
     }
@@ -1671,30 +1816,30 @@ if (form.is_pressed(alarmTest))
 {
     if (alarmpool.sound_is_playing(alarmslot))
 {
-if(togglesound==true) spool.play_stationary(find_sound("sounds/"+soundpack+"/misc/ui/menus/"+menupack+"/*disable*"), false);
+if(togglesound==true) spool.play_stationary(get_sound("misc/ui/menus/"+menupack+"/*disable*"), false);
 speak("alarm off");
         alarmpool.destroy_sound(alarmslot);
     }
 else
 {
-if(togglesound==true) spool.play_stationary(find_sound("sounds/"+soundpack+"/misc/ui/menus/"+menupack+"/*enable*"), false);
+if(togglesound==true) spool.play_stationary(get_sound("misc/ui/menus/"+menupack+"/*enable*"), false);
 speak("alarm on");
-        alarmslot = alarmpool.play_stationary(find_sound("sounds/"+soundpack+"/objects/sources/ambiences/*alarmloop*"), true);
+        alarmslot = alarmpool.play_stationary(get_sound("objects/sources/ambiences/*alarmloop*"), true);
     }
 }
 if (form.is_pressed(heartbeatTest))
 {
     if (heartpool.sound_is_playing(heartslot))
 {
-if(togglesound==true) spool.play_stationary(find_sound("sounds/"+soundpack+"/misc/ui/menus/"+menupack+"/*disable*"), false);
+if(togglesound==true) spool.play_stationary(get_sound("misc/ui/menus/"+menupack+"/*disable*"), false);
 speak("heartbeat off");
         heartpool.destroy_sound(heartslot);
     }
 else
 {
-if(togglesound==true) spool.play_stationary(find_sound("sounds/"+soundpack+"/misc/ui/menus/"+menupack+"/*enable*"), false);
+if(togglesound==true) spool.play_stationary(get_sound("misc/ui/menus/"+menupack+"/*enable*"), false);
 speak("heartbeat on");
-        heartslot = heartpool.play_stationary(find_sound("sounds/"+soundpack+"/misc/player/*heartstart*"), true);
+        heartslot = heartpool.play_stationary(get_sound("misc/player/*heartstart*"), true);
     }
 }
 if(form.is_pressed(sdm))
@@ -1722,7 +1867,7 @@ soundsetsmenu();
     {
         soundcard = devices[mres];
         sound_output_device = mres + 1;
-if(completesound==true) dlgplay(find_sound("sounds/"+soundpack+"/misc/ui/menus/"+menupack+"/*complete*"));
+if(completesound==true) dlgplay(get_sound("misc/ui/menus/"+menupack+"/*complete*"));
 dlgmessage_return("Sound device set to "+soundcard+".");
 soundsetsmenu();
 }
@@ -1758,7 +1903,7 @@ soundsetsmenu();
 else if (mres>=0 and mres<dlgpacks.length())
 {
 dlgpack=dlgpacks[mres];
-if(completesound==true) dlgplay(find_sound("sounds/"+soundpack+"/misc/ui/menus/"+menupack+"/*complete*"));
+if(completesound==true) dlgplay(get_sound("misc/ui/menus/"+menupack+"/*complete*"));
 dlgmessage_return("Dialog theme set to "+dlgpack+".");
 soundsetsmenu();
 }
@@ -1795,7 +1940,7 @@ soundsetsmenu();
 else if (mres>=0 and mres<menupacks.length())
 {
 menupack=menupacks[mres];
-if(completesound==true) dlgplay(find_sound("sounds/"+soundpack+"/misc/ui/menus/"+menupack+"/*complete*"));
+if(completesound==true) dlgplay(get_sound("misc/ui/menus/"+menupack+"/*complete*"));
 dlgmessage_return("Menu theme set to "+menupack+".");
 soundsetsmenu();
 }
@@ -1834,7 +1979,7 @@ else if (mres>=0 and mres<soundpacks.length())
 dlgpack="";
 menupack="";
 soundpack=soundpacks[mres];
-if(completesound==true) dlgplay(find_sound("sounds/"+soundpack+"/misc/ui/menus/"+menupack+"/*complete*"));
+if(completesound==true) dlgplay(get_sound("misc/ui/menus/"+menupack+"/*complete*"));
 dlgmessage_return("Sound pack set to "+soundpack+".");
 soundsetsmenu();
 }
@@ -1853,7 +1998,7 @@ int gameHeartbeatVolumeSlider = form.create_slider("game heartbeat volume: adjus
 int cancel = form.create_button("&cancel");
 int ok = form.create_button("&okay");
 form.focus(gameAmbienceVolumeSlider);
-spool.play_stationary(find_sound("sounds/"+soundpack+"/misc/ui/menus/"+menupack+"/*open*"),false);
+spool.play_stationary(get_sound("misc/ui/menus/"+menupack+"/*open*"),false);
     while (true)
     {
         wait(5);
@@ -1868,7 +2013,7 @@ heartvolume = (form.get_slider(gameHeartbeatVolumeSlider) / 2) - 50;
         heartpool.update_sound_start_values(heartslot, 0, heartvolume, heartpitch);
         if (form.is_pressed(cancel) || key_repeating(KEY_ESCAPE))
         {
-spool.play_stationary(find_sound("sounds/"+soundpack+"/misc/ui/menus/"+menupack+"/*close*"),false);
+spool.play_stationary(get_sound("misc/ui/menus/"+menupack+"/*close*"),false);
 speak("canceled");
 resume_game();
 return;

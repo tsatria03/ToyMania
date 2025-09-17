@@ -39,7 +39,7 @@ endy=ey;
 speed=sp;
 required_keys=rk;
 doortype=dt;
-doorsound=doorpool.play_2d(find_sound("sounds/"+soundpack+"/objects/doors/"+doortype+"/*loop*"),me.x,me.y,startx,starty,true);
+doorsound=doorpool.play_2d(get_sound("objects/doors/"+doortype+"/*loop*"),me.x,me.y,startx,starty,true);
 }
 }
 void doorcheck()
@@ -50,7 +50,7 @@ void doorcheck()
         {
             if (entity_near_door(doors[i].startx, doors[i].starty))
             {
-doors[i].jamsound = doorpool.play_stationary(find_sound("sounds/"+soundpack+"/objects/doors/"+doors[i].doortype+"/*jam*"), false);
+doors[i].jamsound = doorpool.play_stationary(get_sound("objects/doors/"+doors[i].doortype+"/*jam*"), false);
                 speak("The door is jammed! Something dangerous is nearby!");
                 return;
             }
@@ -69,7 +69,7 @@ int total_keys_available = collected_keys + inv_key_count;
 if (total_keys_available < doors[i].required_keys)
 {
 temp.destroy_sound(doors[i].locksound);
-doors[i].locksound = temp.play_stationary(find_sound("sounds/"+soundpack+"/objects/doors/"+doors[i].doortype+"/*deny*"), false);
+doors[i].locksound = temp.play_stationary(get_sound("objects/doors/"+doors[i].doortype+"/*deny*"), false);
 speak("This door is locked. You need " + doors[i].required_keys + " more keys to unlock it.");
 return;
 }
@@ -87,8 +87,7 @@ string keyname = keytypes[j];
 if (item_exists(keyname) > 0)
 {
 give(keyname, -1);
-string path = "sounds/" + soundpack + "/equipments/items/normal/keys/" + cat + "/" + keyname + "/*use*";
-doors[i].unlocksound = doorpool.play_stationary(find_sound(path), false);
+doors[i].unlocksound = doorpool.play_stationary(get_sound("equipments/items/normal/keys/" + cat + "/" + keyname + "/*use*"), false);
 used_key = true;
 break;
 }
@@ -100,13 +99,13 @@ if (!used_key)
 if (endless && collected_keys >= doors[i].required_keys)
 {
 collected_keys -= doors[i].required_keys;
-doors[i].unlocksound = doorpool.play_stationary(find_sound("sounds/"+soundpack+"/objects/doors/"+doors[i].doortype+"/*grant*"), false);
+doors[i].unlocksound = doorpool.play_stationary(get_sound("objects/doors/"+doors[i].doortype+"/*grant*"), false);
 used_key = true;
 }
 else
 {
 temp.destroy_sound(doors[i].locksound);
-doors[i].locksound = temp.play_stationary(find_sound("sounds/"+soundpack+"/objects/doors/"+doors[i].doortype+"/*deny*"), false);
+doors[i].locksound = temp.play_stationary(get_sound("objects/doors/"+doors[i].doortype+"/*deny*"), false);
 speak("You have enough keys, but none in your inventory to unlock the door.");
 return;
 }
@@ -120,8 +119,8 @@ return;
                 wait(500);
                 doormove = true;
                 doors[i].is_moving = true;
-                doors[i].opensound = doorpool.play_stationary(find_sound("sounds/"+soundpack+"/objects/doors/"+doors[i].doortype+"/*open*"), false);
-                doors[i].movesound = doorpool.play_stationary(find_sound("sounds/"+soundpack+"/objects/doors/"+doors[i].doortype+"/*move*"), true);
+                doors[i].opensound = doorpool.play_stationary(get_sound("objects/doors/"+doors[i].doortype+"/*open*"), false);
+                doors[i].movesound = doorpool.play_stationary(get_sound("objects/doors/"+doors[i].doortype+"/*move*"), true);
             }
         }
     }
@@ -157,7 +156,7 @@ me.y--;
 if(me.x==doors[i].endx and me.y==doors[i].endy)
 {
 doorpool.destroy_sound(doors[i].movesound);
-doors[i].closesound=doorpool.play_stationary(find_sound("sounds/"+soundpack+"/objects/doors/"+doors[i].doortype+"/*close*"),false);
+doors[i].closesound=doorpool.play_stationary(get_sound("objects/doors/"+doors[i].doortype+"/*close*"),false);
 doormove=false;
 doors[i].is_moving=false;
 clear_inv();
@@ -190,7 +189,7 @@ if (gamcopy == true)
         if (choice == "copy")
         {
             clipboard_copy_text(statsummary);
-            if (copexpsounds == true) dlgplay(find_sound("sounds/"+soundpack+"/menus/"+menupack+"/*copy*"), false);
+            if (copexpsounds == true) dlgplay(get_sound("menus/"+menupack+"/*copy*"), false);
             dlgmessage_return("All game session results copied to your clipboard.");
         }
         else if (choice == "export")
@@ -198,7 +197,7 @@ if (gamcopy == true)
             poastfile.open(DIRECTORY_APPDATA+"tsatria03/ToyMania/stats/player_posts.txt", "w");
             poastfile.write(statsummary);
             poastfile.close();
-            if (copexpsounds == true) dlgplay(find_sound("sounds/"+soundpack+"/menus/"+menupack+"/*export*"), false);
+            if (copexpsounds == true) dlgplay(get_sound("menus/"+menupack+"/*export*"), false);
             dlgmessage_return("All game session results exported to stats/player_posts.txt.");
         }
     }

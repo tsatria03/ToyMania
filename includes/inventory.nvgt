@@ -28,7 +28,7 @@ p.destroy_sound(invslot);
 speak("empty");
 return;
 }
-invslot = p.play_stationary(find_sound("sounds/" + soundpack + "/misc/player/*inv*"), false);
+invslot = p.play_stationary(get_sound("misc/player/*inv*"), false);
 if (dir == 1)
 invpos += 1;
 else
@@ -108,7 +108,7 @@ if (missing_ammo == 0)
 speak("You already have enough reserved ammo for this weapon.");
 return;
 }
-itemslot = p.play_stationary(find_sound("sounds/"+soundpack+"/equipments/items/endless/"+objcat+"/"+objname+"/*use*"), false);
+itemslot = p.play_stationary(get_sound("equipments/items/endless/"+objcat+"/"+objname+"/*use*"), false);
 give("ammo_pack", -1);
 double ammo_gained = min(random(5, 10), missing_ammo);
 reserved_ammo += ammo_gained;
@@ -117,7 +117,7 @@ return;
 }
 else if (objname == "stun_dart")
 {
-itemslot = p.play_stationary(find_sound("sounds/"+soundpack+"/equipments/items/endless/"+objcat+"/"+objname+"/*fire*"), false);
+itemslot = p.play_stationary(get_sound("equipments/items/endless/"+objcat+"/"+objname+"/*fire*"), false);
 give("stun_dart", -1);
 spawn_dart(me.x, me.y, 5, 10, random(5, 10), 30, facing);
 return;
@@ -129,8 +129,8 @@ if (health >= maxhealth)
 speak("You don't need to use this!");
 return;
 }
-itemslot = p.play_stationary(find_sound("sounds/"+soundpack+"/equipments/items/endless/"+objcat+"/"+objname+"/*use*"), false);
-itemslot = p.play_stationary(find_sound("sounds/"+soundpack+"/misc/player/*heal*"), false);
+itemslot = p.play_stationary(get_sound("equipments/items/endless/"+objcat+"/"+objname+"/*use*"), false);
+itemslot = p.play_stationary(get_sound("misc/player/*heal*"), false);
 give("health_potion", -1);
 double heal_percent = random(5, 10);
 double heal_amount = maxhealth * (heal_percent / 100.0);
@@ -140,15 +140,15 @@ return;
 }
 else if (objname == "player_teleporter")
 {
-itemslot = p.play_stationary(find_sound("sounds/"+soundpack+"/equipments/items/endless/"+objcat+"/"+objname+"/*use*"), false);
+itemslot = p.play_stationary(get_sound("equipments/items/endless/"+objcat+"/"+objname+"/*use*"), false);
 give("player_teleporter", -1);
 me.x = random(0, maxx);
 me.y = random(0, maxy);
 speak("Moved to " + me.x + ", " + me.y + ".");
 return;
 }
-string path = "sounds/" + soundpack + "/equipments/items/endless/" + objcat + "/" + objname + "/";
-string usesnd = find_sound(path + "*use*");
+string path = "equipments/items/endless/" + objcat + "/" + objname + "/";
+string usesnd = get_sound(path + "*use*");
 if (usesnd != "")
 {
 itemslot = p.play_stationary(usesnd, false);

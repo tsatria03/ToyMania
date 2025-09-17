@@ -26,16 +26,16 @@ bosstime=sp;
 teltime=tlt;
 healtime=hlt;
 bosstype=bt;
-bossesound=bosspool.play_2d(find_sound("sounds/"+soundpack+"/npc/bosses/"+bosstype+"/*taunt*"), me.x, me.y, bossx, bossy, true);
+bossesound=bosspool.play_2d(get_sound("npc/bosses/"+bosstype+"/*taunt*"), me.x, me.y, bossx, bossy, true);
 }
 void regenerate_bosshp(int hp)
 {
-healsound=bosspool.play_2d(find_sound("sounds/"+soundpack+"/npc/bosses/"+bosstype+"/*heal*"), me.x, me.y, bossx, bossy, false);
+healsound=bosspool.play_2d(get_sound("npc/bosses/"+bosstype+"/*heal*"), me.x, me.y, bossx, bossy, false);
 bosshealth+=hp;
 }
 void teleport_boss(int bx,int by)
 {
-telsound=bosspool.play_2d(find_sound("sounds/"+soundpack+"/npc/bosses/"+bosstype+"/*tel*"), me.x, me.y, bossx, bossy, false);
+telsound=bosspool.play_2d(get_sound("npc/bosses/"+bosstype+"/*tel*"), me.x, me.y, bossx, bossy, false);
 bossx=bx;
 bossy=by;
 }
@@ -51,14 +51,14 @@ bosses[i].healtimer.restart();
 }
 if(bosses[i].launchtimer.elapsed>=bosses[i].launchtime and bosses[i].launchable==true)
 {
-bosses[i].launchsound=bosspool.play_2d(find_sound("sounds/"+soundpack+"/npc/bosses/"+bosses[i].bosstype+"/*launch*"), me.x, me.y, bosses[i].bossx, bosses[i].bossy, false);
+bosses[i].launchsound=bosspool.play_2d(get_sound("npc/bosses/"+bosses[i].bosstype+"/*launch*"), me.x, me.y, bosses[i].bossx, bosses[i].bossy, false);
 string[] gardtype=find_directories("sounds/"+soundpack+"/npc/guards/*");
 spawn_gard(bosses[i].bossx-random(1,5), bosses[i].bossy-random(1,5), random(30,60), random(30,60), random(50,500), random(50,500), random_string(gardtype));
 bosses[i].launchtimer.restart();
 }
 if(bosses[i].teltimer.elapsed>=bosses[i].teltime and bosses[i].telable==true)
 {
-bosses[i].telsound=bosspool.play_2d(find_sound("sounds/"+soundpack+"/npc/bosses/"+bosses[i].bosstype+"/*tel*"), me.x, me.y, bosses[i].bossx, bosses[i].bossy, false);
+bosses[i].telsound=bosspool.play_2d(get_sound("npc/bosses/"+bosses[i].bosstype+"/*tel*"), me.x, me.y, bosses[i].bossx, bosses[i].bossy, false);
 bosses[i].teleport_boss(random(0, me.x-random(1,5)), random(0, me.y-random(1,5)));
 bosspool.update_sound_2d(bosses[i].bossesound,bosses[i].bossx,bosses[i].bossy);
 bosspool.update_sound_2d(bosses[i].telsound,bosses[i].bossx,bosses[i].bossy);
@@ -66,7 +66,7 @@ bosses[i].teltimer.restart();
 }
 if(bosses[i].bosstimer.elapsed>=bosses[i].bosstime)
 {
-bosses[i].stepsound=bosspool.play_2d(find_sound("sounds/"+soundpack+"/npc/bosses/"+bosses[i].bosstype+"/*step*"),me.x,me.y,bosses[i].bossx,bosses[i].bossy,false);
+bosses[i].stepsound=bosspool.play_2d(get_sound("npc/bosses/"+bosses[i].bosstype+"/*step*"),me.x,me.y,bosses[i].bossx,bosses[i].bossy,false);
 bosspool.update_sound_2d(bosses[i].bossesound,bosses[i].bossx,bosses[i].bossy);
 bosses[i].bosstimer.restart();
 if(bosses[i].bossx<me.x and bosses[i].moveable==true)
@@ -88,23 +88,23 @@ bosses[i].bossy--;
 }
 if(me.x==bosses[i].bossx and me.y==bosses[i].bossy and bosses[i].firetimer.elapsed>=bosses[i].firetime and bosses[i].fireable==true and doormove == false)
 {
-bosses[i].wepsound=bosspool.play_2d(find_sound("sounds/"+soundpack+"/npc/bosses/"+bosses[i].bosstype+"/*hit*"), me.x, me.y, bosses[i].bossx, bosses[i].bossy, false);
-painslot=p.play_stationary(find_sound("sounds/"+soundpack+"/misc/player/*hurt*"), false);
+bosses[i].wepsound=bosspool.play_2d(get_sound("npc/bosses/"+bosses[i].bosstype+"/*hit*"), me.x, me.y, bosses[i].bossx, bosses[i].bossy, false);
+painslot=p.play_stationary(get_sound("misc/player/*hurt*"), false);
 health-=bosses[i].damage;
 bosses[i].firetimer.restart();
     if (isReloading)
     {
         isReloading = false;
 p.destroy_sound(weaponslot);
-        weaponslot=p.play_stationary(find_sound("sounds/"+soundpack+"/equipments/weapons/"+weapontype+"/"+weapontype2+"/*fail*"), false);
+        weaponslot=p.play_stationary(get_sound("equipments/weapons/"+weapontype+"/"+weapontype2+"/*fail*"), false);
     }
 }
 if(bosses[i].bosshealth<=0)
 {
 bosspool.destroy_sound(bosses[i].hurtsound);
 bosspool.destroy_sound(bosses[i].bossesound);
-bosses[i].defsound=bosspool.play_2d(find_sound("sounds/"+soundpack+"/npc/bosses/"+bosses[i].bosstype+"/*death*"), me.x, me.y, bosses[i].bossx, bosses[i].bossy, false);
-spawn_bodyfall(bosses[i].bossx, bosses[i].bossy, random(500,1000), find_sound("sounds/"+soundpack+"/npc/bosses/"+bosses[i].bosstype+"/*fall*"));
+bosses[i].defsound=bosspool.play_2d(get_sound("npc/bosses/"+bosses[i].bosstype+"/*death*"), me.x, me.y, bosses[i].bossx, bosses[i].bossy, false);
+spawn_bodyfall(bosses[i].bossx, bosses[i].bossy, random(500,1000), get_sound("npc/bosses/"+bosses[i].bosstype+"/*fall*"));
 bosses.remove_at(i);
 bossdefeated = true;
 return;

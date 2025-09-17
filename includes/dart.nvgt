@@ -53,7 +53,7 @@ for(uint i1=0; i1<cars.length(); i1++)
 {
 if (absolute(cars[i1].carx - darts[i].dartx) <= 2 && absolute(cars[i1].cary - darts[i].darty) <= 2)
 {
-dartpool.play_2d(find_sound("sounds/"+soundpack+"/equipments/items/endless/common/stun_dart/*hit*"), me.x, me.y, cars[i1].carx, cars[i1].cary, false);
+dartpool.play_2d(get_sound("equipments/items/endless/common/stun_dart/*hit*"), me.x, me.y, cars[i1].carx, cars[i1].cary, false);
 int stundir=random(1500,3000);
 stun_target("car", cars[i1].cartype, darts[i].damage, stundir);
 darts.remove_at(i);
@@ -64,7 +64,7 @@ for(uint i2=0; i2<gards.length(); i2++)
 {
 if (absolute(gards[i2].gardx - darts[i].dartx) <= 2 && absolute(gards[i2].gardy - darts[i].darty) <= 2)
 {
-dartpool.play_2d(find_sound("sounds/"+soundpack+"/equipments/items/endless/common/stun_dart/*hit*"), me.x, me.y, gards[i2].gardx, gards[i2].gardy, false);
+dartpool.play_2d(get_sound("equipments/items/endless/common/stun_dart/*hit*"), me.x, me.y, gards[i2].gardx, gards[i2].gardy, false);
 int stundir2=random(1500,3000);
 stun_target("gard", gards[i2].gardtype, darts[i].damage, stundir2);
 darts.remove_at(i);
@@ -84,7 +84,7 @@ if(cars[i].cartype==id)
 cars[i].stuntimer.restart();
 cars[i].stunned=true;
 cars[i].stundir = st;
-cars[i].hurtsound = carpool.play_2d(find_sound("sounds/"+soundpack+"/npc/cars/"+cars[i].cartype+"/*hurt*"), me.x, me.y, cars[i].carx, cars[i].cary, false);
+cars[i].hurtsound = carpool.play_2d(get_sound("npc/cars/"+cars[i].cartype+"/*hurt*"), me.x, me.y, cars[i].carx, cars[i].cary, false);
 cars[i].carhealth-=dmg;
 cars[i].fireable=false;
 cars[i].moveable=false;
@@ -101,7 +101,7 @@ if(gards[i].gardtype==id)
 gards[i].stuntimer.restart();
 gards[i].stunned=true;
 gards[i].stundir = st;
-gards[i].hurtsound = gardpool.play_2d(find_sound("sounds/"+soundpack+"/npc/guards/"+gards[i].gardtype+"/*hurt*"), me.x, me.y, gards[i].gardx, gards[i].gardy, false);
+gards[i].hurtsound = gardpool.play_2d(get_sound("npc/guards/"+gards[i].gardtype+"/*hurt*"), me.x, me.y, gards[i].gardx, gards[i].gardy, false);
 gards[i].gardhealth-=dmg;
 gards[i].fireable=false;
 gards[i].moveable=false;

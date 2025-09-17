@@ -362,7 +362,7 @@ void setupmenu(bool music_added = true)
 {
 if (music_added)
 {
-m.add_music(find_sound("sounds/"+soundpack+"/misc/ui/menus/"+menupack+"/*music*"));
+m.add_music(get_sound("misc/ui/menus/"+menupack+"/*music*"));
 } else
 {
 m.add_music("");
@@ -371,10 +371,10 @@ m.reset();
 m.automatic_intro = true;
 m.focus_first_item = false;
 m.wrap = menuwrap;
-m.click_sound=find_sound("sounds/"+soundpack+"/misc/ui/menus/"+menupack+"/*click*");
-m.close_sound=find_sound("sounds/"+soundpack+"/misc/ui/menus/"+menupack+"/*close*");
-m.edge_sound=find_sound("sounds/"+soundpack+"/misc/ui/menus/"+menupack+"/*edge*");
-m.enter_sound=find_sound("sounds/"+soundpack+"/misc/ui/menus/"+menupack+"/*enter*");
-m.open_sound=find_sound("sounds/"+soundpack+"/misc/ui/menus/"+menupack+"/*open*");
-m.wrap_sound=find_sound("sounds/"+soundpack+"/misc/ui/menus/"+menupack+"/*wrap*");
+m.click_sound=get_sound("misc/ui/menus/"+menupack+"/*click*");
+m.close_sound=get_sound("misc/ui/menus/"+menupack+"/*close*");
+m.edge_sound=get_sound("misc/ui/menus/"+menupack+"/*edge*");
+m.enter_sound=get_sound("misc/ui/menus/"+menupack+"/*enter*");
+m.open_sound=get_sound("misc/ui/menus/"+menupack+"/*open*");
+m.wrap_sound=get_sound("misc/ui/menus/"+menupack+"/*wrap*");
 }

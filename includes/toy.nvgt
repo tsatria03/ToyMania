@@ -17,7 +17,7 @@ timeout=tt;
 toytype=tot;
 toytype2=tot2;
 autobreak=br;
-toysound=toypool.play_2d(find_sound("sounds/"+soundpack+"/equipments/items/normal/toys/"+toytype+"/"+toytype2+"/*loop*"), me.x, me.y, tx, ty, true);
+toysound=toypool.play_2d(get_sound("equipments/items/normal/toys/"+toytype+"/"+toytype2+"/*loop*"), me.x, me.y, tx, ty, true);
 toypool.update_sound_2d(toysound,tx,ty);
 }
 }
@@ -28,17 +28,17 @@ for(uint i=0; i<toys.length(); i++)
 if(toys[i].timeout_timer.elapsed>=toys[i].timeout and toys[i].autobreak==true)
 {
 toypool.destroy_sound(toys[i].toysound);
-toys[i].hurtsound=toypool.play_2d(find_sound("sounds/"+soundpack+"/equipments/items/normal/toys/"+toys[i].toytype+"/"+toys[i].toytype2+"/*break*"), me.x, me.y, toys[i].tx, toys[i].ty, false);
+toys[i].hurtsound=toypool.play_2d(get_sound("equipments/items/normal/toys/"+toys[i].toytype+"/"+toys[i].toytype2+"/*break*"), me.x, me.y, toys[i].tx, toys[i].ty, false);
 toys.remove_at(i);
 return;
 }
 if(absolute(me.x - toys[i].tx) <= 2 and absolute(me.y - toys[i].ty) <= 2 and doormove == false)
 {
 toypool.destroy_sound(toys[i].toysound);
-toys[i].getsound=toypool.play_stationary(find_sound("sounds/"+soundpack+"/equipments/items/normal/toys/"+toys[i].toytype+"/"+toys[i].toytype2+"/*get*"),false);
+toys[i].getsound=toypool.play_stationary(get_sound("equipments/items/normal/toys/"+toys[i].toytype+"/"+toys[i].toytype2+"/*get*"),false);
 if (!endless)
 {
-if (play_item_gives==true) p.play_stationary(find_sound("sounds/" + soundpack + "/misc/player/*give*"), false);
+if (play_item_gives==true) p.play_stationary(get_sound("misc/player/*give*"), false);
 give(toys[i].toytype2, 1);
 if (speak_item_collects==true) speak(toys[i].toytype2);
 }

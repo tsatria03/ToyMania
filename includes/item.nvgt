@@ -17,8 +17,8 @@ timeout=tt;
 objtype=ot;
 objtype2=ot2;
 autobreak=br;
-spawnsound=objpool.play_2d(find_sound("sounds/"+soundpack+"/equipments/items/endless/"+objtype+"/"+objtype2+"/*spawn*"), me.x, me.y, itx, ity, false);
-objsound=objpool.play_2d(find_sound("sounds/"+soundpack+"/equipments/items/endless/"+objtype+"/"+objtype2+"/*loop*"), me.x, me.y, itx, ity, true);
+spawnsound=objpool.play_2d(get_sound("equipments/items/endless/"+objtype+"/"+objtype2+"/*spawn*"), me.x, me.y, itx, ity, false);
+objsound=objpool.play_2d(get_sound("equipments/items/endless/"+objtype+"/"+objtype2+"/*loop*"), me.x, me.y, itx, ity, true);
 objpool.update_sound_2d(objsound,itx,ity);
 }
 }
@@ -29,17 +29,17 @@ for(uint i=0; i<objs.length(); i++)
 if(objs[i].timeout_timer.elapsed>=objs[i].timeout and objs[i].autobreak==true)
 {
 objpool.destroy_sound(objs[i].objsound);
-objs[i].hurtsound=objpool.play_2d(find_sound("sounds/"+soundpack+"/equipments/items/endless/"+objs[i].objtype+"/"+objs[i].objtype2+"/*break*"), me.x, me.y, objs[i].itx, objs[i].ity, false);
+objs[i].hurtsound=objpool.play_2d(get_sound("equipments/items/endless/"+objs[i].objtype+"/"+objs[i].objtype2+"/*break*"), me.x, me.y, objs[i].itx, objs[i].ity, false);
 objs.remove_at(i);
 return;
 }
 if(absolute(me.x - objs[i].itx) <= 2 and absolute(me.y - objs[i].ity) <= 2 and doormove == false)
 {
 objpool.destroy_sound(objs[i].objsound);
-objs[i].getsound=objpool.play_stationary(find_sound("sounds/"+soundpack+"/equipments/items/endless/"+objs[i].objtype+"/"+objs[i].objtype2+"/*get*"),false);
+objs[i].getsound=objpool.play_stationary(get_sound("equipments/items/endless/"+objs[i].objtype+"/"+objs[i].objtype2+"/*get*"),false);
 if (endless)
 {
-if (play_item_gives==true) p.play_stationary(find_sound("sounds/" + soundpack + "/misc/player/*give*"), false);
+if (play_item_gives==true) p.play_stationary(get_sound("misc/player/*give*"), false);
 give(objs[i].objtype2, 1);
 if (speak_item_collects==true) speak(objs[i].objtype2);
 }
