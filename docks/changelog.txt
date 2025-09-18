@@ -1,4 +1,7 @@
 New in 4.5.
+Updated the readme file with total calculation summeries of sounds found in each section of the sound pack documentation.
+Updated the readme file with added documentation for creating sound packs in the game.
+Converted the rest of the sound categories to use the new sound pack algorithm in the learn game sounds menu.
 Addressed an issue where your inventory wasn't being cleared at the start of a level upon failing the normal game mode.
 New in 4.4.
 Resolved an issue where game level elements wouldn't spawn in the endless mode despite more than a minute of playtime occuring.

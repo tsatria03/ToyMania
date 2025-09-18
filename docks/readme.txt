@@ -56,3 +56,52 @@ Spacebar: Fires the currently drawn weapon, if pressed/held down.
 Enter: Interacts with various game elements, such as doors, dialogs, and lots of other menu items, if pressed/held down.
 Shift plus enter: Uses the current inventory item when it's focused, if pressed/held down.
 Escape: Exits the current game session, and returns back to the main menu, if pressed/held down.
+
+Creating sound packs.
+This game allows you to create customizeable sound packs that you can use in various situations.
+
+Character sound listing: 8 total.
+buy.ogg: This sound is played when your character purchases upgrades.
+death.ogg: This sound is played when your character dies.
+heal.ogg: This sound is played When your character is healing.
+hurt.ogg: This sound is played when your character gets hurt.
+inv.ogg: This sound is played when your character cycles through there inventory.
+land.ogg: This sound is played when your character lands on a platform.
+lev.ogg: This sound is played when your character levels up.
+turn.ogg: This sound is played when your character turns on the spot.
+
+Item sound listing: 5 total.
+break.ogg: This sound is played when an item is being broken.
+fire.ogg: This sound is played when an item is being used.
+get.ogg: This sound is played when an item is being grabbed.
+hit.ogg: This sound is played when an item is used.
+loop.ogg: This sound is played when an item is being looped.
+
+Weapon sound listing: 6 total.
+draw.ogg: This sound is played when a weapon is being drawn.
+empty.ogg: This sound is played when a non melee weapon is being emptyed.
+fire.ogg: This sound is played when a weapon is being used.
+hit.ogg: This sound is played when a weapon is used.
+reload.ogg: This sound is played when a non melee weapon is being reloaded with ammo.
+shell.ogg: This sound is played when a non melee weapon dropps ammo shells.
+
+Menu sound listing: 7 total.
+click.ogg: This sound is played when you go through menu items.
+close.ogg: This sound is played when a menu is being closed.
+edge.ogg: This sound is played when a menu has reached a boundary.
+enter.ogg: This sound is played when a menu item has been selected.
+music.ogg: This sound is played when a menu has music.
+open.ogg: This sound is played when a menu is being opened.
+speaker.ogg: This sound is played when a menu has a speaker test option.
+
+Npc sound listing: 10 total.
+death.ogg: This sound is played when an entity dies.
+heal.ogg: This sound is played when a boss enemy is healing.
+hit.ogg: This sound is played when an entity hits your character.
+hurt.ogg: This sound is played when an entity gets hurt.
+launch.ogg: This sound is played when an entity launches another entity or object.
+loop.ogg: This sound is played when a projectile is being looped.
+spawn.ogg: This sound is played when an entity is being spawned.
+step.ogg: This sound is played when an entity is moving.
+taunt.ogg: This sound is played when an entity is taunting your character.
+tel.ogg: This sound is played when a boss enemy teleports on the x or y axes of a map.

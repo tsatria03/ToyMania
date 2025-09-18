@@ -10,7 +10,7 @@ return false;
 if (key_repeating(KEY_C) and dlgcoppy==true)
 {
 temp.destroy_all();
-temp.play_stationary(get_sound("misc/ui/dialogs/"+dlgpack+"/*copy*"), false);
+temp.play_stationary(get_sound("ui/dialogs/"+dlgpack+"/*copy*"), false);
 string clean_message = string_replace(message, " Press enter or space to continue.", "", true);
 clipboard_copy_text(clean_message);
 speak("Text copied");
@@ -34,25 +34,25 @@ return false;
 }
 void dlgmessage(string messages)
 {
-temp.play_stationary(get_sound("misc/ui/dialogs/"+dlgpack+"/*open*"), false);
+temp.play_stationary(get_sound("ui/dialogs/"+dlgpack+"/*open*"), false);
 string[] d = string_split(messages, "\r\n", true);
 bool escaped = dlg(d[0]);
 if (escaped)
 {
-temp.play_stationary(get_sound("misc/ui/dialogs/"+dlgpack+"/*close*"), false);
+temp.play_stationary(get_sound("ui/dialogs/"+dlgpack+"/*close*"), false);
 return;
 }
 for (uint i = 1; i < d.length(); i++)
 {
-temp.play_stationary(get_sound("misc/ui/dialogs/"+dlgpack+"/*scroll*"), false);
+temp.play_stationary(get_sound("ui/dialogs/"+dlgpack+"/*scroll*"), false);
 escaped = dlg(d[i]);
 if (escaped)
 {
-temp.play_stationary(get_sound("misc/ui/dialogs/"+dlgpack+"/*close*"), false);
+temp.play_stationary(get_sound("ui/dialogs/"+dlgpack+"/*close*"), false);
 return;
 }
 }
-temp.play_stationary(get_sound("misc/ui/dialogs/"+dlgpack+"/*close*"), false);
+temp.play_stationary(get_sound("ui/dialogs/"+dlgpack+"/*close*"), false);
 }
 void dlgmessage_return(string msg)
 {
