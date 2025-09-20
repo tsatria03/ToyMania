@@ -1,3 +1,4 @@
+#pragma embed "data/docks.tmg"
 #include"includes/includes.nvgt"
 void main()
 {
@@ -37,7 +38,7 @@ void getver()
 {
 if (!dockpack_loaded)
 {
-if (!dockpack.open("data/docks.tmg", PACK_OPEN_MODE_READ))
+if (!dockpack.open("*", PACK_OPEN_MODE_READ))
 {
 alert("Error", "Could not open the docks.tmg file!");
 return;

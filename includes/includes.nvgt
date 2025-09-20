@@ -1,5 +1,4 @@
 #pragma asset sounds
-#pragma document data
 #pragma plugin nvgt_curl
 
 #include"bgt_compat.nvgt"

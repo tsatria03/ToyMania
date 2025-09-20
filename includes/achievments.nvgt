@@ -9,6 +9,7 @@ value = int(value * multiplier);
 }
 return result;
 }
+
 class AchievementTracker
 {
 string name;

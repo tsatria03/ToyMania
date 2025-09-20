@@ -58,7 +58,22 @@ Shift plus enter: Uses the current inventory item when it's focused, if pressed/
 Escape: Exits the current game session, and returns back to the main menu, if pressed/held down.
 
 Creating sound packs.
-This game allows you to create customizeable sound packs that you can use in various situations.
+This game allows you to create customizable sound packs that can be used to change the way the game sounds in various situations. These sound packs can include new dialog voices, menu sounds, toy collection sounds, weapon sounds, background ambiences, and much more.
+Each created sound pack must be placed inside its own folder within the main sounds/ directory. For example, if you're making a winter-themed sound pack, you would create a folder named sounds/winter.
+You could also have folders like sounds/default, sounds/summer, or any other name you like. Inside each sound pack folder, you can include specific subfolders that match the structure used by the game.
+These include folders such as ui/dialogs, ui/menus, npc/bosses, npc/guards, and much more. The game will automatically scan for sounds in these folders and use them when appropriate.
+You can change the sound pack at any time using the sound settings menu from within the game. This menu also lets you choose different dialog and menu themes from within a selected sound pack, giving you even more control over how the game will sound.
+One thing to note is that not all sound folders are modifiable in the same way. Some parts of the game are hardcoded and intentionally do not support custom categories or subfolders.
+This is to maintain the structure, balance, and intended design of the game. For example, the equipments/weapons/artillery folder only supports two hardcoded ammo-based weapons.
+Adding more weapons to that folder will be ignored by the game. Similarly, the equipments/weapons/melee folder supports only eight short to long-ranged melee weapons.
+These are the only weapons the game recognizes, and attempting to add more will have no effect on the game. The objects/platforms folder is also limited in that only three platform types exist in the game, and no new ones can be added.
+Likewise, the folders objects/healers and objects/sources are hardcoded for specific game events, and while you can replace the sound files inside them, you can't create new categories or folders under them. The other restricted folders include misc/player, misc/game, and misc/store.
+These contain system sounds for events like game start, buying items, player death, and so on. You can swap out the sounds in these folders, but again, adding new folders or custom categories here won’t work.
+The equipments/items/endless folder is also not expandable. It only supports predefined items used in endless mode, and the game will ignore any new subfolders you try to add here.
+On the other hand, several of the other folders are fully modifiable and designed to support custom content. For example, you can create your own folders under npc/bosses, npc/guards, and npc/cars to add new voice packs or sound styles for these characters.
+You can also create new subfolders in ui/dialogs and ui/menus to build your own dialog or menu sound themes. Additionally, the folders equipments/items/normal/keys/common, equipments/items/normal/keys/other, equipments/items/normal/toys/common, and equipments/items/normal/toys/other support the creation of new folders.
+This means you can add your own toy and key sounds freely in these locations, and the game will detect them automatically. This game gives you a great deal of freedom when customizing the audio experience, but it's balanced with intentional restrictions to protect the core structure of the game.
+The game is not intended to be a realistic map builder. Instead, global sound packs give you a safe, creative way to personalize your experience without disrupting the game’s balance or it's core logic.
 
 Character sound listing: 8 total.
 buy.ogg: This sound is played when your character purchases upgrades.

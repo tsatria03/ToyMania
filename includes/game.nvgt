@@ -384,14 +384,14 @@ speak("You have "+round(health / maxhealth * 100, 0) + " percent HP remaining.")
 }
 if(autorun)
 {
-    if (alt_is_down() or control_is_down())
+if (alt_is_down() or control_is_down())
         movetime = walktime;
     else
         movetime = runtime;
 }
 else
 {
-    if (alt_is_down() or control_is_down())
+if (!alt_is_down() or !control_is_down())
         movetime = runtime;
     else
         movetime = walktime;

@@ -33,6 +33,17 @@ l.load("shell32.dll");
 dictionary@ d = l.call("bool IsUserAnAdmin()");
 return bool(d["0"]);
 }
+bool array_contains(const string[]& arr, const string& value)
+{
+for (uint i = 0; i < arr.length(); i++)
+{
+if (arr[i] == value)
+{
+return true;
+}
+}
+return false;
+}
 bool string_starts_with(const string& in str, const string& in start)
 {
 if (str.length()>=start.length())
@@ -303,7 +314,7 @@ void dockread(const string&in filename)
 string displayname = string_replace(filename, "docks/", "", true);
 if (!dockpack_loaded)
 {
-if (!dockpack.open("data/docks.tmg", PACK_OPEN_MODE_READ))
+if (!dockpack.open("*", PACK_OPEN_MODE_READ))
 {
 alert("Error", "Could not open the docks.tmg file!");
 docksmenu();
