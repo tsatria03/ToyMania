@@ -1,4 +1,5 @@
 New in 4.5.
+Renamed all of the game modes in the game menu. The endless mode is now refered to endless arcade, and the normal mode is now refered to time trial.
 Made it so your player and store HP gets displayed in actual values, along with it's original percentages in the pause menu.
 Reduced your starting health multiplier based on your current game mode. For example, instead of starting with 5000 HP in normal mode, and 50000 HP in endless mode when the difficulty is set to Chaos, you'll now start with 2000 and 20000 HP respectively.
 Made it so your starting health is now higher based on the difficulty mode you're currently playing. This helps you deal with enemies and objects of the game a bit easier.

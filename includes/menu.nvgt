@@ -101,7 +101,8 @@ gamemenu();
 void gamemenu()
 {
 setupmenu();
-m.add_item("play game", "ty");
+m.add_item("play collector", "ty");
+m.add_item("play defender", "ty2");
 m.add_item("learn game sounds", "gsm");
 m.add_item("read game user guides", "dm");
 m.add_item("view game achievements", "ach");
@@ -120,10 +121,10 @@ mainmenu();
 if (gamem == "ty")
 {
 setupmenu(false);
-m.add_item("Normal. This is a timed based mode where you must collect toys, survive various types of enemies, and defeat the final boss before the store explodes. There is one unlockable door that you must find by collecting all of the required keys to win.", "normal");
-m.add_item("Endless. This mode lets you play for as long as you can survive. The game will get harder over time with no final boss, and just one unlockable door to win. This mode also includes some items that drop from time to time for use during intense enemy fights.", "endless");
+m.add_item("Endless arcade. This mode lets you play for as long as you can survive. The game will get harder over time with no final boss, and just one unlockable door to win. This mode also includes some items that drop from time to time for use during intense enemy fights.", "endless");
+m.add_item("Time trial. This is a timed based mode where you must collect toys, survive various types of enemies, and defeat the final boss before the store explodes. There is one unlockable door that you must find by collecting all of the required keys to win.", "timed");
 m.add_item("Back", "back");
-m.intro_text = "Choose the game mode you'd like to play.";
+m.intro_text = "Choose the game you'd like to play for this mode.";
 int gres = m.run();
 string mode = m.get_selected_item_id();
 if (mode == "back" or gres == -1)
@@ -138,7 +139,7 @@ m.add_item("Hard", "3");
 m.add_item("Insane", "4");
 m.add_item("Chaos", "5");
 m.add_item("Back", "back");
-m.intro_text = "Choose the difficulty for this game mode.";
+m.intro_text = "Choose the difficulty you'd like to use for this mode.";
 int dres = m.run();
 string diffchoice = m.get_selected_item_id();
 if (diffchoice == "back" or dres == -1)
@@ -151,7 +152,7 @@ endless = (mode == "endless");
 if (speak_menu_loading)
 {
 string difficulty_name =(gamemod == 1) ? "Easy" :(gamemod == 2) ? "Medium" :(gamemod == 3) ? "Hard" :(gamemod == 4) ? "Insane" :(gamemod == 5) ? "Chaos" :"unknown";
-speak((endless ? "loading endless: mode " : "loading normal: mode ") + difficulty_name);
+speak((endless ? "loading endless arcade: mode " : "loading time trial: mode ") + difficulty_name);
 }
 m.fade_music();
 dlgplay(get_sound("misc/game/*launch*"));
@@ -164,6 +165,7 @@ killed_gards = 0;
 destroyed_cars = 0;
 moved_steps = 0;
 session_playtime = 0;
+stolen_toys = 0;
 for (uint i = 0; i < achievements.length(); i++)
 {
 if (achievements[i].isSessionBased)
@@ -202,6 +204,41 @@ toydest = false;
 toyspawn = true;
 reset_weapons();
 toygame();
+}
+if (gamem == "ty2")
+{
+setupmenu(false);
+m.add_item("Easy", "1");
+m.add_item("Medium", "2");
+m.add_item("Hard", "3");
+m.add_item("Insane", "4");
+m.add_item("Chaos", "5");
+m.add_item("Back", "back");
+m.intro_text = "Choose the difficulty you'd like to use for this mode.";
+int dres = m.run();
+string diffchoice = m.get_selected_item_id();
+if (diffchoice == "back" or dres == -1)
+{
+gamemenu();
+return;
+}
+gamemod = string_to_int(diffchoice);
+if (speak_menu_loading)
+{
+string difficulty_name =(gamemod == 1) ? "Easy" :(gamemod == 2) ? "Medium" :(gamemod == 3) ? "Hard" :(gamemod == 4) ? "Insane" :(gamemod == 5) ? "Chaos" :"unknown";
+speak("loading " + difficulty_name);
+}
+m.fade_music();
+dlgplay(get_sound("misc/game/*launch*"));
+stolen_toys = 0;
+gametimer.restart();
+clear_inv();
+me.x=50;
+me.y=50;
+maxx=50;
+maxy=50;
+reset_weapons();
+//toygame2();
 }
 if (gamem == "gsm")
 {
@@ -827,6 +864,7 @@ collected_toys = 0;
             destroyed_cars = 0;
             moved_steps = 0;
             session_playtime = 0;
+stolen_toys = 0;
             for (uint i = 0; i < achievements.length(); i++)
 {
                 if (achievements[i].isSessionBased)

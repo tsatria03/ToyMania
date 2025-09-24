@@ -82,6 +82,7 @@ destroyed_cars=0;
 killed_gards=0;
 moved_steps=0;
 session_playtime=0;
+stolen_toys = 0;
 total_collected_toys=0;
 total_collected_keys=0;
 total_killed_gards=0;

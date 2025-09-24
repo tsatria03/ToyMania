@@ -95,3 +95,96 @@ gardpool.destroy_sound(gards[i].gardsound);
 }
 gards.resize(0);
 }
+
+theif@[] theifs(0);
+class theif
+{
+bool moveable = true;
+bool moveable2 = true;
+bool stunned = false;
+int theifx;
+int theify;
+int theifhealth;
+int theiftime;
+int target = -1;
+int defsound;
+int hurtsound;
+int theifsound;
+int stepsound;
+int stundir;
+string theiftype;
+timer theiftimer;
+timer stuntimer;
+theif(int thx, int thy, int hp, int sp, string tht)
+{
+theifx = thx;
+theify = thy;
+theifhealth = hp;
+theiftime = sp;
+theiftype = tht;
+theifsound = theifpool.play_2d(get_sound("npc/theifs/" + theiftype + "/*taunt*"), me.x, me.y, theifx, theify, true);
+}
+};
+void theifloop()
+{
+for (uint i = 0; i < theifs.length(); i++)
+{
+theif@ t = theifs[i];
+if (t.theifhealth <= 0)
+{
+theifpool.destroy_sound(t.hurtsound);
+theifpool.destroy_sound(t.theifsound);
+t.defsound = theifpool.play_2d(get_sound("npc/theifs/" + t.theiftype + "/*death*"), me.x, me.y, t.theifx, t.theify, false);
+spawn_bodyfall(t.theifx, t.theify, random(500, 1000), get_sound("npc/theifs/" + t.theiftype + "/*fall*"));
+theifs.remove_at(i);
+return;
+}
+if (t.theiftimer.elapsed >= t.theiftime)
+{
+t.theiftimer.restart();
+if (t.target == -1 && toys.length() > 0)
+{
+t.target = random(0, toys.length() - 1);
+}
+if (t.target >= 0 && t.target < int(toys.length()))
+{
+int tx = toys[t.target].tx;
+int ty = toys[t.target].ty;
+if (t.moveable || t.moveable2)
+{
+t.stepsound = theifpool.play_2d(get_sound("npc/theifs/" + t.theiftype + "/*step*"), me.x, me.y, t.theifx, t.theify, false);
+}
+theifpool.update_sound_2d(t.theifsound, t.theifx, t.theify);
+if (t.theifx < tx && t.moveable) t.theifx++;
+if (t.theifx > tx && t.moveable) t.theifx--;
+if (t.theify < ty && t.moveable2) t.theify++;
+if (t.theify > ty && t.moveable2) t.theify--;
+if (t.theifx == tx && t.theify == ty && !doormove)
+{
+toys.remove_at(t.target);
+stolen_toys++;
+theifpool.destroy_sound(t.theifsound);
+theifs.remove_at(i);
+if (stolen_toys >= total_toy_stock)
+{
+//do something
+}
+return;
+}
+}
+}
+}
+}
+void spawn_theif(int x, int y, int hp, int theiftime, string theiftype)
+{
+theif th(x, y, hp, theiftime, theiftype);
+theifs.insert_last(th);
+}
+void destroy_all_theifs()
+{
+for (uint i = 0; i < theifs.length(); i++)
+{
+theifpool.destroy_sound(theifs[i].theifsound);
+}
+theifs.resize(0);
+}

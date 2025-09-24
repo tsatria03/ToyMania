@@ -32,6 +32,7 @@ money = 0;
     destroyed_cars = 0;
     moved_steps = 0;
     session_playtime = 0;
+stolen_toys = 0;
     for (uint i = 0; i < achievements.length(); i++)
     {
         if (achievements[i].isSessionBased)
@@ -757,7 +758,7 @@ if (res != -1 && choice == "yes")
 if (speak_menu_loading)
 {
 string difficulty_name =(gamemod == 1) ? "Easy" :(gamemod == 2) ? "Medium" :(gamemod == 3) ? "Hard" :(gamemod == 4) ? "Insane" :(gamemod == 5) ? "Chaos" :"unknown";
-speak((endless ? "loading endless: mode " : "loading normal: mode ") + difficulty_name);
+speak((endless ? "loading endless arcade: mode " : "loading time trial: mode ") + difficulty_name);
 }
     dlgplay(get_sound("misc/game/*launch*"));
 last_level_time = 0;
@@ -769,6 +770,7 @@ money = 0;
     destroyed_cars = 0;
     moved_steps = 0;
     session_playtime = 0;
+stolen_toys = 0;
     for (uint i = 0; i < achievements.length(); i++)
     {
         if (achievements[i].isSessionBased)
