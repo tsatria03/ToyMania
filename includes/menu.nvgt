@@ -152,7 +152,7 @@ endless = (mode == "endless");
 if (speak_menu_loading)
 {
 string difficulty_name =(gamemod == 1) ? "Easy" :(gamemod == 2) ? "Medium" :(gamemod == 3) ? "Hard" :(gamemod == 4) ? "Insane" :(gamemod == 5) ? "Chaos" :"unknown";
-speak((endless ? "loading endless arcade: mode " : "loading time trial: mode ") + difficulty_name);
+speak((endless ? "loading endless arcade: difficulty " : "loading time trial: difficulty ") + difficulty_name);
 }
 m.fade_music();
 dlgplay(get_sound("misc/game/*launch*"));
@@ -165,7 +165,6 @@ killed_gards = 0;
 destroyed_cars = 0;
 moved_steps = 0;
 session_playtime = 0;
-stolen_toys = 0;
 for (uint i = 0; i < achievements.length(); i++)
 {
 if (achievements[i].isSessionBased)
@@ -230,15 +229,17 @@ speak("loading " + difficulty_name);
 }
 m.fade_music();
 dlgplay(get_sound("misc/game/*launch*"));
-stolen_toys = 0;
 gametimer.restart();
 clear_inv();
-me.x=50;
-me.y=50;
+me.x=25;
+me.y=25;
 maxx=50;
 maxy=50;
+store_defense=true;
+theifspawn=true;
+toyspawn=true;
 reset_weapons();
-//toygame2();
+toygame2();
 }
 if (gamem == "gsm")
 {
@@ -864,7 +865,6 @@ collected_toys = 0;
             destroyed_cars = 0;
             moved_steps = 0;
             session_playtime = 0;
-stolen_toys = 0;
             for (uint i = 0; i < achievements.length(); i++)
 {
                 if (achievements[i].isSessionBased)

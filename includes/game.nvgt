@@ -32,7 +32,6 @@ money = 0;
     destroyed_cars = 0;
     moved_steps = 0;
     session_playtime = 0;
-stolen_toys = 0;
     for (uint i = 0; i < achievements.length(); i++)
     {
         if (achievements[i].isSessionBased)
@@ -758,7 +757,7 @@ if (res != -1 && choice == "yes")
 if (speak_menu_loading)
 {
 string difficulty_name =(gamemod == 1) ? "Easy" :(gamemod == 2) ? "Medium" :(gamemod == 3) ? "Hard" :(gamemod == 4) ? "Insane" :(gamemod == 5) ? "Chaos" :"unknown";
-speak((endless ? "loading endless arcade: mode " : "loading time trial: mode ") + difficulty_name);
+speak((endless ? "loading endless arcade: difficulty " : "loading time trial: difficulty ") + difficulty_name);
 }
     dlgplay(get_sound("misc/game/*launch*"));
 last_level_time = 0;
@@ -770,7 +769,6 @@ money = 0;
     destroyed_cars = 0;
     moved_steps = 0;
     session_playtime = 0;
-stolen_toys = 0;
     for (uint i = 0; i < achievements.length(); i++)
     {
         if (achievements[i].isSessionBased)
@@ -806,6 +804,7 @@ carspawn=false;
     objspawn = false;
     toydest = false;
     toyspawn = true;
+reset_weapons();
     toygame();
 }
 mainmenu();
@@ -970,6 +969,291 @@ if (gamcopy == true)
 }
 writedata();
 mainmenu();
+}
+}
+}
+
+void toy_game_input2()
+{
+if (key_repeating(KEY_ESCAPE) and paused==false)
+{
+gametimer.pause();
+    if (quit_menu==true)
+    {
+        setupmenu(false);
+        m.add_item("Yes", "yes");
+        m.add_item("No", "no");
+        m.intro_text = "Are you sure you want to quit the game? You will lose all progress for this current game session.";
+        int res = m.run();
+        string confirm = m.get_selected_item_id();
+        if (res == -1 or confirm == "no")
+        {
+            speak("canceled");
+gametimer.resume();
+            return;
+        }
+    }
+gametimer.resume();
+    fade_multi_pool();
+stolen_toys = 0;
+clear_inv();
+destroy_all_theifs();
+    destroy_all_toys();
+    gametimer.restart();
+me.x=25;
+me.y=25;
+maxx=50;
+maxy=50;
+theifspawn=false;
+    toyspawn = false;
+    mainmenu();
+}
+if (key_pressed(KEY_1) && !paused && current_weapon != "bat")
+{
+draw_weapon("melee", "bat");
+}
+if (key_pressed(KEY_2) && !paused && current_weapon != "boot")
+{
+draw_weapon("melee", "boot");
+}
+if (key_pressed(KEY_3) && !paused && current_weapon != "club")
+{
+draw_weapon("melee", "club");
+}
+if (key_pressed(KEY_4) && !paused && current_weapon != "feat")
+{
+draw_weapon("melee", "feat");
+}
+if (key_pressed(KEY_5) && !paused && current_weapon != "fist")
+{
+draw_weapon("melee", "fist");
+}
+if (key_pressed(KEY_6) && !paused && current_weapon != "hammer")
+{
+draw_weapon("melee", "hammer");
+}
+if (key_pressed(KEY_7) && !paused && current_weapon != "knife")
+{
+draw_weapon("melee", "knife");
+}
+if (key_pressed(KEY_8) && !paused && current_weapon != "laser")
+{
+draw_weapon("melee", "laser");
+}
+if(key_repeating(KEY_TAB) and key_up(KEY_LMENU) and key_up(KEY_RMENU) and paused==false)
+{
+if (shift_is_down())
+cycle_inv(0);
+else
+cycle_inv(1);
+}
+if(key_repeating(KEY_RETURN) and shift_is_down() and usetimer.elapsed>=usetime and paused==false)
+{
+usetimer.restart();
+if (inv.get_keys().length()>0 and invpos<inv.get_size())
+useitem(inv.get_keys()[invpos]);
+else
+speak("No item in focus.");
+}
+if(shift_is_down() and key_repeating(KEY_PRIOR) and alarmvolume!=0 and paused==false)
+{
+alarmvolume+=1;
+alarmpool.update_sound_start_values(alarmslot,0,alarmvolume,alarmpitch);
+speak("alarm "+alarmvolume);
+writepreffs();
+}
+if(shift_is_down() and key_repeating(KEY_NEXT) and alarmvolume!=-50 and paused==false)
+{
+alarmvolume-=1;
+alarmpool.update_sound_start_values(alarmslot,0,alarmvolume,alarmpitch);
+speak("alarm "+alarmvolume);
+writepreffs();
+}
+if(shift_is_down() and key_repeating(KEY_HOME) and heartvolume!=0 and paused==false)
+{
+heartvolume+=1;
+heartpool.update_sound_start_values(heartslot,0,heartvolume,heartpitch);
+speak("heart "+heartvolume);
+writepreffs();
+}
+if(shift_is_down() and key_repeating(KEY_END) and heartvolume!=-50 and paused==false)
+{
+heartvolume-=1;
+heartpool.update_sound_start_values(heartslot,0,heartvolume,heartpitch);
+speak("heart "+heartvolume);
+writepreffs();
+}
+if(key_repeating(KEY_PRIOR) and toymusvolume!=0 and paused==false)
+{
+toymusvolume+=1;
+muspool.update_sound_start_values(toytrackslot,0,toymusvolume,toymuspitch);
+speak("track "+toymusvolume);
+writepreffs();
+}
+if(key_repeating(KEY_NEXT) and toymusvolume!=-50 and paused==false)
+{
+toymusvolume-=1;
+muspool.update_sound_start_values(toytrackslot,0,toymusvolume,toymuspitch);
+speak("track "+toymusvolume);
+writepreffs();
+}
+if(key_repeating(KEY_HOME) and toyambvolume!=0 and paused==false)
+{
+toyambvolume+=1;
+ambpool.update_sound_start_values(toyambslot,0,toyambvolume,toyambpitch);
+speak("source "+toyambvolume);
+writepreffs();
+}
+if(key_repeating(KEY_END) and toyambvolume!=-50 and paused==false)
+{
+toyambvolume-=1;
+ambpool.update_sound_start_values(toyambslot,0,toyambvolume,toyambpitch);
+speak("source "+toyambvolume);
+writepreffs();
+}
+if(key_pressed(KEY_P))
+{
+if(paused==false)
+{
+temp.play_stationary(get_sound("misc/game/*pause*"), false);
+pause_game();
+}
+else if(paused==true)
+{
+temp.play_stationary(get_sound("misc/game/*resume*"), false);
+resume_game();
+}
+}
+if(shift_is_down() and paused==false)
+{
+if(key_pressed(KEY_LEFT) and facing=="left"==false)
+{
+facing="left";
+p.play_2d(get_sound("misc/player/*turn*"), me.x-1, me.y, me.x-1, me.y, false);
+}
+if(key_pressed(KEY_RIGHT) and facing=="right"==false)
+{
+facing="right";
+p.play_2d(get_sound("misc/player/*turn*"), me.x+1, me.y, me.x+1, me.y, false);
+}
+if(key_pressed(KEY_DOWN) and facing=="backward"==false)
+{
+facing="backward";
+p.play_2d(get_sound("misc/player/*turn*"), me.x, me.y-1, me.x, me.y-1, false);
+}
+if(key_pressed(KEY_UP) and facing=="forward"==false)
+{
+facing="forward";
+p.play_2d(get_sound("misc/player/*turn*"), me.x, me.y+1, me.x, me.y+1, false);
+}
+}
+if(alt_is_down() and key_pressed(KEY_A) and paused==false)
+{
+pause_game();
+soundsetsmenu2();
+}
+if(alt_is_down() and key_pressed(KEY_G) and paused==false)
+{
+pause_game();
+gamsetsmenu2();
+}
+if(key_pressed(KEY_C) and paused==false)
+{
+speak(me.x+", "+me.y+" on "+gmt(me.x,me.y)+". Facing "+facing+".");
+}
+if (key_pressed(KEY_Y) and paused == false)
+{
+        int session_minutes = int(timeelapsed.ms() / 60000);
+        int session_seconds = int((timeelapsed.ms() % 60000) / 1000);
+        speak("You've been playing for a total of " + session_minutes + " minutes, " + session_seconds + " seconds.");
+    }
+if(autorun and paused==false)
+{
+if (alt_is_down() or control_is_down())
+        movetime = walktime;
+    else
+        movetime = runtime;
+}
+else
+{
+if (!alt_is_down() or !control_is_down())
+        movetime = runtime;
+    else
+        movetime = walktime;
+}
+if (!shift_is_down() and key_down(KEY_LEFT) and movetimer.elapsed>=movetime and me.x!=0 and paused==false)
+{
+me.x-=1;
+facing="left";
+p.play_stationary(get_sound("objects/platforms/"+gmt(me.x,me.y)+"/*step*"), false);
+movetimer.restart();
+}
+if (!shift_is_down() and key_down(KEY_RIGHT) and movetimer.elapsed>=movetime and me.x!=maxx and paused==false)
+{
+me.x+=1;
+facing="right";
+p.play_stationary(get_sound("objects/platforms/"+gmt(me.x,me.y)+"/*step*"), false);
+movetimer.restart();
+}
+if (!shift_is_down() and key_down(KEY_DOWN) and movetimer.elapsed>=movetime and me.y!=0 and paused==false)
+{
+me.y-=1;
+facing="backward";
+p.play_stationary(get_sound("objects/platforms/"+gmt(me.x,me.y)+"/*step*"), false);
+movetimer.restart();
+}
+if (!shift_is_down() and key_down(KEY_UP) and movetimer.elapsed>=movetime and me.y!=maxy and paused==false)
+{
+me.y+=1;
+facing="forward";
+p.play_stationary(get_sound("objects/platforms/"+gmt(me.x,me.y)+"/*step*"), false);
+movetimer.restart();
+}
+if (key_pressed(KEY_SPACE) and weapontimer.elapsed >= weapontime and paused == false)
+{
+    fire_weapon();
+    weapontimer.restart();
+}
+}
+void toygame2()
+{
+    draw_weapon("melee", "bat");
+toyambslot=ambpool.play_stationary_extended(get_sound("objects/sources/ambiences/*gameloop*"),true,0,0,toyambvolume,toyambpitch,false);
+mustype="gamemus";
+toytrackslot=muspool.play_stationary_extended(get_sound("objects/sources/tracks/*"+mustype+"*"),true,0,0,toymusvolume,toymuspitch,false);
+spawn_platform(0, maxx, 0, maxy, "marble");
+p.play_stationary(get_sound("objects/platforms/"+gmt(me.x,me.y)+"/*land*"), false);
+while(true)
+{
+wait(5);
+bfloop();
+theifloop();
+toyloop();
+toy_game_input2();
+p.update_listener_2d(me.x,me.y);
+theifpool.update_listener_2d(me.x,me.y);
+toypool.update_listener_2d(me.x,me.y);
+if (get_total_entities() < max_entities)
+{
+if(theifspawntimer.elapsed>=theifspawntime and theifs.length()<theifnum and theifspawn==true and paused==false)
+{
+string[] theiftype=find_directories("sounds/"+soundpack+"/npc/theifs/*");
+spawn_theif(random(0,maxx), random(0,maxy), random(10*gamemod,20*gamemod), random(500/gamemod,1000/gamemod), random_string(theiftype));
+theifspawntimer.restart();
+}
+if(toyspawntimer.elapsed>=toyspawntime and toys.length()<toynum and toyspawn==true and paused==false)
+{
+string[] toycats = {"common", "other"};
+string toycat = random_string(toycats);
+string[] toytypes = find_directories("sounds/" + soundpack + "/equipments/items/normal/toys/" + toycat + "/*");
+if (toytypes.length() == 0)
+{
+return;
+}
+string toyname = random_string(toytypes);
+spawn_toy(random(0,maxx), random(0,maxy), random(5000/gamemod,10000/gamemod), toycat, toyname, toydest);
+toyspawntimer.restart();
+}
 }
 }
 }
