@@ -96,49 +96,47 @@ gardpool.destroy_sound(gards[i].gardsound);
 gards.resize(0);
 }
 
-theif@[] theifs(0);
-class theif
+thief@[] thieves(0);
+class thief
 {
 bool moveable = true;
 bool moveable2 = true;
-bool stunned = false;
-int defsound, hurtsound, landsound, stealsound, theifsound, stepsound;
-int theifx;
-int theify;
-int theifhealth;
-int theiftime;
+int defsound, hurtsound, landsound, stealsound, thievesound, stepsound;
+int thiefx;
+int thiefy;
+int thiefhealth;
+int thieftime;
 int target = -1;
-string theiftype;
-timer theiftimer;
-timer stuntimer;
-theif(int thx, int thy, int hp, int sp, string tht)
+string thieftype;
+timer thieftimer;
+thief(int thx, int thy, int hp, int sp, string tht)
 {
-theifx = thx;
-theify = thy;
-theifhealth = hp;
-theiftime = sp;
-theiftype = tht;
-if(!paused) landsound = theifpool.play_2d(get_sound("npc/theifs/" + theiftype + "/*land*"), me.x, me.y, theifx, theify, false);
-if(!paused) theifsound = theifpool.play_2d(get_sound("npc/theifs/" + theiftype + "/*taunt*"), me.x, me.y, theifx, theify, true);
+thiefx = thx;
+thiefy = thy;
+thiefhealth = hp;
+thieftime = sp;
+thieftype = tht;
+if(!paused) landsound = thiefpool.play_2d(get_sound("npc/thieves/" + thieftype + "/*land*"), me.x, me.y, thiefx, thiefy, false);
+if(!paused) thievesound = thiefpool.play_2d(get_sound("npc/thieves/" + thieftype + "/*taunt*"), me.x, me.y, thiefx, thiefy, true);
 }
 };
-void theifloop()
+void thiefloop()
 {
-for (uint i = 0; i < theifs.length(); i++)
+for (uint i = 0; i < thieves.length(); i++)
 {
-theif@ t = theifs[i];
-if (t.theifhealth <= 0)
+thief@ t = thieves[i];
+if (t.thiefhealth <= 0)
 {
-theifpool.destroy_sound(t.hurtsound);
-theifpool.destroy_sound(t.theifsound);
-if(!paused) t.defsound = theifpool.play_2d(get_sound("npc/theifs/" + t.theiftype + "/*death*"), me.x, me.y, t.theifx, t.theify, false);
-spawn_bodyfall(t.theifx, t.theify, random(500, 1000), get_sound("npc/theifs/" + t.theiftype + "/*fall*"));
-theifs.remove_at(i);
+thiefpool.destroy_sound(t.hurtsound);
+thiefpool.destroy_sound(t.thievesound);
+if(!paused) t.defsound = thiefpool.play_2d(get_sound("npc/thieves/" + t.thieftype + "/*death*"), me.x, me.y, t.thiefx, t.thiefy, false);
+spawn_bodyfall(t.thiefx, t.thiefy, random(500, 1000), get_sound("npc/thieves/" + t.thieftype + "/*fall*"));
+thieves.remove_at(i);
 return;
 }
-if (t.theiftimer.elapsed >= t.theiftime)
+if (t.thieftimer.elapsed >= t.thieftime)
 {
-t.theiftimer.restart();
+t.thieftimer.restart();
 if (t.target == -1 && toys.length() > 0)
 {
 t.target = random(0, toys.length() - 1);
@@ -149,26 +147,26 @@ int tx = toys[t.target].tx;
 int ty = toys[t.target].ty;
 if (t.moveable || t.moveable2)
 {
-if(!paused) t.stepsound = theifpool.play_2d(get_sound("npc/theifs/" + t.theiftype + "/*step*"), me.x, me.y, t.theifx, t.theify, false);
+if(!paused) t.stepsound = thiefpool.play_2d(get_sound("npc/thieves/" + t.thieftype + "/*step*"), me.x, me.y, t.thiefx, t.thiefy, false);
 }
-theifpool.update_sound_2d(t.theifsound, t.theifx, t.theify);
-if (t.theifx < tx && t.moveable && !paused) t.theifx++;
-if (t.theifx > tx && t.moveable && !paused) t.theifx--;
-if (t.theify < ty && t.moveable2 && !paused) t.theify++;
-if (t.theify > ty && t.moveable2 && !paused) t.theify--;
-if (t.theifx == tx && t.theify == ty && !paused)
+thiefpool.update_sound_2d(t.thievesound, t.thiefx, t.thiefy);
+if (t.thiefx < tx && t.moveable && !paused) t.thiefx++;
+if (t.thiefx > tx && t.moveable && !paused) t.thiefx--;
+if (t.thiefy < ty && t.moveable2 && !paused) t.thiefy++;
+if (t.thiefy > ty && t.moveable2 && !paused) t.thiefy--;
+if (t.thiefx == tx && t.thiefy == ty && !paused)
 {
-if (!paused) t.stealsound = theifpool.play_2d(get_sound("npc/theifs/" + t.theiftype + "/*steal*"), me.x, me.y, t.theifx, t.theify, false);
+if (!paused) t.stealsound = thiefpool.play_2d(get_sound("npc/thieves/" + t.thieftype + "/*steal*"), me.x, me.y, t.thiefx, t.thiefy, false);
 toypool.destroy_sound(toys[t.target].toysound);
 toys.remove_at(t.target);
 stolen_toys++;
 if (stolen_toys >= total_toy_stock)
 {
 store_defense = false;
-theifspawn = false;
+thievespawn = false;
 toyspawn = false;
 clear_inv();
-destroy_all_theifs();
+destroy_all_thieves();
 destroy_all_toys();
 ambpool.destroy_sound(toyambslot);
 muspool.destroy_sound(toytrackslot);
@@ -176,7 +174,7 @@ if(endless)
 {
 double actual_collected = min(collected_toys, total_toy_stock);
 double actual_stolen = total_toy_stock - actual_collected;
-dlgmessage_return("Game over. The enemies stole " + actual_stolen + " toy" + (actual_stolen == 1 ? "" : "s") + ". You saved " + actual_collected + " toy" + (actual_collected == 1 ? "" : "s") + " from being taken. Better luck next time!");
+dlgmessage_return("Game over. The thieves managed to steal " + actual_stolen + " toy" + (actual_stolen == 1 ? "" : "s") + ". You managed to save " + actual_collected + " toy" + (actual_collected == 1 ? "" : "s") + " from being taken. Better luck next time!");
 }
 else
 {
@@ -188,7 +186,7 @@ else
 {
 double actual_collected = min(collected_toys, total_toy_stock);
 double actual_stolen = total_toy_stock - actual_collected;
-dlgmessage_return("Game over. The enemies stole " + actual_stolen + " toy" + (actual_stolen == 1 ? "" : "s") + ". You saved " + actual_collected + " toy" + (actual_collected == 1 ? "" : "s") + " from being taken. Better luck next time!");
+dlgmessage_return("Game over. The thieves managed to steal " + actual_stolen + " toy" + (actual_stolen == 1 ? "" : "s") + ". You managed to save " + actual_collected + " toy" + (actual_collected == 1 ? "" : "s") + " from being taken. Better luck next time!");
 }
 }
 setupmenu(false);
@@ -214,31 +212,31 @@ me.y = 25;
 maxx = 50;
 maxy = 50;
 store_defense = true;
-theifspawn = true;
+thievespawn = true;
 toyspawn = true;
 reset_weapons();
 toygame2();
 }
 mainmenu();
 }
-theifpool.destroy_sound(t.theifsound);
-theifs.remove_at(i);
+thiefpool.destroy_sound(t.thievesound);
+thieves.remove_at(i);
 return;
 }
 }
 }
 }
 }
-void spawn_theif(int x, int y, int hp, int theiftime, string theiftype)
+void spawn_thief(int x, int y, int hp, int thieftime, string thieftype)
 {
-theif th(x, y, hp, theiftime, theiftype);
-theifs.insert_last(th);
+thief th(x, y, hp, thieftime, thieftype);
+thieves.insert_last(th);
 }
-void destroy_all_theifs()
+void destroy_all_thieves()
 {
-for (uint i = 0; i < theifs.length(); i++)
+for (uint i = 0; i < thieves.length(); i++)
 {
-theifpool.destroy_sound(theifs[i].theifsound);
+thiefpool.destroy_sound(thieves[i].thievesound);
 }
-theifs.resize(0);
+thieves.resize(0);
 }

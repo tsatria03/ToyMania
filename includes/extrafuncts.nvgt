@@ -410,7 +410,7 @@ handles[h].destroy_all();
 }
 void pause_pools()
 {
-sound_pool@[] pools = {p, pool, alarmpool, ambpool, bulletpool, dartpool, heartpool, healpool, objpool, muspool, theifpool, bosspool, doorpool, carpool, gardpool, keypool, toypool};
+sound_pool@[] pools = {p, pool, alarmpool, ambpool, bulletpool, dartpool, heartpool, healpool, objpool, muspool, thiefpool, bosspool, doorpool, carpool, gardpool, keypool, toypool};
     for(uint h = 0; h < pools.length(); h++)
     {
         for(uint i = 0; i < pools[h].items.length(); i++)
@@ -425,7 +425,7 @@ sound_pool@[] pools = {p, pool, alarmpool, ambpool, bulletpool, dartpool, heartp
 }
 void resume_pools()
 {
-sound_pool@[] pools = {p, pool, alarmpool, ambpool, bulletpool, dartpool, heartpool, healpool, objpool, muspool, theifpool, bosspool, doorpool, carpool, gardpool, keypool, toypool};
+sound_pool@[] pools = {p, pool, alarmpool, ambpool, bulletpool, dartpool, heartpool, healpool, objpool, muspool, thiefpool, bosspool, doorpool, carpool, gardpool, keypool, toypool};
     for(uint h = 0; h < pools.length(); h++)
     {
         for(uint i = 0; i < pools[h].items.length(); i++)

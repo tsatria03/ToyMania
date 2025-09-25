@@ -1,3 +1,7 @@
+New in 4.6.
+Reduced the starting health randomizer for all thieves found in the toy defender mode to make killing them easier in higher difficulties.
+Made it so the toy defender mode uses 2 of your starter weapons by default, instead of the toy collector's laser.
+Added back some of the achievement trackers that were found in the toy collector game mode.
 New in 4.5.
 Added an endless varient of the new toy store defender game mode.
 Added a new game mode where you play as the store owner and protect theifs from stealing the toys that are yours. The goal of this mode is to save as many toys as you can, while also killing those who try to take them.
