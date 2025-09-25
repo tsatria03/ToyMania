@@ -24,7 +24,7 @@ p.play_stationary(get_sound("equipments/weapons/"+weapontype+"/"+weapontype2+"/*
 }
 isReloading = false;
 }
-void draw_weapon(string weptype, string weptype2)
+void draw_weapon(string weptype, string weptype2, bool announce=true)
 {
 if (current_weapon == weptype2) return;
 weapontype = weptype;
@@ -71,7 +71,7 @@ weapontime2 = 100;
 pistol_initialized = true;
 }
 }
-speak(weptype2 + " equipped");
+if(announce==true) speak(weptype2 + " equipped");
 weaponslot = p.play_stationary(get_sound("equipments/weapons/" + weapontype + "/" + weapontype2 + "/*draw*"), false);
 }
 void draw_random_weapon()
@@ -116,6 +116,7 @@ weaponslot = p.play_stationary(get_sound("equipments/weapons/"+weapontype+"/"+we
 fire_on_target("boss");
 fire_on_target("car");
 fire_on_target("gard");
+fire_on_target("theif");
 }
 void fire_on_target(string targetType)
 {
@@ -170,6 +171,23 @@ weaponslot=p.play_2d(get_sound("equipments/weapons/"+weapontype+"/"+weapontype2+
 }
 gards[i3].hurtsound = gardpool.play_2d(get_sound("npc/guards/"+gards[i3].gardtype+"/*hurt*"), me.x, me.y, gards[i3].gardx, gards[i3].gardy, false);
 gards[i3].gardhealth -= dmg;
+}
+}
+for (uint i4 = 0; i4 < theifs.length(); i4++)
+{
+if (targetType == "theif" && absolute(theifs[i4].theifx - me.x) <= weprange && absolute(theifs[i4].theify - me.y) <= weprange2)
+{
+if (isGun)
+{
+weaponslot=p.play_2d(get_sound("equipments/weapons/"+weapontype+"/"+weapontype2+"/*hit*"), me.x, me.y, theifs[i4].theifx, theifs[i4].theify, false);
+weaponslot=p.play_2d(get_sound("equipments/weapons/"+weapontype+"/"+weapontype2+"/*shell*"), me.x, me.y, theifs[i4].theifx, theifs[i4].theify, false);
+}
+else
+{
+weaponslot=p.play_2d(get_sound("equipments/weapons/"+weapontype+"/"+weapontype2+"/*hit*"), me.x, me.y, theifs[i4].theifx, theifs[i4].theify, false);
+}
+theifs[i4].hurtsound = theifpool.play_2d(get_sound("npc/theifs/"+theifs[i4].theiftype+"/*hurt*"), me.x, me.y, theifs[i4].theifx, theifs[i4].theify, false);
+theifs[i4].theifhealth -= dmg;
 }
 }
 }

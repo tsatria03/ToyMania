@@ -101,8 +101,7 @@ gamemenu();
 void gamemenu()
 {
 setupmenu();
-m.add_item("play collector", "ty");
-m.add_item("play defender", "ty2");
+m.add_item("play game", "pg");
 m.add_item("learn game sounds", "gsm");
 m.add_item("read game user guides", "dm");
 m.add_item("view game achievements", "ach");
@@ -118,128 +117,9 @@ if(mres==-1)
 {
 mainmenu();
 }
-if (gamem == "ty")
+if (gamem == "pg")
 {
-setupmenu(false);
-m.add_item("Endless arcade. This mode lets you play for as long as you can survive. The game will get harder over time with no final boss, and just one unlockable door to win. This mode also includes some items that drop from time to time for use during intense enemy fights.", "endless");
-m.add_item("Time trial. This is a timed based mode where you must collect toys, survive various types of enemies, and defeat the final boss before the store explodes. There is one unlockable door that you must find by collecting all of the required keys to win.", "timed");
-m.add_item("Back", "back");
-m.intro_text = "Choose the game you'd like to play for this mode.";
-int gres = m.run();
-string mode = m.get_selected_item_id();
-if (mode == "back" or gres == -1)
-{
-gamemenu();
-return;
-}
-setupmenu(false);
-m.add_item("Easy", "1");
-m.add_item("Medium", "2");
-m.add_item("Hard", "3");
-m.add_item("Insane", "4");
-m.add_item("Chaos", "5");
-m.add_item("Back", "back");
-m.intro_text = "Choose the difficulty you'd like to use for this mode.";
-int dres = m.run();
-string diffchoice = m.get_selected_item_id();
-if (diffchoice == "back" or dres == -1)
-{
-gamemenu();
-return;
-}
-gamemod = string_to_int(diffchoice);
-endless = (mode == "endless");
-if (speak_menu_loading)
-{
-string difficulty_name =(gamemod == 1) ? "Easy" :(gamemod == 2) ? "Medium" :(gamemod == 3) ? "Hard" :(gamemod == 4) ? "Insane" :(gamemod == 5) ? "Chaos" :"unknown";
-speak((endless ? "loading endless arcade: difficulty " : "loading time trial: difficulty ") + difficulty_name);
-}
-m.fade_music();
-dlgplay(get_sound("misc/game/*launch*"));
-last_level_time = 0;
-level = 1;
-money = 0;
-collected_toys = 0;
-collected_keys = 0;
-killed_gards = 0;
-destroyed_cars = 0;
-moved_steps = 0;
-session_playtime = 0;
-for (uint i = 0; i < achievements.length(); i++)
-{
-if (achievements[i].isSessionBased)
-achievements[i].currentTier = 0;
-}
-gametimer.restart();
-int base = endless ? 10000 : 1000;
-int bonus = endless ? 2500 : 250;
-int added = bonus * (gamemod - 1);
-health = base + added;
-maxhealth = base + added;
-storehealth = base + added;
-storemaxhealth = base + added;
-clear_inv();
-destroy_all_healzones();
-destroy_all_doors();
-me.x = endless ? 50 : 25;
-me.y = endless ? 50 : 25;
-maxx = endless ? 100 : 50;
-maxy = endless ? 100 : 50;
-toynum = 20;
-alarm_started = false;
-countdown_started = false;
-small_storedest = false;
-medium_storedest = false;
-bossdefeated = false;
-bossespawn = false;
-carspawn = false;
-cardest = false;
-gardspawn = false;
-keydest = false;
-keyspawn = false;
-objdest = false;
-objspawn = false;
-toydest = false;
-toyspawn = true;
-reset_weapons();
-toygame();
-}
-if (gamem == "ty2")
-{
-setupmenu(false);
-m.add_item("Easy", "1");
-m.add_item("Medium", "2");
-m.add_item("Hard", "3");
-m.add_item("Insane", "4");
-m.add_item("Chaos", "5");
-m.add_item("Back", "back");
-m.intro_text = "Choose the difficulty you'd like to use for this mode.";
-int dres = m.run();
-string diffchoice = m.get_selected_item_id();
-if (diffchoice == "back" or dres == -1)
-{
-gamemenu();
-return;
-}
-gamemod = string_to_int(diffchoice);
-if (speak_menu_loading)
-{
-string difficulty_name =(gamemod == 1) ? "Easy" :(gamemod == 2) ? "Medium" :(gamemod == 3) ? "Hard" :(gamemod == 4) ? "Insane" :(gamemod == 5) ? "Chaos" :"unknown";
-speak("loading " + difficulty_name);
-}
-m.fade_music();
-dlgplay(get_sound("misc/game/*launch*"));
-gametimer.restart();
-clear_inv();
-me.x=25;
-me.y=25;
-maxx=50;
-maxy=50;
-store_defense=true;
-theifspawn=true;
-toyspawn=true;
-reset_weapons();
-toygame2();
+modemenu();
 }
 if (gamem == "gsm")
 {
@@ -378,6 +258,162 @@ gamemenu();
 if (gamem == "back")
 {
 mainmenu();
+}
+}
+void modemenu()
+{
+setupmenu();
+m.add_item("toy collector", "ty");
+m.add_item("toy defender", "ty2");
+m.add_item("back", "back");
+m.intro_text = "Choose the game you'd like to play.";
+int mres=m.run();
+string gamem2 = m.get_selected_item_id();
+if(mres==-1)
+{
+gamemenu();
+}
+if (gamem2 == "ty")
+{
+setupmenu(false);
+m.add_item("Endless arcade. This mode lets you play for as long as you can survive. The game will get harder over time with no final boss, and just one unlockable door to win. This mode also includes some items that drop from time to time for use during intense enemy fights.", "endless");
+m.add_item("Time trial. This is a timed based mode where you must collect toys, survive various types of enemies, and defeat the final boss before the store explodes. There is one unlockable door that you must find by collecting all of the required keys to win.", "timed");
+m.add_item("Back", "back");
+m.intro_text = "Choose the game you'd like to play for this mode.";
+int gres = m.run();
+string mode = m.get_selected_item_id();
+if (mode == "back" or gres == -1)
+{
+modemenu();
+return;
+}
+setupmenu(false);
+m.add_item("Easy", "1");
+m.add_item("Medium", "2");
+m.add_item("Hard", "3");
+m.add_item("Insane", "4");
+m.add_item("Chaos", "5");
+m.add_item("Back", "back");
+m.intro_text = "Choose the difficulty you'd like to use for this mode.";
+int dres = m.run();
+string diffchoice = m.get_selected_item_id();
+if (diffchoice == "back" or dres == -1)
+{
+modemenu();
+return;
+}
+gamemod = string_to_int(diffchoice);
+endless = (mode == "endless");
+if (speak_menu_loading)
+{
+string difficulty_name =(gamemod == 1) ? "Easy" :(gamemod == 2) ? "Medium" :(gamemod == 3) ? "Hard" :(gamemod == 4) ? "Insane" :(gamemod == 5) ? "Chaos" :"unknown";
+speak((endless ? "loading endless arcade: difficulty " : "loading time trial: difficulty ") + difficulty_name);
+}
+m.fade_music();
+dlgplay(get_sound("misc/game/*launch*"));
+last_level_time = 0;
+level = 1;
+money = 0;
+collected_toys = 0;
+collected_keys = 0;
+killed_gards = 0;
+destroyed_cars = 0;
+moved_steps = 0;
+session_playtime = 0;
+for (uint i = 0; i < achievements.length(); i++)
+{
+if (achievements[i].isSessionBased)
+achievements[i].currentTier = 0;
+}
+gametimer.restart();
+int base = endless ? 10000 : 1000;
+int bonus = endless ? 2500 : 250;
+int added = bonus * (gamemod - 1);
+health = base + added;
+maxhealth = base + added;
+storehealth = base + added;
+storemaxhealth = base + added;
+clear_inv();
+destroy_all_healzones();
+destroy_all_doors();
+me.x = endless ? 50 : 25;
+me.y = endless ? 50 : 25;
+maxx = endless ? 100 : 50;
+maxy = endless ? 100 : 50;
+toynum = 20;
+alarm_started = false;
+countdown_started = false;
+small_storedest = false;
+medium_storedest = false;
+bossdefeated = false;
+bossespawn = false;
+carspawn = false;
+cardest = false;
+gardspawn = false;
+keydest = false;
+keyspawn = false;
+objdest = false;
+objspawn = false;
+toydest = false;
+toyspawn = true;
+reset_weapons();
+toygame();
+}
+if (gamem2 == "ty2")
+{
+setupmenu(false);
+m.add_item("Endless Defense. Survive for as long as you can while preventing intruders from stealing your toy stock. The game gets progressively harder with faster and tuffer thieves. You have to save as many toys as you can by collecting them.", "endless");
+m.add_item("Rush Defense. In this mode, you must protect the toy stock from being stolen. The game ends when you've successfully saved every toy, or if too many are stolen. Expect increasing pressure as waves get faster and more aggressive.", "timed");
+m.add_item("Back", "back");
+m.intro_text = "Choose the game you'd like to play for this mode.";
+int gres = m.run();
+string mode = m.get_selected_item_id();
+if (mode == "back" or gres == -1)
+{
+modemenu();
+return;
+}
+setupmenu(false);
+m.add_item("Easy", "1");
+m.add_item("Medium", "2");
+m.add_item("Hard", "3");
+m.add_item("Insane", "4");
+m.add_item("Chaos", "5");
+m.add_item("Back", "back");
+m.intro_text = "Choose the difficulty you'd like to use for this mode.";
+int dres = m.run();
+string diffchoice = m.get_selected_item_id();
+if (diffchoice == "back" or dres == -1)
+{
+modemenu();
+return;
+}
+gamemod = string_to_int(diffchoice);
+endless = (mode == "endless");
+if (speak_menu_loading)
+{
+string difficulty_name =(gamemod == 1) ? "Easy" :(gamemod == 2) ? "Medium" :(gamemod == 3) ? "Hard" :(gamemod == 4) ? "Insane" :(gamemod == 5) ? "Chaos" :"unknown";
+speak((endless ? "loading endless defense: difficulty " : "loading rush defense: difficulty ") + difficulty_name);
+}
+m.fade_music();
+dlgplay(get_sound("misc/game/*launch*"));
+collected_toys=0;
+stolen_toys = 0;
+gametimer.restart();
+clear_inv();
+me.x=25;
+me.y=25;
+maxx=50;
+maxy=50;
+store_defense=true;
+theifspawn=true;
+toyspawn=true;
+reset_weapons();
+toygame2();
+}
+if (gamem2 == "back")
+{
+gamemenu();
 }
 }
 void learnsoundsmenu()
@@ -533,6 +569,22 @@ player["Purchase error: used in endless mode"] = get_sound("misc/store/error.*")
 player["Session achievement"] = get_sound("misc/player/achsession.*");
 player["Turn"] = get_sound("misc/player/turn.*");
 learnCategories["Player"] = player;
+dictionary theifs;
+theifs["theif Death"] = get_sound("npc/theifs/theif/death.*");
+theifs["theif Fall"] = get_sound("npc/theifs/theif/fall.*");
+theifs["theif Hurt" + vdesc] = array<string> = {get_sound("npc/theifs/theif/hurt1.*"), get_sound("npc/theifs/theif/hurt2.*")};
+theifs["theif Land"] = get_sound("npc/theifs/theif/land.*");
+theifs["theif Steal"] = get_sound("npc/theifs/theif/steal.*");
+theifs["theif Step" + vdesc] = array<string> = {get_sound("npc/theifs/theif/step1.*"), get_sound("npc/theifs/theif/step2.*"), get_sound("npc/theifs/theif/step3.*"), get_sound("npc/theifs/theif/step4.*"), get_sound("npc/theifs/theif/step5.*")};
+theifs["theif Taunt"] = get_sound("npc/theifs/theif/taunt.*");
+theifs["theif2 Death"] = get_sound("npc/theifs/theif2/death.*");
+theifs["theif2 Fall"] = get_sound("npc/theifs/theif2/fall.*");
+theifs["theif2 Hurt"] = get_sound("npc/theifs/theif2/hurt.*");
+theifs["theif2 Land"] = get_sound("npc/theifs/theif2/land.*");
+theifs["theif2 Steal"] = get_sound("npc/theifs/theif2/steal.*");
+theifs["theif2 Step" + vdesc] = array<string> = {get_sound("npc/theifs/theif2/step1.*"), get_sound("npc/theifs/theif2/step2.*"), get_sound("npc/theifs/theif2/step3.*"), get_sound("npc/theifs/theif2/step4.*"), get_sound("npc/theifs/theif2/step5.*")};
+theifs["theif2 Taunt"] = get_sound("npc/theifs/theif2/taunt.*");
+learnCategories["Theifs"] = theifs;
 dictionary toys;
 toys["articulated_rainbow_slug break" + vdesc] = array<string> = {get_sound("equipments/items/normal/toys/common/articulated_rainbow_slug/break1.*"), get_sound("equipments/items/normal/toys/common/articulated_rainbow_slug/break2.*"), get_sound("equipments/items/normal/toys/common/articulated_rainbow_slug/break3.*")};
 toys["articulated_rainbow_slug get" + vdesc] = array<string> = {get_sound("equipments/items/normal/toys/common/articulated_rainbow_slug/get1.*"), get_sound("equipments/items/normal/toys/common/articulated_rainbow_slug/get2.*")};

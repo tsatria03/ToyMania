@@ -1008,38 +1008,6 @@ theifspawn=false;
     toyspawn = false;
     mainmenu();
 }
-if (key_pressed(KEY_1) && !paused && current_weapon != "bat")
-{
-draw_weapon("melee", "bat");
-}
-if (key_pressed(KEY_2) && !paused && current_weapon != "boot")
-{
-draw_weapon("melee", "boot");
-}
-if (key_pressed(KEY_3) && !paused && current_weapon != "club")
-{
-draw_weapon("melee", "club");
-}
-if (key_pressed(KEY_4) && !paused && current_weapon != "feat")
-{
-draw_weapon("melee", "feat");
-}
-if (key_pressed(KEY_5) && !paused && current_weapon != "fist")
-{
-draw_weapon("melee", "fist");
-}
-if (key_pressed(KEY_6) && !paused && current_weapon != "hammer")
-{
-draw_weapon("melee", "hammer");
-}
-if (key_pressed(KEY_7) && !paused && current_weapon != "knife")
-{
-draw_weapon("melee", "knife");
-}
-if (key_pressed(KEY_8) && !paused && current_weapon != "laser")
-{
-draw_weapon("melee", "laser");
-}
 if(key_repeating(KEY_TAB) and key_up(KEY_LMENU) and key_up(KEY_RMENU) and paused==false)
 {
 if (shift_is_down())
@@ -1157,9 +1125,17 @@ if(alt_is_down() and key_pressed(KEY_G) and paused==false)
 pause_game();
 gamsetsmenu2();
 }
-if(key_pressed(KEY_C) and paused==false)
+if(key_pressed(KEY_X) and paused==false)
 {
 speak(me.x+", "+me.y+" on "+gmt(me.x,me.y)+". Facing "+facing+".");
+}
+if(key_pressed(KEY_C) and paused==false)
+{
+speak("Collected toys: "+collected_toys+".");
+}
+if (key_pressed(KEY_S) and paused == false)
+{
+speak("Stolen toys: " + stolen_toys + ".");
 }
 if (key_pressed(KEY_Y) and paused == false)
 {
@@ -1217,7 +1193,7 @@ if (key_pressed(KEY_SPACE) and weapontimer.elapsed >= weapontime and paused == f
 }
 void toygame2()
 {
-    draw_weapon("melee", "bat");
+    draw_weapon("melee", "laser", false);
 toyambslot=ambpool.play_stationary_extended(get_sound("objects/sources/ambiences/*gameloop*"),true,0,0,toyambvolume,toyambpitch,false);
 mustype="gamemus";
 toytrackslot=muspool.play_stationary_extended(get_sound("objects/sources/tracks/*"+mustype+"*"),true,0,0,toymusvolume,toymuspitch,false);
@@ -1238,7 +1214,7 @@ if (get_total_entities() < max_entities)
 if(theifspawntimer.elapsed>=theifspawntime and theifs.length()<theifnum and theifspawn==true and paused==false)
 {
 string[] theiftype=find_directories("sounds/"+soundpack+"/npc/theifs/*");
-spawn_theif(random(0,maxx), random(0,maxy), random(10*gamemod,20*gamemod), random(500/gamemod,1000/gamemod), random_string(theiftype));
+spawn_theif(random(0,maxx), random(0,maxy), random(15*gamemod,30*gamemod), random(250/gamemod,750/gamemod), random_string(theiftype));
 theifspawntimer.restart();
 }
 if(toyspawntimer.elapsed>=toyspawntime and toys.length()<toynum and toyspawn==true and paused==false)
