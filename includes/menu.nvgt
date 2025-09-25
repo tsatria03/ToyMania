@@ -398,6 +398,7 @@ speak((endless ? "loading endless defense: difficulty " : "loading rush defense:
 m.fade_music();
 dlgplay(get_sound("misc/game/*launch*"));
 collected_toys=0;
+killed_thieves=0;
 stolen_toys = 0;
 gametimer.restart();
 clear_inv();

@@ -22,12 +22,12 @@
 #include"form_menu.nvgt"
 #include"game.nvgt"
 #include"gametime.nvgt"
-#include"gard.nvgt"
 #include"healzone.nvgt"
 #include"inventory.nvgt"
 #include"item.nvgt"
 #include"key.nvgt"
 #include"menu.nvgt"
+#include"npc.nvgt"
 #include"platform.nvgt"
 #include"savefuncks.nvgt"
 #include"savedata.nvgt"
@@ -76,7 +76,7 @@ bool isReloading = false;
 const int max_entities = 50;
 double alarmvolume=0, alarmpitch=100, heartvolume=0, heartpitch=100, toyambvolume=0, toyambpitch=100, toymusvolume=0, toymuspitch=100;
 double ammo=50, maxammo=50, reserved_ammo=50, max_reserved_ammo=50;
-double collected_keys=0, collected_toys=0, destroyed_cars=0, health=1000, maxhealth=1000, storehealth=1000, storemaxhealth=1000, killed_gards=0, level=1, money=0, moved_steps=0, stolen_toys = 0, total_toy_stock = 100, total_collected_toys=0, total_collected_keys=0, total_killed_gards=0, total_destroyed_cars=0, total_moved_steps=0;
+double collected_keys=0, collected_toys=0, destroyed_cars=0, health=1000, maxhealth=1000, storehealth=1000, storemaxhealth=1000, killed_gards=0, killed_thieves=0, level=1, money=0, moved_steps=0, stolen_toys=0, total_toy_stock=100, total_collected_toys=0, total_collected_keys=0, total_killed_gards=0, total_killed_thieves=0, total_destroyed_cars=0, total_moved_steps=0;
 double maxx=50, maxy=50;
 float master_volume = 0;
 int achslot, invslot, itemslot, painslot, toyambslot, toytrackslot, weaponslot, alarmslot, heartslot, countslot;

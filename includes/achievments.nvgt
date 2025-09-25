@@ -37,6 +37,7 @@ int get_value()
 if (name == "Toys") return isSessionBased ? collected_toys : total_collected_toys;
 if (name == "Keys") return isSessionBased ? collected_keys : total_collected_keys;
 if (name == "Guards") return isSessionBased ? killed_gards : total_killed_gards;
+if (name == "Thieves") return isSessionBased ? killed_thieves : total_killed_thieves;
 if (name == "Cars") return isSessionBased ? destroyed_cars : total_destroyed_cars;
 if (name == "Steps") return isSessionBased ? moved_steps : total_moved_steps;
 if (name == "Playtime") return isSessionBased ? int(session_playtime / 60000) : int(total_playtime / 60000);
@@ -74,7 +75,7 @@ int tierRange = tierGoal - tierStart;
 double percent = 0.0;
 if (tierRange > 0)
 {
-percent = round((double(progressInTier) * 100.0) / double(tierRange), 2);
+percent = round((double(progressInTier) * 100.0) / double(tierRange), 0);
 }
 return baseName + ": Tier " + currentTier + " of " + thresholds.length() + ". Current progress: " + progressInTier + " (" + percent + "%). " + neededToNext + " total " + name.lower() + " needed to reach the next tier.";
 }
@@ -84,12 +85,14 @@ void load_achievements()
     achievements.insert_last(AchievementTracker("Toys", "Speed Collector", generate_achievement_thresholds(3, 25, 1.5), true));
     achievements.insert_last(AchievementTracker("Keys", "Key Snatcher", generate_achievement_thresholds(5, 25, 1.5), true));
     achievements.insert_last(AchievementTracker("Guards", "Strike Force", generate_achievement_thresholds(8, 25, 1.5), true));
+achievements.insert_last(AchievementTracker("Thieves", "Swift Justice", generate_achievement_thresholds(5, 25, 1.5), true));
     achievements.insert_last(AchievementTracker("Cars", "Crash Rush", generate_achievement_thresholds(10, 25, 1.5), true));
     achievements.insert_last(AchievementTracker("Steps", "Pace Breaker", generate_achievement_thresholds(15, 25, 1.5), true));
     achievements.insert_last(AchievementTracker("Playtime", "Sprint Runner", generate_achievement_thresholds(1, 25, 1.5), true));
 achievements.insert_last(AchievementTracker("Toys", "Toy Collector", generate_achievement_thresholds(5, 50, 1.5), false));
 achievements.insert_last(AchievementTracker("Keys", "Key Hunter", generate_achievement_thresholds(10, 50, 1.5), false));
 achievements.insert_last(AchievementTracker("Guards", "Guard Slayer", generate_achievement_thresholds(15, 50, 1.5), false));
+achievements.insert_last(AchievementTracker("Thieves", "Thief Decimator", generate_achievement_thresholds(10, 50, 1.5), false));
 achievements.insert_last(AchievementTracker("Cars", "Car Crusher", generate_achievement_thresholds(20, 50, 1.5), false));
 achievements.insert_last(AchievementTracker("Steps", "Pacer", generate_achievement_thresholds(25, 50, 1.5), false));
 achievements.insert_last(AchievementTracker("Playtime", "Time Traveler", generate_achievement_thresholds(5, 50, 1.5), false));

@@ -130,6 +130,10 @@ if (t.thiefhealth <= 0)
 thiefpool.destroy_sound(t.hurtsound);
 thiefpool.destroy_sound(t.thievesound);
 if(!paused) t.defsound = thiefpool.play_2d(get_sound("npc/thieves/" + t.thieftype + "/*death*"), me.x, me.y, t.thiefx, t.thiefy, false);
+killed_thieves+=1;
+total_killed_thieves+=1;
+update_achievements();
+writedata();
 spawn_bodyfall(t.thiefx, t.thiefy, random(500, 1000), get_sound("npc/thieves/" + t.thieftype + "/*fall*"));
 thieves.remove_at(i);
 return;
@@ -203,8 +207,9 @@ string difficulty_name = (gamemod == 1) ? "Easy" : (gamemod == 2) ? "Medium" : (
 speak((endless ? "loading endless defense: difficulty " : "loading rush defense: difficulty ") + difficulty_name);
 }
 dlgplay(get_sound("misc/game/*launch*"));
-stolen_toys = 0;
 collected_toys = 0;
+stolen_toys = 0;
+killed_thieves=0;
 gametimer.restart();
 clear_inv();
 me.x = 25;

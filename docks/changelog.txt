@@ -1,10 +1,11 @@
 New in 4.6.
+Added some lifetime and session based achievements for killing thieves.
 Reduced the starting health randomizer for all thieves found in the toy defender mode to make killing them easier in higher difficulties.
 Made it so the toy defender mode uses 2 of your starter weapons by default, instead of the toy collector's laser.
-Added back some of the achievement trackers that were found in the toy collector game mode.
+Added back some of the achievement trackers and keyboard commands that were found in the toy collector game mode.
 New in 4.5.
 Added an endless varient of the new toy store defender game mode.
-Added a new game mode where you play as the store owner and protect theifs from stealing the toys that are yours. The goal of this mode is to save as many toys as you can, while also killing those who try to take them.
+Added a new game mode where you play as the store owner and protect thieves from stealing the toys that are yours. The goal of this mode is to save as many toys as you can, while also killing those who try to take them.
 Renamed all of the game modes in the game menu. The endless mode is now refered to endless arcade, and the normal mode is now refered to time trial.
 Made it so your player and store HP gets displayed in actual values, along with it's original percentages in the pause menu.
 Reduced your starting health multiplier based on your current game mode. For example, instead of starting with 5000 HP in normal mode, and 50000 HP in endless mode when the difficulty is set to Chaos, you'll now start with 2000 and 20000 HP respectively.

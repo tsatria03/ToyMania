@@ -404,6 +404,7 @@ p.play_stationary(get_sound("objects/platforms/"+gmt(me.x,me.y)+"/*step*"), fals
 moved_steps+=1;
 total_moved_steps+=1;
 update_achievements();
+writedata();
 movetimer.restart();
 }
 if (!shift_is_down() and key_down(KEY_RIGHT) and movetimer.elapsed>=movetime and me.x!=maxx and doormove==false)
@@ -414,6 +415,7 @@ p.play_stationary(get_sound("objects/platforms/"+gmt(me.x,me.y)+"/*step*"), fals
 moved_steps+=1;
 total_moved_steps+=1;
 update_achievements();
+writedata();
 movetimer.restart();
 }
 if (!shift_is_down() and key_down(KEY_DOWN) and movetimer.elapsed>=movetime and me.y!=0 and doormove==false)
@@ -424,6 +426,7 @@ p.play_stationary(get_sound("objects/platforms/"+gmt(me.x,me.y)+"/*step*"), fals
 moved_steps+=1;
 total_moved_steps+=1;
 update_achievements();
+writedata();
 movetimer.restart();
 }
 if (!shift_is_down() and key_down(KEY_UP) and movetimer.elapsed>=movetime and me.y!=maxy and doormove==false)
@@ -995,6 +998,8 @@ gametimer.resume();
     }
 gametimer.resume();
     fade_multi_pool();
+collected_toys=0;
+killed_thieves = 0;
 stolen_toys = 0;
 clear_inv();
 destroy_all_thieves();
@@ -1109,9 +1114,21 @@ if(key_pressed(KEY_C) and paused==false)
 {
 speak(me.x+", "+me.y+" on "+gmt(me.x,me.y)+". Facing "+facing+".");
 }
-if(key_pressed(KEY_O) and doormove==false)
+if(key_pressed(KEY_O) and paused==false)
 {
 speak("There are "+toys.length()+" collectible toys on the field.");
+}
+if(key_pressed(KEY_Q) and paused==false)
+{
+speak("You've killed "+killed_thieves+" thieves.");
+}
+if(key_pressed(KEY_E) and paused==false)
+{
+speak("There are "+thieves.length()+" killible thieves on the field.");
+}
+if(key_pressed(KEY_X) and paused==false)
+{
+speak("You've taken "+moved_steps+" steps.");
 }
 if(key_pressed(KEY_T) and paused==false)
 {
