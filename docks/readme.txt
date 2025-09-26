@@ -109,7 +109,7 @@ music.ogg: This sound is played when a menu has music.
 open.ogg: This sound is played when a menu is being opened.
 speaker.ogg: This sound is played when a menu has a speaker test option.
 
-Npc sound listing: 10 total.
+Npc sound listing: 11 total.
 death.ogg: This sound is played when an entity dies.
 heal.ogg: This sound is played when a boss enemy is healing.
 hit.ogg: This sound is played when an entity hits your character.
@@ -118,5 +118,6 @@ launch.ogg: This sound is played when an entity launches another entity or objec
 loop.ogg: This sound is played when a projectile is being looped.
 spawn.ogg: This sound is played when an entity is being spawned.
 step.ogg: This sound is played when an entity is moving.
+take.ogg: This sound is played when an entity takes something.
 taunt.ogg: This sound is played when an entity is taunting your character.
 tel.ogg: This sound is played when a boss enemy teleports on the x or y axes of a map.

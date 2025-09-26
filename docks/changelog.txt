@@ -1,5 +1,5 @@
 New in 4.6.
-Added some lifetime and session based achievements for killing thieves.
+Added some session and lifetime achievements and statistics for killing thieves.
 Reduced the starting health randomizer for all thieves found in the toy defender mode to make killing them easier in higher difficulties.
 Made it so the toy defender mode uses 2 of your starter weapons by default, instead of the toy collector's laser.
 Added back some of the achievement trackers and keyboard commands that were found in the toy collector game mode.

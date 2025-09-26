@@ -1000,6 +1000,7 @@ gametimer.resume();
     fade_multi_pool();
 collected_toys=0;
 killed_thieves = 0;
+moved_steps = 0;
 stolen_toys = 0;
 clear_inv();
 destroy_all_thieves();

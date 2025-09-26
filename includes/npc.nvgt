@@ -160,7 +160,7 @@ if (t.thiefy < ty && t.moveable2 && !paused) t.thiefy++;
 if (t.thiefy > ty && t.moveable2 && !paused) t.thiefy--;
 if (t.thiefx == tx && t.thiefy == ty && !paused)
 {
-if (!paused) t.stealsound = thiefpool.play_2d(get_sound("npc/thieves/" + t.thieftype + "/*steal*"), me.x, me.y, t.thiefx, t.thiefy, false);
+if (!paused) t.stealsound = thiefpool.play_2d(get_sound("npc/thieves/" + t.thieftype + "/*take*"), me.x, me.y, t.thiefx, t.thiefy, false);
 toypool.destroy_sound(toys[t.target].toysound);
 toys.remove_at(t.target);
 stolen_toys++;
@@ -208,8 +208,9 @@ speak((endless ? "loading endless defense: difficulty " : "loading rush defense:
 }
 dlgplay(get_sound("misc/game/*launch*"));
 collected_toys = 0;
-stolen_toys = 0;
 killed_thieves=0;
+moved_steps = 0;
+stolen_toys = 0;
 gametimer.restart();
 clear_inv();
 me.x = 25;

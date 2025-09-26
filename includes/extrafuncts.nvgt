@@ -345,7 +345,7 @@ docksmenu();
 }
 void fade_multi_pool(int fade_mode=1)
 {
-sound_pool@[] pools = {p, pool, alarmpool, ambpool, bulletpool, dartpool, heartpool, healpool, objpool, muspool, bosspool, carpool, gardpool, keypool, toypool};
+sound_pool@[] pools = {p, pool, alarmpool, ambpool, bulletpool, dartpool, heartpool, healpool, objpool, muspool, thiefpool, bosspool, carpool, gardpool, keypool, toypool};
 if(fade_mode==0)
 {
 fade_pitch_pool(pools);
