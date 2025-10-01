@@ -98,7 +98,6 @@ if (!used_key)
 {
 if (endless && collected_keys >= doors[i].required_keys)
 {
-collected_keys -= doors[i].required_keys;
 doors[i].unlocksound = doorpool.play_stationary(get_sound("objects/doors/"+doors[i].doortype+"/*grant*"), false);
 used_key = true;
 }
@@ -159,6 +158,7 @@ doorpool.destroy_sound(doors[i].movesound);
 doors[i].closesound=doorpool.play_stationary(get_sound("objects/doors/"+doors[i].doortype+"/*close*"),false);
 doormove=false;
 doors[i].is_moving=false;
+clear_all_buffers();
 clear_inv();
 fade_multi_pool();
 wait(1000);

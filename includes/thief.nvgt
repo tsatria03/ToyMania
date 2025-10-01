@@ -80,7 +80,7 @@ if(endless)
 {
 double actual_collected = min(collected_toys, total_toy_stock);
 double actual_stolen = total_toy_stock - actual_collected;
-dlgmessage_return("Game over. The thieves managed to steal " + actual_stolen + " toy" + (actual_stolen == 1 ? "" : "s") + ". You managed to save " + actual_collected + " toy" + (actual_collected == 1 ? "" : "s") + ". Better luck next time!");
+dlgmessage_return("Game over. The thieves managed to steal " + actual_stolen + " toy" + (actual_stolen == 1 ? "" : "s") + ". You managed to save " + actual_collected + " toy" + (actual_collected == 1 ? "" : "s") + ".");
 }
 else
 {
@@ -92,7 +92,7 @@ else
 {
 double actual_collected = min(collected_toys, total_toy_stock);
 double actual_stolen = total_toy_stock - actual_collected;
-dlgmessage_return("Game over. The thieves managed to steal " + actual_stolen + " toy" + (actual_stolen == 1 ? "" : "s") + ". You managed to save " + actual_collected + " toy" + (actual_collected == 1 ? "" : "s") + ". Better luck next time!");
+dlgmessage_return("Game over. The thieves managed to steal " + actual_stolen + " toy" + (actual_stolen == 1 ? "" : "s") + ". You managed to save " + actual_collected + " toy" + (actual_collected == 1 ? "" : "s") + ".");
 }
 }
 setupmenu(false);

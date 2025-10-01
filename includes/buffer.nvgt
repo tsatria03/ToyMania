@@ -63,19 +63,41 @@ if (!buffers[b].muted && speakMessage) {
 speak(itemname, true);
 }
 }
-void export_buffers()
+bool export_current_buffer()
+{
+if (bufferpos < 0 || bufferpos >= buffers.length())
+return false;
+buffer@ b = buffers[bufferpos];
+if (b.items.length() == 0)
+{
+speak("There's nothing to export in this buffer.");
+return false;
+}
+string bufferdir = "data/logs";
+if (!directory_exists(bufferdir)) directory_create(bufferdir);
+logfile.open(bufferdir + "/" + b.name + ".log", "ab");
+logfile.write("Exported on " + DATE_MONTH + "/" + DATE_DAY + "/" + DATE_YEAR + "\r\n\r\n");
+string bdata = "";
+for (uint i2 = 0; i2 < b.items.length(); i2++)
+{
+bdata += b.items[i2].name + "\r\n";
+}
+logfile.write(bdata);
+logfile.close();
+if (copexpsounds==true) spool.play_stationary(get_sound("ui/other/*export*"), false);
+speak(b.name + " exported");
+return true;
+}
+bool export_all_buffers()
 {
 string bufferdir = "data/logs";
 if (!directory_exists(bufferdir)) directory_create(bufferdir);
+bool exported = false;
 for (uint i = 0; i < buffers.length(); i++)
 {
-if (buffers[i].items.length() <= 0)
-{
-speak("Empty.");
-return;
-}
 if (buffers[i].items.length() > 0)
 {
+exported = true;
 logfile.open(bufferdir + "/" + buffers[i].name + ".log", "ab");
 logfile.write("Exported on " + DATE_MONTH + "/" + DATE_DAY + "/" + DATE_YEAR + "\r\n\r\n");
 string bdata = "";
@@ -86,6 +108,17 @@ bdata += buffers[i].items[i2].name + "\r\n";
 logfile.write(bdata);
 logfile.close();
 }
+}
+if (exported)
+{
+if (copexpsounds==true) spool.play_stationary(get_sound("ui/other/*export*"), false);
+speak("All buffers exported");
+return true;
+}
+else
+{
+speak("There's nothing to export in these buffers.");
+return false;
 }
 }
 void toggle_buffer()
@@ -186,14 +219,21 @@ void copy_buffer_item()
 {
 if(buffers[bufferpos].items.length()<=0)
 {
-speak("Empty.");
+speak("There's nothing to copy in this buffer.");
 return;
 }
 clipboard_copy_text(buffers[bufferpos].items[buffers[bufferpos].bpos].name);
 if(copexpsounds==true) spool.play_stationary(get_sound("ui/other/*copy*"), false);
-speak("Copied to clipboard",true);
+speak("Message copied",true);
 }
-void clear_all_buffer_items()
+void clear_current_buffer()
+{
+if (bufferpos < 0 || bufferpos >= buffers.length())
+return;
+buffers[bufferpos].items.resize(0);
+buffers[bufferpos].bpos = 0;
+}
+void clear_all_buffers()
 {
 for (uint i = 0; i < buffers.length(); i++)
 {
@@ -246,10 +286,10 @@ copy_buffer_item();
 }
 if (key_repeating(KEY_BACKSLASH))
 {
-if(copexpsounds==true) spool.play_stationary(get_sound("ui/other/*export*"), false);
-speak("buffers exported");
-export_buffers();
-clear_all_buffer_items();
+if (export_current_buffer())
+{
+clear_current_buffer();
+}
 }
 }
 }

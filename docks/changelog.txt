@@ -1,5 +1,6 @@
 New in 4.6.
-Fixed various buffer exporting issues. Buffers can now only be exported if they contain items, preventing empty buffer exports and ensuring cleaner log files.
+Fixed a bug where opening the door with a sertain amount of required keys would cause the results screen to display an incorrect amount of keys collected in the endless arcade game.
+Fixed various buffer exporting issues. Buffers are now only exported if they contain items, preventing empty buffer exports and ensuring cleaner log files.
 Made it so navigating a buffer category provides detailed feedback on the number of items in the currently focused buffer, and your position within it.
 Fixed the bug where buffers continued to speak messages despite being muted. Muted buffers will Now Suppress audible speech output associated with any messages that occur in the game.
 Resolved an issue where muted buffers were not logging messages correctly. Muted buffers will continue logging messages into the buffer for review from now on.

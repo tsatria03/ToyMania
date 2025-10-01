@@ -337,6 +337,7 @@ health = base + added;
 maxhealth = base + added;
 storehealth = base + added;
 storemaxhealth = base + added;
+clear_all_buffers();
 clear_inv();
 destroy_all_healzones();
 destroy_all_doors();
@@ -406,6 +407,7 @@ killed_thieves=0;
 moved_steps = 0;
 stolen_toys = 0;
 gametimer.restart();
+clear_all_buffers();
 clear_inv();
 me.x=25;
 me.y=25;
@@ -930,7 +932,8 @@ collected_toys = 0;
                 if (achievements[i].isSessionBased)
                     achievements[i].currentTier = 0;
             }
-            clear_inv();
+            clear_all_buffers();
+clear_inv();
             if (!endless) destroy_all_bosses();
 destroy_all_healzones();
 destroy_all_bullets();

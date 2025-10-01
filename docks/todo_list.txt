@@ -2,8 +2,6 @@
 
 ****Unfinished. Add a mini map builder into the game.
 ****Unfinished. Add back the tts configuration menu.
-****Unfinished. Fix it so it doesn't say incorrect key collected amounts.
-****Unfinished. Fix it so it doesn't think you lost the game when saving over 100 toys.
 ****Unfinished. Add a mode where you catch toys while falling.
 ****Unfinished. Add a mode where you memorize toy sounds.
 ****Unfinished. Add a mode where you ancer questions about toy sounds.
@@ -16,6 +14,8 @@
 
 ##These are the things that are already finished from earlier versions of the game.
 
+**Finished. Fix it to where it doesn't say incorrect key collected amounts in the endless arcade game.
+**Finished. Fix it to where it doesn't think you lost the game when saving over 100 toys in the toy defender game.
 **Finished. Fix the learn sounds menu, and convert it to use the new sound pack system.
 **Finished. Add difficulty options to the normal and endless game modes.
 **Finished. Add soundpack support.
