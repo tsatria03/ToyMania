@@ -1,5 +1,7 @@
 ####These are the things that need to be finished for future versions of the game.
 
+****Unfinished. Add a mini map builder into the game.
+****Unfinished. Add back the tts configuration menu.
 ****Unfinished. Fix it so it doesn't say incorrect key collected amounts.
 ****Unfinished. Fix it so it doesn't think you lost the game when saving over 100 toys.
 ****Unfinished. Add a mode where you catch toys while falling.

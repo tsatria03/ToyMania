@@ -25,7 +25,7 @@ void cycle_inv(int dir)
 if (inv.get_size() == 0)
 {
 p.destroy_sound(invslot);
-speak("empty");
+speak_buffer("empty");
 return;
 }
 invslot = p.play_stationary(get_sound("misc/player/*inv*"), false);
@@ -40,15 +40,15 @@ invpos = inv.get_size() - 1;
 int a;
 inv.get(inv.get_keys()[invpos], a);
 if (a == 1)
-speak(inv.get_keys()[invpos] + ". Item " + (invpos + 1) + " of " + inv.get_keys().length());
+speak_buffer(inv.get_keys()[invpos] + ". Item " + (invpos + 1) + " of " + inv.get_keys().length());
 else
-speak(inv.get_keys()[invpos] + "s, " + a + ". Item " + (invpos + 1) + " of " + inv.get_keys().length());
+speak_buffer(inv.get_keys()[invpos] + "s, " + a + ". Item " + (invpos + 1) + " of " + inv.get_keys().length());
 }
 void useitem(string current, bool block_desc=false)
 {
 if (inv.get_size()<=0)
 {
-speak("No items");
+speak_buffer("No items");
 }
 else
 {
@@ -78,13 +78,13 @@ invmenu();
 }
 else
 {
-speak(keydesc);
+speak_buffer(keydesc);
 return;
 }
 }
 else
 {
-speak("No description available for " + keyname + ".");
+speak_buffer("No description available for " + keyname + ".");
 return;
 }
 }
@@ -105,14 +105,14 @@ if (objname == "ammo_pack")
 double missing_ammo = max(0, max_reserved_ammo - reserved_ammo);
 if (missing_ammo == 0)
 {
-speak("You already have enough reserved ammo for this weapon.");
+speak_buffer("You already have enough reserved ammo for this weapon.");
 return;
 }
 itemslot = p.play_stationary(get_sound("equipments/items/endless/"+objcat+"/"+objname+"/*use*"), false);
 give("ammo_pack", -1);
 double ammo_gained = min(random(5, 10), missing_ammo);
 reserved_ammo += ammo_gained;
-speak("You received " + round(ammo_gained, 0) + " rounds of ammo from the pack for this weapon.");
+speak_buffer("You received " + round(ammo_gained, 0) + " rounds of ammo from the pack for this weapon.");
 return;
 }
 else if (objname == "stun_dart")
@@ -126,7 +126,7 @@ else if (objname == "health_potion")
 {
 if (health >= maxhealth)
 {
-speak("You don't need to use this!");
+speak_buffer("You don't need to use this!");
 return;
 }
 itemslot = p.play_stationary(get_sound("equipments/items/endless/"+objcat+"/"+objname+"/*use*"), false);
@@ -135,7 +135,7 @@ give("health_potion", -1);
 double heal_percent = random(5, 10);
 double heal_amount = maxhealth * (heal_percent / 100.0);
 health = min(health + heal_amount, maxhealth);
-speak("Healed to " + round(health / maxhealth * 100, 0) + " percent HP.");
+speak_buffer("Healed to " + round(health / maxhealth * 100, 0) + " percent HP.");
 return;
 }
 else if (objname == "player_teleporter")
@@ -144,7 +144,7 @@ itemslot = p.play_stationary(get_sound("equipments/items/endless/"+objcat+"/"+ob
 give("player_teleporter", -1);
 me.x = random(0, maxx);
 me.y = random(0, maxy);
-speak("Moved to " + me.x + ", " + me.y + ".");
+speak_buffer("Moved to " + me.x + ", " + me.y + ".");
 return;
 }
 string path = "equipments/items/endless/" + objcat + "/" + objname + "/";
@@ -167,13 +167,13 @@ invmenu();
 }
 else
 {
-speak(objdesc);
+speak_buffer(objdesc);
 return;
 }
 }
 else
 {
-speak("Used " + objname + ".");
+speak_buffer("Used " + objname + ".");
 }
 give(objname, -1);
 return;
@@ -205,13 +205,13 @@ invmenu();
 }
 else
 {
-speak(toydesc);
+speak_buffer(toydesc);
 return;
 }
 }
 else
 {
-speak("No description available for " + toyname + ".");
+speak_buffer("No description available for " + toyname + ".");
 return;
 }
 }

@@ -1,4 +1,7 @@
-#pragma embed "data/docks.tmg"
+#pragma asset data
+#pragma asset sounds
+#pragma plugin nvgt_curl
+#pragma embed "data/res/docks.tmg"
 #include"includes/includes.nvgt"
 void main()
 {
@@ -27,6 +30,8 @@ exit();
 }
 else
 {
+create_buffer("general");
+create_buffer("misc");
     if (auto_check_updates)
     {
         check_for_updates(version, "ToyMania");

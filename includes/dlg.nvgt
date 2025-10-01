@@ -32,6 +32,19 @@ break;
 }
 return false;
 }
+bool dlg_buffer(string message, string buffer_name="misc", bool dlgcoppy=true, int timeout=-1)
+{
+int buffer_index = get_buffer_index(buffer_name);
+if (buffer_index != -1)
+{
+add_buffer_item(buffer_name, message, false);
+if (buffers[buffer_index].muted)
+{
+return false;
+}
+}
+return dlg(message, dlgcoppy, timeout);
+}
 void dlgmessage(string messages)
 {
 temp.play_stationary(get_sound("ui/dialogs/"+dlgpack+"/*open*"), false);

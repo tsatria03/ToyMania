@@ -107,7 +107,6 @@ edge.ogg: This sound is played when a menu has reached a boundary.
 enter.ogg: This sound is played when a menu item has been selected.
 music.ogg: This sound is played when a menu has music.
 open.ogg: This sound is played when a menu is being opened.
-speaker.ogg: This sound is played when a menu has a speaker test option.
 
 Npc sound listing: 11 total.
 death.ogg: This sound is played when an entity dies.

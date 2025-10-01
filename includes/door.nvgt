@@ -51,7 +51,7 @@ void doorcheck()
             if (entity_near_door(doors[i].startx, doors[i].starty))
             {
 doors[i].jamsound = doorpool.play_stationary(get_sound("objects/doors/"+doors[i].doortype+"/*jam*"), false);
-                speak("The door is jammed! Something dangerous is nearby!");
+                speak_buffer("The door is jammed! Something dangerous is nearby!", "general");
                 return;
             }
 int inv_key_count = 0;
@@ -70,7 +70,7 @@ if (total_keys_available < doors[i].required_keys)
 {
 temp.destroy_sound(doors[i].locksound);
 doors[i].locksound = temp.play_stationary(get_sound("objects/doors/"+doors[i].doortype+"/*deny*"), false);
-speak("This door is locked. You need " + doors[i].required_keys + " more keys to unlock it.");
+speak_buffer("This door is locked. You need " + doors[i].required_keys + " more keys to unlock it.", "general");
 return;
 }
 else
@@ -106,7 +106,7 @@ else
 {
 temp.destroy_sound(doors[i].locksound);
 doors[i].locksound = temp.play_stationary(get_sound("objects/doors/"+doors[i].doortype+"/*deny*"), false);
-speak("You have enough keys, but none in your inventory to unlock the door.");
+speak_buffer("You have enough keys, but none in your inventory to unlock the door.", "general");
 return;
 }
 }
@@ -189,7 +189,7 @@ if (gamcopy == true)
         if (choice == "copy")
         {
             clipboard_copy_text(statsummary);
-            if (copexpsounds == true) dlgplay(get_sound("menus/"+menupack+"/*copy*"), false);
+            if (copexpsounds == true) dlgplay(get_sound("ui/other/*copy*"), false);
             dlgmessage_return("All game session results copied to your clipboard.");
         }
         else if (choice == "export")
@@ -197,7 +197,7 @@ if (gamcopy == true)
             poastfile.open(DIRECTORY_APPDATA+"tsatria03/ToyMania/stats/player_posts.txt", "w");
             poastfile.write(statsummary);
             poastfile.close();
-            if (copexpsounds == true) dlgplay(get_sound("menus/"+menupack+"/*export*"), false);
+            if (copexpsounds == true) dlgplay(get_sound("ui/other/*export*"), false);
             dlgmessage_return("All game session results exported to stats/player_posts.txt.");
         }
     }

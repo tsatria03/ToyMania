@@ -32,6 +32,17 @@ bool speak(string text, bool interrupt = tts_default_interrupt, bool translate_t
 		raw_speak(text, interrupt);
 	return true;
 }
+bool speak_buffer(string text, string buffer_name = "misc", bool interrupt = tts_default_interrupt, bool translate_text = true, bool braille = true)
+{
+    int buffer_index = get_buffer_index(buffer_name);
+    if (buffer_index != -1) {
+        add_buffer_item(buffer_name, text, false);
+        if (buffers[buffer_index].muted) {
+            return false;
+        }
+    }
+    return speak(text, interrupt, translate_text, braille);
+}
 void raw_speak(string text, bool interrupt) {
 	if (interrupt and tts.speaking) tts.stop();
 	if (@tts_config_form != null) {

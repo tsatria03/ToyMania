@@ -1,5 +1,6 @@
 void toy_game_input()
 {
+buffercheck();
 if (key_repeating(KEY_ESCAPE) and doormove == false)
 {
 boss_timer.pause();
@@ -14,7 +15,7 @@ gametimer.pause();
         string confirm = m.get_selected_item_id();
         if (res == -1 or confirm == "no")
         {
-            speak("canceled");
+            speak_buffer("canceled");
 boss_timer.resume();
 gametimer.resume();
             return;
@@ -131,69 +132,69 @@ usetimer.restart();
 if (inv.get_keys().length()>0 and invpos<inv.get_size())
 useitem(inv.get_keys()[invpos]);
 else
-speak("No item in focus.");
+speak_buffer("No item in focus.");
 }
 if(shift_is_down() and key_repeating(KEY_PRIOR) and alarmvolume!=0)
 {
 alarmvolume+=1;
 alarmpool.update_sound_start_values(alarmslot,0,alarmvolume,alarmpitch);
-speak("alarm "+alarmvolume);
+speak_buffer("alarm "+alarmvolume);
 writepreffs();
 }
 if(shift_is_down() and key_repeating(KEY_NEXT) and alarmvolume!=-50)
 {
 alarmvolume-=1;
 alarmpool.update_sound_start_values(alarmslot,0,alarmvolume,alarmpitch);
-speak("alarm "+alarmvolume);
+speak_buffer("alarm "+alarmvolume);
 writepreffs();
 }
 if(shift_is_down() and key_repeating(KEY_HOME) and heartvolume!=0)
 {
 heartvolume+=1;
 heartpool.update_sound_start_values(heartslot,0,heartvolume,heartpitch);
-speak("heart "+heartvolume);
+speak_buffer("heart "+heartvolume);
 writepreffs();
 }
 if(shift_is_down() and key_repeating(KEY_END) and heartvolume!=-50)
 {
 heartvolume-=1;
 heartpool.update_sound_start_values(heartslot,0,heartvolume,heartpitch);
-speak("heart "+heartvolume);
+speak_buffer("heart "+heartvolume);
 writepreffs();
 }
 if(key_repeating(KEY_PRIOR) and toymusvolume!=0)
 {
 toymusvolume+=1;
 muspool.update_sound_start_values(toytrackslot,0,toymusvolume,toymuspitch);
-speak("track "+toymusvolume);
+speak_buffer("track "+toymusvolume);
 writepreffs();
 }
 if(key_repeating(KEY_NEXT) and toymusvolume!=-50)
 {
 toymusvolume-=1;
 muspool.update_sound_start_values(toytrackslot,0,toymusvolume,toymuspitch);
-speak("track "+toymusvolume);
+speak_buffer("track "+toymusvolume);
 writepreffs();
 }
 if(key_repeating(KEY_HOME) and toyambvolume!=0)
 {
 toyambvolume+=1;
 ambpool.update_sound_start_values(toyambslot,0,toyambvolume,toyambpitch);
-speak("source "+toyambvolume);
+speak_buffer("source "+toyambvolume);
 writepreffs();
 }
 if(key_repeating(KEY_END) and toyambvolume!=-50)
 {
 toyambvolume-=1;
 ambpool.update_sound_start_values(toyambslot,0,toyambvolume,toyambpitch);
-speak("source "+toyambvolume);
+speak_buffer("source "+toyambvolume);
 writepreffs();
 }
 if (key_repeating(KEY_I) and doormove == false)
 {
 if (inv.get_size() == 0)
 {
-speak("Your inventory is currently empty.");
+speak_buffer("Your inventory is currently empty.", "general");
 }
 else
 {
@@ -251,11 +252,11 @@ if (key_pressed(KEY_Z) and doormove == false)
 {
     if (weapontype2 == "machine_gun" or weapontype2 == "pistol")
     {
-        speak("You have "+round(ammo,0) + " out of " + round(maxammo,0) + " rounds of ammo loaded, and " + round(reserved_ammo,0) + " rounds of ammo in reserve.");
+        speak_buffer("You have "+round(ammo,0) + " out of " + round(maxammo,0) + " rounds of ammo loaded, and " + round(reserved_ammo,0) + " rounds of ammo in reserve.", "general");
     }
     else
     {
-        speak("This weapon does not take any ammo.");
+        speak_buffer("This weapon does not take any ammo.", "general");
     }
 }
 if (key_pressed(KEY_R) and doormove == false and (weapontype2 == "machine_gun" or weapontype2 == "pistol"))
@@ -266,7 +267,7 @@ if (key_repeating(KEY_D) and doormove == false)
 {
     if (doors.length() == 0)
     {
-        speak("There are no doors currently present.");
+        speak_buffer("There are no doors currently present.", "general");
         return;
     }
     if (shift_is_down())
@@ -275,16 +276,16 @@ int req = doors[0].required_keys;
 int missing = req - collected_keys;
 if (missing > 0)
 {
-speak("You've collected " + collected_keys + " out of " + req + " required keys. You need " + missing + " more keys to unlock the door.");
+speak_buffer("You've collected " + collected_keys + " out of " + req + " required keys. You need " + missing + " more keys to unlock the door.", "general");
 }
 else
 {
-speak("You've collected enough required keys to unlock the door!");
+speak_buffer("You've collected enough required keys to unlock the door!", "general");
 }
     }
     else if (endless)
     {
-        speak("The door is at " + doors[0].startx + ", " + doors[0].starty + ".");
+        speak_buffer("The door is at " + doors[0].startx + ", " + doors[0].starty + ".", "general");
     }
     else
     {
@@ -297,56 +298,56 @@ speak("You've collected enough required keys to unlock the door!");
         if (dx < 0) direction += (direction == "" ? "on your left" : " and to the left");
         else if (dx > 0) direction += (direction == "" ? "on your right" : " and to the right");
         if (direction == "") direction = "right here";
-        speak("The door is " + direction + ", about " + distance + " feet away.");
+        speak_buffer("The door is " + direction + ", about " + distance + " feet away.", "general");
     }
 }
 if(key_pressed(KEY_L) and doormove==false)
 {
-speak("You're currently on level " + level + " of the " + (endless ? "Endless" : "Normal") + " game mode.");
+speak_buffer("You're currently on level " + level + " of the " + (endless ? "Endless" : "Normal") + " game mode.", "general");
 }
 if(key_pressed(KEY_M) and doormove==false and endless)
 {
-speak("You currently have "+money+" dollars available to spend.");
+speak_buffer("You currently have "+money+" dollars available to spend.", "general");
 }
 if(key_pressed(KEY_C) and doormove==false)
 {
-speak(me.x+", "+me.y+" on "+gmt(me.x,me.y)+". Facing "+facing+".");
+speak_buffer(me.x+", "+me.y+" on "+gmt(me.x,me.y)+". Facing "+facing+".");
 }
 if(key_pressed(KEY_O) and doormove==false)
 {
-speak("There are "+toys.length()+" collectible toys on the field.");
+speak_buffer("There are "+toys.length()+" collectible toys on the field.", "general");
 }
 if(key_pressed(KEY_U) and doormove==false)
 {
-speak("There are "+keys.length()+" collectible keys on the field.");
+speak_buffer("There are "+keys.length()+" collectible keys on the field.", "general");
 }
 if(key_pressed(KEY_J) and doormove==false)
 {
-speak("There are "+cars.length()+" destroyable cars on the field.");
+speak_buffer("There are "+cars.length()+" destroyable cars on the field.", "general");
 }
 if(key_pressed(KEY_E) and doormove==false)
 {
-speak("There are "+gards.length()+" killible gards on the field.");
+speak_buffer("There are "+gards.length()+" killible gards on the field.", "general");
 }
 if(key_pressed(KEY_X) and doormove==false)
 {
-speak("You've taken "+moved_steps+" steps.");
+speak_buffer("You've taken "+moved_steps+" steps.", "general");
 }
 if(key_pressed(KEY_T) and doormove==false)
 {
-speak("You've collected "+collected_toys+" toys.");
+speak_buffer("You've collected "+collected_toys+" toys.", "general");
 }
 if(key_pressed(KEY_K) and doormove==false)
 {
-speak("You've collected "+collected_keys+" keys.");
+speak_buffer("You've collected "+collected_keys+" keys.", "general");
 }
 if(key_pressed(KEY_F) and doormove==false)
 {
-speak("You've destroyed "+destroyed_cars+" cars.");
+speak_buffer("You've destroyed "+destroyed_cars+" cars.", "general");
 }
 if(key_pressed(KEY_Q) and doormove==false)
 {
-speak("You've killed "+killed_gards+" gards.");
+speak_buffer("You've killed "+killed_gards+" gards.", "general");
 }
 if (key_pressed(KEY_Y) and doormove == false)
 {
@@ -356,13 +357,13 @@ if (key_pressed(KEY_Y) and doormove == false)
         if (remaining < 0) remaining = 0;
         int minutes = int(remaining / 60000);
         int seconds = int((remaining % 60000) / 1000);
-        speak("You have " + minutes + " minutes, " + seconds + " seconds to escape the store.");
+        speak_buffer("You have " + minutes + " minutes, " + seconds + " seconds to escape the store.", "general");
     }
     else
     {
         int session_minutes = int(timeelapsed.ms() / 60000);
         int session_seconds = int((timeelapsed.ms() % 60000) / 1000);
-        speak("You've been playing for a total of " + session_minutes + " minutes, " + session_seconds + " seconds.");
+        speak_buffer("You've been playing for a total of " + session_minutes + " minutes, " + session_seconds + " seconds.");
     }
 }
 if(key_pressed(KEY_S) and doormove==false)
@@ -375,12 +376,12 @@ gametimer.pause();
 }
 else
 {
-speak("This store has "+round(storehealth / storemaxhealth * 100, 0) + " percent HP remaining.");
+speak_buffer("This store has "+round(storehealth / storemaxhealth * 100, 0) + " percent HP remaining.", "general");
 }
 }
 if(key_pressed(KEY_H) and doormove==false)
 {
-speak("You have "+round(health / maxhealth * 100, 0) + " percent HP remaining.");
+speak_buffer("You have "+round(health / maxhealth * 100, 0) + " percent HP remaining.", "general");
 }
 if(autorun)
 {
@@ -819,7 +820,7 @@ if (endless and gametimer.elapsed >= last_level_time + (1000 * 60))
 p.play_stationary(get_sound("misc/player/*money*"),false);
     level++;
 money += level * 20;
-speak("Congratulations! You earned $" + (level * 20) + " for surviving to level " + level + ". Great work!");
+speak_buffer("Congratulations! You earned $" + (level * 20) + " for surviving to level " + level + ". Great work!");
     last_level_time = gametimer.elapsed;
     if (level == 2)
     {
@@ -957,7 +958,7 @@ if (gamcopy == true)
         if (choice == "copy")
         {
             clipboard_copy_text(statsummary);
-            if (copexpsounds == true) dlgplay(get_sound("ui/menus/"+menupack+"/*copy*"), false);
+            if (copexpsounds == true) dlgplay(get_sound("ui/other/*copy*"), false);
             dlgmessage_return("All game session results copied to your clipboard.");
         }
         else if (choice == "export")
@@ -965,7 +966,7 @@ if (gamcopy == true)
             poastfile.open(DIRECTORY_APPDATA+"tsatria03/ToyMania/data/stats/player_posts.txt", "w");
             poastfile.write(statsummary);
             poastfile.close();
-            if (copexpsounds == true) dlgplay(get_sound("ui/menus/"+menupack+"/*export*"), false);
+            if (copexpsounds == true) dlgplay(get_sound("ui/other/*export*"), false);
             dlgmessage_return("All game session results exported to data/stats/player_posts.txt.");
         }
     }
@@ -978,6 +979,7 @@ mainmenu();
 
 void toy_game_input2()
 {
+buffercheck();
 if (key_repeating(KEY_ESCAPE) and paused==false)
 {
 gametimer.pause();
@@ -991,7 +993,7 @@ gametimer.pause();
         string confirm = m.get_selected_item_id();
         if (res == -1 or confirm == "no")
         {
-            speak("canceled");
+            speak_buffer("canceled");
 gametimer.resume();
             return;
         }
@@ -1035,37 +1037,37 @@ usetimer.restart();
 if (inv.get_keys().length()>0 and invpos<inv.get_size())
 useitem(inv.get_keys()[invpos]);
 else
-speak("No item in focus.");
+speak_buffer("No item in focus.");
 }
 if(key_repeating(KEY_PRIOR) and toymusvolume!=0 and paused==false)
 {
 toymusvolume+=1;
 muspool.update_sound_start_values(toytrackslot,0,toymusvolume,toymuspitch);
-speak("track "+toymusvolume);
+speak_buffer("track "+toymusvolume);
 writepreffs();
 }
 if(key_repeating(KEY_NEXT) and toymusvolume!=-50 and paused==false)
 {
 toymusvolume-=1;
 muspool.update_sound_start_values(toytrackslot,0,toymusvolume,toymuspitch);
-speak("track "+toymusvolume);
+speak_buffer("track "+toymusvolume);
 writepreffs();
 }
 if(key_repeating(KEY_HOME) and toyambvolume!=0 and paused==false)
 {
 toyambvolume+=1;
 ambpool.update_sound_start_values(toyambslot,0,toyambvolume,toyambpitch);
-speak("source "+toyambvolume);
+speak_buffer("source "+toyambvolume);
 writepreffs();
 }
 if(key_repeating(KEY_END) and toyambvolume!=-50 and paused==false)
 {
 toyambvolume-=1;
 ambpool.update_sound_start_values(toyambslot,0,toyambvolume,toyambpitch);
-speak("source "+toyambvolume);
+speak_buffer("source "+toyambvolume);
 writepreffs();
 }
-if(key_pressed(KEY_P))
+if(key_repeating(KEY_P))
 {
 if(paused==false)
 {
@@ -1113,37 +1115,37 @@ gamsetsmenu2();
 }
 if(key_pressed(KEY_C) and paused==false)
 {
-speak(me.x+", "+me.y+" on "+gmt(me.x,me.y)+". Facing "+facing+".");
+speak_buffer(me.x+", "+me.y+" on "+gmt(me.x,me.y)+". Facing "+facing+".");
 }
 if(key_pressed(KEY_O) and paused==false)
 {
-speak("There are "+toys.length()+" collectible toys on the field.");
+speak_buffer("There are "+toys.length()+" collectible toys on the field.", "general");
 }
 if(key_pressed(KEY_Q) and paused==false)
 {
-speak("You've killed "+killed_thieves+" thieves.");
+speak_buffer("You've killed "+killed_thieves+" thieves.", "general");
 }
 if(key_pressed(KEY_E) and paused==false)
 {
-speak("There are "+thieves.length()+" killible thieves on the field.");
+speak_buffer("There are "+thieves.length()+" killible thieves on the field.", "general");
 }
 if(key_pressed(KEY_X) and paused==false)
 {
-speak("You've taken "+moved_steps+" steps.");
+speak_buffer("You've taken "+moved_steps+" steps.", "general");
 }
 if(key_pressed(KEY_T) and paused==false)
 {
-speak("You've collected "+collected_toys+" toys.");
+speak_buffer("You've collected "+collected_toys+" toys.", "general");
 }
 if (key_pressed(KEY_S) and paused == false)
 {
-speak("The thieves  stole " + stolen_toys + " toys.");
+speak_buffer("The thieves  stole " + stolen_toys + " toys.", "general");
 }
 if (key_pressed(KEY_Y) and paused == false)
 {
         int session_minutes = int(timeelapsed.ms() / 60000);
         int session_seconds = int((timeelapsed.ms() % 60000) / 1000);
-        speak("You've been playing for a total of " + session_minutes + " minutes, " + session_seconds + " seconds.");
+        speak_buffer("You've been playing for a total of " + session_minutes + " minutes, " + session_seconds + " seconds.", "general");
     }
 if(autorun and paused==false)
 {
@@ -1209,9 +1211,14 @@ if (key_pressed(KEY_SPACE) and weapontimer.elapsed >= weapontime and paused == f
 void toygame2()
 {
 if (endless)
-    draw_random_weapon();
+{
+string[] weapons={"feat", "fist"};
+draw_weapon("melee", random_string(weapons));
+}
 else
+{
     draw_weapon("melee", "feat");
+}
 toyambslot=ambpool.play_stationary_extended(get_sound("objects/sources/ambiences/*gameloop*"),true,0,0,toyambvolume,toyambpitch,false);
 mustype="gamemus";
 toytrackslot=muspool.play_stationary_extended(get_sound("objects/sources/tracks/*"+mustype+"*"),true,0,0,toymusvolume,toymuspitch,false);

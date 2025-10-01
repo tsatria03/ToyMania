@@ -41,7 +41,7 @@ if (endless)
 {
 if (play_item_gives==true) p.play_stationary(get_sound("misc/player/*give*"), false);
 give(objs[i].objtype2, 1);
-if (speak_item_collects==true) speak(objs[i].objtype2);
+if (speak_item_collects==true) speak_buffer(objs[i].objtype2);
 }
 objs.remove_at(i);
 return;

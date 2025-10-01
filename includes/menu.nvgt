@@ -30,8 +30,8 @@ if(main == "st")
 {
 if(speak_menu_loading==true) speak("loading");
 m.fade_music();
-        dlgplay(get_sound("ui/menus/"+menupack+"/*speaker*"));
-    if(completesound==true) dlgplay(get_sound("ui/menus/"+menupack+"/*complete*"), false);
+        dlgplay(get_sound("ui/other/*speaker*"));
+    if(completesound==true) dlgplay(get_sound("ui/other/*complete*"), false);
 dlgmessage_return("Speaker test complete.");
     mainmenu();
 }
@@ -158,7 +158,7 @@ if(confirm=="yes")
 if(file_exists(DIRECTORY_APPDATA+"tsatria03/ToyMania/saves/game.tmg")) file_delete(DIRECTORY_APPDATA+"tsatria03/ToyMania/saves/game.tmg");
 resetgame();
 writedata();
-if(completesound==true) dlgplay(get_sound("ui/menus/"+menupack+"/*complete*"), false);
+if(completesound==true) dlgplay(get_sound("ui/other/*complete*"), false);
 dlgmessage_return("Game progresses cleared.");
 gamemenu();
 }
@@ -208,7 +208,7 @@ result += "- Thieves killed: " + total_killed_thieves + "\r\n";
     result += "- Steps taken: " + total_moved_steps + "\r\n";
     result += "- Total playtime: " + total_minutes + " minutes, " + total_seconds + " seconds.\r\n";
     clipboard_copy_text(result);
-if(copexpsounds==true) dlgplay(get_sound("ui/menus/"+menupack+"/*copy*") ,false);
+if(copexpsounds==true) dlgplay(get_sound("ui/other/*copy*"), false);
     dlgmessage_return("All game progresses have been copied to your clipboard.");
     gamemenu();
 }
@@ -255,7 +255,7 @@ result += "- Steps taken: " + total_moved_steps + "\r\n";
 result += "- Total playtime: " + total_minutes + " minutes, " + total_seconds + " seconds.\r\n";
 gamfile.write(result);
 gamfile.close();
-if(copexpsounds==true) dlgplay(get_sound("ui/menus/"+menupack+"/*export*"),false);
+if(copexpsounds==true) dlgplay(get_sound("ui/other/*export*"), false);
 dlgmessage_return("All game progresses have been exported to stats/player_progresses.txt.");
 gamemenu();
 }
@@ -714,7 +714,13 @@ toys["wind_up4 get" + vdesc] = array<string> = {get_sound("equipments/items/norm
 toys["wind_up4 loop"] = get_sound("equipments/items/normal/toys/other/wind_up4/loop.*");
 learnCategories["Toys"] = toys;
 dictionary ui;
-ui["Action complete: used in speaker tests and various other menus"] = get_sound("ui/menus/"+menupack+"/complete.*");
+ui["Action complete: used in speaker tests and various other menus"] = get_sound("ui/other/complete.*");
+ui["Action copy: used in copying stats and various other items"] = get_sound("ui/other/copy.*");
+ui["Action disable: used for disabling various toggles"] = get_sound("ui/other/disable.*");
+ui["Action enable: used for enabling various toggles"] = get_sound("ui/other/enable.*");
+ui["Action export: used in exporting stats and various other items"] = get_sound("ui/other/export.*");
+ui["Buffer choose"] = get_sound("ui/other/choose.*");
+ui["Buffer switch"] = get_sound("ui/other/switch.*");
 ui["Dialog close"] = get_sound("ui/dialogs/"+dlgpack+"/close.*");
 ui["Dialog copy"] = get_sound("ui/dialogs/"+dlgpack+"/copy.*");
 ui["Dialog open"] = get_sound("ui/dialogs/"+dlgpack+"/open.*");
@@ -725,10 +731,6 @@ ui["Menu edge"] = get_sound("ui/menus/"+menupack+"/edge.*");
 ui["Menu enter"] = get_sound("ui/menus/"+menupack+"/enter.*");
 ui["Menu open"] = get_sound("ui/menus/"+menupack+"/open.*");
 ui["Menu wrap"] = get_sound("ui/menus/"+menupack+"/wrap.*");
-ui["Setting disable"] = get_sound("ui/menus/"+menupack+"/disable.*");
-ui["Setting enable"] = get_sound("ui/menus/"+menupack+"/enable.*");
-ui["Stats copy"] = get_sound("ui/menus/"+menupack+"/copy.*");
-ui["Stats export"] = get_sound("ui/menus/"+menupack+"/export.*");
 learnCategories["UI"] = ui;
 dictionary weapons;
 weapons["Bat draw"] = get_sound("equipments/weapons/melee/bat/draw.*");
@@ -848,7 +850,7 @@ if (mres == -1)
             string mode = endless ? "Endless" : "Normal";
             string info = "Current Level: " + level + "\r\nGame Mode: " + mode;
             clipboard_copy_text(info);
-            if (copexpsounds==true) dlgplay(get_sound("ui/menus/"+menupack+"/*copy*"), false);
+            if (copexpsounds==true) dlgplay(get_sound("ui/other/*copy*"), false);
             dlgmessage_return("Your current level and game mode has been copied to the clipboard.");
             pausemenu();
 return;
@@ -880,7 +882,7 @@ if (gamcopy == true)
         if (resp == "copy")
         {
             clipboard_copy_text(statsummary);
-            if (copexpsounds == true) dlgplay(get_sound("ui/menus/"+menupack+"/*copy*"), false);
+            if (copexpsounds == true) dlgplay(get_sound("ui/other/*copy*"), false);
             dlgmessage_return("All game session results copied to your clipboard.");
         }
         else if (resp == "export")
@@ -888,7 +890,7 @@ if (gamcopy == true)
             poastfile.open(DIRECTORY_APPDATA+"tsatria03/ToyMania/stats/player_posts.txt", "w");
             poastfile.write(statsummary);
             poastfile.close();
-            if (copexpsounds == true) dlgplay(get_sound("ui/menus/"+menupack+"/*export*"), false);
+            if (copexpsounds == true) dlgplay(get_sound("ui/other/*export*"), false);
             dlgmessage_return("All game session results exported to stats/player_posts.txt.");
         }
     }
@@ -1169,7 +1171,7 @@ int res = m.run();
 string selected = m.get_selected_item_id();
 if (res == -1)
 {
-speak("Canceled");
+speak_buffer("Canceled");
 boss_timer.resume();
 gametimer.resume();
 return;
@@ -1177,7 +1179,7 @@ return;
 string[] parts = string_split(selected, "|", false);
 if (parts.length() != 2)
 {
-speak("Invalid selection.");
+speak_buffer("Invalid selection.");
 boss_timer.resume();
 gametimer.resume();
 return;
@@ -1190,7 +1192,7 @@ draw_weapon(selected_weptype, selected_weptype2);
 }
 else
 {
-speak("This weapon is already equipped.");
+speak_buffer("This weapon is already equipped.");
 }
 boss_timer.resume();
 gametimer.resume();
@@ -1276,7 +1278,7 @@ m.intro_text = "Choose which game achievements to clear. This will clear your ga
     }
     writedata();
 string modeLabel = (achmode == "session") ? "session" : (achmode == "lifetime") ? "lifetime" : "session and lifetime";
-if(completesound==true) dlgplay(get_sound("ui/menus/"+menupack+"/*complete*"), false);
+if(completesound==true) dlgplay(get_sound("ui/other/*complete*"), false);
 dlgmessage_return("Your " + modeLabel + " achievements have been cleared.");
     achesmenu();
 }
@@ -1301,7 +1303,7 @@ m.fade_music();
         }
     }
     clipboard_copy_text(achievementSummary);
-if(copexpsounds==true) dlgplay(get_sound("ui/menus/"+menupack+"/*copy*") ,false);
+if(copexpsounds==true) dlgplay(get_sound("ui/other/*copy*"), false);
     dlgmessage_return("All game achievements have been copied to your clipboard.");
     achesmenu();
 }
@@ -1324,7 +1326,7 @@ achievementSummary += "- " + achievements[i].get_progress_status() + "\r\n";
 }
 achfile.write(achievementSummary);
 achfile.close();
-if(copexpsounds==true) dlgplay(get_sound("ui/menus/"+menupack+"/*export*"),false);
+if(copexpsounds==true) dlgplay(get_sound("ui/other/*export*"), false);
 dlgmessage_return("All game achievements have been exported to stats/player_achievements.txt.");
 achesmenu();
 }
@@ -1429,7 +1431,7 @@ killed_thieves=0;
         moved_steps = 0;
 session_playtime = 0;
 writedata();
-if(completesound==true) dlgplay(get_sound("ui/menus/"+menupack+"/*complete*"), false);
+if(completesound==true) dlgplay(get_sound("ui/other/*complete*"), false);
         dlgmessage_return("Your session stats have been cleared.");
     }
     if (gsm == "lifetime")
@@ -1442,7 +1444,7 @@ total_killed_thieves=0;
         total_moved_steps = 0;
         total_playtime = 0;
         writedata();
-if(completesound==true) dlgplay(get_sound("ui/menus/"+menupack+"/*complete*"), false);
+if(completesound==true) dlgplay(get_sound("ui/other/*complete*"), false);
         dlgmessage_return("Your lifetime stats have been cleared.");
     }
     if (gsm == "both")
@@ -1461,7 +1463,7 @@ total_killed_thieves=0;
         total_moved_steps = 0;
         total_playtime = 0;
         writedata();
-if(completesound==true) dlgplay(get_sound("ui/menus/"+menupack+"/*complete*"), false);
+if(completesound==true) dlgplay(get_sound("ui/other/*complete*"), false);
         dlgmessage_return("Your session and lifetime stats have been cleared.");
     }
     statsmenu();
@@ -1494,7 +1496,7 @@ statsummary += "- Cars destroyed: " + total_destroyed_cars + "\r\n";
 statsummary += "- Steps taken: " + total_moved_steps + "\r\n";
 statsummary += "- Total playtime: " + total_minutes + " minutes, " + total_seconds + " seconds.\r\n";
     clipboard_copy_text(statsummary);
-if(copexpsounds==true) dlgplay(get_sound("ui/menus/"+menupack+"/*copy*") ,false);
+if(copexpsounds==true) dlgplay(get_sound("ui/other/*copy*"), false);
     dlgmessage_return("All game statistics have been copied to your clipboard.");
     statsmenu();
 }
@@ -1528,7 +1530,7 @@ statsummary += "- Steps taken: " + total_moved_steps + "\r\n";
 statsummary += "- Total playtime: " + total_minutes + " minutes, " + total_seconds + " seconds.\r\n";
 statfile.write(statsummary);
 statfile.close();
-if(copexpsounds==true) dlgplay(get_sound("ui/menus/"+menupack+"/*export*"),false);
+if(copexpsounds==true) dlgplay(get_sound("ui/other/*export*"), false);
 dlgmessage_return("All game statistics have been exported to stats/player_statistics.txt.");
 statsmenu();
 }
@@ -1634,7 +1636,7 @@ if(confirm=="yes")
 if(file_exists(DIRECTORY_APPDATA+"tsatria03/ToyMania/saves/settings.tmg")) file_delete(DIRECTORY_APPDATA+"tsatria03/ToyMania/saves/settings.tmg");
 resetpreffs();
 writepreffs();
-if(completesound==true) dlgplay(get_sound("ui/menus/"+menupack+"/*complete*"), false);
+if(completesound==true) dlgplay(get_sound("ui/other/*complete*"), false);
 dlgmessage_return("Settings reset.");
 mainmenu();
 }
@@ -1642,7 +1644,7 @@ mainmenu();
         if (form.is_pressed(savesets))
         {
 writepreffs();
-if(completesound==true) dlgplay(get_sound("ui/menus/"+menupack+"/*complete*"), false);
+if(completesound==true) dlgplay(get_sound("ui/other/*complete*"), false);
 dlgmessage_return("Settings saved.");
 mainmenu();
 }
@@ -1790,14 +1792,14 @@ speak_item_collects = form.is_checked(collectspeech);
         if (form.is_pressed(cancel) || key_repeating(KEY_ESCAPE))
         {
 spool.play_stationary(get_sound("ui/menus/"+menupack+"/*close*"),false);
-speak("canceled");
+speak_buffer("canceled");
 resume_game();
 return;
         }
         if (form.is_pressed(ok))
         {
 writepreffs();
-speak("Settings saved.");
+speak_buffer("Settings saved.");
 resume_game();
 return;
         }
@@ -1980,7 +1982,7 @@ soundsetsmenu();
     {
         soundcard = devices[mres];
         sound_output_device = mres + 1;
-if(completesound==true) dlgplay(get_sound("ui/menus/"+menupack+"/*complete*"));
+if(completesound==true) dlgplay(get_sound("ui/other/*complete*"), false);
 dlgmessage_return("Sound device set to "+soundcard+".");
 soundsetsmenu();
 }
@@ -2016,7 +2018,7 @@ soundsetsmenu();
 else if (mres>=0 and mres<dlgpacks.length())
 {
 dlgpack=dlgpacks[mres];
-if(completesound==true) dlgplay(get_sound("ui/menus/"+menupack+"/*complete*"));
+if(completesound==true) dlgplay(get_sound("ui/other/*complete*"), false);
 dlgmessage_return("Dialog theme set to "+dlgpack+".");
 soundsetsmenu();
 }
@@ -2053,7 +2055,7 @@ soundsetsmenu();
 else if (mres>=0 and mres<menupacks.length())
 {
 menupack=menupacks[mres];
-if(completesound==true) dlgplay(get_sound("ui/menus/"+menupack+"/*complete*"));
+if(completesound==true) dlgplay(get_sound("ui/other/*complete*"), false);
 dlgmessage_return("Menu theme set to "+menupack+".");
 soundsetsmenu();
 }
@@ -2092,7 +2094,7 @@ else if (mres>=0 and mres<soundpacks.length())
 dlgpack="";
 menupack="";
 soundpack=soundpacks[mres];
-if(completesound==true) dlgplay(get_sound("ui/menus/"+menupack+"/*complete*"));
+if(completesound==true) dlgplay(get_sound("ui/other/*complete*"), false);
 dlgmessage_return("Sound pack set to "+soundpack+".");
 soundsetsmenu();
 }
@@ -2127,14 +2129,14 @@ heartvolume = (form.get_slider(gameHeartbeatVolumeSlider) / 2) - 50;
         if (form.is_pressed(cancel) || key_repeating(KEY_ESCAPE))
         {
 spool.play_stationary(get_sound("ui/menus/"+menupack+"/*close*"),false);
-speak("canceled");
+speak_buffer("canceled");
 resume_game();
 return;
         }
         if (form.is_pressed(ok))
         {
 writepreffs();
-speak("Settings saved.");
+speak_buffer("Settings saved.");
 resume_game();
 return;
         }

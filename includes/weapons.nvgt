@@ -71,7 +71,7 @@ weapontime2 = 100;
 pistol_initialized = true;
 }
 }
-if(announce==true) speak(weptype2 + " equipped");
+if(announce==true) speak_buffer(weptype2 + " equipped");
 weaponslot = p.play_stationary(get_sound("equipments/weapons/" + weapontype + "/" + weapontype2 + "/*draw*"), false);
 }
 void draw_random_weapon(bool announce=true)
@@ -94,7 +94,7 @@ break;
 }
 weapontype2 = random_string(weptypes);
 draw_weapon(weapontype, weapontype2, false);
-if(announce==true) speak(weapontype2 + " randomly equipped");
+if(announce==true) speak_buffer(weapontype2 + " randomly equipped");
 }
 void fire_weapon()
 {
@@ -195,24 +195,24 @@ void reload_weapon()
 {
 if (isReloading)
 {
-speak("This weapon is still reloading.");
+speak_buffer("This weapon is still reloading.");
 return;
 }
 bool isGun = (weapontype2 == "machine_gun" || weapontype2 == "pistol");
 if (!isGun)
 {
-speak("This weapon does not take any ammo.");
+speak_buffer("This weapon does not take any ammo.");
 return;
 }
 if (ammo > 0)
 {
-speak("This weapon is already loaded with ammo.");
+speak_buffer("This weapon is already loaded with ammo.");
 return;
 }
 if (reserved_ammo <= 0)
 {
 weaponslot = p.play_stationary(get_sound("equipments/weapons/"+weapontype+"/"+weapontype2+"/*empty*"), false);
-speak("This weapon has no more reserved ammo to reload.");
+speak_buffer("This weapon has no more reserved ammo to reload.");
 return;
 }
 isReloading = true;

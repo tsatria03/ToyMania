@@ -1,4 +1,9 @@
 New in 4.6.
+Fixed various buffer exporting issues. Buffers can now only be exported if they contain items, preventing empty buffer exports and ensuring cleaner log files.
+Made it so navigating a buffer category provides detailed feedback on the number of items in the currently focused buffer, and your position within it.
+Fixed the bug where buffers continued to speak messages despite being muted. Muted buffers will Now Suppress audible speech output associated with any messages that occur in the game.
+Resolved an issue where muted buffers were not logging messages correctly. Muted buffers will continue logging messages into the buffer for review from now on.
+Introduced a new flexible buffer system that allows you to manage and categorize messages spoken during gameplay. This system enables better organization of in-game messages, supports navigation through logged events, and allows players to mute/unmute specific buffers that don't need to be spoken, but can still be viewed reguardless of it's mute state.
 Added some session and lifetime achievements and statistics for killing thieves.
 Reduced the starting health randomizer for all thieves found in the toy defender mode to make killing them easier in higher difficulties.
 Made it so the toy defender mode uses 2 of your starter weapons by default, instead of the toy collector's laser.

@@ -40,7 +40,7 @@ if (!endless)
 {
 if (play_item_gives==true) p.play_stationary(get_sound("misc/player/*give*"), false);
 give(toys[i].toytype2, 1);
-if (speak_item_collects==true) speak(toys[i].toytype2);
+if (speak_item_collects==true) speak_buffer(toys[i].toytype2);
 }
 collected_toys+=1;
 total_collected_toys+=1;

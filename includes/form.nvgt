@@ -3484,11 +3484,11 @@ class control {
 	void checkbox_toggle() {
 		if (checked == true) {
 			checked = false;
-if(togglesound==true) spool.play_stationary(get_sound("ui/menus/"+menupack+"/*disable*"),false);
+if(togglesound==true) spool.play_stationary(get_sound("ui/other/*disable*"),false);
 			speak("Unchecked", true);
 		} else {
 			checked = true;
-if(togglesound==true) spool.play_stationary(get_sound("ui/menus/"+menupack+"/*enable*"),false);
+if(togglesound==true) spool.play_stationary(get_sound("ui/other/*enable*"),false);
 			speak("Checked", true);
 		}
 	}
