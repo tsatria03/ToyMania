@@ -44,6 +44,22 @@ return true;
 }
 return false;
 }
+bool preglobals()
+{
+if (!SCREEN_READER_AVAILABLE)
+{
+alert("error", "cannot load screen reader components");
+}
+else if (!SOUND_AVAILABLE)
+{
+alert("error", "cannot load soundsystem");
+}
+else
+{
+return true;
+}
+return false;
+}
 bool string_starts_with(const string& in str, const string& in start)
 {
 if (str.length()>=start.length())

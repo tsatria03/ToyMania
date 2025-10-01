@@ -1,5 +1,7 @@
 ####These are the things that need to be finished for future versions of the game.
 
+****Unfinished. Changed the macanics of the toy defender game to be time based.
+****Unfinished. Make it so toys don't break in the toy defender game.
 ****Unfinished. Add a mini map builder into the game.
 ****Unfinished. Add back the tts configuration menu.
 ****Unfinished. Add a mode where you catch toys while falling.
