@@ -22,7 +22,7 @@ bool check_for_updates(string old_version, string projectname, bool precheck = f
     if (!is_newer_version(old_version, new_version))
 {
         if (precheck)
-            alert("No updates available", "You already have the latest "+version+" version of the game!");
+            alert("No updates available", "You already have the latest version of the game!");
         mainmenu();
         return false;
     }

@@ -113,11 +113,12 @@ if (key_pressed(KEY_8) && !doormove && current_weapon != "laser")
 {
 draw_weapon("melee", "laser");
 }
-if (key_pressed(KEY_9) && !doormove)
+if (key_pressed(KEY_9) && endless && !doormove && current_weapon != "machine_gun")
 {
-if (endless)
 draw_weapon("artillery", "machine_gun");
-else
+}
+if (key_pressed(KEY_0) && endless && !doormove && current_weapon != "pistol")
+{
 draw_weapon("artillery", "pistol");
 }
 if(key_repeating(KEY_TAB) and key_up(KEY_LMENU) and key_up(KEY_RMENU))
@@ -1008,6 +1009,13 @@ collected_toys=0;
 killed_thieves = 0;
 moved_steps = 0;
 stolen_toys = 0;
+    for (uint i = 0; i < achievements.length(); i++)
+    {
+        if (achievements[i].isSessionBased)
+        {
+            achievements[i].currentTier = 0;
+        }
+    }
 clear_all_buffers();
 clear_inv();
 destroy_all_thieves();
@@ -1018,6 +1026,7 @@ me.y=25;
 maxx=50;
 maxy=50;
 thievespawn=false;
+toydest = false;
     toyspawn = false;
     mainmenu();
 }
@@ -1077,11 +1086,13 @@ if(key_repeating(KEY_P))
 if(paused==false)
 {
 temp.play_stationary(get_sound("misc/game/*pause*"), false);
+speak_buffer("paused");
 pause_game();
 }
 else if(paused==true)
 {
 temp.play_stationary(get_sound("misc/game/*resume*"), false);
+speak_buffer("resumed");
 resume_game();
 }
 }

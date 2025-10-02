@@ -1,3 +1,7 @@
+New in 4.7.
+Fixed some bugs with the session and lifetime achievements for thieves.
+Made it so the pistol weapon is only available in the endless arcade mode for the toy collector game.
+Made it so toys no longer break in the toy defender game.
 New in 4.6.
 Fixed a bug where opening the door with a sertain amount of required keys would cause the results screen to display an incorrect amount of keys collected in the endless arcade game.
 Fixed various buffer exporting issues. Buffers are now only exported if they contain items, preventing empty buffer exports and ensuring cleaner log files.

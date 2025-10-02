@@ -1,7 +1,6 @@
 ####These are the things that need to be finished for future versions of the game.
 
-****Unfinished. Changed the macanics of the toy defender game to be time based.
-****Unfinished. Make it so toys don't break in the toy defender game.
+****Unfinished. Change the macanics of the toy defender game to be time based.
 ****Unfinished. Add a mini map builder into the game.
 ****Unfinished. Add back the tts configuration menu.
 ****Unfinished. Add a mode where you catch toys while falling.
@@ -16,6 +15,8 @@
 
 ##These are the things that are already finished from earlier versions of the game.
 
+**Finished. Make it so the pistol weapon is only useable in the endless arcade mode.
+**Finished. Make it so toys don't break in the toy defender game.
 **Finished. Fix it to where it doesn't say incorrect key collected amounts in the endless arcade game.
 **Finished. Fix it to where it doesn't think you lost the game when saving over 100 toys in the toy defender game.
 **Finished. Fix the learn sounds menu, and convert it to use the new sound pack system.

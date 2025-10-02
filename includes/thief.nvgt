@@ -106,14 +106,22 @@ if (res != -1 && choice == "yes")
 if (speak_menu_loading)
 {
 string difficulty_name = (gamemod == 1) ? "Easy" : (gamemod == 2) ? "Medium" : (gamemod == 3) ? "Hard" : (gamemod == 4) ? "Insane" : (gamemod == 5) ? "Chaos" : "unknown";
-speak((endless ? "loading endless defense: difficulty " : "loading rush defense: difficulty ") + difficulty_name);
+speak((endless ? "loading endless defense: difficulty " : "loading time defense: difficulty ") + difficulty_name);
 }
 dlgplay(get_sound("misc/game/*launch*"));
 collected_toys = 0;
 killed_thieves=0;
 moved_steps = 0;
 stolen_toys = 0;
+    for (uint i = 0; i < achievements.length(); i++)
+    {
+        if (achievements[i].isSessionBased)
+        {
+            achievements[i].currentTier = 0;
+        }
+    }
 gametimer.restart();
+clear_all_buffers();
 clear_inv();
 me.x = 25;
 me.y = 25;
@@ -121,6 +129,7 @@ maxx = 50;
 maxy = 50;
 store_defense = true;
 thievespawn = true;
+toydest=false;
 toyspawn = true;
 reset_weapons();
 toygame2();

@@ -8,7 +8,8 @@ if (weapontype2 == "fist") return random(15, 18);
 if (weapontype2 == "hammer") return random(18, 21);
 if (weapontype2 == "knife") return random(21, 24);
 if (weapontype2 == "laser") return random(24, 27);
-if (weapontype2 == "pistol" || weapontype2 == "machine_gun") return random(27, 30);
+if (weapontype2 == "machine_gun") return random(27, 30);
+if (weapontype2 == "pistol") return random(30, 33);
 return 0;
 }
 void check_weapon_reload()
@@ -58,9 +59,9 @@ weapontime2 = 100;
 machine_gun_initialized = true;
 }
 }
-else if (weptype2 == "pistol" && !endless)
+else if (weptype2 == "pistol" && endless)
 {
-wepdamage = 27; weprange = 9; weprange2 = 10;
+wepdamage = 30; weprange = 10; weprange2 = 11;
 reload_duration = 2000;
 if (!pistol_initialized)
 {
@@ -81,24 +82,13 @@ string[] artillery = {"machine_gun", "pistol"};
 bool isMelee = (random(0, 1) == 0 || !endless);
 weapontype = isMelee ? "melee" : "artillery";
 string[] weptypes = isMelee ? melee : artillery;
-if (endless && !isMelee)
-{
-for (int i = 0; i < int(weptypes.length()); i++)
-{
-if (weptypes[i] == "pistol")
-{
-weptypes.remove_at(i);
-break;
-}
-}
-}
 weapontype2 = random_string(weptypes);
 draw_weapon(weapontype, weapontype2, false);
 if(announce==true) speak_buffer(weapontype2 + " randomly equipped");
 }
 void fire_weapon()
 {
-bool isGun = (weapontype2 == "pistol" || weapontype2 == "machine_gun");
+bool isGun = (weapontype2 == "machine_gun" || weapontype2 == "pistol");
 if (isGun)
 {
 if (ammo <= 0)
@@ -121,7 +111,7 @@ fire_on_target("thief");
 void fire_on_target(string targetType)
 {
 int dmg = get_weapon_damage();
-bool isGun = (weapontype2 == "pistol" || weapontype2 == "machine_gun");
+bool isGun = (weapontype2 == "machine_gun" || weapontype2 == "pistol");
 for (uint i1 = 0; i1 < bosses.length(); i1++)
 {
 if (targetType == "boss" && absolute(bosses[i1].bossx - me.x) <= weprange && absolute(bosses[i1].bossy - me.y) <= weprange2)
@@ -235,6 +225,6 @@ weapontime = 50;
 weapontime2 = 100;
 reload_duration = 0;
 isReloading = false;
-pistol_initialized = false;
 machine_gun_initialized = false;
+pistol_initialized = false;
 }

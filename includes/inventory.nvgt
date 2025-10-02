@@ -105,14 +105,14 @@ if (objname == "ammo_pack")
 double missing_ammo = max(0, max_reserved_ammo - reserved_ammo);
 if (missing_ammo == 0)
 {
-speak_buffer("You already have enough reserved ammo for this weapon.");
+speak_buffer("You already have enough reserved ammo.");
 return;
 }
 itemslot = p.play_stationary(get_sound("equipments/items/endless/"+objcat+"/"+objname+"/*use*"), false);
 give("ammo_pack", -1);
 double ammo_gained = min(random(5, 10), missing_ammo);
 reserved_ammo += ammo_gained;
-speak_buffer("You received " + round(ammo_gained, 0) + " rounds of ammo from the pack for this weapon.");
+speak_buffer("You received " + round(ammo_gained, 0) + " rounds of ammo from this pack.");
 return;
 }
 else if (objname == "stun_dart")

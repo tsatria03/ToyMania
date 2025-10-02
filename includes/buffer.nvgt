@@ -244,7 +244,7 @@ buffers[i].bpos = 0;
 
 void buffercheck()
 {
-if(key_repeating(KEY_COMMA))
+if(key_repeating(KEY_COMMA) and paused==false)
 {
 if (key_down(KEY_LSHIFT) or key_down(KEY_RSHIFT))
 {
@@ -255,7 +255,7 @@ else
 previous_buffer_item();
 }
 }
-if(key_repeating(KEY_PERIOD))
+if(key_repeating(KEY_PERIOD) and paused==false)
 {
 if (key_down(KEY_LSHIFT) or key_down(KEY_RSHIFT))
 {
@@ -266,25 +266,25 @@ else
 next_buffer_item();
 }
 }
-if(key_repeating(KEY_LBRACKET))
+if(key_repeating(KEY_LBRACKET) and paused==false)
 {
 previous_buffer();
 }
-if(key_repeating(KEY_RBRACKET))
+if(key_repeating(KEY_RBRACKET) and paused==false)
 {
 next_buffer();
 }
 if (shift_is_down())
 {
-if (key_repeating(KEY_M))
+if (key_repeating(KEY_M) and paused==false)
 {
 toggle_buffer();
 }
-if (key_repeating(KEY_C))
+if (key_repeating(KEY_C) and paused==false)
 {
 copy_buffer_item();
 }
-if (key_repeating(KEY_BACKSLASH))
+if (key_repeating(KEY_BACKSLASH) and paused==false)
 {
 if (export_current_buffer())
 {
