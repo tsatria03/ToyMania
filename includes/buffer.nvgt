@@ -201,7 +201,7 @@ speak("Empty.");
 return;
 }
 buffers[bufferpos].bpos=0;
-p.play_stationary_extended(get_sound("ui/other/*choose*"),false,0,(buffers[bufferpos].bpos*100/buffers[bufferpos].items.length())-60,0,(buffers[bufferpos].bpos*100/buffers[bufferpos].items.length())-5,false);
+spool.play_stationary_extended(get_sound("ui/other/*choose*"),false,0,(buffers[bufferpos].bpos*100/buffers[bufferpos].items.length())-60,0,(buffers[bufferpos].bpos*100/buffers[bufferpos].items.length())-5,false);
 speak(buffers[bufferpos].items[buffers[bufferpos].bpos].name);
 }
 void bottom_buffer_item()
@@ -212,7 +212,7 @@ speak("Empty.");
 return;
 }
 buffers[bufferpos].bpos=buffers[bufferpos].items.length()-1;
-p.play_stationary_extended(get_sound("ui/other/*choose*"),false,0,(buffers[bufferpos].bpos*100/buffers[bufferpos].items.length())-60,0,(buffers[bufferpos].bpos*100/buffers[bufferpos].items.length())-5,false);
+spool.play_stationary_extended(get_sound("ui/other/*choose*"),false,0,(buffers[bufferpos].bpos*100/buffers[bufferpos].items.length())-60,0,(buffers[bufferpos].bpos*100/buffers[bufferpos].items.length())-5,false);
 speak(buffers[bufferpos].items[buffers[bufferpos].bpos].name);
 }
 void copy_buffer_item()

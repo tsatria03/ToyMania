@@ -46,6 +46,7 @@ bool heartbeat_playing = false;
 bool paused=false;
 bool store_defense = false;
 bool auto_check_updates = true;
+bool play_logo=true;
 bool autorun=true;
 bool play_ach_scores=true;
 bool speak_ach_scores=true;

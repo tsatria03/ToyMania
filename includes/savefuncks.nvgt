@@ -156,6 +156,10 @@ if(st.d.exists("soundpack"))
 {
 soundpack=st.read_string("soundpack");
 }
+if (st.d.exists("play_logo"))
+{
+play_logo = st.read_bool("play_logo");
+}
 if (st.d.exists("auto_check_updates"))
 {
 auto_check_updates = st.read_bool("auto_check_updates");
@@ -272,6 +276,7 @@ st.add("heartvolume", heartvolume);
 st.add("toyambvolume", toyambvolume);
 st.add("toymusvolume", toymusvolume);
 st.add("master_volume", master_volume);
+st.add("play_logo", play_logo);
 st.add("auto_check_updates", auto_check_updates);
 st.add("menuwrap", menuwrap);
 st.add("showset_desc", showset_desc);

@@ -1662,6 +1662,7 @@ void gamsetsmenu()
 {
     form.reset();
     form.create_window("Game settings", false);
+int logosound = form.create_checkbox("Enable playing the logo sound upon game launch.", play_logo);
 int autoUpdateToggle = form.create_checkbox("Enable checking for game updates at startup.", auto_check_updates);
 int menuWrap = form.create_checkbox("Enable menu wrapping in all menus.", menuwrap);
 int showdesc = form.create_checkbox("Enable showing toggleable item descriptions.", showset_desc);
@@ -1722,12 +1723,13 @@ int togsound2 = -1;
 if (showset_desc) togsound2 = form.create_input_box("Toggle switch SFX: description", "This setting controls the sounds played when you enable or disable sertain settings found in the prefferences menu.", "", 0, true, true);
     int cancel = form.create_button("&cancel");
 int ok = form.create_button("&okay");
-form.focus(autoUpdateToggle);
+form.focus(logosound);
 spool.play_stationary(get_sound("ui/menus/"+menupack+"/*open*"),false);
     while (true)
     {
         wait(5);
         form.monitor();
+play_logo=form.is_checked(logosound);
 auto_check_updates=form.is_checked(autoUpdateToggle);
 menuwrap = form.is_checked(menuWrap);
 showset_desc = form.is_checked(showdesc);

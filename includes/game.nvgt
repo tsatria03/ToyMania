@@ -1238,7 +1238,7 @@ else
 toyambslot=ambpool.play_stationary_extended(get_sound("objects/sources/ambiences/*gameloop*"),true,0,0,toyambvolume,toyambpitch,false);
 mustype="gamemus";
 toytrackslot=muspool.play_stationary_extended(get_sound("objects/sources/tracks/*"+mustype+"*"),true,0,0,toymusvolume,toymuspitch,false);
-spawn_platform(0, maxx, 0, maxy, "marble");
+spawn_platform(0, maxx, 0, maxy, "wood");
 p.play_stationary(get_sound("objects/platforms/"+gmt(me.x,me.y)+"/*land*"), false);
 while(true)
 {
