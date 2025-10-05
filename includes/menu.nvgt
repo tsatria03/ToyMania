@@ -1,10 +1,12 @@
 void mainmenu()
 {
 setupmenu();
+m.add_item("documentation menu", "dm");
 m.add_item("game menu", "gm");
 m.add_item("settings menu", "sm");
 m.add_item("check for updates", "chup");
 m.add_item("test speakers", "st");
+if(play_logo==true) m.add_item("replay logo", "rpl");
 if(system_is_windows) m.add_item("restart game", "rt");
 m.add_item("exit game", "ex");
 m.intro_text = "Main menu. Please choose an option with your arrow keys, then press enter to activate one.";
@@ -15,6 +17,10 @@ if(mres==-1)
 speak("exiting");
 m.fade_music();
 exit();
+}
+if (main == "dm")
+{
+docksmenu();
 }
 if (main == "gm")
 {
@@ -33,6 +39,13 @@ m.fade_music();
         dlgplay(get_sound("ui/other/*speaker*"));
     if(completesound==true) dlgplay(get_sound("ui/other/*complete*"), false);
 dlgmessage_return("Speaker test complete.");
+    mainmenu();
+}
+if(main == "rpl")
+{
+if(speak_menu_loading==true) speak("loading");
+m.fade_music();
+        dlgplay(get_sound("misc/game/*logo*"));
     mainmenu();
 }
 if (main == "chup")
@@ -62,12 +75,12 @@ m.add_item("credits", "credits");
 m.add_item("readme", "readme");
 m.add_item("todo_list", "todo_list");
 m.add_item("back", "back");
-m.intro_text = "User guides menu. You can access help guides and other resources explaining how the game works here.";
+m.intro_text = "Documentation menu. You can access help guides and other resources explaining how the game works here.";
 int mres=m.run();
 string dnm=m.get_selected_item_id();
 if(mres==-1)
 {
-gamemenu();
+mainmenu();
 }
 if(dnm=="changelog")
 {
@@ -95,7 +108,7 @@ dockread("todo_list.txt");
 }
 if(dnm=="back")
 {
-gamemenu();
+mainmenu();
 }
 }
 void gamemenu()
@@ -103,7 +116,6 @@ void gamemenu()
 setupmenu();
 m.add_item("play game", "pg");
 m.add_item("learn game sounds", "gsm");
-m.add_item("read game user guides", "dm");
 m.add_item("view game achievements", "ach");
 m.add_item("view game statistics", "stats");
 m.add_item("Clear game progresses.", "cgr");
@@ -126,10 +138,6 @@ if (gamem == "gsm")
 if(speak_menu_loading==true) speak("loading");
 m.fade_music();
 learnsoundsmenu();
-}
-if (gamem == "dm")
-{
-docksmenu();
 }
 if (gamem == "ach")
 {
@@ -580,10 +588,16 @@ player["Life achievement"] = get_sound("misc/player/achlife.*");
 player["Marble fall: used in normal mode"] = get_sound("objects/platforms/marble/fall.*");
 player["Marble land: used in normal mode"] = get_sound("objects/platforms/marble/land.*");
 player["Marble step: used in normal mode" + vdesc] = array<string> = {get_sound("objects/platforms/marble/step1.*"), get_sound("objects/platforms/marble/step2.*"), get_sound("objects/platforms/marble/step3.*"), get_sound("objects/platforms/marble/step4.*"), get_sound("objects/platforms/marble/step5.*")};
+player["Metal fall"] = get_sound("objects/platforms/metal/fall.*");
+player["Metal land"] = get_sound("objects/platforms/metal/land.*");
+player["Metal step" + vdesc] = array<string> = {get_sound("objects/platforms/metal/step1.*"), get_sound("objects/platforms/metal/step2.*"), get_sound("objects/platforms/metal/step3.*"), get_sound("objects/platforms/metal/step4.*"), get_sound("objects/platforms/metal/step5.*")};
 player["Purchase complete: used in endless mode" + vdesc] = array<string> = {get_sound("misc/store/buy1.*"), get_sound("misc/store/buy2.*"), get_sound("misc/store/buy3.*"), get_sound("misc/store/buy4.*")};
 player["Purchase error: used in endless mode"] = get_sound("misc/store/error.*");
 player["Session achievement"] = get_sound("misc/player/achsession.*");
 player["Turn"] = get_sound("misc/player/turn.*");
+player["Wood fall"] = get_sound("objects/platforms/wood/fall.*");
+player["Wood land"] = get_sound("objects/platforms/wood/land.*");
+player["Wood step" + vdesc] = array<string> = {get_sound("objects/platforms/wood/step1.*"), get_sound("objects/platforms/wood/step2.*"), get_sound("objects/platforms/wood/step3.*"), get_sound("objects/platforms/wood/step4.*"), get_sound("objects/platforms/wood/step5.*")};
 learnCategories["Player"] = player;
 dictionary thieves;
 thieves["thief Death"] = get_sound("npc/thieves/thief/death.*");
@@ -1903,13 +1917,13 @@ if (form.is_pressed(ambTest))
 {
     if (ambpool.sound_is_playing(toyambslot))
 {
-if(togglesound==true) spool.play_stationary(get_sound("ui/menus/"+menupack+"/*disable*"),false);
+if(togglesound==true) spool.play_stationary(get_sound("ui/other/*disable*"),false);
 speak("ambience off");
         ambpool.destroy_sound(toyambslot);
     }
 else
 {
-if(togglesound==true) spool.play_stationary(get_sound("ui/menus/"+menupack+"/*enable*"),false);
+if(togglesound==true) spool.play_stationary(get_sound("ui/other/*enable*"),false);
 speak("ambience on");
         toyambslot = ambpool.play_stationary(get_sound("objects/sources/ambiences/*gameloop*"), true);
     }
@@ -1918,7 +1932,7 @@ if (form.is_pressed(musTest))
 {
     if (muspool.sound_is_playing(toytrackslot))
     {
-if(togglesound==true) spool.play_stationary(get_sound("ui/menus/"+menupack+"/*disable*"), false);
+if(togglesound==true) spool.play_stationary(get_sound("ui/other/*disable*"),false);
 speak("music off");
         muspool.destroy_sound(toytrackslot);
         lastMusicIndex = -1;
@@ -1929,7 +1943,7 @@ speak("music off");
         if (musIndex >= 0)
         {
 mustype = form.get_list_item_id(musList, musIndex);
-if(togglesound==true) spool.play_stationary(get_sound("ui/menus/"+menupack+"/*enable*"), false);
+if(togglesound==true) spool.play_stationary(get_sound("ui/other/*enable*"),false);
 speak("music on");
             muspool.destroy_sound(toytrackslot);
             toytrackslot = muspool.play_stationary(get_sound("objects/sources/tracks/*"+mustype+"*"), true);
@@ -1941,13 +1955,13 @@ if (form.is_pressed(alarmTest))
 {
     if (alarmpool.sound_is_playing(alarmslot))
 {
-if(togglesound==true) spool.play_stationary(get_sound("ui/menus/"+menupack+"/*disable*"), false);
+if(togglesound==true) spool.play_stationary(get_sound("ui/other/*disable*"),false);
 speak("alarm off");
         alarmpool.destroy_sound(alarmslot);
     }
 else
 {
-if(togglesound==true) spool.play_stationary(get_sound("ui/menus/"+menupack+"/*enable*"), false);
+if(togglesound==true) spool.play_stationary(get_sound("ui/other/*enable*"),false);
 speak("alarm on");
         alarmslot = alarmpool.play_stationary(get_sound("objects/sources/ambiences/*alarmloop*"), true);
     }
@@ -1956,13 +1970,13 @@ if (form.is_pressed(heartbeatTest))
 {
     if (heartpool.sound_is_playing(heartslot))
 {
-if(togglesound==true) spool.play_stationary(get_sound("ui/menus/"+menupack+"/*disable*"), false);
+if(togglesound==true) spool.play_stationary(get_sound("ui/other/*disable*"),false);
 speak("heartbeat off");
         heartpool.destroy_sound(heartslot);
     }
 else
 {
-if(togglesound==true) spool.play_stationary(get_sound("ui/menus/"+menupack+"/*enable*"), false);
+if(togglesound==true) spool.play_stationary(get_sound("ui/other/*enable*"),false);
 speak("heartbeat on");
         heartslot = heartpool.play_stationary(get_sound("misc/player/*heartstart*"), true);
     }

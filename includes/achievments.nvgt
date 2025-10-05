@@ -148,7 +148,7 @@ void update_achievements()
             else
             {
                 if(play_ach_scores==true) achslot = pool.play_stationary(get_sound("misc/player/*"+soundname+"*"), false);
-                if(speak_ach_scores==true) speak_buffer("Congratulations! You just unlocked Tier " + achievements[i].currentTier + " of the " + typeLabel + baseName + " achievement. You've " + actionVerb + value + " " + unit + ". Nice work!");
+                if(speak_ach_scores==true) speak_buffer("Congratulations! You just unlocked Tier " + achievements[i].currentTier + " of the " + typeLabel + baseName + " achievement. You've " + actionVerb + value + " " + unit + ". Nice work!", "achievements");
             }
         }
     }

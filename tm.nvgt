@@ -30,6 +30,7 @@ exit();
 }
 else
 {
+create_buffer("achievements");
 create_buffer("general");
 create_buffer("misc");
 if(play_logo==true) dlgplay(get_sound("misc/game/*logo*"));

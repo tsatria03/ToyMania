@@ -1,6 +1,9 @@
 New in 4.7.
+Moved the user guides menu out of the game menu. It's now located in the main menu, and also renamed to documentation menu.
+Added an achievements buffer that keeps track of all of the session and lifetime achievements you've unlocked in the game.
+Added an item in the main menu to replay the logo sound that's herd when you launch the game. This will only show up when the play logo setting is enabled in the game settings menu.
 Added an option in the game settings menu to enable or disable playing the logo sound upon launching the game.
-Added some new sounds to the game. Thanks goes to Keri for the huge contribution. This includes a pritty logo, and a custom wood platform for the toy defender mode.
+Added some new sounds to the game. Thanks goes to Keri for the huge contribution. This includes a pritty logo, and a custom metal and wood platform for the toy defender mode.
 Fixed some bugs with the session and lifetime achievements for thieves.
 Made it so the pistol weapon is only available in the endless arcade mode for the toy collector game.
 Made it so toys no longer break in the toy defender game.
