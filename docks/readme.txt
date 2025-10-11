@@ -11,7 +11,7 @@ Letter, F: Announces how many cars you've destroyed, if pressed.
 Letter, J: Announces how many destroyable cars there are on the field, if pressed.
 Letter, S: Announces how much health the store has in the normal game mode, if pressed. In the endless game mode, this shortcut brings up the shop menu.
 Letter, H: Announces how much health you have, if pressed.
-Letter, L: Announces what level you're on and the game mode at witch you are playing, if pressed.
+Letter, L: Announces what level you're on and the game mode at which you are playing, if pressed.
 Letter, Y: Announces how much time you've been playing the game for, if pressed. In the sixth level of the Normal game Mode, it announces how much time you have left to escape the store instead.
 Letter, T: Announces how many toys you've collected, if pressed.
 Letter, O: Announces how many collectible toys there are on the field, if pressed.
@@ -80,7 +80,7 @@ buy.ogg: This sound is played when your character purchases upgrades.
 death.ogg: This sound is played when your character dies.
 heal.ogg: This sound is played When your character is healing.
 hurt.ogg: This sound is played when your character gets hurt.
-inv.ogg: This sound is played when your character cycles through there inventory.
+inv.ogg: This sound is played when your character cycles through their inventory.
 land.ogg: This sound is played when your character lands on a platform.
 lev.ogg: This sound is played when your character levels up.
 turn.ogg: This sound is played when your character turns on the spot.
@@ -94,11 +94,11 @@ loop.ogg: This sound is played when an item is being looped.
 
 Weapon sound listing: 6 total.
 draw.ogg: This sound is played when a weapon is being drawn.
-empty.ogg: This sound is played when a non melee weapon is being emptyed.
+empty.ogg: This sound is played when a non-melee weapon is being emptied.
 fire.ogg: This sound is played when a weapon is being used.
 hit.ogg: This sound is played when a weapon is used.
-reload.ogg: This sound is played when a non melee weapon is being reloaded with ammo.
-shell.ogg: This sound is played when a non melee weapon dropps ammo shells.
+reload.ogg: This sound is played when a non-melee weapon is being reloaded with ammo.
+shell.ogg: This sound is played when a non-melee weapon drops ammo shells.
 
 Menu sound listing: 7 total.
 click.ogg: This sound is played when you go through menu items.
