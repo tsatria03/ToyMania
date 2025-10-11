@@ -128,7 +128,7 @@ int string_to_int(string str)
     }
     return isNegative ? -result : result;
 }
-string find_sound(string soundname)
+string find_sound_in_disk(string soundname)
 {
 string[] snd=find_files(soundname);
 if (snd.length()>0)
@@ -140,9 +140,42 @@ return path+snd[random(0,snd.length()-1)];
 else
 return "";
 }
-string get_sound(const string&in path)
+string find_sound_in_pack(const string name, const string format = "", pack@[] packs = {})
 {
-return find_sound("sounds/" + soundpack + "/" + path);
+uint l1, l2, l3;
+pack@ p;
+string[] files;
+string wildcards = "%0.*".format(name);
+string ffile;
+string[] formats = {"ogg", "mp3", "wav"};
+regexp re("^%0\\.(%1)$".format(name, (format.empty()) ? join(formats, "|") : format), RE_CASELESS);
+packs.insert_last(sound_default_pack);
+l1 = packs.length();
+for (uint i = 0; i < l1; i ++) {
+@p = @packs[i];
+if (p == null)
+continue;
+files = p.list_files();
+l2 = files.length();
+for (uint j = 0; j < l2; j ++) {
+if (re.match(files[j]))
+return files[j];
+}
+}
+files = find_files(wildcards);
+l3 = files.length();
+if (l3 < 1)
+return "";
+for (uint i = 0; i < l3; i ++) {
+if (re.match(files[i]))
+return files[i];
+}
+return "";
+}
+string get_sound(const string&in path, bool search_packs = false)
+{
+string fullpath = "sounds/" + soundpack + "/" + path;
+return search_packs ? find_sound_in_pack(fullpath) : find_sound_in_disk(fullpath);
 }
 string gmt(double x, double y)
 {

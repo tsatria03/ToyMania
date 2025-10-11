@@ -15,8 +15,10 @@ string clean_message = string_replace(message, " Press enter or space to continu
 clipboard_copy_text(clean_message);
 speak("Text copied");
 }
-if (key_repeating(KEY_LEFT) or key_repeating(KEY_RIGHT) or key_repeating(KEY_UP) or key_repeating(KEY_DOWN))
+if (key_repeating(KEY_LEFT) or key_repeating(KEY_RIGHT) or key_repeating(KEY_UP) or key_repeating(KEY_DOWN) or key_repeating(KEY_TAB))
 {
+temp.destroy_all();
+temp.play_stationary(get_sound("ui/dialogs/"+dlgpack+"/*scroll*"), false);
 speak(message);
 }
 if (key_repeating(KEY_ESCAPE))

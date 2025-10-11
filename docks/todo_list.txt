@@ -8,7 +8,6 @@
 ****Unfinished. Add a mode where you ancer questions about toy sounds.
 ****Unfinished. Add a mode where you have to put the toys you collect in a shopping cart.
 ****Unfinished. Add a mode where you get to watch enemies fight each other. This includes cars.
-****Unfinished. Add a mode that allows you to collect and play with the toys you have in your inventory.
 ****Unfinished. Add car and guard related items for the endless mode, such as car and guard callers.
 ****Unfinished. Fix weapon ranges.
 ****Unfinished. Add an online scoreboard system.
