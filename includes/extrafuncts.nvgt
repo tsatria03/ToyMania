@@ -174,7 +174,7 @@ return "";
 }
 string get_sound(const string&in path, bool search_packs = false)
 {
-string fullpath = "sounds/" + soundpack + "/" + path;
+string fullpath = "data/sounds/" + soundpack + "/" + path;
 return search_packs ? find_sound_in_pack(fullpath) : find_sound_in_disk(fullpath);
 }
 string gmt(double x, double y)
