@@ -1050,7 +1050,7 @@ dictionary itemfolders;
 for (uint i = 0; i < folders.length(); i++)
 {
 string folder = folders[i];
-string[] itemlist = find_directories("sounds/" + soundpack + "/equipments/items/endless/" + folder + "/*");
+string[] itemlist = find_directories("data/sounds/" + soundpack + "/equipments/items/endless/" + folder + "/*");
 for (uint j = 0; j < itemlist.length(); j++)
 {
 string itemname = itemlist[j];
@@ -2017,7 +2017,7 @@ ambpool.destroy_sound(toyambslot);
 muspool.destroy_sound(toytrackslot);
 alarmpool.destroy_sound(alarmslot);
 heartpool.destroy_sound(heartslot);
-string[] dlgpacktyp=find_directories("sounds/"+soundpack+"/ui/dialogs/*");
+string[] dlgpacktyp=find_directories("data/sounds/"+soundpack+"/ui/dialogs/*");
 if(dlgpacktyp.length()==0)
 {
 dlgmessage_return("Error. There are no dialog themes available to view.");
@@ -2025,11 +2025,11 @@ soundsetsmenu();
 }
 else
 {
-string[] dlgpacks=find_directories("sounds/"+soundpack+"/ui/dialogs/*");
+string[] dlgpacks=find_directories("data/sounds/"+soundpack+"/ui/dialogs/*");
 setupmenu(false);
 for(uint i=0; i<dlgpacks.length(); i++)
 {
-uint64 size = get_directory_size("sounds/"+soundpack+"/ui/dialogs/" + dlgpacks[i]);
+uint64 size = get_directory_size("data/sounds/"+soundpack+"/ui/dialogs/" + dlgpacks[i]);
 string readable_size = measure_file_size(size);
 m.add_item(dlgpacks[i]+", size: "+readable_size,dlgpacks[i]);
 }
@@ -2054,7 +2054,7 @@ ambpool.destroy_sound(toyambslot);
 muspool.destroy_sound(toytrackslot);
 alarmpool.destroy_sound(alarmslot);
 heartpool.destroy_sound(heartslot);
-string[] menupacktyp=find_directories("sounds/"+soundpack+"/ui/menus/*");
+string[] menupacktyp=find_directories("data/sounds/"+soundpack+"/ui/menus/*");
 if(menupacktyp.length()==0)
 {
 dlgmessage_return("Error. There are no dialog themes available to view.");
@@ -2062,11 +2062,11 @@ soundsetsmenu();
 }
 else
 {
-string[] menupacks=find_directories("sounds/"+soundpack+"/ui/menus/*");
+string[] menupacks=find_directories("data/sounds/"+soundpack+"/ui/menus/*");
 setupmenu(false);
 for(uint i=0; i<menupacks.length(); i++)
 {
-uint64 size = get_directory_size("sounds/"+soundpack+"/ui/menus/" + menupacks[i]);
+uint64 size = get_directory_size("data/sounds/"+soundpack+"/ui/menus/" + menupacks[i]);
 string readable_size = measure_file_size(size);
 m.add_item(menupacks[i]+", size: "+readable_size,menupacks[i]);
 }
@@ -2091,7 +2091,7 @@ ambpool.destroy_sound(toyambslot);
 muspool.destroy_sound(toytrackslot);
 alarmpool.destroy_sound(alarmslot);
 heartpool.destroy_sound(heartslot);
-string[] soundpacktyp=find_directories("sounds/*");
+string[] soundpacktyp=find_directories("data/sounds/*");
 if(soundpacktyp.length()==0)
 {
 dlgmessage_return("Error. There are no sound packs available to view.");
@@ -2099,11 +2099,11 @@ soundsetsmenu();
 }
 else
 {
-string[] soundpacks=find_directories("sounds/*");
+string[] soundpacks=find_directories("data/sounds/*");
 setupmenu(false);
 for(uint i=0; i<soundpacks.length(); i++)
 {
-uint64 size = get_directory_size("sounds/" + soundpacks[i]);
+uint64 size = get_directory_size("data/sounds/" + soundpacks[i]);
 string readable_size = measure_file_size(size);
 m.add_item(soundpacks[i]+", size: "+readable_size,soundpacks[i]);
 }

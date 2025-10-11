@@ -1,6 +1,0 @@
-changelog.txt
-credits.txt
-readme.txt
-todo_list.txt
-version.txt
-total files: 5

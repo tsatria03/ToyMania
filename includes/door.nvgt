@@ -59,7 +59,7 @@ string[] keycats = {"common", "other"};
 for (uint k = 0; k < keycats.length(); k++)
 {
 string cat = keycats[k];
-string[] keytypes = find_directories("sounds/" + soundpack + "/equipments/items/normal/keys/" + cat + "/*");
+string[] keytypes = find_directories("data/sounds/" + soundpack + "/equipments/items/normal/keys/" + cat + "/*");
 for (uint j = 0; j < keytypes.length(); j++)
 {
 inv_key_count += max(0, item_exists(keytypes[j]));
@@ -80,7 +80,7 @@ string[] keycats = {"common", "other"};
 for (uint k = 0; k < keycats.length(); k++)
 {
 string cat = keycats[k];
-string[] keytypes = find_directories("sounds/" + soundpack + "/equipments/items/normal/keys/" + cat + "/*");
+string[] keytypes = find_directories("data/sounds/" + soundpack + "/equipments/items/normal/keys/" + cat + "/*");
 for (uint j = 0; j < keytypes.length(); j++)
 {
 string keyname = keytypes[j];

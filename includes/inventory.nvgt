@@ -57,13 +57,13 @@ string[] keycats = {"common", "other"};
 for (uint i = 0; i < keycats.length(); i++)
 {
 string keycat = keycats[i];
-string[] keytypes = find_directories("sounds/" + soundpack + "/equipments/items/normal/keys/" + keycat + "/*");
+string[] keytypes = find_directories("data/sounds/" + soundpack + "/equipments/items/normal/keys/" + keycat + "/*");
 for (uint j = 0; j < keytypes.length(); j++)
 {
 string keyname = keytypes[j];
 if (current == keyname)
 {
-string path = "sounds/" + soundpack + "/equipments/items/normal/keys/" + keycat + "/" + keyname + "/info.tmf";
+string path = "data/sounds/" + soundpack + "/equipments/items/normal/keys/" + keycat + "/" + keyname + "/info.tmf";
 if (file_exists(path))
 {
 keyfile.open(path, "rb");
@@ -94,7 +94,7 @@ string[] objcats = {"common", "other"};
 for (uint i = 0; i < objcats.length(); i++)
 {
 string objcat = objcats[i];
-string[] objtypes = find_directories("sounds/" + soundpack + "/equipments/items/endless/" + objcat + "/*");
+string[] objtypes = find_directories("data/sounds/" + soundpack + "/equipments/items/endless/" + objcat + "/*");
 for (uint j = 0; j < objtypes.length(); j++)
 {
 string objname = objtypes[j];
@@ -184,13 +184,13 @@ string[] toycats = {"common", "other"};
 for (uint i = 0; i < toycats.length(); i++)
 {
 string toycat = toycats[i];
-string[] toytypes = find_directories("sounds/" + soundpack + "/equipments/items/normal/toys/" + toycat + "/*");
+string[] toytypes = find_directories("data/sounds/" + soundpack + "/equipments/items/normal/toys/" + toycat + "/*");
 for (uint j = 0; j < toytypes.length(); j++)
 {
 string toyname = toytypes[j];
 if (current == toyname)
 {
-string path = "sounds/" + soundpack + "/equipments/items/normal/toys/" + toycat + "/" + toyname + "/info.tmf";
+string path = "data/sounds/" + soundpack + "/equipments/items/normal/toys/" + toycat + "/" + toyname + "/info.tmf";
 if (file_exists(path))
 {
 toyfile.open(path, "rb");
