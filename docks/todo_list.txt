@@ -2,14 +2,12 @@
 
 ****Unfinished. Change the macanics of the toy defender game to be time based.
 ****Unfinished. Add a mini map builder into the game.
-****Unfinished. Add back the tts configuration menu.
+****Unfinished. Add a mode where you get to watch enemies fight each other. This includes cars.
 ****Unfinished. Add a mode where you catch toys while falling.
 ****Unfinished. Add a mode where you memorize toy sounds.
-****Unfinished. Add a mode where you ancer questions about toy sounds.
-****Unfinished. Add a mode where you have to put the toys you collect in a shopping cart.
-****Unfinished. Add a mode where you get to watch enemies fight each other. This includes cars.
+****Unfinished. Add a mode where you ancer quiz questions about toy sounds.
 ****Unfinished. Add car and guard related items for the endless mode, such as car and guard callers.
-****Unfinished. Fix weapon ranges.
+****Unfinished. Add back the tts configuration menu.
 ****Unfinished. Add an online scoreboard system.
 
 ##These are the things that are already finished from earlier versions of the game.

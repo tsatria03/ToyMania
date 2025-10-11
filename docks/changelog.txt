@@ -1,4 +1,5 @@
 New in 4.7.
+Reverted the compressed pack file layout for reading documentation found in the game. The contents of the docks folder is no longer contained in it's own pack file from now on.
 Moved the user guides menu out of the game menu. It's now located in the main menu, and also renamed to documentation menu.
 Added an achievements buffer that keeps track of all of the session and lifetime achievements you've unlocked in the game.
 Added an item in the main menu to replay the logo sound that's herd when you launch the game. This will only show up when the play logo setting is enabled in the game settings menu.

@@ -1,3 +1,7 @@
+#pragma asset data
+#pragma asset sounds
+#pragma plugin nvgt_curl
+
 #include"bgt_compat.nvgt"
 #include"file_contents.nvgt"
 #include"instance.nvgt"
@@ -35,7 +39,6 @@
 #include"virtual_dialogs.nvgt"
 #include"weapons.nvgt"
 
-bool dockpack_loaded = false;
 bool behind_pitch=true;
 bool hrtf=true;
 bool y_is_elevation=true;
@@ -116,8 +119,7 @@ string weapontype="melee";
 string weapontype2="bat";
 string soundcard="Default";
 timer boss_timer, bossespawntimer, carspawntimer, gametimer, gardspawntimer, objspawntimer, thievespawntimer, keyspawntimer, movetimer, runtimer, toyspawntimer, usetimer, walktimer, weapontimer, weapontimer2, reloadTimer, savedata_timer;
-file achfile, gamfile, keyfile, logfile, objfile, poastfile, statfile, toyfile;
-pack dockpack;
+file achfile, dockfile, dockver, gamfile, keyfile, logfile, objfile, poastfile, statfile, toyfile;
 instance gamstence("tm");
 audio_form form;
 sound dummy;

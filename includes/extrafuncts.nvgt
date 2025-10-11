@@ -360,27 +360,18 @@ toypool.volume_step = 2.5;
 }
 void dockread(const string&in filename)
 {
-string displayname = string_replace(filename, "docks/", "", true);
-if (!dockpack_loaded)
+if(!file_exists(filename))
 {
-if (!dockpack.open("*", PACK_OPEN_MODE_READ))
-{
-alert("Error", "Could not open the docks.tmg file!");
+alert("Error", "Could not fined "+string_replace(filename, "docks/", "", true));
 docksmenu();
 }
-dockpack_loaded = true;
-}
-if (!dockpack.file_exists(displayname))
-{
-alert("Error", "Could not find "+displayname+" inside the docks.tmg file.");
-docksmenu();
-}
-uint size = dockpack.get_file_size(displayname);
-string docktext = dockpack.read_file(displayname, 0, size);
+dockfile.open(filename,"rb");
+string docktext=dockfile.read();
+dockfile.close();
 form.reset();
-form.create_window("Viewing "+displayname,false,false,false);
-int dockbox = form.create_input_box(displayname, docktext, read_only:true, multiline:true);
-int dockclose = form.create_button("&close",false,true);
+form.create_window("Viewing "+string_replace(filename, "docks/", "", true),false,false,false);
+int dockbox=form.create_input_box(string_replace(filename, "docks/", "", true), docktext, read_only:true, multiline:true);
+int dockclose=form.create_button("&close",false,true);
 form.focus(dockbox);
 while(true)
 {

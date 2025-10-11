@@ -1,7 +1,3 @@
-#pragma asset data
-#pragma asset sounds
-#pragma plugin nvgt_curl
-#pragma embed "data/res/docks.tmg"
 #include"includes/includes.nvgt"
 void main()
 {
@@ -44,24 +40,9 @@ wait(500);
 }
 void getver()
 {
-if (!dockpack_loaded)
-{
-if (!dockpack.open("*", PACK_OPEN_MODE_READ))
-{
-alert("Error", "Could not open the docks.tmg file!");
-return;
-}
-dockpack_loaded = true;
-}
-if (dockpack.file_exists("version.txt"))
-{
-uint size = dockpack.get_file_size("version.txt");
-version = dockpack.read_file("version.txt", 0, size);
-}
-else
-{
-version = "unknown";
-}
+dockver.open("docks/version.txt","rb");
+version=dockver.read();
+dockver.close();
 }
 void pause_game()
 {
