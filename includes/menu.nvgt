@@ -86,25 +86,25 @@ if(dnm=="changelog")
 {
 if(speak_menu_loading==true) speak("loading");
 m.fade_music();
-dockread("changelog.txt");
+dockread("docks/changelog.txt");
 }
 if(dnm=="credits")
 {
 if(speak_menu_loading==true) speak("loading");
 m.fade_music();
-dockread("credits.txt");
+dockread("docks/credits.txt");
 }
 if(dnm=="readme")
 {
 if(speak_menu_loading==true) speak("loading");
 m.fade_music();
-dockread("readme.txt");
+dockread("docks/readme.txt");
 }
 if(dnm=="todo_list")
 {
 if(speak_menu_loading==true) speak("loading");
 m.fade_music();
-dockread("todo_list.txt");
+dockread("docks/todo_list.txt");
 }
 if(dnm=="back")
 {
