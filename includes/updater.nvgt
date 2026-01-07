@@ -11,7 +11,7 @@ bool check_for_updates(string old_version, string projectname, bool precheck = f
         speak("Checking for updates...");
         wait(1000);
     }
-    string version_url = "https://tsatria03.github.io/projects/" + projectname + "/version.txt";
+    string version_url = "https://tsatria03.github.io/projects/games/" + projectname + "/version.txt";
     string new_version = url_get(version_url);
     if (new_version == "" || string_contains(new_version, "<!DOCTYPE", 1) > -1)
 {

@@ -52,7 +52,7 @@ bosses[i].healtimer.restart();
 if(bosses[i].launchtimer.elapsed>=bosses[i].launchtime and bosses[i].launchable==true)
 {
 bosses[i].launchsound=bosspool.play_2d(get_sound("npc/bosses/"+bosses[i].bosstype+"/*launch*"), me.x, me.y, bosses[i].bossx, bosses[i].bossy, false);
-string[] gardtype=find_directories("data/sounds/"+soundpack+"/npc/guards/*");
+string[] gardtype=find_directories("sounds/"+soundpack+"/npc/guards/*");
 spawn_gard(bosses[i].bossx-random(1,5), bosses[i].bossy-random(1,5), random(30,60), random(30,60), random(50,500), random(50,500), random_string(gardtype));
 bosses[i].launchtimer.restart();
 }
