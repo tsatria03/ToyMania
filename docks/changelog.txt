@@ -1,3 +1,8 @@
+New in 4.8.
+Completely removed the learn game sounds menu, do to the new menu system not supporting it.
+Fixed some menu navigation issues.
+Added the ability to navigate to the first letter of any item in a menu.
+Recoded the entire menu system for the game.
 New in 4.7.
 Made it so exported buffers are now saved to the user's APPDATA folder under tsatria03/ToyMania/logs, instead of the local game's data folder.
 Reverted the compressed pack file layout for reading documentation found in the game. The contents of the docks folder will no longer be contained in it's own pack file from now on.

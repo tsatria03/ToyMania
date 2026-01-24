@@ -1,6 +1,6 @@
 void mainmenu()
 {
-setupmenu();
+setupmenu(true);
 m.add_item("documentation menu", "dm");
 m.add_item("game menu", "gm");
 m.add_item("settings menu", "sm");
@@ -11,7 +11,7 @@ if(system_is_windows) m.add_item("restart game", "rt");
 m.add_item("exit game", "ex");
 m.intro_text = "Main menu. Please choose an option with your arrow keys, then press enter to activate one.";
 int mres=m.run();
-string main = m.get_selected_item_id();
+string main = m.get_item_id(mres);
 if(mres==-1)
 {
 speak("exiting");
@@ -77,7 +77,7 @@ m.add_item("todo_list", "todo_list");
 m.add_item("back", "back");
 m.intro_text = "Documentation menu. You can access help guides and other resources explaining how the game works here.";
 int mres=m.run();
-string dnm=m.get_selected_item_id();
+string dnm=m.get_item_id(mres);
 if(mres==-1)
 {
 mainmenu();
@@ -115,7 +115,6 @@ void gamemenu()
 {
 setupmenu();
 m.add_item("play game", "pg");
-m.add_item("learn game sounds", "gsm");
 m.add_item("view game achievements", "ach");
 m.add_item("view game statistics", "stats");
 m.add_item("Clear game progresses.", "cgr");
@@ -124,7 +123,7 @@ if(statscopy==true) m.add_item("Export all game progresses to file", "cys2");
 m.add_item("back", "back");
 m.intro_text = "Game menu. You can start a new game session, learn about important sounds, view achievements, or check your stats here.";
 int mres=m.run();
-string gamem = m.get_selected_item_id();
+string gamem = m.get_item_id(mres);
 if(mres==-1)
 {
 mainmenu();
@@ -132,12 +131,6 @@ mainmenu();
 if (gamem == "pg")
 {
 modemenu();
-}
-if (gamem == "gsm")
-{
-if(speak_menu_loading==true) speak("loading");
-m.fade_music();
-learnsoundsmenu();
 }
 if (gamem == "ach")
 {
@@ -156,7 +149,7 @@ setupmenu(false);
     m.add_item("No", "no");
 m.intro_text="Are you sure you want to reset all of your game progresses?";
 int mres=m.run();
-string confirm = m.get_selected_item_id();
+string confirm = m.get_item_id(mres);
     if (mres == -1 or confirm == "no")
     {
         gamemenu();
@@ -280,7 +273,7 @@ m.add_item("toy defender", "ty2");
 m.add_item("back", "back");
 m.intro_text = "Choose the game you'd like to play.";
 int mres=m.run();
-string gamem2 = m.get_selected_item_id();
+string gamem2 = m.get_item_id(mres);
 if(mres==-1)
 {
 gamemenu();
@@ -293,7 +286,7 @@ m.add_item("Time trial. This is a timed based mode where you must collect toys, 
 m.add_item("Back", "back");
 m.intro_text = "Choose the game you'd like to play for this mode.";
 int gres = m.run();
-string mode = m.get_selected_item_id();
+string mode = m.get_item_id(mres);
 if (mode == "back" or gres == -1)
 {
 modemenu();
@@ -308,7 +301,7 @@ m.add_item("Chaos", "5");
 m.add_item("Back", "back");
 m.intro_text = "Choose the difficulty you'd like to use for this mode.";
 int dres = m.run();
-string diffchoice = m.get_selected_item_id();
+string diffchoice = m.get_item_id(mres);
 if (diffchoice == "back" or dres == -1)
 {
 modemenu();
@@ -380,7 +373,7 @@ m.add_item("Time defense. This is a timed based mode where you must protect the 
 m.add_item("Back", "back");
 m.intro_text = "Choose the game you'd like to play for this mode.";
 int gres = m.run();
-string mode = m.get_selected_item_id();
+string mode = m.get_item_id(mres);
 if (mode == "back" or gres == -1)
 {
 modemenu();
@@ -395,7 +388,7 @@ m.add_item("Chaos", "5");
 m.add_item("Back", "back");
 m.intro_text = "Choose the difficulty you'd like to use for this mode.";
 int dres = m.run();
-string diffchoice = m.get_selected_item_id();
+string diffchoice = m.get_item_id(mres);
 if (diffchoice == "back" or dres == -1)
 {
 modemenu();
@@ -440,418 +433,6 @@ if (gamem2 == "back")
 gamemenu();
 }
 }
-void learnsoundsmenu()
-{
-dictionary learnCategories;
-string vdesc = variant_descriptions ? ". This sound has multiple variants." : "";
-dictionary boss;
-boss["Death"] = get_sound("npc/bosses/boss/death.*");
-boss["Fall" + vdesc] = array<string> = {get_sound("npc/bosses/boss/fall1.*"), get_sound("npc/bosses/boss/fall2.*")};
-boss["Heal" + vdesc] = array<string> = {get_sound("npc/bosses/boss/heal1.*"), get_sound("npc/bosses/boss/heal2.*"), get_sound("npc/bosses/boss/heal3.*")};
-boss["Hit" + vdesc] = array<string> = {get_sound("npc/bosses/boss/hit1.*"), get_sound("npc/bosses/boss/hit2.*")};
-boss["Hurt"] = get_sound("npc/bosses/boss/hurt.*");
-boss["Launch"] = get_sound("npc/bosses/boss/launch.*");
-boss["Step" + vdesc] = array<string> = {get_sound("npc/bosses/boss/step1.*"), get_sound("npc/bosses/boss/step2.*"), get_sound("npc/bosses/boss/step3.*"), get_sound("npc/bosses/boss/step4.*")};
-boss["Taunt"] = get_sound("npc/bosses/boss/taunt.*");
-boss["Teleport" + vdesc] = array<string> = {get_sound("npc/bosses/boss/tel1.*"), get_sound("npc/bosses/boss/tel2.*")};
-learnCategories["Boss"] = boss;
-dictionary cars;
-cars["Car Death"] = get_sound("npc/cars/car/death.*");
-cars["Car Hurt"] = get_sound("npc/cars/car/hurt.*");
-cars["Car Loop"] = get_sound("npc/cars/car/loop.*");
-cars["Car Shoot"] = get_sound("npc/cars/car/shoot.*");
-cars["Car2 Death"] = get_sound("npc/cars/car2/death.*");
-cars["Car2 Hurt"] = get_sound("npc/cars/car2/hurt.*");
-cars["Car2 Loop"] = get_sound("npc/cars/car2/loop.*");
-cars["Car2 Shoot"] = get_sound("npc/cars/car2/shoot.*");
-cars["Car3 Death"] = get_sound("npc/cars/car3/death.*");
-cars["Car3 Hurt"] = get_sound("npc/cars/car3/hurt.*");
-cars["Car3 Loop"] = get_sound("npc/cars/car3/loop.*");
-cars["Car3 Shoot"] = get_sound("npc/cars/car3/shoot.*");
-learnCategories["Cars"] = cars;
-dictionary doors;
-doors["Close"] = get_sound("objects/doors/door/close.*");
-doors["Deny"] = get_sound("objects/doors/door/deny.*");
-doors["Grant"] = get_sound("objects/doors/door/grant.*");
-doors["Jam" + vdesc] = array<string> = {get_sound("objects/doors/door/jam1.*"), get_sound("objects/doors/door/jam2.*")};
-doors["Loop"] = get_sound("objects/doors/door/loop.*");
-doors["Move"] = get_sound("objects/doors/door/move.*");
-doors["Open"] = get_sound("objects/doors/door/open.*");
-learnCategories["Doors"] = doors;
-dictionary guards;
-guards["Guard Death" + vdesc] = array<string> = {get_sound("npc/guards/guard/death1.*"), get_sound("npc/guards/guard/death2.*")};
-guards["Guard Fall" + vdesc] = array<string> = {get_sound("npc/guards/guard/fall1.*"), get_sound("npc/guards/guard/fall2.*"), get_sound("npc/guards/guard/fall3.*"), get_sound("npc/guards/guard/fall4.*"), get_sound("npc/guards/guard/fall5.*")};
-guards["Guard Hit" + vdesc] = array<string> = {get_sound("npc/guards/guard/hit1.*"), get_sound("npc/guards/guard/hit2.*"), get_sound("npc/guards/guard/hit3.*")};
-guards["Guard Hurt" + vdesc] = array<string> = {get_sound("npc/guards/guard/hurt1.*"), get_sound("npc/guards/guard/hurt2.*"), get_sound("npc/guards/guard/hurt3.*"), get_sound("npc/guards/guard/hurt4.*"), get_sound("npc/guards/guard/hurt5.*")};
-guards["Guard Step" + vdesc] = array<string> = {get_sound("npc/guards/guard/step1.*"), get_sound("npc/guards/guard/step2.*"), get_sound("npc/guards/guard/step3.*"), get_sound("npc/guards/guard/step4.*"), get_sound("npc/guards/guard/step5.*")};
-guards["Guard Taunt"] = get_sound("npc/guards/guard/taunt.*");
-guards["Guard2 Death"] = get_sound("npc/guards/guard2/death.*");
-guards["Guard2 Fall" + vdesc] = array<string> = {get_sound("npc/guards/guard2/fall1.*"), get_sound("npc/guards/guard2/fall2.*")};
-guards["Guard2 Hit" + vdesc] = array<string> = {get_sound("npc/guards/guard2/hit1.*"), get_sound("npc/guards/guard2/hit2.*"), get_sound("npc/guards/guard2/hit3.*")};
-guards["Guard2 Hurt"] = get_sound("npc/guards/guard2/hurt.*");
-guards["Guard2 Step" + vdesc] = array<string> = {get_sound("npc/guards/guard2/step1.*"), get_sound("npc/guards/guard2/step2.*"), get_sound("npc/guards/guard2/step3.*"), get_sound("npc/guards/guard2/step4.*"), get_sound("npc/guards/guard2/step5.*"), get_sound("npc/guards/guard2/step6.*"), get_sound("npc/guards/guard2/step7.*"), get_sound("npc/guards/guard2/step8.*")};
-guards["Guard2 Taunt"] = get_sound("npc/guards/guard2/taunt.*");
-guards["Guard3 Death"] = get_sound("npc/guards/guard3/death.*");
-guards["Guard3 Fall" + vdesc] = array<string> = {get_sound("npc/guards/guard3/fall1.*"), get_sound("npc/guards/guard3/fall2.*")};
-guards["Guard3 Hit"] = get_sound("npc/guards/guard3/hit.*");
-guards["Guard3 Hurt"] = get_sound("npc/guards/guard3/hurt.*");
-guards["Guard3 Step" + vdesc] = array<string> = {get_sound("npc/guards/guard3/step1.*"), get_sound("npc/guards/guard3/step2.*"), get_sound("npc/guards/guard3/step3.*"), get_sound("npc/guards/guard3/step4.*"), get_sound("npc/guards/guard3/step5.*")};
-guards["Guard3 Taunt"] = get_sound("npc/guards/guard3/taunt.*");
-learnCategories["Guards"] = guards;
-dictionary items;
-items["Ammo_pack break: used in endless mode" + vdesc] = array<string> = {get_sound("equipments/items/endless/common/ammo_pack/break1.*"), get_sound("equipments/items/endless/common/ammo_pack/break2.*"), get_sound("equipments/items/endless/common/ammo_pack/break3.*"), get_sound("equipments/items/endless/common/ammo_pack/break4.*"), get_sound("equipments/items/endless/common/ammo_pack/break5.*"), get_sound("equipments/items/endless/common/ammo_pack/break6.*")};
-items["Ammo_pack get: used in endless mode" + vdesc] = array<string> = {get_sound("equipments/items/endless/common/ammo_pack/get1.*"), get_sound("equipments/items/endless/common/ammo_pack/get2.*")};
-items["Ammo_pack loop: used in endless mode"] = get_sound("equipments/items/endless/common/ammo_pack/loop.*");
-items["Ammo_pack spawn: used in endless mode"] = get_sound("equipments/items/endless/common/ammo_pack/spawn.*");
-items["Ammo_pack use: used in endless mode"] = get_sound("equipments/items/endless/common/ammo_pack/use.*");
-items["Health_potion break: used in endless mode" + vdesc] = array<string> = {get_sound("equipments/items/endless/other/health_potion/break1.*"), get_sound("equipments/items/endless/other/health_potion/break2.*"), get_sound("equipments/items/endless/other/health_potion/break3.*"), get_sound("equipments/items/endless/other/health_potion/break4.*"), get_sound("equipments/items/endless/other/health_potion/break5.*"), get_sound("equipments/items/endless/other/health_potion/break6.*")};
-items["Health_potion get: used in endless mode"] = get_sound("equipments/items/endless/other/health_potion/get.*");
-items["Health_potion loop: used in endless mode"] = get_sound("equipments/items/endless/other/health_potion/loop.*");
-items["Health_potion spawn: used in endless mode"] = get_sound("equipments/items/endless/other/health_potion/spawn.*");
-items["Health_potion use: used in endless mode"] = get_sound("equipments/items/endless/other/health_potion/use.*");
-items["Player_teleporter break: used in endless mode" + vdesc] = array<string> = {get_sound("equipments/items/endless/other/player_teleporter/break1.*"), get_sound("equipments/items/endless/other/player_teleporter/break2.*"), get_sound("equipments/items/endless/other/player_teleporter/break3.*"), get_sound("equipments/items/endless/other/player_teleporter/break4.*"), get_sound("equipments/items/endless/other/player_teleporter/break5.*"), get_sound("equipments/items/endless/other/player_teleporter/break6.*")};
-items["Player_teleporter get: used in endless mode"] = get_sound("equipments/items/endless/other/player_teleporter/get.*");
-items["Player_teleporter loop: used in endless mode"] = get_sound("equipments/items/endless/other/player_teleporter/loop.*");
-items["Player_teleporter spawn: used in endless mode"] = get_sound("equipments/items/endless/other/player_teleporter/spawn.*");
-items["Player_teleporter use: used in endless mode"] = get_sound("equipments/items/endless/other/player_teleporter/use.*");
-items["Stun_dart break: used in endless mode" + vdesc] = array<string> = {get_sound("equipments/items/endless/common/stun_dart/break1.*"), get_sound("equipments/items/endless/common/stun_dart/break2.*"), get_sound("equipments/items/endless/common/stun_dart/break3.*"), get_sound("equipments/items/endless/common/stun_dart/break4.*"), get_sound("equipments/items/endless/common/stun_dart/break5.*"), get_sound("equipments/items/endless/common/stun_dart/break6.*")};
-items["Stun_dart get: used in endless mode"] = get_sound("equipments/items/endless/common/stun_dart/get.*");
-items["Stun_dart fire: used in endless mode"] = get_sound("equipments/items/endless/common/stun_dart/fire.*");
-items["Stun_dart hit: used in endless mode"] = get_sound("equipments/items/endless/common/stun_dart/hit.*");
-items["Stun_dart loop: used in endless mode" + vdesc] = array<string> = {get_sound("equipments/items/endless/common/stun_dart/loop1.*"), get_sound("equipments/items/endless/common/stun_dart/loop2.*"), get_sound("equipments/items/endless/common/stun_dart/loop3.*")};
-items["Stun_dart spawn: used in endless mode"] = get_sound("equipments/items/endless/common/stun_dart/spawn.*");
-learnCategories["Items"] = items;
-dictionary keys;
-keys["Black_key break"] = get_sound("equipments/items/normal/keys/common/black_key/break.*");
-keys["Black_key get"] = get_sound("equipments/items/normal/keys/common/black_key/get.*");
-keys["Black_key loop" + vdesc] = array<string> = {get_sound("equipments/items/normal/keys/common/black_key/loop1.*"), get_sound("equipments/items/normal/keys/common/black_key/loop2.*"), get_sound("equipments/items/normal/keys/common/black_key/loop3.*"), get_sound("equipments/items/normal/keys/common/black_key/loop4.*")};
-keys["Black_key spawn"] = get_sound("equipments/items/normal/keys/common/black_key/spawn.*");
-keys["Black_key use"] = get_sound("equipments/items/normal/keys/common/black_key/use.*");
-keys["Green_key break"] = get_sound("equipments/items/normal/keys/common/green_key/break.*");
-keys["Green_key get"] = get_sound("equipments/items/normal/keys/common/green_key/get.*");
-keys["Green_key loop" + vdesc] = array<string> = {get_sound("equipments/items/normal/keys/common/green_key/loop1.*"), get_sound("equipments/items/normal/keys/common/green_key/loop2.*"), get_sound("equipments/items/normal/keys/common/green_key/loop3.*"), get_sound("equipments/items/normal/keys/common/green_key/loop4.*")};
-keys["Green_key spawn"] = get_sound("equipments/items/normal/keys/common/green_key/spawn.*");
-keys["Green_key use"] = get_sound("equipments/items/normal/keys/common/green_key/use.*");
-keys["Orange_key break"] = get_sound("equipments/items/normal/keys/common/orange_key/break.*");
-keys["Orange_key get"] = get_sound("equipments/items/normal/keys/common/orange_key/get.*");
-keys["Orange_key loop" + vdesc] = array<string> = {get_sound("equipments/items/normal/keys/common/orange_key/loop1.*"), get_sound("equipments/items/normal/keys/common/orange_key/loop2.*"), get_sound("equipments/items/normal/keys/common/orange_key/loop3.*"), get_sound("equipments/items/normal/keys/common/orange_key/loop4.*")};
-keys["Orange_key spawn"] = get_sound("equipments/items/normal/keys/common/orange_key/spawn.*");
-keys["Orange_key use"] = get_sound("equipments/items/normal/keys/common/orange_key/use.*");
-keys["Pink_key break"] = get_sound("equipments/items/normal/keys/common/pink_key/break.*");
-keys["Pink_key get"] = get_sound("equipments/items/normal/keys/common/pink_key/get.*");
-keys["Pink_key loop" + vdesc] = array<string> = {get_sound("equipments/items/normal/keys/common/pink_key/loop1.*"), get_sound("equipments/items/normal/keys/common/pink_key/loop2.*"), get_sound("equipments/items/normal/keys/common/pink_key/loop3.*"), get_sound("equipments/items/normal/keys/common/pink_key/loop4.*")};
-keys["Pink_key spawn"] = get_sound("equipments/items/normal/keys/common/pink_key/spawn.*");
-keys["Pink_key use"] = get_sound("equipments/items/normal/keys/common/pink_key/use.*");
-keys["Purple_key break"] = get_sound("equipments/items/normal/keys/common/purple_key/break.*");
-keys["Purple_key get"] = get_sound("equipments/items/normal/keys/common/purple_key/get.*");
-keys["Purple_key loop" + vdesc] = array<string> = {get_sound("equipments/items/normal/keys/common/purple_key/loop1.*"), get_sound("equipments/items/normal/keys/common/purple_key/loop2.*"), get_sound("equipments/items/normal/keys/common/purple_key/loop3.*"), get_sound("equipments/items/normal/keys/common/purple_key/loop4.*")};
-keys["Purple_key spawn"] = get_sound("equipments/items/normal/keys/common/purple_key/spawn.*");
-keys["Purple_key use"] = get_sound("equipments/items/normal/keys/common/purple_key/use.*");
-keys["Red_key break"] = get_sound("equipments/items/normal/keys/common/red_key/break.*");
-keys["Red_key get"] = get_sound("equipments/items/normal/keys/common/red_key/get.*");
-keys["Red_key loop" + vdesc] = array<string> = {get_sound("equipments/items/normal/keys/common/red_key/loop1.*"), get_sound("equipments/items/normal/keys/common/red_key/loop2.*"), get_sound("equipments/items/normal/keys/common/red_key/loop3.*"), get_sound("equipments/items/normal/keys/common/red_key/loop4.*")};
-keys["Red_key spawn"] = get_sound("equipments/items/normal/keys/common/red_key/spawn.*");
-keys["Red_key use"] = get_sound("equipments/items/normal/keys/common/red_key/use.*");
-keys["Yellow_key break"] = get_sound("equipments/items/normal/keys/other/yellow_key/break.*");
-keys["Yellow_key get"] = get_sound("equipments/items/normal/keys/other/yellow_key/get.*");
-keys["Yellow_key loop"] = get_sound("equipments/items/normal/keys/other/yellow_key/loop.*");
-keys["Yellow_key spawn" + vdesc] = array<string> = {get_sound("equipments/items/normal/keys/other/yellow_key/spawn1.*"), get_sound("equipments/items/normal/keys/other/yellow_key/spawn2.*")};
-keys["Yellow_key use" + vdesc] = array<string> = {get_sound("equipments/items/normal/keys/other/yellow_key/use1.*"), get_sound("equipments/items/normal/keys/other/yellow_key/use2.*")};
-learnCategories["Keys"] = keys;
-dictionary player;
-player["Alarm"] = get_sound("objects/sources/ambiences/alarmloop.*");
-player["Alert big: used in normal mode"] = get_sound("misc/store/alert_big.*");
-player["Alert small: used in normal mode"] = get_sound("misc/store/alert_small.*");
-player["Concrete fall: used in endless mode"] = get_sound("objects/platforms/concrete/fall.*");
-player["Concrete land: used in endless mode"] = get_sound("objects/platforms/concrete/land.*");
-player["Concrete step: used in endless mode" + vdesc] = array<string> = {get_sound("objects/platforms/concrete/step1.*"), get_sound("objects/platforms/concrete/step2.*"), get_sound("objects/platforms/concrete/step3.*"), get_sound("objects/platforms/concrete/step4.*"), get_sound("objects/platforms/concrete/step5.*")};
-player["Countdown: used in normal mode"] = get_sound("misc/game/countdown.*");
-player["Cycle inventory" + vdesc] = array<string> = {get_sound("misc/player/inv1.*"), get_sound("misc/player/inv2.*"), get_sound("misc/player/inv3.*"), get_sound("misc/player/inv4.*"), get_sound("misc/player/inv5.*")};
-player["Death"] = get_sound("misc/player/death.*");
-player["Explode large: used in normal mode"] = get_sound("misc/store/dest_large.*");
-player["Explode medium: used in normal mode"] = get_sound("misc/store/dest_medium.*");
-player["Explode small: used in normal mode"] = get_sound("misc/store/dest_small.*");
-player["Game launch"] = get_sound("misc/game/launch.*");
-player["Game pause"] = get_sound("misc/game/pause.*");
-player["Game resume"] = get_sound("misc/game/resume.*");
-player["Get money: used in endless mode"] = get_sound("misc/player/money.*");
-player["Give item"] = get_sound("misc/player/give.*");
-player["Glass fall"] = get_sound("objects/platforms/glass/fall.*");
-player["Glass land"] = get_sound("objects/platforms/glass/land.*");
-player["Glass step" + vdesc] = array<string> = {get_sound("objects/platforms/glass/step1.*"), get_sound("objects/platforms/glass/step2.*"), get_sound("objects/platforms/glass/step3.*"), get_sound("objects/platforms/glass/step4.*"), get_sound("objects/platforms/glass/step5.*")};
-player["Heart start"] = get_sound("misc/player/heartstart.*");
-player["Heart stop"] = get_sound("misc/player/heartstop.*");
-player["Heal: used in endless mode" + vdesc] = array<string> = {get_sound("misc/player/heal1.*"), get_sound("misc/player/heal2.*"), get_sound("misc/player/heal3.*")};
-player["Hurt"] = get_sound("misc/player/hurt.*");
-player["Level up"] = get_sound("misc/player/lev.*");
-player["Life achievement"] = get_sound("misc/player/achlife.*");
-player["Marble fall: used in normal mode"] = get_sound("objects/platforms/marble/fall.*");
-player["Marble land: used in normal mode"] = get_sound("objects/platforms/marble/land.*");
-player["Marble step: used in normal mode" + vdesc] = array<string> = {get_sound("objects/platforms/marble/step1.*"), get_sound("objects/platforms/marble/step2.*"), get_sound("objects/platforms/marble/step3.*"), get_sound("objects/platforms/marble/step4.*"), get_sound("objects/platforms/marble/step5.*")};
-player["Metal fall"] = get_sound("objects/platforms/metal/fall.*");
-player["Metal land"] = get_sound("objects/platforms/metal/land.*");
-player["Metal step" + vdesc] = array<string> = {get_sound("objects/platforms/metal/step1.*"), get_sound("objects/platforms/metal/step2.*"), get_sound("objects/platforms/metal/step3.*"), get_sound("objects/platforms/metal/step4.*"), get_sound("objects/platforms/metal/step5.*")};
-player["Purchase complete: used in endless mode" + vdesc] = array<string> = {get_sound("misc/store/buy1.*"), get_sound("misc/store/buy2.*"), get_sound("misc/store/buy3.*"), get_sound("misc/store/buy4.*")};
-player["Purchase error: used in endless mode"] = get_sound("misc/store/error.*");
-player["Session achievement"] = get_sound("misc/player/achsession.*");
-player["Turn"] = get_sound("misc/player/turn.*");
-player["Wood fall"] = get_sound("objects/platforms/wood/fall.*");
-player["Wood land"] = get_sound("objects/platforms/wood/land.*");
-player["Wood step" + vdesc] = array<string> = {get_sound("objects/platforms/wood/step1.*"), get_sound("objects/platforms/wood/step2.*"), get_sound("objects/platforms/wood/step3.*"), get_sound("objects/platforms/wood/step4.*"), get_sound("objects/platforms/wood/step5.*")};
-learnCategories["Player"] = player;
-dictionary thieves;
-thieves["thief Death"] = get_sound("npc/thieves/thief/death.*");
-thieves["thief Fall"] = get_sound("npc/thieves/thief/fall.*");
-thieves["thief Hurt"] = get_sound("npc/thieves/thief/hurt.*");
-thieves["thief Land"] = get_sound("npc/thieves/thief/land.*");
-thieves["thief Step" + vdesc] = array<string> = {get_sound("npc/thieves/thief/step1.*"), get_sound("npc/thieves/thief/step2.*"), get_sound("npc/thieves/thief/step3.*"), get_sound("npc/thieves/thief/step4.*"), get_sound("npc/thieves/thief/step5.*")};
-thieves["thief Take"] = get_sound("npc/thieves/thief/take.*");
-thieves["thief Taunt"] = get_sound("npc/thieves/thief/taunt.*");
-thieves["thief2 Death"] = get_sound("npc/thieves/thief2/death.*");
-thieves["thief2 Fall"] = get_sound("npc/thieves/thief2/fall.*");
-thieves["thief2 Hurt" + vdesc] = array<string> = {get_sound("npc/thieves/thief2/hurt1.*"), get_sound("npc/thieves/thief2/hurt2.*")};
-thieves["thief2 Land"] = get_sound("npc/thieves/thief2/land.*");
-thieves["thief2 Step" + vdesc] = array<string> = {get_sound("npc/thieves/thief2/step1.*"), get_sound("npc/thieves/thief2/step2.*"), get_sound("npc/thieves/thief2/step3.*"), get_sound("npc/thieves/thief2/step4.*"), get_sound("npc/thieves/thief2/step5.*")};
-thieves["thief2 Take"] = get_sound("npc/thieves/thief2/take.*");
-thieves["thief2 Taunt"] = get_sound("npc/thieves/thief2/taunt.*");
-learnCategories["Thieves"] = thieves;
-dictionary toys;
-toys["articulated_rainbow_slug break" + vdesc] = array<string> = {get_sound("equipments/items/normal/toys/common/articulated_rainbow_slug/break1.*"), get_sound("equipments/items/normal/toys/common/articulated_rainbow_slug/break2.*"), get_sound("equipments/items/normal/toys/common/articulated_rainbow_slug/break3.*")};
-toys["articulated_rainbow_slug get" + vdesc] = array<string> = {get_sound("equipments/items/normal/toys/common/articulated_rainbow_slug/get1.*"), get_sound("equipments/items/normal/toys/common/articulated_rainbow_slug/get2.*")};
-toys["articulated_rainbow_slug loop"] = get_sound("equipments/items/normal/toys/common/articulated_rainbow_slug/loop.*");
-toys["big_fidget_gear_stick break" + vdesc] = array<string> = {get_sound("equipments/items/normal/toys/common/big_fidget_gear_stick/break1.*"), get_sound("equipments/items/normal/toys/common/big_fidget_gear_stick/break2.*"), get_sound("equipments/items/normal/toys/common/big_fidget_gear_stick/break3.*")};
-toys["big_fidget_gear_stick get" + vdesc] = array<string> = {get_sound("equipments/items/normal/toys/common/big_fidget_gear_stick/get1.*"), get_sound("equipments/items/normal/toys/common/big_fidget_gear_stick/get2.*")};
-toys["big_fidget_gear_stick loop"] = get_sound("equipments/items/normal/toys/common/big_fidget_gear_stick/loop.*");
-toys["big_plastic_fidget_spinner break" + vdesc] = array<string> = {get_sound("equipments/items/normal/toys/common/big_plastic_fidget_spinner/break1.*"), get_sound("equipments/items/normal/toys/common/big_plastic_fidget_spinner/break2.*"), get_sound("equipments/items/normal/toys/common/big_plastic_fidget_spinner/break3.*")};
-toys["big_plastic_fidget_spinner get" + vdesc] = array<string> = {get_sound("equipments/items/normal/toys/common/big_plastic_fidget_spinner/get1.*"), get_sound("equipments/items/normal/toys/common/big_plastic_fidget_spinner/get2.*")};
-toys["big_plastic_fidget_spinner loop"] = get_sound("equipments/items/normal/toys/common/big_plastic_fidget_spinner/loop.*");
-toys["classic_fidget_spinner break" + vdesc] = array<string> = {get_sound("equipments/items/normal/toys/common/classic_fidget_spinner/break1.*"), get_sound("equipments/items/normal/toys/common/classic_fidget_spinner/break2.*"), get_sound("equipments/items/normal/toys/common/classic_fidget_spinner/break3.*")};
-toys["classic_fidget_spinner get" + vdesc] = array<string> = {get_sound("equipments/items/normal/toys/common/classic_fidget_spinner/get1.*"), get_sound("equipments/items/normal/toys/common/classic_fidget_spinner/get2.*")};
-toys["classic_fidget_spinner loop"] = get_sound("equipments/items/normal/toys/common/classic_fidget_spinner/loop.*");
-toys["clicker_clacker break" + vdesc] = array<string> = {get_sound("equipments/items/normal/toys/common/clicker_clacker/break1.*"), get_sound("equipments/items/normal/toys/common/clicker_clacker/break2.*"), get_sound("equipments/items/normal/toys/common/clicker_clacker/break3.*")};
-toys["clicker_clacker get" + vdesc] = array<string> = {get_sound("equipments/items/normal/toys/common/clicker_clacker/get1.*"), get_sound("equipments/items/normal/toys/common/clicker_clacker/get2.*")};
-toys["clicker_clacker loop"] = get_sound("equipments/items/normal/toys/common/clicker_clacker/loop.*");
-toys["fidget_car break" + vdesc] = array<string> = {get_sound("equipments/items/normal/toys/common/fidget_car/break1.*"), get_sound("equipments/items/normal/toys/common/fidget_car/break2.*"), get_sound("equipments/items/normal/toys/common/fidget_car/break3.*")};
-toys["fidget_car get" + vdesc] = array<string> = {get_sound("equipments/items/normal/toys/common/fidget_car/get1.*"), get_sound("equipments/items/normal/toys/common/fidget_car/get2.*")};
-toys["fidget_car loop"] = get_sound("equipments/items/normal/toys/common/fidget_car/loop.*");
-toys["fidget_clicky_ball break" + vdesc] = array<string> = {get_sound("equipments/items/normal/toys/common/fidget_clicky_ball/break1.*"), get_sound("equipments/items/normal/toys/common/fidget_clicky_ball/break2.*"), get_sound("equipments/items/normal/toys/common/fidget_clicky_ball/break3.*")};
-toys["fidget_clicky_ball get" + vdesc] = array<string> = {get_sound("equipments/items/normal/toys/common/fidget_clicky_ball/get1.*"), get_sound("equipments/items/normal/toys/common/fidget_clicky_ball/get2.*")};
-toys["fidget_clicky_ball loop"] = get_sound("equipments/items/normal/toys/common/fidget_clicky_ball/loop.*");
-toys["fidget_cube break" + vdesc] = array<string> = {get_sound("equipments/items/normal/toys/common/fidget_cube/break1.*"), get_sound("equipments/items/normal/toys/common/fidget_cube/break2.*"), get_sound("equipments/items/normal/toys/common/fidget_cube/break3.*")};
-toys["fidget_cube get" + vdesc] = array<string> = {get_sound("equipments/items/normal/toys/common/fidget_cube/get1.*"), get_sound("equipments/items/normal/toys/common/fidget_cube/get2.*")};
-toys["fidget_cube loop"] = get_sound("equipments/items/normal/toys/common/fidget_cube/loop.*");
-toys["fidget_cube_2 break" + vdesc] = array<string> = {get_sound("equipments/items/normal/toys/common/fidget_cube_2/break1.*"), get_sound("equipments/items/normal/toys/common/fidget_cube_2/break2.*"), get_sound("equipments/items/normal/toys/common/fidget_cube_2/break3.*")};
-toys["fidget_cube_2 get" + vdesc] = array<string> = {get_sound("equipments/items/normal/toys/common/fidget_cube_2/get1.*"), get_sound("equipments/items/normal/toys/common/fidget_cube_2/get2.*")};
-toys["fidget_cube_2 loop"] = get_sound("equipments/items/normal/toys/common/fidget_cube_2/loop.*");
-toys["fidget_dimple break" + vdesc] = array<string> = {get_sound("equipments/items/normal/toys/common/fidget_dimple/break1.*"), get_sound("equipments/items/normal/toys/common/fidget_dimple/break2.*"), get_sound("equipments/items/normal/toys/common/fidget_dimple/break3.*")};
-toys["fidget_dimple get" + vdesc] = array<string> = {get_sound("equipments/items/normal/toys/common/fidget_dimple/get1.*"), get_sound("equipments/items/normal/toys/common/fidget_dimple/get2.*")};
-toys["fidget_dimple loop"] = get_sound("equipments/items/normal/toys/common/fidget_dimple/loop.*");
-toys["fidget_flicker_switch break" + vdesc] = array<string> = {get_sound("equipments/items/normal/toys/common/fidget_flicker_switch/break1.*"), get_sound("equipments/items/normal/toys/common/fidget_flicker_switch/break2.*"), get_sound("equipments/items/normal/toys/common/fidget_flicker_switch/break3.*")};
-toys["fidget_flicker_switch get" + vdesc] = array<string> = {get_sound("equipments/items/normal/toys/common/fidget_flicker_switch/get1.*"), get_sound("equipments/items/normal/toys/common/fidget_flicker_switch/get2.*")};
-toys["fidget_flicker_switch loop"] = get_sound("equipments/items/normal/toys/common/fidget_flicker_switch/loop.*");
-toys["fidget_hand_clapper break" + vdesc] = array<string> = {get_sound("equipments/items/normal/toys/common/fidget_hand_clapper/break1.*"), get_sound("equipments/items/normal/toys/common/fidget_hand_clapper/break2.*"), get_sound("equipments/items/normal/toys/common/fidget_hand_clapper/break3.*")};
-toys["fidget_hand_clapper get" + vdesc] = array<string> = {get_sound("equipments/items/normal/toys/common/fidget_hand_clapper/get1.*"), get_sound("equipments/items/normal/toys/common/fidget_hand_clapper/get2.*")};
-toys["fidget_hand_clapper loop"] = get_sound("equipments/items/normal/toys/common/fidget_hand_clapper/loop.*");
-toys["fidget_metal_gear_stick break" + vdesc] = array<string> = {get_sound("equipments/items/normal/toys/common/fidget_metal_gear_stick/break1.*"), get_sound("equipments/items/normal/toys/common/fidget_metal_gear_stick/break2.*"), get_sound("equipments/items/normal/toys/common/fidget_metal_gear_stick/break3.*")};
-toys["fidget_metal_gear_stick get" + vdesc] = array<string> = {get_sound("equipments/items/normal/toys/common/fidget_metal_gear_stick/get1.*"), get_sound("equipments/items/normal/toys/common/fidget_metal_gear_stick/get2.*")};
-toys["fidget_metal_gear_stick loop"] = get_sound("equipments/items/normal/toys/common/fidget_metal_gear_stick/loop.*");
-toys["fidget_pad break" + vdesc] = array<string> = {get_sound("equipments/items/normal/toys/common/fidget_pad/break1.*"), get_sound("equipments/items/normal/toys/common/fidget_pad/break2.*"), get_sound("equipments/items/normal/toys/common/fidget_pad/break3.*")};
-toys["fidget_pad get" + vdesc] = array<string> = {get_sound("equipments/items/normal/toys/common/fidget_pad/get1.*"), get_sound("equipments/items/normal/toys/common/fidget_pad/get2.*")};
-toys["fidget_pad loop"] = get_sound("equipments/items/normal/toys/common/fidget_pad/loop.*");
-toys["fidget_plastic_gear_stick break" + vdesc] = array<string> = {get_sound("equipments/items/normal/toys/common/fidget_plastic_gear_stick/break1.*"), get_sound("equipments/items/normal/toys/common/fidget_plastic_gear_stick/break2.*"), get_sound("equipments/items/normal/toys/common/fidget_plastic_gear_stick/break3.*")};
-toys["fidget_plastic_gear_stick get" + vdesc] = array<string> = {get_sound("equipments/items/normal/toys/common/fidget_plastic_gear_stick/get1.*"), get_sound("equipments/items/normal/toys/common/fidget_plastic_gear_stick/get2.*")};
-toys["fidget_plastic_gear_stick loop"] = get_sound("equipments/items/normal/toys/common/fidget_plastic_gear_stick/loop.*");
-toys["fidget_popping_cork break" + vdesc] = array<string> = {get_sound("equipments/items/normal/toys/common/fidget_popping_cork/break1.*"), get_sound("equipments/items/normal/toys/common/fidget_popping_cork/break2.*"), get_sound("equipments/items/normal/toys/common/fidget_popping_cork/break3.*")};
-toys["fidget_popping_cork get" + vdesc] = array<string> = {get_sound("equipments/items/normal/toys/common/fidget_popping_cork/get1.*"), get_sound("equipments/items/normal/toys/common/fidget_popping_cork/get2.*")};
-toys["fidget_popping_cork loop"] = get_sound("equipments/items/normal/toys/common/fidget_popping_cork/loop.*");
-toys["fidget_rainbow_star break" + vdesc] = array<string> = {get_sound("equipments/items/normal/toys/common/fidget_rainbow_star/break1.*"), get_sound("equipments/items/normal/toys/common/fidget_rainbow_star/break2.*"), get_sound("equipments/items/normal/toys/common/fidget_rainbow_star/break3.*")};
-toys["fidget_rainbow_star get" + vdesc] = array<string> = {get_sound("equipments/items/normal/toys/common/fidget_rainbow_star/get1.*"), get_sound("equipments/items/normal/toys/common/fidget_rainbow_star/get2.*")};
-toys["fidget_rainbow_star loop"] = get_sound("equipments/items/normal/toys/common/fidget_rainbow_star/loop.*");
-toys["fidget_wheel_spinner break" + vdesc] = array<string> = {get_sound("equipments/items/normal/toys/common/fidget_wheel_spinner/break1.*"), get_sound("equipments/items/normal/toys/common/fidget_wheel_spinner/break2.*"), get_sound("equipments/items/normal/toys/common/fidget_wheel_spinner/break3.*")};
-toys["fidget_wheel_spinner get" + vdesc] = array<string> = {get_sound("equipments/items/normal/toys/common/fidget_wheel_spinner/get1.*"), get_sound("equipments/items/normal/toys/common/fidget_wheel_spinner/get2.*")};
-toys["fidget_wheel_spinner loop"] = get_sound("equipments/items/normal/toys/common/fidget_wheel_spinner/loop.*");
-toys["infinity_cube break" + vdesc] = array<string> = {get_sound("equipments/items/normal/toys/common/infinity_cube/break1.*"), get_sound("equipments/items/normal/toys/common/infinity_cube/break2.*"), get_sound("equipments/items/normal/toys/common/infinity_cube/break3.*")};
-toys["infinity_cube get" + vdesc] = array<string> = {get_sound("equipments/items/normal/toys/common/infinity_cube/get1.*"), get_sound("equipments/items/normal/toys/common/infinity_cube/get2.*")};
-toys["infinity_cube loop"] = get_sound("equipments/items/normal/toys/common/infinity_cube/loop.*");
-toys["infinity_cube2 break" + vdesc] = array<string> = {get_sound("equipments/items/normal/toys/common/infinity_cube2/break1.*"), get_sound("equipments/items/normal/toys/common/infinity_cube2/break2.*"), get_sound("equipments/items/normal/toys/common/infinity_cube2/break3.*")};
-toys["infinity_cube2 get" + vdesc] = array<string> = {get_sound("equipments/items/normal/toys/common/infinity_cube2/get1.*"), get_sound("equipments/items/normal/toys/common/infinity_cube2/get2.*")};
-toys["infinity_cube2 loop"] = get_sound("equipments/items/normal/toys/common/infinity_cube2/loop.*");
-toys["mini_fidget_slug break" + vdesc] = array<string> = {get_sound("equipments/items/normal/toys/common/mini_fidget_slug/break1.*"), get_sound("equipments/items/normal/toys/common/mini_fidget_slug/break2.*"), get_sound("equipments/items/normal/toys/common/mini_fidget_slug/break3.*")};
-toys["mini_fidget_slug get" + vdesc] = array<string> = {get_sound("equipments/items/normal/toys/common/mini_fidget_slug/get1.*"), get_sound("equipments/items/normal/toys/common/mini_fidget_slug/get2.*")};
-toys["mini_fidget_slug loop"] = get_sound("equipments/items/normal/toys/common/mini_fidget_slug/loop.*");
-toys["mini_fidget_spinner break" + vdesc] = array<string> = {get_sound("equipments/items/normal/toys/common/mini_fidget_spinner/break1.*"), get_sound("equipments/items/normal/toys/common/mini_fidget_spinner/break2.*"), get_sound("equipments/items/normal/toys/common/mini_fidget_spinner/break3.*")};
-toys["mini_fidget_spinner get" + vdesc] = array<string> = {get_sound("equipments/items/normal/toys/common/mini_fidget_spinner/get1.*"), get_sound("equipments/items/normal/toys/common/mini_fidget_spinner/get2.*")};
-toys["mini_fidget_spinner loop"] = get_sound("equipments/items/normal/toys/common/mini_fidget_spinner/loop.*");
-toys["pop_it_ball break" + vdesc] = array<string> = {get_sound("equipments/items/normal/toys/common/pop_it_ball/break1.*"), get_sound("equipments/items/normal/toys/common/pop_it_ball/break2.*"), get_sound("equipments/items/normal/toys/common/pop_it_ball/break3.*")};
-toys["pop_it_ball get" + vdesc] = array<string> = {get_sound("equipments/items/normal/toys/common/pop_it_ball/get1.*"), get_sound("equipments/items/normal/toys/common/pop_it_ball/get2.*")};
-toys["pop_it_ball loop"] = get_sound("equipments/items/normal/toys/common/pop_it_ball/loop.*");
-toys["small_noise_tube break" + vdesc] = array<string> = {get_sound("equipments/items/normal/toys/common/small_noise_tube/break1.*"), get_sound("equipments/items/normal/toys/common/small_noise_tube/break2.*"), get_sound("equipments/items/normal/toys/common/small_noise_tube/break3.*")};
-toys["small_noise_tube get" + vdesc] = array<string> = {get_sound("equipments/items/normal/toys/common/small_noise_tube/get1.*"), get_sound("equipments/items/normal/toys/common/small_noise_tube/get2.*")};
-toys["small_noise_tube loop"] = get_sound("equipments/items/normal/toys/common/small_noise_tube/loop.*");
-toys["baby_rattle break" + vdesc] = array<string> = {get_sound("equipments/items/normal/toys/other/baby_rattle/break1.*"), get_sound("equipments/items/normal/toys/other/baby_rattle/break2.*"), get_sound("equipments/items/normal/toys/other/baby_rattle/break3.*")};
-toys["baby_rattle get" + vdesc] = array<string> = {get_sound("equipments/items/normal/toys/other/baby_rattle/get1.*"), get_sound("equipments/items/normal/toys/other/baby_rattle/get2.*")};
-toys["baby_rattle loop"] = get_sound("equipments/items/normal/toys/other/baby_rattle/loop.*");
-toys["baby_rattle2 break" + vdesc] = array<string> = {get_sound("equipments/items/normal/toys/other/baby_rattle2/break1.*"), get_sound("equipments/items/normal/toys/other/baby_rattle2/break2.*"), get_sound("equipments/items/normal/toys/other/baby_rattle2/break3.*")};
-toys["baby_rattle2 get" + vdesc] = array<string> = {get_sound("equipments/items/normal/toys/other/baby_rattle2/get1.*"), get_sound("equipments/items/normal/toys/other/baby_rattle2/get2.*")};
-toys["baby_rattle2 loop"] = get_sound("equipments/items/normal/toys/other/baby_rattle2/loop.*");
-toys["baby_rattle3 break" + vdesc] = array<string> = {get_sound("equipments/items/normal/toys/other/baby_rattle3/break1.*"), get_sound("equipments/items/normal/toys/other/baby_rattle3/break2.*"), get_sound("equipments/items/normal/toys/other/baby_rattle3/break3.*")};
-toys["baby_rattle3 get" + vdesc] = array<string> = {get_sound("equipments/items/normal/toys/other/baby_rattle3/get1.*"), get_sound("equipments/items/normal/toys/other/baby_rattle3/get2.*")};
-toys["baby_rattle3 loop"] = get_sound("equipments/items/normal/toys/other/baby_rattle3/loop.*");
-toys["baby_rattle4 break" + vdesc] = array<string> = {get_sound("equipments/items/normal/toys/other/baby_rattle4/break1.*"), get_sound("equipments/items/normal/toys/other/baby_rattle4/break2.*"), get_sound("equipments/items/normal/toys/other/baby_rattle4/break3.*")};
-toys["baby_rattle4 get" + vdesc] = array<string> = {get_sound("equipments/items/normal/toys/other/baby_rattle4/get1.*"), get_sound("equipments/items/normal/toys/other/baby_rattle4/get2.*")};
-toys["baby_rattle4 loop"] = get_sound("equipments/items/normal/toys/other/baby_rattle4/loop.*");
-toys["large_train break" + vdesc] = array<string> = {get_sound("equipments/items/normal/toys/other/large_train/break1.*"), get_sound("equipments/items/normal/toys/other/large_train/break2.*"), get_sound("equipments/items/normal/toys/other/large_train/break3.*")};
-toys["large_train get" + vdesc] = array<string> = {get_sound("equipments/items/normal/toys/other/large_train/get1.*"), get_sound("equipments/items/normal/toys/other/large_train/get2.*")};
-toys["large_train loop"] = get_sound("equipments/items/normal/toys/other/large_train/loop.*");
-toys["small_bird break" + vdesc] = array<string> = {get_sound("equipments/items/normal/toys/other/small_bird/break1.*"), get_sound("equipments/items/normal/toys/other/small_bird/break2.*"), get_sound("equipments/items/normal/toys/other/small_bird/break3.*")};
-toys["small_bird get" + vdesc] = array<string> = {get_sound("equipments/items/normal/toys/other/small_bird/get1.*"), get_sound("equipments/items/normal/toys/other/small_bird/get2.*")};
-toys["small_bird loop"] = get_sound("equipments/items/normal/toys/other/small_bird/loop.*");
-toys["small_car break" + vdesc] = array<string> = {get_sound("equipments/items/normal/toys/other/small_car/break1.*"), get_sound("equipments/items/normal/toys/other/small_car/break2.*"), get_sound("equipments/items/normal/toys/other/small_car/break3.*")};
-toys["small_car get" + vdesc] = array<string> = {get_sound("equipments/items/normal/toys/other/small_car/get1.*"), get_sound("equipments/items/normal/toys/other/small_car/get2.*")};
-toys["small_car loop"] = get_sound("equipments/items/normal/toys/other/small_car/loop.*");
-toys["small_train break" + vdesc] = array<string> = {get_sound("equipments/items/normal/toys/other/small_train/break1.*"), get_sound("equipments/items/normal/toys/other/small_train/break2.*"), get_sound("equipments/items/normal/toys/other/small_train/break3.*")};
-toys["small_train get" + vdesc] = array<string> = {get_sound("equipments/items/normal/toys/other/small_train/get1.*"), get_sound("equipments/items/normal/toys/other/small_train/get2.*")};
-toys["small_train loop"] = get_sound("equipments/items/normal/toys/other/small_train/loop.*");
-toys["squeaky_ball break" + vdesc] = array<string> = {get_sound("equipments/items/normal/toys/other/squeaky_ball/break1.*"), get_sound("equipments/items/normal/toys/other/squeaky_ball/break2.*"), get_sound("equipments/items/normal/toys/other/squeaky_ball/break3.*")};
-toys["squeaky_ball get" + vdesc] = array<string> = {get_sound("equipments/items/normal/toys/other/squeaky_ball/get1.*"), get_sound("equipments/items/normal/toys/other/squeaky_ball/get2.*")};
-toys["squeaky_ball loop"] = get_sound("equipments/items/normal/toys/other/squeaky_ball/loop.*");
-toys["squeaky_ball2 break" + vdesc] = array<string> = {get_sound("equipments/items/normal/toys/other/squeaky_ball2/break1.*"), get_sound("equipments/items/normal/toys/other/squeaky_ball2/break2.*"), get_sound("equipments/items/normal/toys/other/squeaky_ball2/break3.*")};
-toys["squeaky_ball2 get" + vdesc] = array<string> = {get_sound("equipments/items/normal/toys/other/squeaky_ball2/get1.*"), get_sound("equipments/items/normal/toys/other/squeaky_ball2/get2.*")};
-toys["squeaky_ball2 loop"] = get_sound("equipments/items/normal/toys/other/squeaky_ball2/loop.*");
-toys["squeaky_ball3 break" + vdesc] = array<string> = {get_sound("equipments/items/normal/toys/other/squeaky_ball3/break1.*"), get_sound("equipments/items/normal/toys/other/squeaky_ball3/break2.*"), get_sound("equipments/items/normal/toys/other/squeaky_ball3/break3.*")};
-toys["squeaky_ball3 get" + vdesc] = array<string> = {get_sound("equipments/items/normal/toys/other/squeaky_ball3/get1.*"), get_sound("equipments/items/normal/toys/other/squeaky_ball3/get2.*")};
-toys["squeaky_ball3 loop"] = get_sound("equipments/items/normal/toys/other/squeaky_ball3/loop.*");
-toys["squeaky_ball4 break" + vdesc] = array<string> = {get_sound("equipments/items/normal/toys/other/squeaky_ball4/break1.*"), get_sound("equipments/items/normal/toys/other/squeaky_ball4/break2.*"), get_sound("equipments/items/normal/toys/other/squeaky_ball4/break3.*")};
-toys["squeaky_ball4 get" + vdesc] = array<string> = {get_sound("equipments/items/normal/toys/other/squeaky_ball4/get1.*"), get_sound("equipments/items/normal/toys/other/squeaky_ball4/get2.*")};
-toys["squeaky_ball4 loop"] = get_sound("equipments/items/normal/toys/other/squeaky_ball4/loop.*");
-toys["wind_up break" + vdesc] = array<string> = {get_sound("equipments/items/normal/toys/other/wind_up/break1.*"), get_sound("equipments/items/normal/toys/other/wind_up/break2.*"), get_sound("equipments/items/normal/toys/other/wind_up/break3.*")};
-toys["wind_up get" + vdesc] = array<string> = {get_sound("equipments/items/normal/toys/other/wind_up/get1.*"), get_sound("equipments/items/normal/toys/other/wind_up/get2.*")};
-toys["wind_up loop"] = get_sound("equipments/items/normal/toys/other/wind_up/loop.*");
-toys["wind_up2 break" + vdesc] = array<string> = {get_sound("equipments/items/normal/toys/other/wind_up2/break1.*"), get_sound("equipments/items/normal/toys/other/wind_up2/break2.*"), get_sound("equipments/items/normal/toys/other/wind_up2/break3.*")};
-toys["wind_up2 get" + vdesc] = array<string> = {get_sound("equipments/items/normal/toys/other/wind_up2/get1.*"), get_sound("equipments/items/normal/toys/other/wind_up2/get2.*")};
-toys["wind_up2 loop"] = get_sound("equipments/items/normal/toys/other/wind_up2/loop.*");
-toys["wind_up3 break" + vdesc] = array<string> = {get_sound("equipments/items/normal/toys/other/wind_up3/break1.*"), get_sound("equipments/items/normal/toys/other/wind_up3/break2.*"), get_sound("equipments/items/normal/toys/other/wind_up3/break3.*")};
-toys["wind_up3 get" + vdesc] = array<string> = {get_sound("equipments/items/normal/toys/other/wind_up3/get1.*"), get_sound("equipments/items/normal/toys/other/wind_up3/get2.*")};
-toys["wind_up3 loop"] = get_sound("equipments/items/normal/toys/other/wind_up3/loop.*");
-toys["wind_up4 break" + vdesc] = array<string> = {get_sound("equipments/items/normal/toys/other/wind_up4/break1.*"), get_sound("equipments/items/normal/toys/other/wind_up4/break2.*"), get_sound("equipments/items/normal/toys/other/wind_up4/break3.*")};
-toys["wind_up4 get" + vdesc] = array<string> = {get_sound("equipments/items/normal/toys/other/wind_up4/get1.*"), get_sound("equipments/items/normal/toys/other/wind_up4/get2.*")};
-toys["wind_up4 loop"] = get_sound("equipments/items/normal/toys/other/wind_up4/loop.*");
-learnCategories["Toys"] = toys;
-dictionary ui;
-ui["Action complete: used in speaker tests and various other menus"] = get_sound("ui/other/complete.*");
-ui["Action copy: used in copying stats and various other items"] = get_sound("ui/other/copy.*");
-ui["Action disable: used for disabling various toggles"] = get_sound("ui/other/disable.*");
-ui["Action enable: used for enabling various toggles"] = get_sound("ui/other/enable.*");
-ui["Action export: used in exporting stats and various other items"] = get_sound("ui/other/export.*");
-ui["Buffer choose"] = get_sound("ui/other/choose.*");
-ui["Buffer switch"] = get_sound("ui/other/switch.*");
-ui["Dialog close"] = get_sound("ui/dialogs/"+dlgpack+"/close.*");
-ui["Dialog copy"] = get_sound("ui/dialogs/"+dlgpack+"/copy.*");
-ui["Dialog open"] = get_sound("ui/dialogs/"+dlgpack+"/open.*");
-ui["Dialog scrol"] = get_sound("ui/dialogs/"+dlgpack+"/scroll.*");
-ui["Menu click"] = get_sound("ui/menus/"+menupack+"/click.*");
-ui["Menu close"] = get_sound("ui/menus/"+menupack+"/close.*");
-ui["Menu edge"] = get_sound("ui/menus/"+menupack+"/edge.*");
-ui["Menu enter"] = get_sound("ui/menus/"+menupack+"/enter.*");
-ui["Menu open"] = get_sound("ui/menus/"+menupack+"/open.*");
-ui["Menu wrap"] = get_sound("ui/menus/"+menupack+"/wrap.*");
-learnCategories["UI"] = ui;
-dictionary weapons;
-weapons["Bat draw"] = get_sound("equipments/weapons/melee/bat/draw.*");
-weapons["Bat fire" + vdesc] = array<string> = {get_sound("equipments/weapons/melee/bat/fire1.*"), get_sound("equipments/weapons/melee/bat/fire2.*"), get_sound("equipments/weapons/melee/bat/fire3.*")};
-weapons["Bat hit" + vdesc] = array<string> = {get_sound("equipments/weapons/melee/bat/hit1.*"), get_sound("equipments/weapons/melee/bat/hit2.*"), get_sound("equipments/weapons/melee/bat/hit3.*")};
-weapons["Boot draw"] = get_sound("equipments/weapons/melee/boot/draw.*");
-weapons["Boot fire" + vdesc] = array<string> = {get_sound("equipments/weapons/melee/boot/fire1.*"), get_sound("equipments/weapons/melee/boot/fire2.*"), get_sound("equipments/weapons/melee/boot/fire3.*")};
-weapons["Boot hit" + vdesc] = array<string> = {get_sound("equipments/weapons/melee/boot/hit1.*"), get_sound("equipments/weapons/melee/boot/hit2.*"), get_sound("equipments/weapons/melee/boot/hit3.*")};
-weapons["Club draw"] = get_sound("equipments/weapons/melee/club/draw.*");
-weapons["Club fire" + vdesc] = array<string> = {get_sound("equipments/weapons/melee/club/fire1.*"), get_sound("equipments/weapons/melee/club/fire2.*"), get_sound("equipments/weapons/melee/club/fire3.*")};
-weapons["Club hit" + vdesc] = array<string> = {get_sound("equipments/weapons/melee/club/hit1.*"), get_sound("equipments/weapons/melee/club/hit2.*"), get_sound("equipments/weapons/melee/club/hit3.*")};
-weapons["Feat draw"] = get_sound("equipments/weapons/melee/feat/draw.*");
-weapons["Feat fire" + vdesc] = array<string> = {get_sound("equipments/weapons/melee/feat/fire1.*"), get_sound("equipments/weapons/melee/feat/fire2.*"), get_sound("equipments/weapons/melee/feat/fire3.*")};
-weapons["Feat hit" + vdesc] = array<string> = {get_sound("equipments/weapons/melee/feat/hit1.*"), get_sound("equipments/weapons/melee/feat/hit2.*"), get_sound("equipments/weapons/melee/feat/hit3.*")};
-weapons["Fist draw"] = get_sound("equipments/weapons/melee/fist/draw.*");
-weapons["Fist fire" + vdesc] = array<string> = {get_sound("equipments/weapons/melee/fist/fire1.*"), get_sound("equipments/weapons/melee/fist/fire2.*")};
-weapons["Fist hit" + vdesc] = array<string> = {get_sound("equipments/weapons/melee/fist/hit1.*"), get_sound("equipments/weapons/melee/fist/hit2.*"), get_sound("equipments/weapons/melee/fist/hit3.*")};
-weapons["Hammer draw"] = get_sound("equipments/weapons/melee/hammer/draw.*");
-weapons["Hammer fire" + vdesc] = array<string> = {get_sound("equipments/weapons/melee/hammer/fire1.*"), get_sound("equipments/weapons/melee/hammer/fire2.*"), get_sound("equipments/weapons/melee/hammer/fire3.*")};
-weapons["Hammer hit" + vdesc] = array<string> = {get_sound("equipments/weapons/melee/hammer/hit1.*"), get_sound("equipments/weapons/melee/hammer/hit2.*"), get_sound("equipments/weapons/melee/hammer/hit3.*")};
-weapons["Knife draw"] = get_sound("equipments/weapons/melee/knife/draw.*");
-weapons["Knife fire" + vdesc] = array<string> = {get_sound("equipments/weapons/melee/knife/fire1.*"), get_sound("equipments/weapons/melee/knife/fire2.*"), get_sound("equipments/weapons/melee/knife/fire3.*")};
-weapons["Knife hit" + vdesc] = array<string> = {get_sound("equipments/weapons/melee/knife/hit1.*"), get_sound("equipments/weapons/melee/knife/hit2.*"), get_sound("equipments/weapons/melee/knife/hit3.*")};
-weapons["Laser draw"] = get_sound("equipments/weapons/melee/laser/draw.*");
-weapons["Laser fire"] = get_sound("equipments/weapons/melee/laser/fire.*");
-weapons["Laser hit"] = get_sound("equipments/weapons/melee/laser/hit.*");
-weapons["Machine Gun draw: used in endless mode"] = get_sound("equipments/weapons/artillery/machine_gun/draw.*");
-weapons["Machine gun empty: used in endless mode"] = get_sound("equipments/weapons/artillery/machine_gun/empty.*");
-weapons["Machine gun fail: used in endless mode"] = get_sound("equipments/weapons/artillery/machine_gun/fail.*");
-weapons["Machine gun fire: used in endless mode"] = get_sound("equipments/weapons/artillery/machine_gun/fire.*");
-weapons["Machine gun hit: used in endless mode"] = get_sound("equipments/weapons/artillery/machine_gun/hit.*");
-weapons["Machine gun ping: used in endless mode"] = get_sound("equipments/weapons/artillery/machine_gun/ping.*");
-weapons["Machine gun reload: used in endless mode"] = get_sound("equipments/weapons/artillery/machine_gun/reload.*");
-weapons["Machine gun shell: used in endless mode" + vdesc] = array<string> = {get_sound("equipments/weapons/artillery/machine_gun/shell1.*"), get_sound("equipments/weapons/artillery/machine_gun/shell2.*")};
-weapons["Pistol draw: used in normal mode"] = get_sound("equipments/weapons/artillery/pistol/draw.*");
-weapons["Pistol empty: used in normal mode"] = get_sound("equipments/weapons/artillery/pistol/empty.*");
-weapons["Pistol fail: used in normal mode"] = get_sound("equipments/weapons/artillery/pistol/fail.*");
-weapons["Pistol fire: used in normal mode"] = get_sound("equipments/weapons/artillery/pistol/fire.*");
-weapons["Pistol hit: used in normal mode"] = get_sound("equipments/weapons/artillery/pistol/hit.*");
-weapons["Pistol ping: used in normal mode"] = get_sound("equipments/weapons/artillery/pistol/ping.*");
-weapons["Pistol reload: used in normal mode"] = get_sound("equipments/weapons/artillery/pistol/reload.*");
-weapons["Pistol shell: used in normal mode" + vdesc] = array<string> = {get_sound("equipments/weapons/artillery/pistol/shell1.*"), get_sound("equipments/weapons/artillery/pistol/shell2.*")};
-learnCategories["Weapons"] = weapons;
-string[] sortedKeys = learnCategories.get_keys();
-sortedKeys.sort_ascending();
-setupmenu(false);
-m.intro_text = "Learn game sounds menu. You can preview the most important sounds used by the game here. This menu is organized by sound category for easier viewing.";
-int restoreIndex = 0;
-for (uint i = 0; i < sortedKeys.length(); i++)
-{
-    if (sortedKeys[i] == last_learn_category)
-    {
-        restoreIndex = i;
-        break;
-    }
-}
-for (uint i = 0; i < sortedKeys.length(); i++)
-{
-string key = sortedKeys[i];
-dictionary@ cat = cast<dictionary@>(learnCategories[key]);
-if (cat is null) continue;
-uint count = 0;
-array<string> subkeys = cat.get_keys();
-for (uint j = 0; j < subkeys.length(); j++)
-{
-if (cat.exists(subkeys[j]))
-{
-    string[]@ arr = cast<string[]@>(cat[subkeys[j]]);
-    if (arr !is null)
-    {
-        count += arr.length();
-    }
-    else
-    {
-        string dummy;
-        if (cat.get(subkeys[j], dummy))
-            count += 1;
-    }
-}
-}
-m.set_focused_item(restoreIndex);
-m.add_item(key+": This category has a total of " + count + " sound" + (count == 1 ? "" : "s"), key);
-}
-m.add_item("Back", "back");
-int res = m.run();
-string sel = m.get_selected_item_id();
-if (res == -1 or sel == "back")
-{
-gamemenu();
-}
-if (learnCategories.exists(sel))
-{
-    last_learn_category = sel;
-m.intro_text = sel + " menu. Press the up or down arrow keys to navigate the list, and enter to play one.";
-learn_game_sounds_menu(cast<dictionary@>(learnCategories[sel]), "", m);
-}
-}
 void pausemenu()
 {
     setupmenu(false);
@@ -862,7 +443,7 @@ void pausemenu()
 m.add_item("view detailed stats", "vds");
     m.intro_text = "Pause menu.";
     int mres = m.run();
-    string psmem = m.get_selected_item_id();
+    string psmem = m.get_item_id(mres);
 if (mres == -1)
 {
     temp.play_stationary(get_sound("misc/game/*resume*"), false);
@@ -899,9 +480,9 @@ if (gamcopy == true)
     m.add_item("Export results to file", "export");
     m.add_item("Return to pause menu.", "cancel");
     m.intro_text = "What would you like to do with the current results for this game session?";
-    int r = m.run();
-    string resp = m.get_selected_item_id();
-    if (r != -1)
+    int res = m.run();
+    string resp = m.get_item_id(res);
+    if (res != -1)
     {
         if (resp == "copy")
         {
@@ -931,7 +512,7 @@ return;
                 m.add_item("No", "no");
                 m.intro_text = "Are you sure you want to quit the game? You will lose all progress for this current game session.";
                 int confirmres = m.run();
-                string confirm = m.get_selected_item_id();
+                string confirm = m.get_item_id(mres);
                 if (confirmres == -1 || confirm == "no")
 {
                     pausemenu();
@@ -1024,8 +605,8 @@ if(!endless) m.add_item("Store HP: "+round(storehealth / storemaxhealth * 100, 0
 m.add_item("back", "back");
 m.intro_text = "Detailed stats menu.";
     int vres = m.run();
-    string psmem2 = m.get_selected_item_id();
-if (vres == -1 || m.get_selected_item_id() == "")
+    string psmem2 = m.get_item_id(mres);
+if (vres == -1 || m.get_item_id(mres) == "")
 {
 pausemenu();
     return;
@@ -1074,7 +655,7 @@ m.add_item(label, itemname);
 m.add_item("back", "back");
 m.intro_text = "Shop menu. What would you like to buy?";
 int mres = m.run();
-string shopem = m.get_selected_item_id();
+string shopem = m.get_item_id(mres);
 if (mres == -1 || shopem == "shopinfo" || shopem == "back")
 {
 speak("Canceled");
@@ -1137,7 +718,7 @@ m.add_item(label, keys[i]);
 int total = count_total_items();
 m.intro_text = "Inventory menu. You currently have " + total + " item" + (total == 1 ? "" : "s") + " available to view.";
 int mres = m.run();
-string choice = m.get_selected_item_id();
+string choice = m.get_item_id(mres);
 if (mres == -1)
 {
 speak("Canceled");
@@ -1190,7 +771,7 @@ m.add_item(label, weaponIds[i] + "|" + weptypes[i]);
 }
 m.intro_text = "Weapons menu.";
 int res = m.run();
-string selected = m.get_selected_item_id();
+string selected = m.get_item_id(res);
 if (res == -1)
 {
 speak_buffer("Canceled");
@@ -1230,7 +811,7 @@ if(statscopy==true) m.add_item("Export all game achievements to file", "cys2");
     m.add_item("back", "back");
 m.intro_text = "Achievements menu. You can view your unlocked session and lifetime achievements, or clear or copy all of your achievements here.";
 int mres=m.run();
-string achm = m.get_selected_item_id();
+string achm = m.get_item_id(mres);
 if(mres==-1)
 {
 gamemenu();
@@ -1258,7 +839,7 @@ m.fade_music();
     m.add_item("Back", "back");
 m.intro_text = "Choose which game achievements to clear. This will clear your game statistics.";
     int mres = m.run();
-    string achmode = m.get_selected_item_id();
+    string achmode = m.get_item_id(mres);
     if (mres == -1 or achmode == "back")
     {
         achesmenu();
@@ -1268,7 +849,7 @@ m.intro_text = "Choose which game achievements to clear. This will clear your ga
     m.add_item("No", "no");
     m.intro_text = "Are you sure you want to reset your " + (achmode == "session" ? "session" : achmode == "lifetime" ? "lifetime" : "session and lifetime") + " achievements? This action can't be undone.";
     mres = m.run();
-    string confirm = m.get_selected_item_id();
+    string confirm = m.get_item_id(mres);
     if (mres == -1 or confirm == "no")
     {
         achesmenu();
@@ -1367,8 +948,8 @@ void show_session_achievements()
     }
     m.add_item("Back", "back");
 m.intro_text = "Session Achievements menu. These achievements reset every run and track short-term progress.";
-    int r = m.run();
-    if (r == -1 or m.get_selected_item_id() == "back")
+    int res = m.run();
+    if (res == -1 or m.get_item_id(res) == "back")
         achesmenu();
     else
         show_session_achievements();
@@ -1383,8 +964,8 @@ void show_lifetime_achievements()
     }
     m.add_item("Back", "back");
 m.intro_text = "Lifetime Achievements menu. These achievements track your long-term overall game progress.";
-    int r = m.run();
-    if (r == -1 or m.get_selected_item_id() == "back")
+    int res = m.run();
+    if (res == -1 or m.get_item_id(res) == "back")
         achesmenu();
     else
         show_lifetime_achievements();
@@ -1400,7 +981,7 @@ if(statscopy==true) m.add_item("Export all game statistics to file", "cys2");
     m.add_item("back", "back");
 m.intro_text = "Statistics menu. You can check your gameplay stats and unlockable player titles, or clear or copy all of your stats here.";
 int mres=m.run();
-string statsm = m.get_selected_item_id();
+string statsm = m.get_item_id(mres);
 if(mres==-1)
 {
 gamemenu();
@@ -1428,7 +1009,7 @@ m.fade_music();
     m.add_item("Back", "back");
 m.intro_text = "Choose which game statistics to clear. This will not clear your game achievements.";
     int mres = m.run();
-    string gsm = m.get_selected_item_id();
+    string gsm = m.get_item_id(mres);
     if (mres == -1 or gsm == "back")
     {
         statsmenu();
@@ -1438,7 +1019,7 @@ m.intro_text = "Choose which game statistics to clear. This will not clear your 
     m.add_item("No", "no");
     m.intro_text = "Are you sure you want to clear " + (gsm == "session" ? "your session stats" : gsm == "lifetime" ? "your lifetime stats" : "your session and lifetime stats") + "? This action can't be undone.";
     mres = m.run();
-    string confirm = m.get_selected_item_id();
+    string confirm = m.get_item_id(mres);
     if (mres == -1 or confirm == "no")
     {
 statsmenu();
@@ -1576,7 +1157,7 @@ m.add_item("You've been playing for " + session_minutes + " minutes, " + session
     m.add_item("Back", "back");
 m.intro_text = "Session Statistics menu. You can view your stats for the current game session here.";
     int mres = m.run();
-    string statsm = m.get_selected_item_id();
+    string statsm = m.get_item_id(mres);
     if (mres == -1 || statsm == "back")
 {
         statsmenu();
@@ -1603,7 +1184,7 @@ m.add_item("You have killed a total of " + total_killed_thieves + " thieves.", "
     m.add_item("Back", "back");
 m.intro_text = "Lifetime Statistics menu. You can see your total stats across all of your game sessions here.";
     int mres = m.run();
-    string statsm = m.get_selected_item_id();
+    string statsm = m.get_item_id(mres);
     if (mres == -1 || statsm == "back")
 {
         statsmenu();
@@ -1648,7 +1229,7 @@ setupmenu(false);
     m.add_item("No", "no");
 m.intro_text="Are you sure you want to reset all of your settings?";
 int mres=m.run();
-string confirm = m.get_selected_item_id();
+string confirm = m.get_item_id(mres);
     if (mres == -1 or confirm == "no")
     {
         preffsmenu();

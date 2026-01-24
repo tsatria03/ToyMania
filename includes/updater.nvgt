@@ -92,7 +92,7 @@ else if (ext == "7z" || ext == "zip")
     m.add_item("Cancel", "cancel");
     m.intro_text = "The update has been downloaded. What would you like to do with " + bare_name + "?";
     int mres = m.run();
-    string choice = m.get_selected_item_id();
+    string choice = m.get_item_id(mres);
     if (mres == -1 || choice == "cancel")
 {
         speak("Canceled");
@@ -225,7 +225,7 @@ string get_download_url(string projectname, string new_version)
 m.add_item("cancel", "cancel");
         m.intro_text = "Which version of the game would you like to download?";
         int mres = m.run();
-        string version_choice = m.get_selected_item_id();
+        string version_choice = m.get_item_id(mres);
         if (mres == -1 || version_choice == "cancel") mainmenu();
         if (version_choice == "portable")
             return base + "/ToyMania_windows_portable_password_is_GreatCollector.7z";

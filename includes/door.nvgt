@@ -173,7 +173,7 @@ if (gamcopy == true)
     m.add_item("Return to main menu.", "cancel");
     m.intro_text = "What would you like to do with the current results for this game session?";
     int res = m.run();
-    string choice = m.get_selected_item_id();
+    string choice = m.get_item_id(res);
     if (res != -1)
     {
         string statsummary = "";
