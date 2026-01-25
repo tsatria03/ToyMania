@@ -32,7 +32,6 @@
 #include"key.nvgt"
 #include"menu.nvgt"
 #include"platform.nvgt"
-#include"savefuncks.nvgt"
 #include"savedata.nvgt"
 #include"setupmenu.nvgt"
 #include"thief.nvgt"
