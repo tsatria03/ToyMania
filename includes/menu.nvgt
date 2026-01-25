@@ -286,7 +286,7 @@ m.add_item("Time trial. This is a timed based mode where you must collect toys, 
 m.add_item("Back", "back");
 m.intro_text = "Choose the game you'd like to play for this mode.";
 int gres = m.run();
-string mode = m.get_item_id(mres);
+string mode = m.get_item_id(gres);
 if (mode == "back" or gres == -1)
 {
 modemenu();
@@ -301,7 +301,7 @@ m.add_item("Chaos", "5");
 m.add_item("Back", "back");
 m.intro_text = "Choose the difficulty you'd like to use for this mode.";
 int dres = m.run();
-string diffchoice = m.get_item_id(mres);
+string diffchoice = m.get_item_id(dres);
 if (diffchoice == "back" or dres == -1)
 {
 modemenu();
@@ -373,7 +373,7 @@ m.add_item("Time defense. This is a timed based mode where you must protect the 
 m.add_item("Back", "back");
 m.intro_text = "Choose the game you'd like to play for this mode.";
 int gres = m.run();
-string mode = m.get_item_id(mres);
+string mode = m.get_item_id(gres);
 if (mode == "back" or gres == -1)
 {
 modemenu();
@@ -388,7 +388,7 @@ m.add_item("Chaos", "5");
 m.add_item("Back", "back");
 m.intro_text = "Choose the difficulty you'd like to use for this mode.";
 int dres = m.run();
-string diffchoice = m.get_item_id(mres);
+string diffchoice = m.get_item_id(dres);
 if (diffchoice == "back" or dres == -1)
 {
 modemenu();
@@ -1297,12 +1297,6 @@ if (showset_desc) gcp2 = form.create_input_box("Post-game copy/export: descripti
 int scp = form.create_checkbox("Enable stat copy and export options.", statscopy);
 int scp2 = -1;
 if (showset_desc) scp2 = form.create_input_box("Stat copy/export: description", "This setting controls the showing of all copy and export entries from various stat based menus.", "", 0, true, true);
-int lps = form.create_checkbox("Enable looping of previewed sounds.", loop_previews);
-int lps2 = -1;
-if (showset_desc) lps2 = form.create_input_box("Loop previews: description", "This setting controls whether the sounds found in the Learn Sounds menu loop until another sound is selected or the Escape key is pressed.", "", 0, true, true);
-int vsc = form.create_checkbox("Enable variant-based sound descriptions.", variant_descriptions);
-int vsc2 = -1;
-if (showset_desc) vsc2 = form.create_input_box("Variant sound: description", "This setting controls whether sounds that have multiple variants will include a description along side them.", "", 0, true, true);
 int cfs = form.create_checkbox("Enable copy and export confirmation sounds.", copexpsounds);
 int cfs2 = -1;
 if (showset_desc) cfs2 = form.create_input_box("Copy/export sound: description", "This setting controls the playing of short chimes after copying or exporting files to and from the clipboard.", "", 0, true, true);
@@ -1345,8 +1339,6 @@ speak_item_collects = form.is_checked(collectspeech);
             speak_menu_loading = form.is_checked(loadspeech);
             gamcopy = form.is_checked(gcp);
             statscopy = form.is_checked(scp);
-            loop_previews = form.is_checked(lps);
-            variant_descriptions = form.is_checked(vsc);
             copexpsounds = form.is_checked(cfs);
             quit_menu = form.is_checked(qcm);
             playcounts = form.is_checked(countsound);

@@ -217,14 +217,6 @@ if (st.d.exists("statscopy"))
 {
 statscopy = st.read_bool("statscopy");
 }
-if (st.d.exists("loop_previews"))
-{
-loop_previews = st.read_bool("loop_previews");
-}
-if (st.d.exists("variant_descriptions"))
-{
-variant_descriptions = st.read_bool("variant_descriptions");
-}
 if (st.d.exists("copexpsounds"))
 {
 copexpsounds = st.read_bool("copexpsounds");
@@ -296,8 +288,6 @@ st.add("speak_dlg_enter", speak_dlg_enter);
 st.add("speak_menu_loading", speak_menu_loading);
 st.add("gamcopy", gamcopy);
 st.add("statscopy", statscopy);
-st.add("loop_previews", loop_previews);
-st.add("variant_descriptions", variant_descriptions);
 st.add("copexpsounds", copexpsounds);
 st.add("quit_menu", quit_menu);
 st.add("playcounts", playcounts);
