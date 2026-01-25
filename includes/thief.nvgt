@@ -18,8 +18,11 @@ thiefy = thy;
 thiefhealth = hp;
 thieftime = sp;
 thieftype = tht;
-if(!paused) landsound = thiefpool.play_2d(get_sound("npc/thieves/" + thieftype + "/*land*"), me.x, me.y, thiefx, thiefy, false);
-if(!paused) thievesound = thiefpool.play_2d(get_sound("npc/thieves/" + thieftype + "/*taunt*"), me.x, me.y, thiefx, thiefy, true);
+if(!paused)
+{
+landsound = thiefpool.play_2d(get_sound("npc/thieves/" + thieftype + "/*land*"), me.x, me.y, thiefx, thiefy, false);
+thievesound = thiefpool.play_2d(get_sound("npc/thieves/" + thieftype + "/*taunt*"), me.x, me.y, thiefx, thiefy, true);
+}
 }
 };
 void thiefloop()
@@ -66,79 +69,7 @@ if (!paused) t.stealsound = thiefpool.play_2d(get_sound("npc/thieves/" + t.thief
 toypool.destroy_sound(toys[t.target].toysound);
 toys.remove_at(t.target);
 stolen_toys++;
-if (stolen_toys >= total_toy_stock)
-{
-store_defense = false;
-thievespawn = false;
-toyspawn = false;
-clear_inv();
-destroy_all_thieves();
-destroy_all_toys();
-ambpool.destroy_sound(toyambslot);
-muspool.destroy_sound(toytrackslot);
-if(endless)
-{
-double actual_collected = min(collected_toys, total_toy_stock);
-double actual_stolen = total_toy_stock - actual_collected;
-dlgmessage_return("Game over. The thieves managed to steal " + actual_stolen + " toy" + (actual_stolen == 1 ? "" : "s") + ". You managed to save " + actual_collected + " toy" + (actual_collected == 1 ? "" : "s") + ".");
-}
-else
-{
-if (collected_toys >= total_toy_stock)
-{
-dlgmessage_return("Congradulations! You saved all " + total_toy_stock + " toy" + (total_toy_stock == 1 ? "" : "s") +" before the enemies could take them. Well done!");
-}
-else
-{
-double actual_collected = min(collected_toys, total_toy_stock);
-double actual_stolen = total_toy_stock - actual_collected;
-dlgmessage_return("Game over. The thieves managed to steal " + actual_stolen + " toy" + (actual_stolen == 1 ? "" : "s") + ". You managed to save " + actual_collected + " toy" + (actual_collected == 1 ? "" : "s") + ".");
-}
-}
-setupmenu();
-m.add_item("Yes", "yes");
-m.add_item("No", "no");
-m.intro_text = "Would you like to play the current game mode again?";
-int res = m.run();
-string choice = m.get_item_id(res);
-if (res != -1 && choice == "yes")
-{
-if (speak_menu_loading)
-{
-string difficulty_name = (gamemod == 1) ? "Easy" : (gamemod == 2) ? "Medium" : (gamemod == 3) ? "Hard" : (gamemod == 4) ? "Insane" : (gamemod == 5) ? "Chaos" : "unknown";
-speak((endless ? "loading endless defense: difficulty " : "loading time defense: difficulty ") + difficulty_name);
-}
-dlgplay(get_sound("misc/game/*launch*"));
-collected_toys = 0;
-killed_thieves=0;
-moved_steps = 0;
-stolen_toys = 0;
-    for (uint i = 0; i < achievements.length(); i++)
-    {
-        if (achievements[i].isSessionBased)
-        {
-            achievements[i].currentTier = 0;
-        }
-    }
-gametimer.restart();
-clear_all_buffers();
-clear_inv();
-me.x = 25;
-me.y = 25;
-maxx = 50;
-maxy = 50;
-store_defense = true;
-thievespawn = true;
-toydest=false;
-toyspawn = true;
-reset_weapons();
-toygame2();
-}
-mainmenu();
-}
-thiefpool.destroy_sound(t.thievesound);
-thieves.remove_at(i);
-return;
+t.target = -1;
 }
 }
 }

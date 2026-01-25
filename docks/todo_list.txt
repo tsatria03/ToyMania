@@ -1,18 +1,17 @@
 ####These are the things that need to be finished for future versions of the game.
 
 ****Unfinished. Make a new stelf mode where you have to collect toys before camera's catch you steeling.
-****Unfinished. Change the macanics of the toy defender game to be time based.
-****Unfinished. Add a mini map builder into the game.
 ****Unfinished. Add a mode where you get to watch enemies fight each other. This includes cars.
 ****Unfinished. Add a mode where you catch toys while falling.
 ****Unfinished. Add a mode where you memorize toy sounds.
 ****Unfinished. Add a mode where you ancer quiz questions about toy sounds.
 ****Unfinished. Add car and guard related items for the endless mode, such as car and guard callers.
-****Unfinished. Add back the tts configuration menu.
 ****Unfinished. Add an online scoreboard system.
 
 ##These are the things that are already finished from earlier versions of the game.
 
+**Finished. Change the macanics of the toy defender game to be time based.
+**Finished. Add back the tts configuration menu.
 **Finished. Make it so the pistol weapon is only useable in the endless arcade mode.
 **Finished. Make it so toys don't break in the toy defender game.
 **Finished. Fix it to where it doesn't say incorrect key collected amounts in the endless arcade game.

@@ -1,6 +1,10 @@
 New in 4.8.
-Removed the looping and variant description options found in the settings menu. These were tied to the old learn game sounds menu.
-Brought back the ability to configure your TTS options in the settings menu.
+Updated the todo list file with the latest bug fix and feature improvements made to the game.
+Made it so the endless defence mode for the toy defender game is now completely stock based. This means that you can now collect as many toys as you want, but if the theives steal more than the allowed number of toys in the process, the game will end.
+Made it so the timed defence mode for the toy defender game is now completely time based. This means that you'll now have to collect a total of 100 toys within the alotted time before the theives come to steel them.
+Fixed some bugs with auto running not respecting it's toggle in the game settings menu.
+Removed the looping and variant description options found in the game settings menu. These were tied to the old learn game sounds menu.
+Brought back the ability to configure your TTS options in the main settings menu.
 Completely removed the learn game sounds menu, do to the new menu system not supporting it.
 Fixed some menu navigation issues.
 Added the ability to navigate to the first letter of any item in a menu.

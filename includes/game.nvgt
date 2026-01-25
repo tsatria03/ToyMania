@@ -390,21 +390,11 @@ if(key_pressed(KEY_H) and doormove==false)
 {
 speak_buffer("You have "+round(health / maxhealth * 100, 0) + " percent HP remaining.", "general");
 }
-if(autorun)
-{
-if (alt_is_down() or control_is_down())
-        movetime = walktime;
-    else
-        movetime = runtime;
-}
-else
-{
-if (!alt_is_down() or !control_is_down())
-        movetime = runtime;
-    else
-        movetime = walktime;
-}
-if (!shift_is_down() and key_down(KEY_LEFT) and movetimer.elapsed>=movetime and me.x!=0 and doormove==false)
+    bool running = autorun;
+    if (alt_is_down() or control_is_down())
+        running = !running;
+    movetime = running ? runtime : walktime;
+if (!shift_is_down() and key_pressed(KEY_LEFT) and me.x!=0 and doormove==false)
 {
 me.x-=1;
 facing="left";
@@ -415,7 +405,7 @@ update_achievements();
 writedata();
 movetimer.restart();
 }
-if (!shift_is_down() and key_down(KEY_RIGHT) and movetimer.elapsed>=movetime and me.x!=maxx and doormove==false)
+if (!shift_is_down() and key_pressed(KEY_RIGHT) and me.x!=maxx and doormove==false)
 {
 me.x+=1;
 facing="right";
@@ -426,7 +416,7 @@ update_achievements();
 writedata();
 movetimer.restart();
 }
-if (!shift_is_down() and key_down(KEY_DOWN) and movetimer.elapsed>=movetime and me.y!=0 and doormove==false)
+if (!shift_is_down() and key_pressed(KEY_DOWN) and me.y!=0 and doormove==false)
 {
 me.y-=1;
 facing="backward";
@@ -437,7 +427,7 @@ update_achievements();
 writedata();
 movetimer.restart();
 }
-if (!shift_is_down() and key_down(KEY_UP) and movetimer.elapsed>=movetime and me.y!=maxy and doormove==false)
+if (!shift_is_down() and key_pressed(KEY_UP) and me.y!=maxy and doormove==false)
 {
 me.y+=1;
 facing="forward";
@@ -447,6 +437,53 @@ total_moved_steps+=1;
 update_achievements();
 writedata();
 movetimer.restart();
+}
+if(movetimer.elapsed>=movetime and doormove==false)
+{
+if (!shift_is_down() and key_down(KEY_LEFT) and me.x!=0)
+{
+me.x-=1;
+facing="left";
+p.play_stationary(get_sound("objects/platforms/"+gmt(me.x,me.y)+"/*step*"), false);
+moved_steps+=1;
+total_moved_steps+=1;
+update_achievements();
+writedata();
+movetimer.restart();
+}
+if (!shift_is_down() and key_down(KEY_RIGHT) and me.x!=maxx)
+{
+me.x+=1;
+facing="right";
+p.play_stationary(get_sound("objects/platforms/"+gmt(me.x,me.y)+"/*step*"), false);
+moved_steps+=1;
+total_moved_steps+=1;
+update_achievements();
+writedata();
+movetimer.restart();
+}
+if (!shift_is_down() and key_down(KEY_DOWN) and me.y!=0)
+{
+me.y-=1;
+facing="backward";
+p.play_stationary(get_sound("objects/platforms/"+gmt(me.x,me.y)+"/*step*"), false);
+moved_steps+=1;
+total_moved_steps+=1;
+update_achievements();
+writedata();
+movetimer.restart();
+}
+if (!shift_is_down() and key_down(KEY_UP) and me.y!=maxy)
+{
+me.y+=1;
+facing="forward";
+p.play_stationary(get_sound("objects/platforms/"+gmt(me.x,me.y)+"/*step*"), false);
+moved_steps+=1;
+total_moved_steps+=1;
+update_achievements();
+writedata();
+movetimer.restart();
+}
 }
 if (key_pressed(KEY_SPACE) and weapontimer.elapsed >= weapontime and doormove == false and (weapontype2 != "machine_gun"))
 {
@@ -1134,6 +1171,11 @@ if(alt_is_down() and key_pressed(KEY_G) and paused==false)
 pause_game();
 gamsetsmenu2();
 }
+if(alt_is_down() and key_pressed(KEY_S))
+{
+pause_game();
+speechsetsmenu2();
+}
 if(key_pressed(KEY_C) and paused==false)
 {
 speak_buffer(me.x+", "+me.y+" on "+gmt(me.x,me.y)+". Facing "+facing+".");
@@ -1168,21 +1210,11 @@ if (key_pressed(KEY_Y) and paused == false)
         int session_seconds = int((timeelapsed.ms() % 60000) / 1000);
         speak_buffer("You've been playing for a total of " + session_minutes + " minutes, " + session_seconds + " seconds.", "general");
     }
-if(autorun and paused==false)
-{
-if (alt_is_down() or control_is_down())
-        movetime = walktime;
-    else
-        movetime = runtime;
-}
-else
-{
-if (!alt_is_down() or !control_is_down())
-        movetime = runtime;
-    else
-        movetime = walktime;
-}
-if (!shift_is_down() and key_down(KEY_LEFT) and movetimer.elapsed>=movetime and me.x!=0 and paused==false)
+    bool running = autorun;
+    if (alt_is_down() or control_is_down())
+        running = !running;
+    movetime = running ? runtime : walktime;
+if (!shift_is_down() and key_pressed(KEY_LEFT) and me.x!=0 and doormove==false)
 {
 me.x-=1;
 facing="left";
@@ -1190,9 +1222,10 @@ p.play_stationary(get_sound("objects/platforms/"+gmt(me.x,me.y)+"/*step*"), fals
 moved_steps+=1;
 total_moved_steps+=1;
 update_achievements();
+writedata();
 movetimer.restart();
 }
-if (!shift_is_down() and key_down(KEY_RIGHT) and movetimer.elapsed>=movetime and me.x!=maxx and paused==false)
+if (!shift_is_down() and key_pressed(KEY_RIGHT) and me.x!=maxx and doormove==false)
 {
 me.x+=1;
 facing="right";
@@ -1200,9 +1233,10 @@ p.play_stationary(get_sound("objects/platforms/"+gmt(me.x,me.y)+"/*step*"), fals
 moved_steps+=1;
 total_moved_steps+=1;
 update_achievements();
+writedata();
 movetimer.restart();
 }
-if (!shift_is_down() and key_down(KEY_DOWN) and movetimer.elapsed>=movetime and me.y!=0 and paused==false)
+if (!shift_is_down() and key_pressed(KEY_DOWN) and me.y!=0 and doormove==false)
 {
 me.y-=1;
 facing="backward";
@@ -1210,9 +1244,10 @@ p.play_stationary(get_sound("objects/platforms/"+gmt(me.x,me.y)+"/*step*"), fals
 moved_steps+=1;
 total_moved_steps+=1;
 update_achievements();
+writedata();
 movetimer.restart();
 }
-if (!shift_is_down() and key_down(KEY_UP) and movetimer.elapsed>=movetime and me.y!=maxy and paused==false)
+if (!shift_is_down() and key_pressed(KEY_UP) and me.y!=maxy and doormove==false)
 {
 me.y+=1;
 facing="forward";
@@ -1222,6 +1257,53 @@ total_moved_steps+=1;
 update_achievements();
 writedata();
 movetimer.restart();
+}
+if(movetimer.elapsed>=movetime and doormove==false)
+{
+if (!shift_is_down() and key_down(KEY_LEFT) and me.x!=0)
+{
+me.x-=1;
+facing="left";
+p.play_stationary(get_sound("objects/platforms/"+gmt(me.x,me.y)+"/*step*"), false);
+moved_steps+=1;
+total_moved_steps+=1;
+update_achievements();
+writedata();
+movetimer.restart();
+}
+if (!shift_is_down() and key_down(KEY_RIGHT) and me.x!=maxx)
+{
+me.x+=1;
+facing="right";
+p.play_stationary(get_sound("objects/platforms/"+gmt(me.x,me.y)+"/*step*"), false);
+moved_steps+=1;
+total_moved_steps+=1;
+update_achievements();
+writedata();
+movetimer.restart();
+}
+if (!shift_is_down() and key_down(KEY_DOWN) and me.y!=0)
+{
+me.y-=1;
+facing="backward";
+p.play_stationary(get_sound("objects/platforms/"+gmt(me.x,me.y)+"/*step*"), false);
+moved_steps+=1;
+total_moved_steps+=1;
+update_achievements();
+writedata();
+movetimer.restart();
+}
+if (!shift_is_down() and key_down(KEY_UP) and me.y!=maxy)
+{
+me.y+=1;
+facing="forward";
+p.play_stationary(get_sound("objects/platforms/"+gmt(me.x,me.y)+"/*step*"), false);
+moved_steps+=1;
+total_moved_steps+=1;
+update_achievements();
+writedata();
+movetimer.restart();
+}
 }
 if (key_pressed(KEY_SPACE) and weapontimer.elapsed >= weapontime and paused == false)
 {
@@ -1245,6 +1327,10 @@ mustype="gamemus";
 toytrackslot=muspool.play_stationary_extended(get_sound("objects/sources/tracks/*"+mustype+"*"),true,0,0,toymusvolume,toymuspitch,false);
 spawn_platform(0, maxx, 0, maxy, endless ? "metal" : "wood");
 p.play_stationary(get_sound("objects/platforms/"+gmt(me.x,me.y)+"/*land*"), false);
+if (defense_timed)
+{
+    defense_timer.restart();
+}
 while(true)
 {
 wait(5);
@@ -1276,6 +1362,127 @@ string toyname = random_string(toytypes);
 spawn_toy(random(0,maxx), random(0,maxy), random(5000/gamemod,10000/gamemod), toycat, toyname, toydest);
 toyspawntimer.restart();
 }
+}
+if (endless && !paused && stolen_toys > max_stolen_toys)
+{
+        store_defense = false;
+        thievespawn = false;
+        toyspawn = false;
+        clear_inv();
+        destroy_all_thieves();
+        destroy_all_toys();
+        ambpool.destroy_sound(toyambslot);
+        muspool.destroy_sound(toytrackslot);
+    dlgmessage_return("Game over. The thieves stole too many toys.");
+        setupmenu();
+        m.add_item("Yes", "yes");
+        m.add_item("No", "no");
+        m.intro_text = "Would you like to play the current game mode again?";
+        int res = m.run();
+        string choice = m.get_item_id(res);
+        if (res != -1 && choice == "yes")
+        {
+            if (speak_menu_loading)
+            {
+                string difficulty_name =(gamemod == 1) ? "Easy" : (gamemod == 2) ? "Medium" : (gamemod == 3) ? "Hard" : (gamemod == 4) ? "Insane" : (gamemod == 5) ? "Chaos" : "unknown";
+                speak("loading endless defense: difficulty " + difficulty_name);
+            }
+            dlgplay(get_sound("misc/game/*launch*"));
+            collected_toys = 0;
+            killed_thieves = 0;
+            moved_steps = 0;
+            stolen_toys = 0;
+            for (uint i = 0; i < achievements.length(); i++)
+            {
+                if (achievements[i].isSessionBased)
+                    achievements[i].currentTier = 0;
+            }
+            gametimer.restart();
+            clear_all_buffers();
+            clear_inv();
+            me.x = 25;
+            me.y = 25;
+            maxx = 50;
+            maxy = 50;
+            store_defense = true;
+            thievespawn = true;
+            toydest = false;
+            toyspawn = true;
+            reset_weapons();
+            toygame2();
+            return;
+        }
+        mainmenu();
+        return;
+    }
+if (defense_timed && !paused)
+{
+    if (defense_timer.elapsed >= defense_time_limit)
+    {
+        store_defense = false;
+        thievespawn = false;
+        toyspawn = false;
+        clear_inv();
+        destroy_all_thieves();
+        destroy_all_toys();
+        ambpool.destroy_sound(toyambslot);
+        muspool.destroy_sound(toytrackslot);
+        if (collected_toys >= defense_toy_target)
+        {
+            dlgmessage_return("Times up! You collected " + collected_toys + " toys on time. Great job!");
+        }
+        else if (stolen_toys > collected_toys)
+        {
+dlgmessage_return("Times up! The thieves stole " + stolen_toys + " toy" + (stolen_toys == 1 ? "" : "s") + ". You were able to save " + collected_toys + " toy" + (collected_toys == 1 ? "" : "s") + ". Better luck next time!");
+        }
+        else
+        {
+int minutes = defense_timer.elapsed / 60000;
+int seconds = (defense_timer.elapsed % 60000) / 1000;
+dlgmessage_return("Time's up! The thieves stole " + stolen_toys + " toy" + (stolen_toys == 1 ? "" : "s") + ". You were able to save " + collected_toys + ". You lasted " + minutes + " minutes and " + seconds + " seconds.");
+        }
+        setupmenu();
+        m.add_item("Yes", "yes");
+        m.add_item("No", "no");
+        m.intro_text = "Would you like to play the current game mode again?";
+        int res = m.run();
+        string choice = m.get_item_id(res);
+        if (res != -1 && choice == "yes")
+        {
+            if (speak_menu_loading)
+            {
+                string difficulty_name =(gamemod == 1) ? "Easy" : (gamemod == 2) ? "Medium" : (gamemod == 3) ? "Hard" : (gamemod == 4) ? "Insane" : (gamemod == 5) ? "Chaos" : "unknown";
+                speak("loading time defense: difficulty " + difficulty_name);
+            }
+            dlgplay(get_sound("misc/game/*launch*"));
+            collected_toys = 0;
+            killed_thieves = 0;
+            moved_steps = 0;
+            stolen_toys = 0;
+            for (uint i = 0; i < achievements.length(); i++)
+            {
+                if (achievements[i].isSessionBased)
+                    achievements[i].currentTier = 0;
+            }
+            gametimer.restart();
+            clear_all_buffers();
+            clear_inv();
+            me.x = 25;
+            me.y = 25;
+            maxx = 50;
+            maxy = 50;
+            store_defense = true;
+            thievespawn = true;
+            toydest = false;
+            toyspawn = true;
+            reset_weapons();
+            defense_timer.restart();
+            toygame2();
+            return;
+        }
+        mainmenu();
+        return;
+    }
 }
 }
 }

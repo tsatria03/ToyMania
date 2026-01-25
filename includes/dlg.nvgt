@@ -26,7 +26,7 @@ if (key_repeating(KEY_ESCAPE))
 temp.destroy_all();
 return true;
 }
-if(key_repeating(KEY_RETURN) or key_repeating(KEY_SPACE)  or key_down(KEY_A))
+if(key_repeating(KEY_RETURN) or key_down(KEY_A))
 {
 temp.destroy_all();
 break;
@@ -71,7 +71,7 @@ temp.play_stationary(get_sound("ui/dialogs/"+dlgpack+"/*close*"), false);
 }
 void dlgmessage_return(string msg)
 {
-    dlgmessage(msg + (speak_dlg_enter ? " Press enter or space to continue." : ""));
+    dlgmessage(msg + (speak_dlg_enter ? " Press enter to continue." : ""));
 }
 void dlgplay(string dlgsound, bool skippable=true, bool fadeable=true, int fadetime=30)
 {

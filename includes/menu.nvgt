@@ -284,7 +284,7 @@ setupmenu();
 m.add_item("Endless arcade. This mode lets you play for as long as you can survive. The game will get harder over time with no final boss, and just one unlockable door to win. This mode also includes some items that drop from time to time for use during intense enemy fights.", "endless");
 m.add_item("Time trial. This is a timed based mode where you must collect toys, survive various types of enemies, and defeat the final boss before the store explodes. There is one unlockable door that you must find by collecting all of the required keys to win.", "timed");
 m.add_item("Back", "back");
-m.intro_text = "Choose the game you'd like to play for this mode.";
+m.intro_text = "Choose the mode you'd like to use for this game.";
 int gres = m.run();
 string mode = m.get_item_id(gres);
 if (mode == "back" or gres == -1)
@@ -368,10 +368,10 @@ toygame();
 if (gamem2 == "ty2")
 {
 setupmenu();
-m.add_item("Endless defense. This mode lets you play for as long as you can survive. The game gets progressively harder with faster and tuffer thieves. You have to save as many toys as you can by collecting them.", "endless");
-m.add_item("Time defense. This is a timed based mode where you must protect the toy stock from being stolen. The game ends when you've successfully saved every toy, or if too many are stolen. Expect increasing pressure as waves get faster and more aggressive.", "timed");
+m.add_item("Endless defense. This mode lets you play for as long as you can survive. Defend the store while thieves try to steal your most precious toys. The game will end if they steal too many of them.", "endless");
+m.add_item("Timed defense. This is a timed based mode where you must protect the store for a limited time by collecting enough toys while stopping thieves from stealing them. The game will end if you successfully meet the expected collection goal before the time runs out, or if they end up stealing more toys than you're able to save in total.", "timed");
 m.add_item("Back", "back");
-m.intro_text = "Choose the game you'd like to play for this mode.";
+m.intro_text = "Choose the mode you'd like to use for this game.";
 int gres = m.run();
 string mode = m.get_item_id(gres);
 if (mode == "back" or gres == -1)
@@ -396,6 +396,9 @@ return;
 }
 gamemod = string_to_int(diffchoice);
 endless = (mode == "endless");
+max_stolen_toys = max(10, 60 - (gamemod * 10));
+defense_timed = (mode == "timed");
+defense_time_limit = max(60000, 180000 - ((gamemod - 1) * 30000));
 if (speak_menu_loading)
 {
 string difficulty_name =(gamemod == 1) ? "Easy" :(gamemod == 2) ? "Medium" :(gamemod == 3) ? "Hard" :(gamemod == 4) ? "Insane" :(gamemod == 5) ? "Chaos" :"unknown";
@@ -426,6 +429,7 @@ thievespawn=true;
 toydest = false;
 toyspawn=true;
 reset_weapons();
+defense_timer.restart();
 toygame2();
 }
 if (gamem2 == "back")
