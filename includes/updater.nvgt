@@ -80,7 +80,7 @@ else
 }
     wait(500);
     string ext = filename.substr(filename.rfind(".") + 1);
-    setupmenu(false);
+    setupmenu();
     if (ext == "exe")
 {
         m.add_item("Run Installer", "run");
@@ -219,7 +219,7 @@ string get_download_url(string projectname, string new_version)
     }
     else
     {
-        setupmenu(false);
+        setupmenu();
         m.add_item("Windows Installer", "installer");
         m.add_item("Windows Portable", "portable");
 m.add_item("cancel", "cancel");

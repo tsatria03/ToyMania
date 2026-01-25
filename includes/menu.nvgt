@@ -144,7 +144,7 @@ if (gamem == "cgr")
 {
 if(speak_menu_loading==true) speak("loading");
 m.fade_music();
-setupmenu(false);
+setupmenu();
     m.add_item("Yes", "yes");
     m.add_item("No", "no");
 m.intro_text="Are you sure you want to reset all of your game progresses?";
@@ -280,7 +280,7 @@ gamemenu();
 }
 if (gamem2 == "ty")
 {
-setupmenu(false);
+setupmenu();
 m.add_item("Endless arcade. This mode lets you play for as long as you can survive. The game will get harder over time with no final boss, and just one unlockable door to win. This mode also includes some items that drop from time to time for use during intense enemy fights.", "endless");
 m.add_item("Time trial. This is a timed based mode where you must collect toys, survive various types of enemies, and defeat the final boss before the store explodes. There is one unlockable door that you must find by collecting all of the required keys to win.", "timed");
 m.add_item("Back", "back");
@@ -292,7 +292,7 @@ if (mode == "back" or gres == -1)
 modemenu();
 return;
 }
-setupmenu(false);
+setupmenu();
 m.add_item("Easy", "1");
 m.add_item("Medium", "2");
 m.add_item("Hard", "3");
@@ -367,7 +367,7 @@ toygame();
 }
 if (gamem2 == "ty2")
 {
-setupmenu(false);
+setupmenu();
 m.add_item("Endless defense. This mode lets you play for as long as you can survive. The game gets progressively harder with faster and tuffer thieves. You have to save as many toys as you can by collecting them.", "endless");
 m.add_item("Time defense. This is a timed based mode where you must protect the toy stock from being stolen. The game ends when you've successfully saved every toy, or if too many are stolen. Expect increasing pressure as waves get faster and more aggressive.", "timed");
 m.add_item("Back", "back");
@@ -379,7 +379,7 @@ if (mode == "back" or gres == -1)
 modemenu();
 return;
 }
-setupmenu(false);
+setupmenu();
 m.add_item("Easy", "1");
 m.add_item("Medium", "2");
 m.add_item("Hard", "3");
@@ -435,7 +435,7 @@ gamemenu();
 }
 void pausemenu()
 {
-    setupmenu(false);
+    setupmenu();
         m.add_item("Copy level and game mode to clipboard", "clg");
         m.add_item("Read current game session statistics", "rs");
         m.add_item("Quit game", "qmg");
@@ -475,7 +475,7 @@ int session_seconds = int((timeelapsed.ms() % 60000) / 1000);
             dlgmessage_return(statsummary);
 if (gamcopy == true)
 {
-    setupmenu(false);
+    setupmenu();
     m.add_item("Copy results to clipboard", "copy");
     m.add_item("Export results to file", "export");
     m.add_item("Return to pause menu.", "cancel");
@@ -507,7 +507,7 @@ return;
 {
             if (quit_menu==true)
 {
-                setupmenu(false);
+                setupmenu();
                 m.add_item("Yes", "yes");
                 m.add_item("No", "no");
                 m.intro_text = "Are you sure you want to quit the game? You will lose all progress for this current game session.";
@@ -585,7 +585,7 @@ temp.play_stationary(get_sound("misc/game/*resume*"), false);
         }
 if(psmem == "vds")
 {
-    setupmenu(false);
+    setupmenu();
     m.add_item("Current level: " + level + " (" + (endless ? "Endless Mode" : "Normal Mode") + ")");
     m.add_item("Current location: " + me.x + ", " + me.y+". You're walking on "+gmt(me.x,me.y)+". Facing "+facing+".");
     m.add_item("Player HP: "+round(health / maxhealth * 100, 0) + " percent. "+health+" of "+maxhealth);
@@ -640,7 +640,7 @@ itemfolders.set(itemname, folder);
 }
 }
 allitems.sort_ascending();
-setupmenu(false);
+setupmenu();
 m.add_item("You have " + round(money, 0) + " dollars available to spend", "shopinfo");
 for (uint i = 0; i < allitems.length(); i++)
 {
@@ -705,7 +705,7 @@ shopmenu();
 }
 void invmenu()
 {
-setupmenu(false);
+setupmenu();
 string[] keys = inv.get_keys();
 keys.sort_ascending();
 for (uint i = 0; i < keys.length(); i++)
@@ -740,7 +740,7 @@ return;
 }
 void weaponsmenu()
 {
-setupmenu(false);
+setupmenu();
 string[] weaponNames = {"Bat", "Boot", "Club", "Feat", "Fist", "Hammer", "Knife", "Laser"};
 string[] weaponIds   = {"bat", "boot", "club", "feat", "fist", "hammer", "knife", "laser"};
 string[] weptypes    = {"melee", "melee", "melee", "melee", "melee", "melee", "melee", "melee"};
@@ -832,7 +832,7 @@ if (achm == "chm")
 {
 if(speak_menu_loading==true) speak("loading");
 m.fade_music();
-    setupmenu(false);
+    setupmenu();
     m.add_item("Session achievements", "session");
     m.add_item("Lifetime achievements", "lifetime");
     m.add_item("Session and lifetime achievements", "both");
@@ -844,7 +844,7 @@ m.intro_text = "Choose which game achievements to clear. This will clear your ga
     {
         achesmenu();
     }
-    setupmenu(false);
+    setupmenu();
     m.add_item("Yes", "yes");
     m.add_item("No", "no");
     m.intro_text = "Are you sure you want to reset your " + (achmode == "session" ? "session" : achmode == "lifetime" ? "lifetime" : "session and lifetime") + " achievements? This action can't be undone.";
@@ -940,7 +940,7 @@ gamemenu();
 }
 void show_session_achievements()
 {
-    setupmenu(false);
+    setupmenu();
     for (uint i = 0; i < achievements.length(); i++)
     {
         if (achievements[i].isSessionBased)
@@ -956,7 +956,7 @@ m.intro_text = "Session Achievements menu. These achievements reset every run an
 }
 void show_lifetime_achievements()
 {
-    setupmenu(false);
+    setupmenu();
     for (uint i = 0; i < achievements.length(); i++)
     {
         if (!achievements[i].isSessionBased)
@@ -1002,7 +1002,7 @@ if (statsm == "gs")
 {
 if(speak_menu_loading==true) speak("loading");
 m.fade_music();
-    setupmenu(false);
+    setupmenu();
     m.add_item("session stats", "session");
     m.add_item("lifetime stats", "lifetime");
     m.add_item("session and lifetime stats", "both");
@@ -1014,7 +1014,7 @@ m.intro_text = "Choose which game statistics to clear. This will not clear your 
     {
         statsmenu();
     }
-    setupmenu(false);
+    setupmenu();
     m.add_item("Yes", "yes");
     m.add_item("No", "no");
     m.intro_text = "Are you sure you want to clear " + (gsm == "session" ? "your session stats" : gsm == "lifetime" ? "your lifetime stats" : "your session and lifetime stats") + "? This action can't be undone.";
@@ -1144,7 +1144,7 @@ gamemenu();
 }
 void view_session_stats()
 {
-    setupmenu(false);
+    setupmenu();
     m.add_item("You have collected " + collected_toys + " toys.", "");
     m.add_item("You have collected " + collected_keys + " keys.", "");
     m.add_item("You have killed " + killed_gards + " guards.", "");
@@ -1169,7 +1169,7 @@ else
 }
 void view_lifetime_stats()
 {
-    setupmenu(false);
+    setupmenu();
     m.add_item("Last Played Date: " + last_played_date, "");
     m.add_item("Last Played Time: " + last_played_time, "");
     m.add_item("You have collected a total of " + total_collected_toys + " toys.", "");
@@ -1200,6 +1200,7 @@ form.reset();
     form.create_window("Preferences", false);
 int audsets = form.create_button("&audio settings");
 int gamsets = form.create_button("&game settings");
+int speechsets = form.create_button("s&peech settings");
     int rest = form.create_button("&reset settings");
 int savesets = form.create_button("&save settings", true);
 int back = form.create_button("&back");
@@ -1222,9 +1223,13 @@ gamsetsmenu();
         {
 soundsetsmenu();
 }
+        if (form.is_pressed(speechsets))
+        {
+speechsetsmenu();
+}
         if (form.is_pressed(rest))
         {
-setupmenu(false);
+setupmenu();
     m.add_item("Yes", "yes");
     m.add_item("No", "no");
 m.intro_text="Are you sure you want to reset all of your settings?";
@@ -1571,7 +1576,7 @@ heartpool.destroy_sound(heartslot);
 string[]@ devices=get_sound_output_devices();
 devices.remove_at(0);
 devices.sort_ascending();
-setupmenu(false);
+setupmenu();
 for(uint i=0; i<devices.length(); i++)
 {
     string soundstate = (i + 1 == sound_output_device) ? ": active" : ": inactive";
@@ -1607,7 +1612,7 @@ soundsetsmenu();
 else
 {
 string[] dlgpacks=find_directories("sounds/"+soundpack+"/ui/dialogs/*");
-setupmenu(false);
+setupmenu();
 for(uint i=0; i<dlgpacks.length(); i++)
 {
 uint64 size = get_directory_size("sounds/"+soundpack+"/ui/dialogs/" + dlgpacks[i]);
@@ -1644,7 +1649,7 @@ soundsetsmenu();
 else
 {
 string[] menupacks=find_directories("sounds/"+soundpack+"/ui/menus/*");
-setupmenu(false);
+setupmenu();
 for(uint i=0; i<menupacks.length(); i++)
 {
 uint64 size = get_directory_size("sounds/"+soundpack+"/ui/menus/" + menupacks[i]);
@@ -1681,7 +1686,7 @@ soundsetsmenu();
 else
 {
 string[] soundpacks=find_directories("sounds/*");
-setupmenu(false);
+setupmenu();
 for(uint i=0; i<soundpacks.length(); i++)
 {
 uint64 size = get_directory_size("sounds/" + soundpacks[i]);
@@ -1747,3 +1752,87 @@ return;
         }
 }
     }
+void speechsetsmenu()
+{
+form.reset();
+    form.create_window("speech settings", false);
+int ttscfg = form.create_button("&Configure voice");
+int speechtest = form.create_button("&preview voice");
+int cancel = form.create_button("&cancel");
+int ok = form.create_button("&okay");
+form.focus(ttscfg);
+spool.play_stationary(get_sound("ui/menus/"+menupack+"/*open*"),false);
+    while (true)
+    {
+        wait(5);
+        form.monitor();
+        if (form.is_pressed(cancel) || key_repeating(KEY_ESCAPE))
+        {
+spool.play_stationary(get_sound("ui/menus/"+menupack+"/*close*"),false);
+preffsmenu();
+        }
+if (form.is_pressed(ttscfg))
+{
+spool.play_stationary(get_sound("ui/menus/"+menupack+"/*open*"),false);
+    tts_config(tts, true);
+spool.play_stationary(get_sound("ui/menus/"+menupack+"/*close*"),false);
+    speechsetsmenu();
+}
+if (form.is_pressed(speechtest))
+{
+dlgmessage_return("This is your current voice configuration.");
+    speechsetsmenu();
+}
+        if (form.is_pressed(ok))
+        {
+preffsmenu();
+        }
+    }
+}
+void speechsetsmenu2()
+{
+form.reset();
+    form.create_window("speech settings", false);
+int ttscfg = form.create_button("&Configure voice");
+int speechtest = form.create_button("&preview voice");
+int cancel = form.create_button("&cancel");
+int ok = form.create_button("&okay");
+form.focus(ttscfg);
+spool.play_stationary(get_sound("ui/menus/"+menupack+"/*open*"),false);
+    while (true)
+    {
+        wait(5);
+        form.monitor();
+        if (form.is_pressed(cancel) || key_repeating(KEY_ESCAPE))
+        {
+spool.play_stationary(get_sound("ui/menus/"+menupack+"/*close*"),false);
+speak_buffer("canceled");
+resume_game();
+return;
+        }
+if (form.is_pressed(ttscfg))
+{
+spool.play_stationary(get_sound("ui/menus/"+menupack+"/*open*"),false);
+    tts_config(tts, true);
+writepreffs();
+speak_buffer("Settings saved.");
+resume_game();
+return;
+}
+if (form.is_pressed(speechtest))
+{
+dlgmessage_return("This is your current voice configuration.");
+writepreffs();
+speak_buffer("Settings saved.");
+resume_game();
+return;
+}
+        if (form.is_pressed(ok))
+        {
+writepreffs();
+speak_buffer("Settings saved.");
+resume_game();
+return;
+        }
+    }
+}

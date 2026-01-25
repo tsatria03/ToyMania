@@ -75,6 +75,7 @@ string tts_dump_config(tts_voice@ v, bool save_screen_reader_setting = ffalse) {
 	if (save_screen_reader_setting) o += "||" + (use_sr? "1" : "0");
 	return o;
 }
+
 bool tts_load_config(string c, tts_voice@ v) {
 	string[] args = c.split("||");
 	if (args[0] == "default") return true;
@@ -90,7 +91,8 @@ bool tts_load_config(string c, tts_voice@ v) {
 	return true;
 }
 
-void tts_config(tts_voice@ v, bool main_config = false) {
+void tts_config(tts_voice@ v, bool main_config = false)
+{
 	bool orig_sr = use_sr;
 	int orig_voice = v.voice;
 	int orig_rate = v.rate;

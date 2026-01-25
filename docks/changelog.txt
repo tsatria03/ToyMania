@@ -1,4 +1,5 @@
 New in 4.8.
+Brought back the ability to configure your TTS options in the settings menu.
 Completely removed the learn game sounds menu, do to the new menu system not supporting it.
 Fixed some menu navigation issues.
 Added the ability to navigate to the first letter of any item in a menu.

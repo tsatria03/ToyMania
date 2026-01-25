@@ -249,6 +249,11 @@ if (st.d.exists("togglesound"))
 {
 togglesound = st.read_bool("togglesound");
 }
+if (st.d.exists("tts_config"))
+{
+    string config = st.read_string("tts_config");
+    tts_load_config(config, tts);
+}
 if(st.d.exists("soundcard"))
 {
 soundcard=st.read_string("soundcard");
@@ -299,5 +304,6 @@ st.add("playcounts", playcounts);
 st.add("playlevels", playlevels);
 st.add("completesound", completesound);
 st.add("togglesound", togglesound);
+st.add("tts_config", tts_dump_config(tts, true));
 st.save();
 }

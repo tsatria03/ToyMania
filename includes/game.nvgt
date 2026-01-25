@@ -250,6 +250,11 @@ if(alt_is_down() and key_pressed(KEY_G))
 pause_game();
 gamsetsmenu2();
 }
+if(alt_is_down() and key_pressed(KEY_S))
+{
+pause_game();
+speechsetsmenu2();
+}
 if (key_pressed(KEY_Z) and doormove == false)
 {
     if (weapontype2 == "machine_gun" or weapontype2 == "pistol")
