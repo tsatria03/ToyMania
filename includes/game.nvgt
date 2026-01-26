@@ -791,6 +791,7 @@ p.destroy_sound(painslot);
     ambpool.destroy_sound(toyambslot);
     muspool.destroy_sound(toytrackslot);
 p.play_stationary(get_sound("misc/player/*death*"), false);
+temp.play_stationary(get_sound("misc/player/*heartstop*"), false);
 dlgplay(get_sound("misc/store/*dest_large*"));
 dlgplay(get_sound("objects/platforms/"+gmt(me.x,me.y)+"/*fall*"));
 string[] failMessages = {"You stuck around too long, and now the store has turned into a pile of ashes. Try escaping with a bit of haste next time!", "Time’s up! The store just blew sky-high, and your session stats blew with it too!", "Well, that literally backfired. The store's gone, and so is your progress!", "Nice sight seeing, but the store had a strict 'explode-on-time' policy. Better run next time!", "Oh dear! Your hesitation turned the store into fireworks. You didn’t escape, but at least it was quite the show to watch!"};

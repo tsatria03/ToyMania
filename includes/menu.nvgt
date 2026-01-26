@@ -660,7 +660,21 @@ m.add_item("back", "back");
 m.intro_text = "Shop menu. What would you like to buy?";
 int mres = m.run();
 string shopem = m.get_item_id(mres);
-if (mres == -1 || shopem == "shopinfo" || shopem == "back")
+if (mres == -1)
+{
+speak("Canceled");
+boss_timer.resume();
+gametimer.resume();
+return;
+}
+if(shopem == "shopinfo")
+{
+speak("Canceled");
+boss_timer.resume();
+gametimer.resume();
+return;
+}
+if(shopem == "back")
 {
 speak("Canceled");
 boss_timer.resume();

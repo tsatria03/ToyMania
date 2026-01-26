@@ -1,3 +1,5 @@
+New in 4.9.
+Fixed some bugs with first letter navigation in menus.
 New in 4.8.
 Updated the todo list file with the latest bug fix and feature improvements made to the game.
 Made it so the endless defence mode for the toy defender game is now completely stock based. This means that you can now collect as many toys as you want, but if the theives steal more than the allowed number of toys in the process, the game will end.
