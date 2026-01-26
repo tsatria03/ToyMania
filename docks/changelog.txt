@@ -1,8 +1,8 @@
 New in 4.9.
 Removed all of the descriptions related to toggling various options in the game settings menu.
 Added some menu navigation options to the game settings menu.
-Fixed some balance quirks with bosses spawning guards in the normal toy collector game.
-Made it so bosses and guards will now play their body fall sounds upon finishing it's death sequence, instead of playing them at a random interval.
+Fixed some balancing quirks with bosses spawning guards in the normal toy collector game.
+Made it so bosses and guards will now play their body fall sounds upon finishing their death sequence, instead of playing them at a random interval.
 Made it so cycle inventory sounds play in 2d for your character.
 Addressed an issue where you were able to move on the map while the game was paused in the toy defender game mode.
 Replaced the wood platform sounds for the toy defender game with better ones.
