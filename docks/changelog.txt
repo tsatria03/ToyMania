@@ -1,4 +1,5 @@
 New in 4.9.
+Addressed an issue where you were able to move on the map while the game was paused in the toy defender game mode.
 Replaced the wood platform sounds for the toy defender game with better ones.
 Fixed some bugs with menu music.
 Fixed some bugs with first letter navigation in menus.

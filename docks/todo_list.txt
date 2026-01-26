@@ -1,11 +1,8 @@
 ####These are the things that need to be finished for future versions of the game.
 
 ****Unfinished. Make a new stelf mode where you have to collect toys before camera's catch you steeling.
-****Unfinished. Add a mode where you get to watch enemies fight each other. This includes cars.
-****Unfinished. Add a mode where you catch toys while falling.
-****Unfinished. Add a mode where you memorize toy sounds.
-****Unfinished. Add a mode where you ancer quiz questions about toy sounds.
-****Unfinished. Add car and guard related items for the endless mode, such as car and guard callers.
+****Unfinished. Add a mode where you get to watch various enemies fight each other.
+****Unfinished. Add car and guard related items for the toy collector endless game, such as car and guard callers.
 ****Unfinished. Add an online scoreboard system.
 
 ##These are the things that are already finished from earlier versions of the game.
