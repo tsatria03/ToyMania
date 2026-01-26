@@ -36,7 +36,7 @@ if(main == "st")
 {
 if(speak_menu_loading==true) speak("loading");
 m.fade_music();
-        dlgplay(get_sound("ui/other/*speaker*"));
+        dlgplay(get_sound("ui/menus/"+menupack+"/*speaker*"));
     if(completesound==true) dlgplay(get_sound("ui/other/*complete*"), false);
 dlgmessage_return("Speaker test complete.");
     mainmenu();
