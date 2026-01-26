@@ -1,4 +1,5 @@
 New in 4.9.
+Fixed some bugs with menu music.
 Fixed some bugs with first letter navigation in menus.
 New in 4.8.
 Updated the todo list file with the latest bug fix and feature improvements made to the game.

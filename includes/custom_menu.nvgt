@@ -243,8 +243,6 @@ int find_item_by_id(string id)
             current_item = 0;
         if (!start_focused && intro_text != "") speak(intro_text);
         play_open_sound();
-music.set_volume(menumusvolume);
-music.play_looped();
 if (enable_first_letter_navigation)
 {
     get_characters();
@@ -255,6 +253,8 @@ if (has_focus)
     speak(intro_text+" "+get_item_description(current_item));
 else if (intro_text != "")
     speak(intro_text);
+music.set_volume(menumusvolume);
+music.play_looped();
         while (true)
         {
             wait(5);
@@ -270,14 +270,14 @@ if (key_down(volkeydown) and voltimer.elapsed >= voltime and menumusvolume > -50
 {
 menumusvolume -= 2;
 music.set_volume(menumusvolume);
-writedata();
+writepreffs();
 voltimer.restart();
 }
 if (key_down(volkeyup) and voltimer.elapsed >= voltime and menumusvolume < 0)
 {
 menumusvolume += 2;
 music.set_volume(menumusvolume);
-writedata();
+writepreffs();
 voltimer.restart();
 }
             if (key_repeating(KEY_TAB))
