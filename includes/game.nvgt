@@ -314,7 +314,7 @@ speak_buffer("You're currently on level " + level + " of the " + (endless ? "End
 }
 if(key_pressed(KEY_M) and doormove==false and endless)
 {
-speak_buffer("You currently have "+money+" dollars available to spend.", "general");
+speak_buffer("You have "+money+" dollars available to spend.", "general");
 }
 if(key_pressed(KEY_C) and doormove==false)
 {
@@ -525,6 +525,8 @@ if(endless)
 string[] doortype=find_directories("sounds/"+soundpack+"/objects/doors/*");
 spawn_door(random(50, 100), random(50, 100), 0, 0, random(100,200), random(20,40), random_string(doortype));
 }
+level=5;
+gametimer.force(1000*300);
 while(true)
 {
 wait(5);

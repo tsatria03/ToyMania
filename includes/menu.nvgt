@@ -645,7 +645,6 @@ itemfolders.set(itemname, folder);
 }
 allitems.sort_ascending();
 setupmenu();
-m.add_item("You have " + round(money, 0) + " dollars available to spend", "shopinfo");
 for (uint i = 0; i < allitems.length(); i++)
 {
 string itemname = allitems[i];
@@ -660,21 +659,7 @@ m.add_item("back", "back");
 m.intro_text = "Shop menu. What would you like to buy?";
 int mres = m.run();
 string shopem = m.get_item_id(mres);
-if (mres == -1)
-{
-speak("Canceled");
-boss_timer.resume();
-gametimer.resume();
-return;
-}
-if(shopem == "shopinfo")
-{
-speak("Canceled");
-boss_timer.resume();
-gametimer.resume();
-return;
-}
-if(shopem == "back")
+if (mres == -1 || shopem == "back")
 {
 speak("Canceled");
 boss_timer.resume();

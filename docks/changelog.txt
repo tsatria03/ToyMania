@@ -1,4 +1,5 @@
 New in 4.9.
+Replaced the wood platform sounds for the toy defender game with better ones.
 Fixed some bugs with menu music.
 Fixed some bugs with first letter navigation in menus.
 New in 4.8.
