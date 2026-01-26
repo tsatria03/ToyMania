@@ -294,13 +294,29 @@ if (st.d.exists("auto_check_updates"))
 {
 auto_check_updates = st.read_bool("auto_check_updates");
 }
-if (st.d.exists("menuwrap"))
+if(st.d.exists("up_and_down"))
 {
-menuwrap = st.read_bool("menuwrap");
+up_and_down=st.read_bool("up_and_down");
 }
-if (st.d.exists("showset_desc"))
+if(st.d.exists("left_and_right"))
 {
-showset_desc = st.read_bool("showset_desc");
+left_and_right=st.read_bool("left_and_right");
+}
+if(st.d.exists("home_and_end"))
+{
+home_and_end=st.read_bool("home_and_end");
+}
+if(st.d.exists("menuwrap"))
+{
+menuwrap=st.read_bool("menuwrap");
+}
+if(st.d.exists("first_letter"))
+{
+first_letter=st.read_bool("first_letter");
+}
+if(st.d.exists("speak_menu_position"))
+{
+speak_menu_position=st.read_bool("speak_menu_position");
 }
 if (st.d.exists("autorun"))
 {
@@ -405,8 +421,12 @@ st.add("toymusvolume", toymusvolume);
 st.add("master_volume", master_volume);
 st.add("play_logo", play_logo);
 st.add("auto_check_updates", auto_check_updates);
+st.add("up_and_down", up_and_down);
+st.add("left_and_right", left_and_right);
+st.add("home_and_end", home_and_end);
 st.add("menuwrap", menuwrap);
-st.add("showset_desc", showset_desc);
+st.add("first_letter", first_letter);
+st.add("speak_menu_position", speak_menu_position);
 st.add("autorun", autorun);
 st.add("behind_pitch", behind_pitch);
 st.add("hrtf", hrtf);

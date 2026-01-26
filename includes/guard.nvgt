@@ -76,7 +76,8 @@ killed_gards+=1;
 total_killed_gards+=1;
 update_achievements();
 writedata();
-spawn_bodyfall(gards[i].gardx, gards[i].gardy, random(500,1000), get_sound("npc/guards/"+gards[i].gardtype+"/*fall*"));
+int falldelay = round(gardpool.get_sound_length(gards[i].defsound), 0);
+spawn_bodyfall(gards[i].gardx, gards[i].gardy, (falldelay <= 0 ? random(500, 1000) : falldelay), get_sound("npc/guards/"+gards[i].gardtype+"/*fall*"));
 gards.remove_at(i);
 return;
 }

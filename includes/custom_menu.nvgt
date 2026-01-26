@@ -230,7 +230,7 @@ int find_item_by_id(string id)
             desc += ". " + string(index + 1) + " of " + string(items.length());
         return desc;
     }
-    int run(int start_position = 0, bool start_focused = false)
+    int run(int start_position = 0, bool start_focused = false, bool speak_focused = false)
     {
         if (items.length() == 0)
         {
@@ -266,24 +266,34 @@ if(key_pressed(KEY_F3))
 {
 find_searched_item();
 }
-if (key_down(volkeydown) and voltimer.elapsed >= voltime and menumusvolume > -50)
+if (key_down(volkeydown) and voltimer.elapsed >= voltime and menumusvolume > -100)
 {
-menumusvolume -= 2;
+menumusvolume -= 5;
 music.set_volume(menumusvolume);
 writepreffs();
 voltimer.restart();
 }
 if (key_down(volkeyup) and voltimer.elapsed >= voltime and menumusvolume < 0)
 {
-menumusvolume += 2;
+menumusvolume += 5;
 music.set_volume(menumusvolume);
 writepreffs();
 voltimer.restart();
 }
             if (key_repeating(KEY_TAB))
             {
-                if (intro_text != "") speak(intro_text+" "+get_item_description(current_item));
+                if (intro_text != "")
+{
+if(speak_focused==true) 
+{
+speak(intro_text+" "+get_item_description(current_item));
             }
+else if(speak_focused==false) 
+{
+speak(intro_text);
+            }
+}
+}
 else if ((key_repeating(KEY_DOWN)) && enable_up_and_down)
 {
     if (!has_focus)

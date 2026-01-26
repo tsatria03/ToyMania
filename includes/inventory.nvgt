@@ -22,27 +22,30 @@ inv.delete_all();
 }
 void cycle_inv(int dir)
 {
-if (inv.get_size() == 0)
-{
-p.destroy_sound(invslot);
-speak_buffer("empty");
-return;
-}
-invslot = p.play_stationary(get_sound("misc/player/*inv*"), false);
-if (dir == 1)
-invpos += 1;
-else
-invpos -= 1;
-if (invpos >= inv.get_size())
-invpos = 0;
-else if (invpos < 0)
-invpos = inv.get_size() - 1;
-int a;
-inv.get(inv.get_keys()[invpos], a);
-if (a == 1)
-speak_buffer(inv.get_keys()[invpos] + ". Item " + (invpos + 1) + " of " + inv.get_keys().length());
-else
-speak_buffer(inv.get_keys()[invpos] + "s, " + a + ". Item " + (invpos + 1) + " of " + inv.get_keys().length());
+    if (inv.get_size() == 0)
+    {
+        p.destroy_sound(invslot);
+        speak_buffer("empty");
+        return;
+    }
+    string[] keys = inv.get_keys();
+    keys.sort_ascending();
+    if (dir == 1)
+        invpos += 1;
+    else
+        invpos -= 1;
+    if (invpos >= keys.length())
+        invpos = 0;
+    else if (invpos < 0)
+        invpos = keys.length() - 1;
+    double invpan = convert_to_pan(keys.length(), invpos, -25, 25);
+    invslot = p.play_stationary_extended(get_sound("misc/player/*inv*"), false, 0, invpan, 0, 100, false);
+    int a;
+    inv.get(keys[invpos], a);
+    if (a == 1)
+        speak_buffer(keys[invpos] + ". Item " + (invpos + 1) + " of " + keys.length());
+    else
+        speak_buffer(keys[invpos] + "s, " + a + ". Item " + (invpos + 1) + " of " + keys.length());
 }
 void useitem(string current, bool block_desc=false)
 {

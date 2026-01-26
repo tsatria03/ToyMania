@@ -34,6 +34,7 @@
 #include"platform.nvgt"
 #include"savedata.nvgt"
 #include"setupmenu.nvgt"
+#include"sound_pool.nvgt"
 #include"thief.nvgt"
 #include"toy.nvgt"
 #include"updater.nvgt"
@@ -60,7 +61,12 @@ bool play_item_gives=true;
 bool speak_item_collects=true;
 bool speak_dlg_enter=true;
 bool speak_menu_loading=true;
-bool menuwrap=true;
+bool up_and_down=true;
+bool left_and_right=false;
+bool home_and_end=false;
+bool first_letter=false;
+bool menuwrap=false;
+bool speak_menu_position=false;
 bool gamcopy=true;
 bool statscopy=true;
 bool copexpsounds=true;
@@ -69,7 +75,6 @@ bool playcounts=true;
 bool playlevels=true;
 bool completesound=true;
 bool togglesound=true;
-bool showset_desc=true;
 bool alarm_started = false;
 bool countdown_started = false;
 bool small_storedest=false;

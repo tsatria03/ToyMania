@@ -525,6 +525,8 @@ if(endless)
 string[] doortype=find_directories("sounds/"+soundpack+"/objects/doors/*");
 spawn_door(random(50, 100), random(50, 100), 0, 0, random(100,200), random(20,40), random_string(doortype));
 }
+level=5;
+gametimer.force(1000*300);
 while(true)
 {
 wait(5);
