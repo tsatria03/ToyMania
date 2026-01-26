@@ -394,7 +394,7 @@ speak_buffer("You have "+round(health / maxhealth * 100, 0) + " percent HP remai
     if (alt_is_down() or control_is_down())
         running = !running;
     movetime = running ? runtime : walktime;
-if (!shift_is_down() and key_pressed(KEY_LEFT) and me.x!=0 and doormove==false)
+if (!shift_is_down() and key_pressed(KEY_LEFT) and me.x!=0 and doormove==false and moveable==true)
 {
 me.x-=1;
 facing="left";
@@ -405,7 +405,7 @@ update_achievements();
 writedata();
 movetimer.restart();
 }
-if (!shift_is_down() and key_pressed(KEY_RIGHT) and me.x!=maxx and doormove==false)
+if (!shift_is_down() and key_pressed(KEY_RIGHT) and me.x!=maxx and doormove==false and moveable==true)
 {
 me.x+=1;
 facing="right";
@@ -416,7 +416,7 @@ update_achievements();
 writedata();
 movetimer.restart();
 }
-if (!shift_is_down() and key_pressed(KEY_DOWN) and me.y!=0 and doormove==false)
+if (!shift_is_down() and key_pressed(KEY_DOWN) and me.y!=0 and doormove==false and moveable==true)
 {
 me.y-=1;
 facing="backward";
@@ -427,7 +427,7 @@ update_achievements();
 writedata();
 movetimer.restart();
 }
-if (!shift_is_down() and key_pressed(KEY_UP) and me.y!=maxy and doormove==false)
+if (!shift_is_down() and key_pressed(KEY_UP) and me.y!=maxy and doormove==false and moveable==true)
 {
 me.y+=1;
 facing="forward";
@@ -438,7 +438,7 @@ update_achievements();
 writedata();
 movetimer.restart();
 }
-if(movetimer.elapsed>=movetime and doormove==false)
+if(movetimer.elapsed>=movetime and doormove==false and moveable==true)
 {
 if (!shift_is_down() and key_down(KEY_LEFT) and me.x!=0)
 {
@@ -1214,7 +1214,7 @@ if (key_pressed(KEY_Y) and paused == false)
     if (alt_is_down() or control_is_down())
         running = !running;
     movetime = running ? runtime : walktime;
-if (!shift_is_down() and key_pressed(KEY_LEFT) and me.x!=0 and doormove==false)
+if (!shift_is_down() and key_pressed(KEY_LEFT) and me.x!=0 and doormove==false and moveable==true)
 {
 me.x-=1;
 facing="left";
@@ -1225,7 +1225,7 @@ update_achievements();
 writedata();
 movetimer.restart();
 }
-if (!shift_is_down() and key_pressed(KEY_RIGHT) and me.x!=maxx and doormove==false)
+if (!shift_is_down() and key_pressed(KEY_RIGHT) and me.x!=maxx and doormove==false and moveable==true)
 {
 me.x+=1;
 facing="right";
@@ -1236,7 +1236,7 @@ update_achievements();
 writedata();
 movetimer.restart();
 }
-if (!shift_is_down() and key_pressed(KEY_DOWN) and me.y!=0 and doormove==false)
+if (!shift_is_down() and key_pressed(KEY_DOWN) and me.y!=0 and doormove==false and moveable==true)
 {
 me.y-=1;
 facing="backward";
@@ -1247,7 +1247,7 @@ update_achievements();
 writedata();
 movetimer.restart();
 }
-if (!shift_is_down() and key_pressed(KEY_UP) and me.y!=maxy and doormove==false)
+if (!shift_is_down() and key_pressed(KEY_UP) and me.y!=maxy and doormove==false and moveable==true)
 {
 me.y+=1;
 facing="forward";
@@ -1258,7 +1258,7 @@ update_achievements();
 writedata();
 movetimer.restart();
 }
-if(movetimer.elapsed>=movetime and doormove==false)
+if(movetimer.elapsed>=movetime and doormove==false and moveable==true)
 {
 if (!shift_is_down() and key_down(KEY_LEFT) and me.x!=0)
 {

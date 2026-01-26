@@ -47,14 +47,18 @@ dockver.close();
 void pause_game()
 {
 boss_timer.pause();
+defense_timer.pause();
 gametimer.pause();
+moveable=false;
 paused=true;
 pause_pools();
 }
 void resume_game()
 {
 boss_timer.resume();
+defense_timer.resume();
 gametimer.resume();
+moveable=true;
 paused=false;
 resume_pools();
 }
