@@ -1560,10 +1560,11 @@ if(mres==-1)
 {
 soundsetsmenu();
 }
-    else if (mres >= 0 && mres < int(devices.length()))
+int index = mres - 1;
+if (index >= 0 && index < int(devices.length()))
     {
-        soundcard = devices[mres];
-        sound_output_device = mres + 1;
+    soundcard = devices[index];
+    sound_output_device = index + 1;
 if(completesound==true) dlgplay(get_sound("ui/other/*complete*"), false);
 dlgmessage_return("Sound device set to "+soundcard+".");
 soundsetsmenu();
@@ -1597,9 +1598,10 @@ if(mres==-1)
 {
 soundsetsmenu();
 }
-else if (mres>=0 and mres<dlgpacks.length())
+int index = mres - 1;
+if (index >= 0 && index < int(dlgpacks.length()))
 {
-dlgpack=dlgpacks[mres];
+dlgpack = dlgpacks[index];
 if(completesound==true) dlgplay(get_sound("ui/other/*complete*"), false);
 dlgmessage_return("Dialog theme set to "+dlgpack+".");
 soundsetsmenu();
@@ -1634,9 +1636,10 @@ if(mres==-1)
 {
 soundsetsmenu();
 }
-else if (mres>=0 and mres<menupacks.length())
+int index = mres - 1;
+if (index >= 0 && index < int(menupacks.length()))
 {
-menupack=menupacks[mres];
+menupack = menupacks[index];
 if(completesound==true) dlgplay(get_sound("ui/other/*complete*"), false);
 dlgmessage_return("Menu theme set to "+menupack+".");
 soundsetsmenu();
@@ -1671,11 +1674,12 @@ if(mres==-1)
 {
 soundsetsmenu();
 }
-else if (mres>=0 and mres<soundpacks.length())
+int index = mres - 1;
+if (index >= 0 && index < int(soundpacks.length()))
 {
 dlgpack="";
 menupack="";
-soundpack=soundpacks[mres];
+soundpack=soundpacks[index];
 if(completesound==true) dlgplay(get_sound("ui/other/*complete*"), false);
 dlgmessage_return("Sound pack set to "+soundpack+".");
 soundsetsmenu();
