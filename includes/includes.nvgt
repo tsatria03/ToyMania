@@ -33,7 +33,7 @@
 #include"menu.nvgt"
 #include"platform.nvgt"
 #include"savedata.nvgt"
-#include"setupmenu.nvgt"
+#include"savefuncts.nvgt"
 #include"sound_pool.nvgt"
 #include"thief.nvgt"
 #include"toy.nvgt"
@@ -117,8 +117,8 @@ string keydesc;
 string objdesc;
 string toydesc;
 string facing="right";
-string savePath = DIRECTORY_APPDATA + "tsatria03/ToyMania/saves/";
-string statsPath = DIRECTORY_APPDATA + "tsatria03/ToyMania/stats/";
+string savePath = DIRECTORY_APPDATA + "tsatria03/ToyMania/saves";
+string statsPath = DIRECTORY_APPDATA + "tsatria03/ToyMania/stats";
 string dlgpack="default";
 string menupack="default";
 string soundpack="default";

@@ -44,6 +44,29 @@ dockver.open("docks/version.txt","rb");
 version=dockver.read();
 dockver.close();
 }
+void setupmenu(bool music_added = false)
+{
+if (music_added)
+{
+m.add_music(get_sound("ui/menus/"+menupack+"/*music*"));
+} else
+{
+m.add_music("");
+}
+m.reset();
+    m.enable_up_and_down = up_and_down;
+    m.enable_left_and_right = left_and_right;
+    m.enable_home_and_end = home_and_end;
+    m.enable_wrapping = menuwrap;
+    m.enable_first_letter_navigation = first_letter;
+    m.speak_position = speak_menu_position;
+m.click_sound=get_sound("ui/menus/"+menupack+"/*click*");
+m.close_sound=get_sound("ui/menus/"+menupack+"/*close*");
+m.edge_sound=get_sound("ui/menus/"+menupack+"/*edge*");
+m.enter_sound=get_sound("ui/menus/"+menupack+"/*enter*");
+m.open_sound=get_sound("ui/menus/"+menupack+"/*open*");
+m.wrap_sound=get_sound("ui/menus/"+menupack+"/*wrap*");
+}
 void pause_game()
 {
 boss_timer.pause();

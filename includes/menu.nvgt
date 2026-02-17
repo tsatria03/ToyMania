@@ -69,7 +69,7 @@ exit();
 }
 void docksmenu()
 {
-setupmenu();
+setupmenu(true);
 m.add_item("changelog", "changelog");
 m.add_item("credits", "credits");
 m.add_item("readme", "readme");
@@ -113,7 +113,7 @@ mainmenu();
 }
 void gamemenu()
 {
-setupmenu();
+setupmenu(true);
 m.add_item("play game", "pg");
 m.add_item("view game achievements", "ach");
 m.add_item("view game statistics", "stats");
@@ -147,7 +147,7 @@ m.fade_music();
 setupmenu();
     m.add_item("Yes", "yes");
     m.add_item("No", "no");
-m.intro_text="Are you sure you want to reset all of your game progresses?";
+m.intro_text="Are you sure you want to reset all of your game progresses? This action cannot be undone.";
 int mres=m.run();
 string confirm = m.get_item_id(mres);
     if (mres == -1 or confirm == "no")
@@ -267,7 +267,7 @@ mainmenu();
 }
 void modemenu()
 {
-setupmenu();
+setupmenu(true);
 m.add_item("toy collector", "ty");
 m.add_item("toy defender", "ty2");
 m.add_item("back", "back");
@@ -806,7 +806,7 @@ gametimer.resume();
 }
 void achesmenu()
 {
-setupmenu();
+setupmenu(true);
     m.add_item("Session Achievements", "session");
     m.add_item("Lifetime Achievements", "lifetime");
 m.add_item("Clear game achievements.", "chm");
@@ -851,7 +851,7 @@ m.intro_text = "Choose which game achievements to clear. This will clear your ga
     setupmenu();
     m.add_item("Yes", "yes");
     m.add_item("No", "no");
-    m.intro_text = "Are you sure you want to reset your " + (achmode == "session" ? "session" : achmode == "lifetime" ? "lifetime" : "session and lifetime") + " achievements? This action can't be undone.";
+    m.intro_text = "Are you sure you want to reset your " + (achmode == "session" ? "session" : achmode == "lifetime" ? "lifetime" : "session and lifetime") + " achievements? This action cannot be undone.";
     mres = m.run();
     string confirm = m.get_item_id(mres);
     if (mres == -1 or confirm == "no")
@@ -976,7 +976,7 @@ m.intro_text = "Lifetime Achievements menu. These achievements track your long-t
 }
 void statsmenu()
 {
-setupmenu();
+setupmenu(true);
     m.add_item("Session Statistics", "session");
     m.add_item("Lifetime Statistics", "lifetime");
 m.add_item("Clear game statistics.", "gs");
@@ -1021,7 +1021,7 @@ m.intro_text = "Choose which game statistics to clear. This will not clear your 
     setupmenu();
     m.add_item("Yes", "yes");
     m.add_item("No", "no");
-    m.intro_text = "Are you sure you want to clear " + (gsm == "session" ? "your session stats" : gsm == "lifetime" ? "your lifetime stats" : "your session and lifetime stats") + "? This action can't be undone.";
+    m.intro_text = "Are you sure you want to clear " + (gsm == "session" ? "your session stats" : gsm == "lifetime" ? "your lifetime stats" : "your session and lifetime stats") + "? This action cannot be undone.";
     mres = m.run();
     string confirm = m.get_item_id(mres);
     if (mres == -1 or confirm == "no")
@@ -1236,7 +1236,7 @@ speechsetsmenu();
 setupmenu();
     m.add_item("Yes", "yes");
     m.add_item("No", "no");
-m.intro_text="Are you sure you want to reset all of your settings?";
+m.intro_text="Are you sure you want to reset all of your settings? This action cannot be undone.";
 int mres=m.run();
 string confirm = m.get_item_id(mres);
     if (mres == -1 or confirm == "no")
@@ -1402,8 +1402,8 @@ int masterGameVolumeSlider = form.create_slider("master game volume: adjustable"
     int heartbeatTest = form.create_button("heartbeat sound test: switch");
     int musTest = form.create_button("music sound test: switch");
     int musList = form.create_list("Test Tracks: menu", 2);
-form.add_list_item(musList, "BossMusic: normal mode", "bossmus");
-form.add_list_item(musList, "Game Music: normal and endless mode", "gamemus");
+form.add_list_item(musList, "BossMusic: toy collector, normal mode", "bossmus");
+form.add_list_item(musList, "Game Music: toy collector, normal and endless modes", "gamemus");
 int sdm = form.create_button("Select sound &device. Currently set to " + soundcard);
 int sgm, slm, spk;
 if (dlgpack == "")
