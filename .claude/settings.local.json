@@ -2,7 +2,10 @@
   "permissions": {
     "allow": [
       "Bash(where ffmpeg:*)",
-      "Bash(scons -s)"
+      "Bash(scons -s)",
+      "Bash(wc -l /c/Users/tonys/OneDrive/Documents/github/ToyMania/includes/*.nvgt)",
+      "Bash(du -sh /c/Users/tonys/OneDrive/Documents/github/ToyMania/includes/*)",
+      "Bash(git -C /c/Users/tonys/OneDrive/Documents/github/ToyMania log --oneline)"
     ]
   }
 }

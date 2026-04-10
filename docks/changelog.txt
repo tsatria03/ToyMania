@@ -1,6 +1,8 @@
 New in 5.1.
-Added bindable actions for the settings menu shortcuts: open_audio_sets_menu, open_game_sets_menu, open_keyboard_sets_menu, and open_speech_sets_menu. These were previously hardcoded Alt key combinations in the script.
-Added held movement actions to keyboard.ini: move_left_held, move_right_held, move_up_held, and move_down_held, each stored with a :down trigger so the held walk behavior is fully configurable.
+Fixed a bug where the recording menu could attempt to start recording with an invalid or missing device, which could later cause a failed to stop recording error. The menu now speaks no recording devices found and closes if no valid devices are available, and blocks the start button with an error if no device is selected.
+Fixed a bug where pressing escape after saving a recording required the user to press the same key multiple times to exit the recording settings menu.
+Added bindable actions for the settings menu shortcuts. These were previously hardcoded Alt key combinations in the script.
+Added held movement actions to keyboard.ini: move_left_held, move_right_held, move_up_held, and move_down_held. Each stored with a down trigger so the held walk behavior is fully configurable.
 Added run_modifier=LALT:down,RALT:down,LCTRL:down,RCTRL:down to keyboard.ini, replacing the hardcoded alt_is_down() and control_is_down() checks in the script.
 Added a [buffer] section to keyboard.ini with 9 bindable actions: buffer_previous, buffer_next, buffer_top, buffer_bottom, buffer_prev_category, buffer_next_category, buffer_toggle, buffer_copy, and buffer_export.
 Added a [facing] section to keyboard.ini with 4 bindable actions: face_left, face_right, face_forward, and face_backward. Each supports both left and right shift variants by default.

@@ -1375,10 +1375,10 @@ if (!ingame)
     form.add_list_item(musList, "BossMusic: toy collector, normal mode", "bossmus");
     form.add_list_item(musList, "Game Music: toy collector, normal and endless modes", "gamemus");
 }
-int sdm = form.create_button("Select sound &device. Currently set to " + soundcard);
-int sgm = -1, slm = -1, spk = -1;
+int sdm=-1, sgm = -1, slm = -1, spk = -1;
 if (!ingame)
 {
+sdm = form.create_button("Select sound &device. Currently set to " + soundcard);
 if (dlgpack == "")
 sgm = form.create_button("Select dialo&g theme for the " + soundpack + " sound pack. Currently set to nothing");
 else
@@ -1605,7 +1605,7 @@ alarmpool.destroy_sound(alarmslot);
 heartpool.destroy_sound(heartslot);
 string[]@ devices=get_sound_output_devices();
 devices.remove_at(0);
-devices.sort_ascending();
+//devices.sort_ascending();
 setupmenu();
 for(uint i=0; i<devices.length(); i++)
 {
@@ -2009,6 +2009,13 @@ else
         form.add_list_item(deviceList, dev_name, ""+i);
         if (i == rec.recording_device) selected_device = form.get_list_count(deviceList) - 1;
     }
+    if (form.get_list_count(deviceList) == 0)
+    {
+        spool.play_stationary(get_sound("ui/menus/"+menupack+"/*close*"), false);
+        speak("No recording devices found.");
+        resume_game();
+        return;
+    }
     form.set_list_position(deviceList, selected_device);
     startBtn = form.create_button("&Start recording");
     closeBtn = form.create_button("&Close");
@@ -2043,22 +2050,31 @@ while (true)
     }
     if (startBtn >= 0 && form.is_pressed(startBtn))
     {
+        bool device_ok = true;
         if (deviceList >= 0)
         {
             int devPos = form.get_list_position(deviceList);
-            if (devPos >= 0)
+            if (devPos < 0)
+            {
+                speak("Please select a recording device first.");
+                device_ok = false;
+            }
+            else
             {
                 string devId = form.get_list_item_id(deviceList, devPos);
                 rec.set_recording_device(string_to_int(devId));
             }
         }
-        if (rec.start_recording())
+        if (device_ok)
         {
-            is_recording = true;
-            break;
+            if (rec.start_recording())
+            {
+                is_recording = true;
+                break;
+            }
+            else
+                speak("Failed to start recording.");
         }
-        else
-            speak("Failed to start recording.");
     }
     if (stopBtn >= 0 && form.is_pressed(stopBtn))
     {
@@ -2099,17 +2115,18 @@ while (true)
                 file_delete(wav_path);
                 if (completesound) dlgplay(get_sound("ui/other/*complete*"), false);
                 dlgmessage_return("Recording saved as " + filename + ".mp3");
-recmenu();
+                has_recording = false;
+                break;
             }
             else
             {
                 dlgmessage_return("Conversion failed. WAV file kept at " + wav_path);
-recmenu();
+                break;
             }
         }
         else
             dlgmessage_return("Failed to save recording.");
-recmenu();
+            break;
     }
 }
 }

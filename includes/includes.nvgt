@@ -2,14 +2,13 @@
 #pragma document docks
 #pragma plugin nvgt_curl
 
-#include"input_conf.nvgt"
 #include"bgt_compat.nvgt"
+#include"input_conf.nvgt"
 #include"file_contents.nvgt"
 #include"instance.nvgt"
 #include"recording.nvgt"
 #include"size.nvgt"
 #include"sound_pool.nvgt"
-#include"speech.nvgt"
 
 #include"achievments.nvgt"
 #include"audioutils.nvgt"
@@ -37,7 +36,7 @@
 #include"platform.nvgt"
 #include"savedata.nvgt"
 #include"savefuncts.nvgt"
-#include"sound_pool.nvgt"
+#include"speech.nvgt"
 #include"thief.nvgt"
 #include"toy.nvgt"
 #include"updater.nvgt"
