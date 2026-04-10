@@ -1,8 +1,8 @@
 @echo off
-set GAME=SimpleFighter
-set PASSWORD=SpfBuilder
+set GAME=ToyMania
+set PASSWORD=GreatCollector
 
-set WIN_SOURCE=..\releases\windows\SimpleFighter_windows_portable_password_is_SpfBuilder\sf
+set WIN_SOURCE=..\releases\windows\ToyMania_windows_portable_password_is_GreatCollector\tm
 
 echo.
 echo Building Windows portable 7z archive...
