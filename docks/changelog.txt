@@ -1,4 +1,9 @@
 New in 5.1.
+Added bindable actions for the settings menu shortcuts: open_audio_sets_menu, open_game_sets_menu, open_keyboard_sets_menu, and open_speech_sets_menu. These were previously hardcoded Alt key combinations in the script.
+Added held movement actions to keyboard.ini: move_left_held, move_right_held, move_up_held, and move_down_held, each stored with a :down trigger so the held walk behavior is fully configurable.
+Added run_modifier=LALT:down,RALT:down,LCTRL:down,RCTRL:down to keyboard.ini, replacing the hardcoded alt_is_down() and control_is_down() checks in the script.
+Added a [buffer] section to keyboard.ini with 9 bindable actions: buffer_previous, buffer_next, buffer_top, buffer_bottom, buffer_prev_category, buffer_next_category, buffer_toggle, buffer_copy, and buffer_export.
+Added a [facing] section to keyboard.ini with 4 bindable actions: face_left, face_right, face_forward, and face_backward. Each supports both left and right shift variants by default.
 Fixed a bug where adding, editing, or removing a key binding would overwrite the keyboard.ini file and strip all comments and section headers.
 Fixed a bug where the list of actions in the add binding menu was displayed in an unpredictable order. Actions are now sorted alphabetically.
 Fixed incorrect action names for the ammo info and door info queries in the game, which were mismatched with the names used in keyboard.ini.

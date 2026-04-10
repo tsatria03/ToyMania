@@ -1,8 +1,45 @@
 void toy_game_input()
 {
-buffercheck();
-// --- Quit ---
-if (controls.action_repeating("quit") and (store_defense or doormove == false))
+if(controls.action_triggered("buffer_top") and paused==false)
+{
+top_buffer_item();
+}
+if(controls.action_triggered("buffer_previous") and paused==false)
+{
+previous_buffer_item();
+}
+if(controls.action_triggered("buffer_bottom") and paused==false)
+{
+bottom_buffer_item();
+}
+if(controls.action_triggered("buffer_next") and paused==false)
+{
+next_buffer_item();
+}
+if(controls.action_triggered("buffer_prev_category") and paused==false)
+{
+previous_buffer();
+}
+if(controls.action_triggered("buffer_next_category") and paused==false)
+{
+next_buffer();
+}
+if(controls.action_triggered("buffer_toggle") and paused==false)
+{
+toggle_buffer();
+}
+if(controls.action_triggered("buffer_copy") and paused==false)
+{
+copy_buffer_item();
+}
+if(controls.action_triggered("buffer_export") and paused==false)
+{
+if (export_current_buffer())
+{
+clear_current_buffer();
+}
+}
+if (controls.action_triggered("quit") and (store_defense or doormove == false))
 {
 if (is_recording)
 {
@@ -114,46 +151,44 @@ else
 ingame = false;
     mainmenu();
 }
-// --- Weapon selection ---
 if (!store_defense)
 {
-if (controls.action_pressed("weapon_bat") && !doormove && current_weapon != "bat")
+if (controls.action_triggered("weapon_bat") && !doormove && current_weapon != "bat")
 draw_weapon("melee", "bat");
-if (controls.action_pressed("weapon_boot") && !doormove && current_weapon != "boot")
+if (controls.action_triggered("weapon_boot") && !doormove && current_weapon != "boot")
 draw_weapon("melee", "boot");
-if (controls.action_pressed("weapon_club") && !doormove && current_weapon != "club")
+if (controls.action_triggered("weapon_club") && !doormove && current_weapon != "club")
 draw_weapon("melee", "club");
-if (controls.action_pressed("weapon_feat") && !doormove && current_weapon != "feat")
+if (controls.action_triggered("weapon_feat") && !doormove && current_weapon != "feat")
 draw_weapon("melee", "feat");
-if (controls.action_pressed("weapon_fist") && !doormove && current_weapon != "fist")
+if (controls.action_triggered("weapon_fist") && !doormove && current_weapon != "fist")
 draw_weapon("melee", "fist");
-if (controls.action_pressed("weapon_hammer") && !doormove && current_weapon != "hammer")
+if (controls.action_triggered("weapon_hammer") && !doormove && current_weapon != "hammer")
 draw_weapon("melee", "hammer");
-if (controls.action_pressed("weapon_knife") && !doormove && current_weapon != "knife")
+if (controls.action_triggered("weapon_knife") && !doormove && current_weapon != "knife")
 draw_weapon("melee", "knife");
-if (controls.action_pressed("weapon_laser") && !doormove && current_weapon != "laser")
+if (controls.action_triggered("weapon_laser") && !doormove && current_weapon != "laser")
 draw_weapon("melee", "laser");
-if (controls.action_pressed("weapon_machine_gun") && endless && !doormove && current_weapon != "machine_gun")
+if (controls.action_triggered("weapon_machine_gun") && endless && !doormove && current_weapon != "machine_gun")
 draw_weapon("artillery", "machine_gun");
-if (controls.action_pressed("weapon_pistol") && endless && !doormove && current_weapon != "pistol")
+if (controls.action_triggered("weapon_pistol") && endless && !doormove && current_weapon != "pistol")
 draw_weapon("artillery", "pistol");
 }
 else
 {
-if (controls.action_pressed("def_weapon_feat") && !paused && current_weapon != "feat")
+if (controls.action_triggered("def_weapon_feat") && !paused && current_weapon != "feat")
 draw_weapon("melee", "feat");
-if (controls.action_pressed("def_weapon_fist") && !paused && current_weapon != "fist")
+if (controls.action_triggered("def_weapon_fist") && !paused && current_weapon != "fist")
 draw_weapon("melee", "fist");
 }
-// --- Inventory ---
-if(controls.action_repeating("inventory_cycle") and key_up(KEY_LMENU) and key_up(KEY_RMENU))
+if(controls.action_triggered("inventory_cycle") and key_up(KEY_LMENU) and key_up(KEY_RMENU))
 {
 if (shift_is_down())
 cycle_inv(0);
 else
 cycle_inv(1);
 }
-if(controls.action_repeating("item_use") and usetimer.elapsed>=usetime)
+if(controls.action_triggered("item_use") and usetimer.elapsed>=usetime)
 {
 usetimer.restart();
 if (inv.get_keys().length()>0 and invpos<inv.get_size())
@@ -161,31 +196,30 @@ useitem(inv.get_keys()[invpos]);
 else
 speak_buffer("No item in focus.");
 }
-// --- Volume controls (non-defense only for alarm/heartbeat) ---
 if (!store_defense)
 {
-if(controls.action_repeating("alarm_vol_up") and alarmvolume!=0)
+if(controls.action_triggered("alarm_vol_up") and alarmvolume!=0)
 {
 alarmvolume+=1;
 alarmpool.update_sound_start_values(alarmslot,0,alarmvolume,alarmpitch);
 speak_buffer("alarm "+alarmvolume);
 writepreffs();
 }
-if(controls.action_repeating("alarm_vol_down") and alarmvolume!=-50)
+if(controls.action_triggered("alarm_vol_down") and alarmvolume!=-50)
 {
 alarmvolume-=1;
 alarmpool.update_sound_start_values(alarmslot,0,alarmvolume,alarmpitch);
 speak_buffer("alarm "+alarmvolume);
 writepreffs();
 }
-if(controls.action_repeating("heart_vol_up") and heartvolume!=0)
+if(controls.action_triggered("heart_vol_up") and heartvolume!=0)
 {
 heartvolume+=1;
 heartpool.update_sound_start_values(heartslot,0,heartvolume,heartpitch);
 speak_buffer("heart "+heartvolume);
 writepreffs();
 }
-if(controls.action_repeating("heart_vol_down") and heartvolume!=-50)
+if(controls.action_triggered("heart_vol_down") and heartvolume!=-50)
 {
 heartvolume-=1;
 heartpool.update_sound_start_values(heartslot,0,heartvolume,heartpitch);
@@ -193,38 +227,37 @@ speak_buffer("heart "+heartvolume);
 writepreffs();
 }
 }
-if(controls.action_repeating("music_vol_up") and toymusvolume!=0)
+if(controls.action_triggered("music_vol_up") and toymusvolume!=0)
 {
 toymusvolume+=1;
 muspool.update_sound_start_values(toytrackslot,0,toymusvolume,toymuspitch);
 speak_buffer("track "+toymusvolume);
 writepreffs();
 }
-if(controls.action_repeating("music_vol_down") and toymusvolume!=-50)
+if(controls.action_triggered("music_vol_down") and toymusvolume!=-50)
 {
 toymusvolume-=1;
 muspool.update_sound_start_values(toytrackslot,0,toymusvolume,toymuspitch);
 speak_buffer("track "+toymusvolume);
 writepreffs();
 }
-if(controls.action_repeating("ambient_vol_up") and toyambvolume!=0)
+if(controls.action_triggered("ambient_vol_up") and toyambvolume!=0)
 {
 toyambvolume+=1;
 ambpool.update_sound_start_values(toyambslot,0,toyambvolume,toyambpitch);
 speak_buffer("source "+toyambvolume);
 writepreffs();
 }
-if(controls.action_repeating("ambient_vol_down") and toyambvolume!=-50)
+if(controls.action_triggered("ambient_vol_down") and toyambvolume!=-50)
 {
 toyambvolume-=1;
 ambpool.update_sound_start_values(toyambslot,0,toyambvolume,toyambpitch);
 speak_buffer("source "+toyambvolume);
 writepreffs();
 }
-// --- Inventory open / weapons menu / pause (non-defense only) ---
 if (!store_defense)
 {
-if (controls.action_repeating("inventory_open") and doormove == false)
+if (controls.action_triggered("inventory_open") and doormove == false)
 {
 if (inv.get_size() == 0)
 speak_buffer("Your inventory is currently empty.", "general");
@@ -235,13 +268,13 @@ gametimer.pause();
 invmenu();
 }
 }
-if (controls.action_pressed("info_weapons") and doormove == false)
+if (controls.action_triggered("info_weapons") and doormove == false)
 {
 boss_timer.pause();
 gametimer.pause();
 weaponsmenu();
 }
-if(controls.action_pressed("pause") and doormove==false)
+if(controls.action_triggered("pause") and doormove==false)
 {
 temp.play_stationary(get_sound("misc/game/*pause*"), false);
 pause_game();
@@ -250,7 +283,7 @@ pausemenu();
 }
 else
 {
-if(controls.action_repeating("pause"))
+if(controls.action_triggered("pause"))
 {
 if(paused==false)
 {
@@ -266,69 +299,63 @@ resume_game();
 }
 }
 }
-// --- Facing direction ---
-if(shift_is_down())
-{
-if(key_pressed(KEY_LEFT) and facing=="left"==false)
+if(controls.action_triggered("face_left") and facing=="left"==false)
 {
 facing="left";
 p.play_2d(get_sound("misc/player/*turn*"), me.x-1, me.y, me.x-1, me.y, false);
 }
-if(key_pressed(KEY_RIGHT) and facing=="right"==false)
+if(controls.action_triggered("face_right") and facing=="right"==false)
 {
 facing="right";
 p.play_2d(get_sound("misc/player/*turn*"), me.x+1, me.y, me.x+1, me.y, false);
 }
-if(key_pressed(KEY_DOWN) and facing=="backward"==false)
+if(controls.action_triggered("face_backward") and facing=="backward"==false)
 {
 facing="backward";
 p.play_2d(get_sound("misc/player/*turn*"), me.x, me.y-1, me.x, me.y-1, false);
 }
-if(key_pressed(KEY_UP) and facing=="forward"==false)
+if(controls.action_triggered("face_forward") and facing=="forward"==false)
 {
 facing="forward";
 p.play_2d(get_sound("misc/player/*turn*"), me.x, me.y+1, me.x, me.y+1, false);
 }
-}
-// --- Settings menus ---
-if(alt_is_down() and key_pressed(KEY_A))
+if(controls.action_triggered("open_audio_sets_menu"))
 {
 pause_game();
 soundsetsmenu();
 }
-if(alt_is_down() and key_pressed(KEY_G))
+if(controls.action_triggered("open_game_sets_menu"))
 {
 pause_game();
 gamsetsmenu();
 }
-if(alt_is_down() and key_pressed(KEY_K))
+if(controls.action_triggered("open_keyboard_sets_menu"))
 {
 pause_game();
 keyboardsetsmenu();
 }
-if(controls.action_pressed("open_rec_menu") and doormove == false)
+if(controls.action_triggered("open_rec_menu") and doormove == false)
 {
 pause_game();
 recmenu();
 }
-if(alt_is_down() and key_pressed(KEY_S))
+if(controls.action_triggered("open_speech_sets_menu"))
 {
 pause_game();
 speechsetsmenu();
 }
-// --- Combat info / reload (non-defense only) ---
 if (!store_defense)
 {
-if (controls.action_pressed("info_ammo") and doormove == false)
+if (controls.action_triggered("info_ammo") and doormove == false)
 {
     if (weapontype2 == "machine_gun" or weapontype2 == "pistol")
         speak_buffer("You have "+round(ammo,0) + " out of " + round(maxammo,0) + " rounds of ammo loaded, and " + round(reserved_ammo,0) + " rounds of ammo in reserve.", "general");
     else
         speak_buffer("This weapon does not take any ammo.", "general");
 }
-if (controls.action_pressed("reload") and doormove == false and (weapontype2 == "machine_gun" or weapontype2 == "pistol"))
+if (controls.action_triggered("reload") and doormove == false and (weapontype2 == "machine_gun" or weapontype2 == "pistol"))
     reload_weapon();
-if (controls.action_repeating("info_door") and doormove == false)
+if (controls.action_triggered("info_door") and doormove == false)
 {
     if (doors.length() == 0)
     {
@@ -360,19 +387,19 @@ if (controls.action_repeating("info_door") and doormove == false)
         speak_buffer("The door is " + direction + ", about " + distance + " feet away.", "general");
     }
 }
-if(controls.action_pressed("info_level") and doormove==false)
+if(controls.action_triggered("info_level") and doormove==false)
     speak_buffer("You're currently on level " + level + " of the " + (endless ? "Endless" : "Normal") + " game mode.", "general");
-if(controls.action_pressed("info_money") and doormove==false and endless)
+if(controls.action_triggered("info_money") and doormove==false and endless)
     speak_buffer("You have "+money+" dollars available to spend.", "general");
-if(controls.action_pressed("info_keys_field") and doormove==false)
+if(controls.action_triggered("info_keys_field") and doormove==false)
     speak_buffer("There are "+keys.length()+" collectible keys on the field.", "general");
-if(controls.action_pressed("info_cars_field") and doormove==false)
+if(controls.action_triggered("info_cars_field") and doormove==false)
     speak_buffer("There are "+cars.length()+" destroyable cars on the field.", "general");
-if(controls.action_pressed("info_collected_keys") and doormove==false)
+if(controls.action_triggered("info_collected_keys") and doormove==false)
     speak_buffer("You've collected "+collected_keys+" keys.", "general");
-if(controls.action_pressed("info_destroyed_cars") and doormove==false)
+if(controls.action_triggered("info_destroyed_cars") and doormove==false)
     speak_buffer("You've destroyed "+destroyed_cars+" cars.", "general");
-if(controls.action_pressed("info_store_or_shop") and doormove==false)
+if(controls.action_triggered("info_store_or_shop") and doormove==false)
 {
     if(endless)
     {
@@ -383,7 +410,7 @@ if(controls.action_pressed("info_store_or_shop") and doormove==false)
     else
         speak_buffer("This store has "+round(storehealth / storemaxhealth * 100, 0) + " percent HP remaining.", "general");
 }
-if (controls.action_pressed("info_time") and doormove == false)
+if (controls.action_triggered("info_time") and doormove == false)
 {
     if (!endless and level == 6)
     {
@@ -401,45 +428,43 @@ if (controls.action_pressed("info_time") and doormove == false)
     }
 }
 }
-// --- Info queries (shared + defense-specific) ---
-if(controls.action_pressed("info_coords") and (store_defense or doormove==false))
+if(controls.action_triggered("info_coords") and (store_defense or doormove==false))
     speak_buffer(me.x+", "+me.y+" on "+gmt(me.x,me.y)+". Facing "+facing+".");
-if(controls.action_pressed("info_toys_field") and (store_defense or doormove==false))
+if(controls.action_triggered("info_toys_field") and (store_defense or doormove==false))
     speak_buffer("There are "+toys.length()+" collectible toys on the field.", "general");
-if(controls.action_pressed("info_collected_toys") and (store_defense or doormove==false))
+if(controls.action_triggered("info_collected_toys") and (store_defense or doormove==false))
     speak_buffer("You've collected "+collected_toys+" toys.", "general");
-if(controls.action_pressed("info_steps") and (store_defense or doormove==false))
+if(controls.action_triggered("info_steps") and (store_defense or doormove==false))
     speak_buffer("You've taken "+moved_steps+" steps.", "general");
-if(controls.action_pressed("info_enemies_field") and (store_defense or doormove==false))
+if(controls.action_triggered("info_enemies_field") and (store_defense or doormove==false))
 {
     if (store_defense)
         speak_buffer("There are "+thieves.length()+" killable thieves on the field.", "general");
     else
         speak_buffer("There are "+gards.length()+" killable gards on the field.", "general");
 }
-if(controls.action_pressed("info_killed_enemies") and (store_defense or doormove==false))
+if(controls.action_triggered("info_killed_enemies") and (store_defense or doormove==false))
 {
     if (store_defense)
         speak_buffer("You've killed "+killed_thieves+" thieves.", "general");
     else
         speak_buffer("You've killed "+killed_gards+" gards.", "general");
 }
-if (store_defense and controls.action_pressed("info_store_or_shop"))
+if (store_defense and controls.action_triggered("info_store_or_shop"))
     speak_buffer("The thieves stole " + stolen_toys + " toys.", "general");
-if (!store_defense and controls.action_pressed("info_health") and doormove==false)
+if (!store_defense and controls.action_triggered("info_health") and doormove==false)
     speak_buffer("You have "+round(health / maxhealth * 100, 0) + " percent HP remaining.", "general");
-if (controls.action_pressed("info_time") and store_defense)
+if (controls.action_triggered("info_time") and store_defense)
 {
     int session_minutes = int(timeelapsed.ms() / 60000);
     int session_seconds = int((timeelapsed.ms() % 60000) / 1000);
     speak_buffer("You've been playing for a total of " + session_minutes + " minutes, " + session_seconds + " seconds.", "general");
 }
-// --- Movement ---
     bool running = autorun;
-    if (alt_is_down() or control_is_down())
+    if (controls.action_triggered("run_modifier"))
         running = !running;
     movetime = running ? runtime : walktime;
-if (!shift_is_down() and controls.action_pressed("move_left") and me.x!=0 and doormove==false and moveable==true)
+if (!shift_is_down() and controls.action_triggered("move_left") and me.x!=0 and doormove==false and moveable==true)
 {
 me.x-=1;
 facing="left";
@@ -450,7 +475,7 @@ update_achievements();
 writedata();
 movetimer.restart();
 }
-if (!shift_is_down() and controls.action_pressed("move_right") and me.x!=maxx and doormove==false and moveable==true)
+if (!shift_is_down() and controls.action_triggered("move_right") and me.x!=maxx and doormove==false and moveable==true)
 {
 me.x+=1;
 facing="right";
@@ -461,7 +486,7 @@ update_achievements();
 writedata();
 movetimer.restart();
 }
-if (!shift_is_down() and controls.action_pressed("move_down") and me.y!=0 and doormove==false and moveable==true)
+if (!shift_is_down() and controls.action_triggered("move_down") and me.y!=0 and doormove==false and moveable==true)
 {
 me.y-=1;
 facing="backward";
@@ -472,7 +497,7 @@ update_achievements();
 writedata();
 movetimer.restart();
 }
-if (!shift_is_down() and controls.action_pressed("move_up") and me.y!=maxy and doormove==false and moveable==true)
+if (!shift_is_down() and controls.action_triggered("move_up") and me.y!=maxy and doormove==false and moveable==true)
 {
 me.y+=1;
 facing="forward";
@@ -485,7 +510,7 @@ movetimer.restart();
 }
 if(movetimer.elapsed>=movetime and doormove==false and moveable==true)
 {
-if (!shift_is_down() and controls.action_down("move_left") and me.x!=0)
+if (!shift_is_down() and controls.action_triggered("move_left_held") and me.x!=0)
 {
 me.x-=1;
 facing="left";
@@ -496,7 +521,7 @@ update_achievements();
 writedata();
 movetimer.restart();
 }
-if (!shift_is_down() and controls.action_down("move_right") and me.x!=maxx)
+if (!shift_is_down() and controls.action_triggered("move_right_held") and me.x!=maxx)
 {
 me.x+=1;
 facing="right";
@@ -507,7 +532,7 @@ update_achievements();
 writedata();
 movetimer.restart();
 }
-if (!shift_is_down() and controls.action_down("move_down") and me.y!=0)
+if (!shift_is_down() and controls.action_triggered("move_down_held") and me.y!=0)
 {
 me.y-=1;
 facing="backward";
@@ -518,7 +543,7 @@ update_achievements();
 writedata();
 movetimer.restart();
 }
-if (!shift_is_down() and controls.action_down("move_up") and me.y!=maxy)
+if (!shift_is_down() and controls.action_triggered("move_up_held") and me.y!=maxy)
 {
 me.y+=1;
 facing="forward";
@@ -530,13 +555,12 @@ writedata();
 movetimer.restart();
 }
 }
-// --- Fire ---
-if (controls.action_pressed("fire") and weapontimer.elapsed >= weapontime and doormove == false and (weapontype2 != "machine_gun"))
+if (controls.action_triggered("fire") and weapontimer.elapsed >= weapontime and doormove == false and (weapontype2 != "machine_gun"))
 {
     fire_weapon();
     weapontimer.restart();
 }
-if (controls.action_down("fire_held") and weapontimer2.elapsed >= weapontime2 and doormove == false and endless and weapontype2 == "machine_gun")
+if (controls.action_triggered("fire_held") and weapontimer2.elapsed >= weapontime2 and doormove == false and endless and weapontype2 == "machine_gun")
 {
     fire_weapon();
     weapontimer2.restart();
