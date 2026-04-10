@@ -814,11 +814,58 @@ string[] lines = content.split("\n");
 for (uint i = 0; i < lines.length(); i++)
 {
     string line = lines[i].trim_whitespace_left().trim_whitespace_right();
-    if (line.length() == 0 || line.substr(0, 1) == ";") continue;
+    if (line.length() == 0 || line.substr(0, 1) == ";" || line.substr(0, 1) == "#") continue;
     if (line.find("=") < 0) continue;
     entries.insert_last(line);
 }
 return entries;
+}
+void save_keyboard_ini()
+{
+string kpath = configPath + "/keyboard.ini";
+file f;
+f.open(kpath, "rb");
+string content = f.read();
+f.close();
+string[] lines = content.split("\n");
+string output = "";
+dictionary written;
+for (uint i = 0; i < lines.length(); i++)
+{
+    string line = lines[i];
+    string trimmed = line.trim_whitespace_left().trim_whitespace_right();
+    if (trimmed.length() == 0 || trimmed.substr(0, 1) == ";" || trimmed.substr(0, 1) == "#" || trimmed.substr(0, 1) == "[")
+    {
+        output += line + "\n";
+        continue;
+    }
+    int eq = trimmed.find("=");
+    if (eq < 0)
+    {
+        output += line + "\n";
+        continue;
+    }
+    string act = trimmed.substr(0, eq);
+    if (!controls.has_action(act)) { output += line + "\n"; continue; }
+    string val = controls.get_keyboard_action_string(act);
+    if (val.length() > 0)
+    {
+        output += act + "=" + val + "\n";
+        written.set(act, true);
+    }
+}
+string[]@ actions = controls.get_actions();
+for (uint i = 0; i < actions.length(); i++)
+{
+    if (written.exists(actions[i])) continue;
+    string val = controls.get_keyboard_action_string(actions[i]);
+    if (val.length() > 0)
+        output += actions[i] + "=" + val + "\n";
+}
+file fw;
+fw.open(kpath, "wb");
+fw.write(output);
+fw.close();
 }
 string entry_action(const string&in entry)
 {

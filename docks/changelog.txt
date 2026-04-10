@@ -1,4 +1,9 @@
+New in 5.1.
+Fixed a bug where adding, editing, or removing a key binding would overwrite the keyboard.ini file and strip all comments and section headers.
+Fixed a bug where the list of actions in the add binding menu was displayed in an unpredictable order. Actions are now sorted alphabetically.
+Fixed incorrect action names for the ammo info and door info queries in the game, which were mismatched with the names used in keyboard.ini.
 New in 5.0.
+Fixed a bug where the keyboard rebind menu would display comment lines such as the format header as bindable entries.
 Made it so you can no longer exit the game by pressing escape while it's recording audio.
 Made it so pressing escape in the recording menu closes it without affecting the recording. If a recording is in progress, it continues in the background so you can capture live gameplay. Reopening the menu will bring you back to the stop button.
 Added some announcements for playing and stopping recorded audio in the recording menu.
@@ -10,7 +15,6 @@ Added a recording menu to the game via a customizable keyboard shortcut, default
 Made it so the audio settings menu now hides the sound test buttons, track list, and theme and pack selectors when opened from within the game, as these options are not needed during gameplay.
 Fixed a bug where closing the audio settings menu from within the game would switch the music to the boss track if the track list had a different item focused.
 Fixed a bug where music, ambience, alarm, and heartbeat sounds would not resume correctly after closing the audio settings menu from within the game.
-Assigned missing key bindings for music volume down and alarm volume down, which are now bound to Page Down and Shift+Page Down respectively.
 Reorganized the keyboard.ini file so that all key bindings are grouped into logical categories, such as movement, combat, weapons, inventory, game controls, info queries, and volume controls. This makes it easier to find and edit bindings manually.
 Added a keyboard shortcut to open the keyboard settings menu from within the game. You can now press Alt+K to access it, similar to Alt+A for audio, Alt+G for game, and Alt+S for speech settings.
 Added support for binding Escape to any action, including the quit action. When pressing Escape during key capture, the game will ask whether you want to bind it or cancel.

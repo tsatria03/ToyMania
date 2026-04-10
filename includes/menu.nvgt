@@ -1866,7 +1866,6 @@ while (true)
 }
 void keybindmenu()
 {
-string kpath = configPath + "/keyboard.ini";
 string[]@ entries = parse_keyboard_ini();
 form.reset();
 form.create_window("Keyboard bindings", false);
@@ -1902,6 +1901,7 @@ while (true)
             keybindmenu();
             return;
         }
+        actions.sort_ascending();
         setupmenu(false);
         for (uint i = 0; i < actions.length(); i++)
             m.add_item(actions[i], actions[i]);
@@ -1909,11 +1909,11 @@ while (true)
         int ares = m.run();
         if (ares == -1) { keybindmenu(); return; }
         string chosen_action = m.get_item_id(ares);
-        string new_key = capture_key_combo("Press the key you want to bind to action: " + chosen_action + ". Press Escape to cancel.");
+        string new_key = capture_key_combo("Press the key you want to bind to action: " + chosen_action + ".");
         if (new_key == "") { keybindmenu(); return; }
         trigger_type trig = choose_trigger_type();
         controls.bind_key(chosen_action, new_key, trig);
-        controls.save_keyboard(kpath);
+        save_keyboard_ini();
         if (completesound) dlgplay(get_sound("ui/other/*complete*"), false);
         dlgmessage_return("Binding added.");
         keybindmenu();
@@ -1933,7 +1933,7 @@ while (true)
         trigger_type trig = choose_trigger_type();
         controls.clear_keyboard_action(chosen_action);
         controls.bind_key(chosen_action, new_key, trig);
-        controls.save_keyboard(kpath);
+        save_keyboard_ini();
         if (completesound) dlgplay(get_sound("ui/other/*complete*"), false);
         dlgmessage_return("Binding updated.");
         keybindmenu();
@@ -1956,7 +1956,7 @@ while (true)
         int cres = m.run();
         if (cres == -1 || m.get_item_id(cres) == "no") { keybindmenu(); return; }
         controls.clear_keyboard_action(chosen_action);
-        controls.save_keyboard(kpath);
+        save_keyboard_ini();
         if (completesound) dlgplay(get_sound("ui/other/*complete*"), false);
         dlgmessage_return("Binding removed.");
         keybindmenu();

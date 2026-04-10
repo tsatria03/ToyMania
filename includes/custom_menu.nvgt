@@ -237,7 +237,7 @@ int find_item_by_id(string id)
             desc += ". " + string(index + 1) + " of " + string(items.length());
         return desc;
     }
-    int run(int start_position = 0, bool start_focused = false, bool speak_focused = true)
+    int run(int start_position = 0, bool start_focused = false, bool speak_focused = false)
     {
         if (items.length() == 0)
         {
