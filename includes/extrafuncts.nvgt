@@ -533,21 +533,6 @@ docksmenu();
 }
 }
 }
-void fade(sound@ handle, double final_volume = -50, double delay = 25)
-{
-if (handle.volume == final_volume or !handle.active)
-return;
-while(round(handle.volume, 0) != round(final_volume, 0) and handle.playing) {
-if (handle.volume > final_volume)
-handle.volume = handle.volume - 1;
-else if (handle.volume < final_volume)
-handle.volume = handle.volume + 1;
-else
-break;
-wait (delay);
-}
-}
-
 void fade_multi_pool(int fade_mode=1, int fade_dir=0, double fade_pitch=50, double fade_volume=-50, bool stop_completely=true)
 {
 sound_pool@[] pools = {p, pool, alarmpool, ambpool, bulletpool, dartpool, doorpool, heartpool, healpool, objpool, muspool, thiefpool, bosspool, carpool, gardpool, keypool, toypool};
@@ -683,4 +668,218 @@ alert("errorr", "Unable to restart "+scriptid+"!");
 }
 }
 exit();
+}
+void getver()
+{
+dockver.open("docks/version.txt","rb");
+version=dockver.read();
+dockver.close();
+}
+void setup_keybinds()
+{
+if (!directory_exists(configPath)) directory_create(configPath);
+string kpath = configPath + "/keyboard.ini";
+if (!file_exists(kpath))
+{
+    alert("Configuration", "No keyboard.ini found in the config folder. Default key bindings will be used. You can edit config/keyboard.ini to customize your controls.");
+    return;
+}
+if (!controls.load_keyboard(kpath))
+    alert("Configuration", "Failed to load config/keyboard.ini. Default key bindings will be used.");
+}
+void setupmenu(bool music_added = false)
+{
+if (music_added)
+{
+m.add_music(get_sound("ui/menus/"+menupack+"/*music*"));
+} else
+{
+m.add_music("");
+}
+m.reset();
+    m.enable_up_and_down = up_and_down;
+    m.enable_left_and_right = left_and_right;
+    m.enable_home_and_end = home_and_end;
+    m.enable_wrapping = menuwrap;
+    m.enable_first_letter_navigation = first_letter;
+    m.speak_position = speak_menu_position;
+m.click_sound=get_sound("ui/menus/"+menupack+"/*click*");
+m.close_sound=get_sound("ui/menus/"+menupack+"/*close*");
+m.edge_sound=get_sound("ui/menus/"+menupack+"/*edge*");
+m.enter_sound=get_sound("ui/menus/"+menupack+"/*enter*");
+m.open_sound=get_sound("ui/menus/"+menupack+"/*open*");
+m.wrap_sound=get_sound("ui/menus/"+menupack+"/*wrap*");
+}
+void pause_game()
+{
+boss_timer.pause();
+defense_timer.pause();
+gametimer.pause();
+moveable=false;
+paused=true;
+pause_pools();
+}
+void resume_game()
+{
+boss_timer.resume();
+defense_timer.resume();
+gametimer.resume();
+moveable=true;
+paused=false;
+resume_pools();
+}
+void resetgame()
+{
+    last_played_date = get_date(true, false);
+    last_played_time = get_time(true, false);
+last_level_time = 0;
+level=1;
+money=0;
+collected_keys=0;
+collected_toys=0;
+destroyed_cars=0;
+killed_gards=0;
+killed_thieves=0;
+moved_steps=0;
+session_playtime=0;
+total_collected_toys=0;
+total_collected_keys=0;
+total_killed_gards=0;
+total_killed_thieves=0;
+total_destroyed_cars=0;
+total_moved_steps=0;
+total_playtime=0;
+    for (uint i = 0; i < achievements.length(); i++)
+    {
+        if (achievements[i].isSessionBased or !achievements[i].isSessionBased)
+        {
+            achievements[i].currentTier = 0;
+        }
+}
+}
+void resetpreffs()
+{
+soundcard="Default";
+dlgpack="default";
+menupack="default";
+soundpack="default";
+sound_output_device=1;
+menumusvolume=0;
+master_volume = 0;
+alarmvolume=0;
+heartvolume=0;
+toyambvolume=0;
+toymusvolume=0;
+play_logo=true;
+auto_check_updates=true;
+autorun=true;
+up_and_down=true;
+left_and_right=false;
+home_and_end=false;
+first_letter=false;
+menuwrap=false;
+speak_menu_position=false;
+behind_pitch=true;
+hrtf=true;
+play_ach_scores=true;
+speak_ach_scores=true;
+play_item_gives=true;
+speak_item_collects=true;
+speak_dlg_enter=true;
+speak_menu_loading=true;
+gamcopy=true;
+statscopy=true;
+copexpsounds=true;
+quit_menu=true;
+playcounts=true;
+playlevels=true;
+completesound=true;
+togglesound=true;
+use_sr = true;
+tts.set_voice(0);
+tts.set_rate(0);
+tts.set_volume(100);
+}
+
+string[]@ parse_keyboard_ini()
+{
+string[] entries;
+string kpath = configPath + "/keyboard.ini";
+if (!file_exists(kpath)) return entries;
+file f;
+f.open(kpath, "rb");
+string content = f.read();
+f.close();
+string[] lines = content.split("\n");
+for (uint i = 0; i < lines.length(); i++)
+{
+    string line = lines[i].trim_whitespace_left().trim_whitespace_right();
+    if (line.length() == 0 || line.substr(0, 1) == ";") continue;
+    if (line.find("=") < 0) continue;
+    entries.insert_last(line);
+}
+return entries;
+}
+string entry_action(const string&in entry)
+{
+int eq = entry.find("=");
+if (eq < 0) return entry;
+return entry.substr(0, eq);
+}
+string entry_bindings(const string&in entry)
+{
+int eq = entry.find("=");
+if (eq < 0) return "";
+return entry.substr(eq + 1);
+}
+string capture_key_combo(const string&in prompt)
+{
+form.reset();
+form.create_window(prompt, false);
+int karea = form.create_keyboard_area(prompt);
+form.focus(karea);
+speak(prompt);
+while (true)
+{
+    wait(5);
+    form.monitor();
+    key_code[]@ pressed = keys_pressed();
+    for (uint i = 0; i < pressed.length(); i++)
+    {
+        uint k = pressed[i];
+        if (k == KEY_ESCAPE)
+        {
+            setupmenu(false);
+            m.add_item("Bind Escape to this action", "bind");
+            m.add_item("Cancel", "cancel");
+            m.intro_text = "You pressed Escape. Do you want to bind it, or cancel?";
+            int eres = m.run();
+            if (eres == -1 || m.get_item_id(eres) == "cancel") return "";
+            return "ESCAPE";
+        }
+        if (k == KEY_LSHIFT || k == KEY_RSHIFT || k == KEY_LCTRL || k == KEY_RCTRL || k == KEY_LALT || k == KEY_RALT) continue;
+        string combo = "";
+        if (key_down(KEY_LSHIFT) || key_down(KEY_RSHIFT)) combo += "LSHIFT+";
+        if (key_down(KEY_LCTRL) || key_down(KEY_RCTRL)) combo += "LCTRL+";
+        if (key_down(KEY_LALT) || key_down(KEY_RALT)) combo += "LALT+";
+        combo += get_key_name(k);
+        return combo;
+    }
+}
+return "";
+}
+
+trigger_type choose_trigger_type()
+{
+setupmenu(false);
+m.add_item("Press (fires once when key is pressed)", "press");
+m.add_item("Repeat (fires repeatedly while held)", "repeat");
+m.add_item("Down (fires every frame while held)", "down");
+m.intro_text = "Choose the trigger type for this binding.";
+int res = m.run();
+if (res == -1) return TRIGGER_PRESS;
+string id = m.get_item_id(res);
+if (id == "repeat") return TRIGGER_REPEAT;
+if (id == "down") return TRIGGER_DOWN;
+return TRIGGER_PRESS;
 }

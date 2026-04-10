@@ -1,4 +1,12 @@
+bool up_and_down=true;
+bool left_and_right=true;
+bool home_and_end=true;
+bool first_letter=true;
+bool menuwrap=true;
+bool speak_menu_position=false;
 int menumusvolume=0;
+sound_pool menupool;
+
 class custom_menu_item
 {
     string name;
@@ -16,9 +24,9 @@ class custom_menu
 bool music_added = false;
     int current_item = 0;
 int last_letter_index = -1;
-int voltime = 50;
-int volkeyup = KEY_PRIOR;
-int volkeydown = KEY_NEXT;
+int voltime = 200;
+int volkeyup = KEY_PAGEUP;
+int volkeydown = KEY_PAGEDOWN;
 string intro_text = "";
 string last_letter_pressed = "";
 sound music;
@@ -40,6 +48,20 @@ void set_volume_keys(int key1, int key2)
 {
 volkeyup = key1;
 volkeydown = key2;
+}
+void fade(sound@ handle, double final_volume = -50, double delay = 25)
+{
+if (handle.volume == final_volume or !handle.active)
+return;
+while(round(handle.volume, 0) != round(final_volume, 0) and handle.playing) {
+if (handle.volume > final_volume)
+handle.volume = handle.volume - 1;
+else if (handle.volume < final_volume)
+handle.volume = handle.volume + 1;
+else
+break;
+wait (delay);
+}
 }
 void fade_music(int value1=20)
 {
@@ -73,27 +95,27 @@ music.play_looped();
 }
     void play_click_sound()
     {
-        if (click_sound != "") spool.play_stationary(click_sound, false);
+        if (click_sound != "") menupool.play_stationary(click_sound, false);
     }
     void play_close_sound()
     {
-        if (close_sound != "") spool.play_stationary(close_sound, false);
+        if (close_sound != "") menupool.play_stationary(close_sound, false);
     }
     void play_enter_sound()
     {
-        if (enter_sound != "") spool.play_stationary(enter_sound, false);
+        if (enter_sound != "") menupool.play_stationary(enter_sound, false);
     }
     void play_edge_sound()
     {
-        if (edge_sound != "") spool.play_stationary(edge_sound, false);
+        if (edge_sound != "") menupool.play_stationary(edge_sound, false);
     }
     void play_open_sound()
     {
-        if (open_sound != "") spool.play_stationary(open_sound, false);
+        if (open_sound != "") menupool.play_stationary(open_sound, false);
     }
     void play_wrap_sound()
     {
-        if (wrap_sound != "") spool.play_stationary(wrap_sound, false);
+        if (wrap_sound != "") menupool.play_stationary(wrap_sound, false);
     }
     void clear_all_items()
     {
@@ -146,7 +168,7 @@ return;
 }
 void find_searched_item()
 {
-    string query = vd.input_box("Find an item", "Enter a keyword to search for:", last_search_query);
+    string query = input_box("Find an item", "Enter a keyword to search for:", last_search_query);
     if (query == "" || get_last_error() == -12)
     {
         speak("Cancelled.");
@@ -215,7 +237,7 @@ int find_item_by_id(string id)
             desc += ". " + string(index + 1) + " of " + string(items.length());
         return desc;
     }
-    int run(int start_position = 0, bool start_focused = false, bool speak_focused = false)
+    int run(int start_position = 0, bool start_focused = false, bool speak_focused = true)
     {
         if (items.length() == 0)
         {
@@ -255,14 +277,14 @@ if (key_down(volkeydown) and voltimer.elapsed >= voltime and menumusvolume > -10
 {
 menumusvolume -= 5;
 music.set_volume(menumusvolume);
-writepreffs();
+writedata();
 voltimer.restart();
 }
 if (key_down(volkeyup) and voltimer.elapsed >= voltime and menumusvolume < 0)
 {
 menumusvolume += 5;
 music.set_volume(menumusvolume);
-writepreffs();
+writedata();
 voltimer.restart();
 }
             if (key_repeating(KEY_TAB))

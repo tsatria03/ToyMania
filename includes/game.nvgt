@@ -1,7 +1,8 @@
 void toy_game_input()
 {
 buffercheck();
-if (key_repeating(KEY_ESCAPE) and doormove == false)
+// --- Quit ---
+if (controls.action_repeating("quit") and (store_defense or doormove == false))
 {
 boss_timer.pause();
 gametimer.pause();
@@ -24,9 +25,36 @@ gametimer.resume();
 boss_timer.resume();
 gametimer.resume();
     fade_multi_pool();
+if (store_defense)
+{
+    collected_toys = 0;
+    killed_thieves = 0;
+    moved_steps = 0;
+    stolen_toys = 0;
+    for (uint i = 0; i < achievements.length(); i++)
+    {
+        if (achievements[i].isSessionBased)
+            achievements[i].currentTier = 0;
+    }
+    clear_all_buffers();
+    clear_inv();
+    destroy_all_thieves();
+    destroy_all_toys();
+    gametimer.restart();
+    me.x = 25;
+    me.y = 25;
+    maxx = 50;
+    maxy = 50;
+    thievespawn = false;
+    toydest = false;
+    toyspawn = false;
+    store_defense = false;
+}
+else
+{
     last_level_time = 0;
-level = 1;
-money = 0;
+    level = 1;
+    money = 0;
     collected_toys = 0;
     collected_keys = 0;
     killed_gards = 0;
@@ -36,42 +64,40 @@ money = 0;
     for (uint i = 0; i < achievements.length(); i++)
     {
         if (achievements[i].isSessionBased)
-        {
             achievements[i].currentTier = 0;
-        }
     }
-clear_all_buffers();
-clear_inv();
+    clear_all_buffers();
+    clear_inv();
     if (!endless) destroy_all_bosses();
-destroy_all_healzones();
-destroy_all_bullets();
+    destroy_all_healzones();
+    destroy_all_bullets();
     destroy_all_cars();
-destroy_all_darts();
+    destroy_all_darts();
     destroy_all_gards();
     destroy_all_doors();
     destroy_all_keys();
     destroy_all_toys();
     gametimer.restart();
-int base = endless ? 10000 : 1000;
-int bonus = endless ? 2500 : 250;
-int added = bonus * (gamemod - 1);
-health = base + added;
-maxhealth = base + added;
-storehealth = base + added;
-storemaxhealth = base + added;
+    int base = endless ? 10000 : 1000;
+    int bonus = endless ? 2500 : 250;
+    int added = bonus * (gamemod - 1);
+    health = base + added;
+    maxhealth = base + added;
+    storehealth = base + added;
+    storemaxhealth = base + added;
     me.x = endless ? 50 : 25;
-me.y = endless ? 50 : 25;
+    me.y = endless ? 50 : 25;
     maxx = endless ? 100 : 50;
-maxy = endless ? 100 : 50;
-toynum=20;
+    maxy = endless ? 100 : 50;
+    toynum = 20;
     if (!endless) bossdefeated = false;
     if (!endless) bossespawn = false;
-alarm_started = false;
-countdown_started = false;
-small_storedest = false;
-medium_storedest = false;
+    alarm_started = false;
+    countdown_started = false;
+    small_storedest = false;
+    medium_storedest = false;
     carspawn = false;
-cardest=false;
+    cardest = false;
     gardspawn = false;
     keydest = false;
     keyspawn = false;
@@ -79,56 +105,50 @@ cardest=false;
     objspawn = false;
     toydest = false;
     toyspawn = false;
+}
+ingame = false;
     mainmenu();
 }
-if (key_pressed(KEY_1) && !doormove && current_weapon != "bat")
+// --- Weapon selection ---
+if (!store_defense)
 {
+if (controls.action_pressed("weapon_bat") && !doormove && current_weapon != "bat")
 draw_weapon("melee", "bat");
-}
-if (key_pressed(KEY_2) && !doormove && current_weapon != "boot")
-{
+if (controls.action_pressed("weapon_boot") && !doormove && current_weapon != "boot")
 draw_weapon("melee", "boot");
-}
-if (key_pressed(KEY_3) && !doormove && current_weapon != "club")
-{
+if (controls.action_pressed("weapon_club") && !doormove && current_weapon != "club")
 draw_weapon("melee", "club");
-}
-if (key_pressed(KEY_4) && !doormove && current_weapon != "feat")
-{
+if (controls.action_pressed("weapon_feat") && !doormove && current_weapon != "feat")
 draw_weapon("melee", "feat");
-}
-if (key_pressed(KEY_5) && !doormove && current_weapon != "fist")
-{
+if (controls.action_pressed("weapon_fist") && !doormove && current_weapon != "fist")
 draw_weapon("melee", "fist");
-}
-if (key_pressed(KEY_6) && !doormove && current_weapon != "hammer")
-{
+if (controls.action_pressed("weapon_hammer") && !doormove && current_weapon != "hammer")
 draw_weapon("melee", "hammer");
-}
-if (key_pressed(KEY_7) && !doormove && current_weapon != "knife")
-{
+if (controls.action_pressed("weapon_knife") && !doormove && current_weapon != "knife")
 draw_weapon("melee", "knife");
-}
-if (key_pressed(KEY_8) && !doormove && current_weapon != "laser")
-{
+if (controls.action_pressed("weapon_laser") && !doormove && current_weapon != "laser")
 draw_weapon("melee", "laser");
-}
-if (key_pressed(KEY_9) && endless && !doormove && current_weapon != "machine_gun")
-{
+if (controls.action_pressed("weapon_machine_gun") && endless && !doormove && current_weapon != "machine_gun")
 draw_weapon("artillery", "machine_gun");
-}
-if (key_pressed(KEY_0) && endless && !doormove && current_weapon != "pistol")
-{
+if (controls.action_pressed("weapon_pistol") && endless && !doormove && current_weapon != "pistol")
 draw_weapon("artillery", "pistol");
 }
-if(key_repeating(KEY_TAB) and key_up(KEY_LMENU) and key_up(KEY_RMENU))
+else
+{
+if (controls.action_pressed("def_weapon_feat") && !paused && current_weapon != "feat")
+draw_weapon("melee", "feat");
+if (controls.action_pressed("def_weapon_fist") && !paused && current_weapon != "fist")
+draw_weapon("melee", "fist");
+}
+// --- Inventory ---
+if(controls.action_repeating("inventory_cycle") and key_up(KEY_LMENU) and key_up(KEY_RMENU))
 {
 if (shift_is_down())
 cycle_inv(0);
 else
 cycle_inv(1);
 }
-if(key_repeating(KEY_RETURN) and shift_is_down() and usetimer.elapsed>=usetime)
+if(controls.action_repeating("item_use") and usetimer.elapsed>=usetime)
 {
 usetimer.restart();
 if (inv.get_keys().length()>0 and invpos<inv.get_size())
@@ -136,87 +156,112 @@ useitem(inv.get_keys()[invpos]);
 else
 speak_buffer("No item in focus.");
 }
-if(shift_is_down() and key_repeating(KEY_PRIOR) and alarmvolume!=0)
+// --- Volume controls (non-defense only for alarm/heartbeat) ---
+if (!store_defense)
+{
+if(controls.action_repeating("alarm_vol_up") and alarmvolume!=0)
 {
 alarmvolume+=1;
 alarmpool.update_sound_start_values(alarmslot,0,alarmvolume,alarmpitch);
 speak_buffer("alarm "+alarmvolume);
 writepreffs();
 }
-if(shift_is_down() and key_repeating(KEY_NEXT) and alarmvolume!=-50)
+if(controls.action_repeating("alarm_vol_down") and alarmvolume!=-50)
 {
 alarmvolume-=1;
 alarmpool.update_sound_start_values(alarmslot,0,alarmvolume,alarmpitch);
 speak_buffer("alarm "+alarmvolume);
 writepreffs();
 }
-if(shift_is_down() and key_repeating(KEY_HOME) and heartvolume!=0)
+if(controls.action_repeating("heart_vol_up") and heartvolume!=0)
 {
 heartvolume+=1;
 heartpool.update_sound_start_values(heartslot,0,heartvolume,heartpitch);
 speak_buffer("heart "+heartvolume);
 writepreffs();
 }
-if(shift_is_down() and key_repeating(KEY_END) and heartvolume!=-50)
+if(controls.action_repeating("heart_vol_down") and heartvolume!=-50)
 {
 heartvolume-=1;
 heartpool.update_sound_start_values(heartslot,0,heartvolume,heartpitch);
 speak_buffer("heart "+heartvolume);
 writepreffs();
 }
-if(key_repeating(KEY_PRIOR) and toymusvolume!=0)
+}
+if(controls.action_repeating("music_vol_up") and toymusvolume!=0)
 {
 toymusvolume+=1;
 muspool.update_sound_start_values(toytrackslot,0,toymusvolume,toymuspitch);
 speak_buffer("track "+toymusvolume);
 writepreffs();
 }
-if(key_repeating(KEY_NEXT) and toymusvolume!=-50)
+if(controls.action_repeating("music_vol_down") and toymusvolume!=-50)
 {
 toymusvolume-=1;
 muspool.update_sound_start_values(toytrackslot,0,toymusvolume,toymuspitch);
 speak_buffer("track "+toymusvolume);
 writepreffs();
 }
-if(key_repeating(KEY_HOME) and toyambvolume!=0)
+if(controls.action_repeating("ambient_vol_up") and toyambvolume!=0)
 {
 toyambvolume+=1;
 ambpool.update_sound_start_values(toyambslot,0,toyambvolume,toyambpitch);
 speak_buffer("source "+toyambvolume);
 writepreffs();
 }
-if(key_repeating(KEY_END) and toyambvolume!=-50)
+if(controls.action_repeating("ambient_vol_down") and toyambvolume!=-50)
 {
 toyambvolume-=1;
 ambpool.update_sound_start_values(toyambslot,0,toyambvolume,toyambpitch);
 speak_buffer("source "+toyambvolume);
 writepreffs();
 }
-if (key_repeating(KEY_I) and doormove == false)
+// --- Inventory open / weapons menu / pause (non-defense only) ---
+if (!store_defense)
+{
+if (controls.action_repeating("inventory_open") and doormove == false)
 {
 if (inv.get_size() == 0)
-{
 speak_buffer("Your inventory is currently empty.", "general");
-}
 else
 {
 boss_timer.pause();
 gametimer.pause();
-    invmenu();
+invmenu();
 }
 }
-if (key_pressed(KEY_W) and doormove == false)
+if (controls.action_pressed("info_weapons") and doormove == false)
 {
 boss_timer.pause();
 gametimer.pause();
-    weaponsmenu();
+weaponsmenu();
 }
-if(key_pressed(KEY_P) and doormove==false)
+if(controls.action_pressed("pause") and doormove==false)
 {
 temp.play_stationary(get_sound("misc/game/*pause*"), false);
 pause_game();
 pausemenu();
 }
+}
+else
+{
+if(controls.action_repeating("pause"))
+{
+if(paused==false)
+{
+temp.play_stationary(get_sound("misc/game/*pause*"), false);
+speak_buffer("paused");
+pause_game();
+}
+else
+{
+temp.play_stationary(get_sound("misc/game/*resume*"), false);
+speak_buffer("resumed");
+resume_game();
+}
+}
+}
+// --- Facing direction ---
 if(shift_is_down())
 {
 if(key_pressed(KEY_LEFT) and facing=="left"==false)
@@ -240,37 +285,35 @@ facing="forward";
 p.play_2d(get_sound("misc/player/*turn*"), me.x, me.y+1, me.x, me.y+1, false);
 }
 }
+// --- Settings menus ---
 if(alt_is_down() and key_pressed(KEY_A))
 {
 pause_game();
-soundsetsmenu2();
+soundsetsmenu();
 }
 if(alt_is_down() and key_pressed(KEY_G))
 {
 pause_game();
-gamsetsmenu2();
+gamsetsmenu();
 }
 if(alt_is_down() and key_pressed(KEY_S))
 {
 pause_game();
-speechsetsmenu2();
+speechsetsmenu();
 }
-if (key_pressed(KEY_Z) and doormove == false)
+// --- Combat info / reload (non-defense only) ---
+if (!store_defense)
+{
+if (controls.action_pressed("ammo_info") and doormove == false)
 {
     if (weapontype2 == "machine_gun" or weapontype2 == "pistol")
-    {
         speak_buffer("You have "+round(ammo,0) + " out of " + round(maxammo,0) + " rounds of ammo loaded, and " + round(reserved_ammo,0) + " rounds of ammo in reserve.", "general");
-    }
     else
-    {
         speak_buffer("This weapon does not take any ammo.", "general");
-    }
 }
-if (key_pressed(KEY_R) and doormove == false and (weapontype2 == "machine_gun" or weapontype2 == "pistol"))
-{
+if (controls.action_pressed("reload") and doormove == false and (weapontype2 == "machine_gun" or weapontype2 == "pistol"))
     reload_weapon();
-}
-if (key_repeating(KEY_D) and doormove == false)
+if (controls.action_repeating("door_info") and doormove == false)
 {
     if (doors.length() == 0)
     {
@@ -279,21 +322,15 @@ if (key_repeating(KEY_D) and doormove == false)
     }
     if (shift_is_down())
     {
-int req = doors[0].required_keys;
-int missing = req - collected_keys;
-if (missing > 0)
-{
-speak_buffer("You've collected " + collected_keys + " out of " + req + " required keys. You need " + missing + " more keys to unlock the door.", "general");
-}
-else
-{
-speak_buffer("You've collected enough required keys to unlock the door!", "general");
-}
+        int req = doors[0].required_keys;
+        int missing = req - collected_keys;
+        if (missing > 0)
+            speak_buffer("You've collected " + collected_keys + " out of " + req + " required keys. You need " + missing + " more keys to unlock the door.", "general");
+        else
+            speak_buffer("You've collected enough required keys to unlock the door!", "general");
     }
     else if (endless)
-    {
         speak_buffer("The door is at " + doors[0].startx + ", " + doors[0].starty + ".", "general");
-    }
     else
     {
         int dx = doors[0].startx - me.x;
@@ -308,55 +345,30 @@ speak_buffer("You've collected enough required keys to unlock the door!", "gener
         speak_buffer("The door is " + direction + ", about " + distance + " feet away.", "general");
     }
 }
-if(key_pressed(KEY_L) and doormove==false)
+if(controls.action_pressed("info_level") and doormove==false)
+    speak_buffer("You're currently on level " + level + " of the " + (endless ? "Endless" : "Normal") + " game mode.", "general");
+if(controls.action_pressed("info_money") and doormove==false and endless)
+    speak_buffer("You have "+money+" dollars available to spend.", "general");
+if(controls.action_pressed("info_keys_field") and doormove==false)
+    speak_buffer("There are "+keys.length()+" collectible keys on the field.", "general");
+if(controls.action_pressed("info_cars_field") and doormove==false)
+    speak_buffer("There are "+cars.length()+" destroyable cars on the field.", "general");
+if(controls.action_pressed("info_collected_keys") and doormove==false)
+    speak_buffer("You've collected "+collected_keys+" keys.", "general");
+if(controls.action_pressed("info_destroyed_cars") and doormove==false)
+    speak_buffer("You've destroyed "+destroyed_cars+" cars.", "general");
+if(controls.action_pressed("info_store_or_shop") and doormove==false)
 {
-speak_buffer("You're currently on level " + level + " of the " + (endless ? "Endless" : "Normal") + " game mode.", "general");
+    if(endless)
+    {
+        boss_timer.pause();
+        gametimer.pause();
+        shopmenu();
+    }
+    else
+        speak_buffer("This store has "+round(storehealth / storemaxhealth * 100, 0) + " percent HP remaining.", "general");
 }
-if(key_pressed(KEY_M) and doormove==false and endless)
-{
-speak_buffer("You have "+money+" dollars available to spend.", "general");
-}
-if(key_pressed(KEY_C) and doormove==false)
-{
-speak_buffer(me.x+", "+me.y+" on "+gmt(me.x,me.y)+". Facing "+facing+".");
-}
-if(key_pressed(KEY_O) and doormove==false)
-{
-speak_buffer("There are "+toys.length()+" collectible toys on the field.", "general");
-}
-if(key_pressed(KEY_U) and doormove==false)
-{
-speak_buffer("There are "+keys.length()+" collectible keys on the field.", "general");
-}
-if(key_pressed(KEY_J) and doormove==false)
-{
-speak_buffer("There are "+cars.length()+" destroyable cars on the field.", "general");
-}
-if(key_pressed(KEY_E) and doormove==false)
-{
-speak_buffer("There are "+gards.length()+" killible gards on the field.", "general");
-}
-if(key_pressed(KEY_X) and doormove==false)
-{
-speak_buffer("You've taken "+moved_steps+" steps.", "general");
-}
-if(key_pressed(KEY_T) and doormove==false)
-{
-speak_buffer("You've collected "+collected_toys+" toys.", "general");
-}
-if(key_pressed(KEY_K) and doormove==false)
-{
-speak_buffer("You've collected "+collected_keys+" keys.", "general");
-}
-if(key_pressed(KEY_F) and doormove==false)
-{
-speak_buffer("You've destroyed "+destroyed_cars+" cars.", "general");
-}
-if(key_pressed(KEY_Q) and doormove==false)
-{
-speak_buffer("You've killed "+killed_gards+" gards.", "general");
-}
-if (key_pressed(KEY_Y) and doormove == false)
+if (controls.action_pressed("info_time") and doormove == false)
 {
     if (!endless and level == 6)
     {
@@ -373,28 +385,46 @@ if (key_pressed(KEY_Y) and doormove == false)
         speak_buffer("You've been playing for a total of " + session_minutes + " minutes, " + session_seconds + " seconds.");
     }
 }
-if(key_pressed(KEY_S) and doormove==false)
-{
-if(endless)
-{
-boss_timer.pause();
-gametimer.pause();
-    shopmenu();
 }
-else
+// --- Info queries (shared + defense-specific) ---
+if(controls.action_pressed("info_coords") and (store_defense or doormove==false))
+    speak_buffer(me.x+", "+me.y+" on "+gmt(me.x,me.y)+". Facing "+facing+".");
+if(controls.action_pressed("info_toys_field") and (store_defense or doormove==false))
+    speak_buffer("There are "+toys.length()+" collectible toys on the field.", "general");
+if(controls.action_pressed("info_collected_toys") and (store_defense or doormove==false))
+    speak_buffer("You've collected "+collected_toys+" toys.", "general");
+if(controls.action_pressed("info_steps") and (store_defense or doormove==false))
+    speak_buffer("You've taken "+moved_steps+" steps.", "general");
+if(controls.action_pressed("info_enemies_field") and (store_defense or doormove==false))
 {
-speak_buffer("This store has "+round(storehealth / storemaxhealth * 100, 0) + " percent HP remaining.", "general");
+    if (store_defense)
+        speak_buffer("There are "+thieves.length()+" killable thieves on the field.", "general");
+    else
+        speak_buffer("There are "+gards.length()+" killable gards on the field.", "general");
 }
-}
-if(key_pressed(KEY_H) and doormove==false)
+if(controls.action_pressed("info_killed_enemies") and (store_defense or doormove==false))
 {
-speak_buffer("You have "+round(health / maxhealth * 100, 0) + " percent HP remaining.", "general");
+    if (store_defense)
+        speak_buffer("You've killed "+killed_thieves+" thieves.", "general");
+    else
+        speak_buffer("You've killed "+killed_gards+" gards.", "general");
 }
+if (store_defense and controls.action_pressed("info_store_or_shop"))
+    speak_buffer("The thieves stole " + stolen_toys + " toys.", "general");
+if (!store_defense and controls.action_pressed("info_health") and doormove==false)
+    speak_buffer("You have "+round(health / maxhealth * 100, 0) + " percent HP remaining.", "general");
+if (controls.action_pressed("info_time") and store_defense)
+{
+    int session_minutes = int(timeelapsed.ms() / 60000);
+    int session_seconds = int((timeelapsed.ms() % 60000) / 1000);
+    speak_buffer("You've been playing for a total of " + session_minutes + " minutes, " + session_seconds + " seconds.", "general");
+}
+// --- Movement ---
     bool running = autorun;
     if (alt_is_down() or control_is_down())
         running = !running;
     movetime = running ? runtime : walktime;
-if (!shift_is_down() and key_pressed(KEY_LEFT) and me.x!=0 and doormove==false and moveable==true)
+if (!shift_is_down() and controls.action_pressed("move_left") and me.x!=0 and doormove==false and moveable==true)
 {
 me.x-=1;
 facing="left";
@@ -405,7 +435,7 @@ update_achievements();
 writedata();
 movetimer.restart();
 }
-if (!shift_is_down() and key_pressed(KEY_RIGHT) and me.x!=maxx and doormove==false and moveable==true)
+if (!shift_is_down() and controls.action_pressed("move_right") and me.x!=maxx and doormove==false and moveable==true)
 {
 me.x+=1;
 facing="right";
@@ -416,7 +446,7 @@ update_achievements();
 writedata();
 movetimer.restart();
 }
-if (!shift_is_down() and key_pressed(KEY_DOWN) and me.y!=0 and doormove==false and moveable==true)
+if (!shift_is_down() and controls.action_pressed("move_down") and me.y!=0 and doormove==false and moveable==true)
 {
 me.y-=1;
 facing="backward";
@@ -427,7 +457,7 @@ update_achievements();
 writedata();
 movetimer.restart();
 }
-if (!shift_is_down() and key_pressed(KEY_UP) and me.y!=maxy and doormove==false and moveable==true)
+if (!shift_is_down() and controls.action_pressed("move_up") and me.y!=maxy and doormove==false and moveable==true)
 {
 me.y+=1;
 facing="forward";
@@ -440,7 +470,7 @@ movetimer.restart();
 }
 if(movetimer.elapsed>=movetime and doormove==false and moveable==true)
 {
-if (!shift_is_down() and key_down(KEY_LEFT) and me.x!=0)
+if (!shift_is_down() and controls.action_down("move_left") and me.x!=0)
 {
 me.x-=1;
 facing="left";
@@ -451,7 +481,7 @@ update_achievements();
 writedata();
 movetimer.restart();
 }
-if (!shift_is_down() and key_down(KEY_RIGHT) and me.x!=maxx)
+if (!shift_is_down() and controls.action_down("move_right") and me.x!=maxx)
 {
 me.x+=1;
 facing="right";
@@ -462,7 +492,7 @@ update_achievements();
 writedata();
 movetimer.restart();
 }
-if (!shift_is_down() and key_down(KEY_DOWN) and me.y!=0)
+if (!shift_is_down() and controls.action_down("move_down") and me.y!=0)
 {
 me.y-=1;
 facing="backward";
@@ -473,7 +503,7 @@ update_achievements();
 writedata();
 movetimer.restart();
 }
-if (!shift_is_down() and key_down(KEY_UP) and me.y!=maxy)
+if (!shift_is_down() and controls.action_down("move_up") and me.y!=maxy)
 {
 me.y+=1;
 facing="forward";
@@ -485,12 +515,13 @@ writedata();
 movetimer.restart();
 }
 }
-if (key_pressed(KEY_SPACE) and weapontimer.elapsed >= weapontime and doormove == false and (weapontype2 != "machine_gun"))
+// --- Fire ---
+if (controls.action_pressed("fire") and weapontimer.elapsed >= weapontime and doormove == false and (weapontype2 != "machine_gun"))
 {
     fire_weapon();
     weapontimer.restart();
 }
-if (key_down(KEY_SPACE) and weapontimer2.elapsed >= weapontime2 and doormove == false and endless and weapontype2 == "machine_gun")
+if (controls.action_down("fire_held") and weapontimer2.elapsed >= weapontime2 and doormove == false and endless and weapontype2 == "machine_gun")
 {
     fire_weapon();
     weapontimer2.restart();
@@ -498,62 +529,96 @@ if (key_down(KEY_SPACE) and weapontimer2.elapsed >= weapontime2 and doormove == 
 }
 void toygame()
 {
-if (endless)
-    draw_random_weapon();
+ingame = true;
+if (store_defense)
+{
+    if (endless)
+    {
+        string[] weapons={"feat", "fist"};
+        draw_weapon("melee", random_string(weapons));
+    }
+    else
+        draw_weapon("melee", "feat");
+}
 else
-    draw_weapon("melee", "bat");
+{
+    if (endless)
+        draw_random_weapon();
+    else
+        draw_weapon("melee", "bat");
+}
 toyambslot=ambpool.play_stationary_extended(get_sound("objects/sources/ambiences/*gameloop*"),true,0,0,toyambvolume,toyambpitch,false);
 mustype="gamemus";
 toytrackslot=muspool.play_stationary_extended(get_sound("objects/sources/tracks/*"+mustype+"*"),true,0,0,toymusvolume,toymuspitch,false);
-spawn_platform(0, maxx, 0, maxy, endless ? "concrete" : "marble");
+if (store_defense)
+    spawn_platform(0, maxx, 0, maxy, endless ? "metal" : "wood");
+else
+{
+    spawn_platform(0, maxx, 0, maxy, endless ? "concrete" : "marble");
+    if (endless)
+    {
+        int leftx = random(0, 10);
+        int rightx = random(90, 99);
+        int miny1 = random(0, 50);
+        int maxy1 = min(miny1 + 10, 99);
+        int miny2 = random(50, 89);
+        int maxy2 = min(miny2 + 10, 99);
+        spawn_platform(leftx, min(leftx + 5, 99), miny1, maxy1, "glass");
+        spawn_healzone(leftx, min(leftx + 5, 99), miny1, maxy1, 0, random(10*gamemod, 20*gamemod), random(2000/gamemod, 4000/gamemod), "fire");
+        spawn_platform(max(rightx - 5, 0), rightx, miny2, maxy2, "glass");
+        spawn_healzone(max(rightx - 5, 0), rightx, miny2, maxy2, 1, random(10*gamemod, 20*gamemod), random(2000/gamemod, 4000/gamemod), "chime");
+    }
+    if (endless)
+    {
+        string[] doortype=find_directories("sounds/"+soundpack+"/objects/doors/*");
+        spawn_door(random(50, 100), random(50, 100), 0, 0, random(100,200), random(20,40), random_string(doortype));
+    }
+}
 p.play_stationary(get_sound("objects/platforms/"+gmt(me.x,me.y)+"/*land*"), false);
-if (endless)
-{
-    int leftx = random(0, 10);
-    int rightx = random(90, 99);
-    int miny1 = random(0, 50);
-    int maxy1 = min(miny1 + 10, 99);
-    int miny2 = random(50, 89);
-    int maxy2 = min(miny2 + 10, 99);
-    spawn_platform(leftx, min(leftx + 5, 99), miny1, maxy1, "glass");
-    spawn_healzone(leftx, min(leftx + 5, 99), miny1, maxy1, 0, random(10*gamemod, 20*gamemod), random(2000/gamemod, 4000/gamemod), "fire");
-    spawn_platform(max(rightx - 5, 0), rightx, miny2, maxy2, "glass");
-    spawn_healzone(max(rightx - 5, 0), rightx, miny2, maxy2, 1, random(10*gamemod, 20*gamemod), random(2000/gamemod, 4000/gamemod), "chime");
-}
-if(endless)
-{
-string[] doortype=find_directories("sounds/"+soundpack+"/objects/doors/*");
-spawn_door(random(50, 100), random(50, 100), 0, 0, random(100,200), random(20,40), random_string(doortype));
-}
-//gametimer.force(1000*300);
+if (store_defense and defense_timed)
+    defense_timer.restart();
 while(true)
 {
 wait(5);
 bfloop();
-bulletloop();
-if(!endless) bossloop();
-carloop();
-dartloop();
-check_weapon_reload();
-doorcheck();
-doorloop();
-gardloop();
-healzoneloop();
-keyloop();
-if(endless) objloop();
-stuncheck();
+if (store_defense)
+{
+    thiefloop();
+}
+else
+{
+    bulletloop();
+    if(!endless) bossloop();
+    carloop();
+    dartloop();
+    check_weapon_reload();
+    doorcheck();
+    doorloop();
+    gardloop();
+    healzoneloop();
+    keyloop();
+    if(endless) objloop();
+    stuncheck();
+}
 toyloop();
 toy_game_input();
 p.update_listener_2d(me.x,me.y);
-if(!endless) bosspool.update_listener_2d(me.x,me.y);
-bulletpool.update_listener_2d(me.x,me.y);
-carpool.update_listener_2d(me.x,me.y);
-doorpool.update_listener_2d(me.x,me.y);
-gardpool.update_listener_2d(me.x,me.y);
-healpool.update_listener_2d(me.x,me.y);
-keypool.update_listener_2d(me.x,me.y);
-if(endless) objpool.update_listener_2d(me.x,me.y);
 toypool.update_listener_2d(me.x,me.y);
+if (store_defense)
+{
+    thiefpool.update_listener_2d(me.x,me.y);
+}
+else
+{
+    if(!endless) bosspool.update_listener_2d(me.x,me.y);
+    bulletpool.update_listener_2d(me.x,me.y);
+    carpool.update_listener_2d(me.x,me.y);
+    doorpool.update_listener_2d(me.x,me.y);
+    gardpool.update_listener_2d(me.x,me.y);
+    healpool.update_listener_2d(me.x,me.y);
+    keypool.update_listener_2d(me.x,me.y);
+    if(endless) objpool.update_listener_2d(me.x,me.y);
+}
 if(ammo<=0)
 {
 ammo=0;
@@ -591,7 +656,7 @@ if (savedata_timer.elapsed >= save_interval)
     writedata();
     savedata_timer.restart();
 }
-if (get_total_entities() < max_entities)
+if (!store_defense and get_total_entities() < max_entities)
 {
 if(bossespawntimer.elapsed>=bossespawntime and bosses.length()<bossnum and bossespawn==true and !bossdefeated and !endless)
 {
@@ -1021,329 +1086,10 @@ if (gamcopy == true)
     }
 }
 writedata();
+ingame = false;
 mainmenu();
 }
-}
-}
-
-void toy_game_input2()
-{
-buffercheck();
-if (key_repeating(KEY_ESCAPE) and paused==false)
-{
-gametimer.pause();
-    if (quit_menu==true)
-    {
-        setupmenu(false);
-        m.add_item("Yes", "yes");
-        m.add_item("No", "no");
-        m.intro_text = "Are you sure you want to quit the game? You will lose all progress for this current game session.";
-        int res = m.run();
-        string confirm = m.get_item_id(res);
-        if (res == -1 or confirm == "no")
-        {
-            speak_buffer("canceled");
-gametimer.resume();
-            return;
-        }
-    }
-gametimer.resume();
-    fade_multi_pool();
-collected_toys=0;
-killed_thieves = 0;
-moved_steps = 0;
-stolen_toys = 0;
-    for (uint i = 0; i < achievements.length(); i++)
-    {
-        if (achievements[i].isSessionBased)
-        {
-            achievements[i].currentTier = 0;
-        }
-    }
-clear_all_buffers();
-clear_inv();
-destroy_all_thieves();
-    destroy_all_toys();
-    gametimer.restart();
-me.x=25;
-me.y=25;
-maxx=50;
-maxy=50;
-thievespawn=false;
-toydest = false;
-    toyspawn = false;
-    mainmenu();
-}
-if (key_pressed(KEY_1) && !paused && current_weapon != "feat")
-{
-draw_weapon("melee", "feat");
-}
-if (key_pressed(KEY_2) && !paused && current_weapon != "fist")
-{
-draw_weapon("melee", "fist");
-}
-if(key_repeating(KEY_TAB) and key_up(KEY_LMENU) and key_up(KEY_RMENU) and paused==false)
-{
-if (shift_is_down())
-cycle_inv(0);
-else
-cycle_inv(1);
-}
-if(key_repeating(KEY_RETURN) and shift_is_down() and usetimer.elapsed>=usetime and paused==false)
-{
-usetimer.restart();
-if (inv.get_keys().length()>0 and invpos<inv.get_size())
-useitem(inv.get_keys()[invpos]);
-else
-speak_buffer("No item in focus.");
-}
-if(key_repeating(KEY_PRIOR) and toymusvolume!=0 and paused==false)
-{
-toymusvolume+=1;
-muspool.update_sound_start_values(toytrackslot,0,toymusvolume,toymuspitch);
-speak_buffer("track "+toymusvolume);
-writepreffs();
-}
-if(key_repeating(KEY_NEXT) and toymusvolume!=-50 and paused==false)
-{
-toymusvolume-=1;
-muspool.update_sound_start_values(toytrackslot,0,toymusvolume,toymuspitch);
-speak_buffer("track "+toymusvolume);
-writepreffs();
-}
-if(key_repeating(KEY_HOME) and toyambvolume!=0 and paused==false)
-{
-toyambvolume+=1;
-ambpool.update_sound_start_values(toyambslot,0,toyambvolume,toyambpitch);
-speak_buffer("source "+toyambvolume);
-writepreffs();
-}
-if(key_repeating(KEY_END) and toyambvolume!=-50 and paused==false)
-{
-toyambvolume-=1;
-ambpool.update_sound_start_values(toyambslot,0,toyambvolume,toyambpitch);
-speak_buffer("source "+toyambvolume);
-writepreffs();
-}
-if(key_repeating(KEY_P))
-{
-if(paused==false)
-{
-temp.play_stationary(get_sound("misc/game/*pause*"), false);
-speak_buffer("paused");
-pause_game();
-}
-else if(paused==true)
-{
-temp.play_stationary(get_sound("misc/game/*resume*"), false);
-speak_buffer("resumed");
-resume_game();
-}
-}
-if(shift_is_down() and paused==false)
-{
-if(key_pressed(KEY_LEFT) and facing=="left"==false)
-{
-facing="left";
-p.play_2d(get_sound("misc/player/*turn*"), me.x-1, me.y, me.x-1, me.y, false);
-}
-if(key_pressed(KEY_RIGHT) and facing=="right"==false)
-{
-facing="right";
-p.play_2d(get_sound("misc/player/*turn*"), me.x+1, me.y, me.x+1, me.y, false);
-}
-if(key_pressed(KEY_DOWN) and facing=="backward"==false)
-{
-facing="backward";
-p.play_2d(get_sound("misc/player/*turn*"), me.x, me.y-1, me.x, me.y-1, false);
-}
-if(key_pressed(KEY_UP) and facing=="forward"==false)
-{
-facing="forward";
-p.play_2d(get_sound("misc/player/*turn*"), me.x, me.y+1, me.x, me.y+1, false);
-}
-}
-if(alt_is_down() and key_pressed(KEY_A) and paused==false)
-{
-pause_game();
-soundsetsmenu2();
-}
-if(alt_is_down() and key_pressed(KEY_G) and paused==false)
-{
-pause_game();
-gamsetsmenu2();
-}
-if(alt_is_down() and key_pressed(KEY_S))
-{
-pause_game();
-speechsetsmenu2();
-}
-if(key_pressed(KEY_C) and paused==false)
-{
-speak_buffer(me.x+", "+me.y+" on "+gmt(me.x,me.y)+". Facing "+facing+".");
-}
-if(key_pressed(KEY_O) and paused==false)
-{
-speak_buffer("There are "+toys.length()+" collectible toys on the field.", "general");
-}
-if(key_pressed(KEY_Q) and paused==false)
-{
-speak_buffer("You've killed "+killed_thieves+" thieves.", "general");
-}
-if(key_pressed(KEY_E) and paused==false)
-{
-speak_buffer("There are "+thieves.length()+" killible thieves on the field.", "general");
-}
-if(key_pressed(KEY_X) and paused==false)
-{
-speak_buffer("You've taken "+moved_steps+" steps.", "general");
-}
-if(key_pressed(KEY_T) and paused==false)
-{
-speak_buffer("You've collected "+collected_toys+" toys.", "general");
-}
-if (key_pressed(KEY_S) and paused == false)
-{
-speak_buffer("The thieves  stole " + stolen_toys + " toys.", "general");
-}
-if (key_pressed(KEY_Y) and paused == false)
-{
-        int session_minutes = int(timeelapsed.ms() / 60000);
-        int session_seconds = int((timeelapsed.ms() % 60000) / 1000);
-        speak_buffer("You've been playing for a total of " + session_minutes + " minutes, " + session_seconds + " seconds.", "general");
-    }
-    bool running = autorun;
-    if (alt_is_down() or control_is_down())
-        running = !running;
-    movetime = running ? runtime : walktime;
-if (!shift_is_down() and key_pressed(KEY_LEFT) and me.x!=0 and doormove==false and moveable==true)
-{
-me.x-=1;
-facing="left";
-p.play_stationary(get_sound("objects/platforms/"+gmt(me.x,me.y)+"/*step*"), false);
-moved_steps+=1;
-total_moved_steps+=1;
-update_achievements();
-writedata();
-movetimer.restart();
-}
-if (!shift_is_down() and key_pressed(KEY_RIGHT) and me.x!=maxx and doormove==false and moveable==true)
-{
-me.x+=1;
-facing="right";
-p.play_stationary(get_sound("objects/platforms/"+gmt(me.x,me.y)+"/*step*"), false);
-moved_steps+=1;
-total_moved_steps+=1;
-update_achievements();
-writedata();
-movetimer.restart();
-}
-if (!shift_is_down() and key_pressed(KEY_DOWN) and me.y!=0 and doormove==false and moveable==true)
-{
-me.y-=1;
-facing="backward";
-p.play_stationary(get_sound("objects/platforms/"+gmt(me.x,me.y)+"/*step*"), false);
-moved_steps+=1;
-total_moved_steps+=1;
-update_achievements();
-writedata();
-movetimer.restart();
-}
-if (!shift_is_down() and key_pressed(KEY_UP) and me.y!=maxy and doormove==false and moveable==true)
-{
-me.y+=1;
-facing="forward";
-p.play_stationary(get_sound("objects/platforms/"+gmt(me.x,me.y)+"/*step*"), false);
-moved_steps+=1;
-total_moved_steps+=1;
-update_achievements();
-writedata();
-movetimer.restart();
-}
-if(movetimer.elapsed>=movetime and doormove==false and moveable==true)
-{
-if (!shift_is_down() and key_down(KEY_LEFT) and me.x!=0)
-{
-me.x-=1;
-facing="left";
-p.play_stationary(get_sound("objects/platforms/"+gmt(me.x,me.y)+"/*step*"), false);
-moved_steps+=1;
-total_moved_steps+=1;
-update_achievements();
-writedata();
-movetimer.restart();
-}
-if (!shift_is_down() and key_down(KEY_RIGHT) and me.x!=maxx)
-{
-me.x+=1;
-facing="right";
-p.play_stationary(get_sound("objects/platforms/"+gmt(me.x,me.y)+"/*step*"), false);
-moved_steps+=1;
-total_moved_steps+=1;
-update_achievements();
-writedata();
-movetimer.restart();
-}
-if (!shift_is_down() and key_down(KEY_DOWN) and me.y!=0)
-{
-me.y-=1;
-facing="backward";
-p.play_stationary(get_sound("objects/platforms/"+gmt(me.x,me.y)+"/*step*"), false);
-moved_steps+=1;
-total_moved_steps+=1;
-update_achievements();
-writedata();
-movetimer.restart();
-}
-if (!shift_is_down() and key_down(KEY_UP) and me.y!=maxy)
-{
-me.y+=1;
-facing="forward";
-p.play_stationary(get_sound("objects/platforms/"+gmt(me.x,me.y)+"/*step*"), false);
-moved_steps+=1;
-total_moved_steps+=1;
-update_achievements();
-writedata();
-movetimer.restart();
-}
-}
-if (key_pressed(KEY_SPACE) and weapontimer.elapsed >= weapontime and paused == false)
-{
-    fire_weapon();
-    weapontimer.restart();
-}
-}
-void toygame2()
-{
-if (endless)
-{
-string[] weapons={"feat", "fist"};
-draw_weapon("melee", random_string(weapons));
-}
-else
-{
-    draw_weapon("melee", "feat");
-}
-toyambslot=ambpool.play_stationary_extended(get_sound("objects/sources/ambiences/*gameloop*"),true,0,0,toyambvolume,toyambpitch,false);
-mustype="gamemus";
-toytrackslot=muspool.play_stationary_extended(get_sound("objects/sources/tracks/*"+mustype+"*"),true,0,0,toymusvolume,toymuspitch,false);
-spawn_platform(0, maxx, 0, maxy, endless ? "metal" : "wood");
-p.play_stationary(get_sound("objects/platforms/"+gmt(me.x,me.y)+"/*land*"), false);
-if (defense_timed)
-{
-    defense_timer.restart();
-}
-while(true)
-{
-wait(5);
-bfloop();
-thiefloop();
-toyloop();
-toy_game_input2();
-p.update_listener_2d(me.x,me.y);
-thiefpool.update_listener_2d(me.x,me.y);
-toypool.update_listener_2d(me.x,me.y);
-if (get_total_entities() < max_entities)
+if (store_defense and get_total_entities() < max_entities)
 {
 if(thievespawntimer.elapsed>=thievespawntime and thieves.length()<thiefnum and thievespawn==true and paused==false)
 {
@@ -1356,68 +1102,66 @@ if(toyspawntimer.elapsed>=toyspawntime and toys.length()<toynum and toyspawn==tr
 string[] toycats = {"common", "other"};
 string toycat = random_string(toycats);
 string[] toytypes = find_directories("sounds/" + soundpack + "/equipments/items/normal/toys/" + toycat + "/*");
-if (toytypes.length() == 0)
-{
-return;
-}
+if (toytypes.length() == 0) return;
 string toyname = random_string(toytypes);
 spawn_toy(random(0,maxx), random(0,maxy), random(5000/gamemod,10000/gamemod), toycat, toyname, toydest);
 toyspawntimer.restart();
 }
 }
-if (endless && !paused && stolen_toys > max_stolen_toys)
+if (store_defense and endless and !paused and stolen_toys > max_stolen_toys)
 {
-        store_defense = false;
-        thievespawn = false;
-        toyspawn = false;
-        clear_inv();
-        destroy_all_thieves();
-        destroy_all_toys();
-        ambpool.destroy_sound(toyambslot);
-        muspool.destroy_sound(toytrackslot);
+    store_defense = false;
+    thievespawn = false;
+    toyspawn = false;
+    clear_inv();
+    destroy_all_thieves();
+    destroy_all_toys();
+    ambpool.destroy_sound(toyambslot);
+    muspool.destroy_sound(toytrackslot);
     dlgmessage_return("Game over. The thieves stole too many toys.");
-        setupmenu();
-        m.add_item("Yes", "yes");
-        m.add_item("No", "no");
-        m.intro_text = "Would you like to play the current game mode again?";
-        int res = m.run();
-        string choice = m.get_item_id(res);
-        if (res != -1 && choice == "yes")
+    setupmenu();
+    m.add_item("Yes", "yes");
+    m.add_item("No", "no");
+    m.intro_text = "Would you like to play the current game mode again?";
+    int dres = m.run();
+    string dchoice = m.get_item_id(dres);
+    if (dres != -1 && dchoice == "yes")
+    {
+        if (speak_menu_loading)
         {
-            if (speak_menu_loading)
-            {
-                string difficulty_name =(gamemod == 1) ? "Easy" : (gamemod == 2) ? "Medium" : (gamemod == 3) ? "Hard" : (gamemod == 4) ? "Insane" : (gamemod == 5) ? "Chaos" : "unknown";
-                speak("loading endless defense: difficulty " + difficulty_name);
-            }
-            dlgplay(get_sound("misc/game/*launch*"));
-            collected_toys = 0;
-            killed_thieves = 0;
-            moved_steps = 0;
-            stolen_toys = 0;
-            for (uint i = 0; i < achievements.length(); i++)
-            {
-                if (achievements[i].isSessionBased)
-                    achievements[i].currentTier = 0;
-            }
-            gametimer.restart();
-            clear_all_buffers();
-            clear_inv();
-            me.x = 25;
-            me.y = 25;
-            maxx = 50;
-            maxy = 50;
-            store_defense = true;
-            thievespawn = true;
-            toydest = false;
-            toyspawn = true;
-            reset_weapons();
-            toygame2();
-            return;
+            string difficulty_name =(gamemod == 1) ? "Easy" : (gamemod == 2) ? "Medium" : (gamemod == 3) ? "Hard" : (gamemod == 4) ? "Insane" : (gamemod == 5) ? "Chaos" : "unknown";
+            speak("loading endless defense: difficulty " + difficulty_name);
         }
-        mainmenu();
+        dlgplay(get_sound("misc/game/*launch*"));
+        collected_toys = 0;
+        killed_thieves = 0;
+        moved_steps = 0;
+        stolen_toys = 0;
+        for (uint i = 0; i < achievements.length(); i++)
+        {
+            if (achievements[i].isSessionBased)
+                achievements[i].currentTier = 0;
+        }
+        gametimer.restart();
+        clear_all_buffers();
+        clear_inv();
+        me.x = 25;
+        me.y = 25;
+        maxx = 50;
+        maxy = 50;
+        store_defense = true;
+        thievespawn = true;
+        toydest = false;
+        toyspawn = true;
+        reset_weapons();
+        toygame();
         return;
     }
-if (defense_timed && !paused)
+ingame = false;
+    mainmenu();
+    return;
+}
+if (store_defense and defense_timed and !paused)
 {
     if (defense_timer.elapsed >= defense_time_limit)
     {
@@ -1430,26 +1174,22 @@ if (defense_timed && !paused)
         ambpool.destroy_sound(toyambslot);
         muspool.destroy_sound(toytrackslot);
         if (collected_toys >= defense_toy_target)
-        {
             dlgmessage_return("Times up! You collected " + collected_toys + " toys on time. Great job!");
-        }
         else if (stolen_toys > collected_toys)
-        {
-dlgmessage_return("Times up! The thieves stole " + stolen_toys + " toy" + (stolen_toys == 1 ? "" : "s") + ". You were able to save " + collected_toys + " toy" + (collected_toys == 1 ? "" : "s") + ". Better luck next time!");
-        }
+            dlgmessage_return("Times up! The thieves stole " + stolen_toys + " toy" + (stolen_toys == 1 ? "" : "s") + ". You were able to save " + collected_toys + " toy" + (collected_toys == 1 ? "" : "s") + ". Better luck next time!");
         else
         {
-int minutes = defense_timer.elapsed / 60000;
-int seconds = (defense_timer.elapsed % 60000) / 1000;
-dlgmessage_return("Time's up! The thieves stole " + stolen_toys + " toy" + (stolen_toys == 1 ? "" : "s") + ". You were able to save " + collected_toys + ". You lasted " + minutes + " minutes and " + seconds + " seconds.");
+            int minutes = defense_timer.elapsed / 60000;
+            int seconds = (defense_timer.elapsed % 60000) / 1000;
+            dlgmessage_return("Time's up! The thieves stole " + stolen_toys + " toy" + (stolen_toys == 1 ? "" : "s") + ". You were able to save " + collected_toys + ". You lasted " + minutes + " minutes and " + seconds + " seconds.");
         }
         setupmenu();
         m.add_item("Yes", "yes");
         m.add_item("No", "no");
         m.intro_text = "Would you like to play the current game mode again?";
-        int res = m.run();
-        string choice = m.get_item_id(res);
-        if (res != -1 && choice == "yes")
+        int tres = m.run();
+        string tchoice = m.get_item_id(tres);
+        if (tres != -1 && tchoice == "yes")
         {
             if (speak_menu_loading)
             {
@@ -1479,12 +1219,14 @@ dlgmessage_return("Time's up! The thieves stole " + stolen_toys + " toy" + (stol
             toyspawn = true;
             reset_weapons();
             defense_timer.restart();
-            toygame2();
+            toygame();
             return;
         }
+ingame = false;
         mainmenu();
         return;
     }
 }
 }
 }
+
