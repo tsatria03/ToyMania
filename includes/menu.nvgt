@@ -1973,62 +1973,88 @@ default_filename = default_filename.replace("/", "-", true);
 spool.play_stationary(get_sound("ui/menus/"+menupack+"/*open*"), false);
 while (true)
 {
+wait(5);
 form.reset();
 form.create_window("Recording settings", false);
-string[]@ all_devices = rec.list_recording_devices(true);
-int deviceList = form.create_list("Recording device: menu", 0);
-int selected_device = 0;
-for (uint i = 0; i < all_devices.length(); i++)
-{
-    if (all_devices[i].lower().find_first("microphone") >= 0) continue;
-    if (all_devices[i].lower().find_first("default") >= 0) continue;
-    string dev_name = all_devices[i];
-    int colon_pos = dev_name.find_first(": ");
-    if (colon_pos >= 0) dev_name = dev_name.substr(colon_pos + 2);
-    form.add_list_item(deviceList, dev_name, ""+i);
-    if (i == rec.recording_device) selected_device = form.get_list_count(deviceList) - 1;
-}
-form.set_list_position(deviceList, selected_device);
-int filenameBox = form.create_input_box("Recording filename", default_filename);
+int deviceList = -1;
+int filenameBox = -1;
 int startBtn = -1;
 int stopBtn = -1;
 int playBtn = -1;
 int saveBtn = -1;
+int closeBtn = -1;
 if (is_recording)
+{
     stopBtn = form.create_button("S&top recording");
+}
+else if (has_recording)
+{
+    filenameBox = form.create_input_box("Recording filename", default_filename);
+    playBtn = form.create_button("&Play recording");
+    saveBtn = form.create_button("Sa&ve recording");
+    closeBtn = form.create_button("&Clear recording");
+}
 else
 {
-    startBtn = form.create_button("&Start recording");
-    if (has_recording)
+    string[]@ all_devices = rec.list_recording_devices(true);
+    deviceList = form.create_list("Recording device: menu", 0);
+    int selected_device = 0;
+    for (uint i = 0; i < all_devices.length(); i++)
     {
-        playBtn = form.create_button("&Play recording");
-        saveBtn = form.create_button("Sa&ve recording");
+        if (all_devices[i].lower().find_first("microphone") >= 0) continue;
+        if (all_devices[i].lower().find_first("default") >= 0) continue;
+        string dev_name = all_devices[i];
+        int colon_pos = dev_name.find_first(": ");
+        if (colon_pos >= 0) dev_name = dev_name.substr(colon_pos + 2);
+        form.add_list_item(deviceList, dev_name, ""+i);
+        if (i == rec.recording_device) selected_device = form.get_list_count(deviceList) - 1;
     }
+    form.set_list_position(deviceList, selected_device);
+    startBtn = form.create_button("&Start recording");
+    closeBtn = form.create_button("&Close");
 }
-int closeBtn = form.create_button("&Close");
-form.focus(is_recording ? stopBtn : startBtn);
+form.focus(is_recording ? stopBtn : (has_recording ? playBtn : startBtn));
 while (true)
 {
     wait(5);
     form.monitor();
-    if (form.is_pressed(closeBtn) || key_repeating(KEY_ESCAPE))
+    if (closeBtn >= 0 && form.is_pressed(closeBtn))
     {
+        if (has_recording)
+        {
+            rec.stop_playback();
+            rec.clear_recording();
+            has_recording = false;
+            break;
+        }
+        else
+        {
+            spool.play_stationary(get_sound("ui/menus/"+menupack+"/*close*"), false);
+            resume_game();
+            return;
+        }
+    }
+    if (key_repeating(KEY_ESCAPE))
+    {
+        rec.stop_playback();
         spool.play_stationary(get_sound("ui/menus/"+menupack+"/*close*"), false);
         resume_game();
         return;
     }
     if (startBtn >= 0 && form.is_pressed(startBtn))
     {
-        int devPos = form.get_list_position(deviceList);
-        if (devPos >= 0)
+        if (deviceList >= 0)
         {
-            string devId = form.get_list_item_id(deviceList, devPos);
-            rec.set_recording_device(string_to_int(devId));
+            int devPos = form.get_list_position(deviceList);
+            if (devPos >= 0)
+            {
+                string devId = form.get_list_item_id(deviceList, devPos);
+                rec.set_recording_device(string_to_int(devId));
+            }
         }
         if (rec.start_recording())
         {
             is_recording = true;
-            speak("Recording started.");
             break;
         }
         else
@@ -2040,7 +2066,6 @@ while (true)
         {
             is_recording = false;
             has_recording = true;
-            speak("Recording stopped.");
             break;
         }
         else
@@ -2051,21 +2076,21 @@ while (true)
         if (rec.playback.playing)
         {
             rec.stop_playback();
-            speak("Playback stopped.");
+            speak("Stopped recorded audio.");
         }
         else
         {
             rec.play();
-            speak("Playing back recording.");
+            speak("Playing recorded audio.");
         }
     }
     if (saveBtn >= 0 && form.is_pressed(saveBtn))
     {
-        string filename = form.get_text(filenameBox).trim_whitespace_left().trim_whitespace_right();
+        string filename = filenameBox >= 0 ? form.get_text(filenameBox).trim_whitespace_left().trim_whitespace_right() : "";
         if (filename == "") filename = default_filename;
         string wav_path = recordingsPath + "/" + filename + ".wav";
         string mp3_path = recordingsPath + "/" + filename + ".mp3";
-        string ffmpeg_path = "lib/windows/tools/ffmpeg.exe";
+        string ffmpeg_path = "lib/ffmpeg.exe";
         if (rec.save_recording(wav_path))
         {
             run(ffmpeg_path, "-i \"" + wav_path + "\" -b:a 192k \"" + mp3_path + "\"", true, true);
@@ -2073,15 +2098,18 @@ while (true)
             {
                 file_delete(wav_path);
                 if (completesound) dlgplay(get_sound("ui/other/*complete*"), false);
-                speak("Recording saved as " + filename + ".mp3");
+                dlgmessage_return("Recording saved as " + filename + ".mp3");
+recmenu();
             }
             else
             {
-                speak("Conversion failed. WAV file kept at " + wav_path);
+                dlgmessage_return("Conversion failed. WAV file kept at " + wav_path);
+recmenu();
             }
         }
         else
-            speak("Failed to save recording.");
+            dlgmessage_return("Failed to save recording.");
+recmenu();
     }
 }
 }

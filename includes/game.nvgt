@@ -4,6 +4,11 @@ buffercheck();
 // --- Quit ---
 if (controls.action_repeating("quit") and (store_defense or doormove == false))
 {
+if (is_recording)
+{
+    speak("You can't exit the game while recording audio.");
+    return;
+}
 boss_timer.pause();
 gametimer.pause();
     if (quit_menu==true)
