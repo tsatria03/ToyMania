@@ -1964,3 +1964,125 @@ while (true)
     }
 }
 }
+void recmenu()
+{
+if (!directory_exists(recordingsPath)) directory_create(recordingsPath);
+string default_filename = get_date(false, true) + " " + get_time(false, false);
+default_filename = default_filename.replace(":", "-", true);
+default_filename = default_filename.replace("/", "-", true);
+form.reset();
+form.create_window("Recording settings", false);
+string[]@ all_devices = rec.list_recording_devices(true);
+int deviceList = form.create_list("Recording device: menu", 0);
+int selected_device = 0;
+for (uint i = 0; i < all_devices.length(); i++)
+{
+    if (all_devices[i].lower().find_first("microphone") >= 0) continue;
+    if (all_devices[i].lower().find_first("default") >= 0) continue;
+    form.add_list_item(deviceList, all_devices[i], ""+i);
+    if (i == rec.recording_device) selected_device = form.get_list_count(deviceList) - 1;
+}
+form.set_list_position(deviceList, selected_device);
+int filenameBox = form.create_input_box("Recording filename", default_filename);
+int startBtn = form.create_button("&Start recording");
+int stopBtn = form.create_button("S&top recording");
+int playBtn = form.create_button("&Play back recording");
+int saveBtn = form.create_button("Sa&ve recording");
+int closeBtn = form.create_button("&Close");
+form.focus(is_recording ? stopBtn : startBtn);
+spool.play_stationary(get_sound("ui/menus/"+menupack+"/*open*"), false);
+while (true)
+{
+    wait(5);
+    form.monitor();
+    if (form.is_pressed(closeBtn) || key_repeating(KEY_ESCAPE))
+    {
+        spool.play_stationary(get_sound("ui/menus/"+menupack+"/*close*"), false);
+        resume_game();
+        return;
+    }
+    if (form.is_pressed(startBtn))
+    {
+        if (is_recording)
+        {
+            speak("Already recording.");
+        }
+        else
+        {
+            int devPos = form.get_list_position(deviceList);
+            if (devPos >= 0)
+            {
+                string devId = form.get_list_item_id(deviceList, devPos);
+                rec.set_recording_device(string_to_int(devId));
+            }
+            if (rec.start_recording())
+            {
+                is_recording = true;
+                speak("Recording started.");
+            }
+            else
+                speak("Failed to start recording.");
+        }
+    }
+    if (form.is_pressed(stopBtn))
+    {
+        if (!is_recording)
+        {
+            speak("Not currently recording.");
+        }
+        else
+        {
+            if (rec.stop_recording())
+            {
+                is_recording = false;
+                speak("Recording stopped.");
+            }
+            else
+                speak("Failed to stop recording.");
+        }
+    }
+    if (form.is_pressed(playBtn))
+    {
+        if (is_recording)
+        {
+            speak("Please stop the recording before playing it back.");
+        }
+        else
+        {
+            rec.play();
+            speak("Playing back recording.");
+        }
+    }
+    if (form.is_pressed(saveBtn))
+    {
+        if (is_recording)
+        {
+            speak("Please stop the recording before saving.");
+        }
+        else
+        {
+            string filename = form.get_text(filenameBox).trim_whitespace_left().trim_whitespace_right();
+            if (filename == "") filename = default_filename;
+            string wav_path = recordingsPath + "/" + filename + ".wav";
+            string mp3_path = recordingsPath + "/" + filename + ".mp3";
+            string ffmpeg_path = "lib/windows/tools/ffmpeg.exe";
+            if (rec.save_recording(wav_path))
+            {
+                run(ffmpeg_path, "-i \"" + wav_path + "\" -b:a 192k \"" + mp3_path + "\"", true, true);
+                if (file_exists(mp3_path))
+                {
+                    file_delete(wav_path);
+                    if (completesound) dlgplay(get_sound("ui/other/*complete*"), false);
+                    speak("Recording saved as " + filename + ".mp3");
+                }
+                else
+                {
+                    speak("Conversion failed. WAV file kept at " + wav_path);
+                }
+            }
+            else
+                speak("Failed to save recording.");
+        }
+    }
+}
+}

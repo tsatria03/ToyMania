@@ -301,6 +301,11 @@ if(alt_is_down() and key_pressed(KEY_K))
 pause_game();
 keyboardsetsmenu();
 }
+if(controls.action_pressed("open_rec_menu") and doormove == false)
+{
+pause_game();
+recmenu();
+}
 if(alt_is_down() and key_pressed(KEY_S))
 {
 pause_game();

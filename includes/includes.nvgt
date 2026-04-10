@@ -6,6 +6,7 @@
 #include"bgt_compat.nvgt"
 #include"file_contents.nvgt"
 #include"instance.nvgt"
+#include"recording.nvgt"
 #include"size.nvgt"
 #include"sound_pool.nvgt"
 #include"speech.nvgt"
