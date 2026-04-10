@@ -1,4 +1,7 @@
 New in 5.0.
+Made it so the recording device list only speaks the device name, without the device number prefix.
+Made it so the play button in the recording menu toggles playback. Pressing it once starts playing back the recording, and pressing it again stops it.
+Improved the recording menu so that buttons are shown contextually. The start button is shown by default. Once recording begins, only the stop button is available. After stopping, the play and save buttons appear alongside the start button.
 Added a recording menu to the game via a customizable keyboard shortcut, defaulting to Alt+R. This menu allows you to select a recording device, start and stop recording, play back the current recording, and save it as an MP3 file to your ToyMania recordings folder. Microphone devices are excluded from the device list. The default filename is based on the current date and time, but can be changed before saving the recording.
 Made it so the audio settings menu now hides the sound test buttons, track list, and theme and pack selectors when opened from within the game, as these options are not needed during gameplay.
 Fixed a bug where closing the audio settings menu from within the game would switch the music to the boss track if the track list had a different item focused.

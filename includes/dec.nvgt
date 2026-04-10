@@ -37,6 +37,7 @@ bool machine_gun_initialized = false;
 bool isReloading = false;
 bool defense_timed = false;
 bool is_recording = false;
+bool has_recording = false;
 const int max_entities = 50;
 double alarmvolume=0, alarmpitch=100, heartvolume=0, heartpitch=100, toyambvolume=0, toyambpitch=100, toymusvolume=0, toymuspitch=100;
 double ammo=50, maxammo=50, reserved_ammo=50, max_reserved_ammo=50;
