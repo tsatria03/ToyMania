@@ -296,6 +296,11 @@ if(alt_is_down() and key_pressed(KEY_G))
 pause_game();
 gamsetsmenu();
 }
+if(alt_is_down() and key_pressed(KEY_K))
+{
+pause_game();
+keyboardsetsmenu();
+}
 if(alt_is_down() and key_pressed(KEY_S))
 {
 pause_game();

@@ -1364,15 +1364,21 @@ int gameHeartbeatVolumeSlider = form.create_slider("game heartbeat volume: adjus
 int gameMusicVolumeSlider = form.create_slider("game music volume: adjustable", (toymusvolume + 50) * 2, 0, 100, "percent", 1);
 int menuMusicVolumeSlider = form.create_slider("menu music volume: adjustable", (menumusvolume + 50) * 2, 0, 100, "percent", 1);
 int masterGameVolumeSlider = form.create_slider("master game volume: adjustable", (int(master_volume) + 50) * 2, 0, 100, "percent", 1);
-    int alarmTest = form.create_button("alarm sound test: switch");
-    int ambTest = form.create_button("ambience sound test: switch");
-    int heartbeatTest = form.create_button("heartbeat sound test: switch");
-    int musTest = form.create_button("music sound test: switch");
-    int musList = form.create_list("Test Tracks: menu", 2);
-form.add_list_item(musList, "BossMusic: toy collector, normal mode", "bossmus");
-form.add_list_item(musList, "Game Music: toy collector, normal and endless modes", "gamemus");
+    int alarmTest = -1, ambTest = -1, heartbeatTest = -1, musTest = -1, musList = -1;
+if (!ingame)
+{
+    alarmTest = form.create_button("alarm sound test: switch");
+    ambTest = form.create_button("ambience sound test: switch");
+    heartbeatTest = form.create_button("heartbeat sound test: switch");
+    musTest = form.create_button("music sound test: switch");
+    musList = form.create_list("Test Tracks: menu", 2);
+    form.add_list_item(musList, "BossMusic: toy collector, normal mode", "bossmus");
+    form.add_list_item(musList, "Game Music: toy collector, normal and endless modes", "gamemus");
+}
 int sdm = form.create_button("Select sound &device. Currently set to " + soundcard);
-int sgm, slm, spk;
+int sgm = -1, slm = -1, spk = -1;
+if (!ingame)
+{
 if (dlgpack == "")
 sgm = form.create_button("Select dialo&g theme for the " + soundpack + " sound pack. Currently set to nothing");
 else
@@ -1385,6 +1391,7 @@ if (soundpack == "")
 spk = form.create_button("Select sound &pack. Currently set to nothing");
 else
 spk = form.create_button("Select sound &pack. Currently set to " + soundpack);
+}
 int cancel = form.create_button("&cancel");
 int ok = form.create_button("&okay");
 form.focus(gameAlarmVolumeSlider);
@@ -1393,8 +1400,8 @@ spool.play_stationary(get_sound("ui/menus/"+menupack+"/*open*"),false);
     {
         wait(5);
         form.monitor();
-int currentMusIndex = form.get_list_position(musList);
-if (currentMusIndex != lastMusicIndex && currentMusIndex != -1)
+int currentMusIndex = musList >= 0 ? form.get_list_position(musList) : -1;
+if (!ingame && currentMusIndex != lastMusicIndex && currentMusIndex != -1)
 {
     lastMusicIndex = currentMusIndex;
 mustype = form.get_list_item_id(musList, currentMusIndex);
@@ -1423,24 +1430,20 @@ set_sound_master_volume(master_volume);
         heartpool.update_sound_start_values(heartslot, 0, heartvolume, heartpitch);
         if (form.is_pressed(cancel) || key_repeating(KEY_ESCAPE))
         {
-ambpool.destroy_sound(toyambslot);
-muspool.destroy_sound(toytrackslot);
-alarmpool.destroy_sound(alarmslot);
-heartpool.destroy_sound(heartslot);
 spool.play_stationary(get_sound("ui/menus/"+menupack+"/*close*"),false);
             if (ingame)
             {
                 resume_game();
                 return;
             }
-            preffsmenu();
-        }
-        if (form.is_pressed(ok))
-        {
 ambpool.destroy_sound(toyambslot);
 muspool.destroy_sound(toytrackslot);
 alarmpool.destroy_sound(alarmslot);
 heartpool.destroy_sound(heartslot);
+            preffsmenu();
+        }
+        if (form.is_pressed(ok))
+        {
             if (ingame)
             {
                 writepreffs();
@@ -1448,10 +1451,31 @@ heartpool.destroy_sound(heartslot);
                 resume_game();
                 return;
             }
+ambpool.destroy_sound(toyambslot);
+muspool.destroy_sound(toytrackslot);
+alarmpool.destroy_sound(alarmslot);
+heartpool.destroy_sound(heartslot);
             preffsmenu();
         }
 if (form.is_pressed(ambTest))
 {
+    if (ingame)
+    {
+        if (ambpool.items[toyambslot].paused)
+        {
+if(togglesound==true) spool.play_stationary(get_sound("ui/other/*enable*"),false);
+speak("ambience on");
+            ambpool.resume_sound(toyambslot);
+        }
+        else
+        {
+if(togglesound==true) spool.play_stationary(get_sound("ui/other/*disable*"),false);
+speak("ambience off");
+            ambpool.pause_sound(toyambslot);
+        }
+    }
+    else
+    {
     if (ambpool.sound_is_playing(toyambslot))
 {
 if(togglesound==true) spool.play_stationary(get_sound("ui/other/*disable*"),false);
@@ -1464,9 +1488,27 @@ if(togglesound==true) spool.play_stationary(get_sound("ui/other/*enable*"),false
 speak("ambience on");
         toyambslot = ambpool.play_stationary(get_sound("objects/sources/ambiences/*gameloop*"), true);
     }
+    }
 }
 if (form.is_pressed(musTest))
 {
+    if (ingame)
+    {
+        if (muspool.items[toytrackslot].paused)
+        {
+if(togglesound==true) spool.play_stationary(get_sound("ui/other/*enable*"),false);
+speak("music on");
+            muspool.resume_sound(toytrackslot);
+        }
+        else
+        {
+if(togglesound==true) spool.play_stationary(get_sound("ui/other/*disable*"),false);
+speak("music off");
+            muspool.pause_sound(toytrackslot);
+        }
+    }
+    else
+    {
     if (muspool.sound_is_playing(toytrackslot))
     {
 if(togglesound==true) spool.play_stationary(get_sound("ui/other/*disable*"),false);
@@ -1487,9 +1529,27 @@ speak("music on");
             lastMusicIndex = musIndex;
         }
     }
+    }
 }
 if (form.is_pressed(alarmTest))
 {
+    if (ingame)
+    {
+        if (alarmpool.items[alarmslot].paused)
+        {
+if(togglesound==true) spool.play_stationary(get_sound("ui/other/*enable*"),false);
+speak("alarm on");
+            alarmpool.resume_sound(alarmslot);
+        }
+        else
+        {
+if(togglesound==true) spool.play_stationary(get_sound("ui/other/*disable*"),false);
+speak("alarm off");
+            alarmpool.pause_sound(alarmslot);
+        }
+    }
+    else
+    {
     if (alarmpool.sound_is_playing(alarmslot))
 {
 if(togglesound==true) spool.play_stationary(get_sound("ui/other/*disable*"),false);
@@ -1502,9 +1562,27 @@ if(togglesound==true) spool.play_stationary(get_sound("ui/other/*enable*"),false
 speak("alarm on");
         alarmslot = alarmpool.play_stationary(get_sound("objects/sources/ambiences/*alarmloop*"), true);
     }
+    }
 }
 if (form.is_pressed(heartbeatTest))
 {
+    if (ingame)
+    {
+        if (heartpool.items[heartslot].paused)
+        {
+if(togglesound==true) spool.play_stationary(get_sound("ui/other/*enable*"),false);
+speak("heartbeat on");
+            heartpool.resume_sound(heartslot);
+        }
+        else
+        {
+if(togglesound==true) spool.play_stationary(get_sound("ui/other/*disable*"),false);
+speak("heartbeat off");
+            heartpool.pause_sound(heartslot);
+        }
+    }
+    else
+    {
     if (heartpool.sound_is_playing(heartslot))
 {
 if(togglesound==true) spool.play_stationary(get_sound("ui/other/*disable*"),false);
@@ -1516,6 +1594,7 @@ else
 if(togglesound==true) spool.play_stationary(get_sound("ui/other/*enable*"),false);
 speak("heartbeat on");
         heartslot = heartpool.play_stationary(get_sound("misc/player/*heartstart*"), true);
+    }
     }
 }
 if(form.is_pressed(sdm))
