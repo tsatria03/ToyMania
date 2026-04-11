@@ -36,13 +36,6 @@ bool check_for_updates(string old_version, string projectname, bool precheck = f
     string url = get_download_url(projectname, new_version);
     string filename = get_disk_filename(url);
     string bare_name = strip_extension(strip_directory(filename));
-if (system_is_unix)
-{
-    clipboard_set_text(url);
-alert("Manual Download Required", "This update must be installed manually for this platform. The download link has been copied to your clipboard. Please paste it into your browser to download the update.");
-    mainmenu();
-    return false;
-}
 if (!file_exists(filename))
 {
     string test_file = filename + ".test";
@@ -202,36 +195,23 @@ return status;
 }
 string get_downloads_folder()
 {
-    if (system_is_windows)
-        return expand_environment_variables("%USERPROFILE%\\Downloads\\");
-    else if (system_is_unix)
-        return expand_environment_variables("$HOME/Downloads/");
-    else
-        return "";
+    return expand_environment_variables("%USERPROFILE%\\Downloads\\");
 }
 string get_download_url(string projectname, string new_version)
 {
-    bool is_mac = system_is_unix;
     string base = "https://github.com/tsatria03/" + projectname + "/releases/download/V" + new_version+"0";
-    if (is_mac)
-    {
-        return base + "/ToyMania_mac_portable_password_is_GreatCollector.zip";
-    }
+    setupmenu();
+    m.add_item("Windows Installer", "installer");
+    m.add_item("Windows Portable", "portable");
+    m.add_item("cancel", "cancel");
+    m.intro_text = "Which version of the game would you like to download?";
+    int mres = m.run();
+    string version_choice = m.get_item_id(mres);
+    if (mres == -1 || version_choice == "cancel") mainmenu();
+    if (version_choice == "portable")
+        return base + "/ToyMania_windows_portable_password_is_GreatCollector.7z";
     else
-    {
-        setupmenu();
-        m.add_item("Windows Installer", "installer");
-        m.add_item("Windows Portable", "portable");
-m.add_item("cancel", "cancel");
-        m.intro_text = "Which version of the game would you like to download?";
-        int mres = m.run();
-        string version_choice = m.get_item_id(mres);
-        if (mres == -1 || version_choice == "cancel") mainmenu();
-        if (version_choice == "portable")
-            return base + "/ToyMania_windows_portable_password_is_GreatCollector.7z";
-        else
-            return base + "/ToyMania_windows_installer_password_is_GreatCollector.exe";
-    }
+        return base + "/ToyMania_windows_installer_password_is_GreatCollector.exe";
 }
 string get_disk_filename(string url)
 {
