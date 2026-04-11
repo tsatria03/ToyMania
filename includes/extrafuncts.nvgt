@@ -681,8 +681,13 @@ if (!directory_exists(configPath)) directory_create(configPath);
 string kpath = configPath + "/keyboard.ini";
 if (!file_exists(kpath))
 {
-    alert("Configuration", "No keyboard.ini found in the config folder. Default key bindings will be used. You can edit config/keyboard.ini to customize your controls.");
-    return;
+    string default_kpath = "data/config/keyboard.ini";
+    if (!file_exists(default_kpath))
+    {
+        alert("Configuration", "Could not create keyboard.ini. The default config file is missing from the game's data folder. Please reinstall the game.");
+        return;
+    }
+    file_copy(default_kpath, kpath, false);
 }
 if (!controls.load_keyboard(kpath))
     alert("Configuration", "Failed to load config/keyboard.ini. Default key bindings will be used.");
