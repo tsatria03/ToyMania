@@ -2106,13 +2106,12 @@ while (true)
         if (filename == "") filename = default_filename;
         string wav_path = recordingsPath + "/" + filename + ".wav";
         string mp3_path = recordingsPath + "/" + filename + ".mp3";
-        string ffmpeg_path = "lib/ffmpeg.exe";
         if (rec.save_recording(wav_path))
         {
-            run(ffmpeg_path, "-i \"" + wav_path + "\" -b:a 192k \"" + mp3_path + "\"", true, true);
+            run("lib/lame.exe", "-b 192 \"" + wav_path + "\" \"" + mp3_path + "\"", true, true);
+            if (file_exists(mp3_path)) file_delete(wav_path);
             if (file_exists(mp3_path))
             {
-                file_delete(wav_path);
                 if (completesound) dlgplay(get_sound("ui/other/*complete*"), false);
                 dlgmessage_return("Recording saved as " + filename + ".mp3");
                 has_recording = false;
