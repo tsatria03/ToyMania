@@ -681,16 +681,14 @@ if (!directory_exists(configPath)) directory_create(configPath);
 string kpath = configPath + "/keyboard.ini";
 if (!file_exists(kpath))
 {
-    string default_kpath = "data/config/keyboard.ini";
-    if (!file_exists(default_kpath))
-    {
-        alert("Configuration", "Could not create keyboard.ini. The default config file is missing from the game's data folder. Please reinstall the game.");
-        return;
-    }
-    file_copy(default_kpath, kpath, false);
+    alert("Configuration", "No keyboard.ini found in the data/config folder.");
+    exit();
 }
 if (!controls.load_keyboard(kpath))
-    alert("Configuration", "Failed to load config/keyboard.ini. Default key bindings will be used.");
+{
+    alert("Configuration", "Failed to load config/keyboard.ini. Please reinstall the game.");
+    exit(1);
+}
 }
 void setupmenu(bool music_added = false)
 {
