@@ -1,19 +1,16 @@
-#define MyAppId "{{AB5A1A66-8DA2-4A93-9F7C-202B2A40F88F}}"
-#define MyAppName "ToyMania"
-#define MyAppVersion "5.1"
+#define MyAppVersion Trim(FileRead(FileOpen("version.txt")))
 #define MyAppPublisher "tsatria03"
-#define MyAppURL "https://tsatria03.github.io/projects/games/ToyMania"
-#define MyAppExeName "tm.exe"
+#define MyOutputFilename MyAppName + "_windows_installer_password_is_" + MyAppPassword
 
 [Setup]
-AppId={#MyAppId}
+AppId={{{#MyAppId}}
 AppName={#MyAppName}
 AppVersion={#MyAppVersion}
 AppPublisher={#MyAppPublisher}
 AppPublisherURL={#MyAppURL}
 AppSupportURL={#MyAppURL}
 AppUpdatesURL={#MyAppURL}
-DefaultDirName={autopf}\{#MyAppPublisher}\{#MyAppName}\tm
+DefaultDirName={autopf}\{#MyAppPublisher}\{#MyAppName}\cst
 DefaultGroupName={#MyAppName}
 UninstallDisplayIcon={app}\{#MyAppExeName}
 ArchitecturesAllowed=x64compatible
@@ -21,9 +18,9 @@ ArchitecturesInstallIn64BitMode=x64compatible
 PrivilegesRequired=admin
 UninstallDisplayName={#MyAppName} {#MyAppVersion}
 AppMutex={#MyAppName}_Mutex
-OutputDir=.
-OutputBaseFilename=ToyMania_windows_installer_password_is_GreatCollector
-Password=GreatCollector
+OutputDir=..\releases\archives
+OutputBaseFilename={#MyOutputFilename}
+Password={#MyAppPassword}
 Encryption=yes
 SolidCompression=yes
 WizardStyle=modern
@@ -36,7 +33,7 @@ Name: "desktopicon"; Description: "Create a desktop shortcut"; GroupDescription:
 Name: "startmenuicon"; Description: "Create a Start Menu shortcut"; GroupDescription: "Additional icons:"
 
 [Files]
-Source: "C:\Users\tonys\OneDrive\Documents\GitHub\ToyMania\releases\windows\ToyMania_windows_portable_password_is_GreatCollector\tm\*"; \
+Source: "{#MySourcePath}\*"; \
   DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs
 
 [Icons]
