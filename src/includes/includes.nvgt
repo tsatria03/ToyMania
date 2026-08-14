@@ -1,0 +1,10 @@
+#pragma plugin nvgt_curl
+
+#include"version.nvgt"
+
+#include"main/deps/*"
+#include"main/functions/*"
+#include"main/globals/*"
+#include"main/menus/*"
+
+typedef uint8 usmall; typedef int8 small;

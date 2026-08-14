@@ -17,7 +17,6 @@ if (@timeelapsed.handle == null)
 {
     timeelapsed.set_timer(gametimer);
 }
-getver();
 show_window("ToyMania, version "+version);
 if(gamstence.is_already_running)
 {

@@ -39,6 +39,12 @@ ARCHIVE      = os.path.join(ARCHIVE_DIR, ARCHIVE_NAME)
 INSTALLER    = os.path.join(ARCHIVE_DIR, f"{GAME}_windows_installer_password_is_{PASSWORD}.exe")
 RELEASE_DIR  = os.path.join(REPO_DIR, "releases", "windows", f"{GAME}_windows_portable_password_is_{PASSWORD}")
 
+SRC_DIR      = os.path.join(REPO_DIR, "src")                     # entry .nvgt lives here (src/<name>.nvgt)
+ASSETS_DIR   = os.path.join(REPO_DIR, NVGT_OUT)                  # asset folder (data/docks/sounds); its name == NVGT_OUT
+BUNDLE       = os.path.join(SRC_DIR, NVGT_OUT)                   # nvgt -c (run from src) produces this bundle folder
+VERSION_NVGT = os.path.join(SRC_DIR, "includes", "version.nvgt") # mirror of build/version.txt, read by the running game
+ASSET_FOLDERS = ["data", "docks", "sounds"]                     # copied into the bundle after compile (pragmas were dropped)
+
 SKIP = 0
 DO = 1
 SILENT_SKIP = 2
@@ -61,6 +67,16 @@ def clip(text):
 def get_version():
     with open(os.path.join(SCRIPT_DIR, "version.txt"), "r") as f:
         return f.read().strip()
+
+def sync_version_file(version):
+    # Mirror build/version.txt into src/includes/version.nvgt so the compiled build carries the right
+    # version (a compiled release has no build/version.txt beside it to read at runtime). Preserve the
+    # file's existing line ending (this repo's .nvgt convention) so we don't churn it.
+    data = open(VERSION_NVGT, "rb").read() if os.path.exists(VERSION_NVGT) else b""
+    nl = b"\r\n" if b"\r\n" in data else b"\n"
+    with open(VERSION_NVGT, "wb") as f:
+        f.write(('string version = "%s";' % version).encode("utf-8") + nl)
+    print("Synced version %s into version.nvgt." % version)
 
 # ── Commit ────────────────────────────────────────────────────────────────────
 
@@ -87,7 +103,14 @@ def do_commit():
         print("Summary cannot be empty.")
         return
     print()
-    description = input("Commit description (optional, press Enter to skip): ").strip()
+    print("Commit description (enter lines one by one, blank line to finish):")
+    desc_lines = []
+    while True:
+        line = input(f"Line {len(desc_lines) + 1}: ")
+        if not line.strip():
+            break
+        desc_lines.append(line)
+    description = "\n".join(desc_lines)
     print()
     print(f"Summary:     {summary}")
     if description:
@@ -133,6 +156,24 @@ def do_undo(unpushed):
         print("ERROR: Undo failed.")
     else:
         print("Commit undone. Your changes are still staged.")
+
+def do_push(unpushed):
+    if unpushed == 0:
+        print("Nothing to push. All commits are already on the remote.")
+        return
+    log = run_out(["git", "log", "origin/HEAD..HEAD", "--oneline"])
+    print(f"Unpushed commits ({unpushed}):")
+    print()
+    print(log)
+    print()
+    if not ask("Push these commits to the remote?"):
+        print("Cancelled.")
+        return
+    result = run(["git", "push"])
+    if result.returncode != 0:
+        print("ERROR: Push failed.")
+    else:
+        print("Push complete.")
 
 def do_history():
     raw = run_out(["git", "log", "-50", "--decorate-refs=refs/tags", "--format=%h~%ar~%s%d"])
@@ -227,6 +268,21 @@ def copy_tag(sha):
         clip(tag)
         print(f"Tag copied to clipboard: {tag}")
 
+def do_create_tag():
+    raw = input("Commit to tag (press Enter for HEAD): ").strip()
+    target = raw if raw else "HEAD"
+    sha = run_out(["git", "rev-parse", "--verify", target])
+    if not sha:
+        print(f"ERROR: Could not resolve commit '{target}'.")
+        return
+    short = sha[:7]
+    msg = run_out(["git", "log", "--format=%s", "-1", sha])
+    print(f"{target} is at: {short} {msg}")
+    if not ask("Tag this commit?"):
+        print("Cancelled.")
+        return
+    create_tag(sha)
+
 def do_reset(sha):
     print("WARNING: Resetting will move HEAD to this commit.")
     print()
@@ -279,13 +335,25 @@ def do_website_update(version, tag, skip_website):
         return
     print("Website updated.\n")
 
+    version_txt = os.path.join(os.path.dirname(SITE_HTML), "version.txt")
+    version_txt_relpath = os.path.dirname(SITE_PATH) + "/version.txt"
+    version_txt_updated = False
+    if os.path.exists(version_txt):
+        with open(version_txt, "w", encoding="utf-8") as f:
+            f.write(version)
+        print(f"Updated {version_txt} to {version}.")
+        version_txt_updated = True
+
     print("Committing website changes...")
     log = subprocess.run(["git", "log", "--oneline"], cwd=SITE_REPO, capture_output=True, text=True).stdout
     if f"Updated {GAME} to version {version}." in log:
         print("WARNING: Commit already exists. Skipping commit.\n")
         return
 
-    run_cmd(["git", "add", SITE_PATH], cwd=SITE_REPO)
+    add_targets = [SITE_PATH]
+    if version_txt_updated:
+        add_targets.append(version_txt_relpath)
+    run_cmd(["git", "add"] + add_targets, cwd=SITE_REPO)
     if not run_cmd(["git", "commit", "-m", f"Updated {GAME} to version {version}."], cwd=SITE_REPO):
         print("ERROR: Failed to commit website changes.")
         return
@@ -294,7 +362,7 @@ def do_website_update(version, tag, skip_website):
         return
     print("Website committed and pushed.\n")
 
-def run_release(skip_compile, skip_package, skip_release, skip_website, skip_empty_release):
+def run_release(skip_compile, skip_package, skip_release, skip_website, skip_empty_release, interactive=True):
     version = get_version()
     if not version:
         print("ERROR: Could not read version from version.txt.")
@@ -307,6 +375,34 @@ def run_release(skip_compile, skip_package, skip_release, skip_website, skip_emp
     print(f"Tag:     {tag}")
     print(f"Title:   {title}\n")
 
+    if skip_release != SILENT_SKIP:
+        head_sha = run_out(["git", "rev-parse", "--verify", "HEAD"])
+        existing_tag_sha = run_out(["git", "rev-parse", "--verify", "--quiet", f"refs/tags/{tag}"])
+        existing_release = subprocess.run([GH, "release", "view", tag], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL, cwd=REPO_DIR).returncode == 0
+        if existing_tag_sha or existing_release:
+            print(f"WARNING: {tag} already exists.")
+            if existing_tag_sha:
+                short = existing_tag_sha[:7]
+                msg = run_out(["git", "log", "--format=%s", "-1", existing_tag_sha])
+                if existing_tag_sha != head_sha:
+                    head_short = head_sha[:7] if head_sha else "?"
+                    head_msg = run_out(["git", "log", "--format=%s", "-1", "HEAD"])
+                    print(f"  Tag points to {short} {msg}")
+                    print(f"  This release will MOVE the tag to HEAD ({head_short} {head_msg}).")
+                else:
+                    print("  Tag already points to HEAD, so it will not move.")
+            if existing_release:
+                print(f"  GitHub release {tag} will be deleted and recreated with new assets.")
+            print()
+            if interactive:
+                if not ask("Continue with the release?"):
+                    print("Release cancelled.")
+                    return
+            else:
+                print("ERROR: Refusing to overwrite an existing tag or release in non-interactive mode.")
+                print("       Delete the tag and release manually first, or run tools.py interactively.")
+                return
+
     # Compile
     do_compile = False
     if skip_compile == DO:
@@ -316,16 +412,26 @@ def run_release(skip_compile, skip_package, skip_release, skip_website, skip_emp
 
     if do_compile:
         print("Compiling NVGT source...")
-        if not run_cmd([NVGT, "-c", "-Q", os.path.join(REPO_DIR, NVGT_FILE)]):
+        sync_version_file(version)
+        # Source compiles from src/; run nvgt -c there so the bundle lands in src/<name>.
+        if not run_cmd([NVGT, "-c", "-Q", NVGT_FILE], cwd=SRC_DIR):
             print("ERROR: NVGT compilation failed.")
             return
         print("Compilation successful.\n")
+        print("Copying assets into the compiled bundle...")
+        # Assets live in the asset folder; copy them beside the exe (cwd-relative), since the
+        # asset/document pragmas were dropped and nvgt -c no longer bundles them.
+        for folder in ASSET_FOLDERS:
+            asset_src = os.path.join(ASSETS_DIR, folder)
+            if not os.path.isdir(asset_src):
+                print(f"ERROR: missing asset folder: {asset_src}")
+                return
+            shutil.copytree(asset_src, os.path.join(BUNDLE, folder), dirs_exist_ok=True)
         print("Replacing compiled output in release folder...")
-        cst_out = os.path.join(REPO_DIR, NVGT_OUT)
-        cst_dest = os.path.join(RELEASE_DIR, NVGT_OUT)
-        if os.path.exists(cst_dest):
-            shutil.rmtree(cst_dest)
-        shutil.move(cst_out, cst_dest)
+        dest = os.path.join(RELEASE_DIR, NVGT_OUT)
+        if os.path.exists(dest):
+            shutil.rmtree(dest)
+        shutil.move(BUNDLE, dest)
         print("Release folder updated.\n")
     elif skip_compile == SKIP:
         print("Skipping compilation.\n")
@@ -339,7 +445,7 @@ def run_release(skip_compile, skip_package, skip_release, skip_website, skip_emp
 
     if do_package:
         if not os.path.exists(WIN_SOURCE):
-            print("ERROR: cst folder not found in release directory. Please compile the full project first.")
+            print(f"ERROR: {NVGT_OUT} folder not found in release directory. Please compile the full project first.")
             return
         print("Building Windows portable 7z archive...")
         if os.path.exists(ARCHIVE):
@@ -429,15 +535,17 @@ def menu():
         print(" --- Commit ---")
         print(" 1. Make a commit")
         print(f" 2. Undo last commit (unpushed: {unpushed})")
-        print(" 3. Show commit history")
+        print(f" 3. Push commits (unpushed: {unpushed})")
+        print(" 4. Show commit history")
+        print(" 5. Create tag manually")
         print(" --- Release ---")
-        print(" 4. Full release")
-        print(" 5. Compile only")
-        print(" 6. Package only")
-        print(" 7. Release only")
-        print(" 8. Website only")
+        print(" 6. Full release")
+        print(" 7. Compile only")
+        print(" 8. Package only")
+        print(" 9. Release only")
+        print(" 10. Website only")
         print(" ---")
-        print(" 9. Exit")
+        print(" 11. Exit")
         print("========================")
         choice = input("Choose an option: ").strip()
         print()
@@ -446,26 +554,40 @@ def menu():
         elif choice == "2":
             do_undo(unpushed)
         elif choice == "3":
-            do_history()
+            do_push(unpushed)
         elif choice == "4":
-            run_release(SKIP, SKIP, SKIP, SKIP, SKIP)
+            do_history()
         elif choice == "5":
-            run_release(DO, SILENT_SKIP, SILENT_SKIP, SILENT_SKIP, SILENT_SKIP)
+            do_create_tag()
         elif choice == "6":
-            run_release(SILENT_SKIP, DO, SILENT_SKIP, SILENT_SKIP, SILENT_SKIP)
+            run_release(SKIP, SKIP, SKIP, SKIP, SKIP)
         elif choice == "7":
-            run_release(SILENT_SKIP, SILENT_SKIP, DO, SILENT_SKIP, DO)
+            run_release(DO, SILENT_SKIP, SILENT_SKIP, SILENT_SKIP, SILENT_SKIP)
         elif choice == "8":
-            run_release(SILENT_SKIP, SILENT_SKIP, SILENT_SKIP, DO, SILENT_SKIP)
+            run_release(SILENT_SKIP, DO, SILENT_SKIP, SILENT_SKIP, SILENT_SKIP)
         elif choice == "9":
+            run_release(SILENT_SKIP, SILENT_SKIP, DO, SILENT_SKIP, DO)
+        elif choice == "10":
+            run_release(SILENT_SKIP, SILENT_SKIP, SILENT_SKIP, DO, SILENT_SKIP)
+        elif choice == "11":
             sys.exit(0)
         else:
-            print("Invalid choice. Please enter 1-9.")
+            print("Invalid choice. Please enter 1-11.")
 
 if __name__ == "__main__":
     args = sys.argv[1:]
-    if len(args) >= 5:
-        flags = [int(a) for a in args[:5]]
-        run_release(*flags)
-    else:
+    if not args:
         menu()
+    else:
+        if len(args) != 5:
+            print("Error: expected 5 integer flags (0=ask, 1=do, 2=silent-skip).")
+            sys.exit(2)
+        try:
+            flags = [int(a) for a in args]
+        except ValueError:
+            print("Error: all flags must be integers (0, 1, or 2).")
+            sys.exit(2)
+        if any(f not in (SKIP, DO, SILENT_SKIP) for f in flags):
+            print("Error: each flag must be 0, 1, or 2.")
+            sys.exit(2)
+        run_release(*flags, interactive=False)

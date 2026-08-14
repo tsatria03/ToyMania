@@ -1,0 +1,137 @@
+/* input_conf.nvgt - Wrapper class for the input_bind object.
+ * Provides a higher-level interface for managing named action bindings
+ * for keyboard and joystick input, with INI file load/save support.
+ *
+ * NVGT - NonVisual Gaming Toolkit (Legacy)
+ * Copyright (c) 2022-2025 Sam Tupy
+ * https://nvgt.gg
+ * This software is provided "as-is", without any express or implied warranty. In no event will the authors be held liable for any damages arising from the use of this software.
+ * Permission is granted to anyone to use this software for any purpose, including commercial applications, and to alter it and redistribute it freely, subject to the following restrictions:
+ * 1. The origin of this software must not be misrepresented; you must not claim that you wrote the original software. If you use this software in a product, an acknowledgment in the product documentation would be appreciated but is not required.
+ * 2. Altered source versions must be plainly marked as such, and must not be misrepresented as being the original software.
+ * 3. This notice may not be removed or altered from any source distribution.
+*/
+
+class input_conf {
+	private input_bind@ binds;
+
+	input_conf() {
+		@binds = input_bind();
+	}
+
+	// Action management
+
+	void add_action(const string&in action) {
+		binds.add_action(action);
+	}
+
+	void remove_action(const string&in action) {
+		binds.remove_action(action);
+	}
+
+	bool has_action(const string&in action) const {
+		return binds.has_action(action);
+	}
+
+	string[]@ get_actions() const {
+		return binds.get_actions();
+	}
+
+	void clear() {
+		binds.clear();
+	}
+
+	// Keyboard binding
+	// combo can be a single key name like "SPACE" or a chord like "LSHIFT+SPACE".
+
+	void bind_key(const string&in action, const string&in combo, trigger_type trigger = TRIGGER_PRESS) {
+		binds.bind_key(action, combo, trigger);
+	}
+
+	void bind_key(const string&in action, uint key, trigger_type trigger = TRIGGER_PRESS) {
+		binds.bind_key(action, key, trigger);
+	}
+
+	// Removes all combos for the action whose primary key matches.
+	void unbind_key(const string&in action, uint key) {
+		binds.unbind_key(action, key);
+	}
+
+	// Removes a specific combo, e.g. unbind_key("jump", "LSHIFT", KEY_SPACE).
+	void unbind_key(const string&in action, const string&in combo, uint key) {
+		binds.unbind_key(action, combo, key);
+	}
+
+	void clear_keyboard_action(const string&in action) {
+		binds.clear_keyboard_action(action);
+	}
+
+	// Joystick binding
+
+	void bind_joystick_button(const string&in action, int button, trigger_type trigger = TRIGGER_PRESS) {
+		binds.bind_joystick_button(action, button, trigger);
+	}
+
+	void unbind_joystick_button(const string&in action, int button) {
+		binds.unbind_joystick_button(action, button);
+	}
+
+	void clear_joystick_action(const string&in action) {
+		binds.clear_joystick_action(action);
+	}
+
+	void set_joystick(joystick@ j) {
+		binds.set_joystick(j);
+	}
+
+	// State queries
+
+	bool action_pressed(const string&in action) {
+		return binds.action_pressed(action);
+	}
+
+	bool action_down(const string&in action) const {
+		return binds.action_down(action);
+	}
+
+	bool action_released(const string&in action) {
+		return binds.action_released(action);
+	}
+
+	bool action_up(const string&in action) const {
+		return binds.action_up(action);
+	}
+
+	bool action_repeating(const string&in action) {
+		return binds.action_repeating(action);
+	}
+
+	// Checks each binding using its own assigned trigger type.
+	bool action_triggered(const string&in action) {
+		return binds.action_triggered(action);
+	}
+
+	// INI file I/O
+	// Keyboard format: action=KEY  or  action=MOD+KEY  or  action=MOD+KEY:trigger
+	// Joystick format: action=BUTTON_0  or  action=BUTTON_0:trigger
+
+	bool load_keyboard(const string&in path) {
+		return binds.load_keyboard(path);
+	}
+
+	bool save_keyboard(const string&in path) const {
+		return binds.save_keyboard(path);
+	}
+
+	string get_keyboard_action_string(const string&in action) const {
+		return binds.get_keyboard_action_string(action);
+	}
+
+	bool load_joystick(const string&in path) {
+		return binds.load_joystick(path);
+	}
+
+	bool save_joystick(const string&in path) const {
+		return binds.save_joystick(path);
+	}
+}

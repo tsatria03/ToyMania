@@ -669,12 +669,6 @@ alert("errorr", "Unable to restart "+scriptid+"!");
 }
 exit();
 }
-void getver()
-{
-dockver.open("docks/version.txt","rb");
-version=dockver.read();
-dockver.close();
-}
 void setup_keybinds()
 {
 if (!directory_exists(configPath)) directory_create(configPath);
