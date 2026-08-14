@@ -649,7 +649,7 @@ sound_pool@[] pools = {p, pool, alarmpool, ambpool, bulletpool, dartpool, doorpo
         }
     }
 }
-void restart(string appid, string scriptid="tm.nvgt")
+void restart(string appid, string scriptid="../src/tm.nvgt")
 {
 if(SCRIPT_COMPILED)
 {
@@ -661,7 +661,7 @@ alert("errorr", "Unable to restart "+appid+"!");
 }
 else
 {
-bool success=run("c:\\nvgt\\nvgtw.exe", scriptid,false,false);
+bool success=run("c:\\nvgt2\\nvgtw.exe", scriptid,false,false);
 if(!success)
 {
 alert("errorr", "Unable to restart "+scriptid+"!");
