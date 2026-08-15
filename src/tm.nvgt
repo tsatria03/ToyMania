@@ -39,3 +39,94 @@ wait(500);
     mainmenu();
 }
 }
+
+void pause_game()
+{
+boss_timer.pause();
+defense_timer.pause();
+gametimer.pause();
+moveable=false;
+paused=true;
+pause_pools();
+}
+void resume_game()
+{
+boss_timer.resume();
+defense_timer.resume();
+gametimer.resume();
+moveable=true;
+paused=false;
+resume_pools();
+}
+void resetgame()
+{
+    last_played_date = get_date(true, false);
+    last_played_time = get_time(true, false);
+last_level_time = 0;
+level=1;
+money=0;
+collected_keys=0;
+collected_toys=0;
+destroyed_cars=0;
+killed_gards=0;
+killed_thieves=0;
+moved_steps=0;
+session_playtime=0;
+total_collected_toys=0;
+total_collected_keys=0;
+total_killed_gards=0;
+total_killed_thieves=0;
+total_destroyed_cars=0;
+total_moved_steps=0;
+total_playtime=0;
+    for (uint i = 0; i < achievements.length(); i++)
+    {
+        if (achievements[i].isSessionBased or !achievements[i].isSessionBased)
+        {
+            achievements[i].currentTier = 0;
+        }
+}
+}
+void resetpreffs()
+{
+soundcard="Default";
+dlgpack="default";
+menupack="default";
+soundpack="default";
+sound_output_device=1;
+menumusvolume=0;
+master_volume = 0;
+alarmvolume=0;
+heartvolume=0;
+toyambvolume=0;
+toymusvolume=0;
+play_logo=true;
+auto_check_updates=true;
+autorun=true;
+up_and_down=true;
+left_and_right=false;
+home_and_end=false;
+first_letter=false;
+menuwrap=false;
+speak_menu_position=false;
+behind_pitch=true;
+hrtf=true;
+play_ach_scores=false;
+speak_ach_scores=false;
+play_item_gives=false;
+speak_item_collects=false;
+speak_dlg_enter=true;
+speak_menu_loading=true;
+gamcopy=true;
+statscopy=true;
+copexpsounds=true;
+quit_menu=true;
+playcounts=true;
+playlevels=true;
+completesound=true;
+togglesound=true;
+use_sr = true;
+tts.set_voice(0);
+tts.set_rate(0);
+tts.set_volume(100);
+}
