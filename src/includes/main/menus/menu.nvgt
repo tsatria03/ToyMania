@@ -692,27 +692,18 @@ setupmenu();
 string[] weaponNames = {"Bat", "Boot", "Club", "Feat", "Fist", "Hammer", "Knife", "Laser"};
 string[] weaponIds   = {"bat", "boot", "club", "feat", "fist", "hammer", "knife", "laser"};
 string[] weptypes    = {"melee", "melee", "melee", "melee", "melee", "melee", "melee", "melee"};
-int[] damages        = {3, 6, 9, 12, 15, 18, 21, 24};
-int[] horizRanges    = {1, 2, 3, 4, 5, 6, 7, 8};
-int[] vertRanges     = {2, 3, 4, 5, 6, 7, 8, 9};
 if (endless)
 {
 weaponNames.insert_last("Machine Gun");
 weaponIds.insert_last("machine_gun");
 weptypes.insert_last("artillery");
-damages.insert_last(27);
-horizRanges.insert_last(9);
-vertRanges.insert_last(10);
 weaponNames.insert_last("Pistol");
 weaponIds.insert_last("pistol");
 weptypes.insert_last("artillery");
-damages.insert_last(30);
-horizRanges.insert_last(10);
-vertRanges.insert_last(11);
 }
 for (uint i = 0; i < weaponNames.length(); i++)
 {
-string label = weaponNames[i] + ": Attack " + damages[i] + ". Horizontal range " + horizRanges[i] + ". Vertical range " + vertRanges[i] + ".";
+string label = weaponNames[i];
 if (weaponIds[i] == weapontype2)
 label += " (Equipped)";
 m.add_item(label, weaponIds[i] + "|" + weptypes[i]);

@@ -113,14 +113,11 @@ if (current == objname)
 {
 if (block_desc)
 {
-int target = sorted_inv_keys().find(current);
-if (invpos != target)
-{
-invpos = target;
-speak_buffer(objname + " selected.");
-}
-else
-speak_buffer(objname + " is already selected.");
+string[] ik = sorted_inv_keys();
+invpos = ik.find(current);
+double invpan = convert_to_pan(ik.length(), invpos, -25, 25);
+invslot = p.play_stationary_extended(get_sound("misc/player/*inv*"), false, 0, invpan, 0, 100, false);
+speak_buffer(objname + " focused.");
 return;
 }
 if (objname == "ammo_pack")
