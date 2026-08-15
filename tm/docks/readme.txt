@@ -8,16 +8,24 @@ You can equip various weapons, each with different strengths and ranges, to help
 Can you escape before the boss inevitably catches you? Let's find out!
 
 Game modes.
+
 Toy mania has two main games, each with two sub modes, and five difficulty levels ranging from easy to chaos.
+
 The first main game is the toy collector, where you gather toys and survive against various enemies.
+
 Its time trial sub mode is a level based game where you collect toys, survive cars, guards, and a final boss, then find the keys and reach the exit door before the store explodes.
 Its endless arcade sub mode has no final boss and never ends on its own. You survive for as long as you can while the game gets harder over time, earn money to spend at a shop, and pick up items that drop during intense fights.
+
 The second main game is the toy defender, where you protect the store from thieves who try to steal your toys.
+
 Its timed defense sub mode has you collecting as many toys as you can before a time limit runs out. You win if you collect at least 100 toys, and lose if the thieves steal more than you save.
 Its endless defense sub mode lets you defend for as long as you can. The game ends only when the thieves steal too many toys.
+
 Some games and difficulties start locked, and unlock as you play, so you can get comfortable before jumping into the hardest content.
+
 The endless arcade unlocks after you complete three time trial games.
 The toy defender unlocks after you complete five toy collector games, counting either of its sub modes. Once unlocked, its timed defense is available right away, and its endless defense unlocks after you complete three timed defense games.
+
 Within each sub mode, only easy is available at first. Each higher difficulty unlocks after you complete one game on the difficulty just below it, tracked separately for each sub mode.
 A completed game is one you played through to its end, whether you won or lost. Quitting early with the escape key does not count toward unlocks.
 
