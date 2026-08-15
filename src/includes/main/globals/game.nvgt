@@ -472,7 +472,6 @@ p.play_stationary(get_sound("objects/platforms/"+gmt(me.x,me.y)+"/*step*"), fals
 moved_steps+=1;
 total_moved_steps+=1;
 update_achievements();
-writedata();
 movetimer.restart();
 }
 if (!shift_is_down() and controls.action_triggered("move_right") and me.x!=maxx and doormove==false and moveable==true)
@@ -483,7 +482,6 @@ p.play_stationary(get_sound("objects/platforms/"+gmt(me.x,me.y)+"/*step*"), fals
 moved_steps+=1;
 total_moved_steps+=1;
 update_achievements();
-writedata();
 movetimer.restart();
 }
 if (!shift_is_down() and controls.action_triggered("move_down") and me.y!=0 and doormove==false and moveable==true)
@@ -494,7 +492,6 @@ p.play_stationary(get_sound("objects/platforms/"+gmt(me.x,me.y)+"/*step*"), fals
 moved_steps+=1;
 total_moved_steps+=1;
 update_achievements();
-writedata();
 movetimer.restart();
 }
 if (!shift_is_down() and controls.action_triggered("move_up") and me.y!=maxy and doormove==false and moveable==true)
@@ -505,7 +502,6 @@ p.play_stationary(get_sound("objects/platforms/"+gmt(me.x,me.y)+"/*step*"), fals
 moved_steps+=1;
 total_moved_steps+=1;
 update_achievements();
-writedata();
 movetimer.restart();
 }
 if(movetimer.elapsed>=movetime and doormove==false and moveable==true)
@@ -518,7 +514,6 @@ p.play_stationary(get_sound("objects/platforms/"+gmt(me.x,me.y)+"/*step*"), fals
 moved_steps+=1;
 total_moved_steps+=1;
 update_achievements();
-writedata();
 movetimer.restart();
 }
 if (!shift_is_down() and controls.action_triggered("move_right_held") and me.x!=maxx)
@@ -529,7 +524,6 @@ p.play_stationary(get_sound("objects/platforms/"+gmt(me.x,me.y)+"/*step*"), fals
 moved_steps+=1;
 total_moved_steps+=1;
 update_achievements();
-writedata();
 movetimer.restart();
 }
 if (!shift_is_down() and controls.action_triggered("move_down_held") and me.y!=0)
@@ -540,7 +534,6 @@ p.play_stationary(get_sound("objects/platforms/"+gmt(me.x,me.y)+"/*step*"), fals
 moved_steps+=1;
 total_moved_steps+=1;
 update_achievements();
-writedata();
 movetimer.restart();
 }
 if (!shift_is_down() and controls.action_triggered("move_up_held") and me.y!=maxy)
@@ -551,7 +544,6 @@ p.play_stationary(get_sound("objects/platforms/"+gmt(me.x,me.y)+"/*step*"), fals
 moved_steps+=1;
 total_moved_steps+=1;
 update_achievements();
-writedata();
 movetimer.restart();
 }
 }
