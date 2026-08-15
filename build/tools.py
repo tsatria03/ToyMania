@@ -43,7 +43,7 @@ SRC_DIR      = os.path.join(REPO_DIR, "src")                     # entry .nvgt l
 ASSETS_DIR   = os.path.join(REPO_DIR, NVGT_OUT)                  # asset folder (data/docks/sounds); its name == NVGT_OUT
 BUNDLE       = os.path.join(SRC_DIR, NVGT_OUT)                   # nvgt -c (run from src) produces this bundle folder
 VERSION_NVGT = os.path.join(SRC_DIR, "includes", "version.nvgt") # mirror of build/version.txt, read by the running game
-ASSET_FOLDERS = ["data", "docks", "sounds"]                     # copied into the bundle after compile (pragmas were dropped)
+ASSET_FOLDERS = ["data", "docks", "lib", "sounds"]              # copied into the bundle after compile (pragmas were dropped). lib holds the runtime DLLs (nvgt_curl plugin, BASS, phonon, screen-reader libs) plus 7zr.exe/lame.exe, referenced cwd-relative as lib/... (updater, recording)
 
 SKIP = 0
 DO = 1
