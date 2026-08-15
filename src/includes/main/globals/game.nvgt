@@ -113,6 +113,28 @@ bool endless_defense_unlocked() { return timed_defense_completed >= 3; }
 /* Layer 2 difficulty ladder: difficulty diff (gamemod 1..5) is open if it's Easy
 or the player has completed the tier below it in this sub-mode (max_completed >= diff-1). */
 bool difficulty_unlocked(int diff, int max_completed) { return diff <= 1 || max_completed >= diff - 1; }
+/* One-time migration for saves that predate the unlock system. Such saves have
+real play history but no unlock data, so the new gates would wrongly hide modes
+the player already earned. Grant those veterans full access. Genuinely new saves
+(all lifetime stats zero) fall through and follow the normal unlock ramp.
+Idempotent via unlocks_migrated; call once at startup after readdata(). */
+void migrate_unlocks()
+{
+if (unlocks_migrated) return;
+unlocks_migrated = true;
+if (total_moved_steps > 0 || total_playtime > 0 || total_collected_toys > 0)
+{
+time_trial_completed = 100;
+endless_arcade_completed = 100;
+timed_defense_completed = 100;
+endless_defense_completed = 100;
+time_trial_max_difficulty = 5;
+endless_arcade_max_difficulty = 5;
+timed_defense_max_difficulty = 5;
+endless_defense_max_difficulty = 5;
+}
+writedata();
+}
 void toy_game_input()
 {
 if(controls.action_triggered("buffer_top") and paused==false)

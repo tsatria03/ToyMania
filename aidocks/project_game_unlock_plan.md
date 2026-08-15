@@ -7,7 +7,15 @@ metadata:
   originSessionId: 0a768c3e-c5af-4cd5-bb65-ccc32a83039b
 ---
 
-FINALIZED DESIGN as of 2026-08-14. NOT yet implemented — this is the agreed spec to build from. See [[project_game_vision]] for mode structure. Don't implement until the dev gives the go-ahead ([[feedback_confirm_before_implementing]]).
+IMPLEMENTED 2026-08-15 (all 5 sections built; shipped in v5.2). See [[project_game_vision]] for mode structure. This file now doubles as the record of how it was built.
+
+## Implementation status
+- S1 (data): 8 persisted ints in dec.nvgt (`*_completed`, `*_max_difficulty`) + save/load in savefuncts.nvgt. DONE.
+- S2 (increments): `record_game_completion()` in game.nvgt, called from the 5 completion end-states (health death, level-6 escape-fail, endless-defense stolen, timed-defense timer, both door wins in door.nvgt). Not on Escape-quit. DONE.
+- S3 (gating): unlock helpers in game.nvgt (`endless_arcade_unlocked` >=3 TT, `defender_unlocked` >=5 Collector, `endless_defense_unlocked` >=3 TD, `difficulty_unlocked`); `choose_difficulty()` in menu.nvgt (Layer-2 ladder, re-prompts on locked pick); modemenu/ty/ty2 gated. DONE.
+- S4 (veteran migration): `bool unlocks_migrated` + `migrate_unlocks()` in game.nvgt, called in tm.nvgt after readdata(). If a save has history (`total_moved_steps>0 || total_playtime>0 || total_collected_toys>0`) but no unlock data, it seeds all `*_completed=100` and `*_max_difficulty=5` so pre-update veterans keep full access; genuinely new saves ramp normally. Idempotent via the flag. DONE.
+- S5 (docks): added a "Game modes" section to tm/docks/readme.txt (the readme had none) covering the 2 games, 4 sub-modes, and all unlock rules; plus 3 changelog entries under New in 5.2. DONE.
+NOTE: `choose_difficulty()` needs a trailing unreachable `return -1;` after its `while(true)` — see [[project_angelscript_while_true_return]].
 
 ## What gets locked
 Lock layers:

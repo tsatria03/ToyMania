@@ -85,6 +85,7 @@ last_played_time = sd.read_string("last_played_time");
     if (sd.d.exists("endless_arcade_max_difficulty")) endless_arcade_max_difficulty = sd.read_int("endless_arcade_max_difficulty");
     if (sd.d.exists("timed_defense_max_difficulty")) timed_defense_max_difficulty = sd.read_int("timed_defense_max_difficulty");
     if (sd.d.exists("endless_defense_max_difficulty")) endless_defense_max_difficulty = sd.read_int("endless_defense_max_difficulty");
+    if (sd.d.exists("unlocks_migrated")) unlocks_migrated = sd.read_bool("unlocks_migrated");
     for (uint i = 0; i < achievements.length(); i++)
     {
         string id = "ach_tier_" + (achievements[i].isSessionBased ? "session_" : "lifetime_") + achievements[i].name;
@@ -125,6 +126,7 @@ sd.add("total_killed_thieves", total_killed_thieves);
     sd.add("endless_arcade_max_difficulty", endless_arcade_max_difficulty);
     sd.add("timed_defense_max_difficulty", timed_defense_max_difficulty);
     sd.add("endless_defense_max_difficulty", endless_defense_max_difficulty);
+    sd.add("unlocks_migrated", unlocks_migrated);
     for (uint i = 0; i < achievements.length(); i++)
     {
         string id = "ach_tier_" + (achievements[i].isSessionBased ? "session_" : "lifetime_") + achievements[i].name;

@@ -1,9 +1,0 @@
-Compilation error:
-file: C:/Users/tonys/OneDrive/Documents/github/tsatria03/games/ToyMania/src/includes/main/menus/menu.nvgt
-line: 272 (1)
-INFO: Compiling int choose_difficulty(int, string)
-
-file: C:/Users/tonys/OneDrive/Documents/github/tsatria03/games/ToyMania/src/includes/main/menus/menu.nvgt
-line: 273 (1)
-ERROR: Not all paths return a value
-

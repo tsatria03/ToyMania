@@ -1,4 +1,6 @@
 New in 5.2.
+Made it so players who were already playing prior to the game unlocking system now keep full access to everything, and don't have to unlock anything again.
+Added a game unlock system. New players now start with just the time trial mode on easy, and unlock the other games, modes, and difficulties by completing games.
 Reworded the timed defense mode description so it correctly explains that the game plays out the full timer before deciding the outcome, rather than ending the moment you collect enough toys or the thieves steal too many.
 Made it so the weapons menu now speaks only the weapon name, instead of also reading out its attack damage and range stats.
 Made it so selecting a usable item in the inventory menu during the endless toy collector game now moves your inventory cycle focus to that item instead of using it right away, letting you use it in game with the use key.

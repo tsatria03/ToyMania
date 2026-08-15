@@ -9,6 +9,7 @@ load_session_achievements();
 if (!directory_exists(savePath)) directory_create(savePath);
 if (!directory_exists(statsPath)) directory_create(statsPath);
 readdata();
+migrate_unlocks();
 readpreffs();
 sound_global_hrtf=hrtf;
 apply_pitch_pool_settings();

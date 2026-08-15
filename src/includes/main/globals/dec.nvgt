@@ -50,6 +50,8 @@ int defense_toy_target = 100;
 Per sub-mode: number of completed games, and the highest difficulty (gamemod 1..5, 0=none) ever completed. */
 int time_trial_completed=0, endless_arcade_completed=0, timed_defense_completed=0, endless_defense_completed=0;
 int time_trial_max_difficulty=0, endless_arcade_max_difficulty=0, timed_defense_max_difficulty=0, endless_defense_max_difficulty=0;
+/* One-shot flag: has the pre-update veteran unlock migration already run for this save? */
+bool unlocks_migrated=false;
 int bossespawntime=5000, objspawntime=2500, carspawntime=1000, gardspawntime=500, keyspawntime=250, toyspawntime=125, thievespawntime=500;
 int boss_time_limit = 90000;
 int defense_time_limit = 180000;
