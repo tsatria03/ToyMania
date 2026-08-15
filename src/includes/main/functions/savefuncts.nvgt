@@ -77,6 +77,14 @@ last_played_time = sd.read_string("last_played_time");
 {
         total_playtime = sd.read_int64("total_playtime");
     }
+    if (sd.d.exists("time_trial_completed")) time_trial_completed = sd.read_int("time_trial_completed");
+    if (sd.d.exists("endless_arcade_completed")) endless_arcade_completed = sd.read_int("endless_arcade_completed");
+    if (sd.d.exists("timed_defense_completed")) timed_defense_completed = sd.read_int("timed_defense_completed");
+    if (sd.d.exists("endless_defense_completed")) endless_defense_completed = sd.read_int("endless_defense_completed");
+    if (sd.d.exists("time_trial_max_difficulty")) time_trial_max_difficulty = sd.read_int("time_trial_max_difficulty");
+    if (sd.d.exists("endless_arcade_max_difficulty")) endless_arcade_max_difficulty = sd.read_int("endless_arcade_max_difficulty");
+    if (sd.d.exists("timed_defense_max_difficulty")) timed_defense_max_difficulty = sd.read_int("timed_defense_max_difficulty");
+    if (sd.d.exists("endless_defense_max_difficulty")) endless_defense_max_difficulty = sd.read_int("endless_defense_max_difficulty");
     for (uint i = 0; i < achievements.length(); i++)
     {
         string id = "ach_tier_" + (achievements[i].isSessionBased ? "session_" : "lifetime_") + achievements[i].name;
@@ -109,6 +117,14 @@ sd.add("total_killed_thieves", total_killed_thieves);
     sd.add("total_destroyed_cars", total_destroyed_cars);
     sd.add("total_moved_steps", total_moved_steps);
     sd.add("total_playtime", total_playtime);
+    sd.add("time_trial_completed", time_trial_completed);
+    sd.add("endless_arcade_completed", endless_arcade_completed);
+    sd.add("timed_defense_completed", timed_defense_completed);
+    sd.add("endless_defense_completed", endless_defense_completed);
+    sd.add("time_trial_max_difficulty", time_trial_max_difficulty);
+    sd.add("endless_arcade_max_difficulty", endless_arcade_max_difficulty);
+    sd.add("timed_defense_max_difficulty", timed_defense_max_difficulty);
+    sd.add("endless_defense_max_difficulty", endless_defense_max_difficulty);
     for (uint i = 0; i < achievements.length(); i++)
     {
         string id = "ach_tier_" + (achievements[i].isSessionBased ? "session_" : "lifetime_") + achievements[i].name;
