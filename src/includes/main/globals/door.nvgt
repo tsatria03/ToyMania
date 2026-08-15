@@ -202,6 +202,7 @@ if (gamcopy == true)
         }
     }
 }
+record_game_completion();
 writedata();
 mainmenu();
 }

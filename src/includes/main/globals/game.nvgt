@@ -71,6 +71,41 @@ gametimer.restart();
 boss_timer.restart();
 defense_timer.restart();
 }
+/* Records one completed game for the CURRENT sub-mode: bumps its completion
+count and, if this difficulty beats the old best, its highest-difficulty.
+Call ONLY from real end-states (win/loss/timer-out/stolen-too-many), never
+from the Escape-quit path. Reads store_defense/endless/defense_timed, so call
+it before any end-state handler resets those flags. Drives the unlock gates. */
+void record_game_completion()
+{
+if (!store_defense)
+{
+if (!endless)
+{
+time_trial_completed++;
+if (gamemod > time_trial_max_difficulty) time_trial_max_difficulty = gamemod;
+}
+else
+{
+endless_arcade_completed++;
+if (gamemod > endless_arcade_max_difficulty) endless_arcade_max_difficulty = gamemod;
+}
+}
+else
+{
+if (defense_timed)
+{
+timed_defense_completed++;
+if (gamemod > timed_defense_max_difficulty) timed_defense_max_difficulty = gamemod;
+}
+else
+{
+endless_defense_completed++;
+if (gamemod > endless_defense_max_difficulty) endless_defense_max_difficulty = gamemod;
+}
+}
+writedata();
+}
 void toy_game_input()
 {
 if(controls.action_triggered("buffer_top") and paused==false)
@@ -933,6 +968,7 @@ pool.play_stationary(get_sound("misc/store/*dest_medium*"), false);
 }
     if (boss_timer.elapsed > boss_time_limit-1000)
     {
+record_game_completion();
 if (heartbeat_playing)
 {
     heartpool.destroy_sound(heartslot);
@@ -1118,6 +1154,7 @@ if (health > heartbeat_threshold and heartbeat_playing)
 }
 if (health <= 0)
 {
+record_game_completion();
 if (heartbeat_playing)
 {
     heartpool.destroy_sound(heartslot);
@@ -1227,6 +1264,7 @@ toyspawntimer.restart();
 }
 if (store_defense and endless and !paused and stolen_toys > max_stolen_toys)
 {
+    record_game_completion();
     store_defense = false;
     thievespawn = false;
     toyspawn = false;
@@ -1282,6 +1320,7 @@ if (store_defense and defense_timed and !paused)
 {
     if (defense_timer.elapsed >= defense_time_limit)
     {
+        record_game_completion();
         store_defense = false;
         thievespawn = false;
         toyspawn = false;
