@@ -316,51 +316,11 @@ speak((endless ? "loading endless arcade: difficulty " : "loading time trial: di
 }
 m.fade_music();
 dlgplay(get_sound("misc/game/*launch*"));
-last_level_time = 0;
-level = 1;
-money = 0;
-collected_toys = 0;
-collected_keys = 0;
-killed_gards = 0;
-destroyed_cars = 0;
-moved_steps = 0;
-session_playtime = 0;
-for (uint i = 0; i < achievements.length(); i++)
-{
-if (achievements[i].isSessionBased)
-achievements[i].currentTier = 0;
-}
-gametimer.restart();
-int base = endless ? 10000 : 1000;
-int bonus = endless ? 2500 : 250;
-int added = bonus * (gamemod - 1);
-health = base + added;
-maxhealth = base + added;
-storehealth = base + added;
-storemaxhealth = base + added;
-clear_all_buffers();
-clear_inv();
-destroy_all_healzones();
-destroy_all_doors();
+reset_game_state();
 me.x = endless ? 50 : 25;
 me.y = endless ? 50 : 25;
 maxx = endless ? 100 : 50;
 maxy = endless ? 100 : 50;
-toynum = 20;
-alarm_started = false;
-countdown_started = false;
-small_storedest = false;
-medium_storedest = false;
-bossdefeated = false;
-bossespawn = false;
-carspawn = false;
-cardest = false;
-gardspawn = false;
-keydest = false;
-keyspawn = false;
-objdest = false;
-objspawn = false;
-toydest = false;
 toyspawn = true;
 reset_weapons();
 toygame();
@@ -397,7 +357,6 @@ return;
 gamemod = string_to_int(diffchoice);
 endless = (mode == "endless");
 max_stolen_toys = max(10, 60 - (gamemod * 10));
-defense_timed = (mode == "timed");
 defense_time_limit = max(60000, 180000 - ((gamemod - 1) * 30000));
 if (speak_menu_loading)
 {
@@ -406,27 +365,14 @@ speak((endless ? "loading endless defense: difficulty " : "loading time defense:
 }
 m.fade_music();
 dlgplay(get_sound("misc/game/*launch*"));
-collected_toys=0;
-killed_thieves=0;
-moved_steps = 0;
-stolen_toys = 0;
-    for (uint i = 0; i < achievements.length(); i++)
-    {
-        if (achievements[i].isSessionBased)
-        {
-            achievements[i].currentTier = 0;
-        }
-    }
-gametimer.restart();
-clear_all_buffers();
-clear_inv();
+reset_game_state();
+defense_timed = (mode == "timed");
 me.x=25;
 me.y=25;
 maxx=50;
 maxy=50;
 store_defense=true;
 thievespawn=true;
-toydest = false;
 toyspawn=true;
 reset_weapons();
 defense_timer.restart();

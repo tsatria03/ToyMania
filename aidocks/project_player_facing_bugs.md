@@ -7,7 +7,11 @@ metadata:
   originSessionId: 0a768c3e-c5af-4cd5-bb65-ccc32a83039b
 ---
 
-Player-facing bugs the dev is aware of but has chosen NOT to fix yet. Verify each (re-locate by symbol) before acting; don't fix unless asked ([[feedback_confirm_before_implementing]]). Internal/code-level bugs live in [[project_deferred_code_bugs]].
+STATUS: FIXED 2026-08-14, shipped in v5.2 (changelog + build/version.txt bumped). Kept as a record of the cross-mode state-bleed class and the shared-reset design that fixes it. Internal/code-level bugs live in [[project_deferred_code_bugs]].
+
+FIX APPLIED: added a shared `reset_game_state()` helper at the top of `src/includes/main/globals/game.nvgt` that destroys every entity type, resets all cross-mode flags + counters + spawn caps to baseline, and sets full health (scaled by endless+gamemod, which callers set first). Both menu launchers in `menu.nvgt` now call it and then re-enable only their own mode's bits (collector: positions + `toyspawn`; defender: `defense_timed` + positions + `store_defense` + `thievespawn` + `toyspawn`). Belt-and-suspenders: all level-progression blocks and the level-6 store-explosion block in `game.nvgt` are now gated on `!store_defense` (and the endless level-up on `!store_defense`). The in-game "play again"/quit restart paths were left as-is (they already reset thoroughly and replay the same mode); a future cleanup could route them through `reset_game_state()` too, to fully retire the drift risk.
+
+--- Original investigation notes (pre-fix) below ---
 
 ## Cross-mode state bleed between toy collector and toy defender
 

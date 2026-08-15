@@ -1,3 +1,7 @@
+New in 5.2.
+Fixed a bug where leftover enemies, progress, and events from one game could bleed into another when starting a new game from the menu.
+Fixed a bug where thieves from the toy defender game could carry over into the toy collector game and keep stealing your toys.
+Fixed a bug where starting the toy defender game after playing the toy collector could cause the store to take damage and explode, ending your game with the collector's game over screen even though you were playing a different game mode.
 New in 5.1.
 Fixed a bug where the recording menu could attempt to start recording with an invalid or missing device, which could later cause a failed to stop recording error. The menu now speaks no recording devices found and closes if no valid devices are available, and blocks the start button with an error if no device is selected.
 Fixed a bug where pressing escape after saving a recording required the user to press the same key multiple times to exit the recording settings menu.

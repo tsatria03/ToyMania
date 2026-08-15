@@ -1,3 +1,76 @@
+/* Clears every trace of a prior session or mode so the next game starts clean.
+Both menu launchers (and the in-game restarts) call this, then re-enable only
+the flags their own mode needs. Keeping the full reset in one place is what
+stops collector and defender state from bleeding into each other. Reads endless
+and gamemod, so callers must set those before calling. */
+void reset_game_state()
+{
+destroy_all_bosses();
+destroy_all_healzones();
+destroy_all_bullets();
+destroy_all_cars();
+destroy_all_darts();
+destroy_all_gards();
+destroy_all_doors();
+destroy_all_keys();
+destroy_all_objs();
+destroy_all_toys();
+destroy_all_thieves();
+clear_all_buffers();
+clear_inv();
+last_level_time = 0;
+level = 1;
+money = 0;
+collected_toys = 0;
+collected_keys = 0;
+killed_gards = 0;
+killed_thieves = 0;
+destroyed_cars = 0;
+stolen_toys = 0;
+moved_steps = 0;
+session_playtime = 0;
+for (uint i = 0; i < achievements.length(); i++)
+{
+if (achievements[i].isSessionBased)
+achievements[i].currentTier = 0;
+}
+store_defense = false;
+defense_timed = false;
+bossdefeated = false;
+bossespawn = false;
+carspawn = false;
+cardest = false;
+gardspawn = false;
+keydest = false;
+keyspawn = false;
+objdest = false;
+objspawn = false;
+thievespawn = false;
+toydest = false;
+toyspawn = false;
+alarm_started = false;
+countdown_started = false;
+small_storedest = false;
+medium_storedest = false;
+heartbeat_playing = false;
+bossnum = 1;
+carnum = 5;
+gardnum = 10;
+keynum = 15;
+objnum = 15;
+toynum = 20;
+thiefnum = 10;
+int base = endless ? 10000 : 1000;
+int bonus = endless ? 2500 : 250;
+int added = bonus * (gamemod - 1);
+health = base + added;
+maxhealth = base + added;
+storehealth = base + added;
+storemaxhealth = base + added;
+gametimer.restart();
+boss_timer.restart();
+defense_timer.restart();
+}
 void toy_game_input()
 {
 if(controls.action_triggered("buffer_top") and paused==false)
@@ -757,14 +830,14 @@ toyspawntimer.restart();
 }
 }
 }
-if(!endless and level==1 and gametimer.elapsed>=1000*60)
+if(!endless and !store_defense and level==1 and gametimer.elapsed>=1000*60)
 {
 if(playlevels==true) p.play_stationary(get_sound("misc/player/*lev*"), false);
 level=2;
 carspawn=true;
 toynum=25;
 }
-if(!endless and level==2 and gametimer.elapsed>=1000*120)
+if(!endless and !store_defense and level==2 and gametimer.elapsed>=1000*120)
 {
 if(playlevels==true) p.play_stationary(get_sound("misc/player/*lev*"), false);
 level=3;
@@ -773,7 +846,7 @@ carnum=10;
 toydest=true;
 toynum=30;
 }
-if(!endless and level==3 and gametimer.elapsed>=1000*180)
+if(!endless and !store_defense and level==3 and gametimer.elapsed>=1000*180)
 {
 if(playlevels==true) p.play_stationary(get_sound("misc/player/*lev*"), false);
 level=4;
@@ -782,14 +855,14 @@ cardest=false;
 gardspawn=true;
 toynum=35;
 }
-if(!endless and level==4 and gametimer.elapsed>=1000*240)
+if(!endless and !store_defense and level==4 and gametimer.elapsed>=1000*240)
 {
 if(playlevels==true) p.play_stationary(get_sound("misc/player/*lev*"), false);
 level=5;
 gardnum=20;
 toynum=50;
 }
-if (!endless && level == 5 && gametimer.elapsed >= 1000 * 300)
+if (!endless && !store_defense && level == 5 && gametimer.elapsed >= 1000 * 300)
 {
 mustype="bossmus";
 muspool.destroy_sound(toytrackslot);
@@ -816,7 +889,7 @@ countdown_started = false;
 small_storedest = false;
 medium_storedest = false;
 }
-if (!endless && level == 6)
+if (!endless && !store_defense && level == 6)
 {
     if (!alarm_started && boss_timer.elapsed >= 0)
     {
@@ -966,7 +1039,7 @@ reset_weapons();
 mainmenu();
 }
 }
-if (endless and gametimer.elapsed >= last_level_time + (1000 * 60))
+if (endless and !store_defense and gametimer.elapsed >= last_level_time + (1000 * 60))
 {
     if(playlevels==true) p.play_stationary(get_sound("misc/player/*lev*"), false);
 p.play_stationary(get_sound("misc/player/*money*"),false);

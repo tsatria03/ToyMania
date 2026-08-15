@@ -15,7 +15,7 @@ The `[[name]]` links in `CLAUDE.md` and across these memories resolve to `aidock
 - [Repo hygiene](project_repo_hygiene.md) — .gitattributes CRLF enforcement + binary rules; releases/ gitignored; stale .claude/ removed; CLAUDE.md + aidocks/ committed.
 - [Engine pinned to nvgt2](project_engine_pinned_nvgt2.md) — runs on the legacy fork at C:\nvgt2 (BASS); upstream C:\nvgt (miniaudio) incompatible; don't target it or suggest upgrading.
 - [Deferred code bugs](project_deferred_code_bugs.md) — internal bugs: toygame() spawner `return` crash-out (FIXED) and the wider random_string() empty-array crash on find_directories spawn sites, hardened helper + 7 guarded NPC/door spawners (FIXED 2026-08-14); per-step writedata() disk churn removed, now relies on the 5s timer + event saves (FIXED 2026-08-14). All tracked internal bugs fixed.
-- [Player-facing bugs](project_player_facing_bugs.md) — deferred cross-mode state bleed between collector and defender: leftover level-6 store explosion / game-over dialog in defender, and defender thieves stealing toys in the collector; root cause = partial/asymmetric menu-launcher resets + level-6 block not gated on store_defense.
+- [Player-facing bugs](project_player_facing_bugs.md) — cross-mode state bleed between collector and defender (FIXED, shipped v5.2): fixed via a shared reset_game_state() helper both menu launchers call + gating the level/level-6 blocks on !store_defense; file kept as a record of the class and the shared-reset design.
 
 ## NVGT / AngelScript gotchas — these cause compile failures or subtle bugs
 - [AngelScript braceless if](project_angelscript_braceless_if.md) — a braceless if/else governs one statement; a second orphans the else → compile error.
