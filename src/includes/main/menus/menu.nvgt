@@ -671,16 +671,14 @@ int mres = m.run();
 string choice = m.get_item_id(mres);
 if (mres == -1)
 {
-speak("Canceled");
+speak("canceled");
 boss_timer.resume();
 gametimer.resume();
 return;
 }
 if (choice == "")
 {
-speak("Canceled");
-boss_timer.resume();
-gametimer.resume();
+invmenu();
 return;
 }
 useitem(choice, true);

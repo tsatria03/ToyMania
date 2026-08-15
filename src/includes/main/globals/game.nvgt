@@ -265,7 +265,7 @@ if(controls.action_triggered("item_use") and usetimer.elapsed>=usetime)
 {
 usetimer.restart();
 if (inv.get_keys().length()>0 and invpos<inv.get_size())
-useitem(inv.get_keys()[invpos]);
+useitem(sorted_inv_keys()[invpos]);
 else
 speak_buffer("No item in focus.");
 }

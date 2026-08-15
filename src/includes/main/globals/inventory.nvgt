@@ -20,6 +20,15 @@ void clear_inv()
 {
 inv.delete_all();
 }
+/* The inventory cursor (invpos) indexes the alphabetically sorted key list,
+so every place that turns invpos back into an item must sort the same way.
+inv.get_keys() alone returns dictionary order, which does not match. */
+string[] sorted_inv_keys()
+{
+string[] k = inv.get_keys();
+k.sort_ascending();
+return k;
+}
 void cycle_inv(int dir)
 {
     if (inv.get_size() == 0)
@@ -28,8 +37,7 @@ void cycle_inv(int dir)
         speak_buffer("empty");
         return;
     }
-    string[] keys = inv.get_keys();
-    keys.sort_ascending();
+    string[] keys = sorted_inv_keys();
     if (dir == 1)
         invpos += 1;
     else
@@ -55,7 +63,7 @@ speak_buffer("No items");
 }
 else
 {
-invpos = inv.get_keys().find(current);
+invpos = sorted_inv_keys().find(current);
 string[] keycats = {"common", "other"};
 for (uint i = 0; i < keycats.length(); i++)
 {
@@ -103,6 +111,18 @@ for (uint j = 0; j < objtypes.length(); j++)
 string objname = objtypes[j];
 if (current == objname)
 {
+if (block_desc)
+{
+int target = sorted_inv_keys().find(current);
+if (invpos != target)
+{
+invpos = target;
+speak_buffer(objname + " selected.");
+}
+else
+speak_buffer(objname + " is already selected.");
+return;
+}
 if (objname == "ammo_pack")
 {
 double missing_ammo = max(0, max_reserved_ammo - reserved_ammo);
@@ -234,7 +254,7 @@ return "";
 }
 else
 {
-string current=inv.get_keys()[invpos];
+string current=sorted_inv_keys()[invpos];
 return current;
 }
 }

@@ -1,5 +1,6 @@
 ####These are the things that need to be finished for future versions of the game.
 
+****Unfinished. Lock game modes behind play time counters.
 ****Unfinished. Bring back the learn sounds menu.
 ****Unfinished. Make a new stelf mode where you have to collect toys before camera's catch you steeling.
 ****Unfinished. Add a mode where you get to watch various enemies fight each other.

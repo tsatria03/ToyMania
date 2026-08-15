@@ -1,4 +1,6 @@
 New in 5.2.
+Made it so selecting a usable item in the inventory menu during the endless toy collector game now moves your inventory cycle focus to that item instead of using it right away, letting you use it in game with the use key.
+Fixed a bug where reading a collected item's description with the inventory cycle keys could announce the wrong item's description, because the read used a different item order than the one you were cycling through.
 Fixed a bug where leftover enemies, progress, and events from one game could bleed into another when starting a new game from the menu.
 Fixed a bug where thieves from the toy defender game could carry over into the toy collector game and keep stealing your toys.
 Fixed a bug where starting the toy defender game after playing the toy collector could cause the store to take damage and explode, ending your game with the collector's game over screen even though you were playing a different game mode.

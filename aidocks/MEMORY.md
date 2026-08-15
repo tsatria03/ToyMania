@@ -24,6 +24,9 @@ The `[[name]]` links in `CLAUDE.md` and across these memories resolve to `aidock
 - [NVGT sound preload cache](project_nvgt_sound_preload_cache.md) — sound.load caches by filename; reusing a name for changed audio replays the old clip; use a fresh name or allow_preloads=false.
 - [Sound device indexing](project_sound_device_indexing.md) — device list is index 0 "No sound", 1 "Default", 2+ named; don't add a synthetic Default item in the picker.
 
+## Gameplay systems detail
+- [Inventory sorted cursor](project_inventory_sorted_cursor.md) — invpos indexes the ALPHABETICALLY SORTED key list; never index inv.get_keys() (dictionary order) with invpos directly — use sorted_inv_keys(). Fixed the wrong-description-on-enter bug (FIXED 2026-08-14).
+
 ## Feedback — how the dev wants you to work
 - [Confirm before implementing](feedback_confirm_before_implementing.md) — a design discussion or any `?` is a request for a plan, not a green light to edit; wait for explicit go-ahead.
 - [Ask one question at a time](feedback_ask_one_question_at_a_time.md) — surface ONE question per turn and wait; don't batch a numbered list.
