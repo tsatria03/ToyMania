@@ -610,6 +610,7 @@ else
     if (endless)
     {
         string[] doortype=find_directories("sounds/"+soundpack+"/objects/doors/*");
+        if (doortype.length() > 0)
         spawn_door(random(50, 100), random(50, 100), 0, 0, random(100,200), random(20,40), random_string(doortype));
     }
 }
@@ -700,14 +701,20 @@ if (!store_defense and get_total_entities() < max_entities)
 if(bossespawntimer.elapsed>=bossespawntime and bosses.length()<bossnum and bossespawn==true and !bossdefeated and !endless)
 {
 string[] bosstype=find_directories("sounds/"+soundpack+"/npc/bosses/*");
+if (bosstype.length() > 0)
+{
 spawn_boss(random(0,maxx), random(0,maxy), random(100*gamemod,200*gamemod), random(50*gamemod,100*gamemod), random(500/gamemod,1000/gamemod), random(5000/gamemod,10000/gamemod), random(1000/gamemod,2000/gamemod), random(10000/gamemod,20000/gamemod), random(20000/gamemod,40000/gamemod), random_string(bosstype));
 bossespawntimer.restart();
+}
 }
 if(carspawntimer.elapsed>=carspawntime and cars.length()<carnum and carspawn==true)
 {
 string[] cartype=find_directories("sounds/"+soundpack+"/npc/cars/*");
+if (cartype.length() > 0)
+{
 spawn_car(random(0,maxx), random(0,maxy), random(0,1), random(0,1), random(5*gamemod,10*gamemod), random(100/gamemod,500/gamemod), random_string(cartype), cardest);
 carspawntimer.restart();
+}
 }
 if(gardspawntimer.elapsed>=gardspawntime and gards.length()<gardnum and gardspawn==true)
 {
@@ -715,47 +722,47 @@ destroy_all_bullets();
 if(!endless) destroy_all_cars();
 destroy_all_darts();
 string[] gardtype=find_directories("sounds/"+soundpack+"/npc/guards/*");
+if (gardtype.length() > 0)
+{
 spawn_gard(random(0,maxx), random(0,maxy), random(10*gamemod,20*gamemod), random(5*gamemod,10*gamemod), random(250/gamemod,500/gamemod), random(500/gamemod,1000/gamemod), random_string(gardtype));
 gardspawntimer.restart();
+}
 }
 if(keyspawntimer.elapsed>=keyspawntime and keys.length()<keynum and keyspawn==true)
 {
 string[] keycats = {"common", "other"};
 string keycat = random_string(keycats);
 string[] keytypes = find_directories("sounds/" + soundpack + "/equipments/items/normal/keys/" + keycat + "/*");
-if (keytypes.length() == 0)
+if (keytypes.length() > 0)
 {
-return;
-}
 string keyname = random_string(keytypes);
 spawn_key(random(0,maxx), random(0,maxy), random(2500/gamemod,5000/gamemod), keycat, keyname, keydest);
 keyspawntimer.restart();
+}
 }
 if(objspawntimer.elapsed>=objspawntime and objs.length()<objnum and objspawn==true and endless)
 {
 string[] objcats = {"common", "other"};
 string objcat = random_string(objcats);
 string[] objtypes = find_directories("sounds/" + soundpack + "/equipments/items/endless/" + objcat + "/*");
-if (objtypes.length() == 0)
+if (objtypes.length() > 0)
 {
-return;
-}
 string objname = random_string(objtypes);
 spawn_obj(random(0,maxx), random(0,maxy), random(3000/gamemod,6000/gamemod), objcat, objname, objdest);
 objspawntimer.restart();
+}
 }
 if(toyspawntimer.elapsed>=toyspawntime and toys.length()<toynum and toyspawn==true)
 {
 string[] toycats = {"common", "other"};
 string toycat = random_string(toycats);
 string[] toytypes = find_directories("sounds/" + soundpack + "/equipments/items/normal/toys/" + toycat + "/*");
-if (toytypes.length() == 0)
+if (toytypes.length() > 0)
 {
-return;
-}
 string toyname = random_string(toytypes);
 spawn_toy(random(0,maxx), random(0,maxy), random(5000/gamemod,10000/gamemod), toycat, toyname, toydest);
 toyspawntimer.restart();
+}
 }
 }
 if(!endless and level==1 and gametimer.elapsed>=1000*60)
@@ -803,6 +810,7 @@ destroy_all_darts();
     destroy_all_gards();
     destroy_all_toys();
 string[] doortype=find_directories("sounds/"+soundpack+"/objects/doors/*");
+    if (doortype.length() > 0)
     spawn_door(random(25, 50), random(25, 50), 0, 0, random(100, 200), random(10,20), random_string(doortype));
     carspawn = false;
     gardspawn = false;
@@ -1133,18 +1141,23 @@ if (store_defense and get_total_entities() < max_entities)
 if(thievespawntimer.elapsed>=thievespawntime and thieves.length()<thiefnum and thievespawn==true and paused==false)
 {
 string[] thieftype=find_directories("sounds/"+soundpack+"/npc/thieves/*");
+if (thieftype.length() > 0)
+{
 spawn_thief(random(0,maxx), random(0,maxy), random(5*gamemod,10*gamemod), random(250/gamemod,750/gamemod), random_string(thieftype));
 thievespawntimer.restart();
+}
 }
 if(toyspawntimer.elapsed>=toyspawntime and toys.length()<toynum and toyspawn==true and paused==false)
 {
 string[] toycats = {"common", "other"};
 string toycat = random_string(toycats);
 string[] toytypes = find_directories("sounds/" + soundpack + "/equipments/items/normal/toys/" + toycat + "/*");
-if (toytypes.length() == 0) return;
+if (toytypes.length() > 0)
+{
 string toyname = random_string(toytypes);
 spawn_toy(random(0,maxx), random(0,maxy), random(5000/gamemod,10000/gamemod), toycat, toyname, toydest);
 toyspawntimer.restart();
+}
 }
 }
 if (store_defense and endless and !paused and stolen_toys > max_stolen_toys)

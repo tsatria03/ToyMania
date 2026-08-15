@@ -426,6 +426,7 @@ return result;
 }
 string random_string(string[] array)
 {
+if (array.length() == 0) return "";
 string retval=array[random(0,array.length()-1)];
 return retval;
 }

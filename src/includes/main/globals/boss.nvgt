@@ -53,6 +53,7 @@ if(bosses[i].launchtimer.elapsed>=bosses[i].launchtime and bosses[i].launchable=
 {
 bosses[i].launchsound=bosspool.play_2d(get_sound("npc/bosses/"+bosses[i].bosstype+"/*launch*"), me.x, me.y, bosses[i].bossx, bosses[i].bossy, false);
 string[] gardtype=find_directories("sounds/"+soundpack+"/npc/guards/*");
+if (gardtype.length() > 0)
 spawn_gard(bosses[i].bossx-random(1,5), bosses[i].bossy-random(1,5), random(20*gamemod,40*gamemod), random(10*gamemod,20*gamemod), random(100/gamemod,200/gamemod), random(250/gamemod,500/gamemod), random_string(gardtype));
 bosses[i].launchtimer.restart();
 }
