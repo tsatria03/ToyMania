@@ -329,7 +329,7 @@ if (gamem2 == "ty2")
 {
 setupmenu();
 m.add_item("Endless defense. This mode lets you play for as long as you can survive. Defend the store while thieves try to steal your most precious toys. The game will end if they steal too many of them.", "endless");
-m.add_item("Timed defense. This is a timed based mode where you must protect the store for a limited time by collecting enough toys while stopping thieves from stealing them. The game will end if you successfully meet the expected collection goal before the time runs out, or if they end up stealing more toys than you're able to save in total.", "timed");
+m.add_item("Timed defense. This is a time based mode where you must protect the store by collecting as many toys as you can while stopping thieves from stealing them. You keep playing until the time runs out. When it does, you win if you've collected at least 100 toys. Otherwise, you lose if the thieves stole more toys than you saved, or simply survive with your final results.", "timed");
 m.add_item("Back", "back");
 m.intro_text = "Choose the mode you'd like to use for this game.";
 int gres = m.run();

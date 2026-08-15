@@ -1,4 +1,5 @@
 New in 5.2.
+Reworded the timed defense mode description so it correctly explains that the game plays out the full timer before deciding the outcome, rather than ending the moment you collect enough toys or the thieves steal too many.
 Made it so the weapons menu now speaks only the weapon name, instead of also reading out its attack damage and range stats.
 Made it so selecting a usable item in the inventory menu during the endless toy collector game now moves your inventory cycle focus to that item instead of using it right away, letting you use it in game with the use key.
 Fixed a bug where reading a collected item's description with the inventory cycle keys could announce the wrong item's description, because the read used a different item order than the one you were cycling through.
