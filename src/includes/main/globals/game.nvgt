@@ -106,6 +106,13 @@ if (gamemod > endless_defense_max_difficulty) endless_defense_max_difficulty = g
 }
 writedata();
 }
+/* Sub-game unlock checks (Layer 0 / Layer 1). See [[project_game_unlock_plan]]. */
+bool endless_arcade_unlocked() { return time_trial_completed >= 3; }
+bool defender_unlocked() { return (time_trial_completed + endless_arcade_completed) >= 5; }
+bool endless_defense_unlocked() { return timed_defense_completed >= 3; }
+/* Layer 2 difficulty ladder: difficulty diff (gamemod 1..5) is open if it's Easy
+or the player has completed the tier below it in this sub-mode (max_completed >= diff-1). */
+bool difficulty_unlocked(int diff, int max_completed) { return diff <= 1 || max_completed >= diff - 1; }
 void toy_game_input()
 {
 if(controls.action_triggered("buffer_top") and paused==false)

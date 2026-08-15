@@ -265,11 +265,47 @@ if (gamem == "back")
 mainmenu();
 }
 }
+/* Builds the difficulty menu with the Layer-2 ladder for one sub-mode. max_completed
+is that sub-mode's highest difficulty completed; mode_name is the lowercase mode name
+for the lock wording (e.g. "time trial"). Returns gamemod 1..5, or -1 for back/cancel.
+Locked tiers are shown with their requirement and re-prompt if picked. */
+int choose_difficulty(int max_completed, string mode_name)
+{
+string[] diffnames = {"Easy", "Medium", "Hard", "Insane", "Chaos"};
+string[] difflower = {"easy", "medium", "hard", "insane", "chaos"};
+while (true)
+{
+setupmenu();
+for (int d = 1; d <= 5; d++)
+{
+string label = diffnames[d-1];
+if (!difficulty_unlocked(d, max_completed))
+label += ". Locked. Unlocked after completing 1 " + difflower[d-2] + " " + mode_name + " game.";
+m.add_item(label, "" + d);
+}
+m.add_item("Back", "back");
+m.intro_text = "Choose the difficulty you'd like to use for this mode.";
+int dres = m.run();
+string diffchoice = m.get_item_id(dres);
+if (diffchoice == "back" or dres == -1) return -1;
+int chosen = string_to_int(diffchoice);
+if (!difficulty_unlocked(chosen, max_completed))
+{
+speak(diffnames[chosen-1] + " is locked. Complete 1 " + difflower[chosen-2] + " " + mode_name + " game first.");
+continue;
+}
+return chosen;
+}
+return -1; // Unreachable (the while loop only exits via return), but AngelScript requires all paths to return.
+}
 void modemenu()
 {
 setupmenu(true);
 m.add_item("toy collector", "ty");
+if (defender_unlocked())
 m.add_item("toy defender", "ty2");
+else
+m.add_item("toy defender. Locked. Unlocked after completing 5 toy collector games.", "ty2");
 m.add_item("back", "back");
 m.intro_text = "Choose the game you'd like to play.";
 int mres=m.run();
@@ -281,7 +317,10 @@ gamemenu();
 if (gamem2 == "ty")
 {
 setupmenu();
+if (endless_arcade_unlocked())
 m.add_item("Endless arcade. This mode lets you play for as long as you can survive. The game will get harder over time with no final boss, and just one unlockable door to win. This mode also includes some items that drop from time to time for use during intense enemy fights.", "endless");
+else
+m.add_item("Endless arcade. Locked. Unlocked after completing 3 time trial games.", "endless");
 m.add_item("Time trial. This is a timed based mode where you must collect toys, survive various types of enemies, and defeat the final boss before the store explodes. There is one unlockable door that you must find by collecting all of the required keys to win.", "timed");
 m.add_item("Back", "back");
 m.intro_text = "Choose the mode you'd like to use for this game.";
@@ -292,22 +331,19 @@ if (mode == "back" or gres == -1)
 modemenu();
 return;
 }
-setupmenu();
-m.add_item("Easy", "1");
-m.add_item("Medium", "2");
-m.add_item("Hard", "3");
-m.add_item("Insane", "4");
-m.add_item("Chaos", "5");
-m.add_item("Back", "back");
-m.intro_text = "Choose the difficulty you'd like to use for this mode.";
-int dres = m.run();
-string diffchoice = m.get_item_id(dres);
-if (diffchoice == "back" or dres == -1)
+if (mode == "endless" and !endless_arcade_unlocked())
+{
+speak("Endless arcade is locked. Complete 3 time trial games to unlock it.");
+modemenu();
+return;
+}
+int chosen_diff = choose_difficulty((mode == "endless") ? endless_arcade_max_difficulty : time_trial_max_difficulty, (mode == "endless") ? "endless arcade" : "time trial");
+if (chosen_diff == -1)
 {
 modemenu();
 return;
 }
-gamemod = string_to_int(diffchoice);
+gamemod = chosen_diff;
 endless = (mode == "endless");
 if (speak_menu_loading)
 {
@@ -327,8 +363,17 @@ toygame();
 }
 if (gamem2 == "ty2")
 {
+if (!defender_unlocked())
+{
+speak("Toy defender is locked. Complete 5 toy collector games to unlock it.");
+modemenu();
+return;
+}
 setupmenu();
+if (endless_defense_unlocked())
 m.add_item("Endless defense. This mode lets you play for as long as you can survive. Defend the store while thieves try to steal your most precious toys. The game will end if they steal too many of them.", "endless");
+else
+m.add_item("Endless defense. Locked. Unlocked after completing 3 timed defense games.", "endless");
 m.add_item("Timed defense. This is a time based mode where you must protect the store by collecting as many toys as you can while stopping thieves from stealing them. You keep playing until the time runs out. When it does, you win if you've collected at least 100 toys. Otherwise, you lose if the thieves stole more toys than you saved, or simply survive with your final results.", "timed");
 m.add_item("Back", "back");
 m.intro_text = "Choose the mode you'd like to use for this game.";
@@ -339,22 +384,19 @@ if (mode == "back" or gres == -1)
 modemenu();
 return;
 }
-setupmenu();
-m.add_item("Easy", "1");
-m.add_item("Medium", "2");
-m.add_item("Hard", "3");
-m.add_item("Insane", "4");
-m.add_item("Chaos", "5");
-m.add_item("Back", "back");
-m.intro_text = "Choose the difficulty you'd like to use for this mode.";
-int dres = m.run();
-string diffchoice = m.get_item_id(dres);
-if (diffchoice == "back" or dres == -1)
+if (mode == "endless" and !endless_defense_unlocked())
+{
+speak("Endless defense is locked. Complete 3 timed defense games to unlock it.");
+modemenu();
+return;
+}
+int chosen_diff = choose_difficulty((mode == "endless") ? endless_defense_max_difficulty : timed_defense_max_difficulty, (mode == "endless") ? "endless defense" : "timed defense");
+if (chosen_diff == -1)
 {
 modemenu();
 return;
 }
-gamemod = string_to_int(diffchoice);
+gamemod = chosen_diff;
 endless = (mode == "endless");
 max_stolen_toys = max(10, 60 - (gamemod * 10));
 defense_time_limit = max(60000, 180000 - ((gamemod - 1) * 30000));

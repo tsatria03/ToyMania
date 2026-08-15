@@ -23,6 +23,7 @@ The `[[name]]` links in `CLAUDE.md` and across these memories resolve to `aidock
 - [NVGT key_pressed one-shot](project_nvgt_key_pressed_oneshot.md) — key_pressed() is consumed on first read each frame; read a multi-purpose key once and branch inside.
 - [NVGT sound preload cache](project_nvgt_sound_preload_cache.md) — sound.load caches by filename; reusing a name for changed audio replays the old clip; use a fresh name or allow_preloads=false.
 - [Sound device indexing](project_sound_device_indexing.md) — device list is index 0 "No sound", 1 "Default", 2+ named; don't add a synthetic Default item in the picker.
+- [AngelScript while(true) return](project_angelscript_while_true_return.md) — a non-void function whose only returns are inside a while(true) loop still needs a trailing unreachable return, or it fails with "Not all paths return a value".
 
 ## Gameplay systems detail
 - [Game unlock plan](project_game_unlock_plan.md) — FINALIZED but UNIMPLEMENTED design. Toy Defender MAIN game locked until 5 completed Collector games (either sub-mode); Endless Arcade after 3 Time Trials; Endless Defense after 3 Timed Defenses (Timed Defense itself opens with the Defender main game). Plus a per-sub-mode difficulty ladder (each tier after 1 completed game of the tier below, independent per mode). Trigger = any end state except Escape-quit; needs new persisted per-sub-mode data (completion count + highest difficulty completed).
