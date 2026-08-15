@@ -424,6 +424,8 @@ def run_release(skip_compile, skip_package, skip_release, skip_website, skip_emp
         for folder in ASSET_FOLDERS:
             asset_src = os.path.join(ASSETS_DIR, folder)
             if not os.path.isdir(asset_src):
+                if folder == "lib":
+                    continue  # optional: only some games ship a lib/ folder of runtime DLLs / helper exes
                 print(f"ERROR: missing asset folder: {asset_src}")
                 return
             shutil.copytree(asset_src, os.path.join(BUNDLE, folder), dirs_exist_ok=True)
