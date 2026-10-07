@@ -13,8 +13,9 @@ The `[[name]]` links in `CLAUDE.md` and across these memories resolve to `aidock
 - [Audio model](project_audio_model.md) — sound_pool + HRTF; all clips via get_sound() + the sound-pack system; tm/sounds/<pack>/.
 - [Save-data layout](project_save_data_layout.md) — AppData tsatria03/ToyMania/ (saves/stats/recordings); keyboard.ini rebinds live in tm/data/config/ (in the bundle).
 - [Repo hygiene](project_repo_hygiene.md) — .gitattributes CRLF enforcement + binary rules; releases/ gitignored; stale .claude/ removed; CLAUDE.md + aidocks/ committed.
-- [Engine pinned to nvgt2](project_engine_pinned_nvgt2.md) — runs on the legacy fork at C:\nvgt2 (BASS); upstream C:\nvgt (miniaudio) incompatible; don't target it or suggest upgrading.
+- [Engine pinned to nvgt](project_engine_pinned_nvgt2.md) — runs on the legacy fork at C:\nvgt (BASS); upstream C:\nvgt2 (miniaudio) incompatible; don't target it or suggest upgrading.
 - [Deferred code bugs](project_deferred_code_bugs.md) — internal bugs: toygame() spawner `return` crash-out (FIXED) and the wider random_string() empty-array crash on find_directories spawn sites, hardened helper + 7 guarded NPC/door spawners (FIXED 2026-08-14); per-step writedata() disk churn removed, now relies on the 5s timer + event saves (FIXED 2026-08-14). All tracked internal bugs fixed.
+- [Evaluation 2026-10](project_evaluation_2026_10.md) — full-game review: 10 verified OPEN bugs (pause-quit "No" still quits, ingame flag leak, door-key double count, dart/bullet direction, thief freeze, stun-by-type, replay state leak, playtime undercount, escape-timeout) + design notes. Not fixed yet.
 - [Player-facing bugs](project_player_facing_bugs.md) — cross-mode state bleed between collector and defender (FIXED, shipped v5.2): fixed via a shared reset_game_state() helper both menu launchers call + gating the level/level-6 blocks on !store_defense; file kept as a record of the class and the shared-reset design.
 
 ## NVGT / AngelScript gotchas — these cause compile failures or subtle bugs
